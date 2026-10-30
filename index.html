@@ -1896,6 +1896,10 @@
           { id: "m8m", code: "M8+", part: "B", t: "Meaning, beliefs & stories", s: "What meaning is, how beliefs form, and how to work with them", after: "m8",
             depth: ["What meaning is, where it comes from, and how beliefs and schemas form", "Hear meaning and core beliefs in clients’ stories, and work with them", "Measurement, culture, and the limits of meaning and schema theories"],
             lessons: ["What meaning is, and is not", "Frankl and the three paths", "The other voices of meaning", "Making meaning in practice", "How beliefs are made", "Core beliefs and schemas", "Working with a core belief without diminishing the person"] },
+          /* phase 3j-1: SG · sex & gender differences (shell; lessons 1–2 built) */
+          { id: "m8s", code: "SG", part: "B", t: "Sex & gender differences", s: "Overlap first: what differs, by how much, and why it never judges the person", after: "m8",
+            depth: ["What the evidence says differs between the sexes, and by how much, in words", "Read a group finding in class, clinic or the news without judging the person in front of you", "Biology, culture and combined profiles: the explanations weighed, and where each runs out"],
+            lessons: ["Overlap first: the similarities finding", "What actually differs, and by how much", "Empathy, personality and the equality paradox", "Prevalence: who gets diagnosed with what", "Brains, hormones and explanations weighed", "The person in the chair: clinical rules"] },
           { id: "m9", code: "C", part: "C", t: "The effects library", s: "Classic social effects, with the replication crisis", after: "m0",
             depth: ["Conformity, obedience, attribution and dissonance", "Group pressure at work, in families and in programs", "Which classic effects replicated, and which didn’t"],
             lessons: ["Conformity (Asch)", "Obedience (Milgram)", "The bystander effect", "The fundamental attribution error", "Cognitive dissonance", "Social facilitation and loafing", "The Stanford prison study, re-examined", "The replication crisis"],
@@ -7721,6 +7725,531 @@
                 "Useful for some functions, not evidence of human-like thinking; it would change with models matching human errors, development and data efficiency.")
             ]
           },
+          /* phase 3j-1: SG lessons 1–2 (sizes in words only; no numbers except years) */
+          "m8s.1": {
+            home: "For nearly everything psychological, men and women overlap almost completely. So what does knowing someone’s sex tell you about the person in front of you?",
+            keys: [["What is the overlap-first finding?", "For nearly every psychological trait, the two distributions overlap almost completely, and the spread within each sex dwarfs the gap between the averages (Hyde 2005; Zell, Krizan & Teeter 2015)."],
+              ["Sex or gender?", "Sex refers to biological categories; gender to social roles and identity. Intersex and transgender people exist; most research compares self-reported men and women."],
+              ["Do women talk more than men?", "One study that recorded everyday speech found no meaningful difference, with huge variation among both men and women (Mehl et al. 2007). A single study, contested."],
+              ["Why do small average gaps show up at the extremes?", "When two largely overlapping curves are shifted a little, the far tails hold noticeably more of one group, even though most people sit in the shared middle."],
+              ["What is the verdict as of 2026?", "Trait by trait, most differences are small with large overlap; combined profiles can differ more; neither predicts the person in front of you. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Overlap first", body: '<p class="hook">For nearly everything psychological, the two distributions overlap almost completely. The spread within each sex dwarfs the gap between the averages.</p>' +
+                who("<b>Ana</b> and <b>Miguel</b> are in the same counselling group. Over several sessions, the counsellor notes what each of them does.") +
+                "<p>Ana is the more competitive of the two in group games. Miguel talks more, and says he feels anxious before most sessions.</p>" },
+              { kind: "predict", id: "m8s.1:predict", title: "Feel it first",
+                case: ["Ana pushes hardest to win in group games.",
+                  "Miguel speaks more often than Ana in each session.",
+                  { t: "The group meets on weekday evenings.", irrelevant: true },
+                  "Miguel says he feels anxious before most sessions.",
+                  { t: "Both of them arrive by bus.", irrelevant: true },
+                  "The counsellor knows nothing else about them."],
+                q: "If you know only that someone is a man, how well can you predict how talkative he is?",
+                options: ["Fairly well, since men are clearly quieter on average", "Barely, since men differ from each other far more than from women", "Well, as long as you also know his job"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: barely. Talkativeness varies hugely among men and among women, and the average gap, if any, is negligible. Miguel being talkative is not surprising; it is just Miguel.",
+                hints: ["Ask how much men differ from each other.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: compare the spread within men with the gap between men and women."] },
+              { kind: "idea", lvl: "f", title: "Words first: sex and gender", body: "<p><b>Sex</b> refers to biological categories. <b>Gender</b> refers to social roles and identity: what a society expects of men and women, and how a person understands themselves.</p>" +
+                "<p>Intersex people, born with sex characteristics that do not fit typical categories, and transgender people, whose gender identity differs from the sex recorded at birth, exist and belong in this science. Most research, though, compares self-reported men and women, so its findings describe those groups.</p>" +
+                "<p><b>So:</b> say which one a study measured, and remember who it left out.</p>" },
+              { kind: "idea", lvl: "f", title: "The similarities finding", body: "<p>Hyde (2005) " + ev("r") + " gathered the large reviews of sex differences in thinking, communication, personality and wellbeing. Most differences were small or near zero. She called this the <b>gender similarities hypothesis</b>.</p>" +
+                "<p>Zell, Krizan and Teeter (2015) " + ev("r") + " pooled a far larger body of reviews and reached the same picture: most differences small, a few moderate, very few large.</p>" +
+                "<p><b>So:</b> on nearly every trait studied, men and women are far more alike than different.</p>" },
+              { kind: "idea", lvl: "p", title: "Who talks more?", body: "<p>The idea that women talk far more than men is widely repeated. Mehl et al. (2007) " + ev("c") + " had students wear recorders that captured short snippets of everyday sound, then counted words.</p>" +
+                "<p>They found no meaningful difference between women and men. The variation among men, and among women, was very large: the most and least talkative people in the study were both men.</p>" +
+                "<p>It is a single study of students, so the finding is contested; but it shows how a confident stereotype can rest on almost nothing.</p>" +
+                "<p><b>So:</b> knowing Miguel is a man tells you next to nothing about how much he talks.</p>" },
+              { kind: "idea", lvl: "p", title: "Two curves, in words", body: "<p>Picture the scores of all women on a trait as a hill, and the scores of all men as a second hill. For most traits the hills sit almost on top of each other. That shared ground is the <b>distribution overlap</b>.</p>" +
+                "<p>Each hill is also wide: people of the same sex differ a great deal. That is <b>within-group variation</b>, and for most traits it is far larger than the gap between the two peaks.</p>" +
+                "<p>Shift one hill a little and the middles barely change, but the far edges do. Among the very highest scorers, one group can be noticeably more common, even when the difference in averages is small. That is why a small average gap can look large if you only see the extremes, such as top competitions or rare diagnoses.</p>" +
+                "<p><b>So:</b> averages can differ while most individuals overlap; the extremes exaggerate the gap. See Effect size, in words (How to judge a study).</p>" },
+              { kind: "contrast", id: "m8s.1:contrast", title: "Two reports, one difference",
+                q: "Which made-up report describes the kind of sex difference psychology usually finds?",
+                cases: [
+                  { label: "Report A", s: ["A survey measured worry in a large group of men and women.", { t: "It was run by a university team.", irrelevant: true }, { t: "Women scored a little higher on average, and most men and women scored in the same range.", diff: true }] },
+                  { label: "Report B", s: ["A survey measured worry in a large group of men and women.", { t: "It was run by a university team.", irrelevant: true }, { t: "Every woman in the study scored higher than every man.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["What was measured", "A gap between averages versus a gap between every person", "Who ran the survey", "How large the group was"],
+                feature: 1,
+                why: "Same survey, same team. Report A describes a difference in averages with large overlap, which is the usual finding. Report B describes a difference between every man and every woman, which almost never appears in psychology.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether any man scored higher than any woman."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Del Giudice et al. (2012) argue that looking at one trait at a time hides the real difference. Combine many small personality differences into one profile, and men and women overlap much less. On this multivariate view, the similarities finding is an artefact of counting traits separately.</p>' +
+                "<p><b>The question.</b> Both views use sound data. They disagree on whether separate traits or combined profiles are the right thing to compare. The next two steps put each in its strongest form.</p>" +
+                '<p class="x-note">Lab: The two curves, coming later</p>' },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Gender similarities", body: "<p>On this view, the headline finding is how alike men and women are.</p>" +
+                "<p><b>Its evidence:</b> across very large reviews, most single differences are small or near zero (Hyde 2005; Zell, Krizan & Teeter 2015). Many also shift with context, such as whether people know they are being watched.</p>" +
+                "<p><b>Its charge:</b> overstating differences has real costs, for children steered away from subjects, for workers and for clients judged by a stereotype. Combined profiles are built from statistical choices that can enlarge the gap.</p>" +
+                "<p><b>So:</b> on this view, similarity is the finding, and the burden is on anyone claiming more.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Multivariate difference", body: "<p>On the other view, people are combinations of traits, so differences should be measured in combination.</p>" +
+                "<p><b>Its evidence:</b> Del Giudice et al. (2012) " + ev("c") + " combined many personality traits and found the overall profiles of men and women differed far more than any single trait suggested.</p>" +
+                "<p><b>Its charge:</b> counting traits one by one guarantees the conclusion that differences are small. Honest science reports the whole pattern, even when it is unwelcome.</p>" +
+                "<p><b>So:</b> on this view, many small differences can add up to a larger one.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree on the single-trait data and on the large spread within each sex. They disagree on whether combining traits reveals something real or builds it in.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Trait by trait, most differences are small with large overlap; combined profiles can differ more; the person in front of you is not predicted by either.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Robust evidence that combined profiles predict individuals.</dd></div></dl>" +
+                "<p><b>So:</b> report group findings honestly, and meet each person as themselves.</p>" },
+              { kind: "example", lvl: "p", title: "Ana and Miguel, read carefully", body: who("The <b>counsellor</b> writes a note before the next group session.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>Ana pushes hardest to win; Miguel talks most and reports anxiety before sessions.</dd></div>' +
+                "<div><dt>What group averages say</dt><dd>Little. On most traits the two curves overlap almost completely.</dd></div>" +
+                "<div><dt>What guides the plan</dt><dd>What Ana and Miguel each do, say and want, asked about directly.</dd></div></dl>" +
+                "<p><b>Person-first.</b> Write “Miguel, who feels anxious before sessions”, never “an anxious man”, and do not treat either as unusual for their sex.</p>" },
+              { kind: "teachback", id: "m8s.1:teachback", title: "Teach it back", prompt: "Explain to a group member who says “Miguel talks like a woman” what the evidence says: sex as biological categories and gender as social roles and identity, with intersex and transgender people existing and most research comparing self-reported men and women; the gender similarities hypothesis from Hyde and the meta-synthesis from Zell, Krizan and Teeter, that most differences are small or near zero; Mehl and colleagues’ single, contested study finding no meaningful difference in talkativeness; the two curves, where averages differ a little while most people overlap and the extremes exaggerate the gap; the difference between a gap in averages and a gap between every man and every woman; both sides steelmanned, gender similarities versus the multivariate view from Del Giudice and colleagues; and the dated verdict, small trait by trait, larger in combination, predicting the person by neither, confidence moderate." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Most single differences small or near zero " + ev("r") + ". No meaningful difference in talkativeness " + ev("c") + ". Combined profiles differing more " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a difference between averages is not a difference between people; overlap comes first, and the person in front of you comes before any average.</p>" },
+              Q("A study finds women score a little higher than men on average on a trait, with most scores in the same range. What follows?",
+                ["Most women score higher than most men", "Knowing a person’s sex tells you little about their score", "The trait is fixed by biology", "The study must have made an error"], 1,
+                "A small gap between averages with large overlap leaves most of the variation within each sex."),
+              Q("Why can a small average difference look large in a top competition?",
+                ["The far edges of shifted curves hold more of one group", "Competitions measure a different trait", "Small differences grow with age", "Only one sex enters competitions"], 0,
+                "A slight shift barely changes the middles but changes who is most common at the extremes."),
+              Q("What is the 2026 verdict on sex differences in traits?",
+                ["Differences are large and predict individuals", "There are no differences at all", "Small trait by trait, larger in combination, predicting neither person", "Settled, with high confidence"], 2,
+                "Confidence is moderate; it would change with robust evidence that combined profiles predict individuals.")
+            ]
+          },
+          "m8s.2": {
+            home: "A vocational counsellor sorts a stack of interest inventories. Which sex differences are large, which are near zero, and what does any of it say about the next client?",
+            keys: [["What is the largest psychological sex difference?", "Interest in working with people versus things: large, with men leaning toward things and women toward people on average (Su, Rounds & Armstrong 2009). Robust."],
+              ["Do men and women differ in aggression?", "Physical aggression: moderate, larger in men. Indirect or relational aggression: small or none (Archer 2004). Robust."],
+              ["What about spatial and verbal skills?", "Mental rotation: moderate, favouring men, and training improves it (Voyer, Voyer & Bryden 1995; Uttal et al. 2013). Verbal fluency and reading: small, favouring women (Hyde & Linn 1988; Reilly et al. 2019)."],
+              ["Do boys and girls differ in mathematics?", "Near zero in most countries (Lindberg et al. 2010). Robust."],
+              ["Do these differences settle cause?", "No. They vary across countries and decades (Lippa 2010; Guiso et al. 2008), and measures can carry cultural loading."]],
+            steps: [
+              { kind: "hook", title: "A stack of inventories", body: who("<b>Rosa</b> is a vocational counsellor. At the end of the month she reads through a stack of interest inventories her clients filled in.") +
+                "<p>On average, the forms from women lean toward jobs working with people, and the forms from men toward jobs working with things. Many forms from both go the other way.</p>" +
+                '<p class="hook">Is this one of the big differences, or one of the small ones?</p>' },
+              { kind: "predict", id: "m8s.2:predict", title: "Your call first",
+                case: ["The inventories ask how much people like different kinds of work.",
+                  "Women’s forms lean toward people-oriented work, on average.",
+                  { t: "Rosa reads them in her office at lunchtime.", irrelevant: true },
+                  "Many forms from both men and women go the other way.",
+                  { t: "The forms are printed on blue paper.", irrelevant: true },
+                  "Rosa has also seen her clients’ school maths results."],
+                q: "Which sex difference do you expect to be largest?",
+                options: ["Mathematics performance", "Interest in people versus things", "Verbal fluency"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: interest in people versus things. It is the largest psychological difference known, and even it leaves plenty of overlap. Mathematics, often assumed to differ, is near zero in most countries.",
+                hints: ["Ask which measure is about preference, not ability.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say which differences you have heard most, then ask whether that means they are largest."] },
+              { kind: "idea", lvl: "f", title: "Interests: people versus things", body: "<p>Su, Rounds and Armstrong (2009) " + ev("r") + " pooled interest inventories from very many people. On the <b>people–things dimension</b>, liking work with people versus work with objects and machines, the difference was large: men leaned toward things and women toward people, on average.</p>" +
+                "<p>It is the largest psychological sex difference known. The curves still overlap: many women prefer things and many men prefer people.</p>" +
+                "<p><b>So:</b> large is a size in words, not a rule about any client.</p>" },
+              { kind: "idea", lvl: "f", title: "Aggression: physical and relational", body: "<p>Archer (2004) " + ev("r") + " pooled studies across many settings. Physical aggression, such as hitting, showed a moderate difference, larger in men.</p>" +
+                "<p><b>Relational aggression</b>, harming someone through gossip, exclusion or damaging their friendships, showed a small difference or none. The common belief that women are more relationally aggressive found little support.</p>" +
+                "<p><b>So:</b> the size depends on which kind of aggression you measure.</p>" },
+              { kind: "idea", lvl: "p", title: "Mental rotation", body: "<p><b>Mental rotation</b> is turning a shape in your mind to see whether it matches another. Voyer, Voyer and Bryden (1995) " + ev("r") + " found a moderate difference favouring men.</p>" +
+                "<p>Uttal et al. (2013) " + ev("r") + " found that spatial skills respond well to practice, and that training can narrow the gap.</p>" +
+                "<p><b>So:</b> a moderate difference is not a fixed one.</p>" },
+              { kind: "idea", lvl: "p", title: "Verbal fluency and reading", body: "<p>Hyde and Linn (1988) " + ev("r") + " pooled studies of verbal ability and found a small difference overall, favouring women, largest for fluency in producing words.</p>" +
+                "<p>Reilly et al. (2019) " + ev("r") + ", using national school tests, found girls ahead in reading and writing, by small amounts in reading.</p>" +
+                "<p><b>So:</b> verbal differences are small, and favour women.</p>" },
+              { kind: "idea", lvl: "p", title: "Mathematics performance", body: "<p>Lindberg et al. (2010) " + ev("r") + " pooled studies from many countries and found the difference in mathematics performance was near zero in most of them.</p>" +
+                "<p>The belief that boys are better at maths is one of the most repeated sex stereotypes, and one of the least supported for average performance.</p>" +
+                "<p><b>So:</b> on maths performance, men and women are essentially the same on average.</p>" },
+              { kind: "contrast", id: "m8s.2:contrast", title: "Two measures, one difference",
+                q: "Which measure shows the larger sex difference?",
+                cases: [
+                  { label: "Measure A", s: ["It was given to many men and women.", { t: "It is filled in on paper.", irrelevant: true }, { t: "It asks about liking work with people versus things; the two curves overlap less than for almost any other psychological measure.", diff: true }] },
+                  { label: "Measure B", s: ["It was given to many men and women.", { t: "It is filled in on paper.", irrelevant: true }, { t: "It tests mathematics; the two curves sit almost on top of each other.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["How many people took it", "How much the two curves overlap", "Whether it is on paper", "Whether it measures a skill"],
+                feature: 1,
+                why: "Same group, same format. The interest measure shows a large difference; the maths test a near-zero one. Even for the interest measure, many individuals sit in the shared range.",
+                hints: ["Find the one sentence where the measures part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: picture the two curves for each measure."] },
+              { kind: "example", lvl: "p", title: "Rosa reads the next form", body: who("<b>Rosa</b> meets a client, a young woman whose inventory leans strongly toward working with machines.") +
+                '<dl class="x-dossier"><div><dt>What group averages say</dt><dd>On average, women lean toward people; the difference is large, with plenty of overlap.</dd></div>' +
+                "<div><dt>What this form says</dt><dd>She leans toward things, clearly.</dd></div>" +
+                "<div><dt>What guides the advice</dt><dd>Her own interests, skills and goals, not the average for her sex.</dd></div></dl>" +
+                "<p><b>Person-first.</b> Say “a client interested in engineering”, not “an unusual woman”.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Measures of interests and aggression carry cultural loading: what counts as a “people” job, or as aggression, reflects a society’s roles. And the differences shift. Lippa (2010) ' + ev("c") + " found the interests difference across many nations, with its size varying; Guiso et al. (2008) " + ev("c") + " found the maths gap smaller where gender equality was higher.</p>" +
+                "<p><b>The answer.</b> Variation shows that culture shapes how big a difference is. It does not settle cause: consistency across countries does not prove biology, and variation does not prove culture alone. The explanations are weighed later in this module.</p>" },
+              { kind: "teachback", id: "m8s.2:teachback", title: "Teach it back", prompt: "Explain to Rosa’s trainee which sex differences are large and which are near zero: interests in people versus things as the largest psychological difference, from Su, Rounds and Armstrong; physical aggression moderate and larger in men, relational aggression small or none, from Archer; mental rotation moderate, from Voyer, Voyer and Bryden, with training narrowing it, from Uttal and colleagues; verbal fluency and reading small and favouring women, from Hyde and Linn and from Reilly and colleagues; mathematics near zero in most countries, from Lindberg and colleagues; the contrast between a large and a near-zero difference; and the critique that measures carry cultural loading and differences shift across countries and decades, from Lippa and from Guiso and colleagues, which does not settle cause." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Interests: large " + ev("r") + ". Physical aggression: moderate " + ev("r") + ". Mental rotation: moderate, trainable " + ev("r") + ". Verbal: small " + ev("r") + ". Mathematics: near zero " + ev("r") + ". Cause of the differences " + ev("c") + ".</p>" +
+                "<p><b>So:</b> sizes range from large to near zero; even the largest leaves room for every client to be the exception.</p>" },
+              Q("Which sex difference is largest in the evidence?",
+                ["Mathematics performance", "Relational aggression", "Verbal fluency", "Interest in people versus things"], 3,
+                "Interests in people versus things show a large difference; the others are small, none or near zero."),
+              Q("What did Archer find about relational aggression?",
+                ["A large difference, higher in women", "A small difference or none", "A moderate difference, higher in men", "It could not be measured"], 1,
+                "Physical aggression differed moderately; relational aggression differed little or not at all."),
+              Q("The maths gap is smaller in countries with more gender equality. What does this show?",
+                ["Culture shapes the size of the gap, without settling cause", "Biology causes the gap", "The gap is a measurement error", "Mathematics cannot be tested fairly"], 0,
+                "Variation shows culture matters for size; it does not by itself settle what causes a difference.")
+            ]
+          },
+          /* phase 3j-2: SG lessons 3–4 */
+          "m8s.3": {
+            home: "Two clients fill in an empathy questionnaire, then watch a stranger cry. Why do the two measures tell different stories, and what is the gender-equality paradox?",
+            keys: [["Do women report more empathy than men?", "Yes, on questionnaires the difference is large; on physiological and behavioural measures it is small or near zero (Eisenberg & Lennon 1983). Robust."],
+              ["Why do the measures disagree?", "Motivation and self-image: the gap shrinks when people are not reminded they are being judged on empathy (Ickes, Gesn & Graham 2000). What you measure changes what you find."],
+              ["How do personality averages differ?", "Neuroticism and agreeableness are higher in women on average, small to moderate (Costa, Terracciano & McCrae 2001), with larger differences in some facets (Weisberg, DeYoung & Hirsh 2011). Robust."],
+              ["What is the gender-equality paradox?", "Some differences in personality, preferences and study choice appear larger in more gender-equal countries (Costa et al. 2001; Falk & Hermle 2018; Stoet & Geary 2018). Contested (Richardson et al. 2020)."],
+              ["What is the verdict as of 2026?", "The pattern appears in several datasets but its size and cause are disputed; confidence low; defeater a cross-cultural measure shown to be equivalent across countries that still shows the pattern."]],
+            steps: [
+              { kind: "hook", title: "A questionnaire and a film", body: who("<b>Maya</b> and <b>Daniel</b> take part in a study at a university clinic. Each fills in an empathy questionnaire.") +
+                "<p>Then each watches a short film of a stranger crying, while a sensor records heart rate and a camera records their face.</p>" +
+                "<p>On the questionnaire, Maya rates herself as much more empathic than Daniel does. On the sensor and the camera, the two look much alike.</p>" +
+                '<p class="hook">Which measure shows the real difference?</p>' },
+              { kind: "predict", id: "m8s.3:predict", title: "Your call first",
+                case: ["Maya and Daniel each rate their own empathy on a questionnaire.",
+                  { t: "The questionnaire is filled in on a tablet.", irrelevant: true },
+                  "Maya rates herself much higher than Daniel does.",
+                  "While they watch the film, their heart rates and faces respond much alike.",
+                  { t: "The clinic is on the second floor.", irrelevant: true },
+                  "The questionnaire’s title includes the word “empathy”."],
+                q: "Across many studies, where is the sex difference in empathy largest?",
+                options: ["On self-report questionnaires", "On heart rate and other body signals", "On facial reactions to someone’s distress"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: on self-report questionnaires. The difference is large when people describe themselves, and small or near zero when their bodies and faces are measured.",
+                hints: ["Ask which measure lets a person choose how they look.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what each measure records, words or reactions."] },
+              { kind: "idea", lvl: "f", title: "Empathy as asked, and as seen", body: "<p>Eisenberg and Lennon (1983) " + ev("r") + " pooled studies of empathy. When people rated themselves, women scored higher by a large amount.</p>" +
+                "<p>When empathy was measured through heart rate, skin response or facial reactions, the difference was small or near zero.</p>" +
+                "<p><b>So:</b> the size of the difference depends on the measure.</p>" },
+              { kind: "idea", lvl: "f", title: "Self-report bias: knowing you’re being judged", body: "<p><b>Self-report bias</b> means answers shaped by how people want to see themselves, or be seen. Empathy is part of many people’s picture of what a woman should be.</p>" +
+                "<p>Ickes, Gesn and Graham (2000) " + ev("c") + " reviewed tests of empathic accuracy, reading another person’s thoughts and feelings. Women did better mainly when the task reminded them they were being judged on empathy. Without that reminder, the gap shrank.</p>" +
+                "<p><b>So:</b> part of the difference may be motivation, not ability.</p>" },
+              { kind: "contrast", id: "m8s.3:contrast", title: "Same people, two measures",
+                q: "Which measure is more likely to show a large sex difference?",
+                cases: [
+                  { label: "Measure A", s: ["Many women and men take part.", { t: "It happens in the same room.", irrelevant: true }, { t: "Each person rates how empathic they are, on a form titled “empathy”.", diff: true }] },
+                  { label: "Measure B", s: ["Many women and men take part.", { t: "It happens in the same room.", irrelevant: true }, { t: "A sensor records each person’s heart rate while a stranger cries.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["How many people take part", "Whether people describe themselves or are recorded", "Which room is used", "Whether a stranger is present"],
+                feature: 1,
+                why: "Same people, same room. Describing yourself lets beliefs about who you are shape the answer; a body signal leaves less room for that. Self-report shows a large difference; body signals a small or near-zero one.",
+                hints: ["Find the one sentence where the measures part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask which measure the person can steer."] },
+              { kind: "idea", lvl: "p", title: "Personality: averages and overlap", body: "<p>Costa, Terracciano and McCrae (2001) " + ev("r") + " compared personality questionnaires from many countries. On average, women scored higher on <b>neuroticism</b>, the tendency to feel anxious or low, and on <b>agreeableness</b>, warmth and cooperation. Both differences were small to moderate.</p>" +
+                "<p>Weisberg, DeYoung and Hirsh (2011) " + ev("r") + " looked at narrower facets and found some, such as compassion and volatility, differed more than the broad traits.</p>" +
+                "<p><b>So:</b> small to moderate averages, with most women and men in the shared range.</p>" },
+              { kind: "idea", lvl: "p", title: "The gender-equality paradox", body: "<p>Costa et al. (2001) " + ev("r") + " noticed something unexpected: personality differences were larger in more gender-equal countries, not smaller.</p>" +
+                "<p>Falk and Hermle (2018) " + ev("c") + " found the same for preferences such as risk-taking and patience. Stoet and Geary (2018) " + ev("c") + " reported that women’s share of science and engineering degrees was lower in more gender-equal countries.</p>" +
+                "<p>This is the <b>gender-equality paradox</b>: some differences appear larger where equality is greater.</p>" +
+                "<p><b>So:</b> the pattern runs against a simple “equality removes differences” story.</p>" },
+              { kind: "idea", lvl: "m", title: "Reanalysis and measurement", body: "<p>Richardson et al. (2020) " + ev("c") + " reanalysed Stoet and Geary’s data and found the link depended on how the gap was calculated; the original authors published a correction.</p>" +
+                "<p>Two measurement problems sit underneath. <b>Measurement invariance</b>: a questionnaire may not mean the same thing in every country. The reference-group effect: people rate themselves against those around them, so a woman compares herself with other women in her own country (Heine et al. 2002) " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a cross-country pattern is only as good as the measure behind it.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Evolved preferences expressed more freely", body: "<p>On this view, where people have more money, safety and choice, they follow their own preferences more, and average differences in those preferences show more clearly.</p>" +
+                "<p><b>Its evidence:</b> the pattern turns up in personality (Costa et al. 2001), in economic preferences (Falk & Hermle 2018) and in study choices (Stoet & Geary 2018), using different data.</p>" +
+                "<p><b>Its charge:</b> if culture alone made the differences, equality should shrink them, and in these datasets it does not.</p>" +
+                "<p><b>So:</b> on this view, freedom reveals differences rather than creating them.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Measurement artefact and different kinds of inequality", body: "<p>On the other view, the paradox comes from the measures and the indices, not from people’s nature.</p>" +
+                "<p><b>Its evidence:</b> reanalysis showed results shift with how gaps are calculated (Richardson et al. 2020); self-ratings are made against local comparison groups (Heine et al. 2002); and equality indices can miss other inequalities, such as stereotypes about who belongs in engineering, which can be stronger in richer countries.</p>" +
+                "<p><b>Its charge:</b> a paradox built on measures that may not mean the same thing across countries cannot carry a claim about evolved preferences.</p>" +
+                "<p><b>So:</b> on this view, the pattern says more about the yardstick than about women and men.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree the pattern appears in several datasets. They disagree on whether it is real in size, and on what causes it.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>The pattern appears in several datasets but its size and cause are disputed.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Low.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A cross-cultural measure shown to be equivalent across countries that still shows the pattern.</dd></div></dl>" +
+                "<p><b>So:</b> hold the paradox as a question, and date the verdict.</p>" },
+              { kind: "example", lvl: "p", title: "What the clinician takes from it", body: who("<b>A clinician</b> reads Maya’s and Daniel’s results before seeing them.") +
+                '<dl class="x-dossier"><div><dt>What the questionnaire says</dt><dd>How each describes their own empathy, shaped partly by self-image.</dd></div>' +
+                "<div><dt>What the film says</dt><dd>How each reacted in the moment; here, much alike.</dd></div>" +
+                "<div><dt>What guides the work</dt><dd>Each person’s own reactions and relationships, not the average for their sex.</dd></div></dl>" +
+                "<p><b>Person-first.</b> Say “a man who rates his empathy low”, not “an unempathic man”.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>The personality averages in this lesson come from self-report questionnaires, the very kind of measure the empathy studies warn about. If women and men describe themselves through gender norms, the personality differences, and the paradox built on them, may partly be differences in self-description (Heine et al. 2002 ' + ev("c") + ").</p>" +
+                "<p><b>The answer.</b> Ratings by people who know the person well show similar averages (Costa et al. 2001), which counts against pure self-image. But observer ratings carry norms too, which is why the verdict asks for a measure shown to be equivalent across countries.</p>" },
+              { kind: "teachback", id: "m8s.3:teachback", title: "Teach it back", prompt: "Explain to the clinician why Maya’s and Daniel’s questionnaire and film results differ: self-reported empathy shows a large difference while body and behaviour measures show a small or near-zero one, from Eisenberg and Lennon; the gap shrinking when people are not reminded they are being judged, from Ickes, Gesn and Graham; the contrast between self-report and behaviour; personality averages, neuroticism and agreeableness higher in women, small to moderate, from Costa, Terracciano and McCrae, with facets from Weisberg, DeYoung and Hirsh; the gender-equality paradox, from Costa and colleagues, Falk and Hermle, and Stoet and Geary; the reanalysis by Richardson and colleagues, measurement invariance and the reference-group effect; both sides steelmanned, evolved preferences expressed more freely versus measurement artefact and different kinds of inequality; the dated verdict, disputed in size and cause, confidence low, defeater an equivalent cross-cultural measure that still shows the pattern; and the critique that personality averages rest on self-report too." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Empathy: large on self-report, small or near zero on body and behaviour " + ev("r") + ". Motivation shapes the gap " + ev("c") + ". Neuroticism and agreeableness: small to moderate " + ev("r") + ". The gender-equality paradox " + ev("c") + ".</p>" +
+                "<p><b>So:</b> what you measure changes what you find, and a cross-country pattern is only as sound as its yardstick.</p>" },
+              Q("Where is the sex difference in empathy largest?",
+                ["On heart-rate measures", "On facial reactions", "On self-report questionnaires", "On tests of reading others’ feelings"], 2,
+                "Self-report shows a large difference; body signals and facial reactions show a small or near-zero one."),
+              Q("What is the gender-equality paradox?",
+                ["Equality removes all psychological differences", "Some differences appear larger in more gender-equal countries", "Gender-equal countries have no reliable data", "Differences appear only in poorer countries"], 1,
+                "Several datasets show some differences larger, not smaller, where equality is greater; size and cause are disputed."),
+              Q("Which finding would most strengthen the paradox?",
+                ["A measure shown to mean the same across countries that still shows the pattern", "A larger sample from a single country", "A new equality index with more items", "Self-ratings from more countries"], 0,
+                "That is the defeater: if an equivalent measure still shows the pattern, the measurement-artefact view loses support.")
+            ]
+          },
+          "m8s.4": {
+            home: "A clinic’s intake log shows more women diagnosed with depression and more men with substance use disorders. Is that a difference in rates, or in who gets noticed?",
+            keys: [["Is depression more common in women?", "Yes, from adolescence on, moderate in size (Salk, Hyde & Abramson 2017). Robust as description; the explanation is open."],
+              ["Are substance use disorders more common in men?", "Yes, though the gap is narrowing in younger generations (Seedat et al. 2009; McHugh et al. 2018). Robust."],
+              ["Why are autism and ADHD diagnosed more in boys?", "Partly ascertainment: the gap is smaller in screened population samples than in clinics, and girls are diagnosed later or missed (Loomes, Hull & Mandy 2017). Camouflaging is a contested part of the story (Hull et al. 2017)."],
+              ["Are eating disorders only a women’s problem?", "No. They are more common in women, but men are under-recognized (Hudson et al. 2007; Murray et al. 2017)."],
+              ["What is the strongest critique?", "Diagnosis counts what clinicians notice. Whether men’s depression is “masked” as anger or drinking is contested (Addis 2008)."]],
+            steps: [
+              { kind: "hook", title: "The intake log", body: who("<b>Grace</b> manages intake at a community clinic. At the end of the year she reads down the log of new diagnoses.") +
+                "<p>More of the women in the log are diagnosed with depression and anxiety. More of the men are diagnosed with alcohol and drug problems. More boys than girls are referred for autism assessments.</p>" +
+                '<p class="hook">Does the log show who is unwell, or who gets noticed?</p>' },
+              { kind: "predict", id: "m8s.4:predict", title: "Your call first",
+                case: ["The log records diagnoses given at the clinic.",
+                  "More women than men are diagnosed with depression.",
+                  { t: "The log is kept in a spreadsheet.", irrelevant: true },
+                  "More boys than girls are referred for autism assessment.",
+                  { t: "Grace reads it on a Friday afternoon.", irrelevant: true },
+                  "Only people who come to the clinic appear in the log."],
+                q: "In a survey of a whole population, screening everyone, what happens to the autism gap between boys and girls?",
+                options: ["It stays the same size", "It gets smaller", "It disappears completely"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: it gets smaller. Clinics see who is referred; screening everyone finds more girls who were missed. The gap shrinks, but does not vanish.",
+                hints: ["Ask who decides who reaches the clinic.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say who is missing from a clinic’s log."] },
+              { kind: "idea", lvl: "f", title: "Describing rates is not explaining them", body: "<p><b>Prevalence</b> is how common a condition is in a group. A difference in prevalence can be described with confidence, and still leave its cause wide open.</p>" +
+                "<p>This lesson takes each condition twice: how robust the description is, and how open the explanation is.</p>" +
+                "<p><b>So:</b> “more common in women” is a finding; “because they are women” is a separate claim.</p>" },
+              { kind: "idea", lvl: "f", title: "Depression and anxiety", body: "<p>Salk, Hyde and Abramson (2017) " + ev("r") + " pooled studies across many countries. Depression was more common in women by a moderate amount, a gap that opens in adolescence and stays.</p>" +
+                "<p><b>Explanations weighed.</b> Rumination, dwelling repeatedly on low mood, is somewhat more common in women and accounts for part of the gap (Nolen-Hoeksema 2001) " + ev("c") + ". More exposure to some stressors, such as sexual abuse, plays a part. Women also seek help more, which raises diagnosis but cannot explain the gap in surveys that screen everyone.</p>" +
+                "<p><b>So:</b> robust as description; partly explained, and still open.</p>" },
+              { kind: "idea", lvl: "f", title: "Substance use disorders", body: "<p>Alcohol and drug use disorders are more common in men. Seedat et al. (2009) " + ev("r") + ", using surveys from many countries, found the gap narrower in younger generations, and narrowest where women’s roles had changed most.</p>" +
+                "<p>McHugh et al. (2018) " + ev("r") + " reviewed the evidence and found the gap closing, with women often moving faster from first use to problems.</p>" +
+                "<p><b>So:</b> a robust difference that is shrinking, which points to opportunity and norms, not only to sex.</p>" },
+              { kind: "idea", lvl: "p", title: "Autism and ADHD: who gets counted", body: "<p><b>Ascertainment bias</b> means the way cases are found shapes who is counted. Loomes, Hull and Mandy (2017) " + ev("r") + " pooled autism studies: the gap between boys and girls was large in clinic samples and smaller in population samples that screened everyone.</p>" +
+                "<p>Girls were also diagnosed later. For ADHD, Mowlem et al. (2019) " + ev("c") + " found girls with high symptoms were less likely to be diagnosed unless they also had behaviour problems that others noticed.</p>" +
+                "<p><b>So:</b> part of the gap is in who gets noticed.</p>" },
+              { kind: "idea", lvl: "p", title: "Camouflaging", body: "<p><b>Camouflaging</b> means hiding or masking autistic traits to fit in, such as copying others or rehearsing conversations. Hull et al. (2017) " + ev("c") + " interviewed autistic adults, mostly women, who described it as exhausting.</p>" +
+                "<p>It may help explain why some girls are missed. The measure is still contested: it rests largely on self-report, and it is unclear how far it differs between the sexes.</p>" +
+                "<p><b>So:</b> a plausible part of the story, not yet a settled one.</p>" },
+              { kind: "idea", lvl: "p", title: "Eating disorders", body: "<p>Hudson et al. (2007) " + ev("r") + ", in a national survey, found eating disorders more common in women, though binge-eating disorder showed a smaller gap.</p>" +
+                "<p>Murray et al. (2017) " + ev("c") + " reviewed eating disorders in men and found them under-recognized: screening tools ask about thinness, while many men pursue muscle.</p>" +
+                "<p><b>So:</b> criteria built on one group’s presentation can miss another’s.</p>" },
+              { kind: "contrast", id: "m8s.4:contrast", title: "A rate or a recognition?",
+                q: "Which finding points more to a difference in recognition than in rates?",
+                cases: [
+                  { label: "Finding A", s: ["Boys outnumber girls among autism diagnoses.", { t: "The data come from one region.", irrelevant: true }, { t: "The gap is large in clinic records and smaller when everyone is screened.", diff: true }] },
+                  { label: "Finding B", s: ["Women outnumber men among depression diagnoses.", { t: "The data come from one region.", irrelevant: true }, { t: "The gap is about the same in clinic records and when everyone is screened.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Which region the data come from", "Whether the gap shrinks when everyone is screened", "Which condition is studied", "Who outnumbers whom"],
+                feature: 1,
+                why: "A gap that shrinks when everyone is screened was partly made by who reached the clinic: recognition. A gap that holds under screening points more to a real difference in rates, whatever its cause.",
+                hints: ["Find the one sentence that compares clinic and screening.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: ask what screening everyone adds that a clinic misses."] },
+              { kind: "example", lvl: "p", title: "Grace reads the log again", body: who("<b>Grace</b> adds a column to the log: how each person reached the clinic.") +
+                '<dl class="x-dossier"><div><dt>Depression in women</dt><dd>Robust in rates; help-seeking adds to it but does not explain it.</dd></div>' +
+                "<div><dt>Substance use in men</dt><dd>Robust, and narrowing in younger people.</dd></div>" +
+                "<div><dt>Autism in boys</dt><dd>Partly real, partly recognition; ask who referred, and who was never referred.</dd></div></dl>" +
+                "<p><b>Person-first.</b> Say “a woman with depression” or “an autistic girl”, as she prefers, and never “a typical female case”.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Diagnosis counts what clinicians notice, through criteria written mostly from one group’s presentation. Addis (2008) ' + ev("c") + " argued that men’s depression may be “masked” as anger, drinking or overwork, so the depression gap may be partly an artefact of the criteria.</p>" +
+                "<p><b>The answer.</b> The masked-depression idea is contested: when broader male-typical symptoms are added, the gap narrows but does not close, and widening criteria risks calling every drinking problem depression. <b>Help-seeking</b>, whether and when a person asks for help, shapes clinic counts more than population surveys.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>The depression gap is real in rates; masked male depression explains some of it at most.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Population surveys using criteria validated equally in both sexes that show no gap.</dd></div></dl>" },
+              { kind: "teachback", id: "m8s.4:teachback", title: "Teach it back", prompt: "Explain to Grace what her intake log can and cannot tell her: prevalence as description, not explanation; depression and anxiety more common in women from adolescence, moderate, from Salk, Hyde and Abramson, with rumination, stressors and help-seeking weighed; substance use disorders more common in men and narrowing in younger generations, from Seedat and colleagues and McHugh and colleagues; autism and ADHD diagnosed more in boys, partly ascertainment, with the gap smaller in screened samples, from Loomes, Hull and Mandy, and from Mowlem and colleagues; camouflaging, from Hull and colleagues, still contested; eating disorders more common in women with men under-recognized, from Hudson and colleagues and Murray and colleagues; the contrast between a difference in rates and a difference in recognition; and the critique that diagnosis counts what clinicians notice, with masked male depression, from Addis, contested and given a dated verdict." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Depression and anxiety in women: moderate " + ev("r") + ". Substance use in men: robust, narrowing " + ev("r") + ". Autism in boys: smaller when everyone is screened " + ev("r") + ". Camouflaging " + ev("c") + ". Eating disorders in men: under-recognized " + ev("c") + ". Masked male depression " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a log of diagnoses mixes who is unwell with who gets noticed; read it for both.</p>" },
+              Q("Why is the autism gap smaller in population samples than in clinics?",
+                ["Population samples use a different definition of autism", "Girls are more often missed by referral", "Clinics only assess adults", "Boys are less often screened"], 1,
+                "Screening everyone finds girls who were never referred; clinic counts reflect who gets noticed."),
+              Q("What does the narrowing substance use gap in younger generations suggest?",
+                ["The gap was a measurement error", "Women now use less than men did", "Opportunity and norms shape the gap", "Sex has no link to substance use"], 2,
+                "A gap that shrinks as roles change points to opportunity and norms, without ruling out other causes."),
+              Q("Women seek help more often. What can this explain?",
+                ["Part of the gap in clinic counts", "The whole gap in population surveys", "Why depression starts in adolescence", "Why men camouflage symptoms"], 0,
+                "Help-seeking raises clinic diagnoses; it cannot explain a gap found when everyone is screened.")
+            ]
+          },
+          /* phase 3j-3: SG lessons 5–6 */
+          "m8s.5": {
+            home: "A viral post says male and female brains are wired differently, over a colourful scan. What do brains, hormones and the explanations actually show?",
+            keys: [["Do male and female brains differ?", "On average, yes: overall size is larger in men, robust (Ruigrok et al. 2014; Ritchie et al. 2018). Region by region the differences are small once size is accounted for."],
+              ["What is the mosaic critique?", "Most brains are mixtures of features, and few are all one type (Joel et al. 2015). Contested."],
+              ["Can an algorithm tell brains apart by sex?", "Well above chance, from combined patterns (Del Giudice et al. 2016). That does not make a brain type predict a person’s traits."],
+              ["Do hormones explain behaviour?", "Prenatal androgens shape toy and interest preferences, fairly robust (Hines 2010). Testosterone and adult aggression: a weak, two-way link (Archer, Graham-Kevan & Davies 2005)."],
+              ["Biology or socialization?", "Mostly interaction, with the share differing by trait (Wood & Eagly 2012). Verdict dated 2026, confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "The colourful post", body: who("<b>Jonah</b>, a trainee, shows his supervisor a post that has been shared widely.") +
+                "<p>It shows two brain scans side by side, one tinted blue and one pink, with bright lines between regions. The caption reads: “Male and female brains are wired differently.”</p>" +
+                "<p>The post names no study. Under it, people argue about whether this explains why men and women think differently.</p>" +
+                '<p class="hook">What does the brain evidence actually show, and what can it say about one person?</p>' },
+              { kind: "predict", id: "m8s.5:predict", title: "Your call first",
+                case: ["Men’s brains are larger overall, on average.",
+                  "Larger brains have larger regions.",
+                  { t: "The scans in the post are tinted blue and pink.", irrelevant: true },
+                  "Researchers can compare regions after accounting for overall size.",
+                  { t: "The post was shared many times.", irrelevant: true }],
+                q: "Once overall brain size is accounted for, what happens to most region-by-region differences?",
+                options: ["They grow larger", "They shrink to small", "They stay the same"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: they shrink to small. Much of what looks like a regional difference follows from overall size.",
+                hints: ["Ask what a bigger whole does to its parts.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what changes when size is held equal."] },
+              { kind: "idea", lvl: "f", steelman: true, title: "Steelman ✓ · Average differences are real", body: "<p>Ruigrok et al. (2014) " + ev("r") + " pooled many imaging studies: men’s brains are larger overall on average, and some regions differ on average in volume.</p>" +
+                "<p>Ritchie et al. (2018) " + ev("r") + " scanned thousands of adults in the UK Biobank. The difference in overall size was robust and large. Once size was accounted for, most regional differences were small.</p>" +
+                "<p><b>Its charge:</b> denying any difference ignores large, careful datasets.</p>" +
+                "<p><b>So:</b> on average, brains differ in size, and a little in some regions.</p>" },
+              { kind: "idea", lvl: "f", steelman: true, title: "Steelman ✓ · The mosaic brain", body: "<p>Joel et al. (2015) " + ev("c") + " looked at the regions with the largest averages and asked how they combine inside each person.</p>" +
+                "<p>Most brains were <b>mosaics</b>: some features more common in men, some more common in women. Few brains were all one type.</p>" +
+                "<p><b>Its charge:</b> averages describe groups; inside one head, “male brain” and “female brain” rarely fit.</p>" +
+                "<p><b>So:</b> on this view, a person’s brain is a mixture, not a category.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Patterns in combination", body: "<p>Del Giudice et al. (2016) " + ev("c") + " replied to the mosaic paper: small differences, combined across many regions, can add up to a clear pattern.</p>" +
+                "<p>Algorithms trained on scans can sort brains by sex well above chance, though not perfectly.</p>" +
+                "<p><b>Its charge:</b> judging one region at a time hides the pattern that many regions make together.</p>" +
+                "<p><b>So:</b> on this view, brains differ more in combination than piece by piece.</p>" },
+              { kind: "idea", lvl: "p", title: "What survives a size correction", body: "<p>Eliot et al. (2021) " + ev("c") + " reviewed decades of studies and found that few regional differences survive once head size is properly accounted for, and that findings often fail to repeat across samples.</p>" +
+                "<p>Classifying a brain by sex is also different from predicting what that person thinks, feels or does.</p>" +
+                "<p><b>So:</b> a pattern that sorts brains does not yet sort minds.</p>" },
+              { kind: "idea", lvl: "p", title: "Two traps the post sets", body: "<p><b>Reverse inference</b> (see M5+ lesson 3) reads a mental trait off a brain feature; most features take part in many processes " + ev("r") + ".</p>" +
+                "<p>The <b>seductive allure</b> effect (see M5+ lesson 5): brain images and brain talk make a claim feel more convincing, even when they add nothing " + ev("c") + ".</p>" +
+                "<p><b>So:</b> the colour on the scan is doing the persuading, not the evidence.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the brain verdict", body: "<p>All three views agree on the size difference. They disagree on how much the regional and combined differences mean.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Brains differ on average in size and in some combined patterns; the differences are small region by region, mosaic within individuals, and don’t map neatly onto behaviour.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Brain differences that reliably predict an individual’s psychological traits.</dd></div></dl>" +
+                "<p><b>So:</b> “wired differently” overstates a real but modest average.</p>" },
+              { kind: "idea", lvl: "p", title: "Prenatal androgens", body: "<p><b>Prenatal androgens</b> are hormones such as testosterone acting before birth. Hines (2010) " + ev("r") + " reviewed the evidence, much of it from girls with congenital adrenal hyperplasia, a condition that exposes them to higher androgens in the womb.</p>" +
+                "<p>These girls show, on average, more interest in toys and activities more often chosen by boys, even when parents encourage girl-typical play. The finding is fairly robust; samples are small and the condition has other effects.</p>" +
+                "<p><b>So:</b> hormones before birth shape some interests, on average.</p>" },
+              { kind: "idea", lvl: "p", title: "Testosterone and aggression", body: "<p>In adults, the link between testosterone and aggression is weak. Archer, Graham-Kevan and Davies (2005) " + ev("r") + " pooled studies and found only a small association.</p>" +
+                "<p>It also runs both ways: competing and winning can raise testosterone. Carré and Archer (2018) " + ev("c") + " argue that testosterone changes in the moment matter more than a person’s usual level.</p>" +
+                "<p><b>So:</b> “testosterone makes men aggressive” is folklore, not finding.</p>" },
+              { kind: "idea", lvl: "p", title: "The menstrual-cycle mood myth", body: "<p>Romans et al. (2012) " + ev("r") + " systematically reviewed studies that tracked mood daily. Most found little evidence of a general premenstrual mood effect in women as a whole.</p>" +
+                "<p>The belief that most women become moody before a period is largely debunked " + ev("d") + ". Premenstrual dysphoric disorder is real, and severe, for a minority of women " + ev("r") + ".</p>" +
+                "<p><b>So:</b> take a woman’s report of her own cycle seriously; don’t assume one for her.</p>" },
+              { kind: "idea", lvl: "f", title: "Three kinds of explanation", body: "<p><b>Biology:</b> genes, hormones and brain development. <b>Socialization:</b> what people learn from family, peers and culture. <b>Social role theory</b> (Eagly & Wood 2012) " + ev("c") + ": differences grow from the roles each sex has held in a society, and the skills and expectations those roles bring.</p>" +
+                "<p>The <b>biosocial model</b> (Wood & Eagly 2012) " + ev("c") + " joins them: physical differences make some roles easier for one sex in a given economy, and those roles then shape people.</p>" +
+                "<p><b>So:</b> the real question is how much of each, and for which trait.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Biology first", body: "<p>On this view, evolved and hormonal influences set the direction, and culture adjusts the size.</p>" +
+                "<p><b>Its evidence:</b> prenatal androgen studies (Hines 2010); some differences, such as in interests and physical aggression, appearing early and across many cultures (Archer 2004; Su, Rounds & Armstrong 2009).</p>" +
+                "<p><b>Its charge:</b> if roles alone made the differences, they would not appear so early or so widely.</p>" +
+                "<p><b>So:</b> on this view, biology is the starting point that culture works on.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Social roles first", body: "<p>On this view, the roles a society assigns do most of the shaping, and biology matters mainly through which roles are easier to fill.</p>" +
+                "<p><b>Its evidence:</b> differences that shift across cultures and decades as roles change (Eagly & Wood 2012); stereotypes learned early by children; gaps that narrow with opportunity, such as in substance use.</p>" +
+                "<p><b>Its charge:</b> universal patterns can come from universal role divisions, not only from biology.</p>" +
+                "<p><b>So:</b> on this view, change the roles and many differences change with them.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the explanation verdict", body: "<p>Both sides accept some biological and some social influence. They disagree on the share, and the share is not the same for every trait.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Most differences are best explained by interaction; the share differs by trait (interests and physical aggression show more prenatal influence; most others show more social shaping).</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Cross-cultural or developmental evidence that cleanly separates the two.</dd></div></dl>" +
+                "<p><b>So:</b> ask “how much, for which trait?”, not “nature or nurture?”.</p>" },
+              { kind: "contrast", id: "m8s.5:contrast", title: "Hormone or upbringing?",
+                q: "Which finding points more to a prenatal influence on toy preference?",
+                cases: [
+                  { label: "Finding A", s: ["Some girls play more with toy trucks than most girls do.", { t: "The study took place in one city.", irrelevant: true }, { t: "They were exposed to higher androgens before birth, and their parents encouraged dolls.", diff: true }] },
+                  { label: "Finding B", s: ["Some girls play more with toy trucks than most girls do.", { t: "The study took place in one city.", irrelevant: true }, { t: "Their parents bought them mostly trucks and praised truck play.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Which city the study took place in", "Exposure before birth against the parents’ encouragement", "Which toy the girls chose", "How many girls were studied"],
+                feature: 1,
+                why: "When the preference runs against what parents encourage and follows exposure before birth, upbringing explains it less well. When parents supplied and praised the toy, upbringing is the simpler explanation.",
+                hints: ["Find the sentence about what happened before birth.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: ask which finding upbringing alone could explain."] },
+              { kind: "example", lvl: "p", title: "Jonah replies to the post", body: who("<b>Jonah</b> writes a short reply under the post.") +
+                '<dl class="x-dossier"><div><dt>What’s true</dt><dd>Brains differ on average in overall size, and a little in some combined patterns.</dd></div>' +
+                "<div><dt>What’s missing</dt><dd>The large overlap, the size correction, and any link to what one person thinks or does.</dd></div>" +
+                "<div><dt>What to ask</dt><dd>Which study, which measure, and how big is the difference?</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Fine (2010) ' + ev("c") + " argued that brain and hormone research on sex is shaped by the expectations of the people who do it and read it: small, unrepeated findings are reported as wiring, and the press turns averages into types.</p>" +
+                "<p><b>The answer.</b> The critique fits much of the popular coverage and some older studies. It does not erase the robust size difference or the prenatal androgen findings, which hold in careful, large or independent samples.</p>" +
+                "<p><b>So:</b> weigh each claim by its evidence, not by whether it suits a story about women and men.</p>" },
+              { kind: "teachback", id: "m8s.5:teachback", title: "Teach it back", prompt: "Explain to Jonah what the viral post gets right and wrong: overall brain size larger in men, robust, from Ruigrok and colleagues and from Ritchie and colleagues, with most regional differences small once size is accounted for; the mosaic brain, from Joel and colleagues, contested; combined patterns that classify brains above chance, from Del Giudice and colleagues; few differences surviving a head-size correction, from Eliot and colleagues; reverse inference and the seductive allure of brain images; prenatal androgens and interests, from Hines; a weak, two-way testosterone and aggression link, from Archer and colleagues and Carré and Archer; the menstrual mood myth, from Romans and colleagues, with premenstrual dysphoric disorder real for a minority; biology, social role theory and the biosocial model, from Eagly and Wood; the contrast between a prenatal and an upbringing explanation; and the two dated verdicts with their defeaters." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Brain size differs on average " + ev("r") + ". Regional differences, small after size correction " + ev("r") + ". Mosaic brains " + ev("c") + ". Prenatal androgens and interests " + ev("r") + ". Testosterone and adult aggression, weak " + ev("r") + ". General premenstrual mood effect " + ev("d") + ". Interaction explanations " + ev("c") + ".</p>" +
+                "<p><b>So:</b> real averages, small pieces, mixed individuals, and causes that work together.</p>" },
+              Q("Once overall brain size is accounted for, most regional sex differences are:",
+                ["Large", "Small", "Absent in every study", "Larger in women"], 1,
+                "Ritchie and colleagues found most regional differences small once size was accounted for; the size difference itself is robust."),
+              Q("What does the mosaic finding describe?",
+                ["Brains that change sex across the lifespan", "Most brains mixing features more common in each sex", "Brains that cannot be classified at all", "Regions that differ only in women"], 1,
+                "Most brains combine features more common in men with features more common in women; few are all one type."),
+              Q("In adults, the link between testosterone and aggression is best described as:",
+                ["Strong and one-way", "Absent", "Weak and running both ways", "Found only in women"], 2,
+                "The pooled association is small, and competing or winning can raise testosterone too.")
+            ]
+          },
+          "m8s.6": {
+            home: "Two new intakes on the same day. How does a counsellor use what is known about sex and gender without letting it judge the person in the chair?",
+            keys: [["Can a group average tell you about this client?", "No. Applying a group finding to one person is the ecological fallacy; use it to raise questions, not answers."],
+              ["Does depression look different in men?", "Sometimes, as irritability, anger or drinking (Martin, Neighbors & Griffith 2013). Contested."],
+              ["Why are women with ADHD or autism missed?", "Their presentation is often quieter and criteria were built mostly on boys (Quinn & Madhoo 2014). Robust."],
+              ["How does help-seeking differ?", "Men seek help less on average (Addis & Mahalik 2003); ask differently, not less."],
+              ["What about the clinician’s own stereotypes?", "Gender bias in diagnosis and diagnostic overshadowing are documented errors (Garb 1997; Ford & Widiger 1989). Check yourself."]],
+            steps: [
+              { kind: "hook", title: "Two intakes, one day", body: who("<b>Lena</b> is a counsellor at a community service. She has two new intakes today.") +
+                "<p>In the morning, <b>Ray</b> sits quietly, answers briefly and says he is “just stressed”. He mentions he has a few drinks every night to unwind, and that he snaps at his kids more than he used to.</p>" +
+                "<p>In the afternoon, <b>Nadia</b> describes a lifetime of restlessness, losing things and missing deadlines. Her last provider called it anxiety. She says the anxiety treatment helped her worry, but not the rest.</p>" +
+                '<p class="hook">What should Lena carry from the research into each room, and what should she leave outside?</p>' },
+              { kind: "predict", id: "m8s.6:predict", title: "Your call first",
+                case: ["Ray says he is “just stressed”.",
+                  "Ray drinks every night and snaps at his kids.",
+                  { t: "Ray arrived on time.", irrelevant: true },
+                  "Nadia has been restless and disorganized since childhood.",
+                  "Her last provider called it anxiety.",
+                  { t: "Nadia’s appointment is in the afternoon.", irrelevant: true }],
+                q: "What is Lena’s best first move with both clients?",
+                options: ["Start from the most common diagnosis for each one’s sex", "Ask open questions about each person’s own experience", "Accept each client’s own label and move on"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: ask open questions. Group patterns tell Lena what to ask about; only the person can tell her what is true for them.",
+                hints: ["Ask who can tell Lena what is true for Ray.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what a group average can and cannot tell you."] },
+              { kind: "idea", lvl: "f", title: "Rule one: the average never judges the person", body: "<p>The <b>ecological fallacy</b> is reading a group finding as a fact about one member of the group " + ev("r") + ". “Women are more often depressed” says nothing about whether Nadia is.</p>" +
+                "<p>The same limit applied to adversity scores (see M6 lesson 7): a group risk does not predict one person’s future.</p>" +
+                "<p><b>So:</b> group findings raise questions; the person answers them.</p>" },
+              { kind: "idea", lvl: "p", title: "Rule two: depression can look different", body: "<p>Martin, Neighbors and Griffith (2013) " + ev("c") + " found that when anger, irritability, risk-taking and drinking were counted as symptoms, men reported depression about as often as women.</p>" +
+                "<p>This is contested: broader criteria may also count problems that are not depression.</p>" +
+                "<p><b>So:</b> with Ray, ask about anger and drinking as possible signs of low mood, not proof of it.</p>" },
+              { kind: "idea", lvl: "p", title: "Rule two, continued: who gets missed", body: "<p>Quinn and Madhoo (2014) " + ev("r") + " reviewed ADHD in women and girls: they are more often inattentive than hyperactive, and are diagnosed late or treated for anxiety or depression first.</p>" +
+                "<p>Autistic women are also diagnosed late or missed, partly because of how cases are found (see SG lesson 4) " + ev("r") + ".</p>" +
+                "<p><b>So:</b> with Nadia, ask about childhood and attention, not only about worry.</p>" },
+              { kind: "idea", lvl: "p", title: "Rule three: ask differently, not less", body: "<p>Addis and Mahalik (2003) " + ev("r") + " reviewed why men seek help less on average: norms of self-reliance, and help that feels like losing control.</p>" +
+                "<p>Men are more willing when a problem is framed as common and when they keep some control over what happens next.</p>" +
+                "<p><b>So:</b> make the question ordinary and the choice theirs.</p>" },
+              { kind: "idea", lvl: "m", title: "Rule four: your stereotypes are an error class", body: "<p><b>Gender bias in diagnosis</b> is documented. Garb (1997) " + ev("r") + " reviewed clinical judgment studies and found bias by sex for some diagnoses. Ford and Widiger (1989) " + ev("c") + " gave clinicians identical case vignettes: when the case was a woman, they more often diagnosed histrionic personality disorder; when a man, antisocial.</p>" +
+                "<p><b>Diagnostic overshadowing</b> is putting new symptoms down to a label already given, as when Nadia’s attention problems were put down to anxiety " + ev("r") + ".</p>" +
+                '<p class="x-note">Self-check: “Would I reach the same view if this client were another sex?”</p>' +
+                "<p><b>So:</b> name the error, then test your view against it.</p>" },
+              { kind: "idea", lvl: "p", title: "Rule five: ask, don’t assume", body: "<p>The American Psychological Association’s guidelines (APA 2015) " + ev("r") + " ask clinicians not to assume a client’s gender identity from appearance, to ask for name and pronouns, and to treat transgender and nonbinary identities as part of human diversity, not as disorders.</p>" +
+                "<p>Use the name and pronouns a client gives, and ask again if you are unsure.</p>" +
+                "<p><b>So:</b> asking is respect; assuming is a guess.</p>" },
+              { kind: "example", lvl: "p", title: "Lena’s lines", body: who("<b>Lena</b> keeps three lines ready.") +
+                '<p class="x-note">With Ray: “Some people feel stress as anger or need a drink to unwind. Does any of that sound like you?” · <span lang="es">“Algunas personas sienten el estrés como rabia o necesitan un trago para relajarse. ¿Te suena algo de eso?”</span></p>' +
+                '<p class="x-note">With Nadia: “Were concentration and keeping track of things hard for you as a child too?” · <span lang="es">“¿Concentrarte y llevar el control de las cosas también te costaba de niña?”</span></p>' +
+                '<p class="x-note">With anyone: “What name and pronouns would you like me to use?” · <span lang="es">“¿Qué nombre y pronombres quieres que use?”</span></p>' },
+              { kind: "contrast", id: "m8s.6:contrast", title: "An assumption or a question?",
+                q: "Which response follows the clinical rules?",
+                cases: [
+                  { label: "Response A", s: ["Ray mentions nightly drinking.", { t: "It is a weekday session.", irrelevant: true }, { t: "Lena thinks: men drink to cope, so this is just stress, and moves on.", diff: true }] },
+                  { label: "Response B", s: ["Ray mentions nightly drinking.", { t: "It is a weekday session.", irrelevant: true }, { t: "Lena asks what the drinking does for him and how his mood has been.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Which day the session is", "Whether Lena draws a conclusion from the group or asks the person", "Whether Ray drinks", "How long the session lasts"],
+                feature: 1,
+                why: "Response A turns a group pattern into a conclusion about Ray. Response B uses the pattern to choose a question and lets Ray answer it.",
+                hints: ["Find the sentence about what Lena does next.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: ask whose answer each response relies on."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Teaching clinicians about sex differences can create the stereotypes it warns against: a “male depression” checklist may lead a clinician to read every angry man as depressed, and every quiet woman as anxious.</p>' +
+                "<p><b>The answer.</b> The rules treat each pattern as a question to ask, never a conclusion, and pair it with a self-check. Ignoring known patterns also has a cost: it is how Nadia was missed.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Known patterns in presentation help clinicians ask better questions; male-typical depression remains contested.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Evidence that training on sex differences increases diagnostic bias in practice.</dd></div></dl>" },
+              { kind: "teachback", id: "m8s.6:teachback", title: "Teach it back", prompt: "Explain to a new counsellor how Lena handles Ray and Nadia: rule one, the ecological fallacy, with the limits of adversity scores; rule two, depression that may show as anger or drinking in men, from Martin, Neighbors and Griffith, contested, and women with ADHD and autistic women missed or diagnosed late, from Quinn and Madhoo; rule three, help-seeking, from Addis and Mahalik, so ask differently, not less; rule four, gender bias in diagnosis and diagnostic overshadowing, from Garb and from Ford and Widiger, with the self-check; rule five, asking about gender identity and pronouns, from the APA guidelines; the contrast between an assumption from the group and a question to the person; and the critique that teaching differences can create stereotypes, with its dated verdict." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Ecological fallacy " + ev("r") + ". Male-typical depression " + ev("c") + ". Missed ADHD and autism in women " + ev("r") + ". Help-seeking differs " + ev("r") + ". Gender bias in diagnosis " + ev("r") + ". Ask about identity and pronouns " + ev("r") + ".</p>" +
+                "<p><b>So:</b> the research tells Lena what to ask; Ray and Nadia tell her what is true.</p>" },
+              { kind: "idea", lvl: "f", title: "So, for the whole module", body: "<p><b>Overlap first:</b> for most traits, women and men are far more alike than different, and the spread within each sex is wide.</p>" +
+                "<p><b>Sizes in words:</b> say whether a difference is near zero, small, moderate or large, and where it was measured.</p>" +
+                "<p><b>So:</b> the person in the chair always comes before the average.</p>" +
+                '<p class="x-note">Lab: The two curves, coming later.</p>' },
+              Q("A clinician concludes a man can’t be depressed because his main complaint is anger. Which error is this most like?",
+                ["Ascertainment bias", "Ignoring that presentation can differ", "Reverse inference", "Measurement invariance"], 1,
+                "Anger and irritability can be part of how some men show low mood; ruling depression out on that basis skips the question."),
+              Q("Nadia’s attention problems were put down to her anxiety. What is this called?",
+                ["Diagnostic overshadowing", "The ecological fallacy", "Help-seeking", "Camouflaging"], 0,
+                "Diagnostic overshadowing is putting new symptoms down to a label already given."),
+              Q("Men seek help less often on average. What follows for the clinician?",
+                ["Ask men fewer questions", "Ask differently: ordinary framing, choice kept with the client", "Refer all men elsewhere", "Wait for the man to raise the problem"], 1,
+                "Lower help-seeking calls for a different way of asking, not less asking.")
+            ]
+          },
           /* ============ M0 · HOW TO JUDGE A STUDY: concepts only, no numbers ============ */
           "m0.1": {
             home: "Teens who eat family dinner use fewer drugs. Does dinner do it?",
@@ -9741,7 +10270,32 @@
           G("m5c.5", "Multiple comparisons problem", "Problema de las comparaciones múltiples", "Running many tests makes some pass by pure chance.", "The more separate tests are run, the more likely some will seem significant by chance alone unless the analysis corrects for how many were run; shown vividly by a dead salmon that seemed to “respond” in a scanner (Bennett et al. 2010); see Statistical significance (M0)."),
           G("m5c.5", "Seductive allure effect", "Efecto de seducción neurocientífica", "Brain talk or pictures making a claim seem more convincing.", "The finding that irrelevant brain information can make explanations more satisfying to non-experts (Weisberg et al. 2008; McCabe & Castel 2008); contested, since replications found the image effect weaker or absent (Farah & Hook 2013; Michael et al. 2013)."),
           G("m5c.6", "Deep neural network", "Red neuronal profunda", "An artificial network with many hidden layers.", "An artificial neural network with many layers between input and output; networks trained on objects show layers resembling stages of the visual brain and can be tested as models of mind (Yamins & DiCarlo 2016; Kriegeskorte 2015); see Hidden layer and Adversarial example."),
-          G("m5c.6", "Large language model", "Modelo de lenguaje grande", "A network trained on vast text to predict the next word.", "A deep neural network trained on very large amounts of text to predict words, producing fluent language; debated as a model of human cognition (Binz & Schulz 2023) or a different kind of system (Bender et al. 2021); see Chatbot / conversational agent.")
+          G("m5c.6", "Large language model", "Modelo de lenguaje grande", "A network trained on vast text to predict the next word.", "A deep neural network trained on very large amounts of text to predict words, producing fluent language; debated as a model of human cognition (Binz & Schulz 2023) or a different kind of system (Bender et al. 2021); see Chatbot / conversational agent."),
+          /* phase 3j-1: SG lessons 1–2 */
+          G("m8s.1", "Sex", "Sexo", "Biological categories, such as female and male.", "Biological categories based on features such as chromosomes, hormones and anatomy; intersex people have sex characteristics that do not fit typical categories; contrast Gender."),
+          G("m8s.1", "Gender", "Género", "Social roles and identity: what a society expects, and how a person sees themselves.", "The social roles, expectations and identities attached to being a woman, a man or another gender; transgender people have a gender identity that differs from the sex recorded at birth; most research compares self-reported men and women; contrast Sex."),
+          G("m8s.1", "Gender similarities hypothesis", "Hipótesis de las similitudes de género", "Men and women are alike on most psychological traits.", "Hyde’s (2005) proposal, supported by a later meta-synthesis (Zell, Krizan & Teeter 2015), that most psychological sex differences are small or near zero; challenged by the multivariate view that combined profiles differ more (Del Giudice et al. 2012)."),
+          G("m8s.1", "Distribution overlap", "Solapamiento de distribuciones", "How much two groups’ scores share the same range.", "The shared region of two groups’ score distributions; for most psychological traits the distributions of men and women overlap almost completely, so a difference in averages says little about individuals; see Effect size."),
+          G("m8s.1", "Within-group variation", "Variación intragrupal", "How much people in the same group differ from each other.", "The spread of scores inside one group; for most traits the variation within each sex is far larger than the gap between the sexes’ averages; see Distribution overlap."),
+          G("m8s.2", "People–things dimension", "Dimensión personas–cosas", "Preferring work with people versus with objects and machines.", "An interest dimension running from people-oriented to thing-oriented work; it shows the largest known psychological sex difference, large in size, with men leaning toward things and women toward people on average, and much overlap (Su, Rounds & Armstrong 2009)."),
+          G("m8s.2", "Relational aggression", "Agresión relacional", "Harming someone through gossip, exclusion or damaged friendships.", "Indirect aggression aimed at relationships and social standing; sex differences are small or absent, unlike physical aggression, which is moderately higher in men (Archer 2004)."),
+          G("m8s.2", "Mental rotation", "Rotación mental", "Turning a shape in your mind to compare it with another.", "A spatial task in which a person judges whether rotated figures match; shows a moderate difference favouring men (Voyer, Voyer & Bryden 1995), and spatial skills improve with training (Uttal et al. 2013)."),
+          /* phase 3j-2: SG lessons 3–4 */
+          G("m8s.3", "Self-report bias", "Sesgo de autoinforme", "Answers shaped by how people want to see themselves or be seen.", "Distortion in self-rated measures from self-image, norms or the wish to look good; self-reported empathy shows a large sex difference while body and behaviour measures show a small or near-zero one (Eisenberg & Lennon 1983; Ickes, Gesn & Graham 2000); see Self-report (M7)."),
+          G("m8s.3", "Gender-equality paradox", "Paradoja de la igualdad de género", "Some sex differences look larger in more gender-equal countries.", "The finding that some differences in personality, preferences and study choice appear larger, not smaller, where gender equality is greater (Costa, Terracciano & McCrae 2001; Falk & Hermle 2018; Stoet & Geary 2018); contested on measurement grounds (Richardson et al. 2020); see Measurement invariance."),
+          G("m8s.3", "Measurement invariance", "Invarianza de medida", "A test meaning the same thing in every group it is used with.", "The property that a questionnaire measures the same trait in the same way across groups, such as countries or sexes; without it, group comparisons may reflect the measure rather than people; see Gender-equality paradox."),
+          G("m8s.4", "Prevalence", "Prevalencia", "How common a condition is in a group.", "The share of a population that has a condition at a given time; a difference in prevalence can be robust as description while its explanation stays open; contrast Ascertainment bias."),
+          G("m8s.4", "Ascertainment bias", "Sesgo de detección", "Who gets counted depends on how cases are found.", "Distortion in counts caused by how cases are identified, such as referral to a clinic; the autism gap between boys and girls is smaller in screened population samples than in clinic samples (Loomes, Hull & Mandy 2017); see Prevalence."),
+          G("m8s.4", "Camouflaging (autism)", "Camuflaje (autismo)", "Hiding autistic traits to fit in.", "Masking or compensating for autistic traits, for example by copying others or rehearsing conversations, described as exhausting (Hull et al. 2017); may help explain why some girls are diagnosed late or missed; its measurement and sex difference are contested."),
+          G("m8s.4", "Help-seeking", "Búsqueda de ayuda", "Whether and when a person asks for help.", "The steps a person takes to get professional or informal support; higher in women on average, which raises clinic diagnoses but cannot explain gaps found when a whole population is screened; see Prevalence."),
+          /* phase 3j-3: SG lessons 5–6 */
+          G("m8s.5", "Mosaic brain", "Cerebro mosaico", "A brain that mixes features more common in each sex.", "The finding that most individual brains combine features more common in men with features more common in women, and few are all one type (Joel et al. 2015); contested by work showing combined patterns classify brains by sex above chance (Del Giudice et al. 2016)."),
+          G("m8s.5", "Prenatal androgens", "Andrógenos prenatales", "Hormones such as testosterone acting before birth.", "Androgens present in the womb; evidence from congenital adrenal hyperplasia links higher exposure to more interest in toys and activities more often chosen by boys, a fairly robust finding (Hines 2010)."),
+          G("m8s.5", "Social role theory", "Teoría del rol social", "Sex differences grow from the roles each sex holds in a society.", "The account that differences in behaviour arise from the division of roles in a society and the skills and expectations those roles bring (Eagly & Wood 2012); contested in how much it explains; see Biosocial model."),
+          G("m8s.5", "Biosocial model", "Modelo biosocial", "Biology and society shaping sex differences together.", "The view that physical sex differences make some roles easier for one sex in a given economy, and those roles then shape people, so most differences come from interaction (Wood & Eagly 2012); see Social role theory."),
+          G("m8s.6", "Ecological fallacy", "Falacia ecológica", "Reading a group finding as a fact about one person.", "The error of inferring an individual’s traits from a group average or rate; a group difference cannot say whether a given client has a trait or condition."),
+          G("m8s.6", "Diagnostic overshadowing", "Eclipsamiento diagnóstico", "Putting new symptoms down to a label already given.", "The error of attributing new or different symptoms to an existing diagnosis, so other conditions are missed, as when attention problems are put down to anxiety; see Gender bias in diagnosis."),
+          G("m8s.6", "Gender bias in diagnosis", "Sesgo de género en el diagnóstico", "Diagnoses shifted by a client’s sex rather than their symptoms.", "Systematic differences in diagnosis for identical presentations depending on the client’s sex (Garb 1997); identical vignettes drew histrionic diagnoses for women and antisocial for men (Ford & Widiger 1989).")
         ];
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m0")).map(function (id) { return { v: id, t: "M0 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m1")).map(function (id) { return { v: id, t: "M1 · " + lessonOf(id).title }; }));
@@ -9752,6 +10306,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat(["m7.7", "m7.8", "m7.9", "m7.10", "m7.11", "m7.12", "m7.13"].map(function (id) { return { v: id, t: "M7 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
 
         /* ============ CONTENT ENGINE (phase 2a): case bank, status discipline, references, validators. Data + checks only; lesson text untouched ============ */
         /* @engine-start */
@@ -10139,6 +10694,44 @@
             R("Kriegeskorte", 2015, "review", "Argued that deep networks are a new kind of model for brain and mind, precise enough to test and to break.", st("contested", "Influential as a framework; whether such models explain or only predict is still argued.")),
             R("Binz & Schulz", 2023, "experiment", "A language model given classic psychology tasks often decided like people and could be studied like a participant.", st("contested", "Models change quickly, and they also failed some tasks in ways people do not."), true),
             R("Bender et al.", 2021, "review", "Argued that language models stitch together patterns from text without grasp of meaning, calling them stochastic parrots.", st("contested", "A widely cited position paper; others argue the models capture more structure than the phrase suggests."))];
+          /* phase 3j-1: SG lessons 1–2 */
+          REFS["m8s.1"] = [
+            R("Hyde", 2005, "review", "Gathering the large reviews of sex differences, found most psychological differences small or near zero: the gender similarities hypothesis.", st("robust", "Built on many meta-analyses and confirmed by later, larger syntheses; a few differences are larger.")),
+            R("Zell, Krizan & Teeter", 2015, "meta-analysis", "A meta-synthesis of a very large body of reviews found most sex differences small, a few moderate and very few large.", st("robust", "Broad and systematic; it rests on the quality of the reviews it pooled.")),
+            R("Mehl et al.", 2007, "observational", "Recordings of everyday speech found no meaningful difference in how much women and men talk, with very large variation within each.", st("contested", "A single study of students; others suggest the answer depends on setting and topic."), true),
+            R("Del Giudice et al.", 2012, "observational", "Combining many personality traits into one profile showed men and women overlapping much less than single traits suggest.", st("contested", "The method and the meaning of a combined difference are debated; it does not predict individuals."))];
+          REFS["m8s.2"] = [
+            R("Su, Rounds & Armstrong", 2009, "meta-analysis", "Interest in working with people versus things showed a large sex difference, the largest psychological difference known, with overlap remaining.", st("robust", "Pooled across very many people and inventories; the measures carry some cultural loading.")),
+            R("Archer", 2004, "meta-analysis", "Physical aggression showed a moderate difference, larger in men; indirect or relational aggression showed a small difference or none.", st("robust", "Consistent across settings and methods; sizes vary with how aggression is measured.")),
+            R("Voyer, Voyer & Bryden", 1995, "meta-analysis", "Mental rotation showed a moderate difference favouring men, the largest among spatial tasks.", st("robust", "Replicated widely; training narrows it (Uttal et al. 2013).")),
+            R("Hyde & Linn", 1988, "meta-analysis", "Verbal ability showed a small difference overall, favouring women, largest for fluency.", st("robust", "Confirmed for reading and writing by later school data (Reilly et al. 2019).")),
+            R("Lindberg et al.", 2010, "meta-analysis", "Mathematics performance showed a near-zero sex difference in most countries studied.", st("robust", "Large and international; the gap varies by country and is debated at the very top of the range."))];
+          /* phase 3j-2: SG lessons 3–4 */
+          REFS["m8s.3"] = [
+            R("Eisenberg & Lennon", 1983, "meta-analysis", "Self-reported empathy showed a large difference favouring women; physiological and behavioural measures showed a small or near-zero one.", st("robust", "The measure-dependence has held in later work; it shows what self-report captures, not why.")),
+            R("Costa, Terracciano & McCrae", 2001, "observational", "Across many countries, women averaged higher on neuroticism and agreeableness, small to moderate, with larger differences in more gender-equal countries.", st("robust", "Replicated in self and observer ratings; the cross-country pattern depends on comparable measures.")),
+            R("Falk & Hermle", 2018, "observational", "Sex differences in preferences such as risk-taking and patience were larger in richer, more gender-equal countries.", st("contested", "A large survey; whether the measures mean the same across countries is debated.")),
+            R("Stoet & Geary", 2018, "observational", "Women’s share of science and engineering degrees was lower in more gender-equal countries.", st("contested", "Later corrected after reanalysis showed results depend on how the gap is calculated.")),
+            R("Richardson et al.", 2020, "observational", "Reanalysing Stoet and Geary’s data, found the reported link depended on how the gap was measured.", st("contested", "A reanalysis and critique; the original authors published a correction, and the debate continues."))];
+          REFS["m8s.4"] = [
+            R("Salk, Hyde & Abramson", 2017, "meta-analysis", "Depression was more common in women by a moderate amount, a gap opening in adolescence.", st("robust", "Large and international; explanations remain open.")),
+            R("McHugh et al.", 2018, "review", "Substance use disorders are more common in men, but the gap is closing, with women often progressing faster.", st("robust", "Consistent with cross-national surveys (Seedat et al. 2009); causes of the narrowing debated.")),
+            R("Loomes, Hull & Mandy", 2017, "meta-analysis", "The autism gap between boys and girls was smaller in screened population samples than in clinic samples.", st("robust", "Consistent across studies; how much of the remaining gap is real is debated.")),
+            R("Hull et al.", 2017, "observational", "Interviews with autistic adults, mostly women, described camouflaging traits to fit in, at a cost.", st("contested", "A small interview study; measurement and sex differences in camouflaging are still debated."), true),
+            R("Hudson et al.", 2007, "observational", "A national survey found eating disorders more common in women, with a smaller gap for binge-eating disorder.", st("robust", "Large and representative; men are under-recognized by current screening (Murray et al. 2017)."))];
+          /* phase 3j-3: SG lessons 5–6 */
+          REFS["m8s.5"] = [
+            R("Ritchie et al.", 2018, "observational", "In a very large UK Biobank sample, overall brain size was larger in men; most regional differences were small once size was accounted for.", st("robust", "Robust for overall size; regional findings depend on how size is corrected (Ruigrok et al. 2014; Eliot et al. 2021).")),
+            R("Joel et al.", 2015, "observational", "Most brains were mosaics of features more common in each sex; few were consistently one type.", st("contested", "Combined patterns can still classify brains by sex above chance (Del Giudice et al. 2016).")),
+            R("Hines", 2010, "review", "Prenatal androgen exposure, including in congenital adrenal hyperplasia, was linked to more male-typical toy and interest preferences on average.", st("robust", "Fairly robust; samples are small and the condition has other effects.")),
+            R("Archer, Graham-Kevan & Davies", 2005, "meta-analysis", "Testosterone and aggression in adults showed only a weak association.", st("robust", "The link runs both ways; momentary changes may matter more (Carré & Archer 2018).")),
+            R("Romans et al.", 2012, "review", "Daily-tracking studies found little evidence of a general premenstrual mood effect in women as a whole.", st("robust", "Premenstrual dysphoric disorder remains real for a minority; study methods vary."))];
+          REFS["m8s.6"] = [
+            R("Garb", 1997, "review", "Clinical judgment studies showed bias by client sex for some diagnoses.", st("robust", "Consistent across many studies; the size varies by diagnosis.")),
+            R("Ford & Widiger", 1989, "experiment", "Identical vignettes drew more histrionic diagnoses when the client was a woman and more antisocial when a man.", st("contested", "A single vignette study; vignettes may not reflect real practice."), true),
+            R("Addis & Mahalik", 2003, "review", "Men seek help less on average, shaped by norms of self-reliance and how help is offered.", st("robust", "Widely supported; varies with culture and setting.")),
+            R("Martin, Neighbors & Griffith", 2013, "observational", "Counting anger, irritability, risk-taking and drinking as symptoms made depression about as common in men as in women.", st("contested", "Broader criteria may also capture problems that are not depression.")),
+            R("Quinn & Madhoo", 2014, "review", "Women and girls with ADHD are more often inattentive, and are diagnosed late or first treated for anxiety or depression.", st("robust", "Consistent with later studies; how much is presentation versus recognition is debated."))];
           Object.keys(REFS).forEach(function (id) { if (LESSON_CONTENT[id]) LESSON_CONTENT[id].refs = REFS[id]; });
           /* fixture for the single-small-study flag: the same real study as above, deliberately mis-worded as robust */
           var REF_TESTS = [R("Rosenthal & Fode", 1963, "experiment", "Fixture: the maze-bright study, worded as robust.", st("robust", "Fixture only."), true)];
