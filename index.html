@@ -5111,6 +5111,207 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* PHASE 3q-5 · L18 Bias Arcade: the counsellor in an intake week. Predict, set one manipulation (slow-down card off or on), three short case rounds with why-feedback and the trap named, end readout in words, collapsible reveal and therapy sections, so what. Page-only 2D SVG; animates only while visible, stops on exit; reduced motion drops the pulse; stores nothing. */
+          {
+            id: "biasarcade", name: "Bias Arcade", kicker: "M5 · Cognitive biases", hue: ["#ffc35a", "#ff8a9a"], gallery: true, order: 5.9, dom: true,
+            idea: "You are the counsellor in an intake week. Three quick cases, three tempting shortcuts. See which traps catch you, and whether a pause helps.",
+            see: "A short case card, three big answers, and instant feedback that names the trap and the habit that beats it. Lamps light up as you dodge or get caught.",
+            why: "Fast mental shortcuts usually work and fail in predictable ways. Experience protects less than people think; structure protects more.",
+            use: "Intake, reading referrals and records, first formulations, medical rule-outs, and how you write notes.",
+            cap: "Predict, choose the slow-down card, then play three quick intake cases.",
+            RD: [
+              { tag: "Anchor", trap: "Anchoring and labelling", habit: "Treat a referral label as someone’s opinion, and assess fresh.",
+                cs: "The referral note says “manipulative, drug-seeking”. The client describes real back pain and asks about pain management. Your first thought?",
+                alt: "The pain is real and untreated, and asking for relief is what anyone in pain would do.",
+                opts: [
+                  ["confirm", "Confirm drug-seeking", false, "Trap. The label in the note set your anchor, and you read the request through it. Pain is common in people who use substances, and asking about it is not proof of drug-seeking."],
+                  ["fresh", "Assess the pain and the use history fresh", true, "Dodged it. You treated the note as one person’s view, not a finding. A fresh pain and use history lets you see both the pain and any real risk."],
+                  ["refuse", "Refuse to discuss medication", false, "Trap. Refusing acts on the label without assessing anything. The client learns pain can’t be raised here, and real pain goes untreated."]
+                ] },
+              { tag: "Confirm", trap: "Confirmation bias", habit: "Ask a question that could prove you wrong.",
+                cs: "You suspect the client is depressed. Which question tests your idea best?",
+                alt: "Low mood could be grief, poor sleep, withdrawal or a hard month, not depression.",
+                opts: [
+                  ["often", "“Do you often feel down?”", false, "Trap. Most people say yes to this sometimes, so the answer can’t prove you wrong. It only collects agreement."],
+                  ["most", "“Have you felt down most days?”", false, "Trap. Better worded, but it still only looks for the answer you expect. A yes feels like proof; a no gets explained away."],
+                  ["well", "“What has gone well lately, and what do you still enjoy?”", true, "Dodged it. This question could prove you wrong. If enjoyment is intact, depression is less likely; if not, your idea has earned its support."]
+                ] },
+              { tag: "Overshadow", trap: "Availability and diagnostic overshadowing", habit: "Rule out medical causes before settling on a psychological one.",
+                cs: "A client in early recovery is confused and sweating. Last week a colleague’s client in withdrawal looked the same. What now?",
+                alt: "Confusion and sweating can also mean low blood sugar, infection or a head injury, and some of those are emergencies.",
+                opts: [
+                  ["same", "It’s withdrawal, same as last week", false, "Trap: availability. Last week’s case came to mind easily, so it felt likely. Withdrawal may be part of it, but confusion can signal a medical emergency."],
+                  ["anx", "It’s just anxiety about treatment", false, "Trap: diagnostic overshadowing. New symptoms were put down to a known label. Confusion is not a usual sign of anxiety, and a physical cause gets missed."],
+                  ["med", "Check medical causes too — low blood sugar, infection, head injury — before deciding", true, "Dodged it. Checking medical causes keeps the client safe. If they come back clear, withdrawal or anxiety is still on the table."]
+                ] }
+            ],
+            flat: function (box, ctl) {
+              var sc = this, RD = sc.RD, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var PRED = [["yes", "Yes, experience cancels bias"], ["struct", "Experience helps less than people think; structure helps more"], ["untrained", "Bias only affects untrained people"]];
+              var NUM = ["One", "Two", "Three"], BIG = "flex:1 1 100%;min-height:56px;font-size:15px;border-radius:16px;text-align:left";
+              var fresh = function (k) { return { pred: k ? k.pred : null, slow: k ? k.slow : null, prev: k ? k.prev : null, open: k ? k.open : {}, play: false, r: 0, card: false, ans: [], done: false }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function sect(title, sub, body) { return '<section class="x-lens__box glass" aria-label="' + esc(title) + '"><h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function btn(act, v, label, on, dis, st) { return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + !!on + '"' + (dis ? " disabled" : "") + (st ? ' style="' + st + '"' : "") + ">" + esc(label) + "</button>"; }
+              function go(act, label) { return '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="' + act + '" style="min-height:52px">' + esc(label) + "</button></div>"; }
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function det(k, title, sub, body, strong) {
+                return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (S.open[k] ? " open" : "") + (strong ? ' style="border-color:var(--primary)"' : "") +
+                  '><summary><h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>";
+              }
+              function lamps() {
+                var words = RD.map(function (d, i) { var a = S.ans[i]; return d.tag + ": " + (a == null ? "not played" : a.ok ? "dodged" : "caught"); }).join(", ");
+                var s = '<svg data-stage="lamps" viewBox="0 0 360 66" role="img" aria-label="Trap lamps. ' + esc(words) + '" style="display:block;width:100%;height:auto;max-height:120px"><g aria-hidden="true" style="font:12px var(--sans)" text-anchor="middle">';
+                RD.forEach(function (d, i) {
+                  var x = 60 + i * 120, a = S.ans[i], f = a == null ? "none" : a.ok ? "var(--primary)" : "var(--coral)";
+                  if (i < RD.length - 1) s += '<path d="M' + (x + 18) + " 24H" + (x + 102) + '" stroke="var(--dim)" stroke-opacity="0.4" stroke-dasharray="3 4"/>';
+                  s += '<circle cx="' + x + '" cy="24" r="12" fill="' + f + '" stroke="' + (a == null ? "var(--dim)" : f) + '" stroke-width="1.6"/>';
+                  if (S.play && !S.done && i === S.r) s += '<circle data-k="ring" cx="' + x + '" cy="24" r="17" fill="none" stroke="var(--gold)" stroke-width="1.4"/>';
+                  s += '<text x="' + x + '" y="58" fill="var(--dim)">' + (a == null ? d.tag : d.tag + (a.ok ? " · dodged" : " · caught")) + "</text>";
+                });
+                return s + "</g></svg>";
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.t += Math.min(0.05, (now - A.last) / 1000);
+                A.last = now;
+                var w = Math.sin(A.t * 3);
+                A.ring.setAttribute("r", (17 + w * 2.5).toFixed(2)); A.ring.setAttribute("stroke-opacity", (0.55 + w * 0.4).toFixed(2));
+                kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function caught() { return S.ans.filter(function (a) { return a && !a.ok; }).length; }
+              function word(c) { return c >= 2 ? "Most traps caught you" : c === 1 ? "A few traps caught you" : "You dodged nearly every trap"; }
+              function modeWord(m) { return m === "on" ? "with the slow-down card on" : "with the slow-down card off"; }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var d = RD[S.r], a = S.ans[S.r];
+                var h = sect("Predict first", "Experienced clinicians are less biased than beginners, right?",
+                  '<div class="x-lens__row" role="group" aria-label="Your prediction">' + PRED.map(function (o) { return btn("pred", o[0], o[1], S.pred === o[0], !!S.pred, "flex:1 1 100%;min-height:52px"); }).join("") + "</div>" +
+                  (S.pred ? '<p class="x-lens__p" aria-live="polite"><b>' + (S.pred === "struct" ? "Right." : "Not quite.") + "</b> Clinicians show the same biases as everyone, and experience improves accuracy less than expected, mostly where there is clear feedback (Garb 1998). Structure, such as checklists and a pause to consider the opposite, helps more (Croskerry 2003).</p>" : ""));
+                if (S.pred && !S.play && !S.done) h += sect("Set up your intake week", "One choice, set once before you play.",
+                  '<p class="x-lens__p"><b>Slow-down card</b> · On means a short “consider the opposite” card before each answer.</p>' +
+                  '<div class="x-lens__row" role="group" aria-label="Slow-down card">' + btn("slow", "off", "Off", S.slow === "off", false, "flex:1 1 40%;min-height:52px;text-align:center") + btn("slow", "on", "On", S.slow === "on", false, "flex:1 1 40%;min-height:52px;text-align:center") + "</div>" +
+                  (S.slow ? go("start", "Start the arcade") : '<p class="x-lens__p">Pick Off or On to start.</p>'));
+                if (S.play || S.done) {
+                  var body = lamps() + '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    "<li><b>Round:</b> " + (S.done ? "All three played" : NUM[S.r] + " of three") + " · " + modeWord(S.slow) + "</li>" +
+                    "<li><b>Trap in play:</b> " + (S.done ? "All revealed" : a ? esc(a.trap) + (a.ok ? " — you dodged it" : " — it caught you") : "Hidden until you answer") + "</li>" +
+                    "<li><b>Clinician habit that helps:</b> " + (S.done ? "Structure over speed" : a ? esc(d.habit) : "Shown after you answer") + "</li></ul>";
+                  if (!S.done) {
+                    body += '<p class="x-lens__p" style="font-size:16px;line-height:1.45"><b>' + esc(d.cs) + "</b></p>";
+                    if (S.slow === "on" && !S.card && !a) body += '<div class="x-lens__box" style="border:1px dashed var(--primary);padding:12px;border-radius:14px"><p class="x-lens__p"><b>Consider the opposite: what else could explain this?</b></p><p class="x-lens__p">' + esc(d.alt) + "</p></div>" + go("card", "Got it — show the answers");
+                    else {
+                      body += '<div class="x-lens__row" role="group" aria-label="Your answer">' + d.opts.map(function (o) {
+                        return btn("ans", o[0], a ? o[1] + (o[2] ? " · better" : " · trap") : o[1], a && a.v === o[0], !!a, BIG);
+                      }).join("") + "</div>";
+                      if (a) body += '<p class="x-lens__p" aria-live="polite"><b>' + (a.ok ? "Dodged it." : "Caught.") + "</b> " + esc(a.why) + "</p>" + go("next", S.r < RD.length - 1 ? "Next round" : "See your result");
+                    }
+                  }
+                  h += sect(S.done ? "Your intake week" : "Round " + NUM[S.r].toLowerCase(), S.done ? "" : "You are the counsellor. Tap the first move you’d make.", body);
+                }
+                if (S.done) {
+                  var c = caught(), other = S.slow === "on" ? "off" : "on";
+                  h += sect("Result", "", '<p class="x-lens__take">' + word(c) + ".</p>" +
+                    '<p class="x-lens__p">You played ' + modeWord(S.slow) + "." + (S.prev ? " Last time, " + modeWord(S.prev.slow) + ": " + S.prev.word.charAt(0).toLowerCase() + S.prev.word.slice(1) + "." : "") +
+                    " A pause to consider the opposite tends to catch the shortcut before it lands. Open the sections below to see why.</p>" +
+                    go("again", "Play again with the card " + other));
+                }
+                var after = S.done ? " · ready to read" : " · readable any time";
+                h += det("reveal", "Reveal", "Why the shortcuts caught you" + after,
+                  '<p class="x-lens__p"><b>Shortcuts that usually work.</b> Heuristics are fast mental shortcuts. They usually work, and they fail in predictable ways: anchoring on the first label, judging by what comes to mind easily, and matching a familiar picture (Tversky &amp; Kahneman 1974)' + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p"><b>Clinicians too.</b> Clinical judgment shows the same biases, and experience improves accuracy less than expected. It depends on getting clear feedback about whether your calls were right (Garb 1998)' + tag(" x-ev--c", "Contested") + "</p>" +
+                  '<p class="x-lens__p"><b>Diagnostic overshadowing.</b> New symptoms get put down to a label the person already has, so physical illness is missed (Jones et al. 2008).</p>' +
+                  '<p class="x-lens__p"><b>Confirmation bias and premature closure.</b> Once we have an idea, we look for what fits it, explain away what doesn’t, and stop looking too soon.</p>' +
+                  '<p class="x-lens__p"><b>Debiasing helps somewhat.</b> Slowing down and considering the opposite reduced biased judgment more than simply trying to be fair (Lord, Lepper &amp; Preston 1984). Checklists and structured assessment help in clinical work (Croskerry 2003). Just being aware of bias does little.</p>' +
+                  '<p class="x-mr__status">Heuristics-and-biases effects' + tag("", "Robust") + "· Experience adds little accuracy (depends on feedback)" + tag(" x-ev--c", "Contested") + "· “Just be aware of bias”" + tag(" x-ev--d", "Debunked or revised") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Tversky &amp; Kahneman", 1974, "experiments and review", "Anchoring, availability and representativeness: shortcuts that usually work and fail in predictable ways.", tag("", "Robust")) +
+                  ref("Garb", 1998, "review", "Clinical judgment shows the same biases, and experience adds less accuracy than expected without good feedback.", tag(" x-ev--c", "Contested")) +
+                  ref("Croskerry", 2003, "review", "Cognitive debiasing in diagnosis: checklists, structured assessment and forcing a pause work better than awareness alone.", tag(" x-ev--c", "Contested")) +
+                  ref("Jones et al.", 2008, "review", "Diagnostic overshadowing: physical symptoms in people with mental illness are put down to the known label and missed.", tag("", "Robust")) +
+                  ref("Lord, Lepper &amp; Preston", 1984, "experiments", "Asking people to consider the opposite reduced biased judgment more than telling them to be unbiased.", tag("", "Robust")) +
+                  "</ol></section>");
+                h += det("therapy", "Where this becomes a problem in therapy", "Labels, first impressions and missed illness" + after,
+                  '<p class="x-lens__p"><b>Labels travel.</b> Words in referrals and records, such as “manipulative”, “noncompliant” or “drug-seeking”, anchor every later clinician and follow clients through justice and treatment systems.</p>' +
+                  '<p class="x-lens__p"><b>The first formulation locks in.</b> Confirmation bias filters what clients say, so what fits is heard and what doesn’t is lost.</p>' +
+                  '<p class="x-lens__p"><b>Physical illness gets missed.</b> Diagnostic overshadowing in people with substance use or mental illness is a serious safety risk.</p>' +
+                  '<p class="x-lens__p"><b>Circumstances become character.</b> The fundamental attribution error turns a missed appointment, caused by bus fare, shift work or childcare, into “unmotivated”.</p>' +
+                  '<p class="x-lens__p"><b>Clients’ biases, and ours.</b> Catastrophizing and all-or-nothing thinking are what CBT targets (Beck 1979). Counsellors share the same mind.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Use a structured intake and validated screeners.</li>" +
+                  "<li>Write observations before interpretations.</li>" +
+                  "<li>Ask a question that could prove your formulation wrong.</li>" +
+                  "<li>Revisit the formulation at set points.</li>" +
+                  "<li>Seek supervision and peer consultation.</li>" +
+                  "<li>Use person-first, behaviour-specific notes: “arrived late twice, said the bus was late”, not “noncompliant”.</li>" +
+                  "<li>Rule out medical causes.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Your first impression is a hypothesis, not a finding — write what you saw before what you think, ask the question that could prove you wrong, and never let a label in a file do your assessment for you.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m5.3", "Cognitive biases") + lessonBtn("m5.2", "Problem solving and heuristics") + "</div></section>";
+                main.innerHTML = h;
+                var ring = $('[data-k="ring"]', main);
+                if (ring && !RM) { A = { ring: ring, t: 0, last: null }; kick(); }
+                var f = keep && $(keep, main);
+                if (!f || f.disabled) f = $('[data-act="next"]', main) || $('[data-act="card"]', main) || (keep ? $('[data-act="ans"]:not([disabled])', main) : null);
+                if (f && !f.disabled && keep) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v, d = RD[S.r];
+                if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "struct" ? "Right" : "Not quite") + ": experience helps less than people think; structure helps more. Now set the slow-down card."; }
+                else if (a === "slow") { if (S.play || S.done) return; S.slow = v; live.textContent = "Slow-down card " + (v === "on" ? "on" : "off") + ". Press Start the arcade."; }
+                else if (a === "start") { if (!S.pred || !S.slow) return; S.play = true; S.r = 0; S.card = false; S.ans = []; live.textContent = "Round one. " + RD[0].cs; }
+                else if (a === "card") { if (!S.play) return; S.card = true; live.textContent = "Choose your answer."; }
+                else if (a === "ans") {
+                  if (!S.play || S.ans[S.r] || (S.slow === "on" && !S.card)) return;
+                  var o = d.opts.filter(function (x) { return x[0] === v; })[0]; if (!o) return;
+                  S.ans[S.r] = { v: v, ok: o[2], why: o[3], trap: d.trap };
+                  live.textContent = (o[2] ? "Dodged it. " : "Caught. ") + o[3] + " Trap in play: " + d.trap + ". Habit that helps: " + d.habit;
+                }
+                else if (a === "next") {
+                  if (!S.ans[S.r]) return;
+                  if (S.r < RD.length - 1) { S.r++; S.card = false; live.textContent = "Round " + NUM[S.r].toLowerCase() + ". " + RD[S.r].cs; }
+                  else { S.play = false; S.done = true; live.textContent = word(caught()) + ". You played " + modeWord(S.slow) + "."; }
+                }
+                else if (a === "again") {
+                  if (!S.done) return;
+                  var prev = { slow: S.slow, word: word(caught()) }, nx = S.slow === "on" ? "off" : "on";
+                  S = fresh(S); S.prev = prev; S.slow = nx; S.play = true; live.textContent = "Playing again " + modeWord(nx) + ". Round one. " + RD[0].cs;
+                }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && !b.disabled) act(b);
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
