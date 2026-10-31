@@ -5973,7 +5973,7 @@
               CH.forEach(function (c) { FOrd[c[0]] = optOrder(2); });
               var N = 24, RANK = optOrder(N), XY = [];
               for (var q = 0; q < N; q++) XY.push([150 + (q % 8) * 25 + ((q * 7) % 5) - 2, 34 + Math.floor(q / 8) * 30 + ((q * 3) % 4) * 2]);
-              var fresh = function () { return { pred: null, w: {}, s: {}, built: false, ch: {}, typed: "", cmp: false, open: {} }; };
+              var fresh = function () { return { pred: null, w: {}, s: {}, built: false, ch: {}, typed: "", cmp: false, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false, D = { w: 0, s: 0 };
@@ -6139,6 +6139,15 @@
                   ref("Anda et al.", 2020, "commentary", "Original ACE researchers caution against using ACE scores to screen or predict for individuals.", tag("", "Robust")) +
                   ref("SAMHSA", 2014, "guidance", "Trauma-informed care: safety, trustworthiness, choice, collaboration and empowerment, and avoiding re-traumatization.", tag("", "Robust")) +
                   "</ol></section>", false, 4);
+                var bullets = function (title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; };
+                h += det("toolkit", "Teach it: from what happened to what helps", "A client toolkit, in plain words · readable any time",
+                  '<p class="x-lens__p">Say it to a client like this: “What happened to you shaped you, but it isn\'t a sentence. Protection can be built at any age.”</p>' +
+                  bullets("Notice it", ["old alarms firing in new places: startling easily, shutting down, anger coming fast, not trusting people", "ask “what happened to you?” — not “what's wrong with you?”", "notice the body's stress signs: tight chest, racing heart, clenched jaw, poor sleep"]) +
+                  bullets("Steady it", ["slow breathing with a long out-breath", "grounding through the senses: what you can see, hear, touch", "name the feeling out loud", "keep a list of safe people to call", "a predictable daily routine: sleep, food, movement"]) +
+                  bullets("Build shields", ["one steady adult or mentor", "connection to a group, faith, culture or work", "skills that bring small wins", "helping others", "sober supports"]) +
+                  bullets("Break the cycle as a parent", ["repair after yelling: come back, own it, reconnect", "keep routines", "praise effort, not just results", "ask for help early", "coming home from prison or jail? Rebuild trust with consistent small contacts"]) +
+                  bullets("Careful", ["ACE scores describe groups, not destiny — never use the score to predict one person", "when memories flood daily life, refer to trauma-focused treatment, such as trauma-focused CBT or EMDR"]) +
+                  '<p class="x-lens__take">Name the dose, build the shields, one steady relationship at a time.</p>', true);
                 h += det("therapy", "Where this becomes a problem in therapy", "Scores as fate, and what to do instead · readable any time",
                   '<p class="x-lens__p"><b>A score treated as fate.</b> Clients come to see themselves as “damaged goods”, and counsellors can quietly expect less. Both lower the ceiling.</p>' +
                   '<p class="x-lens__p"><b>Deterministic language travels.</b> Phrases like “set up to fail” in records and court or reentry reports follow a person into every later decision.</p>' +
@@ -6249,7 +6258,7 @@
               var WHY = ["James–Lange: body first, the feeling reads it.", "Cannon–Bard: body and feeling together, from the brain.", "Schachter–Singer: arousal, then a label from context.", "Appraisal: the meaning comes first.", "Constructed: a prediction from the past builds the feeling."];
               function opts(i) { return [i, (i + 1) % 5, (i + 3) % 5]; }
               var POrd = optOrder(PRED.length), OO = EV.map(function () { return LENS.map(function () { return optOrder(3); }); });
-              var fresh = function () { return { pred: null, lens: -1, seen: {}, ev: 0, pk: {}, chk: {}, open: {} }; };
+              var fresh = function () { return { pred: null, lens: -1, seen: {}, ev: 0, pk: {}, chk: {}, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false, P = {}, ph = 0;
@@ -6385,6 +6394,15 @@
                   ref("Lazarus", 1991, "book", "Emotion and Adaptation: appraisals of threat and coping shape each emotion.", tag("", "Robust as a family")) +
                   ref("Barrett", 2017, "book", "How Emotions Are Made: the brain constructs emotions from prediction and concepts.", tag(" x-ev--c", "Contested")) +
                   "</ol></section>", false, 4);
+                var bullets = function (title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; };
+                h += det("toolkit", "Teach it: name it, read it, steer it", "A client toolkit, in plain words · readable any time",
+                  '<p class="x-lens__p">Say it to a client like this: “Feelings are messages, not orders. You can read them and choose what to do.”</p>' +
+                  bullets("Notice it", ["body first: heat, a tight chest, a clenched fist", "then the thought", "then the urge", "rate the strength: low, medium or high", "use precise words — name it to tame it: “frustrated, embarrassed” beats “bad”"]) +
+                  bullets("Read the message", ["ask: “What does this feeling want me to do, and is that useful right now?”", "check the facts", "HALT: am I hungry, angry, lonely or tired?"]) +
+                  bullets("Steady it", ["pause and breathe", "opposite action when the urge doesn't fit: approach instead of avoid, gentle instead of attack", "reappraise: find another true way to see it", "the urge can wait — it rises and falls"]) +
+                  bullets("Use it on purpose", ["anger can fuel fair boundaries", "fear signals real risk", "sadness asks for support", "grow good feelings by savouring, gratitude and doing what you value"]) +
+                  bullets("The relapse link", ["strong feelings are a common relapse trigger", "plan what you'll do with each one before it hits"]) +
+                  '<p class="x-lens__take">Name it, read it, then you choose — not the feeling.</p>', true);
                 h += det("therapy", "Where this becomes a problem in therapy", "One-lens counselling, and what to do instead · readable any time",
                   '<p class="x-lens__p"><b>One-lens counsellors.</b> Only the body (“just breathe”), only thoughts (“just reframe”), or only context (“anyone would feel that”). Each helps some clients and misses the rest.</p>' +
                   '<p class="x-lens__p"><b>Body before words.</b> Craving and trauma responses often hit the body first. Asking “why do you feel that?” too early can feel like an interrogation.</p>' +
