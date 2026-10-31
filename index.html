@@ -4210,6 +4210,412 @@
               return function () {};
             }
           },
+          /* PHASE 3q-1 · L14 The Schedules Machine: four schedules of reinforcement drawn as cumulative records. Predict, one manipulation, live words, reveal, so what. Page-only 2D SVG; animates only while visible, stops on exit; stores nothing. */
+          {
+            id: "schedules", name: "The Schedules Machine", kicker: "M3 · Schedules of reinforcement", hue: ["#f5c76b", "#3ee0c8"], gallery: true, order: 5.5, dom: true,
+            idea: "When a reward comes shapes how a behaviour runs, and how long it lasts once rewards stop. Guess the mystery rhythm, run all four schedules, then stop the rewards.",
+            see: "A person at a lever and a line that climbs with every press. Each schedule draws its own rhythm: bursts and pauses, a steep climb, scallops, or a slow, even slope.",
+            why: "Unpredictable rewards build the most stubborn habits. The same rule explains a slot player, a phone checker and a craving that will not fade.",
+            use: "Gambling, pay schemes, message checking, cravings and relapse, and treatments such as contingency management.",
+            cap: "Guess which schedule drew the mystery line. Then pick a schedule, run it, and stop the rewards to see which habits hold on.",
+            /* key, name, rule, rate, pauses, if rewards stop, shape, why, example, extinction */
+            SCH: [
+              ["fr", "Fixed ratio", "A reward after a set number of presses", "fast", "after each reward", "quits fast", "bursts of pressing with a flat pause after each reward",
+                "Flat steps after each reward, then a steep burst: the post-reward pause. The next reward is always the same amount of work away.",
+                "Piecework pay: paid per crate picked, a worker races through each batch, then takes a breather.",
+                "The pauses after each run grow longer and longer, then pressing stops. Quits fast."],
+              ["vr", "Variable ratio", "A reward after an unpredictable number of presses", "fast", "none", "keeps going a long time", "a steep, unbroken climb with no pauses",
+                "A steep climb with no pauses: any press might be the one that pays, so there is never a reason to stop.",
+                "Slot machines and the lottery: the next pull or ticket might win, so people keep going.",
+                "Pressing stays fast for a long time and fades only slowly. Long dry runs were normal before, so this one looks no different."],
+              ["fi", "Fixed interval", "A reward for the first press after a set time", "moderate", "before the time is up", "quits fast", "scallops: slow after each reward, speeding up as the time nears",
+                "Scallops: almost nothing just after a reward, then faster and faster as the time nears. Presses early on never pay.",
+                "Waiting for a paycheck or a weekly visit: little checking early in the week, lots as the day comes.",
+                "One more scallop climbs as the time passes, then the pressing dies away. Quits fast."],
+              ["vi", "Variable interval", "A reward for the first press after an unpredictable time", "slow", "none", "keeps going a long time", "a slow, steady, even slope",
+                "A slow, even slope: a reward could be waiting at any moment, but pressing faster does not bring it sooner.",
+                "Checking messages: a reply could arrive any time, so people check at a steady, even pace.",
+                "The slow, even pressing carries on and fades only gradually. Keeps going a long time."]
+            ],
+            rec: function (k, ext) {
+              var N = 240, dt = 1 / N, stop = ext ? 0.4 : 9, s = { fr: 3, vr: 7, fi: 11, vi: 13 }[k] + (ext ? 17 : 0);
+              var rnd = function () { s = (s * 16807) % 2147483647; return s / 2147483647; };
+              var y = 0, last = 0, since = 0, need = 0.1, pause = 0, pz = 0.05, rate, pts = [[0, 0]], rates = [0], ticks = [];
+              for (var i = 1; i <= N; i++) {
+                var t = i * dt, on = t < stop;
+                if (k === "fr") { if (pause > 0) { rate = 0; pause -= dt; } else rate = 1.35; }
+                else if (k === "vr") rate = 0.95 * (0.9 + 0.2 * rnd()) * (on ? 1 : Math.exp(-(t - stop) / 0.9));
+                else if (k === "fi") { var u = (t - last) / 0.18; rate = on || u < 1 ? Math.min(1.1, 1.1 * Math.pow(u, 2.4)) : 1.1 * Math.exp(-(t - last - 0.18) / 0.07); }
+                else rate = 0.38 * (0.85 + 0.3 * rnd()) * (on ? 1 : Math.exp(-(t - stop) / 1.4));
+                var dy = rate * dt; y += dy; since += dy;
+                if (k === "fr" && rate > 0 && since >= need) { since = 0; if (on) { ticks.push(i); pause = pz; } else { pz *= 2.4; pause = pz; } }
+                else if (k === "vr" && since >= need) { since = 0; need = 0.02 + 0.13 * rnd(); if (on) ticks.push(i); }
+                else if (k === "fi" && on && t - last >= 0.18) { last = t; ticks.push(i); }
+                else if (k === "vi" && t - last >= need) { last = t; need = 0.04 + 0.16 * rnd(); if (on) ticks.push(i); }
+                pts.push([t, Math.min(1, y)]); rates.push(rate);
+              }
+              return { pts: pts, rates: rates, ticks: ticks, stop: stop, N: N };
+            },
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var K = {}; sc.SCH.forEach(function (r) { K[r[0]] = r; });
+              var KEYS = ["fr", "vr", "fi", "vi"];
+              var fresh = function () { return { hid: KEYS[Math.floor(Math.random() * 4)], guess: null, k: null, ext: false, run: null, ran: false, pAnim: true, rAnim: false }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function sect(title, sub, body) { return '<section class="x-lens__box glass" aria-label="' + esc(title) + '"><h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function btn(act, v, label, on, dis) { return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + !!on + '"' + (dis ? " disabled" : "") + ">" + esc(label) + "</button>"; }
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              var X0 = 84, X1 = 350, Y0 = 146, Y1 = 14;
+              function P(p) { return (X0 + p[0] * (X1 - X0)).toFixed(1) + "," + (Y0 - p[1] * (Y0 - Y1)).toFixed(1); }
+              function stage(id, label) {
+                return '<svg data-stage="' + id + '" viewBox="0 0 360 172" role="img" aria-label="' + esc(label) + '" style="display:block;width:100%;height:auto;max-height:260px">' +
+                  '<g aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+                  '<circle cx="24" cy="70" r="8" stroke="var(--dim)" stroke-width="2"/><path d="M24 78V112M24 112L14 140M24 112L34 140M24 88L44 98" stroke="var(--dim)" stroke-width="2"/>' +
+                  '<path d="M40 140H72M60 140V104" stroke="var(--dim)" stroke-width="2"/>' +
+                  '<line data-k="lever" x1="60" y1="104" x2="44" y2="96" stroke="var(--text)" stroke-width="3"/>' +
+                  '<circle data-k="food" cx="66" cy="134" r="4" fill="var(--gold)" stroke="none" opacity="0"/>' +
+                  '<path d="M' + X0 + " " + Y1 + "V" + Y0 + "H" + X1 + '" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>' +
+                  '<line data-k="stop" x1="0" y1="' + Y1 + '" x2="0" y2="' + Y0 + '" stroke="var(--dim)" stroke-dasharray="3 4" stroke-width="1" opacity="0"/>' +
+                  '<g data-k="ticks" stroke="var(--gold)" stroke-width="2"></g>' +
+                  '<polyline data-k="line" points="" stroke="var(--primary)" stroke-width="2.4"/></g>' +
+                  '<g aria-hidden="true" fill="var(--dim)" style="font:12px var(--sans)"><text x="' + (X0 + X1) / 2 + '" y="166" text-anchor="middle">Time</text>' +
+                  '<text transform="translate(' + (X0 - 8) + " " + (Y0 + Y1) / 2 + ') rotate(-90)" text-anchor="middle">Presses so far</text>' +
+                  '<text data-k="stopt" x="0" y="' + (Y1 + 2) + '" opacity="0">rewards stop</text></g></svg>';
+              }
+              function render(a) {
+                var r = a.r, n = Math.max(0, Math.min(r.N, Math.floor(a.p * r.N))), g = a.svg, pts = [];
+                for (var i = 0; i <= n; i++) pts.push(P(r.pts[i]));
+                $('[data-k="line"]', g).setAttribute("points", pts.join(" "));
+                var tk = r.ticks.filter(function (i) { return i <= n; });
+                if (tk.length !== a.tk) {
+                  a.tk = tk.length;
+                  $('[data-k="ticks"]', g).innerHTML = tk.map(function (i) { var q = P(r.pts[i]).split(","), x = +q[0], y = +q[1]; return '<line x1="' + x + '" y1="' + y + '" x2="' + (x + 4) + '" y2="' + (y + 7) + '"/>'; }).join("");
+                }
+                var lv = $('[data-k="lever"]', g), y = r.pts[n][1], dip = a.p >= 1 ? 0 : Math.abs(Math.sin(y * 46 * Math.PI)) * 18;
+                lv.setAttribute("transform", "rotate(" + (-dip).toFixed(1) + " 60 104)");
+                var fed = tk.length && n - tk[tk.length - 1] < 8 && a.p < 1;
+                $('[data-k="food"]', g).setAttribute("opacity", fed ? "1" : "0");
+                if (r.stop < 1 && n / r.N >= r.stop) {
+                  var sx = (X0 + r.stop * (X1 - X0)).toFixed(1), sl = $('[data-k="stop"]', g), st = $('[data-k="stopt"]', g);
+                  sl.setAttribute("x1", sx); sl.setAttribute("x2", sx); sl.setAttribute("opacity", "1"); st.setAttribute("x", +sx + 5); st.setAttribute("opacity", "1");
+                }
+                if (a.now) {
+                  var rt = r.rates[n], off = r.stop < 1 && n / r.N >= r.stop;
+                  a.now.textContent = a.p >= 1 ? "Run finished." : fed ? "A reward arrives." : rt > 0.7 ? "Pressing fast." : rt > 0.25 ? "Pressing steadily." : rt > 0.06 ? (off ? "Still pressing, slowly, with no reward." : "Pressing slowly.") : off ? "Pausing; no reward is coming." : "Pausing.";
+                }
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.p += Math.min(0.05, (now - A.last) / 1000) / A.dur;
+                A.last = now; if (A.p > 1) A.p = 1;
+                render(A);
+                if (A.p < 1) kick(); else A.done = true;
+              }
+              function kick() { if (!raf && A && !A.done && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function show(svg, k, ext, anim, now) {
+                if (!svg) return;
+                var a = { svg: svg, r: sc.rec(k, ext), p: anim && !RM ? 0 : 1, dur: 4.2, last: null, tk: -1, now: now, done: false };
+                if (a.p >= 1) { a.done = true; render(a); return; }
+                halt(); A = a; render(a); kick();
+              }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function readouts(k, ext) {
+                var r = K[k];
+                return '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li><b>Response rate:</b> " + r[3] + "</li><li><b>Pauses:</b> " + r[4] + "</li><li><b>If rewards stop:</b> " + r[5] + "</li>" +
+                  '<li><b>Right now:</b> <span data-k="now">Starting.</span></li></ul>' +
+                  (ext ? '<p class="x-lens__p"><b>Rewards stopped.</b> ' + esc(r[9]) + "</p>" : "");
+              }
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function paint() {
+                var a = doc.activeElement, keep = a && wrap.contains(a) && a.dataset && a.dataset.act ? '[data-act="' + a.dataset.act + '"]' + (a.dataset.v != null ? '[data-v="' + a.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var h = sect("Predict first", S.guess ? "Your guess: " + esc(K[S.guess][1]) + "." : "Someone pressed a lever under one of four schedules. Which one drew this line?",
+                  stage("pred", "Mystery rhythm: " + K[S.hid][6] + ".") +
+                  '<div class="x-lens__row" role="group" aria-label="Your guess">' + KEYS.map(function (k) { return btn("guess", k, K[k][1], S.guess === k, !!S.guess); }).join("") + "</div>" +
+                  (S.guess ? '<p class="x-lens__p" aria-live="polite"><b>' + (S.guess === S.hid ? "Right: " : "It was ") + esc(K[S.hid][1]) + ".</b> " + esc(K[S.hid][7]) + "</p>" : ""));
+                h += sect("Run the machine", S.guess ? "Pick a schedule and press Run. Then stop the rewards and run it again." : "Make your guess to start the machine.",
+                  '<div class="x-lens__row" role="group" aria-label="Schedule">' + KEYS.map(function (k) { return btn("k", k, K[k][1], S.k === k, !S.guess); }).join("") + "</div>" +
+                  (S.k ? '<p class="x-lens__p">' + esc(K[S.k][2]) + ".</p>" : "") +
+                  '<div class="x-lens__row" role="group" aria-label="Run controls">' + btn("ext", "", "Stop rewards", S.ext, !S.guess) +
+                  '<button type="button" class="start press x-lens__go" data-act="run"' + (S.guess && S.k ? "" : " disabled") + ">Run</button></div>" +
+                  (S.run ? stage("run", K[S.run.k][1] + (S.run.ext ? ", rewards stopped partway: " : ": ") + K[S.run.k][6] + ".") + readouts(S.run.k, S.run.ext) : ""));
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="Reveal"><h3 class="x-lens__h">Reveal<small>Four rhythms, and where you meet them</small></h3>' +
+                  '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:6px">' + KEYS.map(function (k) { return "<li><b>" + esc(K[k][1]) + ":</b> " + esc(K[k][6]) + ". " + esc(K[k][8]) + "</li>"; }).join("") + "</ul>" +
+                  '<p class="x-lens__p"><b>When rewards stop,</b> variable schedules keep behaviour going longest: the partial-reinforcement extinction effect' + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p"><b>In the clinic:</b> a drug that only sometimes brings the hoped-for high, or attention that only sometimes follows a tantrum, works like a variable schedule. The behaviour keeps going long after the payoff becomes rare.</p>' +
+                  '<p class="x-mr__status">Schedule effects in animals and many human settings' + tag("", "Robust") + "· As a full account of complex human behaviour" + tag(" x-ev--c", "Contested") + "</p>" +
+                  '<p class="x-lens__p">Ferster &amp; Skinner 1957, Schedules of Reinforcement.</p></section>' +
+                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Rewards that come unpredictably build the most stubborn habits — the same rule that keeps a slot player pulling keeps a craving alive, and it is why contingency management pays reliably and promptly.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m3.3", "Schedules of reinforcement") + lessonBtn("m3.5", "Extinction, cues and relapse") + "</div></section>";
+                main.innerHTML = h;
+                show($('[data-stage="pred"]', main), S.hid, false, S.pAnim);
+                S.pAnim = false;
+                if (S.run) show($('[data-stage="run"]', main), S.run.k, S.run.ext, S.rAnim, $('[data-k="now"]', main));
+                S.rAnim = false;
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "guess") { if (S.guess) return; S.guess = v; live.textContent = (v === S.hid ? "Right: " : "Not quite. It was ") + K[S.hid][1] + ". " + K[S.hid][7]; }
+                else if (a === "k") { if (!S.guess) return; S.k = v; live.textContent = K[v][1] + " selected. " + K[v][2] + ". Press Run."; }
+                else if (a === "ext") { if (!S.guess) return; S.ext = !S.ext; live.textContent = S.ext ? "Rewards will stop partway through the next run." : "Rewards stay on for the next run."; }
+                else if (a === "run") {
+                  if (!S.guess || !S.k) return; S.run = { k: S.k, ext: S.ext }; S.ran = true; S.rAnim = true;
+                  var r = K[S.k]; live.textContent = r[1] + (S.ext ? ", rewards stopped. " : ". ") + "Response rate: " + r[3] + ". Pauses: " + r[4] + ". If rewards stop: " + r[5] + "." + (S.ext ? " " + r[9] : "");
+                }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) { var b = e.target.closest("[data-act]"); if (!b || b.disabled) return; act(b); });
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over with a new mystery line."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
+          /* PHASE 3q-2 · L15 Extinction Burst Stage: a reinforced behaviour after its rewards stop. Burst, fade, rest gap, spontaneous recovery; or give in once and watch it come back stronger. Predict, one manipulation, live words, challenge, reveal, so what. Page-only 2D SVG; animates only while visible, stops on exit; stores nothing. */
+          {
+            id: "extinction", name: "Extinction Burst Stage", kicker: "M3 · Extinction, cues and relapse", hue: ["#ff9f6b", "#b49cff"], gallery: true, order: 5.6, dom: true,
+            idea: "Stop the rewards for a well-learned behaviour and watch what it does next. Predict, choose how to handle the burst, then find the moment most plans get abandoned.",
+            see: "A person pressing a button for a reward, and a line showing how often they press. Rewards stop, the pressing flares, fades, rests, and briefly comes back.",
+            why: "The flare right after a payoff stops is the plan working, not failing. Giving in once during it teaches the behaviour to last longer.",
+            use: "Behaviour plans with families and schools, cravings and lapses in addiction work, and relapse prevention.",
+            cap: "Predict what happens when rewards stop. Then choose how to handle the burst, run it, and tap the moment a plan is most likely to be wrongly dropped.",
+            /* t of: rewards stop, end of first fade, return after the rest gap */
+            T: { stop: 0.2, gapA: 0.56, gapB: 0.68 },
+            KF: {
+              hold: [[0, 0.45], [0.2, 0.45], [0.24, 0.7], [0.3, 0.95], [0.36, 0.72], [0.46, 0.32], [0.56, 0.08], [0.68, 0.08], [0.72, 0.32], [0.78, 0.2], [0.86, 0.06], [1, 0.03]],
+              give: [[0, 0.45], [0.2, 0.45], [0.24, 0.7], [0.3, 0.95], [0.33, 0.9], [0.4, 0.84], [0.5, 0.76], [0.56, 0.68], [0.68, 0.68], [0.73, 0.82], [0.84, 0.7], [1, 0.6]]
+            },
+            rec: function (give) {
+              var sc = this, N = 240, K = sc.KF[give ? "give" : "hold"], s = give ? 29 : 17, pts = [], ticks = [], cum = [], c = 0;
+              var rnd = function () { s = (s * 16807) % 2147483647; return s / 2147483647; };
+              for (var i = 0; i <= N; i++) {
+                var t = i / N, j = 0;
+                while (j < K.length - 2 && t > K[j + 1][0]) j++;
+                var a = K[j], b = K[j + 1], u = Math.max(0, Math.min(1, (t - a[0]) / (b[0] - a[0] || 1))), e = u * u * (3 - 2 * u);
+                var v = Math.max(0.02, Math.min(0.98, a[1] + (b[1] - a[1]) * e + (rnd() - 0.5) * 0.04));
+                var gap = t > sc.T.gapA && t < sc.T.gapB;
+                pts.push([t, gap ? null : v]); c += gap ? 0 : v; cum.push(c);
+                if ((t < sc.T.stop && i % 12 === 6) || (give && i === 72)) ticks.push(i);
+              }
+              return { pts: pts, ticks: ticks, cum: cum, N: N, give: give };
+            },
+            flat: function (box, ctl) {
+              var sc = this, T = sc.T, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var PRED = [["steady", "It fades steadily"], ["worse", "It gets worse before it gets better"], ["once", "It stops at once"]];
+              var MOM = [["stop", 0.21, "Rewards stop"], ["peak", 0.3, "Burst peak"], ["fade", 0.46, "Fading"], ["gap", 0.62, "Days later"], ["back", 0.74, "Back briefly"]];
+              var FB = {
+                stop: "Not yet. Right as rewards stop, little has changed; the flare is still to come.",
+                peak: "Right. At the burst peak the behaviour is at its most frequent and intense, so it looks like the plan is making things worse. This is exactly when people restart the old plan, and that teaches the behaviour that pushing harder pays.",
+                fade: "Close, but by now the behaviour is already falling. The pull to quit the plan is strongest earlier, at the peak.",
+                gap: "Not here: during the rest gap nothing is seen. The test comes before this, at the burst peak.",
+                back: "A tempting choice: the comeback can feel like failure too. But it is small and expected. The riskiest moment is the burst peak, when the flare is at its worst."
+              };
+              var fresh = function () { return { pred: null, give: null, run: null, ran: false, rAnim: false, tap: null }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function sect(title, sub, body) { return '<section class="x-lens__box glass" aria-label="' + esc(title) + '"><h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function btn(act, v, label, on, dis) { return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + !!on + '"' + (dis ? " disabled" : "") + ">" + esc(label) + "</button>"; }
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              var X0 = 92, X1 = 350, Y0 = 146, Y1 = 14;
+              function XT(t) { return X0 + t * (X1 - X0); }
+              function P(p) { return XT(p[0]).toFixed(1) + "," + (Y0 - p[1] * (Y0 - Y1)).toFixed(1); }
+              function stage(id, label) {
+                var gx = (XT(T.gapA) + XT(T.gapB)) / 2;
+                return '<svg data-stage="' + id + '" viewBox="0 0 360 172" role="img" aria-label="' + esc(label) + '" style="display:block;width:100%;height:auto;max-height:260px">' +
+                  '<g aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+                  '<circle cx="24" cy="70" r="8" stroke="var(--dim)" stroke-width="2"/><path d="M24 78V112M24 112L14 140M24 112L34 140" stroke="var(--dim)" stroke-width="2"/>' +
+                  '<path data-k="arm" d="M24 88L50 96" stroke="var(--dim)" stroke-width="2"/>' +
+                  '<rect x="52" y="100" width="22" height="40" rx="3" stroke="var(--dim)" stroke-width="2"/>' +
+                  '<rect data-k="btn" x="57" y="93" width="12" height="7" rx="2" fill="var(--text)" stroke="none"/>' +
+                  '<path data-k="anger" d="M10 54l4 5l3-6M30 52l3 6l4-5M20 48l2 5" stroke="var(--gold)" stroke-width="1.6" opacity="0"/>' +
+                  '<circle data-k="food" cx="63" cy="132" r="4" fill="var(--gold)" stroke="none" opacity="0"/>' +
+                  '<path d="M' + X0 + " " + Y1 + "V" + Y0 + "H" + X1 + '" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>' +
+                  '<line data-k="stop" x1="' + XT(T.stop) + '" y1="' + Y1 + '" x2="' + XT(T.stop) + '" y2="' + Y0 + '" stroke="var(--dim)" stroke-dasharray="3 4" stroke-width="1" opacity="0"/>' +
+                  '<line data-k="mark" x1="0" y1="' + Y1 + '" x2="0" y2="' + Y0 + '" stroke="var(--gold)" stroke-width="2" opacity="0"/>' +
+                  '<g data-k="ticks" stroke="var(--gold)" stroke-width="2"></g>' +
+                  '<polyline data-k="la" points="" stroke="var(--primary)" stroke-width="2.4"/><polyline data-k="lb" points="" stroke="var(--primary)" stroke-width="2.4"/></g>' +
+                  '<g aria-hidden="true" fill="var(--dim)" style="font:12px var(--sans)"><text x="' + (X0 + X1) / 2 + '" y="166" text-anchor="middle">Time</text>' +
+                  '<text transform="translate(' + (X0 - 8) + " " + (Y0 + Y1) / 2 + ') rotate(-90)" text-anchor="middle">How often</text>' +
+                  '<text data-k="stopt" x="' + (XT(T.stop) + 5) + '" y="' + (Y1 + 2) + '" opacity="0">rewards stop</text>' +
+                  '<text data-k="gapt" x="' + gx + '" y="' + (Y0 - 6) + '" text-anchor="middle" opacity="0">days later</text>' +
+                  '<text data-k="q" x="' + (XT(T.stop) + 40) + '" y="' + (Y0 - 50) + '" style="font:600 22px var(--sans)" opacity="0">?</text></g></svg>';
+              }
+              function phaseOf(t, give) {
+                if (t < T.stop) return "rew";
+                if (t < 0.23) return "stop";
+                if (give && t >= 0.3 && t <= T.gapA) return "gave";
+                if (t < 0.37) return "burst";
+                if (t <= T.gapA) return "fade";
+                if (t < T.gapB) return "gap";
+                if (give) return "giveback";
+                return t < 0.8 ? "back" : "again";
+              }
+              var PH = {
+                rew: ["Rewarded", "Each press sometimes pays, so the behaviour runs at a steady rate.", "Asking for sweets at the checkout often gets a yes."],
+                stop: ["Rewards stop", "The payoff is gone. Nothing visible has changed yet; brief the client and family on what comes next.", "The parent starts saying no every time."],
+                burst: ["Extinction burst", "This flare is expected. More often, more intense, new variations, frustration. Hold steady.", "Asking louder and more often, new tactics, tears and anger."],
+                fade: ["Extinction", "The behaviour is fading because it no longer pays. Keep the plan consistent.", "The asking grows rarer and quieter."],
+                gap: ["Rest gap: days later", "Nothing is seen, but the old learning is still there underneath the new.", "A few calm days pass."],
+                back: ["Spontaneous recovery", "A brief comeback is normal. It is a lapse, not a return to zero. Hold steady again.", "One day the asking suddenly returns at the checkout."],
+                again: ["Extinction again", "Without a payoff the comeback fades faster. Plan for the next one.", "It fades again, sooner this time."],
+                gave: ["Gave in once, mid-burst", "One reward at the peak taught that pushing harder pays, on a variable schedule.", "The parent gave in once to stop the scene."],
+                giveback: ["Back, stronger", "The behaviour now outlasts the plan: rare, unpredictable payoffs keep it going longest.", "The asking returns stronger and lasts longer."]
+              };
+              function behOf(r, n, t) {
+                var v = r.pts[n][1];
+                if (v == null) return "resting (not seen)";
+                if (!r.give && t >= T.gapB && t < 0.8) return "back briefly";
+                var pv = r.pts[Math.max(0, n - 4)][1], d = pv == null ? 0.05 : v - pv;
+                if (v > 0.86) return "peaking";
+                if (d > 0.012) return "rising";
+                if (d < -0.012) return "fading";
+                return "steady";
+              }
+              function render(a) {
+                var r = a.r, n = Math.max(0, Math.min(r.N, Math.floor(a.p * r.N))), g = a.svg, la = [], lb = [];
+                for (var i = 0; i <= n; i++) { var p = r.pts[i]; if (p[1] == null) continue; (p[0] <= T.gapA ? la : lb).push(P(p)); }
+                $('[data-k="la"]', g).setAttribute("points", la.join(" "));
+                $('[data-k="lb"]', g).setAttribute("points", lb.join(" "));
+                var tk = r.ticks.filter(function (i) { return i <= n; });
+                if (tk.length !== a.tk) {
+                  a.tk = tk.length;
+                  $('[data-k="ticks"]', g).innerHTML = tk.map(function (i) { var q = P(r.pts[i]).split(","), x = +q[0], y = +q[1]; return '<line x1="' + x + '" y1="' + (y - 10) + '" x2="' + x + '" y2="' + (y - 4) + '"/>'; }).join("");
+                }
+                var t = n / r.N, ph = phaseOf(t, r.give), v = r.pts[n][1] || 0, moving = a.p < 1 && r.pts[n][1] != null;
+                var down = moving && Math.sin(r.cum[n] * 1.1) > 0.3;
+                $('[data-k="btn"]', g).setAttribute("transform", down ? "translate(0 4)" : "");
+                $('[data-k="arm"]', g).setAttribute("d", down ? "M24 88L58 98" : "M24 88L50 92");
+                $('[data-k="anger"]', g).setAttribute("opacity", (ph === "burst" || ph === "gave" || ph === "giveback") && v > 0.75 ? "1" : "0");
+                var fed = tk.length && n - tk[tk.length - 1] < 8 && a.p < 1;
+                $('[data-k="food"]', g).setAttribute("opacity", fed ? "1" : "0");
+                var on = n / r.N >= T.stop;
+                ["stop", "stopt"].forEach(function (k) { $('[data-k="' + k + '"]', g).setAttribute("opacity", on ? "1" : "0"); });
+                $('[data-k="gapt"]', g).setAttribute("opacity", t > T.gapA ? "1" : "0");
+                if (a.out) {
+                  var w = [PH[ph][0], behOf(r, n, t), PH[ph][1], PH[ph][2]];
+                  if (a.p >= 1) w[1] = r.give ? "still going, stronger than before" : "faded, for now";
+                  a.out.forEach(function (el, k) { if (el && el.textContent !== w[k]) el.textContent = w[k]; });
+                }
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.p += Math.min(0.05, (now - A.last) / 1000) / A.dur;
+                A.last = now; if (A.p > 1) A.p = 1;
+                render(A);
+                if (A.p < 1) kick(); else A.done = true;
+              }
+              function kick() { if (!raf && A && !A.done && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function show(svg, give, anim, out, upto) {
+                if (!svg) return;
+                var a = { svg: svg, r: sc.rec(give), p: upto != null ? upto : anim && !RM ? 0 : 1, dur: 7, last: null, tk: -1, out: out, done: false };
+                if (!anim || RM || upto != null) { a.done = true; render(a); return; }
+                halt(); A = a; render(a); kick();
+              }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function momName(m) { return m[0] === "back" && S.run && S.run.give ? "Back, stronger" : m[2]; }
+              function paint() {
+                var a = doc.activeElement, keep = a && wrap.contains(a) && a.dataset && a.dataset.act ? '[data-act="' + a.dataset.act + '"]' + (a.dataset.v != null ? '[data-v="' + a.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var right = S.pred === "worse";
+                var h = sect("Predict first", "Rewards just stopped. What happens next?",
+                  stage("pred", "A steady, rewarded behaviour, then rewards stop. What comes next is hidden.") +
+                  '<div class="x-lens__row" role="group" aria-label="Your prediction">' + PRED.map(function (o) { return btn("pred", o[0], o[1], S.pred === o[0], !!S.pred); }).join("") + "</div>" +
+                  (S.pred ? '<p class="x-lens__p" aria-live="polite"><b>' + (right ? "Right: it gets worse before it gets better." : "Not quite: it gets worse before it gets better.") + "</b> Right after a payoff stops, the behaviour usually flares: the extinction burst. Run it below to see the whole arc.</p>" : ""));
+                h += sect("During the burst:", S.pred ? "Choose one, then press Run." : "Make your prediction to start.",
+                  '<div class="x-lens__row" role="group" aria-label="During the burst">' + btn("give", "no", "Hold steady (no reward)", S.give === false, !S.pred) + btn("give", "yes", "Give in once", S.give === true, !S.pred) +
+                  '<button type="button" class="start press x-lens__go" data-act="run"' + (S.pred && S.give != null ? "" : " disabled") + ">Run</button></div>" +
+                  (S.run ? stage("run", S.run.give ? "Gave in once during the burst: the behaviour comes back stronger and lasts longer." : "Held steady: a burst, a fade, a rest gap, a small comeback, then a fade again.") +
+                    '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    '<li><b>Phase:</b> <span data-o="0">Rewarded</span></li><li><b>Behaviour:</b> <span data-o="1">steady</span></li>' +
+                    '<li><b>What it means for the counsellor:</b> <span data-o="2"></span></li><li><b>In the human example:</b> <span data-o="3"></span></li></ul>' : ""));
+                if (S.ran) h += sect("Challenge", "Tap the moment a counsellor is most likely to wrongly conclude “it’s getting worse, restart the old plan”. Tap the line above, or pick a moment.",
+                  '<div class="x-lens__row" role="group" aria-label="Moments">' + MOM.map(function (m) { return btn("tap", m[0], momName(m), S.tap === m[0]); }).join("") + "</div>" +
+                  (S.tap ? '<p class="x-lens__p" aria-live="polite"><b>' + esc(momName(MOM.filter(function (m) { return m[0] === S.tap; })[0])) + ".</b> " + esc(FB[S.tap]) + "</p>" : ""));
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="Reveal"><h3 class="x-lens__h">Reveal<small>Worse before better, and why it comes back</small></h3>' +
+                  '<p class="x-lens__p"><b>Hold steady:</b> the behaviour bursts, then fades. After a rest it briefly returns (spontaneous recovery), then fades again if it still does not pay. <b>Give in once:</b> one reward at the peak works like a variable schedule, the most stubborn kind, so the behaviour returns stronger and lasts longer.</p>' +
+                  '<p class="x-lens__p"><b>Cues and context:</b> a cue in an old setting, such as the shop where it used to pay, can bring the behaviour back too (renewal).</p>' +
+                  '<p class="x-lens__p"><b>The relapse bridge:</b> extinction does not erase learning; it adds new learning on top of the old' + tag("", "Robust") + " The burst and spontaneous recovery are learning-science roots of lapse and relapse. A lapse is not a return to zero. This points forward to relapse prevention in Part F and to the models of addiction module.</p>" +
+                  '<p class="x-mr__status">Extinction burst in animal and applied behaviour work' + tag("", "Robust") + "· Its size in people varies; as universal" + tag(" x-ev--c", "Contested") + "· Spontaneous recovery and renewal" + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p">Pavlov 1927; Lerman &amp; Iwata 1995 found bursts in only a minority of extinction-only cases; Bouton 2004, Context and behavioral processes in extinction.</p></section>' +
+                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">When a client’s old behaviour flares right after its payoff is removed, that flare is the plan working, not failing — hold steady, plan for the comeback, and treat a lapse as information, not proof of failure.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m3.5", "Extinction, cues and relapse") + lessonBtn("m3.3", "Schedules of reinforcement") + lessonBtn("m8a.3", "Why the bond holds") + "</div></section>";
+                main.innerHTML = h;
+                var pg = $('[data-stage="pred"]', main);
+                show(pg, false, false, null, T.stop);
+                if (pg) $('[data-k="q"]', pg).setAttribute("opacity", "1");
+                if (S.run) {
+                  var rg = $('[data-stage="run"]', main);
+                  show(rg, S.run.give, S.rAnim, [0, 1, 2, 3].map(function (k) { return $('[data-o="' + k + '"]', main); }));
+                  if (S.tap && rg) { var m = MOM.filter(function (x) { return x[0] === S.tap; })[0], mx = XT(m[1]).toFixed(1), ml = $('[data-k="mark"]', rg); ml.setAttribute("x1", mx); ml.setAttribute("x2", mx); ml.setAttribute("opacity", "1"); }
+                }
+                S.rAnim = false;
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "worse" ? "Right" : "Not quite") + ": it gets worse before it gets better. Choose how to handle the burst."; }
+                else if (a === "give") { if (!S.pred) return; S.give = v === "yes"; live.textContent = S.give ? "Give in once selected. Press Run." : "Hold steady selected. Press Run."; }
+                else if (a === "run") {
+                  if (!S.pred || S.give == null) return; S.run = { give: S.give }; S.ran = true; S.rAnim = true; S.tap = null;
+                  live.textContent = S.give ? "Running: rewards stop, the behaviour bursts, one reward is given at the peak, and it comes back stronger and lasts longer." : "Running: rewards stop, the behaviour bursts, fades, rests for days, returns briefly, then fades again.";
+                }
+                else if (a === "tap") { if (!S.ran) return; S.tap = v; live.textContent = FB[v]; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b) { if (!b.disabled) act(b); return; }
+                var g = e.target.closest('svg[data-stage="run"]');
+                if (!g || !S.ran || (A && !A.done)) return;
+                var rc = g.getBoundingClientRect(); if (!rc.width) return;
+                var t = ((e.clientX - rc.left) / rc.width * 360 - X0) / (X1 - X0), best = MOM[0];
+                MOM.forEach(function (m) { if (Math.abs(m[1] - t) < Math.abs(best[1] - t)) best = m; });
+                act({ dataset: { act: "tap", v: best[0] } });
+              });
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
