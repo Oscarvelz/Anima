@@ -195,6 +195,8 @@
       [data-theme="day"] .alert { color: #c02b3f; }
       .auth__foot { margin-top: 14px; text-align: center; font-size: 12px; color: var(--dim); }
       .alert.is-info, [data-theme="day"] .alert.is-info { color: var(--text); }
+      .x-keep { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: var(--text); cursor: pointer; user-select: none; }
+      .x-keep input { width: 20px; height: 20px; margin: 0; accent-color: var(--primary); flex: none; }
       .x-authalt { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; margin-top: 4px; }
       .x-link { min-height: var(--tap); padding: 0 4px; font-size: 13px; color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
       .chip[data-state="live"] { color: var(--text); }
@@ -1577,6 +1579,7 @@
             <button type="button" class="eye press" id="eye" aria-pressed="false" aria-label="Show password" aria-controls="i-pw"></button>
           </div>
         </div>
+        <label class="x-keep"><input type="checkbox" id="i-keep" checked /> <span>Keep me signed in</span></label>
         <button type="button" class="cta press" id="submit">Sign in</button>
         <p class="alert" id="alert" role="alert"></p>
         <div class="x-authalt">
@@ -1669,6 +1672,44 @@
         };
         /* every key is namespaced "anima." so Anima never touches Numina's data on a shared origin */
         var K = { accounts: "anima.accounts", session: "anima.session", prefs: "anima.prefs", meta: "anima.meta", cloud: "anima.cloud" };
+        /* "Keep me signed in": the flag lives in localStorage ("0" = off, default on); session keys follow it */
+        var KEEP = "anima.keep", LAST = "anima.lastEmail";
+        function keepSignedIn() { try { return localStorage.getItem(KEEP) !== "0"; } catch (e) { return mem[KEEP] !== "0"; } }
+        function stor(local) { try { var s = local ? localStorage : sessionStorage; var t = "anima.__t"; s.setItem(t, "1"); s.removeItem(t); return s; } catch (e) { return null; } }
+        function box() { return stor(keepSignedIn()); }
+        function otherBox() { return stor(!keepSignedIn()); }
+        function sGet(k, fallback) {
+          var raw = null, b = box(), o = otherBox();
+          try { if (b) raw = b.getItem(k); } catch (e) { raw = null; }
+          try { if (raw == null && o) raw = o.getItem(k); } catch (e) {}
+          if (raw == null && k in mem) raw = mem[k];
+          if (raw == null) return fallback;
+          try { return JSON.parse(raw); } catch (e) { return fallback; }
+        }
+        function sSet(k, v) {
+          var raw = JSON.stringify(v), b = box(), o = otherBox();
+          mem[k] = raw;
+          try { if (b) b.setItem(k, raw); } catch (e) {}
+          try { if (o) o.removeItem(k); } catch (e) {}
+          return v;
+        }
+        function sDel(k) {
+          delete mem[k];
+          [stor(true), stor(false)].forEach(function (s) { try { if (s) s.removeItem(k); } catch (e) {} });
+        }
+        function setKeepSignedIn(on) {
+          on = !!on;
+          if (on === keepSignedIn()) return;
+          var from = box(), moved = {};
+          [K.session, K.cloud, LAST].forEach(function (k) { try { if (from) { var r = from.getItem(k); if (r != null) moved[k] = r; } } catch (e) {} });
+          mem[KEEP] = on ? "1" : "0";
+          try { localStorage.setItem(KEEP, on ? "1" : "0"); } catch (e) {}
+          var to = box();
+          Object.keys(moved).forEach(function (k) {
+            try { if (to) to.setItem(k, moved[k]); } catch (e) {}
+            try { if (from) from.removeItem(k); } catch (e) {}
+          });
+        }
         var prefs = Object.assign({ night: "aurora", day: "pearl", theme: "night", goal: 10, view: "medium", cols: 2, vb: {}, done: [], passed: [], gates: {}, srs: {}, recent: [] }, Store.get(K.prefs, {}));
         if (!pickTheme(prefs.night, ["aurora", "obsidian"])) prefs.night = "aurora";
         if (!pickTheme(prefs.day, ["pearl", "sage"])) prefs.day = "pearl";
@@ -1707,7 +1748,7 @@
 
         /* ============ AUTH ============ */
         var Auth = {
-          user: Store.get(K.session, null),
+          user: sGet(K.session, null),
           rand: function () {
             var a = new Uint8Array(16);
             (window.crypto || {}).getRandomValues ? crypto.getRandomValues(a) : a.forEach(function (_, i) { a[i] = Math.floor(Math.random() * 256); });
@@ -1790,8 +1831,14 @@
           guest: function () { return Auth.start({ name: "", email: "", local: true }); },
           start: function (user) {
             Auth.user = user;
-            Store.set(K.session, user);
+            sSet(K.session, user);
+            if (user && user.email && !user.local) sSet(LAST, user.email);
             return user;
+          },
+          /* expired session: drop only the dead token and session; no push, no logout call, local data kept */
+          endSession: function () {
+            clearTimeout(Sync.t);
+            Cloud.save(null); Auth.user = null; sDel(K.session);
           },
           signOut: function () {
             var s = Cloud.s, first = s && Sync.dirty ? Sync.push() : Promise.resolve();
@@ -1799,15 +1846,15 @@
               if (s) Cloud.raw("/auth/v1/logout", { method: "POST" }).catch(function () {});
             }).then(function () {
               clearTimeout(Sync.t); Sync.dirty = false;
-              Cloud.save(null); Auth.user = null; Store.del(K.session);
+              Cloud.save(null); Auth.user = null; sDel(K.session);
             });
           }
         };
 
         /* ============ CLOUD: Supabase REST via fetch ============ */
         var Cloud = {
-          s: Store.get(K.cloud, null),
-          save: function (s) { Cloud.s = s; if (s) Store.set(K.cloud, s); else Store.del(K.cloud); },
+          s: sGet(K.cloud, null),
+          save: function (s) { Cloud.s = s; if (s) sSet(K.cloud, s); else sDel(K.cloud); },
           take: function (d) {
             var u = d.user || {}, md = u.user_metadata || {}, old = Cloud.s && Cloud.s.user;
             var s = {
@@ -1976,7 +2023,9 @@
             });
             var note = $("#sync-note");
             if (note) note.hidden = Sync.state !== "expired";
-            if (note) note.textContent = "Your session ended. Sign out and sign in again to resume syncing; progress here is kept.";
+            if (note) note.textContent = "Your session ended. Your progress here is safe.";
+            var again = $("#sync-again");
+            if (again) again.hidden = Sync.state !== "expired";
           },
           touch: function () {
             if (Sync.quiet) return;
@@ -8042,6 +8091,7 @@
                   ? '<div class="rows">' + row("Signed in as", u.email) + "</div>" +
                     '<div class="x-acts"><span class="chip" id="sync-chip" aria-live="polite"></span></div>' +
                     '<p class="dim" id="sync-note" hidden></p>' +
+                    '<div class="x-acts"><button type="button" class="start press" id="sync-again"' + (Sync.state === "expired" ? "" : " hidden") + '>Sign in again</button></div>' +
                     '<div class="x-acts"><button type="button" class="start press" id="sync-now">Sync now</button><button type="button" class="danger press" id="signout">Sign out</button></div>'
                   : '<div class="rows">' + (u.name ? row("Name", u.name) : "") + (u.email ? row("Email", u.email) : "") + row("Account", "On this device only") + "</div>" +
                     '<p class="dim">Sign in or create an account to sync progress across devices. Everything on this device is merged into your account.</p>' +
@@ -18943,7 +18993,7 @@
             if (pick(th.night, NIGHTS)) prefs.night = th.night;
             if (pick(th.day, DAYS)) prefs.day = th.day;
             if (pick(th.style, STYLES)) prefs.style = th.style;
-            if (Auth.user && o.account && o.account.name) { Auth.user.name = String(o.account.name).slice(0, 60); Store.set(K.session, Auth.user); }
+            if (Auth.user && o.account && o.account.name) { Auth.user.name = String(o.account.name).slice(0, 60); sSet(K.session, Auth.user); }
             savePrefs();
             Themes.apply();
             Views.render();
@@ -19088,6 +19138,14 @@
           if (t.id === "bk-export") return exportProgress();
           if (t.id === "bk-import") return importProgress();
           if (t.id === "sync-now") { Sync.dirty = true; return Sync.pull(); }
+          if (t.id === "sync-again") {
+            var em = Auth.user && Auth.user.email;
+            Auth.endSession();
+            while (Layers.length) Layers.pop();
+            showLogin();
+            if (em) $("#i-email").value = em;
+            return;
+          }
           if (t.id === "signout" || t.id === "go-signin") {
             t.disabled = true;
             return Auth.signOut().then(function () {
@@ -19354,6 +19412,7 @@
             btn.setAttribute("aria-busy", "true");
             btn.textContent = "Working…";
             var p;
+            setKeepSignedIn($("#i-keep").checked);
             try { p = mode === "up" ? Auth.signUp(name, email, pw) : Auth.signIn(email, pw); }
             catch (x) { p = Promise.reject(x); }
             Promise.resolve(p)
@@ -19397,6 +19456,9 @@
           $("#i-pw").value = "";
           Sync.set("off");
           setMode("in");
+          $("#i-keep").checked = keepSignedIn();
+          var last = sGet(LAST, "");
+          if (!$("#i-email").value && last) $("#i-email").value = last;
         }
         function showApp() {
           $("#login").hidden = true;
