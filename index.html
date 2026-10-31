@@ -5030,7 +5030,8 @@
                 cars: "Not this one. Both cars really were there, and the memory kept them. What changed is the damage drawn onto them, and what lies on the road beneath them.",
                 road: "Not this one. The road was in the original scene. Look at what lies on it: the glass shards were never there."
               };
-              var fresh = function () { return { pred: null, v: null, run: null, ran: false, rAnim: false, tap: null }; };
+              var fresh = function () { return { pred: null, v: null, run: null, ran: false, rAnim: false, tap: null, open: { toolkit: true } }; };
+              function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -5196,6 +5197,15 @@
                   ref("Geraerts et al.", 2007, "corroboration study", "Memories recovered spontaneously outside therapy were corroborated about as often as continuous memories; memories recovered in suggestive therapy were rarely corroborated.", tag(" x-ev--c", "Contested")) +
                   ref("Wixted &amp; Wells", 2017, "review", "Confidence at trial is not accuracy, but initial confidence at a fair first lineup is informative.", tag("", "Robust")) +
                   "</ol></section></section>" +
+                  '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: protect a memory<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                  '<p class="x-lens__p">Say it to a client like this: “Memory isn\'t a video. Every time you recall something, you rebuild it, and it can change.”</p>' +
+                  bullets("Notice the risk", ["feeling very sure doesn\'t mean being right", "stress, weapons, darkness, alcohol or drugs, and time all blur memory", "hearing other people\'s versions can blend into your own"]) +
+                  bullets("Protect it", ["write down what happened soon, in your own words, with the date and time", "separate what you saw from what you guessed", "avoid talking the story over again and again with others before you have to tell it officially"]) +
+                  bullets("For court, case managers or probation", ["bring your notes", "say “I don\'t know” or “I\'m not sure” when that\'s true", "don\'t fill gaps to please the questioner", "ask for a question to be repeated"]) +
+                  bullets("In recovery", ["“euphoric recall” — memory of using keeps the highs and drops the costs", "write a “whole story” card of the last bad use and read it when cravings hit"]) +
+                  bullets("Use it on purpose", ["since memories are rebuilt, recalling a hard memory in a safe place with new meaning can soften it", "this is part of how trauma therapy works"]) +
+                  bullets("For counsellors", ["ask open questions (“what happened next?”)", "avoid leading ones (“did he hit you?”)", "never push to “recover” memories", "a confident story can still be partly rebuilt"]) +
+                  '<p class="x-lens__take">Write it soon, say what you saw, and leave room for “I\'m not sure”.</p></details>' +
                   '<section class="x-lens__box glass" aria-label="Where this becomes a problem in therapy"><h3 class="x-lens__h">Where this becomes a problem in therapy<small>The same nudge that adds glass to a car crash can add a story to a life</small></h3>' +
                   '<p class="x-lens__p"><b>The memory wars.</b> In the 1990s some therapists searched for “repressed” memories using suggestive techniques: repeated guided imagery, hypnosis, dream interpretation, suggestive questioning, and symptom lists said to “prove” hidden abuse. Some clients came to believe in abuse that later evidence showed did not happen. Families were torn apart and lawsuits followed (Loftus 1993; Lindsay &amp; Read 1994). Many people, often called retractors, later withdrew their accounts.</p>' +
                   '<p class="x-lens__p"><b>Imagination inflation.</b> Simply imagining an event makes people more confident it happened (Garry et al. 1996)' + tag("", "Robust") + " Guided imagery used to “find” a memory is imagination practice.</p>" +
@@ -5223,6 +5233,7 @@
                 S.rAnim = false;
                 var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
               }
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
               function act(b) {
                 var a = b.dataset.act, v = b.dataset.v;
                 if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "rise" ? "Right" : "Not quite") + ": the speed estimate rises, and false details can appear. Choose a verb for the question."; }
@@ -6499,7 +6510,8 @@
               ];
               function mid() { return { O: 1, C: 1, E: 1, A: 1, N: 1 }; }
               var POrd = optOrder(PRED.length);
-              var fresh = function () { return { pred: null, tr: mid(), sit: 0, wk: null, prev: null, runs: 0, shown: 7, ch: 0, cv: W.map(mid), ck: {}, done: {}, open: {} }; };
+              var fresh = function () { return { pred: null, tr: mid(), sit: 0, wk: null, prev: null, runs: 0, shown: 7, ch: 0, cv: W.map(mid), ck: {}, done: {}, open: { toolkit: true } }; };
+              function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -6603,6 +6615,15 @@
                   ref("Roberts et al.", 2006, "meta-analysis", "Mean-level trait change across the lifespan; the maturity principle.", tag("", "Robust")) +
                   ref("Ashton & Lee", 2007, "theory and review", "The HEXACO model adds honesty-humility as a sixth factor.", tag(" x-ev--c", "Contested")) +
                   "</ol></section>", false, 4);
+                h += '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: know your settings, choose your moves<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                  '<p class="x-lens__p">Say it to a client like this: “Personality is like default settings: they lean you one way, but you still choose what you do today.”</p>' +
+                  bullets("Notice your settings", ["openness: new ideas or the familiar", "conscientiousness: plans or flexibility", "extraversion: energy from people or from quiet", "agreeableness: keeping the peace or pushing back", "neuroticism, or emotional sensitivity: how fast and how strongly stress hits", "each end has strengths and costs — no trait is “bad”"]) +
+                  bullets("Steady the hard ones", ["high emotional sensitivity: emotion skills, sleep, routines and an early warning plan", "low conscientiousness: outside structure — alarms, checklists, small steps, an accountability partner", "high agreeableness: practise saying no", "low agreeableness: practise checking the other person\'s view first"]) +
+                  bullets("Fit, don\'t fight", ["pick jobs, routines and recovery supports that match your settings", "introverts: one-on-one support or smaller meetings", "extraverts: group work and service", "high openness: variety in recovery activities"]) +
+                  bullets("Change is real but slow", ["people tend to grow calmer and more conscientious with age", "therapy and steady new habits can shift traits, especially emotional sensitivity", "act like the person you want to be, again and again — “fake it until you become it”, in small doses"]) +
+                  bullets("Situation still matters", ["traits predict averages, not every moment", "strong situations — prison, a using crowd, a crisis — can override them"]) +
+                  bullets("For counsellors", ["use traits to tailor the plan, not to label", "the client is more than five scores"]) +
+                  '<p class="x-lens__take">Know your settings, plan around them, and grow them a little at a time.</p></details>';
                 h += det("therapy", "Where this becomes a problem in therapy", "Traits as labels, and what to do instead · readable any time",
                   '<p class="x-lens__p"><b>Traits turned into labels.</b> “Lazy”, “antisocial”, “difficult client” close the door on curiosity and follow a person through their file.</p>' +
                   '<p class="x-lens__p"><b>A strong situation mistaken for personality.</b> Jail, a shelter or early recovery shape behaviour hard. Guardedness or flat mood there may be the setting, not the person.</p>' +
