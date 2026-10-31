@@ -965,6 +965,17 @@
       .x-grade button { min-height: 48px; border-radius: 999px; font-weight: 600; border: 1px solid var(--border); background: var(--surface-2); }
       .x-grade .is-good { box-shadow: inset 0 0 0 1.5px var(--ok); }
       .x-grade .is-miss { box-shadow: inset 0 0 0 1.5px var(--bad); }
+      /* Phase R-A review: confidence, four-way rating, typed vs correct, illusion banner */
+      .x-grade--4 { grid-template-columns: repeat(4, 1fr); }
+      .x-grade--4 button { display: grid; place-content: center; gap: 2px; padding: 6px 4px; border-radius: var(--r-s); }
+      .x-grade--4 button small { font: 400 12px/1.2 var(--sans); opacity: .75; }
+      .x-conf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .x-conf button { min-height: 48px; border-radius: 999px; font-weight: 600; border: 1px solid var(--border); background: var(--surface-2); }
+      .x-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .x-cmp > div { padding: 14px; border-radius: var(--r-s); display: grid; gap: 6px; align-content: start; }
+      .x-cmp__you { background: var(--surface-2); border-left: 3px solid var(--border); }
+      .x-illus { padding: 10px 14px; border-radius: var(--r-s); border: 1px solid var(--bad); background: var(--surface-2); font-size: 14px; }
+      @media (max-width: 520px) { .x-grade--4 { grid-template-columns: 1fr 1fr; } .x-cmp { grid-template-columns: 1fr; } }
 
       /* glossary */
       .x-search { position: relative; }
@@ -2076,8 +2087,27 @@
         var pad2 = function (n) { return (n < 10 ? "0" : "") + n; };
         var GOALS = [{ v: 5, t: "5 minutes", s: "Light" }, { v: 10, t: "10 minutes", s: "Steady" }, { v: 20, t: "20 minutes", s: "Serious" }, { v: 30, t: "30 minutes", s: "Intensive" }];
 
-        /* ============ REVIEW: spaced repetition at 1, 3, 7 and 30 days ============ */
-        var SRS_DAYS = [1, 3, 7, 30], DAYMS = 864e5;
+        /* ============ REVIEW: expanding spaced repetition (SM-2 style): 1 → 3 → 7 → ~16 → ~37 days, set by how well and how surely you recall ============ */
+        var SRS_DAYS = [1, 3, 7, 30], DAYMS = 864e5, SRS_MAX = 365;
+        /* the next schedule for one entry; optional fields (ivl, ease, reps, lapses, conf, illus) ride inside the old {b, due, at} shape */
+        function srsNext(c, r, conf) {
+          var ivl = c ? c.ivl || SRS_DAYS[c.b || 0] : 0, ease = (c && c.ease) || 2.3, wrong = r === "again", n = {}, k;
+          for (k in c || {}) n[k] = c[k];
+          if (r === "good" && conf === "low") r = "hard"; /* right but unsure: no full growth */
+          var good = ivl < 1 ? 1 : ivl < 3 ? 3 : ivl < 7 ? 7 : Math.round(ivl * ease);
+          if (r === "again") { ivl = 1; ease = Math.max(1.3, ease - 0.2); n.lapses = (n.lapses || 0) + 1; }
+          else if (r === "hard") { ivl = Math.max(1, Math.round(ivl * 1.2)); ease = Math.max(1.3, ease - 0.15); }
+          else if (r === "easy") { ivl = Math.round(good * 1.3); ease += 0.15; }
+          else ivl = good;
+          ivl = Math.min(SRS_MAX, Math.max(1, ivl));
+          if (wrong && conf === "high") { n.illus = true; ivl = 1; } /* illusion of knowing: back tomorrow */
+          if (conf) n.conf = conf;
+          n.b = 0; SRS_DAYS.forEach(function (d, j) { if (d <= ivl) n.b = j; });
+          n.ivl = ivl; n.ease = Math.round(ease * 100) / 100; n.reps = (n.reps || 0) + 1;
+          n.due = addDays(ivl); n.at = Date.now();
+          return n;
+        }
+        function srsMod(id) { return (String(id).split(":")[1] || "").split(".")[0]; }
         function cardKind(c) { return c.kind === "key" ? "Key idea" : c.kind === "palace" ? "Palace station" : "Missed question"; }
         function dayStart(t) { var d = new Date(t || Date.now()); d.setHours(0, 0, 0, 0); return d.getTime(); }
         function addDays(n) { var d = new Date(dayStart()); d.setDate(d.getDate() + n); return d.getTime(); }
@@ -2085,10 +2115,30 @@
           /* a new card: first review tomorrow */
           add: function (id) { if (!prefs.srs) prefs.srs = {}; if (prefs.srs[id]) return false; prefs.srs[id] = { b: 0, due: addDays(SRS_DAYS[0]), at: Date.now() }; return true; },
           /* a missed question: back to the 1-day box */
-          miss: function (id) { if (!prefs.srs) prefs.srs = {}; prefs.srs[id] = { b: 0, due: addDays(SRS_DAYS[0]), at: Date.now() }; },
-          grade: function (id, ok) {
-            var c = prefs.srs[id] || { b: 0 }, b = ok ? Math.min(SRS_DAYS.length - 1, (c.b || 0) + 1) : 0;
-            prefs.srs[id] = { b: b, due: addDays(SRS_DAYS[ok ? b : 0]), at: Date.now() };
+          miss: function (id) {
+            if (!prefs.srs) prefs.srs = {};
+            var c = prefs.srs[id], n = { b: 0, due: addDays(SRS_DAYS[0]), at: Date.now() };
+            if (c) { ["ease", "reps", "conf", "illus"].forEach(function (k) { if (c[k] != null) n[k] = c[k]; }); n.lapses = (c.lapses || 0) + 1; }
+            prefs.srs[id] = n;
+          },
+          /* r: again | hard | good | easy; conf (optional): low | mid | high, chosen before answering */
+          rate: function (id, r, conf) { if (!prefs.srs) prefs.srs = {}; return (prefs.srs[id] = srsNext(prefs.srs[id], r, conf)); },
+          preview: function (id, r, conf) { return srsNext((prefs.srs || {})[id], r, conf); },
+          grade: function (id, ok) { Srs.rate(id, ok ? "good" : "again"); },
+          every: function (c) { return (c && (c.ivl || SRS_DAYS[c.b || 0])) || SRS_DAYS[0]; },
+          /* interleave: never the same module twice in a row when avoidable; random within each module */
+          interleave: function (ids) {
+            var g = {}, order = [], out = [], last = null;
+            ids.forEach(function (id) { var m = srsMod(id); if (!g[m]) { g[m] = []; order.push(m); } g[m].push(id); });
+            var mix = function (a) { for (var j = a.length - 1; j > 0; j--) { var r = Math.floor(Math.random() * (j + 1)), t = a[j]; a[j] = a[r]; a[r] = t; } return a; };
+            mix(order); order.forEach(function (m) { mix(g[m]); });
+            while (out.length < ids.length) {
+              var best = null;
+              order.forEach(function (m) { if (g[m].length && m !== last && (!best || g[m].length > g[best].length)) best = m; });
+              if (!best) best = last;
+              out.push(g[best].pop()); last = best;
+            }
+            return out;
           },
           ids: function () { return Object.keys(prefs.srs || {}).filter(function (k) { return !!cardOf(k); }); },
           due: function () { var end = addDays(1); return Srs.ids().filter(function (k) { return prefs.srs[k].due < end; }); }
@@ -2223,7 +2273,7 @@
             filters: [{ v: "all", t: "All modules" }, { v: "open", t: "Open now" }, { v: "A", t: "Part A · Foundations" }, { v: "B", t: "Part B · Core processes" }, { v: "C", t: "Part C · Social" }] },
           gloss: { v0: "medium", wide: "grid", sorts: [{ v: "az", t: "A–Z" }, { v: "za", t: "Z–A" }, { v: "path", t: "Lesson order" }], filters: [{ v: "all", t: "All lessons" }] },
           lab: { v0: "large", wide: "grid", sorts: [{ v: "path", t: "Timeline order" }, { v: "az", t: "A–Z" }, { v: "za", t: "Z–A" }], filters: [{ v: "all", t: "All scenes" }] },
-          review: { v0: "medium", wide: "grid", sorts: [{ v: "due", t: "Due soonest" }, { v: "az", t: "A–Z" }], filters: [{ v: "all", t: "All cards" }, { v: "today", t: "Due today" }, { v: "key", t: "Key ideas" }, { v: "q", t: "Missed questions" }] }
+          review: { v0: "medium", wide: "grid", sorts: [{ v: "due", t: "Due soonest" }, { v: "az", t: "A–Z" }], filters: [{ v: "all", t: "All cards" }, { v: "today", t: "Due today" }, { v: "key", t: "Key ideas" }, { v: "q", t: "Missed questions" }, { v: "illus", t: "Felt sure, missed" }] }
         };
         function vb(k) {
           var d = (prefs.vb || {})[k] || {}, c = COLL[k], sorts = c.sorts.map(function (s) { return s.v; }), fs = c.filters.map(function (f) { return f.v; });
@@ -5240,13 +5290,13 @@
               (due.length ? '<div class="x-acts"><button type="button" class="start press" data-queue="today">Start today’s queue</button></div>'
                 : '<p class="dim">' + (ids.length ? "Nothing due today. Next card comes back " + esc(dueWord(prefs.srs[next].due)) + "." : "Finish a lesson and its key ideas arrive here, plus any question you miss.") + "</p>" +
                   (ids.length ? '<div class="x-acts"><button type="button" class="danger press" data-queue="ahead">Study ahead (no schedule change)</button></div>' : '<div class="x-acts"><button type="button" class="start press" data-go="map">Open the map</button></div>')) + "</section>" +
-              '<section class="x-curve glass">' + curve + "<p><b>Why spaced review:</b> Ebbinghaus’s forgetting curve shows memories fade fast at first, then slowly — and every well-timed recall flattens the curve, so cards return at 1, 3, 7, then 30 days, and a miss starts the card over at 1 day.</p></section>";
+              '<section class="x-curve glass">' + curve + "<p><b>Why spaced review:</b> Ebbinghaus’s forgetting curve shows memories fade fast at first, then slowly — and every well-timed recall flattens the curve, so intervals grow from 1, 3 and 7 days to about 16, then longer, adjusted by how well and how surely you recall. A miss starts the card over at 1 day, and a card you felt sure about but missed comes back tomorrow.</p></section>";
             var cards = ids.map(cardOf).filter(function (c) {
-              return s.f === "all" || (s.f === "today" ? due.indexOf(c.id) > -1 : s.f === "key" ? c.kind === "key" : c.kind === "q");
+              return s.f === "all" || (s.f === "today" ? due.indexOf(c.id) > -1 : s.f === "key" ? c.kind === "key" : s.f === "illus" ? !!prefs.srs[c.id].illus : c.kind === "q");
             }).sort(s.sort === "az" ? function (a, b) { return a.front.localeCompare(b.front); } : function (a, b) { return prefs.srs[a.id].due - prefs.srs[b.id].due; });
             var list = ids.length ? viewBar("review", "cards") + '<div class="x-cards"' + layoutAttr("review") + ">" + (cards.length ? cards.map(function (c) {
               var st = prefs.srs[c.id], isDue = st.due < now;
-              return '<button type="button" class="x-rc glass press" data-card="' + c.id + '"><span class="x-rc__f">' + esc(c.front) + '</span><span class="x-rc__m"><span>' + cardKind(c) + " · " + esc(c.src) + "</span><span>Every " + SRS_DAYS[st.b || 0] + " day" + (SRS_DAYS[st.b || 0] > 1 ? "s" : "") + '</span><span class="' + (isDue ? "is-due" : "") + '">' + (isDue ? "Due today" : "Due " + esc(dueWord(st.due))) + "</span></span></button>";
+              return '<button type="button" class="x-rc glass press" data-card="' + c.id + '"><span class="x-rc__f">' + esc(c.front) + '</span><span class="x-rc__m"><span>' + cardKind(c) + " · " + esc(c.src) + "</span><span>Every " + Srs.every(st) + " day" + (Srs.every(st) > 1 ? "s" : "") + '</span><span class="' + (isDue ? "is-due" : "") + '">' + (isDue ? "Due today" : "Due " + esc(dueWord(st.due))) + "</span></span></button>";
             }).join("") : '<p class="x-empty-s">No cards match this filter.</p>') + "</div>" : "";
             return '<div><h1 class="greet">Review</h1><p class="dim">Spaced retrieval: answer first, then check. Re-reading notes is review, not learning; recalling is what makes it last.</p></div>' + q + list;
           },
@@ -5285,7 +5335,7 @@
                 toggle("night", "Night mode", prefs.theme === "night")) +
               fold("learning", "Learning",
                 UI.selBtn("Daily goal", prefs.goal, "Daily goal", GOALS) + toggle("remind", "Daily reminder", !!prefs.remind) +
-                '<div class="rows">' + row("Review intervals", "1 · 3 · 7 · 30 days") + row("Mastery gate", "80% to pass") + row("Cards in review", String(Srs.ids().length)) + "</div>") +
+                '<div class="rows">' + row("Review intervals", "1 · 3 · 7 → about 16 days, then longer, set by how well and how surely you recall; a miss restarts at 1 day") + row("Mastery gate", "80% to pass") + row("Cards in review", String(Srs.ids().length)) + "</div>") +
               fold("account", "Account &amp; Sync",
                 (u.cloud
                   ? '<div class="rows">' + row("Signed in as", u.email) + "</div>" +
@@ -15543,52 +15593,135 @@
 
         /* ============ REVIEW SESSION: today's queue, one card at a time ============ */
         function openQueue(mode) {
-          var ids = mode === "ahead" ? Srs.ids().sort(function (a, b) { return prefs.srs[a].due - prefs.srs[b].due; }).slice(0, 10) : Srs.due();
+          var ids = Srs.interleave(mode === "ahead" ? Srs.ids().sort(function (a, b) { return prefs.srs[a].due - prefs.srs[b].due; }).slice(0, 10) : Srs.due());
           if (!ids.length) return UI.toast("Nothing due right now");
-          var opener = doc.activeElement, i = 0, st = { shown: false, pick: null }, right = 0, el = doc.createElement("div");
+          var fresh = function () { return { conf: null, typed: "", checked: false, opts: false, pick: null, rated: null, prev: null, illus: false, cz: undefined }; };
+          var opener = doc.activeElement, i = 0, st = fresh(), right = 0, sure = { ok: 0, miss: 0 }, fooled = [], el = doc.createElement("div");
+          var CONF = [["low", "Low"], ["mid", "Medium"], ["high", "High"]], RATES = [["again", "Again"], ["hard", "Hard"], ["good", "Good"], ["easy", "Easy"]];
+          var STOP = ["because", "without", "between", "through", "another", "something", "someone", "however", "therefore", "should", "whether", "itself", "before", "rather", "around", "within", "during", "others", "people", "things", "really", "either", "neither", "although", "always", "become", "becomes", "instead", "nothing", "everything", "usually", "simply", "actually"];
+          var norm = function (w) { return String(w || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ""); };
+          var inWords = function (n) { return n <= 1 ? "tomorrow" : "in " + n + " days"; };
+          /* cloze on alternate reviews of key cards: the longest word over 5 letters, outside the stoplist, becomes a blank */
+          function clozeOf(c) {
+            var e = prefs.srs[c.id] || {};
+            if (c.kind !== "key" || (e.reps || 0) % 2 !== 1 || c.back.split(/\s+/).filter(Boolean).length < 6) return null;
+            var best = null;
+            (c.back.match(/[\p{L}][\p{L}'’-]*[\p{L}]/gu) || []).forEach(function (w) { if (w.length > 5 && STOP.indexOf(w.toLowerCase()) < 0 && (!best || w.length > best.length)) best = w; });
+            if (!best) return null;
+            var at = c.back.indexOf(best); /* the longest word cannot sit inside a longer one */
+            return { word: best, pre: c.back.slice(0, at), post: c.back.slice(at + best.length) };
+          }
+          function when(r) {
+            if (mode === "ahead") return r === "again" ? "tomorrow" : "no change";
+            return inWords(Srs.preview(ids[i], r, st.conf).ivl);
+          }
+          /* one rating per card; Study ahead only lets misses move the schedule */
+          function grade(r) {
+            var id = ids[i], c0 = prefs.srs[id], ok = r !== "again";
+            st.prev = c0 ? JSON.parse(JSON.stringify(c0)) : null;
+            if (mode !== "ahead") Srs.rate(id, r, st.conf); else if (!ok) Srs.rate(id, "again", st.conf);
+            st.rated = r;
+            if (ok) right++;
+            if (st.conf === "high") {
+              if (ok) sure.ok++;
+              else { sure.miss++; st.illus = true; fooled.push(cardOf(id).front); }
+            }
+            savePrefs();
+          }
+          function next() { i++; st = fresh(); paint(); }
           el.className = "player"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Review queue");
           el.innerHTML = '<div class="player__in" style="max-width:40rem"><div class="player__top"><button type="button" class="iconbtn press" data-q="close" aria-label="Close review">✕</button>' +
             '<span class="mark">' + (mode === "ahead" ? "Study ahead" : "Today’s queue") + '</span><span class="eyebrow" id="q-count"></span></div>' +
             '<div class="rail" aria-hidden="true">' + ids.map(function () { return "<span></span>"; }).join("") + '</div><div class="stage" id="q-stage" aria-live="polite"></div></div>';
-          function grade(ok) {
-            if (ok) right++;
-            if (mode !== "ahead") Srs.grade(ids[i], ok); else if (!ok) Srs.miss(ids[i]);
-            savePrefs();
-          }
           function paint() {
             var stage = $("#q-stage", el);
             $("#q-count", el).textContent = Math.min(i + 1, ids.length) + " / " + ids.length;
             Array.prototype.forEach.call(el.querySelectorAll(".rail span"), function (r, k) { r.classList.toggle("is-on", k <= i); });
             if (i >= ids.length) {
               studied(); savePrefs();
+              var sureN = sure.ok + sure.miss;
+              var calib = sureN ? "You felt sure on " + sureN + " card" + (sureN === 1 ? "" : "s") + ": " + sure.ok + " right, " + sure.miss + " wrong." : "You didn’t mark any answer as High confidence this session.";
               stage.innerHTML = '<article class="scard glass x-flash"><p class="eyebrow">Session done</p><h2>' + right + " of " + ids.length + " recalled</h2><p class=\"dim\">" +
-                (mode === "ahead" ? "Study-ahead sessions don’t move your schedule; misses still go back to 1 day." : "Recalled cards wait longer next time (1 → 3 → 7 → 30 days). Missed cards come back tomorrow.") +
-                '</p><div class="x-acts"><button type="button" class="start press" data-q="close">Done</button></div></article>';
+                (mode === "ahead" ? "Study-ahead sessions don’t move your schedule; misses still go back to 1 day." : "Recalled cards wait longer next time (1 → 3 → 7 → about 16 days, then longer). Missed cards come back tomorrow.") +
+                '</p><p><b>Calibration:</b> ' + esc(calib) + "</p>" +
+                (fooled.length ? '<p class="x-illus">Cards you felt sure about but missed: ' + fooled.slice(0, 3).map(function (f) { return "“" + esc(f) + "”"; }).join("; ") + "</p>" : "") +
+                '<div class="x-acts"><button type="button" class="start press" data-q="close">Done</button></div></article>';
               return $("[data-q=close]", stage).focus();
             }
-            var c = cardOf(ids[i]), b = st.shown, body;
-            if (c.kind === "q") {
-              body = '<p class="x-q">' + esc(c.front) + "</p>" + c.options.map(function (o, k) {
-                var cls = st.pick == null ? "" : k === c.answer ? " is-right" : k === st.pick ? " is-wrong" : "";
-                return '<button type="button" class="qopt press' + cls + '" data-qo="' + k + '"' + (st.pick != null ? " disabled" : "") + ">" + esc(o) + "</button>";
-              }).join("") + (st.pick != null ? '<p class="why' + (st.pick === c.answer ? "" : " is-bad") + '">' + esc(c.why) + '</p><div class="x-acts"><button type="button" class="start press" data-q="next">Next card</button></div>' : "");
+            var c = cardOf(ids[i]), body = '<p class="x-q">' + esc(c.front) + "</p>";
+            var banner = st.illus ? '<p class="x-illus" role="status">Illusion of knowing caught — this one comes back tomorrow.</p>' : "";
+            var nextBtn = '<button type="button" class="start press" data-q="next">Next card</button>';
+            if (st.cz === undefined) st.cz = clozeOf(c);
+            if (!st.conf) {
+              /* confidence first, before any answer */
+              body += '<p class="dim">How sure are you? Decide before you answer.</p><div class="x-conf" role="group" aria-label="How sure are you?">' +
+                CONF.map(function (o) { return '<button type="button" class="press" data-conf="' + o[0] + '">' + o[1] + "</button>"; }).join("") + "</div>";
+            } else if (c.kind === "q") {
+              if (!st.opts) {
+                body += '<label class="dim" for="q-own">Answer in your own words before you see the options</label><textarea id="q-own" class="x-tb" rows="3">' + esc(st.typed) + "</textarea>" +
+                  '<div class="x-acts"><button type="button" class="start press" data-q="opts">Show options</button></div>';
+              } else {
+                body += (st.typed ? '<p class="dim">You wrote: ' + esc(st.typed) + "</p>" : "") + c.options.map(function (o, k) {
+                  var cls = st.pick == null ? "" : k === c.answer ? " is-right" : k === st.pick ? " is-wrong" : "";
+                  return '<button type="button" class="qopt press' + cls + '" data-qo="' + k + '"' + (st.pick != null ? " disabled" : "") + ">" + esc(o) + "</button>";
+                }).join("");
+                if (st.pick != null) {
+                  var ok = st.pick === c.answer, e = prefs.srs[ids[i]];
+                  /* corrective feedback: the right option and its reason, never just "wrong" */
+                  body += '<p class="why' + (ok ? "" : " is-bad") + '">' + (ok ? "" : "<b>The answer: " + esc(c.options[c.answer]) + ".</b> ") + esc(c.why) + "</p>" + banner +
+                    '<p class="dim">' + (mode === "ahead" && ok ? "Study ahead: the schedule doesn’t change." : "Comes back " + inWords(Srs.every(e)) + ".") + "</p>" +
+                    '<div class="x-acts">' + nextBtn + (ok && mode !== "ahead" && st.rated !== "easy" ? '<button type="button" class="danger press" data-q="easy">Easy · ' + esc(inWordsEasy()) + "</button>" : "") + "</div>";
+                }
+              }
+            } else if (st.rated) {
+              body += '<p class="x-flash__a">' + esc(c.back) + "</p>" + banner + '<div class="x-acts">' + nextBtn + "</div>";
+            } else if (!st.checked) {
+              body += st.cz
+                ? '<p class="x-flash__a">' + esc(st.cz.pre) + "<b>_____</b>" + esc(st.cz.post) + '</p><label class="dim" for="q-own">Type the missing word</label><input id="q-own" class="x-tb" type="text" autocomplete="off" spellcheck="false" value="' + esc(st.typed) + '">'
+                : '<label class="dim" for="q-own">Type your answer from memory</label><textarea id="q-own" class="x-tb" rows="3">' + esc(st.typed) + "</textarea>";
+              body += '<div class="x-acts"><button type="button" class="start press" data-q="check">Check</button></div>';
             } else {
-              body = '<p class="x-q">' + esc(c.front) + "</p>" + (b ? '<p class="x-flash__a">' + esc(c.back) + '</p><p class="dim">Did you recall it before you looked?</p><div class="x-grade"><button type="button" class="press is-miss" data-q="miss">' + (c.kind === "palace" ? "I didn’t" : "Missed it") + '</button><button type="button" class="press is-good" data-q="good">' + (c.kind === "palace" ? "I remembered" : "Got it") + '</button></div>'
-                : '<p class="dim">Say or write your answer first, then check.</p><div class="x-acts"><button type="button" class="start press" data-q="show">Show answer</button></div>');
+              if (st.cz) {
+                var hit = norm(st.typed) === norm(st.cz.word);
+                body += '<p class="x-flash__a">' + esc(c.back) + '</p><p class="why' + (hit ? "" : " is-bad") + '">' +
+                  (hit ? "Right: “" + esc(st.cz.word) + "”." : (st.typed ? "You wrote “" + esc(st.typed) + "”; the word was “" : "The word was “") + esc(st.cz.word) + "”.") + "</p>";
+              } else {
+                body += '<div class="x-cmp"><div class="x-cmp__you"><p class="eyebrow">You wrote</p><p>' + (st.typed ? esc(st.typed) : '<span class="dim">Nothing typed</span>') + '</p></div><div class="x-flash__a"><p class="eyebrow">Answer</p><p>' + esc(c.back) + "</p></div></div>";
+              }
+              body += '<p class="dim">How well did you recall it?</p><div class="x-grade x-grade--4" role="group" aria-label="Rate your recall">' + RATES.map(function (r) {
+                return '<button type="button" class="press' + (r[0] === "again" ? " is-miss" : r[0] === "good" ? " is-good" : "") + '" data-rate="' + r[0] + '">' + r[1] + "<small>" + esc(when(r[0])) + "</small></button>";
+              }).join("") + "</div>";
             }
             stage.innerHTML = '<article class="scard glass x-flash"><p class="eyebrow">' + cardKind(c) + " · " + esc(c.src) + "</p>" + body + "</article>";
-            var f = $("[data-q=show], [data-q=good], [data-q=next], .qopt", stage); if (f) f.focus({ preventScroll: true });
+            var f = $("[data-conf], #q-own, [data-rate=good], [data-q=next], .qopt", stage); if (f) f.focus({ preventScroll: true });
           }
+          /* the Easy override's interval, from the entry as it was before this card's automatic rating */
+          function inWordsEasy() { return inWords(srsNext(st.prev, "easy", st.conf).ivl); }
           el.addEventListener("click", function (e) {
             var t = e.target.closest("button"); if (!t) return;
             e.stopPropagation();
             var a = t.dataset.q;
             if (a === "close") return History.closeTop();
             if (i >= ids.length) return;
-            if (a === "show") { st.shown = true; return paint(); }
-            if (a === "good" || a === "miss") { grade(a === "good"); i++; st = { shown: false, pick: null }; return paint(); }
-            if (a === "next") { i++; st = { shown: false, pick: null }; return paint(); }
-            if (t.dataset.qo != null && st.pick == null) { st.pick = +t.dataset.qo; grade(st.pick === cardOf(ids[i]).answer); paint(); }
+            var c = cardOf(ids[i]);
+            if (t.dataset.conf && !st.conf) { st.conf = t.dataset.conf; return paint(); }
+            if (a === "check" || a === "opts") { var fld = $("#q-own", el); st.typed = fld ? fld.value.trim() : ""; st[a === "check" ? "checked" : "opts"] = true; return paint(); }
+            if (t.dataset.rate && st.checked && !st.rated) { grade(t.dataset.rate); return st.illus ? paint() : next(); }
+            if (a === "easy" && st.rated && st.rated !== "again" && mode !== "ahead") {
+              if (st.prev) prefs.srs[ids[i]] = st.prev; else delete prefs.srs[ids[i]];
+              Srs.rate(ids[i], "easy", st.conf); st.rated = "easy"; savePrefs();
+              return next();
+            }
+            if (a === "next") return next();
+            if (t.dataset.qo != null && st.pick == null && st.opts) {
+              st.pick = +t.dataset.qo;
+              var ok = st.pick === c.answer;
+              grade(!ok ? "again" : st.conf === "low" ? "hard" : "good");
+              paint();
+            }
+          });
+          el.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" && e.target.id === "q-own" && e.target.tagName === "INPUT") { e.preventDefault(); var b = $("[data-q=check]", el); if (b) b.click(); }
           });
           doc.body.appendChild(el); doc.body.style.overflow = "hidden";
           paint();
@@ -15775,7 +15908,16 @@
             o.lessons.passed = (Array.isArray(o.lessons.passed) ? o.lessons.passed : []).filter(function (m) { return !!modOf(m); });
             o.lessons.gates = o.lessons.gates && typeof o.lessons.gates === "object" ? o.lessons.gates : {};
             var srs = {};
-            Object.keys(o.srs || {}).forEach(function (k) { var c = o.srs[k]; if (c && isFinite(c.due) && cardOf(k)) srs[k] = { b: Math.max(0, Math.min(SRS_DAYS.length - 1, c.b | 0)), due: +c.due, at: +c.at || 0 }; });
+            Object.keys(o.srs || {}).forEach(function (k) { var c = o.srs[k]; if (c && isFinite(c.due) && cardOf(k)) srs[k] = { b: Math.max(0, Math.min(SRS_DAYS.length - 1, c.b | 0)), due: +c.due, at: +c.at || 0 };
+              /* optional Phase R-A fields travel with the entry, cleaned */
+              if (c && srs[k]) {
+                if (isFinite(c.ivl) && c.ivl > 0) srs[k].ivl = Math.min(SRS_MAX, Math.round(c.ivl));
+                if (isFinite(c.ease) && c.ease > 0) srs[k].ease = Math.max(1.3, Math.min(5, +c.ease));
+                if (isFinite(c.reps) && c.reps >= 0) srs[k].reps = c.reps | 0;
+                if (isFinite(c.lapses) && c.lapses >= 0) srs[k].lapses = c.lapses | 0;
+                if (c.conf === "low" || c.conf === "mid" || c.conf === "high") srs[k].conf = c.conf;
+                if (c.illus === true) srs[k].illus = true;
+              } });
             o.srs = srs;
             return o;
           },
@@ -16052,10 +16194,10 @@
             '<div class="x-acts"><button type="button" class="danger press" data-x="close">Close</button></div>');
           $(".x-dlg", L).classList.add("x-kitdlg");
           var tabs = $(".x-kit__tabs", L), body = $(".x-kit__body", L);
-          function every(id) { var c = (prefs.srs || {})[id]; return c ? "In Review · every " + SRS_DAYS[c.b || 0] + " day" + (SRS_DAYS[c.b || 0] > 1 ? "s" : "") + ", due " + dueWord(c.due) : ""; }
+          function every(id) { var c = (prefs.srs || {})[id]; return c ? "In Review · every " + Srs.every(c) + " day" + (Srs.every(c) > 1 ? "s" : "") + ", due " + dueWord(c.due) : ""; }
           function walk() {
             var done = S.i >= st.length, ok = S.res.filter(Boolean).length;
-            var h = '<p class="dim"><b>Recall first.</b> Walk ' + esc(kitPlace(mid)) + " in order. At each spot, say or type what was there, then mark it. The figure and idea light up after you answer. Each station is a palace card in Review (1 → 3 → 7 → 30 days; a miss restarts at 1 day).</p>";
+            var h = '<p class="dim"><b>Recall first.</b> Walk ' + esc(kitPlace(mid)) + " in order. At each spot, say or type what was there, then mark it. The figure and idea light up after you answer. Each station is a palace card in Review (1 → 3 → 7 → about 16 days, then longer; a miss restarts at 1 day).</p>";
             h += st.map(function (s, k) {
               var spot = '<span class="x-stn__spot">' + s.n + " · " + esc(kitSpot(mid, k)) + "</span>";
               if (k < S.i) return '<div class="x-stn ' + (S.res[k] ? "is-ok" : "is-miss") + '">' + spot + (S.typed[k] ? '<p class="x-stn__con">You said: ' + esc(S.typed[k]) + "</p>" : "") +
