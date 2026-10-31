@@ -6795,6 +6795,202 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* L25 Bystander Street: add witnesses to a street emergency and watch each person's urge to act fall while the chance someone acts holds. History card, predict, mechanism toggles over Latane & Darley's five steps, challenge, reveal. Saves nothing. */
+          {
+            id: "bystander", name: "Bystander Street", kicker: "C · Helping", hue: ["#7fe9ff", "#ffb38a"], gallery: true, order: 6.5, dom: true,
+            idea: "A person collapses on a street. Does a crowd make help more likely, or less? Guess first, then add witnesses one at a time.",
+            see: "One street, one person in distress. Each witness you add lowers every single person's urge to act, while the chance that somebody acts holds up.",
+            why: "Latané and Darley's five steps — notice, interpret as an emergency, take responsibility, know how, act. Diffusion of responsibility, pluralistic ignorance and audience inhibition each block one of them; clear danger and a shared group shrink the effect.",
+            use: "Group rooms, staff teams, overdoses on the street: name the emergency, name one person, and assume nobody else has acted.",
+            cap: "Read the history, predict, add witnesses and flip the mechanisms on, then choose what to do in three real situations.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["History", "Predict", "Street", "Challenge", "Reveal"], WORD = ["one", "two", "three", "four", "five"];
+              var ON = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight"];
+              function up(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+              var FIVE = ["notice it", "interpret it as an emergency", "take responsibility", "know how to help", "act"];
+              var M = [
+                { id: "dif", t: "Diffusion of responsibility", b: 2, d: "Thought bubbles over the crowd: “someone else will.” Responsibility spreads out until nobody owns it.", e: -1 },
+                { id: "pi", t: "Pluralistic ignorance", b: 1, d: "Everyone keeps a calm face, so each person reads the calm around them as proof that nothing is wrong.", e: -1 },
+                { id: "aud", t: "Audience inhibition", b: 4, d: "Being watched raises the cost of being wrong: nobody wants to be the person who overreacted.", e: -1 },
+                { id: "dang", t: "Clear danger", b: -1, d: "When the emergency is unmistakable, the effect shrinks and help comes faster (Fischer et al. 2011).", e: 1 },
+                { id: "grp", t: "Shared group, or knows the person", b: -1, d: "Among people who feel like one group, or who know the person, helping rises sharply.", e: 1 }];
+              var URG = ["very weak", "weak", "moderate", "strong", "very strong"], CHW = ["low", "moderate", "fairly high", "high", "very high"];
+              var PR = [["With one witness", true], ["With many witnesses", false]];
+              var CH = [
+                { s: "A person is slumped at a bus stop, lips grey, breathing shallow — a possible overdose. People wait nearby, looking at their phones.",
+                  br: [["Point at one person — “You in the grey jacket, call emergency services” — then check breathing and give naloxone if you carry it.", true], ["Shout “somebody call for help!” over the crowd and keep walking.", false], ["Wait to see whether anyone who knows the person steps in first.", false]],
+                  bw: "Naming one person unblocks <b>take responsibility</b>, and checking breathing with naloxone unblocks <b>know how to help</b>. A shout at a crowd lands on nobody, and waiting hands the moment to pluralistic ignorance." },
+                { s: "In a group session, a member hints that they have a plan to end their life. The room goes quiet and the other members look at the floor.",
+                  br: [["Name it out loud as an emergency, speak to the person directly, and run the suicide-risk protocol yourself.", true], ["Move the group on and check in by text afterwards, so the person is not put on the spot.", false], ["Wait for another member to answer, so it comes from a peer.", false]],
+                  bw: "Saying it out loud unblocks <b>interpret it as an emergency</b> — the silence was telling everyone it was fine — and doing the protocol yourself unblocks <b>take responsibility</b>. Risk assessment belongs to you, not to the room." },
+                { s: "A fight is brewing in a residential unit's dayroom. Residents and two staff are watching; nobody wants to be the one who “snitches”.",
+                  br: [["Say plainly what you see, call one staff member by name to come, and separate the two people before it starts.", true], ["Keep watching so you don't escalate it or look foolish.", false], ["Let it play out and file a report about it afterwards.", false]],
+                  bw: "Speaking and moving unblocks <b>act</b>, the step audience inhibition holds shut, and calling one colleague by name unblocks <b>take responsibility</b>. The “no snitching” silence is pluralistic ignorance: many people in that room privately want it stopped." }];
+              var PO = optOrder(PR.length), BO = CH.map(function (c) { return optOrder(c.br.length); });
+              var fresh = function () { return { cd: false, pk: null, w: 1, added: false, m: {}, ch: 0, ab: {}, done: {}, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) { return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) { return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>"; }).join("") + "</p>"; }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of five · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) { return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") + "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>"; }
+              function goStep(n) { var s = $('[data-step="' + n + '"]', main); if (!s) return; s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var f = s.querySelector("button:not(:disabled), input:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true }); }
+              function lessonBtn(id, label) { var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {} return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>"; }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function on(id) { return !!S.m[id]; }
+              function clamp(x) { return Math.max(0, Math.min(4, x)); }
+              function urge(n) { var base = [4, 3, 3, 2, 2, 1, 1, 0][Math.min(7, n - 1)]; return clamp(base - (on("dif") ? 1 : 0) - (on("pi") ? 1 : 0) - (on("aud") ? 1 : 0) + (on("dang") ? 1 : 0) + (on("grp") ? 1 : 0)); }
+              function chance(n) { var base = [1, 2, 2, 3, 3, 4, 4, 4][Math.min(7, n - 1)]; return clamp(base + (on("dang") ? 1 : 0) + (on("grp") ? 1 : 0) - (on("pi") ? 1 : 0)); }
+              function T(x, y, s, fill, w) { return '<text x="' + x + '" y="' + y + '" style="fill:' + fill + ';font:' + (w || 500) + ' 12px var(--sans)">' + esc(s) + "</text>"; }
+              function fig(x, y, col, k) {
+                var a = k < S.w - 1 || S.an >= 1 ? 1 : S.an;
+                return '<g opacity="' + a.toFixed(2) + '" fill="' + col + '"><circle cx="' + x + '" cy="' + y + '" r="5"/><rect x="' + (x - 5) + '" y="' + (y + 7) + '" width="10" height="15" rx="4"/>' +
+                  (on("dif") ? '<g opacity=".85"><ellipse cx="' + (x + 13) + '" cy="' + (y - 12) + '" rx="15" ry="8" fill="#2b2e4d" stroke="#a9acd6" stroke-width="1"/><circle cx="' + (x + 4) + '" cy="' + (y - 4) + '" r="2" fill="#a9acd6"/><text x="' + (x + 13) + '" y="' + (y - 9) + '" text-anchor="middle" style="fill:#cfd2ff;font:600 12px var(--sans)">…</text></g>' : "") + "</g>";
+              }
+              function bar(y, label, idx, words, col) {
+                var w = 40 + idx * 55;
+                return T(12, y, label, "#a9acd6", 400) + '<rect x="12" y="' + (y + 6) + '" width="' + w + '" height="8" rx="4" fill="' + col + '"/>' + T(12 + w + 8, y + 14, words[idx], "#eef0ff");
+              }
+              function stSVG() {
+                var n = S.w, u = urge(n), c = chance(n), i, s = "", xs;
+                for (i = 0; i < n; i++) { xs = 92 + (i % 6) * 42; s += fig(xs, 54 + (i > 5 ? 34 : 0), on("grp") ? "#7fe9ff" : "#c4b0ff", i); }
+                var lbl = ON[Math.min(8, n)] + (n === 1 ? " witness" : " witnesses") + " on the street. Each person's urge to act: " + URG[u] + ". Chance that someone acts: " + CHW[c] + ".";
+                return '<svg class="x-mem__svg" viewBox="0 0 360 190" role="img" aria-label="' + esc(lbl) + '" style="background:#1b1d33">' +
+                  '<rect x="0" y="96" width="360" height="30" fill="#24273f"/>' + T(12, 20, up(ON[Math.min(8, n)]) + (n === 1 ? " witness" : " witnesses"), "#eef0ff", 600) + (on("dif") ? '<text x="348" y="20" text-anchor="end" style="fill:#cfd2ff;font:400 12px var(--sans)">thinking: “someone else will”</text>' : "") +
+                  '<g fill="' + (on("dang") ? "#ff9aa8" : "#ff8a7a") + '"><circle cx="38" cy="78" r="6"/><rect x="18" y="84" width="42" height="11" rx="5"/></g>' + T(12, 112, "person in distress", "#cfd2ff", 400) + s +
+                  bar(140, "each person’s urge to act", u, URG, "#ffb38a") + bar(168, "chance someone acts", c, CHW, "#7fe9ff") + "</svg>";
+              }
+              function render() { var g = $('[data-k="st"]', main); if (g) g.innerHTML = stSVG(); }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                var dt = A.last != null ? Math.min(0.05, (now - A.last) / 1000) : 0; A.last = now;
+                S.an = Math.min(1, S.an + dt * 4); render();
+                if (S.an >= 1) { A = null; return; }
+                kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function play() { halt(); if (RM) { S.an = 1; render(); return; } S.an = 0; A = { last: null }; render(); kick(); }
+              S.an = 1;
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function blocked() {
+                var b = {}; M.forEach(function (m) { if (m.b >= 0 && on(m.id)) b[m.b] = m.t; });
+                return FIVE.map(function (s, i) { return b[i] ? '<li><b>' + up(s) + '</b> — blocked by ' + b[i].toLowerCase() + "</li>" : "<li>" + up(s) + "</li>"; }).join("");
+              }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") : null;
+                halt();
+                var allDone = Object.keys(S.done).length === CH.length, n = !S.cd ? 0 : S.pk == null ? 1 : !S.added ? 2 : !allDone ? 3 : 4;
+                var h = trail(n) + msect("Queens, New York, 1964", "One history card",
+                  '<p class="x-lens__p" style="font-size:15px"><b>Kitty Genovese is murdered outside her building.</b> A <i>New York Times</i> story claims thirty-eight witnesses watched from their windows and did nothing.</p>' +
+                  '<p class="x-lens__p">The story horrified the country and launched a research program by John Darley and Bibb Latané: why would a crowd fail to help?</p>' +
+                  '<p class="x-lens__p">Later historians and psychologists (Manning, Levine &amp; Collins 2007) showed the story was wrong. Few people saw the attack, at least one person called the police, and a neighbour, Sophia Farrar, ran out and held Kitty as she died.</p>' +
+                  '<p class="x-lens__p x-mem__fb"><b>The lesson before the science:</b> even a famous “fact” can be a myth. Check the source — including this one.</p>' +
+                  (!S.cd ? '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="cd" style="min-height:52px;flex:1">Next: Predict ↓</button></div>' : ""), 1);
+                h += msect("Predict: one witness, or many?", !S.cd ? "Read the history card first." : "A person collapses on a busy street. Is that person more likely to get help with one witness, or with many?",
+                  S.cd ? '<div class="x-lens__row x-mem__opts" role="group" aria-label="Your prediction">' + PO.map(function (k, d) {
+                    var i = optPick(PO, d), p = PR[i], sel = S.pk === i;
+                    return '<button type="button" class="x-lens__b press" data-act="pk" data-v="' + d + '" aria-pressed="' + sel + '"' + (S.pk != null ? " disabled" : "") + ' style="flex:1 1 12rem;min-height:48px;text-align:left">' + esc(p[0]) + "</button>";
+                  }).join("") + "</div>" +
+                    (S.pk != null ? '<div class="x-lens__p x-mem__fb"><p class="x-lens__p" style="margin:0"><b>It depends — and both halves are true.</b> In the lab, each individual witness is less likely to act as the crowd grows: that is the bystander effect.</p>' +
+                      '<p class="x-lens__p" style="margin:6px 0 0">Yet when researchers watched real street conflicts on CCTV in three cities, somebody intervened in about nine in ten of them — and the more bystanders were present, the better the chance that at least one of them stepped in (Philpot et al. 2020).</p></div>' +
+                      '<p class="x-lens__take">Your odds as the person on the ground can rise while every single onlooker’s urge to act falls.</p>' + (n === 1 ? next(3) : "") : "") : "", 2);
+                if (S.pk != null) {
+                  var u = urge(S.w), c = chance(S.w);
+                  h += msect("The street: add witnesses", "Add people one at a time, then switch the mechanisms on and off.",
+                    '<div data-k="st">' + stSVG() + "</div>" +
+                    '<div class="x-lens__row">' + (S.w < 8 ? '<button type="button" class="start press x-lens__go" data-act="add" style="min-height:52px">Add witness</button>' : '<p class="fineprint" style="margin:0">The street is full.</p>') +
+                    (S.w > 1 ? '<button type="button" class="x-lens__b press" data-act="rem" style="min-height:44px">Remove one</button>' : "") + "</div>" +
+                    '<p class="x-lens__p" style="margin:6px 0 0">Each person’s urge to act: <b>' + URG[u] + "</b>. Chance that someone acts: <b>" + CHW[c] + "</b>.</p>" +
+                    '<p class="x-lens__p"><b>Mechanisms</b></p><div class="x-lens__row" role="group" aria-label="Mechanisms">' + M.map(function (m) {
+                      var o = on(m.id);
+                      return '<button type="button" class="x-lens__b press" data-act="m" data-v="' + m.id + '" aria-pressed="' + o + '" style="flex:1 1 13rem;min-height:44px;text-align:left' + (o ? ";border-color:#7fe9ff" : "") + '">' + esc(m.t) + (o ? " · on" : "") + "</button>";
+                    }).join("") + "</div>" +
+                    '<div class="x-lens__p x-mem__fb" aria-live="polite">' + M.filter(function (m) { return on(m.id); }).map(function (m) { return '<p class="x-lens__p" style="margin:0 0 4px"><b>' + esc(m.t) + ".</b> " + esc(m.d) + "</p>"; }).join("") +
+                    (Object.keys(S.m).filter(function (k) { return S.m[k]; }).length ? "" : '<p class="x-lens__p" style="margin:0">Nothing switched on yet: a plain street, with each person free to act.</p>') + "</div>" +
+                    '<p class="x-lens__p"><b>Latané and Darley’s five steps — a helper has to pass all of them</b></p><ol class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' + blocked() + "</ol>" +
+                    (S.added && n === 2 ? next(4) : !S.added ? '<p class="fineprint" style="margin:6px 0 0">Add at least one witness to unlock the challenge.</p>' : ""), 3);
+                }
+                if (S.added) {
+                  var ci = S.ch, C = CH[ci], ab = S.ab[ci];
+                  h += msect("Challenge: intervene", "Three situations. Pick the action most likely to get help moving.",
+                    '<p class="x-lens__p" style="font-size:15px"><b>Situation ' + WORD[ci] + " of three:</b> " + esc(C.s) + "</p>" +
+                    '<div class="x-lens__row x-mem__opts" role="group" aria-label="Best action">' + BO[ci].map(function (k, d) {
+                      var i = optPick(BO[ci], d), b = C.br[i], sel = ab === i;
+                      return '<button type="button" class="x-lens__b press" data-act="br" data-v="' + d + '" aria-pressed="' + sel + '"' + (ab != null ? " disabled" : "") + ' style="flex:1 1 14rem;min-height:48px;text-align:left">' + esc(b[0]) + (ab != null && b[1] ? " · best" : "") + "</button>" +
+                        (sel ? '<p class="x-lens__p x-mem__fb"><b>' + (b[1] ? "Right." : "Not quite.") + "</b> " + C.bw + "</p>" : "");
+                    }).join("") + "</div>" +
+                    (ab != null ? '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="nx" style="min-height:52px">' + (Object.keys(S.done).length === CH.length ? "See another situation" : "Next situation") + "</button></div>" : "") +
+                    (Object.keys(S.done).length === CH.length ? '<p class="x-lens__take">Every best answer did the same two things: it named the emergency out loud, and it gave one named person one task.</p>' + (n >= 3 ? next(5) : "") : ""), 4);
+                }
+                h += det("reveal", "Reveal", "The studies, and what survived · readable any time",
+                  '<p class="x-lens__p"><b>The seizure study.</b> Darley and Latané (1968) had students talk over an intercom while one of them appeared to have a seizure. Those who believed they were the only listener nearly all went for help, and fast; those who believed several others were listening were slower and often did not go at all.</p>' +
+                  '<p class="x-lens__p"><b>The five steps.</b> Latané and Darley (1970) set out the model you just used: notice, interpret as an emergency, take responsibility, know how to help, act. A crowd can block any of the middle three.</p>' +
+                  '<p class="x-lens__p"><b>The myth.</b> Manning, Levine and Collins (2007) went back to the court records and press archive: the thirty-eight witnesses never existed as described.</p>' +
+                  '<p class="x-lens__p"><b>Danger shrinks it.</b> Fischer and colleagues (2011) pooled decades of studies: the effect is real in ambiguous, low-risk situations, and much smaller — sometimes reversed — when the danger is clear and physical.</p>' +
+                  '<p class="x-lens__p"><b>Real streets.</b> Philpot and colleagues (2020) coded CCTV of public conflicts in Lancaster, Amsterdam and Cape Town. Someone intervened in about nine in ten, and bigger crowds meant a better chance of intervention.</p>' +
+                  '<p class="x-mr__status">Diffusion of responsibility in ambiguous, low-danger lab settings ' + tag("", "Robust") + " · “Crowds make people callous — nobody helps” " + tag(" x-ev--d", "Debunked or revised") + " · The Genovese “thirty-eight witnesses” " + tag(" x-ev--d", "Debunked") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Darley &amp; Latané", 1968, "laboratory experiment", "Seizure over an intercom: help fell as the believed number of other listeners rose.", tag("", "Robust")) +
+                  ref("Latané &amp; Darley", 1970, "theory", "The Unresponsive Bystander: the five-step model of intervening.", tag("", "Robust")) +
+                  ref("Manning, Levine &amp; Collins", 2007, "archival review", "The Genovese story as told in the press was wrong in its central claim.", tag(" x-ev--d", "Debunked")) +
+                  ref("Fischer et al.", 2011, "meta-analysis", "The bystander effect shrinks, and can reverse, when danger is clear.", tag("", "Robust")) +
+                  ref("Philpot et al.", 2020, "CCTV observation", "In real street conflicts, someone intervened in about nine in ten cases.", tag("", "Robust")) +
+                  "</ol></section>", false, 5);
+                h += det("therapy", "Where this becomes a problem in therapy", "Group rooms, staff teams and overdose response · readable any time",
+                  '<p class="x-lens__p"><b>Silence after a disclosure of risk.</b> In group therapy, a member hints at suicide and the room goes quiet — each person assuming the counsellor heard it and has it handled. Say it out loud, in the room.</p>' +
+                  '<p class="x-lens__p"><b>Diffusion inside institutions.</b> Staff teams assume someone else filed the report, made the call, did the safety check. Mandated reporting and suicide risk belong to <b>you</b>, by name, until you have confirmed otherwise.</p>' +
+                  '<p class="x-lens__p"><b>“No snitching” as pluralistic ignorance.</b> On a unit or a street, the shared silence looks like shared agreement. Many people privately want someone to help; each reads the others’ stillness as the rule.</p>' +
+                  '<p class="x-lens__p"><b>Overdose response.</b> Teach Good Samaritan protections, naloxone training, and the habit of naming one person: “You, in the grey jacket, call emergency services.”</p>' +
+                  '<p class="x-lens__p"><b>Shame for not having helped.</b> Clients carry guilt for standing still while someone was hurt. Explain the situational forces without erasing the grief — the explanation is not an excuse, and it is not an argument against their sorrow.</p>' +
+                  '<p class="x-lens__p"><b>Teach the five steps as a skill.</b> Notice, call it an emergency, take it as yours, know one concrete move, do it. Rehearse the words in session.</p>', true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">In a crowd, responsibility evaporates — name the emergency, name the person, and assume no one else has done it.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m9.3", "The bystander effect") +
+                  '<button type="button" class="x-lens__b press" data-act="fx">Effects library: Bystander effect</button></div></section>';
+                main.innerHTML = h;
+                if (A) kick();
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v, c = S.ch;
+                if (a === "cd") { S.cd = true; paint(); goStep(2); live.textContent = "Predict: one witness, or many?"; return; }
+                else if (a === "pk") { if (S.pk != null) return; S.pk = optPick(PO, v); paint(); goStep(3); live.textContent = "It depends. Each individual is less likely to act as the crowd grows, yet on real streets someone intervened in about nine in ten conflicts."; return; }
+                else if (a === "add") { if (S.w >= 8) return; S.w++; S.added = true; paint(); play(); live.textContent = up(ON[S.w]) + " witnesses. Each person’s urge to act: " + URG[urge(S.w)] + ". Chance someone acts: " + CHW[chance(S.w)] + "."; return; }
+                else if (a === "rem") { if (S.w <= 1) return; S.w--; paint(); live.textContent = up(ON[S.w]) + (S.w === 1 ? " witness." : " witnesses."); return; }
+                else if (a === "m") { S.m[v] = !S.m[v]; paint(); var mm = M.filter(function (x) { return x.id === v; })[0]; live.textContent = mm.t + (S.m[v] ? " on. " + mm.d : " off."); return; }
+                else if (a === "br") { if (S.ab[c] != null) return; S.ab[c] = optPick(BO[c], v); S.done[c] = true; live.textContent = (CH[c].br[S.ab[c]][1] ? "Right. " : "Not quite. ") + CH[c].bw.replace(/<[^>]+>/g, ""); }
+                else if (a === "nx") { S.ch = (c + 1) % CH.length; delete S.ab[S.ch]; BO[S.ch] = optOrder(CH[S.ch].br.length); paint(); live.textContent = "Situation " + WORD[S.ch] + ": " + CH[S.ch].s; goStep(4); return; }
+                else if (a === "fx") { if (typeof openEffect === "function") openEffect("fx-bystander"); return; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && b.tagName === "BUTTON") { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]"); if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { halt(); A = null; S = fresh(); S.an = 1; paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
