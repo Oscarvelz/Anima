@@ -15445,6 +15445,202 @@
             ]
           },
           /* ============ phase 3m-1: M3 · THE CHOMSKY BLOCK, lessons 7–8 (built lessons inside a still-locked module; open as Preview) ============ */
+          "m3.1": {
+            home: "A man in recovery drives past an old corner and his heart races before he has thought a thing. How does a street corner learn to do that?",
+            keys: [["What is classical conditioning?", "Learning that a neutral cue predicts something that already sets off a response, so the cue alone comes to set off a response, as when Pavlov’s dogs salivated to a metronome.", "A dog in a tuxedo drools at a ticking metronome conducting the orchestra, while a bell sits unused in the corner, because Pavlov’s lab used metronomes and buzzers far more than bells."],
+              ["Name the four terms of classical conditioning.", "The unconditioned stimulus (food, a drug) sets off the unconditioned response unlearned; a neutral cue paired with it becomes the conditioned stimulus, which sets off the conditioned response.", "The corner streetlight bows like a waiter and whispers “The usual?”, and Daniel’s mouth waters and his heart drums though nothing is on offer: the cue alone now sets off the response."],
+              ["Is pairing enough for conditioning?", "No. The cue must predict the outcome: Rescorla (1968) found that a tone paired with shock taught rats nothing when shocks came just as often without the tone.", "A weather forecaster who shouts “Rain!” every morning, rain or shine, is ignored by everyone; the one who shouts it only before real rain gets an umbrella parade."],
+              ["What did Garcia and Koelling (1966) show about taste aversion?", "Rats linked illness with a taste, not with lights and sounds, and one pairing could be enough: some links are learned far more readily than others (biological preparedness).", "A rat sips sweet water under flashing disco lights, gets seasick once on a toy boat, and swears off sweet water forever, yet keeps dancing under the disco lights."],
+              ["Why can a usual dose be riskier in a new place?", "Familiar drug cues set off the body’s learned bracing against the drug (conditioned tolerance); in a new place that bracing is missing (Siegel 1982, robust in animals, supported by human case reports).", "Daniel’s body has a doorman who braces for the party only at the familiar front door; come in through a strange back door and the doorman is caught in his slippers."]],
+            steps: [
+              { kind: "hook", title: "Daniel at the corner", body: who("<b>Daniel</b>, eight months into recovery, driving home from work.") +
+                "<p>He turns onto the street where he used to buy. Before he has thought about anything, his heart is racing and his mouth is watering.</p>" +
+                "<p>“I wasn’t even thinking about using,” he tells his counsellor. “The corner did it.”</p>" },
+              { kind: "predict", id: "m3.1:predict", title: "Your call first",
+                case: ["Daniel’s craving fires at the corner where he used to buy.",
+                  { t: "He drives a blue car.", irrelevant: true },
+                  "Across town is a corner he has never bought at.",
+                  "It has the same kind of shop, streetlight and bus shelter.",
+                  { t: "The radio is playing the news.", irrelevant: true }],
+                q: "Will Daniel’s craving fire at the corner he never used at?",
+                options: ["No: nothing ever happened to him at that corner", "Likely yes, though probably weaker", "Only if he chooses to think about using"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: likely yes, though probably weaker. A response learned to one cue spreads to cues that look like it. This is generalisation, and the more alike the corners, the stronger the pull.",
+                hints: ["Ask what the new corner shares with the old one.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: list what looks the same at both corners."] },
+              { kind: "idea", lvl: "f", title: "Pavlov, who was studying digestion", body: "<p>In the 1890s Ivan Pavlov measured how dogs’ stomachs and salivary glands respond to food. That work won him the 1904 Nobel Prize, for digestion, not for learning.</p>" +
+                "<p>His dogs began to salivate before the food arrived: at the sight of the assistant, at the sound of footsteps. Pavlov turned this nuisance into a method: sound a cue, then give food, and soon the cue alone brings saliva " + ev("r") + ".</p>" +
+                "<p>The famous bell is mostly a retelling. His lab used metronomes, buzzers, lights and touches on the skin far more often.</p>" +
+                "<p><b>So:</b> classical conditioning was found by accident, by a physiologist who would rather have had clean saliva samples.</p>" },
+              { kind: "idea", lvl: "f", title: "Four terms, one switch", body: "<p>The <b>unconditioned stimulus</b> sets off a response without any learning: food in the mouth. That response, saliva, is the <b>unconditioned response</b>.</p>" +
+                "<p>A <b>neutral stimulus</b>, such as a metronome, sets off nothing at first. Paired again and again with the food, it becomes a <b>conditioned stimulus</b>, and the saliva it now sets off on its own is the <b>conditioned response</b>.</p>" +
+                "<p>For Daniel: the drug is the unconditioned stimulus, its effects the unconditioned response; the corner is the conditioned stimulus, and the racing heart and watering mouth the conditioned response.</p>" +
+                "<p><b>So:</b> conditioning moves a response from the thing itself to the cue that came before it.</p>" },
+              { kind: "idea", lvl: "p", title: "Acquisition: the cue must predict", body: "<p>The response grows over pairings. This phase is <b>acquisition</b>. It works best when the cue comes just before the outcome; a cue that comes after it teaches little.</p>" +
+                "<p>Rescorla (1968) " + ev("r") + " showed that pairing is not enough. Rats heard a tone that was paired with shock. When shocks also came just as often without the tone, the rats learned no fear of the tone, despite the same number of pairings.</p>" +
+                "<p>What matters is <b>contingency</b>: whether the cue tells you the outcome is more likely.</p>" +
+                "<p><b>So:</b> the brain learns what predicts what, not just what happens to come together.</p>" },
+              { kind: "contrast", id: "m3.1:contrast", title: "Two corners, one difference",
+                q: "In which account will the corner come to set off craving?",
+                cases: [
+                  { label: "Account A", s: ["Daniel passes a corner most days.", { t: "It has a bakery on it.", irrelevant: true }, "He used just as often on days he did not pass it.", { t: "Passing the corner told him nothing about whether he would use.", diff: true }] },
+                  { label: "Account B", s: ["Daniel passes a corner most days.", { t: "It has a bakery on it.", irrelevant: true }, "He used just as often on days he did not pass it.", { t: "But every time he used, he had passed the corner just before.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["What shop is on the corner", "Whether the corner reliably came before the drug", "How often he passed it", "How often he used"],
+                feature: 1,
+                why: "Same corner, same drives, same use. Only in Account B did the corner reliably come before the drug, so only there did it predict the drug and become a conditioned stimulus.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether the corner told Daniel the drug was coming."] },
+              { kind: "idea", lvl: "p", title: "Generalisation and discrimination", body: "<p><b>Stimulus generalisation:</b> a response learned to one cue spreads to similar cues, more strongly the more alike they are. That is why a corner Daniel never bought at can still pull at him.</p>" +
+                "<p><b>Stimulus discrimination:</b> with experience, the response narrows to the cue that really predicts the outcome. Dogs rewarded after one tone but not another soon salivate to only the first.</p>" +
+                "<p><b>So:</b> conditioning spreads first and sharpens later; recovery work can use both.</p>" },
+              { kind: "idea", lvl: "p", title: "Second-order conditioning", body: "<p>A conditioned stimulus can teach a new cue, with no drug or food involved. Pair a light with a metronome that already brings saliva, and the light comes to bring some saliva too. This is <b>second-order conditioning</b> " + ev("r") + ", usually weaker than the first.</p>" +
+                "<p>For Daniel, the street sign before the turn was never paired with the drug, only with the corner. It can still start the craving.</p>" +
+                "<p><b>So:</b> cues can chain, which is why triggers often reach further than the place a habit began.</p>" },
+              { kind: "idea", lvl: "p", title: "Taste aversion: one trial, and not just any cue", body: "<p>Garcia and Koelling (1966) " + ev("r") + " gave rats water that came with a taste, a flash of light and a click. Rats made sick afterwards avoided the taste but not the light and click. Rats given a shock instead avoided the light and click but not the taste.</p>" +
+                "<p>Garcia’s work also showed that a taste followed by illness once, even hours later, could be enough: <b>conditioned taste aversion</b>. Most people know it from one bad night after a particular food.</p>" +
+                "<p>Seligman (1970) called this <b>biological preparedness</b>: animals learn some links far more readily than others, links that would have mattered for survival.</p>" +
+                "<p><b>So:</b> not every cue is equal. Organisms come ready to learn some things fast.</p>" },
+              { kind: "idea", lvl: "p", title: "Little Albert, told straight", body: "<p>Watson and Rayner (1920) " + ev("c") + " tested one infant, “Albert”, about eleven months old. Each time he reached for a white rat, they made a loud noise behind him by striking a steel bar. He came to cry at the rat, and was reported to react to a rabbit, a dog and a fur coat.</p>" +
+                "<p>The study had one child, loose methods and no attempt to undo the fear before he left. It would not be allowed today. Retellings have long exaggerated it, adding objects and an undoing that never happened, and the boy’s identity is still disputed.</p>" +
+                "<p><b>So:</b> it is a famous demonstration, not strong evidence, and a lesson in research ethics as much as in fear.</p>" },
+              { kind: "idea", lvl: "m", title: "Cues and cravings", body: "<p>People in recovery shown cues linked to their drug, such as pictures, paraphernalia or places, report strong craving and show smaller changes in heart rate and sweating. This is <b>cue reactivity</b> " + ev("r") + " (Carter and Tiffany 1999).</p>" +
+                "<p>The craving is a conditioned response. It does not mean Daniel wants to relapse or is failing; it means he learned well.</p>" +
+                "<p><b>So:</b> name it to clients as learning, not as weakness, and plan around the cues.</p>" },
+              { kind: "idea", lvl: "m", title: "Conditioned tolerance and overdose in a new place", body: "<p>Familiar drug cues come to set off the body’s bracing against the drug before it arrives, a learned part of tolerance: <b>conditioned tolerance</b>.</p>" +
+                "<p>Siegel and colleagues (1982) " + ev("r") + " gave rats heroin in one setting, then a large dose. Far more died when that dose came in a new setting than in the usual one. In people the evidence is case reports from overdose survivors, many of whom had used somewhere unusual " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a usual dose in an unusual place can be more dangerous; this belongs in harm-reduction talk, especially after a period of not using.</p>" },
+              { kind: "idea", lvl: "m", title: "Extinction and exposure", body: "<p>Present the cue again and again without the outcome, and the response fades. This is <b>extinction</b>; it is new learning, not erasing, so the old response can come back after time away or in a new place. See <b>Extinction learning</b>, earlier in M2.</p>" +
+                "<p><b>Exposure therapy</b> uses this: facing a feared cue, safely and step by step, until it loses its pull. For phobias and anxiety it is well supported " + ev("r") + ". For addiction, cue exposure on its own has shown weak results (Conklin and Tiffany 2002) " + ev("c") + ", partly because what is learned in the clinic may not carry to the street.</p>" +
+                "<p><b>So:</b> what is learned can be outweighed by new learning, best done in the places where the cues live.</p>" },
+              { kind: "example", lvl: "p", title: "Daniel’s corner, read as conditioning", body: who("<b>Daniel</b>, mapping his triggers with his counsellor.") +
+                '<dl class="x-dossier"><div><dt>Unconditioned</dt><dd>The drug and its effects.</dd></div>' +
+                "<div><dt>Conditioned stimulus</dt><dd>The corner where he bought, reliably just before using.</dd></div>" +
+                "<div><dt>Conditioned response</dt><dd>Racing heart, watering mouth, craving.</dd></div>" +
+                "<div><dt>Generalisation</dt><dd>Corners with the same shop and streetlight.</dd></div>" +
+                "<div><dt>Second-order</dt><dd>The street sign before the turn.</dd></div>" +
+                "<div><dt>Plan</dt><dd>A different route for now; craving named as learning; safety talk about tolerance in new places.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where simple pairing falls short", body: '<p class="x-crit"><b>Strongest critique</b>The textbook picture, a blank organism that links whatever comes together, is wrong. Rescorla showed that cues must predict, not merely co-occur. Garcia showed that some links are learned in one trial and others hardly at all. Organisms come prepared, and conditioning is closer to forecasting than to stamping in.</p>' +
+                "<p><b>The counter.</b> Conditioning theory absorbed these findings. Later models treat learning as driven by prediction error, the gap between what was expected and what happened, and these models still guide work on addiction and fear.</p>" +
+                "<p><b>Person-first.</b> Say “a person in recovery” or “a person who uses drugs”, never “an addict”.</p>" +
+                "<p>Background: M1 · Behaviorism.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Pavlov’s cue.</b> A dog in a tuxedo drools at a ticking metronome conducting the orchestra, while a bell sits unused in the corner.</p>" +
+                "<p><b>The four terms.</b> The corner streetlight bows like a waiter and whispers “The usual?”, and Daniel’s mouth waters with nothing on offer.</p>" +
+                "<p><b>Contingency.</b> A forecaster who shouts “Rain!” every morning, rain or shine, is ignored; the one who shouts it only before real rain gets an umbrella parade.</p>" +
+                "<p><b>Taste aversion.</b> A rat sips sweet water under disco lights, gets seasick once on a toy boat, and swears off sweet water forever, but keeps dancing under the lights.</p>" +
+                "<p><b>Conditioned tolerance.</b> Daniel’s body has a doorman who braces only at the familiar front door; come in the back door and he’s caught in his slippers.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.1:teachback", title: "Teach it back", prompt: "Explain to Daniel why the corner sets off his craving: Pavlov, the digestion researcher, and why the bell is mostly a retelling; the unconditioned and conditioned stimulus and response; acquisition, timing and Rescorla’s contingency finding; generalisation to corners he never used at, and discrimination; second-order conditioning; Garcia and Koelling’s one-trial taste aversion and biological preparedness; Little Albert, with its ethics and its exaggerated retellings; cue reactivity and craving as learning; conditioned tolerance and the risk of a usual dose in a new place; and extinction and exposure, including where cue exposure falls short." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Conditioning to cues " + ev("r") + ". Contingency over mere pairing " + ev("r") + ". One-trial taste aversion and preparedness " + ev("r") + ". Little Albert as evidence " + ev("c") + ". Conditioned tolerance in animals " + ev("r") + "; in people, from case reports " + ev("c") + ". Exposure for anxiety " + ev("r") + "; cue exposure alone for addiction " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a cue that predicted a drug can set off craving on its own; that is learning, and new learning can outweigh it.</p>" },
+              Q("A woman who was sick once after eating oysters now feels queasy at the smell of them. What does this show?",
+                ["One-trial taste aversion, a link learned readily", "Operant conditioning, since she chose to avoid them", "Generalisation from a bell to food", "Second-order conditioning to the restaurant"], 0,
+                "A single pairing of a taste or smell with illness can set up a lasting aversion, as Garcia’s work showed."),
+              Q("A tone is paired with shock 20 times, but shocks come just as often when no tone sounds. What will rats learn about the tone?",
+                ["Strong fear, from 20 pairings", "Little or nothing, since the tone predicts nothing", "Fear of every sound they hear", "Fear only after a second-order cue"], 1,
+                "Rescorla (1968): what matters is whether the cue makes the outcome more likely, not how often the two come together."),
+              Q("A man uses his usual dose for the first time in a friend’s flat he has never visited. Why is this a concern?",
+                ["New places make drugs chemically stronger", "His body’s learned bracing, set off by familiar cues, may be missing", "Friends’ flats raise heart rate by themselves", "It is only a concern for people who have never used"], 1,
+                "Familiar cues set off conditioned tolerance. Without them, the same dose can hit harder (Siegel 1982, robust in animals, supported by human case reports).")
+            ]
+          },
+          "m3.2": {
+            home: "A client skips group whenever she feels anxious, and the relief is instant. Why does that make the next skip more likely?",
+            keys: [["What is the law of effect?", "Thorndike’s rule (1898, stated in 1911): actions followed by satisfying results become more likely, and actions followed by discomfort less likely; his puzzle-box cats escaped faster over trials.", "A cat in a puzzle box, wearing a stopwatch, pulls the string marked “EXIT” a little faster every time, because each escape was followed by a fish."],
+              ["What do positive and negative mean in operant conditioning?", "Positive means something is added after the behaviour; negative means something is removed. Reinforcement makes the behaviour more likely; punishment makes it less likely.", "A plus sign hands someone a gift and a minus sign lifts a heavy backpack off their shoulders, and both shout “Do that again!”: adding and removing can each reinforce."],
+              ["Is negative reinforcement a kind of punishment?", "No. Negative reinforcement removes something unpleasant, which makes the behaviour more likely, as in escape and avoidance; punishment makes behaviour less likely.", "A rain cloud of anxiety vanishes the instant Keisha steps out of the group-room door, and a tiny trophy appears that says “Skip again!”"],
+              ["What is shaping?", "Teaching a new behaviour by reinforcing successive approximations: each step a little closer to the goal, rewarded right away.", "A pigeon chisels a statue of itself one chip at a time, and a sculptor hands it a seed after every chip that brings the statue closer to the final shape."],
+              ["What is an ABC analysis?", "A functional analysis that maps the antecedent (what comes before), the behaviour, and the consequence (what follows), to find what keeps a behaviour going.", "A three-carriage train: A is the engine that sets off, B is the passenger car, and C is the caboose who decides whether the train runs again tomorrow."]],
+            steps: [
+              { kind: "hook", title: "Keisha at the door", body: who("<b>Keisha</b>, a client in an outpatient programme, on Tuesday afternoon.") +
+                "<p>Group starts at two. At a quarter to, her chest tightens. She texts that she’s sick and goes home.</p>" +
+                "<p>The moment she turns away from the building, the tightness lifts. “It’s such a relief,” she says later. “But I keep doing it.”</p>" },
+              { kind: "predict", id: "m3.2:predict", title: "Your call first",
+                case: ["Keisha feels anxious before group.",
+                  { t: "Group meets in Room 4.", irrelevant: true },
+                  "She skips.",
+                  "Her anxiety drops at once.",
+                  { t: "She takes the bus home.", irrelevant: true }],
+                q: "Next week, will Keisha be more or less likely to skip?",
+                options: ["Less: skipping didn’t solve anything", "More: the skip was followed by relief", "No change: anxiety is not learned"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: more. Skipping removed the anxiety right away, and removing something unpleasant strengthens what came just before. This is negative reinforcement, and it is how avoidance keeps anxiety going.",
+                hints: ["Ask what happened right after she skipped.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether that result felt good or bad to her."] },
+              { kind: "idea", lvl: "f", title: "Thorndike’s cats and the law of effect", body: "<p>Edward Thorndike (1898) " + ev("r") + " put hungry cats in puzzle boxes, with food outside. Pulling a loop or pressing a lever opened the door. At first the cats escaped by accident; over trials, they escaped faster and faster.</p>" +
+                "<p>He stated the rule in 1911 as the <b>law of effect</b>: actions followed by satisfying results are “stamped in” and become more likely; actions followed by discomfort become less likely.</p>" +
+                "<p><b>So:</b> behaviour is shaped by what follows it, not only by what comes before it.</p>" },
+              { kind: "idea", lvl: "f", title: "Skinner’s box", body: "<p>From the 1930s B. F. Skinner built the <b>operant chamber</b>, the “Skinner box”: a rat presses a lever or a pigeon pecks a key, and food may follow. It let him count responses, minute by minute.</p>" +
+                "<p>He called behaviour that acts on the world an <b>operant</b>. Any consequence that makes it more likely is <b>reinforcement</b>; any that makes it less likely is <b>punishment</b>.</p>" +
+                "<p><b>So:</b> reinforcement and punishment are defined by their effect on behaviour, not by whether they seem nice or nasty.</p>" },
+              { kind: "idea", lvl: "f", title: "Add or remove, more or less", body: "<p><b>Positive</b> means something is added after the behaviour. <b>Negative</b> means something is removed. Neither means good or bad.</p>" +
+                '<dl class="x-dossier"><div><dt>Positive reinforcement</dt><dd>Add something, behaviour goes up: praise after sharing in group.</dd></div>' +
+                "<div><dt>Negative reinforcement</dt><dd>Remove something, behaviour goes up: anxiety lifts after skipping.</dd></div>" +
+                "<div><dt>Positive punishment</dt><dd>Add something, behaviour goes down: a reprimand after shouting.</dd></div>" +
+                "<div><dt>Negative punishment</dt><dd>Remove something, behaviour goes down: losing phone time after breaking a rule.</dd></div></dl>" +
+                "<p><b>So:</b> ask two questions: was something added or removed, and did the behaviour go up or down?</p>" },
+              { kind: "idea", lvl: "p", title: "Negative reinforcement is not punishment", body: "<p>The most common mix-up. Negative reinforcement makes behaviour <b>more</b> likely, by taking away something unpleasant.</p>" +
+                "<p>It drives <b>escape</b>, getting out of something unpleasant, and <b>avoidance</b>, staying away before it starts. Keisha’s skip is both: it ends the rising anxiety and keeps her from group.</p>" +
+                "<p><b>So:</b> when a behaviour persists even though it costs the person, look for something it takes away.</p>" },
+              { kind: "contrast", id: "m3.2:contrast", title: "Two skips, one difference",
+                q: "Which account shows negative reinforcement?",
+                cases: [
+                  { label: "Account A", s: ["Keisha skips group.", { t: "It is a rainy Tuesday.", irrelevant: true }, "Next week she skips again.", { t: "After the skip, a staff member calls and talks with her warmly for half an hour.", diff: true }] },
+                  { label: "Account B", s: ["Keisha skips group.", { t: "It is a rainy Tuesday.", irrelevant: true }, "Next week she skips again.", { t: "After the skip, the anxiety she felt before group drops away.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["What the weather is", "Whether something was added or removed after the skip", "Whether she skips again", "Which day group meets"],
+                feature: 1,
+                why: "Same skip, and both make the next skip more likely. In Account A something was added, staff attention: positive reinforcement. In Account B something was removed, her anxiety: negative reinforcement.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say whether something arrived or went away after the skip."] },
+              { kind: "idea", lvl: "p", title: "Shaping, and why timing matters", body: "<p>Some behaviours never happen on their own, so they can’t be reinforced. Skinner taught pigeons to turn in circles by rewarding a slight turn, then a bigger one, then a full circle. This is <b>shaping</b> by <b>successive approximations</b> " + ev("r") + ".</p>" +
+                "<p>Timing matters: a consequence that comes right away works far better than one that comes later, because it is tied to the right act. Skipping relieves Keisha in seconds; the cost, missing her recovery work, comes much later.</p>" +
+                "<p><b>So:</b> reward each step toward the goal, and reward it quickly.</p>" },
+              { kind: "idea", lvl: "p", title: "ABC: finding what a behaviour is for", body: "<p>An <b>ABC analysis</b> maps the <b>antecedent</b> (what comes before), the <b>behaviour</b>, and the <b>consequence</b> (what follows). It is a kind of functional analysis: it asks what the behaviour does for the person.</p>" +
+                "<p>For Keisha: A, chest tight at a quarter to two; B, texts she’s sick and leaves; C, anxiety drops at once.</p>" +
+                "<p><b>So:</b> two people can do the same thing for different reasons; the consequence tells you which.</p>" },
+              { kind: "idea", lvl: "p", title: "Punishment’s limits", body: "<p>Punishment can stop a behaviour for now, but it tends to suppress rather than remove it, often only while the punisher is present. It teaches what not to do, not what to do instead. It can bring fear, anger and avoidance of the person giving it.</p>" +
+                "<p>Spanking is the hot case. Gershoff and Grogan-Kaylor (2016) " + ev("c") + " pooled studies of over 160,000 children: spanking was linked with more aggression and other problems, and not with better behaviour. The link is robust; because most studies are observational, how much spanking causes is still argued.</p>" +
+                "<p><b>So:</b> when you want behaviour to change, build up what should replace it.</p>" },
+              { kind: "idea", lvl: "m", title: "Operant learning in the clinic", body: "<p><b>Avoidance keeps anxiety alive.</b> Each skip relieves Keisha and so is reinforced, and she never learns that group would have been bearable. Treatment builds graded approach instead of avoidance.</p>" +
+                "<p><b>Contingency management</b> gives vouchers or prizes for verified goals, such as negative drug tests. For cocaine and other stimulants it is among the best-supported treatments (De Crescenzo and colleagues 2018) " + ev("r") + ", where few medicines help.</p>" +
+                "<p><b>Praising approximations.</b> Arriving late, staying ten minutes, saying one sentence: each is a step toward full attendance, and each is worth noticing.</p>" +
+                "<p><b>So:</b> what we notice and reward in clients is part of the treatment.</p>" },
+              { kind: "example", lvl: "p", title: "Keisha’s skip, mapped", body: who("<b>Keisha</b>, mapping her pattern with her counsellor.") +
+                '<dl class="x-dossier"><div><dt>Antecedent</dt><dd>Chest tight at a quarter to two, before group.</dd></div>' +
+                "<div><dt>Behaviour</dt><dd>Texts she’s sick and goes home.</dd></div>" +
+                "<div><dt>Consequence</dt><dd>Anxiety drops at once: negative reinforcement.</dd></div>" +
+                "<div><dt>Plan</dt><dd>Arrive and stay ten minutes, then longer; counsellor greets each step; relief comes from staying, not leaving.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Operant accounts leave out what the behaviour means to the person: Keisha’s shame, her story about herself, what group stands for. And reinforcers are often named only after the fact: the skip went up, so the relief “must” be a reinforcer, and it went up because of the reinforcer. Critics call this circular. Chomsky (1959) pressed a similar charge when Skinner stretched these terms to language; see “Chomsky’s review: the debate with the behaviourist”, later in M3.</p>' +
+                "<p><b>The counter.</b> A reinforcer found in one setting can be tested in others; if it strengthens other behaviours too, the claim is not circular. And mapping consequences does not forbid asking about meaning; good formulations do both.</p>" +
+                "<p><b>Person-first.</b> Say “a client who avoids group when anxious”, not “a non-compliant client”.</p>" +
+                "<p>Background: M1 · Behaviorism.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Law of effect.</b> A cat in a puzzle box, wearing a stopwatch, pulls the string marked “EXIT” faster every time, because each escape was followed by a fish.</p>" +
+                "<p><b>Positive and negative.</b> A plus sign hands over a gift and a minus sign lifts off a heavy backpack, and both shout “Do that again!”</p>" +
+                "<p><b>Negative reinforcement.</b> A rain cloud of anxiety vanishes the instant Keisha steps out the door, and a tiny trophy appears: “Skip again!”</p>" +
+                "<p><b>Shaping.</b> A pigeon chisels a statue of itself one chip at a time, and gets a seed after every chip that brings it closer to the final shape.</p>" +
+                "<p><b>ABC.</b> A three-carriage train: A the engine, B the passengers, and C the caboose who decides whether the train runs again tomorrow.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.2:teachback", title: "Teach it back", prompt: "Explain to Keisha why skipping keeps getting easier: Thorndike’s puzzle-box cats and the law of effect; the Skinner box; reinforcement making behaviour more likely and punishment less; positive as adding and negative as removing, with all four kinds; why negative reinforcement is not punishment, and how escape and avoidance keep her skipping; shaping by successive approximations, and why immediate consequences win; an ABC analysis of her skip; punishment’s limits, with the spanking meta-analysis and its contested causal status; contingency management and praising small steps; and the critique that the account misses meaning and may be circular, which Chomsky pressed against Skinner." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>The law of effect and reinforcement " + ev("r") + ". Shaping by approximations " + ev("r") + ". Spanking linked with worse outcomes " + ev("r") + "; how much it causes " + ev("c") + ". Contingency management for stimulants " + ev("r") + ".</p>" +
+                "<p><b>So:</b> what follows a behaviour, added or removed, decides whether it comes back; avoidance wins on relief now, so recovery has to make staying pay off too.</p>" },
+              Q("A man takes a painkiller for a headache, the pain stops, and he takes one sooner next time. What is this?",
+                ["Positive punishment", "Negative reinforcement", "Negative punishment", "Classical conditioning"], 1,
+                "Something unpleasant, the pain, was removed, and the behaviour became more likely. That is negative reinforcement."),
+              Q("A teenager loses her phone for a weekend after missing curfew, and misses curfew less. What is this?",
+                ["Negative punishment", "Negative reinforcement", "Positive reinforcement", "Shaping"], 0,
+                "Something wanted was removed, and the behaviour became less likely. That is negative punishment."),
+              Q("A counsellor praises a client for coming ten minutes late, then for coming on time, then for speaking once. What is she using?",
+                ["Punishment of lateness", "Shaping by successive approximations", "Second-order conditioning", "Extinction"], 1,
+                "Each step closer to the goal is reinforced in turn. That is shaping.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -16872,6 +17068,27 @@
           G("m8c.7", "Expectancy violation", "Violación de expectativas", "The gap between what was feared and what happened.", "In inhibitory learning, the mismatch between an expected catastrophe and the actual outcome, thought to drive new learning during exposure (Craske et al. 2014); see Inhibitory learning."),
           G("m8c.7", "Mentalization", "Mentalización", "Holding one’s own and others’ minds in mind.", "The capacity to understand behaviour in terms of feelings, wishes and beliefs, one’s own and others’; the target of mentalization-based treatment for borderline personality disorder (Bateman & Fonagy 2009)."),
           G("m8c.7", "Countertransference", "Contratransferencia", "The therapist’s own reactions to a client.", "The therapist’s emotional reactions to a client; acting them out went with slightly worse outcomes, while noticing and managing them, and reading them as data, went with better ones (Hayes, Gelso & Hummel 2011); see Part H."),
+          /* M3 lessons 1–2 · conditioning */
+          G("m3.1", "Unconditioned stimulus", "Estímulo incondicionado", "Something that sets off a response with no learning.", "In classical conditioning, a stimulus such as food or a drug that triggers a response unlearned; paired with a neutral cue, it turns that cue into a conditioned stimulus; see Unconditioned response."),
+          G("m3.1", "Unconditioned response", "Respuesta incondicionada", "The unlearned reaction to an unconditioned stimulus.", "In classical conditioning, the automatic response, such as salivation to food, set off by the unconditioned stimulus; see Conditioned response."),
+          G("m3.1", "Conditioned stimulus", "Estímulo condicionado", "A once-neutral cue that now sets off a response.", "A stimulus that triggered nothing at first but, after reliably predicting an unconditioned stimulus, comes to trigger a response on its own, such as Pavlov’s metronome or a corner where drugs were bought."),
+          G("m3.1", "Conditioned response", "Respuesta condicionada", "The learned reaction to a conditioned stimulus.", "The response set off by a conditioned stimulus alone after conditioning, such as salivation to a metronome or craving at a drug cue; often similar to the unconditioned response, sometimes opposite to it, as in conditioned tolerance."),
+          G("m3.1", "Acquisition (conditioning)", "Adquisición (condicionamiento)", "The phase in which a learned response grows.", "The stage of conditioning in which repeated pairings strengthen the conditioned response; fastest when the cue comes shortly before the outcome and reliably predicts it; see Contingency (conditioning)."),
+          G("m3.1", "Contingency (conditioning)", "Contingencia (condicionamiento)", "Whether a cue makes an outcome more likely.", "The degree to which a cue predicts an outcome; Rescorla (1968) showed that a tone paired with shock produced no fear when shocks were just as likely without it, so prediction, not mere pairing, drives conditioning."),
+          G("m3.1", "Stimulus generalization", "Generalización del estímulo", "A learned response spreading to similar cues.", "The tendency for a conditioned response to be set off by stimuli resembling the conditioned stimulus, more strongly the more alike they are; see Stimulus discrimination."),
+          G("m3.1", "Stimulus discrimination", "Discriminación de estímulos", "Responding only to the cue that really predicts.", "Learning to respond to the conditioned stimulus but not to similar stimuli that are not followed by the outcome; see Stimulus generalization."),
+          G("m3.1", "Second-order conditioning", "Condicionamiento de segundo orden", "A cue learned from another cue, not the thing itself.", "Conditioning in which a new neutral stimulus is paired with an existing conditioned stimulus, never with the unconditioned stimulus, and comes to trigger a usually weaker response."),
+          G("m3.1", "Conditioned taste aversion", "Aversión condicionada al sabor", "Avoiding a taste after it was followed by illness.", "A learned aversion that can form in a single pairing of a taste with illness, even hours apart; Garcia and Koelling (1966) showed rats link illness with taste but not with lights and sounds; see Prepared learning."),
+          G("m3.1", "Conditioned tolerance", "Tolerancia condicionada", "Part of drug tolerance, set off by familiar cues.", "A learned compensatory response, triggered by cues that usually come before a drug, that braces the body against it; without those cues the same dose can hit harder (Siegel et al. 1982, robust in animals, supported by human case reports)."),
+          G("m3.1", "Exposure therapy", "Terapia de exposición", "Facing a feared cue safely until it loses its pull.", "Treatment that presents a feared or craving cue repeatedly without the outcome, step by step, building new extinction learning; well supported for phobias and anxiety; cue exposure alone has shown weak results for addiction."),
+          G("m3.1", "Little Albert study", "Estudio del pequeño Albert", "Watson and Rayner’s 1920 fear-conditioning of an infant.", "A single-infant demonstration in which a white rat was paired with a loud noise until the child cried at the rat; methodologically weak, unethical by today’s standards, often exaggerated in retellings, and the child’s identity is disputed."),
+          G("m3.2", "Law of effect", "Ley del efecto", "Actions with satisfying results get repeated.", "Thorndike’s principle (1898, stated 1911): responses followed by satisfying consequences become more likely, and those followed by discomfort less likely; based on cats escaping puzzle boxes faster over trials."),
+          G("m3.2", "Operant chamber", "Cámara operante", "The “Skinner box” for counting responses.", "An enclosure in which an animal presses a lever or pecks a key and consequences such as food follow, letting the rate of a response be recorded over time."),
+          G("m3.2", "Positive punishment", "Castigo positivo", "Adding something so a behaviour happens less.", "A consequence that adds a stimulus, such as a reprimand, after a behaviour and makes that behaviour less likely; see Negative punishment."),
+          G("m3.2", "Negative punishment", "Castigo negativo", "Removing something so a behaviour happens less.", "A consequence that takes away something wanted, such as privileges, after a behaviour and makes that behaviour less likely; not the same as negative reinforcement."),
+          G("m3.2", "Shaping", "Moldeamiento", "Rewarding each step closer to a goal.", "Teaching a new behaviour by reinforcing successive approximations to it, raising the bar as each step is reached; used by Skinner with pigeons and in therapy to reward small steps."),
+          G("m3.2", "Avoidance learning", "Aprendizaje de evitación", "Staying away because staying away brings relief.", "Learning in which escaping or preventing something unpleasant is negatively reinforced; it keeps anxiety going because the person never learns the feared situation is bearable; see Experiential avoidance."),
+          G("m3.2", "ABC analysis", "Análisis ABC", "Antecedent, behaviour, consequence.", "A simple functional analysis that maps what comes before a behaviour, the behaviour, and what follows it, to find what keeps the behaviour going; see Functional analysis."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -17354,6 +17571,19 @@
             R("Diekelmann & Born", 2010, "review", "Sleep after learning helps stabilize and strengthen new memories, with different sleep stages proposed to serve different kinds of memory.", st("contested", "That sleep helps memory is well supported; which stage does what, and how large the benefit is, are debated.")),
             R("Simons et al.", 2016, "review", "Brain-training games improve performance on the trained tasks and closely related ones, but there is little evidence of gains in everyday thinking.", st("robust", "A broad, critical review; later meta-analyses reach similar conclusions on far transfer.")),
             R("Nielsen et al.", 2013, "observational", "Brain scans from many people showed some functions lean to one side, but no evidence that people are overall left-brained or right-brained.", st("robust", "A large imaging sample, consistent with decades of work on how the hemispheres share functions."))];
+          /* M3 lessons 1–2 · conditioning */
+          REFS["m3.1"] = [
+            R("Rescorla", 1968, "experiment", "A tone paired with shock produced fear in rats only when shocks were more likely with the tone than without it; equal pairings with no contingency taught nothing.", st("robust", "Foundational and widely replicated; it led to prediction-error models of learning.")),
+            R("Garcia & Koelling", 1966, "experiment", "Rats made ill avoided a taste but not lights and sounds; rats shocked avoided lights and sounds but not the taste.", st("robust", "Taste aversion and selective associations are replicated across species, including humans.")),
+            R("Watson & Rayner", 1920, "case series", "One infant came to cry at a white rat after it was paired with a loud noise, with reported spread to other furry objects.", st("contested", "A single child, loose methods and no undoing of the fear; retellings exaggerate it, and his identity is disputed."), true),
+            R("Siegel et al.", 1982, "experiment", "Rats given a large heroin dose died far more often when it came in a new setting than in the setting linked with earlier doses.", st("robust", "Replicated in animals; in people, support comes from overdose survivors’ case reports.")),
+            R("Carter & Tiffany", 1999, "meta-analysis", "Across cue-reactivity studies, drug cues produced large increases in reported craving and smaller changes in heart rate and sweating.", st("robust", "Consistent across drugs; how well cue reactivity predicts relapse is less clear."))];
+          REFS["m3.2"] = [
+            R("Thorndike", 1898, "experiment", "Cats in puzzle boxes escaped faster over trials, leading to the law of effect: actions followed by satisfying results become more likely.", st("robust", "The core finding is foundational and has been reproduced countless times.")),
+            R("Skinner", 1938, "review", "The Behavior of Organisms: operant behaviour studied in a chamber, with response rates shaped by reinforcement.", st("robust", "Its basic operant effects replicate widely; its claims as a complete account of behaviour are contested.")),
+            R("Gershoff & Grogan-Kaylor", 2016, "meta-analysis", "Across studies of over 160,000 children, spanking was linked with more aggression and other poor outcomes, and not with better behaviour.", st("contested", "The associations are consistent; because most studies are observational, how much spanking causes them is argued.")),
+            R("Prendergast et al.", 2006, "meta-analysis", "Contingency management, rewarding verified drug abstinence, reduced use across many trials and drug types.", st("robust", "Effects are strongest during treatment and can fade after rewards stop.")),
+            R("De Crescenzo et al.", 2018, "meta-analysis", "Among psychosocial treatments for cocaine and amphetamine use, contingency management was the most effective, at the end of treatment and later.", st("robust", "A large network meta-analysis; few medicines help with stimulants, so this result shapes practice."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
