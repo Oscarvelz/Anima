@@ -4809,7 +4809,7 @@
                 gap: "Not here: during the rest gap nothing is seen. The test comes before this, at the burst peak.",
                 back: "A tempting choice: the comeback can feel like failure too. But it is small and expected. The riskiest moment is the burst peak, when the flare is at its worst."
               };
-              var fresh = function () { return { pred: null, give: null, run: null, ran: false, rAnim: false, tap: null }; };
+              var fresh = function () { return { pred: null, give: null, run: null, ran: false, rAnim: false, tap: null, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -4952,8 +4952,20 @@
                   '<p class="x-lens__p"><b>Cues and context:</b> a cue in an old setting, such as the shop where it used to pay, can bring the behaviour back too (renewal).</p>' +
                   '<p class="x-lens__p"><b>The relapse bridge:</b> extinction does not erase learning; it adds new learning on top of the old' + tag("", "Robust") + " The burst and spontaneous recovery are learning-science roots of lapse and relapse. A lapse is not a return to zero. This points forward to relapse prevention in Part F and to the models of addiction module.</p>" +
                   '<p class="x-mr__status">Extinction burst in animal and applied behaviour work' + tag("", "Robust") + "· Its size in people varies; as universal" + tag(" x-ev--c", "Contested") + "· Spontaneous recovery and renewal" + tag("", "Robust") + "</p>" +
-                  '<p class="x-lens__p">Pavlov 1927; Lerman &amp; Iwata 1995 found bursts in only a minority of extinction-only cases; Bouton 2004, Context and behavioral processes in extinction.</p></section>' +
-                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__p">Pavlov 1927; Lerman &amp; Iwata 1995 found bursts in only a minority of extinction-only cases; Bouton 2004, Context and behavioral processes in extinction.</p></section>';
+                (function () {
+                  function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
+                  h += '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: ride the burst<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                    '<p class="x-lens__p">Say it to a client like this: “When a habit stops paying off, the urge often gets louder before it gets quieter. That spike means it\'s working.”</p>' +
+                    bullets("Know it's coming", ["when a habit stops paying off — a craving, or a behaviour that used to bring attention or relief — urges usually get worse before they get better", "a spike means it's working, not failing"]) +
+                    bullets("Get through it — getting back in control", ["urge surfing: notice it, name it, rate it in words (mild, strong, huge), then breathe and watch it crest and fall like a wave (Marlatt)", "delay and distract for a short, set time", "change the setting", "call someone", "HALT check: am I hungry, angry, lonely or tired?"]) +
+                    bullets("Don't feed it by accident", ["giving in at the peak teaches the brain that bigger bursts work", "that turns it into an on-and-off payoff — the strongest kind to break", "the same goes for parents and staff: stay consistent"]) +
+                    bullets("Make the new path pay", ["replace, don't just remove", "reward the new behaviour quickly and often at first (differential reinforcement)", "plan rewards for clean days and small wins"]) +
+                    bullets("Expect comebacks", ["an old urge can return out of nowhere after weeks (spontaneous recovery)", "old places can trigger it again (renewal)", "it's normal, not a relapse — use the plan again"]) +
+                    bullets("For the counsellor", ["warn clients ahead of time", "frame a burst as a sign of progress"]) +
+                    '<p class="x-lens__take">Worse before better is the plan working: hold steady, ride the wave, and make the new path pay.</p></details>';
+                })();
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
                   '<p class="x-lens__take">When a client’s old behaviour flares right after its payoff is removed, that flare is the plan working, not failing — hold steady, plan for the comeback, and treat a lapse as information, not proof of failure.</p>' +
                   '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m3.5", "Extinction, cues and relapse") + lessonBtn("m3.3", "Schedules of reinforcement") + lessonBtn("m8a.3", "Why the bond holds") + "</div></section>";
                 main.innerHTML = h;
@@ -4990,6 +5002,7 @@
                 MOM.forEach(function (m) { if (Math.abs(m[1] - t) < Math.abs(best[1] - t)) best = m; });
                 act({ dataset: { act: "tap", v: best[0] } });
               });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
               flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
               paint();
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
@@ -5726,7 +5739,7 @@
                 unp: ["Ambivalent or resistant: clings and resists, hard to soothe", "keeps an unpredictable caregiver close by turning the alarm up", "May look “needy” or test limits. It’s a learned way to keep help close."],
                 dist: ["Avoidant: looks away and keeps playing, but the body is still stressed — heart rate up (Sroufe & Waters 1977)", "keeps a distant caregiver close by not asking too much", "May look “fine” or “resistant” and miss sessions. Calm on the surface isn’t the same as not caring."]
               };
-              var fresh = function () { return { pred: null, resp: null, phase: null, ranResp: null, ran: false, chal: null, t: 0, open: {} }; };
+              var fresh = function () { return { pred: null, resp: null, phase: null, ranResp: null, ran: false, chal: null, t: 0, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -5870,6 +5883,19 @@
                   ref("Levy et al.", 2018, "meta-analysis", "Client attachment anxiety relates modestly to poorer therapy outcomes; secure attachment to better ones.", tag(" x-ev--c", "Contested")) +
                   ref("Chaffin et al.", 2006, "task force report", "Coercive “attachment therapy” and holding therapy are unsupported, have caused deaths, and should not be used.", tag("", "Robust")) +
                   "</ol></section>", false, 4);
+                h += (function () {
+                  function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
+                  return det("toolkit", "Teach it: from old strategy to new choice", "A client toolkit, in plain words · readable any time",
+                    '<p class="x-lens__p">Say it to a client like this: “The way you reach for people, or pull back from them, once kept you safe. Now you can choose.”</p>' +
+                    bullets("Notice your pattern", ["when someone matters, do I chase and check (anxious), pull away and go numb (avoidant), or both?", "notice the body signs: a racing heart, a tight chest, going blank"]) +
+                    bullets("Name the need under it", ["closeness and safety are human needs, not weakness", "the strategy made sense back then"]) +
+                    bullets("Steady yourself — getting back in control", ["pause before texting, or before shutting down", "self-soothe: slow breath, grounding", "tell yourself: “this feeling is old and loud, not a fact about now”"]) +
+                    bullets("Build security", ["“earned security” is possible — through steady relationships, therapy, mentors and recovery groups", "practise asking for what you need, clearly", "practise staying a little longer when you'd usually leave", "choose people who are consistent"]) +
+                    bullets("Repair", ["after conflict, come back and say it: “I pulled away; I'm back.”", "small repairs build trust"]) +
+                    bullets("Parenting and reentry", ["be predictable, keep small promises, show up on time", "consistency rebuilds trust with children after separation or incarceration"]) +
+                    bullets("For the counsellor", ["be the predictable person", "explain the pattern without labels", "never force closeness"]) +
+                    '<p class="x-lens__take">An old strategy is not a life sentence: notice it, steady it, then choose the next small, secure step.</p>', true);
+                })();
                 h += det("therapy", "Where this becomes a problem in therapy", "Distance and clinging in the room · readable any time",
                   '<p class="x-lens__p"><b>The room can be a secure base.</b> The counselling relationship can work as a secure base (Bowlby 1988), and client attachment anxiety relates modestly to outcomes (Levy et al. 2018).</p>' +
                   '<p class="x-lens__p"><b>Avoidant strategies look “fine” or “resistant”.</b> Clients may play things down and miss sessions.</p>' +
