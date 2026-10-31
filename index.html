@@ -411,6 +411,17 @@
       .x-posl__h { margin-top: 10px; font-size: 14px; }
       .x-posl__h summary { min-height: var(--tap); display: flex; align-items: center; cursor: pointer; font-weight: 500; }
       .x-posl__h ol { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+      /* PHASE 3o-4: m8a.7 tap-to-compare (radio chips; the checked map shows its row) */
+      .x-cmp { position: relative; margin-top: 12px; }
+      .x-cmp > input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+      .x-cmp label.x-chip { display: inline-flex; align-items: center; cursor: pointer; }
+      .x-cmp__row { display: none; }
+      #x-cmp-rel:checked ~ .x-cmp__rows [data-m="rel"], #x-cmp-brain:checked ~ .x-cmp__rows [data-m="brain"], #x-cmp-choice:checked ~ .x-cmp__rows [data-m="choice"],
+      #x-cmp-learn:checked ~ .x-cmp__rows [data-m="learn"], #x-cmp-twelve:checked ~ .x-cmp__rows [data-m="twelve"], #x-cmp-public:checked ~ .x-cmp__rows [data-m="public"] { display: grid; }
+      #x-cmp-rel:checked ~ .x-chips [for="x-cmp-rel"], #x-cmp-brain:checked ~ .x-chips [for="x-cmp-brain"], #x-cmp-choice:checked ~ .x-chips [for="x-cmp-choice"],
+      #x-cmp-learn:checked ~ .x-chips [for="x-cmp-learn"], #x-cmp-twelve:checked ~ .x-chips [for="x-cmp-twelve"], #x-cmp-public:checked ~ .x-chips [for="x-cmp-public"] { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 14%, transparent); }
+      #x-cmp-rel:focus-visible ~ .x-chips [for="x-cmp-rel"], #x-cmp-brain:focus-visible ~ .x-chips [for="x-cmp-brain"], #x-cmp-choice:focus-visible ~ .x-chips [for="x-cmp-choice"],
+      #x-cmp-learn:focus-visible ~ .x-chips [for="x-cmp-learn"], #x-cmp-twelve:focus-visible ~ .x-chips [for="x-cmp-twelve"], #x-cmp-public:focus-visible ~ .x-chips [for="x-cmp-public"] { outline: 2px solid var(--primary); outline-offset: 2px; }
       .x-tbchk li p { margin-top: 4px; color: var(--dim); font-size: 13.5px; }
       .x-tbchk .danger { margin-top: 8px; }
       .x-gstat { flex: 1 1 100%; display: grid; gap: 6px; font-size: 13.5px; }
@@ -1900,6 +1911,10 @@
             lessons: ["What meaning is, and is not", "Frankl and the three paths", "The other voices of meaning", "Making meaning in practice", "How beliefs are made", "Core beliefs and schemas", "Working with a core belief without diminishing the person",
               /* phase 3n-1: addiction, environment and meaning (appended; lessons 1–7 unchanged) */
               "Vietnam and Rat Park: environment and addiction", "Connection, meaning and recovery in the room"] },
+          /* phase 3o-1: AD · models of addiction, six maps (shell; lessons 1–2 built) */
+          { id: "m8a", code: "AD", part: "B", t: "Models of addiction: six maps", s: "Addiction as a relationship, and the strongest versions of its rivals", after: "m8",
+            depth: ["Addiction as a relationship the person takes part in: how the bond starts and why it holds", "Read a client’s use as a web of bonds, and hear each rival map at its strongest", "Six maps side by side: what each explains, what each misses, and where the evidence runs out"],
+            lessons: ["Addiction as relationship: the organism participates", "How the bond starts", "Why the bond holds", "Attachment and nested worlds", "Steelmen I: brain disease and choice", "Steelmen II: learning, 12-step, public health and trauma", "Six maps side by side", "Recovery as re-entering relationships"] },
           /* phase 3j-1: SG · sex & gender differences (shell; lessons 1–2 built) */
           { id: "m8s", code: "SG", part: "B", t: "Sex & gender differences", s: "Overlap first: what differs, by how much, and why it never judges the person", after: "m8",
             depth: ["What the evidence says differs between the sexes, and by how much, in words", "Read a group finding in class, clinic or the news without judging the person in front of you", "Biology, culture and combined profiles: the explanations weighed, and where each runs out"],
@@ -4989,6 +5004,50 @@
             ev: ["tomasello", "2003", "saffran", "1996", "statistical learning", "verb island*", "evans", "levinson", "2009", "kuhl", "islas verbales", "aprendizaje estadistico"],
             charge: ["label", "names the ability", "not explained", "exceptions", "no universals", "extra", "unneeded", "etiqueta", "excepciones", "sin universales", "innecesari*"] }
         ];
+        /* PHASE 3o-4: rival chips and cue lists for q-addiction (m8a.7), pointing to m8a.1–m8a.6 */
+        var ADD_VIEWS = [
+          { v: "ad-relational", t: "Relational-organismic: a relationship the organism starts and keeps", at: [["m8a.1", 2], ["m8a.4", 7], ["m8a.1", 3]],
+            claim: ["relationship", "relational", "bond*", "participat*", "organism", "starts and keeps", "relacion*", "vinculo*", "particip*", "organismo"],
+            ev: ["schindler", "2019", "attachment", "insecure", "flores", "2004", "bandura", "1977", "burkett", "apego", "inseguro"],
+            charge: ["only molecules", "only the brain", "container", "specimen", "person off stage", "one level", "only level", "solo moleculas", "contenedor", "especimen", "un solo nivel"] },
+          { v: "ad-brain", t: "Brain disease: a chronic relapsing brain disorder", at: [["m8a.5", 3], ["m8a.5", 4], ["m8a.5", 4]],
+            claim: ["brain disease", "chronic", "relaps*", "circuit*", "hijack*", "disorder", "enfermedad cerebral", "cronic*", "recaida*", "circuito*", "secuestr*"],
+            ev: ["leshner", "1997", "volkow", "2016", "medication*", "cue*", "prefrontal", "wanting", "medicamento*", "senales", "prefrontal"],
+            charge: ["punish*", "jail", "prison", "moral failing", "blame", "willpower", "castigo*", "carcel", "prision", "culpa", "fuerza de voluntad"] },
+          { v: "ad-choice", t: "Choice and economics: voluntary but myopic behaviour", at: [["m8a.5", 6], ["m8a.5", 6], ["m8a.5", 6]],
+            claim: ["choice", "choos*", "voluntary", "myopic", "time horizon", "local", "global", "incentive*", "eleccion", "elig*", "voluntari*", "miope", "incentivo*"],
+            ev: ["heyman", "2009", "recover without treatment", "remission", "contingenc*", "most people recover", "remision", "contingencia*", "sin tratamiento"],
+            charge: ["fatali*", "chronic disease", "not a disease", "remits", "recovery rate*", "fataliz*", "no es una enfermedad"] },
+          { v: "ad-learning", t: "Learning and development: accelerated, narrowed goal-learning", at: [["m8a.6", 3], ["m8a.6", 3], ["m8a.6", 3]],
+            claim: ["learning", "learned", "learn*", "narrow*", "goal*", "habit*", "develop*", "aprendizaje", "aprend*", "estrech*", "meta*", "habito*", "desarroll*"],
+            ev: ["lewis", "2015", "2018", "biology of desire", "neuroplastic*", "brains change", "love", "biologia del deseo", "cerebros cambian"],
+            charge: ["change is not disease", "not a disease", "disease label", "chronic package", "el cambio no es enfermedad", "etiqueta de enfermedad"] },
+          { v: "ad-twelve", t: "12-step hybrid: vulnerability, obsession and spiritual collapse", at: [["m8a.6", 5], ["m8a.6", 5], ["m8a.6", 5]],
+            claim: ["twelve step", "12 step", "spiritual", "fellowship", "surrender", "powerless", "obsession", "doce pasos", "espiritual", "comunidad", "rendicion", "impotente", "obsesion"],
+            ev: ["kelly", "2020", "cochrane", "jellinek", "1960", "aa", "na", "twelve step facilitation", "facilitacion"],
+            charge: ["self will", "isolation", "insight alone", "willpower alone", "voluntad propia", "aislamiento", "solo con voluntad"] },
+          { v: "ad-public", t: "Public health and social: adaptation to cages and markets", at: [["m8a.6", 8], ["m8a.6", 8], ["m8a.6", 8]],
+            claim: ["public health", "social", "cage*", "market*", "environment*", "availability", "inequality", "population*", "salud publica", "jaula*", "mercado*", "entorno*", "disponibilidad", "desigualdad", "poblacion*"],
+            ev: ["alexander", "2008", "2012", "rat park", "harm reduction", "naloxone", "housing", "vietnam", "parque de ratas", "reduccion de danos", "naloxona", "vivienda"],
+            charge: ["individual*", "one person", "ignore* context", "supply", "poverty", "stigma", "individuo*", "una persona", "contexto", "oferta", "pobreza", "estigma"] }
+        ];
+        /* PHASE 3o-4: the deck's comparison table for m8a.7, as a tap-to-compare step (radio chips, no script) */
+        var ADD_LENSES = ["What it is", "Unit of analysis", "Why it starts", "Why it holds", "What recovery is", "Agency of the person", "Treatment emphasis", "Policy tilt", "Hard case", "What it risks ignoring"];
+        var ADD_ROWS = [
+          { k: "rel", t: "Relational-organismic", c: ["A relationship the organism starts and keeps", "Organism-in-relation", "Need, model, dislocation, first reliable relief", "Reinforcement, identity, reliable object, lock-in", "Re-enter different relationships", "Constrained but real participant", "New bonds; treat the need under use", "Connection, skills, less isolation", "Rapid physical dependence; some drugs hook without a “story”", "Can poeticize a process that is also cellular and lethal"] },
+          { k: "brain", t: "Brain disease", c: ["Chronic relapsing brain disorder", "Circuits (reward, stress, control)", "Exposure plus vulnerability hijack circuits", "Sensitized cues, allostasis, weak control", "Chronic care; medication plus behaviour; relapse expected", "Hijacked; limited but not zero", "Medications, contingency, chronic care", "Medicalize; fund treatment, not only jail", "High untreated remission; sensitivity to incentives and meaning", "Person as patient only; recovery as compliance"] },
+          { k: "choice", t: "Choice / economics", c: ["Voluntary but myopic operant behaviour", "Choice under local vs global reward", "Local reward outbids the long basket", "Same myopia, plus shrinking alternatives", "Global frame returns: roles, costs, values", "Choosing, with a bad time-horizon", "Incentives, costs, alternative rewards", "Change contingencies; do not fatalize", "Late-stage compulsion, withdrawal, overdose despite knowing better", "Shame returning through the back door"] },
+          { k: "learn", t: "Learning / development", c: ["Accelerated, narrowed goal-learning", "Experience ↔ brain change loop", "Intense repeated goal pursuit", "Deep habit; other goals fade", "New learning; identity and cortex reconfigure", "Learner whose brain is doing its job", "New goals, identity, practice", "Developmental supports, not only prescriptions", "Why this learning destroys lives when other deep habits do not", "May underplay toxicity and medical risk"] },
+          { k: "twelve", t: "12-step hybrid", c: ["Bodily vulnerability, obsession and spiritual collapse", "Person-in-fellowship", "Constitution, first drinks, spiritual void", "Obsession, isolation, self-will", "Surrender, inventory, fellowship, service", "Powerless over the object; powerful in surrender", "Fellowship, inventory, Higher Power", "Mutual aid as public infrastructure", "People who recover without AA; non-theists; behavioural addictions", "One narrative as the only honest path"] },
+          { k: "public", t: "Public health / social", c: ["Population adaptation to cages and markets", "Environment, availability, inequality", "Broken belonging plus cheap supply", "The cage remains; the market remains", "Change cages, housing, policy, connection", "Person inside a designed cage", "Harm reduction, housing, belonging", "Supply, poverty, stigma, Rat Park logic", "Siblings in the same cage who do not take the same path", "The particular person’s meanings and choices"] }
+        ];
+        function addCompare() {
+          return '<div class="x-cmp">' + ADD_ROWS.map(function (r, i) { return '<input type="radio" name="x-cmp" id="x-cmp-' + r.k + '" aria-label="' + r.t + '"' + (i ? "" : " checked") + " />"; }).join("") +
+            '<div class="x-chips" aria-hidden="true">' + ADD_ROWS.map(function (r) { return '<label class="x-chip" for="x-cmp-' + r.k + '">' + r.t + "</label>"; }).join("") + "</div>" +
+            '<div class="x-cmp__rows">' + ADD_ROWS.map(function (r) {
+              return '<dl class="x-dossier x-cmp__row" data-m="' + r.k + '" aria-label="' + r.t + '">' + r.c.map(function (c, j) { return "<div><dt>" + ADD_LENSES[j] + "</dt><dd>" + c + "</dd></div>"; }).join("") + "</dl>";
+            }).join("") + "</div></div>";
+        }
         var LESSON_CONTENT = {
           /* ============ M0+ · THE FIELD ARGUES WITH ITSELF: steelman each side, declare no winner ============ */
           "m0p.1": {
@@ -7473,6 +7532,848 @@
               Q("A client on buprenorphine says a peer told him real recovery means stopping it and finding connection. What fits the evidence?",
                 ["Taper soon, since connection is what matters", "Keep the medication and build connection too", "Stop the groups, since they conflict with medication", "Switch to contingency management instead"], 1,
                 "Medication reduces overdose death; meaning and connection add to it, not replace it.")
+            ]
+          },
+          /* ============ phase 3o-1: AD · MODELS OF ADDICTION, lessons 1–2 (psychology only; no numbers except years; running client Andrés) ============ */
+          "m8a.1": {
+            home: "Andrés says “the bottle never let me down — people did.” What if he is describing a relationship, not just a habit?",
+            keys: [["What is the relational-organismic map?", "A synthesis framework, the deck’s own integration of Bandura, Flores, Khantzian, Alexander and Hari: addiction as a bond an active person takes part in, held in a web of people, places, feelings and institutions. Not a tested school; contested."],
+              ["What is reciprocal determinism?", "Bandura’s principle of “continuous reciprocal interaction between cognitive, behavioral, and environmental determinants” (1977; 1978): person, behaviour and environment keep making each other."],
+              ["What does agency within constraint mean?", "“Individuals are neither powerless objects controlled by environmental forces nor entirely free agents” (Bandura 1977): a person selects and acts, inside real limits."],
+              ["What is the strongest critique?", "A relationship metaphor can poeticize a process that is also cellular and lethal; it is a framework, not yet a tested theory."]],
+            steps: [
+              { kind: "hook", title: "Andrés, in group", body: who("<b>Andrés</b> is a man in his thirties in a reentry program. He uses opioids and alcohol.") +
+                "<p>In group he says: “The bottle never let me down — people did.”</p>" +
+                '<p class="hook">Later he mentions that he first drank at his uncle’s parties, at fourteen.</p>' },
+              { kind: "predict", id: "m8a.1:predict", title: "Your call first",
+                case: ["Andrés says the bottle never let him down.",
+                  { t: "He wears a grey hoodie to group.", irrelevant: true },
+                  "He first drank at family parties, at fourteen.",
+                  "He also uses opioids.",
+                  { t: "He sits near the door.", irrelevant: true },
+                  "His days, people and evenings are the same as before."],
+                q: "If Andrés stops drinking but nothing else in his life changes, what is his “relationship” most likely to do?",
+                options: ["Look for a new partner, such as more opioid use", "Fade away, since the drinking itself has ended", "Stay as it is, but with no further effect on him"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s what this map predicts: the jobs the bottle did, comfort, reliability, a place to turn, still need doing. With nothing else changed, the bond is likely to move to another partner, here the opioids he already uses. The map says to watch the relationship, not only the substance.",
+                hints: ["Ask what the bottle was doing for him, not what was in it.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what else in his life could answer when people let him down."] },
+              { kind: "idea", lvl: "f", title: "Honesty first: a synthesis map", body: "<p>This module opens with the <b>relational-organismic map</b> " + ev("c") + ". It is a <b>synthesis framework</b>: the deck’s own integration of Bandura, Flores, Khantzian, Alexander and Hari.</p>" +
+                "<p>It is not a tested school with its own trials. Each piece has evidence of its own strength; the whole has not been tested as a whole. Later lessons set it beside the strongest rival maps.</p>" +
+                "<p><b>So:</b> use it as a way of seeing, and tag it contested.</p>" },
+              { kind: "idea", lvl: "f", title: "Not a container", body: "<p>One picture treats the person as a <b>container</b>: a drug goes in, and the effect comes out.</p>" +
+                "<p>Bandura (1977) " + ev("r") + " showed people are not containers. They <b>act, select, interpret and repeat</b>: they choose what to attend to, give it meaning and return to what has worked.</p>" +
+                "<p><b>So:</b> the organism participates; Andrés is doing something with the bottle, not only having something done to him.</p>" },
+              { kind: "idea", lvl: "f", title: "Relationship, not only chemistry", body: "<p>Flores (2004) " + ev("c") + " argued that the substance becomes an <b>attachment partner</b>.</p>" +
+                "<p>Like a partner, it is <b>available</b> when called, <b>predictable</b> in what it gives, and <b>hard to leave</b>.</p>" +
+                "<p><b>So:</b> “the bottle never let me down” is relationship talk, and worth hearing as such.</p>" },
+              { kind: "idea", lvl: "p", title: "Making each other", body: "<p>Bandura described “continuous reciprocal interaction between cognitive, behavioral, and environmental determinants” (1977), and set it out as <b>reciprocal determinism</b> (1978, American Psychologist) " + ev("c") + ".</p>" +
+                "<p>Person, behaviour and environment continuously make each other. Andrés’s drinking shaped who he spent time with; those people shaped his drinking; both shaped how he sees himself.</p>" +
+                "<p><b>So:</b> look for loops, not a single first cause.</p>" },
+              { kind: "idea", lvl: "p", title: "Agency inside constraint", body: "<p>Bandura (1977): “Individuals are neither powerless objects controlled by environmental forces nor entirely free agents.”</p>" +
+                "<p>This is <b>agency within constraint</b>. Andrés makes real choices, but inside the limits of his body, his history and the places open to him.</p>" +
+                "<p><b>So:</b> neither blame him as if he were free, nor treat him as if he had no say.</p>" },
+              { kind: "idea", lvl: "p", title: "Lived in the body", body: "<p>The relationship is <b>embodied</b>. Craving is felt as tension and pull; relief is felt as the body loosening.</p>" +
+                "<p>Over time the body itself expects its partner, and its absence is felt as discomfort.</p>" +
+                "<p><b>So:</b> ask where in his body Andrés feels the pull and the relief, not only what he thinks about it.</p>" },
+              { kind: "idea", lvl: "p", title: "The role it is given", body: "<p>People give the object a <b>role</b>: friend, armour, reward, identity or protest.</p>" +
+                "<p>For Andrés, the bottle may be the friend who never lets him down. Meaning shapes what the substance is for him; see “What meaning is, and is not” in Meaning, beliefs &amp; stories.</p>" +
+                "<p><b>So:</b> ask what role the substance plays, in his words.</p>" },
+              { kind: "idea", lvl: "m", title: "The self as a relationship", body: "<p>Flores (2004) " + ev("c") + ": “Addiction is a disorder in self-regulation.”</p>" +
+                "<p>On this view, how a person soothes, steadies and cares for themselves is itself a relationship, learned with others. When that relationship is thin, a substance can take over the work.</p>" +
+                "<p><b>So:</b> the deepest bond on the map may be the one between Andrés and himself.</p>" },
+              { kind: "contrast", id: "m8a.1:contrast", title: "Two notes, one difference",
+                q: "Which note maps a relationship rather than an object?",
+                cases: [
+                  { label: "Note A", s: ["Andrés drinks most evenings.", { t: "Written in the intake room.", irrelevant: true }, "He also uses opioids.", { t: "Goal: remove alcohol from his room and reduce the amount he drinks.", diff: true }] },
+                  { label: "Note B", s: ["Andrés drinks most evenings.", { t: "Written in the intake room.", irrelevant: true }, "He also uses opioids.", { t: "Goal: learn what the bottle gives him when people let him down, and who else could give it.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where the note was written", "Whether the goal targets the substance or what the bond does", "How often he drinks", "Whether he uses opioids"],
+                feature: 1,
+                why: "Both notes record the same use. Note A treats alcohol as an object to remove. Note B treats it as a partner doing a job, and asks who else could do that job. Removing an object can leave the relationship looking for someone new.",
+                hints: ["Find the one sentence where the two notes part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which goal asks what the bottle is for."] },
+              { kind: "idea", lvl: "p", title: "The web of bonds", body: "<p>The bond is never only person and substance. It sits in a web:</p>" +
+                "<ul><li><b>Substance:</b> a partner that always answers.</li>" +
+                "<li><b>Behaviour:</b> the same grammar without a molecule, as in gambling.</li>" +
+                "<li><b>People:</b> who he uses with, and who left.</li>" +
+                "<li><b>Place:</b> rooms, corners and parties that cue the bond.</li>" +
+                "<li><b>Affect:</b> feelings handed over for the substance to regulate (Khantzian 1985).</li>" +
+                "<li><b>Identity:</b> who he is when he uses.</li>" +
+                "<li><b>Institution:</b> clinic, prison, market, street.</li>" +
+                "<li><b>Future self:</b> “relapse is often a reunion”.</li></ul>" +
+                "<p>Peter Cohen, quoted by Hari (2015) " + ev("c") + ": “Maybe we shouldn’t even call it addiction; maybe we should call it bonding.”</p>" +
+                "<p>Place and people as bonds are where Vietnam and Rat Park come in; see “Vietnam and Rat Park: environment and addiction” and “Connection, meaning and recovery in the room” in Meaning, beliefs &amp; stories. They are not repeated here.</p>" +
+                "<p><b>So:</b> map every strand, because removing one leaves the others pulling.</p>" },
+              { kind: "mastery", lvl: "m", title: "When the metaphor goes soft", body: '<p class="x-crit"><b>Strongest critique</b>A relationship metaphor can poeticize a process that is also cellular and lethal. Opioids change the brain and stop breathing; calling it bonding can make overdose risk sound gentler than it is. And this is a framework, not yet a tested theory: it can describe almost any case, which makes it hard to prove wrong.</p>' +
+                "<p><b>The counter.</b> Use the map alongside medical care and overdose prevention, never instead of them, and treat its claims as questions to test with each person.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, mapped", body: who("<b>His counsellor</b> writes a first map after group.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>“The bottle never let me down — people did.” First drank at his uncle’s parties, at fourteen. Uses opioids and alcohol.</dd></div>' +
+                "<div><dt>Role given</dt><dd>A friend who always answers.</dd></div>" +
+                "<div><dt>Strands to ask about</dt><dd>People who let him down; family parties as place; feelings he hands to the bottle; who he is when he drinks.</dd></div>" +
+                "<div><dt>Not concluded</dt><dd>Why he started or why he keeps going; those are the next questions.</dd></div></dl>" +
+                '<p class="x-note">For the room: “When people let you down, what does the bottle do for you?” · <span lang="es">“Cuando la gente te falla, ¿qué hace la botella por ti?”</span></p>' },
+              { kind: "teachback", id: "m8a.1:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager how this map reads “the bottle never let me down”: the relational-organismic map as a synthesis framework, not a tested school, and contested; the organism as active, not a container, from Bandura; the substance as an attachment partner, available, predictable and hard to leave, and addiction as a disorder in self-regulation, from Flores; reciprocal determinism and agency within constraint; craving and relief lived in the body, and the role the substance is given; the web of bonds, with people, place, affect, identity, institution and future self; Cohen’s line on bonding, quoted by Hari; why stopping one substance while nothing else changes may move the bond elsewhere; and the strongest critique, that the metaphor can soften a cellular and lethal process." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>People select and interpret, learning from models and results " + ev("r") + ". Reciprocal determinism as a whole " + ev("c") + ". Substance as attachment partner " + ev("c") + ". Addiction as bonding " + ev("c") + ". The relational-organismic map as a synthesis " + ev("c") + ".</p>" +
+                "<p><b>So:</b> addiction can be read as a relationship the person takes part in, held in a web of bonds; change the web, not only the substance.</p>" },
+              Q("A client says alcohol is “the only thing that never lets me down.” What does the relational map suggest asking first?",
+                ["What alcohol does for him that people have not", "How many drinks he usually has each day", "Whether he accepts he is powerless over it", "Which brain areas alcohol is changing"], 0,
+                "The map treats the substance as a partner doing a job; the first question is what that job is."),
+              Q("What does Bandura’s reciprocal determinism hold?",
+                ["The environment alone decides behaviour", "Person, behaviour and environment shape each other", "A person’s choices are completely free", "Behaviour is set by early childhood alone"], 1,
+                "Person, behaviour and environment are in continuous two-way interaction; none is only cause."),
+              Q("How should the relational-organismic map be described?",
+                ["A tested school with strong trial support", "A synthesis framework, contested", "A debunked idea from the past", "A brain disease model with a new name"], 1,
+                "It integrates Bandura, Flores, Khantzian, Alexander and Hari, and has not been tested as a whole.")
+            ]
+          },
+          "m8a.2": {
+            home: "The first time Andrés used heroin, “my head finally went quiet.” That year he lost his job and his mother died. Which door did the bond come through?",
+            keys: [["What is the self-medication hypothesis?", "Khantzian’s (1985; 1997) idea that “painful affect states” make specific drugs compelling. The general link between distress and use is robust; the specific drug-matching claim has mixed support."],
+              ["What is dislocation theory?", "Alexander’s (2008; 2012) account that when psychosocial integration fails, people may adopt a “narrowly focused lifestyle” around a substance or activity; contested."],
+              ["What are the six doors?", "Need (self-medication), bond (attachment substitution), world (dislocation), learn (social and operant start), body (vulnerability) and story (cultural invitation). They often combine."],
+              ["What is the dated verdict?", "As of 2026: both pathways are real; distress raises risk and shapes which drug feels like relief, but many people start through access and peers and never develop a disorder; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, the first time", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>He describes the first time he used heroin: “My head finally went quiet.”</p>" +
+                '<p class="hook">That year he had lost his job, and his mother had died.</p>' },
+              { kind: "predict", id: "m8a.2:predict", title: "Your call first",
+                case: ["Andrés says heroin made his head go quiet.",
+                  "That year he lost his job.",
+                  { t: "He was living in a second-floor flat.", irrelevant: true },
+                  "His mother died the same year.",
+                  { t: "He liked to cook on weekends.", irrelevant: true },
+                  "He already drank to cope with people letting him down."],
+                q: "What most likely made heroin feel so compelling that first time?",
+                options: ["It eased painful feelings during a year of loss", "Its chemistry alone, whatever his state that year", "Curiosity alone, with no link to his losses"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the likeliest reading: relief. “Finally went quiet” describes pain stopping, in a year of grief and lost work. That fits self-medication. It does not show that every start works this way; many people start through access and friends, with no deep need.",
+                hints: ["Listen to the word “finally”.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what was hurting that year."] },
+              { kind: "idea", lvl: "f", title: "Six doors, not one", body: "<p>A bond can start through different <b>doors</b>: NEED, BOND, WORLD, LEARN, BODY and STORY.</p>" +
+                "<p>Most people come through more than one at once. Naming the doors keeps one story from swallowing the rest.</p>" +
+                "<p><b>So:</b> ask which doors were open for this person, not which single cause is true.</p>" },
+              { kind: "idea", lvl: "f", title: "NEED · Self-medication", body: "<p>Khantzian (1985, American Journal of Psychiatry; 1997, Harvard Review of Psychiatry) " + ev("c") + " proposed that “painful affect states” make specific drugs compelling. Opioids, for example, may calm rage or grief.</p>" +
+                "<p><b>Status:</b> contested. The specific drug-matching claim has mixed support; the general link between distress and use is robust.</p>" +
+                "<p><b>So:</b> Andrés’s “quiet head” fits; it is a lead to explore, not a proof.</p>" },
+              { kind: "idea", lvl: "f", title: "BOND · Attachment substitution", body: "<p>Flores (2004) " + ev("c") + ": people “substitute chemical solutions and connections for human ones”.</p>" +
+                "<p>When human bonds are thin or broken, a substance offers a connection that does not leave. Andrés lost his mother the year he started heroin.</p>" +
+                "<p><b>Status:</b> contested; a clinical theory with few direct tests.</p>" +
+                "<p><b>So:</b> ask who was missing when the bond began.</p>" },
+              { kind: "idea", lvl: "p", title: "WORLD · Dislocation", body: "<p>Alexander (2008, The Globalization of Addiction; 2012, Substance Use &amp; Misuse) " + ev("c") + " argued that when <b>psychosocial integration</b> fails, people may adopt a “narrowly focused lifestyle” around a substance or activity.</p>" +
+                "<p>Losing work can be losing a role, a rhythm and a place among others. That is dislocation, not only bad luck.</p>" +
+                "<p><b>Status:</b> contested; a broad social argument, hard to test directly.</p>" +
+                "<p><b>So:</b> ask what place in the world the person lost.</p>" },
+              { kind: "idea", lvl: "p", title: "LEARN · Social and operant start", body: "<p>Bandura (1977) " + ev("r") + ": people learn by watching. Peers and family <b>model the bond</b>, showing how to use and what it is for.</p>" +
+                "<p>Then the first reward teaches that <b>this object works</b>. Andrés first drank at his uncle’s parties, at fourteen, among adults who drank.</p>" +
+                "<p><b>So:</b> ask who showed the person how, and what the first use gave them.</p>" },
+              { kind: "idea", lvl: "p", title: "BODY · Vulnerability", body: "<p>Twin and adoption studies " + ev("r") + " suggest genes account for roughly half of the differences in risk between people. A meta-analysis by Verhulst, Neale and Kendler (2015, Psychological Medicine) put the heritability of alcohol use disorder at roughly half. See “Do inherent tendencies exist?” in Evolution &amp; human nature.</p>" +
+                "<p>Early adversity raises risk too; see “ACEs: dose, response, and limits” in Lifespan development.</p>" +
+                "<p>These tilt how intense the bond becomes. They do not erase the person’s participation.</p>" +
+                "<p><b>So:</b> vulnerability shapes the slope, not the whole path.</p>" },
+              { kind: "idea", lvl: "p", title: "STORY · Cultural invitation", body: "<p>A culture can sell the relationship before the first use: drinking as <b>adulthood</b>, a pill as <b>relief</b>, a drug as <b>freedom</b>.</p>" +
+                "<p>This <b>cultural invitation</b> " + ev("c") + " means the first use arrives with a story attached. Family parties where men drink can teach that drinking is what a man does.</p>" +
+                "<p><b>So:</b> ask what using meant in the person’s world before they ever tried it.</p>" },
+              { kind: "contrast", id: "m8a.2:contrast", title: "Two questions, one difference",
+                q: "Which question asks why the bond holds, rather than how it started?",
+                cases: [
+                  { label: "Question A", s: ["The counsellor sits with Andrés.", { t: "It is a Tuesday session.", irrelevant: true }, "She has his history in front of her.", { t: "She asks: “What was going on in your life the first time you used heroin?”", diff: true }] },
+                  { label: "Question B", s: ["The counsellor sits with Andrés.", { t: "It is a Tuesday session.", irrelevant: true }, "She has his history in front of her.", { t: "She asks: “What brings you back to heroin now, years later?”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["The day of the session", "Whether the question is about the start or about keeping going", "Whether she has his history", "Who is in the room"],
+                feature: 1,
+                why: "Question A asks about the doors in: loss, relief, peers. Question B asks what keeps the bond going now, which can be quite different: habit, withdrawal, cues, identity. Why someone starts is not why someone keeps going; that is the next lesson, “Why the bond holds”.",
+                hints: ["Find the one sentence where the two questions part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which question looks back to the beginning."] },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Use begins mainly to solve a problem", body: "<p><b>Distress comes first often.</b> Many people with a substance use disorder describe pain, loneliness or trauma before heavy use.</p>" +
+                "<p><b>Relief explains choice.</b> People report that their drug fit their feeling, as “my head finally went quiet” suggests (Khantzian 1985; 1997).</p>" +
+                "<p><b>It guides care.</b> Treating the pain beneath the use gives people a reason to stay.</p>" +
+                "<p><b>So:</b> on this side, use usually begins as an attempted solution.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Much use begins from access, curiosity and peers", body: "<p><b>Most first use is ordinary.</b> Many people first use because a drug is around, friends are using, or they are curious, with no deep need.</p>" +
+                "<p><b>Most who try never develop a disorder.</b> If need drove starting, far more would stay.</p>" +
+                "<p><b>Stories are told later.</b> People explain their start after the fact, and a need can be read back into a start that was simply social.</p>" +
+                "<p><b>So:</b> on this side, availability and peers explain much of starting.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Both pathways are real; distress raises risk and shapes which drug feels like relief, but many people start through access and peers and never develop a disorder.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Prospective studies showing self-medication does not predict onset beyond availability and peers.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "mastery", lvl: "m", title: "When a door becomes an excuse, or a verdict", body: '<p class="x-crit"><b>Strongest critique</b>Door stories are mostly retrospective: told years later, shaped by treatment language and by what the person now believes. A neat story of need can be read back into a start that was social and casual. And a single door can harden into blame (“you chose this”) or into fate (“your genes did this”).</p>' +
+                "<p><b>The counter.</b> Treat each door as a question to ask, keep several open, and check stories against what others saw at the time.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, the doors", body: who("<b>His counsellor</b> notes which doors were open.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>“My head finally went quiet.” That year: job lost, mother died. First drank at family parties, at fourteen.</dd></div>' +
+                "<div><dt>Doors to explore</dt><dd>NEED (grief and stress), BOND (loss of his mother), WORLD (loss of work), LEARN and STORY (family parties).</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That need was the only door, or that his genes or history decided it.</dd></div></dl>" +
+                '<p class="x-note">For the room: “What was the drug doing for you the first time it worked?” · <span lang="es">“¿Qué estaba haciendo la droga por ti la primera vez que funcionó?”</span></p>' },
+              { kind: "teachback", id: "m8a.2:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager how his heroin use may have started: the six doors, need, bond, world, learn, body and story, and why they combine; self-medication from Khantzian, with the general distress link robust and drug matching mixed; attachment substitution from Flores, contested; dislocation and psychosocial integration from Alexander, contested; modelling and first reward from Bandura, robust; genes and early adversity tilting intensity without erasing participation; cultural invitation; both sides steelmanned, use as solving a problem versus use from access, curiosity and peers; the dated verdict, both pathways real, confidence moderate, and its defeater; and why starting is not the same as keeping going." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Distress linked to use " + ev("r") + ". Specific drug matching " + ev("c") + ". Attachment substitution " + ev("c") + ". Dislocation " + ev("c") + ". Modelling and first reward " + ev("r") + ". Genetic and early-adversity risk " + ev("r") + ".</p>" +
+                "<p><b>So:</b> a bond can start through several doors at once; ask which were open, and do not mistake how it started for why it holds.</p>" },
+              Q("A client says she first used at a party because everyone else was. Which door does this point to first?",
+                ["Need, since all use eases pain", "Learning, through peers and first reward", "Body, since genes decide first use", "World, since parties show dislocation"], 1,
+                "Peers modelling use and the first reward point to the learning door; other doors may still be open."),
+              Q("What is the status of the self-medication hypothesis?",
+                ["Fully confirmed in every detail", "Debunked by recent studies", "Distress link robust, drug matching mixed", "Untested and purely speculative"], 2,
+                "The general link between distress and use is robust; the claim that people pick drugs to match feelings has mixed support."),
+              Q("Why does knowing how someone started not settle why they keep using?",
+                ["Starting and keeping going can have different causes", "People never remember how they started", "Starting always has a single cause", "Keeping going depends only on genes"], 0,
+                "The doors in can differ from what holds the bond later, such as habit, cues or withdrawal.")
+            ]
+          },
+          /* ============ phase 3o-2: AD · MODELS OF ADDICTION, lessons 3–4 (same rules; running client Andrés) ============ */
+          "m8a.3": {
+            home: "Andrés still feels a pull at the liquor store, though “it doesn’t even feel good anymore — I just need it to feel normal.” What keeps a bond going after the pleasure has gone?",
+            keys: [["What is negative reinforcement?", "A behaviour grows stronger because it ends something unpleasant, such as withdrawal or shame (Khantzian 1985). It is not punishment, which makes a behaviour weaker."],
+              ["What is allostasis in addiction?", "Koob and Le Moal’s (2001) idea that repeated use shifts the body’s set-point, so the drug is needed just to feel normal. Robust in animal work; contested as a full account in humans."],
+              ["What is incentive sensitization?", "Robinson and Berridge’s (1993) finding that wanting can be sensitized separately from liking, so craving grows while pleasure fades. Robust."],
+              ["What are the eight holds?", "Positive reinforcement, negative reinforcement, cue reactivity, allostasis, incentive sensitization, identity fusion, the reliable object and social lock-in, in four groups: learning, body, self and world."]],
+            steps: [
+              { kind: "hook", title: "Andrés, at the liquor store", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>He says he still feels a pull when he walks past the liquor store.</p>" +
+                '<p class="hook">“It doesn’t even feel good anymore — I just need it to feel normal.”</p>' },
+              { kind: "predict", id: "m8a.3:predict", title: "Your call first",
+                case: ["Andrés feels a pull at the liquor store.",
+                  { t: "The store is on the corner by his bus stop.", irrelevant: true },
+                  "He says drinking no longer feels good.",
+                  { t: "He walks past it in the afternoon.", irrelevant: true },
+                  "He says he needs it to feel normal.",
+                  "The pull comes before he has thought about it."],
+                q: "Which holds best explain “it doesn’t feel good, but I need it”?",
+                options: ["Allostasis and incentive sensitization together", "Positive reinforcement on its own", "Social lock-in on its own"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading: two holds at once. Allostasis explains “to feel normal”: his body has a new set-point, and without the drink he feels below it. Incentive sensitization explains “it doesn’t feel good”: wanting has grown while liking has faded. Pleasure, the first hold, has dropped out.",
+                hints: ["Split his sentence in two: the part about feeling good, and the part about feeling normal.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what “normal” means for a body that has drunk for years."] },
+              { kind: "idea", lvl: "f", title: "Eight holds, four groups", body: "<p>Why a bond starts is not why it holds. This lesson names <b>eight holds</b>, in four groups:</p>" +
+                "<ul><li><b>Learning:</b> positive reinforcement, negative reinforcement, cue reactivity.</li>" +
+                "<li><b>Body:</b> allostasis, incentive sensitization.</li>" +
+                "<li><b>Self:</b> identity fusion, the reliable object.</li>" +
+                "<li><b>World:</b> social lock-in.</li></ul>" +
+                "<p><b>So:</b> a bond rarely holds by one thread; ask which holds are pulling now.</p>" },
+              { kind: "idea", lvl: "f", title: "Learning · Reward, relief and signals", body: "<p><b>Positive reinforcement</b> " + ev("r") + ": use adds something good, such as pleasure, intensity, or belonging in a using group, so it is repeated.</p>" +
+                "<p><b>Negative reinforcement</b> " + ev("r") + ": use takes something bad away, such as withdrawal or shame, so it is repeated. Khantzian (1985) " + ev("c") + " described people using to silence painful feelings.</p>" +
+                "<p><b>Cue reactivity</b> " + ev("r") + ": places, people and times become signals, and the body answers them with craving before deliberation starts (Carter &amp; Tiffany 1999).</p>" +
+                '<p class="x-note">Common error: negative reinforcement is not punishment. Both kinds of reinforcement make a behaviour stronger; punishment makes it weaker.</p>' +
+                "<p><b>So:</b> ask what use adds, what it takes away, and what sets it off.</p>" },
+              { kind: "contrast", id: "m8a.3:contrast", title: "Two notes, one difference",
+                q: "Which note describes negative reinforcement?",
+                cases: [
+                  { label: "Note A", s: ["Andrés drinks most evenings.", { t: "Written after group.", irrelevant: true }, "He drinks with the same friends.", { t: "He says: “I drink because it makes the night fun and loud.”", diff: true }] },
+                  { label: "Note B", s: ["Andrés drinks most evenings.", { t: "Written after group.", irrelevant: true }, "He drinks with the same friends.", { t: "He says: “I drink because it stops the shakes and the shame.”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["When the note was written", "Whether drinking adds something good or takes something bad away", "Who he drinks with", "How often he drinks"],
+                feature: 1,
+                why: "Both notes describe reinforcement: drinking keeps happening. Note A is positive: it adds fun and intensity. Note B is negative: it takes away the shakes and the shame. Neither is punishment, which would make drinking less likely.",
+                hints: ["Find the one sentence where the two notes part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which note has drinking ending something."] },
+              { kind: "idea", lvl: "p", title: "Body · A new normal, and wanting without liking", body: "<p><b>Allostasis</b>: Koob and Le Moal (2001, Neuropsychopharmacology) " + ev("c") + " argued that repeated use pushes the brain’s reward and stress systems to a <b>new set-point</b>. Without the drug the person feels below normal, so using is needed just to reach baseline. Robust in animal work; contested as a full account in humans.</p>" +
+                "<p><b>Incentive sensitization</b>: Robinson and Berridge (1993, Brain Research Reviews) " + ev("r") + " showed that <b>wanting</b> can be sensitized separately from <b>liking</b>. Craving grows stronger with use, while pleasure stays flat or fades.</p>" +
+                "<p><b>So:</b> “it doesn’t feel good but I need it” is not a contradiction; it is two body holds speaking.</p>" },
+              { kind: "contrast", id: "m8a.3:contrast2", title: "Two sentences, one difference",
+                q: "Which sentence shows wanting outrunning liking?",
+                cases: [
+                  { label: "Sentence A", s: ["Andrés passes the liquor store.", { t: "It is raining.", irrelevant: true }, "He stops at the window.", { t: "He says: “I can’t stop thinking about it, and I don’t even enjoy it.”", diff: true }] },
+                  { label: "Sentence B", s: ["Andrés passes the liquor store.", { t: "It is raining.", irrelevant: true }, "He stops at the window.", { t: "He says: “I want it because it still tastes great.”", diff: true }] }
+                ],
+                answer: 0,
+                features: ["The weather", "Whether the pull comes with pleasure or without it", "Where he stops", "Which store he passes"],
+                feature: 1,
+                why: "In Sentence B, wanting and liking still match: he wants it because he enjoys it. In Sentence A, wanting is strong and liking is gone. That gap is what Robinson and Berridge’s incentive sensitization predicts.",
+                hints: ["Find the one sentence where the two part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which sentence pulls without pleasure."] },
+              { kind: "idea", lvl: "p", title: "Self · Who I am, and who never leaves", body: "<p><b>Identity fusion</b> " + ev("c") + ": when using and self grow together, leaving can feel like killing a version of the self: the drinker, the hustler, the one who survived.</p>" +
+                "<p><b>The reliable object</b> " + ev("c") + ": unlike people, the substance does not reject. It answers every time, until it does not, through tolerance, illness or overdose (Flores 2004).</p>" +
+                "<p><b>So:</b> ask who he would be without it, and what it has never refused him.</p>" },
+              { kind: "idea", lvl: "p", title: "World · Social lock-in", body: "<p><b>Social lock-in</b> " + ev("c") + ": using networks reward staying, with company, status and help. Leaving costs belonging, and often the only friends a person has.</p>" +
+                "<p>For a man leaving prison, the people who welcome him back may be the people he used with.</p>" +
+                "<p><b>So:</b> recovery asks a person to give up a network; offer one in return.</p>" },
+              { kind: "mastery", lvl: "m", title: "When a list explains everything", body: '<p class="x-crit"><b>Strongest critique</b>Eight holds can explain any case after the fact, which makes the list hard to prove wrong. The body holds rest largely on animal work: allostasis is robust in rats but contested as a full human account. And naming holds can sound like fate, as if the person were simply held.</p>' +
+                "<p><b>The counter.</b> Use the holds as questions, check each against what the person reports now, and remember most people with a substance use disorder eventually loosen these holds.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, the holds", body: who("<b>His counsellor</b> notes which holds are pulling now.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>A pull at the liquor store. “It doesn’t even feel good anymore — I just need it to feel normal.”</dd></div>' +
+                "<div><dt>Holds to explore</dt><dd>Allostasis and incentive sensitization; cue reactivity at the store; negative reinforcement for shame.</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That pleasure still drives it, or that the holds are permanent.</dd></div></dl>" +
+                '<p class="x-note">For the room: “Which part still pulls you: the high, the relief, the people, or who you were?” · <span lang="es">“¿Qué parte te sigue jalando: el efecto, el alivio, la gente o quién eras?”</span></p>' },
+              { kind: "teachback", id: "m8a.3:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager why he still feels a pull at the liquor store though drinking no longer feels good: the eight holds in four groups; positive reinforcement through pleasure, intensity and belonging; negative reinforcement, ending withdrawal or shame, from Khantzian, and why it is not punishment; cue reactivity, answered before deliberation; allostasis, a new set-point, from Koob and Le Moal, robust in animals and contested as a full human account; incentive sensitization, wanting outrunning liking, from Robinson and Berridge, robust; identity fusion, the reliable object and social lock-in; and the strongest critique, that a list of holds can explain any case after the fact." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Positive and negative reinforcement " + ev("r") + ". Cue reactivity " + ev("r") + ". Allostasis as a full human account " + ev("c") + ". Incentive sensitization " + ev("r") + ". Identity fusion, the reliable object and social lock-in " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a bond can hold long after pleasure has gone, through relief, signals, a new normal, wanting without liking, self and network; ask which hold pulls now.</p>" },
+              Q("A client says she drinks to stop the shame she feels each morning. Which hold is this?",
+                ["Positive reinforcement", "Negative reinforcement", "Punishment", "Social lock-in"], 1,
+                "Drinking takes away something unpleasant, so it grows stronger; that is negative reinforcement, not punishment."),
+              Q("What does incentive sensitization predict?",
+                ["Liking and wanting always rise together", "Wanting can grow while liking fades", "Craving disappears once pleasure fades", "Pleasure grows stronger with each use"], 1,
+                "Robinson and Berridge showed wanting can be sensitized separately from liking."),
+              Q("What is the status of allostasis as an account of addiction?",
+                ["Robust in animals, contested as a full human account", "Debunked in animals and humans", "Fully confirmed in human trials", "Untested in any species"], 0,
+                "Koob and Le Moal’s model is well supported in animal work; how fully it explains human addiction is argued.")
+            ]
+          },
+          "m8a.4": {
+            home: "Andrés has no one to call on bad nights. The only numbers he has are his parole officer’s, his counselor’s and his sister’s. What does that tell us about his use?",
+            keys: [["Who said “the opposite of addiction is connection”?", "Hari (2015), a contested popularization; the idea comes from Alexander’s work. Medication saves lives, and connected people also develop addiction."],
+              ["What links attachment and drug reward in the brain?", "Dopamine, opioid and stress systems overlap between social bonding and drug reward (Burkett & Young 2012); animal-based, contested for humans."],
+              ["How does insecure attachment relate to substance use disorder?", "Consistently linked across reviewed studies, and use then impairs closeness (Schindler 2019); correlational, the association robust, the direction unclear."],
+              ["What is the dated verdict?", "As of 2026: connection is a strong protective and maintaining factor but not a substitute for medication for opioid use disorder; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, on bad nights", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>He says he has no one to call on bad nights.</p>" +
+                '<p class="hook">His parole officer, his counselor and his sister are the only people whose numbers he has.</p>' },
+              { kind: "predict", id: "m8a.4:predict", title: "Your call first",
+                case: ["Andrés has no one to call on bad nights.",
+                  "He has his parole officer’s number.",
+                  { t: "His phone is an older model.", irrelevant: true },
+                  "He has his counselor’s number.",
+                  "He has his sister’s number.",
+                  { t: "He charges it at the program office.", irrelevant: true }],
+                q: "What does his short list of numbers most likely mean for his bad nights?",
+                options: ["The substance is the one partner always available then", "Nothing, since phone numbers do not affect use", "He prefers being alone and does not want contact"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the attachment reading: two of his three contacts are institutions, and none may answer at night. On a bad night the one partner that is always available is the substance. That makes widening his list part of treatment, not an extra.",
+                hints: ["Ask who on his list would pick up at night.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what is always available when no one answers."] },
+              { kind: "idea", lvl: "f", title: "A famous line, and whose idea it is", body: "<p>Hari (2015) " + ev("c") + ": “The opposite of addiction is not sobriety. The opposite of addiction is connection.”</p>" +
+                "<p>This is a <b>contested popularization</b>. The idea comes from Alexander’s work on dislocation and Rat Park; Hari made it famous.</p>" +
+                "<p><b>So:</b> use the line as a prompt to ask about connection, and credit the idea to Alexander, not as a finding.</p>" },
+              { kind: "idea", lvl: "p", title: "Parallel systems", body: "<p>Burkett and Young (2012, Psychopharmacology) " + ev("c") + " reviewed how <b>dopamine</b>, <b>opioid</b> and <b>stress (CRF)</b> systems overlap between social bonding and drug reward.</p>" +
+                "<p>The same circuits that make a partner rewarding, and their absence painful, are those drugs act on. The evidence is largely from animals, such as prairie voles; it is contested for humans.</p>" +
+                "<p><b>So:</b> people and drugs may compete for the same machinery.</p>" },
+              { kind: "idea", lvl: "p", title: "Bowlby: where bonds are learned", body: "<p>Bowlby (1969/1982, Attachment) " + ev("r") + " described how infants bond to carers who keep them safe, and how early bonds shape what a person expects from others.</p>" +
+                "<p>A person’s <b>attachment history</b> is the first map of whether others answer when called.</p>" +
+                "<p><b>So:</b> ask what Andrés learned early about who answers.</p>" },
+              { kind: "idea", lvl: "p", title: "Regulation, borrowed then owned", body: "<p>Self-regulation is <b>co-created early</b>: a carer soothes a child, and over time the child learns to soothe themselves.</p>" +
+                "<p>When that does not happen, regulation is <b>outsourced</b>: to a person, a behaviour or a substance (after Flores 2004).</p>" +
+                "<p><b>So:</b> a substance can be doing a job a carer never got to teach.</p>" },
+              { kind: "idea", lvl: "p", title: "The substance as attachment object", body: "<p>Flores (2004) " + ev("c") + ": the substance works as an <b>attachment object</b>. It is <b>available</b>, <b>predictable</b>, and <b>distressing when gone</b>.</p>" +
+                "<p>Those are the marks of an attachment figure. On a bad night, Andrés’s substance meets all three; his contacts may not.</p>" +
+                "<p><b>So:</b> withdrawal can feel like separation, not only sickness.</p>" },
+              { kind: "idea", lvl: "p", title: "Styles as risk", body: "<p>Schindler (2019, Frontiers in Psychiatry) " + ev("r") + " reviewed the research: <b>insecure attachment</b> was consistently linked to substance use disorder across the studies reviewed.</p>" +
+                "<p>And use then <b>impairs closeness</b>, making bonds harder to build. The studies are correlational: the association is robust, the direction unclear.</p>" +
+                "<p><b>So:</b> treat insecure attachment as a risk to notice, not a cause to assume.</p>" },
+              { kind: "idea", lvl: "m", title: "A developmental model", body: "<p>Alvarez-Monjaras and colleagues (2019, Attachment &amp; Human Development) " + ev("c") + " proposed a <b>developmental model</b> of addiction through attachment: early bonds shape stress regulation and reward, which shape vulnerability to substances, which in turn shape later bonds.</p>" +
+                "<p>It is a model that organizes the findings; it has not been tested as a whole.</p>" +
+                "<p><b>So:</b> read use as part of a life story of bonds, from the start.</p>" },
+              { kind: "idea", lvl: "p", title: "The vicious cycle", body: "<p>The bond that soothes <b>starves other bonds</b>. Time, trust and money go to the substance; people pull away; loneliness grows; the substance is needed more.</p>" +
+                "<p>Andrés’s short list of numbers may be a result of the cycle, not only its cause.</p>" +
+                "<p><b>So:</b> look for where the cycle can be broken, one bond at a time.</p>" },
+              { kind: "idea", lvl: "p", title: "Treat the need, not only the behaviour", body: "<p>The clinical implication: <b>treat the need under the behaviour</b>, not only the behaviour.</p>" +
+                "<p>If the substance is soothing loneliness, stopping it leaves the loneliness. Care plans should add people, routines and skills that meet the need.</p>" +
+                "<p><b>So:</b> ask what the substance is doing, and who or what else could do it.</p>" },
+              { kind: "contrast", id: "m8a.4:contrast", title: "Two plans, one difference",
+                q: "Which plan treats the need under the behaviour?",
+                cases: [
+                  { label: "Plan A", s: ["Andrés keeps his counseling sessions.", { t: "The plan is printed on blue paper.", irrelevant: true }, "He keeps his parole check-ins.", { t: "Add: urine tests twice a week, and nothing else.", diff: true }] },
+                  { label: "Plan B", s: ["Andrés keeps his counseling sessions.", { t: "The plan is printed on blue paper.", irrelevant: true }, "He keeps his parole check-ins.", { t: "Add: a peer mentor he can call at night, and an evening group.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["The colour of the paper", "Whether the addition meets the need for someone on bad nights", "Whether he keeps counseling", "Whether he keeps parole check-ins"],
+                feature: 1,
+                why: "Plan A only watches the behaviour. Plan B adds people who can answer at night, the need his use may be meeting. Testing has its place; on its own it leaves the bad nights empty.",
+                hints: ["Find the one sentence where the two plans part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which plan gives him someone to call."] },
+              { kind: "idea", lvl: "p", title: "Nested worlds", body: "<p>Bronfenbrenner (1979, The Ecology of Human Development) " + ev("r") + " placed each person inside <b>nested systems</b>. For addiction, the levels are:</p>" +
+                "<ul><li><b>Organism:</b> nervous system, affect, memory and values (Koob &amp; Le Moal 2001).</li>" +
+                "<li><b>Microsystem:</b> family, partner, using circle, counselor.</li>" +
+                "<li><b>Mesosystem:</b> where settings meet: home and street, clinic and court, work and night life.</li>" +
+                "<li><b>Exosystem:</b> settings he is not in that still shape him: markets, housing, parole, media, availability.</li>" +
+                "<li><b>Macrosystem:</b> stigma, and a culture of isolation or belonging (Alexander 2012).</li>" +
+                "<li><b>Chronosystem:</b> time: attachment history, first use, institutions, ageing.</li></ul>" +
+                "<p><b>So:</b> a bond is held at every level; change can start at any of them.</p>" },
+              Object.assign(Q("Drill · Andrés’s sister is one of the few people whose number he has. Which level is she?",
+                ["Microsystem", "Mesosystem", "Exosystem", "Macrosystem"], 0,
+                "His sister is in his direct, face-to-face world: the microsystem."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés says his parole check-ins and clinic appointments clash in the same week. Which level is this?",
+                ["Organism", "Microsystem", "Mesosystem", "Chronosystem"], 2,
+                "The clash sits where two settings meet, clinic and court: the mesosystem."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés says people look at him differently once they hear he uses. Which level is this?",
+                ["Microsystem", "Exosystem", "Macrosystem", "Organism"], 2,
+                "Stigma is a cultural pattern: the macrosystem."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés first drank at his uncle’s parties, at fourteen. Which level does this belong to?",
+                ["Chronosystem", "Mesosystem", "Exosystem", "Macrosystem"], 0,
+                "First use is part of his history over time: the chronosystem."), { lvl: "p" }),
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Connection is the core treatment", body: "<p><b>Isolation predicts relapse.</b> People with few bonds return to use more often; people embedded in recovery networks do better (Alexander 2012).</p>" +
+                "<p><b>It meets the need.</b> If the substance is an attachment object, only another bond can replace it (Flores 2004).</p>" +
+                "<p><b>It lasts.</b> Medication and structure end; relationships can carry a person for life.</p>" +
+                "<p><b>So:</b> on this side, connection is the treatment, and everything else supports it.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Connection matters, but medication and structure come first for opioids", body: "<p><b>Medication saves lives.</b> Methadone and buprenorphine lower overdose death; a person must be alive to reconnect.</p>" +
+                "<p><b>Connection does not protect fully.</b> Many connected people also develop addiction, and some relapse inside loving families.</p>" +
+                "<p><b>Structure makes connection possible.</b> Housing, stable dosing and routines give bonds somewhere to grow.</p>" +
+                "<p><b>So:</b> on this side, for opioids, medication and structure come first, and connection builds on them.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Connection is a strong protective and maintaining factor, but not a substitute for medication for opioid use disorder.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Trials where connection-based interventions alone match medication on overdose and retention.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "mastery", lvl: "m", title: "When a slogan replaces care", body: '<p class="x-crit"><b>Strongest critique</b>“The opposite of addiction is connection” can be read as saying medication is unnecessary, and medication for opioid use disorder saves lives. Connected people also develop addiction, so connection cannot be the whole answer. And much of the attachment evidence is animal-based or correlational.</p>' +
+                "<p><b>The counter.</b> Build connection alongside medication and structure, never instead of them, and treat attachment findings as risks to explore with each person.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, his bonds and worlds", body: who("<b>His counselor</b> maps his bonds and levels.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>No one to call on bad nights. Numbers for his parole officer, his counselor and his sister only.</dd></div>' +
+                "<div><dt>Levels to work on</dt><dd>Microsystem (his sister, a peer mentor); mesosystem (clinic and court); exosystem (parole, housing); chronosystem (his attachment history).</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That connection replaces medication, or that his attachment history caused his use.</dd></div></dl>" +
+                '<p class="x-note">For the room: “On your worst night, who could you call — and who could you call instead of using?” · <span lang="es">“En tu peor noche, ¿a quién podrías llamar, y a quién podrías llamar en vez de usar?”</span></p>' },
+              { kind: "teachback", id: "m8a.4:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager why his short list of numbers matters: Hari’s line on connection, a contested popularization of Alexander’s idea, and its strongest critique, that medication saves lives and connected people also develop addiction; parallel dopamine, opioid and stress systems in bonding and drug reward, from Burkett and Young, animal-based; the substance as attachment object, available, predictable and distressing when gone, from Flores; Bowlby’s attachment history and regulation co-created early or outsourced; insecure attachment as a robust but correlational risk, from Schindler; the developmental model of Alvarez-Monjaras and colleagues; the vicious cycle and treating the need under the behaviour; Bronfenbrenner’s nested worlds, from organism to chronosystem; both sides steelmanned; and the dated verdict, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Attachment history shapes expectations of others " + ev("r") + ". Shared bonding and reward systems in humans " + ev("c") + ". Substance as attachment object " + ev("c") + ". Insecure attachment linked to substance use disorder " + ev("r") + ". Nested systems as a frame " + ev("r") + ". Connection as the opposite of addiction " + ev("c") + ".</p>" +
+                "<p><b>So:</b> use can stand in for people, at every level of a person’s world; build connection alongside medication and structure, not instead of them.</p>" },
+              Q("Who should the idea that “the opposite of addiction is connection” be credited to?",
+                ["Bowlby’s attachment research", "Alexander’s work, popularized by Hari", "Koob and Le Moal’s allostasis model", "Bronfenbrenner’s nested systems"], 1,
+                "Hari made the line famous; the idea comes from Alexander, and it is contested."),
+              Q("What does Schindler’s review show about insecure attachment and substance use disorder?",
+                ["Insecure attachment is proven to cause it", "A consistent link, with the direction unclear", "No link once studies are combined", "A link found only in animal studies"], 1,
+                "The association is robust across studies, but they are correlational, and use also impairs closeness."),
+              Q("A client on methadone hears that connection, not medication, is the real cure. What fits the dated verdict?",
+                ["Taper off, since connection is enough", "Keep the medication and build connection too", "Avoid groups, since they compete with medication", "Wait to connect until the medication ends"], 1,
+                "As of 2026, connection protects and maintains recovery but does not substitute for medication for opioid use disorder.")
+            ]
+          },
+          /* ============ phase 3o-3: AD · MODELS OF ADDICTION, lessons 5–6 (steelmen; same rules; running client Andrés) ============ */
+          "m8a.5": {
+            home: "Andrés’s doctor told him it’s a brain disease, so it’s not his fault. Then why did he stay clean the whole time his daughter lived with him?",
+            keys: [["What does it mean to steelman a model?", "State it at its strongest: no cartoons, grant its evidence and its motive, then press on what it cannot explain. The aim is not to win by default but to hold the strongest view because you met the strongest objections."],
+              ["What is the brain disease model of addiction?", "Leshner’s (1997) “chronic, relapsing disease that results from the prolonged effects of drugs on the brain”: use hijacks reward, sensitizes cues, recruits stress systems and weakens prefrontal control (Volkow, Koob & McLellan 2016). The brain changes are robust; “disease” as the full account is contested."],
+              ["What is the choice view of addiction?", "Heyman’s (2009) behavioural economics: use is voluntary operant behaviour, and what fails is the time horizon, as the local choice (the drug now) beats the global one (health, work, family later). It owns the fact that most people recover, often without treatment."],
+              ["What is the dated verdict?", "As of 2026: brain change is real and medically important, and so is sensitivity to choice; “disease” and “choice” are both partial descriptions. Confidence moderate."]],
+            steps: [
+              { kind: "idea", lvl: "f", title: "How to steelman", body: "<p><b>No cartoons.</b> The moral model is not “just say no”. The brain disease model is not “the person is a broken machine”.</p>" +
+                "<p><b>Grant the evidence.</b> Say what each model gets right before you push.</p>" +
+                "<p><b>Grant the motive.</b> Most models try to reduce stigma, save lives or restore dignity. Attack the claim, not the motive.</p>" +
+                "<p><b>Then press.</b> What can it not explain? What does it force us to ignore?</p>" +
+                "<p><b>So:</b> the aim is not to win by default, but to hold the strongest view because you met the strongest objections.</p>" },
+              { kind: "hook", title: "Andrés, and his doctor’s words", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>He repeats what his doctor told him, then stops.</p>" +
+                '<p class="hook">“My doctor told me it’s a brain disease, so I guess it’s not my fault — but then why did I stay clean the whole time my daughter lived with me?”</p>' },
+              { kind: "predict", id: "m8a.5:predict", title: "Your call first",
+                case: ["Andrés’s doctor called his addiction a brain disease.",
+                  { t: "He saw the doctor at a community clinic.", irrelevant: true },
+                  "Andrés concluded it is not his fault.",
+                  "He stayed clean the whole time his daughter lived with him.",
+                  { t: "His daughter has since moved to another city.", irrelevant: true },
+                  "He asks how both can be true."],
+                q: "Which reading best fits both facts?",
+                options: ["Brain change makes stopping hard, and his use still responded to what mattered to him", "It is a disease, so his clean time was luck", "It is a choice, so he only needs to want it more"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading this lesson builds: both facts are real. Repeated use changes the brain and makes stopping hard. And his use responded when something he valued was in front of him every day. Neither “disease” nor “choice” alone holds both.",
+                hints: ["Take each fact seriously; don’t explain one away.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what changed in his days while his daughter lived with him."] },
+              { kind: "idea", lvl: "f", steelman: true, title: "Steelman ✓ · Brain disease: the claim", body: "<p>Leshner (1997, Science) " + ev("c") + ": addiction is “a chronic, relapsing disease that results from the prolonged effects of drugs on the brain”.</p>" +
+                "<p>Volkow, Koob and McLellan (2016, NEJM) " + ev("r") + " set out the circuit story: repeated use <b>hijacks reward</b>, <b>sensitizes cues</b>, <b>recruits stress systems</b> and <b>weakens prefrontal control</b>.</p>" +
+                "<p><b>So:</b> on this side, compulsion is a circuit problem, not a sermon problem.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Brain disease: why it is strong", body: "<p><b>It explains wanting after liking fades</b>, and relapse set off by stress and cues.</p>" +
+                "<p><b>It explains adolescence</b> as a window of vulnerability, while control circuits are still maturing.</p>" +
+                "<p><b>It explains why medications work</b>: agonists, antagonists and anti-craving drugs act on the systems the model names.</p>" +
+                "<p><b>Its moral gain.</b> If the brain has changed, punishment is the wrong first tool. That is why NIDA pushed the model.</p>" +
+                "<p><b>So:</b> grant it the evidence and the motive: it aimed to move addiction from the courtroom to the clinic.</p>" },
+              { kind: "idea", lvl: "p", title: "Press: what brain disease cannot explain", body: "<p><b>Most people recover.</b> Most people who meet criteria for addiction eventually stop, often without treatment (Heyman 2009) " + ev("r") + ". A chronic disease should not remit so often on its own.</p>" +
+                "<p><b>Use responds.</b> It shifts with incentives, meaning and new bonds, as Andrés’s clean years with his daughter show.</p>" +
+                "<p><b>Change is not disease.</b> Brains also change in love, sport and grief, so change alone does not make a disease (Lewis 2018; Satel &amp; Lilienfeld 2014, Front Psychiatry) " + ev("c") + ".</p>" +
+                "<p><b>Promises.</b> Hall, Carter and Forlini (2015, Lancet Psychiatry) " + ev("c") + " asked whether the model is supported and has delivered; stigma has not clearly fallen.</p>" +
+                "<p><b>So:</b> the brain changes are real; “chronic disease” as the whole story is what is pressed.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Choice: a failure of time horizon", body: "<p>Heyman (2009, Addiction: A Disorder of Choice) " + ev("c") + ": drug use is <b>voluntary operant behaviour</b>, shaped by its results, not compelled like a seizure.</p>" +
+                "<p>What fails is the <b>time horizon</b>. The <b>local book</b> (the drug now) beats the <b>global book</b> (health, work, family later), choice by choice.</p>" +
+                "<p>People quit when the global frame becomes vivid: new roles, rising costs, new information.</p>" +
+                "<p>The high recovery rate without treatment is a fact this view owns, not one it explains away.</p>" +
+                "<p><b>So:</b> on this side, Andrés stayed clean because his daughter made the global book visible every day.</p>" },
+              { kind: "contrast", id: "m8a.5:contrast", title: "Two weeks, one difference",
+                q: "Which week does the choice view say should go better?",
+                cases: [
+                  { label: "Week A", s: ["Andrés works his shifts.", { t: "It rains most days.", irrelevant: true }, "He attends group.", { t: "Evenings are empty; nothing waits for him tomorrow.", diff: true }] },
+                  { label: "Week B", s: ["Andrés works his shifts.", { t: "It rains most days.", irrelevant: true }, "He attends group.", { t: "His daughter stays with him, and he walks her to school each morning.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["The weather", "Whether a later good is vivid in his day", "Whether he works his shifts", "Whether he attends group"],
+                feature: 1,
+                why: "In Week B the global book is in front of him every morning: a role he values and a cost he can see. Heyman’s view predicts use falls when the later good becomes vivid. Week A leaves only the local book.",
+                hints: ["Find the one sentence where the two weeks part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which week makes tomorrow visible."] },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · The moral view, steeled", body: "<p><b>Not “weak people deserve pain”.</b> Persons are answerable for patterned action.</p>" +
+                "<p><b>Dignity.</b> Removing all blame can remove dignity, treating the person as a machine that cannot answer.</p>" +
+                "<p><b>Real goods.</b> Keeping promises and standing by a future self are worth naming.</p>" +
+                "<p><b>Shame and responsibility differ.</b> Shame that isolates is toxic; responsibility that invites a person back into the moral community can be repair.</p>" +
+                "<p><b>So:</b> on this side, being asked to answer is a form of respect. It fails when it ignores trauma, poverty and brain change.</p>" },
+              { kind: "idea", lvl: "p", title: "Press: what choice cannot explain", body: "<p><b>Late-stage compulsion.</b> Some people use against every stated wish, again and again.</p>" +
+                "<p><b>Withdrawal.</b> A body in withdrawal does not weigh books calmly.</p>" +
+                "<p><b>Overdose despite knowing better.</b> People die who knew the risk and wanted to live.</p>" +
+                "<p><b>Shame through the back door.</b> “Choice” can slide back into blame, the very stigma the disease model was built to reduce.</p>" +
+                "<p><b>So:</b> sensitivity to choice is real; choice as the whole story is what is pressed.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh the sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                "<p>It complements, and does not repeat, the verdict in “Vietnam and Rat Park: environment and addiction” in Meaning, beliefs &amp; stories, which weighed environment against brain change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Brain change is real and medically important, and sensitivity to choice is real. “Disease” and “choice” are both partial descriptions.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Evidence that people with severe disorder show no sensitivity to incentives, such as contingency management failing at high severity.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "mastery", lvl: "m", title: "When a frame becomes a verdict on the person", body: '<p class="x-crit"><b>Strongest critique</b>Splitting the difference can be a dodge: “both partial” may hide that the models disagree on what to do. The disease frame was meant to cut stigma and has not clearly done so; the choice frame owns recovery but can reopen blame. Calling them all partial does not tell a clinician which to lead with today.</p>' +
+                "<p><b>The counter.</b> Let the person’s state decide: lead with medication and safety where the body is in charge, and with incentives, roles and responsibility where choice is open. Most people need both, in turns.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, both answers", body: who("<b>His counsellor</b> answers his question without picking a side.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>Told it is a brain disease. Stayed clean the whole time his daughter lived with him.</dd></div>' +
+                "<div><dt>What each map offers</dt><dd>Brain disease: why stopping is hard, and why medication may help. Choice: why his daughter’s presence mattered. Moral view: a future self he can keep faith with.</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That “not his fault” means “not his to work on”, or that his clean time proves it was easy.</dd></div></dl>" +
+                '<p class="x-note">For the room: “It’s not your fault that it’s hard, and it’s still yours to work on.” · <span lang="es">“No es tu culpa que sea difícil, y aun así te toca trabajarlo.”</span></p>' },
+              { kind: "teachback", id: "m8a.5:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager how his doctor’s words and his clean years with his daughter can both be true: how to steelman, with no cartoons, granting evidence and motive, then pressing; the brain disease model from Leshner, and the circuit story of reward, cues, stress and prefrontal control from Volkow, Koob and McLellan; why it is strong, from wanting after liking to medications, and its moral gain; the press from Heyman’s recovery figures, Lewis and Satel and Lilienfeld on change that is not disease, and Hall, Carter and Forlini on unmet promises; Heyman’s choice view, the local and global books, and the press of compulsion, withdrawal, overdose and returning shame; the moral view steeled, responsibility as repair; and the dated verdict, both partial, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Brain changes with repeated use " + ev("r") + ". Disease as the full account " + ev("c") + ". Most people recovering, often without treatment " + ev("r") + ". Use responding to incentives " + ev("r") + ". Choice as the full account " + ev("c") + ". The moral view as a clinical guide " + ev("c") + ".</p>" +
+                "<p><b>So:</b> brain change explains why it is hard; choice explains why it can shift; hold both, and say which leads for this person now.</p>" },
+              Q("Which of these is a cartoon, not a steelman, of the brain disease model?",
+                ["Repeated use changes reward, cue and control circuits", "The person is a broken machine with no say", "Medications work by acting on those circuits", "Punishment is the wrong first tool"], 1,
+                "The model’s strongest form names circuit changes and their clinical uses; it does not say the person has no part."),
+              Q("In Heyman’s choice view, what fails in addiction?",
+                ["The person’s will is destroyed by drugs", "The time horizon: the drug now beats the life later", "The body’s ability to feel any pleasure", "The person’s knowledge of the risks"], 1,
+                "The local book beats the global book; people quit when the later goods become vivid."),
+              Q("Which finding would most damage the app’s verdict?",
+                ["Brain scans showing change in people with addiction", "Contingency management failing at high severity", "Many people recovering without treatment", "Medication lowering overdose deaths"], 1,
+                "If people with severe disorder showed no sensitivity to incentives, choice would no longer be part of the picture for them.")
+            ]
+          },
+          "m8a.6": {
+            home: "Andrés goes to NA “for the people, not the God part”. His brother, raised in the same house and neighbourhood, never used. Which map explains which fact?",
+            keys: [["What is the learning model of addiction?", "Lewis’s (2015; 2018) view that the brain changes because that is what brains do when a goal is pursued hard and often: accelerated, narrowed learning, with recovery also a kind of learning. Contested as a full account."],
+              ["What does the Cochrane review say about AA?", "Kelly, Humphreys and Ferri (2020): AA and Twelve-Step Facilitation were as good as or better than other treatments for abstinence. Robust."],
+              ["What does the public health map add?", "Populations become addicted when belonging, work and meaning collapse and strong, cheap drugs are easy to get (Alexander 2008), so overdose prevention, housing and less stigma are clinical acts."],
+              ["What is the dated verdict?", "As of 2026: each map captures a real level, and none is complete alone. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, and his brother", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>He says he goes to NA “for the people, not the God part”.</p>" +
+                '<p class="hook">His brother, raised in the same house and the same neighbourhood, never used.</p>' },
+              { kind: "predict", id: "m8a.6:predict", title: "Your call first",
+                case: ["Andrés and his brother grew up in the same house.",
+                  { t: "The house had a small yard.", irrelevant: true },
+                  "They grew up in the same neighbourhood.",
+                  "Drugs were easy to get there.",
+                  { t: "His brother is the older of the two.", irrelevant: true },
+                  "His brother never used."],
+                q: "Which map does his brother’s path press hardest?",
+                options: ["Public health: the same setting gave two different paths", "Twelve-step: his brother never needed a fellowship", "Learning: his brother learned a different habit"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading: the public health map says the setting is part of the cause. His brother lived in the same setting and never used, so setting cannot be the whole cause. Something else, such as body, history or meaning, differed between them.",
+                hints: ["Ask which map puts most weight on the setting.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what the two brothers shared, and what they did not."] },
+              { kind: "idea", lvl: "f", title: "Four more maps", body: "<p>This lesson steelmans four more maps, each at its strongest:</p>" +
+                "<ul><li><b>Learning:</b> addiction as deep, narrowed learning.</li>" +
+                "<li><b>Twelve-step:</b> vulnerability, obsession and a fellowship that answers it.</li>" +
+                "<li><b>Public health:</b> the setting as part of the cause.</li>" +
+                "<li><b>Trauma:</b> use as a function that quiets pain.</li></ul>" +
+                "<p><b>So:</b> grant each its evidence and motive, then press where it runs out.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Learning: brains change because they learn", body: "<p>Lewis (2015, The Biology of Desire; 2018, NEJM, “Brain change in addiction as learning, not disease”) " + ev("c") + ": brains change because that is what brains do when a goal is pursued <b>hard and often</b>.</p>" +
+                "<p>Addiction is <b>accelerated, narrowed learning</b>. Recovery is learning too.</p>" +
+                "<p>It keeps the neuroscience without the chronic-disease package, and it is the closest scientific cousin to the relational map of this module.</p>" +
+                "<p><b>So:</b> on this side, Andrés learned a bond, and can learn others.</p>" },
+              { kind: "idea", lvl: "p", title: "Press: learning", body: "<p><b>Why this learning?</b> Other deep habits, such as running or chess, do not destroy lives. The model has to say why this one does.</p>" +
+                "<p><b>Toxicity.</b> It may underplay what the drugs themselves do to the body.</p>" +
+                "<p><b>So:</b> learning explains the shape of the change; it has less to say about the harm.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Twelve-step: the Jellinek hybrid", body: "<p>Jellinek (1960, The Disease Concept of Alcoholism) " + ev("c") + " and AA: some people cannot safely use at all.</p>" +
+                "<p>Three parts: a <b>bodily vulnerability</b> (the “allergy”), a <b>mental obsession</b>, and a <b>spiritual malady</b>.</p>" +
+                "<p>Recovery is fellowship, honest inventory, amends, and a life beyond the self. Power is communal and narrative.</p>" +
+                "<p><b>The evidence.</b> Kelly, Humphreys and Ferri (2020, Cochrane) " + ev("r") + ": AA and Twelve-Step Facilitation were as good as or better than other treatments for abstinence.</p>" +
+                "<p><b>So:</b> on this side, Andrés’s “for the people” is not a side effect; the fellowship is the mechanism.</p>" },
+              { kind: "contrast", id: "m8a.6:contrast", title: "Two notes, one difference",
+                q: "Which note points to fellowship as what keeps him coming?",
+                cases: [
+                  { label: "Note A", s: ["Andrés goes to NA on Tuesdays.", { t: "The meeting is in a church basement.", irrelevant: true }, "He sits near the back.", { t: "He says: “I go because my parole officer checks the sheet.”", diff: true }] },
+                  { label: "Note B", s: ["Andrés goes to NA on Tuesdays.", { t: "The meeting is in a church basement.", irrelevant: true }, "He sits near the back.", { t: "He says: “I go because they call me when I miss a week.”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where the meeting is held", "Whether people in the group reach for him", "Which day he goes", "Where he sits"],
+                feature: 1,
+                why: "Note A describes attendance under supervision. Note B describes people who notice his absence and reach for him: the communal power the twelve-step map names.",
+                hints: ["Find the one sentence where the two notes part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which note has someone noticing him."] },
+              { kind: "idea", lvl: "p", title: "Press: twelve-step", body: "<p><b>Many recover without AA</b>, as the choice map showed.</p>" +
+                "<p><b>Non-theists.</b> The “God part” keeps some people away, as Andrés’s own words suggest.</p>" +
+                "<p><b>Behavioural addictions</b> fit the “allergy” less well.</p>" +
+                "<p><b>One path.</b> A single narrative offered as the only honest path can shut out others.</p>" +
+                "<p><b>So:</b> the fellowship works for many; the claim that it is the only way is what is pressed.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Public health: the cage is part of the cause", body: "<p>Alexander (2008) " + ev("c") + " and Rat Park: if isolated rats drink and housed rats mostly do not, the cage is part of the cause. Rat Park is covered in “Vietnam and Rat Park: environment and addiction” in Meaning, beliefs &amp; stories, and not repeated here.</p>" +
+                "<p>Populations become addicted when <b>belonging, work and meaning collapse</b> and strong, cheap drugs are easy to get.</p>" +
+                "<p>So <b>overdose prevention, housing and reduced stigma</b> are clinical acts. Harm reduction keeps people alive long enough to change.</p>" +
+                "<p><b>So:</b> on this side, treating one person while the setting stays the same is half the work.</p>" },
+              { kind: "idea", lvl: "p", title: "Press: public health", body: "<p><b>Siblings in the same cage.</b> Andrés’s brother grew up in the same house and neighbourhood and never used.</p>" +
+                "<p>Setting raises the odds for a population; it does not decide which person takes which path.</p>" +
+                "<p><b>So:</b> the cage explains rates; it cannot explain the brother.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Trauma: use has a function", body: "<p>Khantzian (1985; 1997) " + ev("c") + ": use has a function; a <b>specific effect quiets a specific pain</b>.</p>" +
+                "<p>Childhood adversity, insecure attachment and untreated psychiatric states raise the odds " + ev("r") + ".</p>" +
+                "<p>Maté’s trauma frame " + ev("c") + " is a popular account, widely read and contested by researchers; it is not a tested model.</p>" +
+                "<p>Stop the function without replacing it, and the organism looks for another object.</p>" +
+                "<p><b>So:</b> on this side, ask what the use was doing before asking him to stop it.</p>" },
+              { kind: "idea", lvl: "p", title: "Press: trauma", body: "<p><b>Many traumatized people never become addicted.</b> Trauma raises odds; it is not the whole story.</p>" +
+                "<p>The drug-matching claim, that people pick drugs to fit their pain, has mixed support.</p>" +
+                "<p><b>So:</b> trauma is a door to ask about, not a cause to assume.</p>" },
+              Object.assign(Q("Drill · Andrés says: “I go to NA for the people, not the God part.” Which map explains this best?",
+                ["Twelve-step", "Public health", "Trauma", "Learning"], 0,
+                "Fellowship as the power that keeps him coming is the twelve-step map’s communal mechanism."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés says: “When my mother died, it was the only thing that made my head go quiet.” Which map explains this best?",
+                ["Learning", "Trauma and self-medication", "Public health", "Twelve-step"], 1,
+                "A specific effect quieting a specific pain is the trauma and self-medication map."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés says: “After I lost my job, everyone on my block was using, and it was cheap.” Which map explains this best?",
+                ["Trauma", "Twelve-step", "Public health", "Learning"], 2,
+                "Lost work, a using setting and cheap supply are the public health map’s causes."), { lvl: "p" }),
+              Object.assign(Q("Drill · Andrés says: “The more I used, the less anything else could hold my mind.” Which map explains this best?",
+                ["Learning", "Public health", "Twelve-step", "Trauma"], 0,
+                "Accelerated, narrowed learning around one goal is Lewis’s learning map."), { lvl: "p" }),
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh the maps yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Each map captures a real level: learning, fellowship, setting and function. None is complete alone.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A single-level model that predicts onset and recovery better than combined models.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "mastery", lvl: "m", title: "When every map is right, none is tested", body: '<p class="x-crit"><b>Strongest critique</b>“Each map captures a level” can absorb any case after the fact, which makes it hard to prove wrong. Only the twelve-step evidence rests on a robust trial base; the learning, dislocation and trauma maps rest mostly on theory, animal work and correlation, and the popular trauma frame outruns its studies.</p>' +
+                "<p><b>The counter.</b> Use each map to make a prediction for this person, check it against what happens, and drop the map that keeps missing.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés, four maps", body: who("<b>His counsellor</b> notes which map each fact points to.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>Goes to NA “for the people, not the God part”. His brother, raised in the same house and neighbourhood, never used.</dd></div>' +
+                "<div><dt>Maps to explore</dt><dd>Twelve-step fellowship (the people); learning (a narrowed bond he can unlearn); public health (his block and work); trauma (his mother’s death).</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That he must accept the God part to belong, or that his setting decided his path.</dd></div></dl>" +
+                '<p class="x-note">For the room: “Which part of the program keeps you coming back?” · <span lang="es">“¿Qué parte del programa te hace regresar?”</span></p>' },
+              { kind: "teachback", id: "m8a.6:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager why he goes to NA for the people and why his brother never used: Lewis’s learning model, accelerated narrowed learning with recovery as learning, and its press, why this learning destroys lives and toxicity; the twelve-step and Jellinek hybrid, bodily vulnerability, mental obsession and spiritual malady, fellowship, inventory and amends, with the robust Cochrane evidence from Kelly, Humphreys and Ferri, and its press, recovery without AA, non-theists, behavioural addictions and one path; Alexander’s public health map, the cage as part of the cause, harm reduction, and the press of siblings in the same cage; the trauma and self-medication map from Khantzian, with Maté’s popular, contested frame, and its press; the drill matching his statements to maps; and the dated verdict, each map a real level, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>AA and Twelve-Step Facilitation for abstinence " + ev("r") + ". Learning as the full account " + ev("c") + ". Dislocation as a cause " + ev("c") + ". Childhood adversity raising odds " + ev("r") + ". Specific drug matching " + ev("c") + ". Maté’s popular trauma frame " + ev("c") + ".</p>" +
+                "<p><b>So:</b> each map sees a real level, from learning to fellowship to setting to function; match the map to the fact, and keep the others in view.</p>" },
+              Q("What does the Cochrane review by Kelly, Humphreys and Ferri find?",
+                ["AA works only for people with a faith", "AA and Twelve-Step Facilitation as good as or better for abstinence", "AA is worse than no treatment", "Twelve-step programs have never been tested"], 1,
+                "Across many trials, AA and Twelve-Step Facilitation matched or beat other treatments for abstinence."),
+              Q("Why does Andrés’s brother press the public health map?",
+                ["He used a different drug", "He shared the setting but took a different path", "He went to a different program", "He moved away as a child"], 1,
+                "Setting raises odds across a population; it cannot alone explain why two brothers in it diverged."),
+              Q("What is the status of Maté’s trauma frame?",
+                ["A robust, tested model", "Popular and contested", "Largely debunked by trials", "The basis of the Cochrane review"], 1,
+                "It is widely read but contested; childhood adversity raising odds is robust, the broader frame is not tested.")
+            ]
+          },
+          /* ---- PHASE 3o-4: AD lessons 7–8 · six maps side by side; recovery as re-entering relationships ---- */
+          "m8a.7": {
+            home: "Andrés’s counselor, parole officer, NA sponsor and psychiatrist each describe his problem differently. Which map is each one speaking from?",
+            keys: [["What are the six maps?", "Relational-organismic (this module’s synthesis), brain disease, choice and economics, learning and development, the 12-step hybrid, and public health. Each answers the same questions differently."],
+              ["Where is each rival map strongest?", "Brain disease is the most institutional; choice is the strongest rival on agency, learning on the brain, and public health on context; the 12-step map is the most common in recovery culture."],
+              ["How can two maps share a fact and still disagree?", "Both can accept that repeated use changes the brain, and read it differently: a chronic disorder to manage, or learning doing its job that new learning can redirect."],
+              ["What is the dated verdict?", "As of 2026: each map is true at its own level and partial as the only level; the relational map is used here to hold them together, and is untested as a whole. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, four descriptions", body: who("<b>Andrés</b>, in his thirties, in a reentry program, uses opioids and alcohol.") +
+                "<p>In one week, four people describe his problem: his counselor, his parole officer, his NA sponsor and his psychiatrist.</p>" +
+                '<p class="hook">Each one describes the same man in different words.</p>' },
+              { kind: "predict", id: "m8a.7:predict", title: "Your call first",
+                case: ["An outreach worker says: “Every block he has lived on had cheap heroin and no work.”",
+                  { t: "She visits on Thursdays.", irrelevant: true },
+                  "She hands him naloxone.",
+                  { t: "She has worked in the area for years.", irrelevant: true },
+                  "She is pushing for him to get stable housing."],
+                q: "Which map is she speaking from?",
+                options: ["Public health and social", "Choice and economics", "The 12-step hybrid"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading: cheap supply, no work, harm reduction and housing are the public health map’s cells, row by row. This lesson lays all six rows side by side, so you can hear which map a sentence comes from.",
+                hints: ["Listen for where she puts the cause: in him, or around him.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what she wants changed, and where it is."] },
+              { kind: "idea", lvl: "f", title: "The six maps at a glance", body: "<p>Six maps of the same problem, each with the ground where it is strongest:</p>" +
+                "<ul><li><b>Relational-organismic</b>: this module’s map. Participation is the unit; it is a synthesis " + ev("c") + ".</li>" +
+                "<li><b>Brain disease</b>: the most institutional (Leshner 1997; Volkow, Koob &amp; McLellan 2016).</li>" +
+                "<li><b>Choice and economics</b>: the strongest rival on agency (Heyman 2009).</li>" +
+                "<li><b>Learning and development</b>: the strongest rival on the brain (Lewis 2015; 2018).</li>" +
+                "<li><b>12-step, spiritual disease</b>: the most common in recovery culture (Jellinek 1960; AA).</li>" +
+                "<li><b>Public health and social</b>: the strongest rival on context (Alexander 2008; 2012), with harm reduction.</li></ul>" +
+                "<p>Trauma and self-medication, from the last lesson, sits inside the relational row as one of the needs a bond can start from.</p>" +
+                "<p><b>So:</b> each map has a home ground; knowing it tells you when to reach for that map.</p>" },
+              { kind: "idea", lvl: "p", title: "Compare: tap a map", body: "<p>Tap a map to see its row across ten lenses. Then tap another and read the same lens again.</p>" +
+                addCompare() +
+                "<p class=\"dim\">Rows are the deck’s summaries, not each school’s own words.</p>" +
+                "<p><b>So:</b> the maps differ less on the facts than on the unit they watch, and so on what recovery, agency and policy mean.</p>" },
+              { kind: "contrast", id: "m8a.7:contrast", title: "Two notes, one fact",
+                q: "Which note reads his brain change as learning doing its job?",
+                cases: [
+                  { label: "Note A", s: ["Andrés has used opioids most days for years.", { t: "The note was written in the spring.", irrelevant: true }, "The writer accepts that his brain has changed.", { t: "It reads: “A chronic brain disorder; we should expect relapses.”", diff: true }] },
+                  { label: "Note B", s: ["Andrés has used opioids most days for years.", { t: "The note was written in the spring.", irrelevant: true }, "The writer accepts that his brain has changed.", { t: "It reads: “His brain learned this goal hard and often; it can learn others.”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["When the note was written", "What the brain change is taken to mean", "Whether the brain change is real", "How long he has used"],
+                feature: 1,
+                why: "Both notes share the fact: repeated use changed his brain. Note A reads it as a chronic disorder to manage; Note B reads it as learning, the brain doing what brains do. Same fact, different meaning, and different next steps.",
+                hints: ["Find the one sentence where the two notes part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what each note thinks the change is for."] },
+              Object.assign(Q("Drill · Which map said it? “Chronic care; medication plus behaviour; relapse expected.”",
+                ["Learning and development", "Brain disease", "Public health and social", "12-step hybrid"], 1,
+                "Recovery as chronic care with relapse expected is the brain disease row."), { lvl: "p" }),
+              Object.assign(Q("Drill · Which map said it? “Change contingencies; do not fatalize.”",
+                ["Choice and economics", "Relational-organismic", "Brain disease", "12-step hybrid"], 0,
+                "A policy tilt toward incentives, and against fatalism, is the choice row."), { lvl: "p" }),
+              Object.assign(Q("Drill · Which map said it? “Powerless over the object; powerful in surrender.”",
+                ["Public health and social", "Learning and development", "12-step hybrid", "Choice and economics"], 2,
+                "Agency as powerlessness answered by surrender is the 12-step row."), { lvl: "p" }),
+              Object.assign(Q("Drill · Which map said it? “A learner whose brain is doing its job.”",
+                ["Brain disease", "Public health and social", "Relational-organismic", "Learning and development"], 3,
+                "The person as a learner, with brain change as ordinary learning, is the learning row."), { lvl: "p" }),
+              { kind: "example", lvl: "p", title: "Four voices, four maps", body: who("<b>Four people</b> describe Andrés in the same week. Predict each map before you open it.") +
+                '<dl class="x-dossier"><div><dt>Counselor</dt><dd>“When his mother died he had no one to call; the drug became the friend that always answered.”' +
+                '<details class="x-posl__h"><summary>Which map?</summary><p>Relational-organismic: a need, a dislocation and a reliable object.</p></details></dd></div>' +
+                '<div><dt>Parole officer</dt><dd>“He used less in the months he had a job and a curfew. When the costs are clear, he chooses better.”' +
+                '<details class="x-posl__h"><summary>Which map?</summary><p>Choice and economics: incentives, costs and a time horizon.</p></details></dd></div>' +
+                '<div><dt>NA sponsor</dt><dd>“He can’t drink like other people. Alone, his thinking takes him back; in the rooms, he stays.”' +
+                '<details class="x-posl__h"><summary>Which map?</summary><p>The 12-step hybrid: bodily vulnerability, obsession, and fellowship as the answer.</p></details></dd></div>' +
+                '<div><dt>Psychiatrist</dt><dd>“His brain has adapted to opioids. Buprenorphine and steady follow-up are his best protection.”' +
+                '<details class="x-posl__h"><summary>Which map?</summary><p>Brain disease: changed circuits, medication and chronic care.</p></details></dd></div>' +
+                "<div><dt>Not assumed</dt><dd>That one voice is right and the others wrong, or that Andrés agrees with any of them.</dd></div></dl>" +
+                '<p class="x-note">For the room: “Four people describe you four ways. Which one sounds most like you?” · <span lang="es">“Cuatro personas te describen de cuatro maneras. ¿Cuál se parece más a ti?”</span></p>' },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh the maps yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Each map is true at its own level and partial when it is the only level. The relational map is the app’s working frame for holding them together; it is a synthesis, untested as a whole.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate as a teaching frame; low as a tested theory.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A single map that predicts onset and recovery better than combined maps, across settings.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "position", id: "m8a.7:position", qid: "q-addiction", question: "What is addiction, at bottom?", title: "Weigh, then take a position", views: ADD_VIEWS, about: "about what addiction is" },
+              { kind: "mastery", lvl: "m", title: "When a table flattens six schools", body: '<p class="x-crit"><b>Strongest critique</b>A table makes six maps look like six complete, equal rivals. The cells are the deck’s summaries, not each school’s own words, and a short cell hardens easily into a cartoon. The relational row is written by the side that proposes it.</p>' +
+                "<p><b>The counter.</b> Use the table to hear which map a sentence comes from, then read the primary text, and check that the map’s own holders would sign its row.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "teachback", id: "m8a.7:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager why four people describe his problem four ways: the six maps and the home ground of each, from the institutional brain disease map of Leshner and Volkow, to Heyman’s choice map on agency, Lewis’s learning map on the brain, the 12-step map of Jellinek and AA in recovery culture, and Alexander’s public health map on context, with the relational map as a synthesis; the ten lenses, from unit of analysis to hard case and what each risks ignoring; how two maps can share brain change and disagree on its meaning; and the dated verdict, each map true at its level, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Brain changes with repeated use " + ev("r") + ". Most people recovering, often without treatment " + ev("r") + ". AA and Twelve-Step Facilitation for abstinence " + ev("r") + ". Isolation linked with risk " + ev("r") + ". Any single map as the full account " + ev("c") + ". The relational synthesis as a tested theory " + ev("c") + ".</p>" +
+                "<p><b>So:</b> six maps watch six units; hear which one a sentence speaks from, and ask what it risks ignoring.</p>" },
+              Q("Which map is the strongest rival on agency?",
+                ["Brain disease", "Choice and economics", "Public health and social", "12-step hybrid"], 1,
+                "Heyman’s choice map keeps the person choosing, with a bad time horizon."),
+              Q("Two maps agree that repeated use changes the brain. What do they disagree on?",
+                ["Whether the change is real", "What the change means and what to do about it", "Whether drugs reach the brain", "Whether anyone recovers"], 1,
+                "The fact is shared; its meaning, a disorder or learning, and so the next steps, are not."),
+              Q("What is a map’s “hard case” for?",
+                ["Proving the map wrong", "Naming the fact it struggles most to explain", "Ranking it against the others", "Listing its treatments"], 1,
+                "Each row names its own hard case: the fact its rivals press, and the place to test it.")
+            ]
+          },
+          "m8a.8": {
+            home: "Andrés, sixty days into his program, has a job interview, calls his sister on Sundays, and sometimes sits in his car outside the old bar. What is recovery here?",
+            keys: [["What is recovery on the relational map?", "Re-entering relationships: practising and being held in different bonds, not only quitting an object."],
+              ["What is Living in Balance?", "A NIDA-funded treatment manual by Hoffman and Landry (Hazelden / Danya International) that treats addiction as a biopsychosocial problem that neglects whole areas of life, and rebuilds them area by area."],
+              ["What is a balance check?", "Asking, across body, mind, relationships, meaning, institutional life and balance, which area is starved, and which bond could take over the old object’s job."],
+              ["What is the dated verdict?", "As of 2026: addiction is learned, embodied and socially situated participation in a relationship that once solved a problem. Confidence moderate as a clinical frame, low as a scientific theory."]],
+            steps: [
+              { kind: "hook", title: "Andrés, sixty days in", body: who("<b>Andrés</b>, in his thirties, is sixty days into his reentry program.") +
+                "<p>He says he has a job interview, and he calls his sister on Sundays.</p>" +
+                '<p class="hook">And sometimes he sits in his car outside the old bar.</p>' },
+              { kind: "predict", id: "m8a.8:predict", title: "Your call first",
+                case: ["Andrés is sixty days into his program.",
+                  { t: "He drives an old car.", irrelevant: true },
+                  "He has a job interview.",
+                  "He calls his sister on Sundays.",
+                  { t: "His sister lives across town.", irrelevant: true },
+                  "Sometimes he sits in his car outside the old bar."],
+                q: "What best describes what he is doing?",
+                options: ["Moving into new bonds while an old one still calls", "Failing, because he still goes to the bar", "Done, because he has a job interview"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading this lesson builds: a job and his sister are new bonds he is entering; the bar is an old one that still calls. Recovery, on this map, is that move, and it is not finished.",
+                hints: ["Read every fact; don’t let one cancel the others.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say which facts are new bonds and which is an old one."] },
+              { kind: "idea", lvl: "f", title: "Not only quitting: re-entering", body: "<p>The organism does not only quit. It <b>re-enters relationships</b>: with work, with family, with its own body and time.</p>" +
+                "<p>Leaving an object leaves its job undone: the relief, company or meaning it gave. Bonds and drugs share reward and stress systems (Burkett &amp; Young 2012) " + ev("c") + ", and bonds are where regulation is first learned (Bowlby 1969/1982).</p>" +
+                "<p>Something has to take that job, or the old bond calls.</p>" +
+                "<p><b>So:</b> recovery is a move into new bonds, not only an exit from one.</p>" },
+              { kind: "idea", lvl: "p", title: "Living in Balance", body: "<p>Hoffman and Landry’s <b>Living in Balance</b> (Hazelden / Danya International), a NIDA-funded treatment manual, treats addiction as a <b>biopsychosocial</b> problem.</p>" +
+                "<p>Use does not only add a harm; it <b>neglects whole areas of life</b>. Treatment rebuilds those areas.</p>" +
+                "<p><b>So:</b> recovery work is done area by area, not only at the object.</p>" },
+              { kind: "idea", lvl: "p", title: "Six areas of a life", body: "<ul><li><b>Body</b>: relearn sensation that is not only craving or numbness.</li>" +
+                "<li><b>Mind</b>: study how one participates, instead of only being used by the pattern.</li>" +
+                "<li><b>Relationships</b>: peers who make sobriety a belonging, not an exile.</li>" +
+                "<li><b>Spirit and meaning</b>: a reason to stay in the new bonds when the old object calls.</li>" +
+                "<li><b>Institutional life</b>: education and vocation as a future, the outer worlds of Bronfenbrenner (1979).</li>" +
+                "<li><b>Balance</b>: restore neglected bonds with work, family, health and self.</li></ul>" +
+                "<p><b>So:</b> each area is a place where the old object did a job, or where its absence starved something.</p>" },
+              { kind: "contrast", id: "m8a.8:contrast", title: "Two evenings, one difference",
+                q: "Which evening shows a new bond taking the old object’s job?",
+                cases: [
+                  { label: "Evening A", s: ["Andrés has a hard day at work.", { t: "He takes the bus home.", irrelevant: true }, "He feels the old pull.", { t: "He drives to the old bar and sits outside it alone.", diff: true }] },
+                  { label: "Evening B", s: ["Andrés has a hard day at work.", { t: "He takes the bus home.", irrelevant: true }, "He feels the old pull.", { t: "He calls his sister and talks until the pull passes.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["How he got home", "Where the pull goes: to a person, or to the old place", "Whether he had a hard day", "Whether he felt the pull"],
+                feature: 1,
+                why: "Both evenings have the same stress and the same pull. In Evening B the pull goes to his sister, who does the job the bar once did: company and calm. In Evening A the old place still holds that job.",
+                hints: ["Find the one sentence where the two evenings part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say where the pull goes each evening."] },
+              { kind: "idea", lvl: "m", title: "The synthesis, in six points", body: "<ul><li>Addiction studies relationships humans <b>start and keep</b>, not only molecules.</li>" +
+                "<li>The organism <b>participates</b> in every bond.</li>" +
+                "<li><b>Starting</b> usually tries to solve regulation, belonging or meaning.</li>" +
+                "<li><b>Keeping</b> it is learning, identity and context as much as compulsion.</li>" +
+                "<li>Treatment that ignores the <b>need under the bond</b> leaves the relationship hungry.</li>" +
+                "<li><b>Recovery</b> is practising and being held in different relationships.</li></ul>" +
+                "<p><b>So:</b> the module’s eight lessons fold into one sentence about bonds started, kept and replaced.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · What still favours the relational map", body: "<p><b>It absorbs the rivals’ best facts</b> as descriptions of how the organism participates: circuits, choices, learning, fellowship and cages.</p>" +
+                "<p><b>It keeps the person on stage.</b> Disease and population models are true at their level, and false when they are the only level.</p>" +
+                "<p><b>It explains substitution.</b> When one object goes, another often takes its place: the circuit is the hardware, the relationship is the job.</p>" +
+                "<p><b>It carries an ethic.</b> Responsibility without contempt; care without turning the person into a specimen.</p>" +
+                "<p><b>So:</b> on this side, the map earns its place by holding the others, not by replacing them.</p>" },
+              { kind: "mastery", lvl: "m", title: "It must stay honest", body: '<p class="x-crit"><b>Strongest critique</b>The map cannot deny overdose physics, heritability, or that some people need medication and structure more than insight: “a map that cannot use a methadone clinic is not serious.” It is still a synthesis, not a tested model.</p>' +
+                "<p><b>The deck’s own warning.</b> Quotes are shortened, and a steelman is a reconstruction. Read the primary text.</p>" +
+                "<p><b>The counter.</b> Use the map beside medication, overdose prevention and structure, never instead of them, and test its claims with each person.</p>" +
+                "<p><b>Person-first.</b> Say “a person in recovery”, never “an addict”.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh the module yourself first. Then compare with the deck’s provisional opinion, judged here, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>“Addiction is learned, embodied and socially situated participation in a relationship that once solved a problem; treatment changes the relationship, not only the molecule or the sermon.”</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate as an integrative clinical frame; low as a scientific theory until tested.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Prospective studies in which relationship and meaning variables add nothing beyond biological and availability predictors of recovery.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "idea", lvl: "p", title: "Clinical tool: a balance check", body: who("<b>His counselor</b> runs a balance check with Andrés, one area at a time.") +
+                '<dl class="x-dossier"><div><dt>Body</dt><dd>Observed: nothing yet. Ask: what does his body feel, besides craving or numbness?</dd></div>' +
+                "<div><dt>Mind</dt><dd>Observed: sits outside the old bar. Ask: what is he doing there, and what does he notice?</dd></div>" +
+                "<div><dt>Relationships</dt><dd>Observed: calls his sister on Sundays. Ask: who could he call on the other days?</dd></div>" +
+                "<div><dt>Meaning</dt><dd>Observed: nothing yet. Ask: what reason does he have to stay in the new bonds when the old place calls?</dd></div>" +
+                "<div><dt>Institutional life</dt><dd>Observed: has a job interview. Ask: what future would the job open?</dd></div>" +
+                "<div><dt>Balance</dt><dd>Ask: which area is starved? Which bond could take over the old object’s job?</dd></div></dl>" +
+                "<p><b>So:</b> the empty rows are not failures; they are where the next bond is needed.</p>" },
+              { kind: "example", lvl: "p", title: "The car outside the bar, three maps", body: who("<b>His counselor</b> reads one observation through three maps.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>Sometimes sits in his car outside the old bar.</dd></div>' +
+                "<div><dt>Brain disease</dt><dd>A cue-driven pull from changed circuits. Ask about craving, and whether medication and cue plans fit.</dd></div>" +
+                "<div><dt>Choice</dt><dd>The local book in front of him. Make the global book vivid: the interview, his sister.</dd></div>" +
+                "<div><dt>Relational</dt><dd>An old bond that still calls, with its job not yet taken. Ask what he goes there for.</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That sitting there means relapse is near, or that it means nothing.</dd></div></dl>" +
+                '<p class="x-note">For the room: “Recovery isn’t only leaving something. It’s moving into a new life — who will be there with you?” · <span lang="es">“La recuperación no es solo dejar algo. Es mudarte a una vida nueva: ¿quién va a estar ahí contigo?”</span></p>' },
+              { kind: "teachback", id: "m8a.8:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager what recovery means for him now: recovery as re-entering relationships, not only quitting; Hoffman and Landry’s Living in Balance and its six areas, body, mind, relationships, meaning, institutional life and balance; the synthesis in six points, from relationships started and kept to recovery as being held in different bonds; the steelman for the relational map, absorbing rivals’ facts, keeping the person on stage, explaining substitution, and its ethic; the strongest critique, overdose physics, heritability and the methadone clinic; a balance check and the car outside the bar read through three maps; and the dated verdict, confidence moderate as a clinical frame and low as a theory, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Insecure attachment linked with substance use disorder " + ev("r") + ". AA and Twelve-Step Facilitation for abstinence " + ev("r") + ". Brain changes with repeated use " + ev("r") + ". Attachment-based developmental models " + ev("c") + ". The brain disease model as the full account " + ev("c") + ". The relational synthesis as a tested theory " + ev("c") + ".</p>" +
+                "<p><b>So:</b> recovery is practising and being held in different relationships; ask which area is starved, and who will be there.</p>" },
+              Q("On the relational map, what is recovery?",
+                ["Quitting the object, and nothing more", "Re-entering and being held in different relationships", "Accepting that the brain cannot change", "Removing every cue from a person’s life"], 1,
+                "The organism does not only quit; it moves into new bonds that take the old object’s job."),
+              Q("Which finding would most damage the dated verdict?",
+                ["Brain changes with repeated use", "Relationship and meaning adding nothing beyond biology and availability in predicting recovery", "Methadone lowering overdose deaths", "People recovering through fellowship"], 1,
+                "That is the named defeater: if relationship variables add nothing, the map loses its claim."),
+              Q("Andrés calls his sister when the pull comes. What does this show on the relational map?",
+                ["A new bond taking the old object’s job", "That he no longer needs any support", "That his brain has fully recovered", "That he has chosen the global book for good"], 0,
+                "His sister does the job the bar once did: company and calm, held in a new relationship."),
+              { kind: "idea", lvl: "f", title: "Sources for this module", body: "<p>The full deck bibliography. Quotes in the lessons are shortened; read the primary texts.</p>" +
+                "<ul>" +
+                "<li>Alexander, B. K. (2008). <i>The globalization of addiction</i>. Oxford University Press.</li>" +
+                "<li>Alexander, B. K. (2012). <i>Substance Use &amp; Misuse</i>, 47.</li>" +
+                "<li>Alvarez-Monjaras, M., et al. (2019). <i>Attachment &amp; Human Development</i>, 21(6).</li>" +
+                "<li>Bandura, A. (1977). <i>Social learning theory</i>. Prentice-Hall.</li>" +
+                "<li>Bandura, A. (1978). <i>American Psychologist</i>, 33(4).</li>" +
+                "<li>Bowlby, J. (1969/1982). <i>Attachment</i>. Basic Books.</li>" +
+                "<li>Bronfenbrenner, U. (1979). <i>The ecology of human development</i>. Harvard University Press.</li>" +
+                "<li>Burkett, J. P., &amp; Young, L. J. (2012). <i>Psychopharmacology</i>, 224.</li>" +
+                "<li>Flores, P. J. (2004). <i>Addiction as an attachment disorder</i>. Jason Aronson.</li>" +
+                "<li>Hall, W., Carter, A., &amp; Forlini, C. (2015). <i>Lancet Psychiatry</i>, 2(1).</li>" +
+                "<li>Hari, J. (2015). TEDGlobal London talk; and <i>Chasing the scream</i>. Bloomsbury.</li>" +
+                "<li>Heyman, G. M. (2009). <i>Addiction: A disorder of choice</i>. Harvard University Press.</li>" +
+                "<li>Hoffman &amp; Landry. <i>Living in balance</i>. Hazelden / Danya International.</li>" +
+                "<li>Jellinek, E. M. (1960). <i>The disease concept of alcoholism</i>. Hillhouse.</li>" +
+                "<li>Khantzian, E. J. (1985). <i>American Journal of Psychiatry</i>, 142(11).</li>" +
+                "<li>Khantzian, E. J. (1997). <i>Harvard Review of Psychiatry</i>, 4(5).</li>" +
+                "<li>Koob, G. F., &amp; Le Moal, M. (2001). <i>Neuropsychopharmacology</i>, 24.</li>" +
+                "<li>Leshner, A. I. (1997). <i>Science</i>, 278.</li>" +
+                "<li>Lewis, M. (2015). <i>The biology of desire</i>. PublicAffairs.</li>" +
+                "<li>Lewis, M. (2018). <i>New England Journal of Medicine</i>, 379.</li>" +
+                "<li>Robinson, T. E., &amp; Berridge, K. C. (1993). <i>Brain Research Reviews</i>, 18.</li>" +
+                "<li>Satel, S., &amp; Lilienfeld, S. O. (2014). <i>Frontiers in Psychiatry</i>.</li>" +
+                "<li>Schindler, A. (2019). <i>Frontiers in Psychiatry</i>, 10.</li>" +
+                "<li>Volkow, N. D., Koob, G. F., &amp; McLellan, A. T. (2016). <i>New England Journal of Medicine</i>, 374.</li></ul>" +
+                '<p class="dim">Volume and issue numbers appear in this list only.</p>' }
             ]
           },
           /* ============ phase 3i-1: M5+ · THE COMPUTATIONAL MIRROR, lessons 1–2 (concepts in words, no formulas) ============ */
@@ -12255,6 +13156,41 @@
           G("m8m.9", "Functional analysis of use", "Análisis funcional del consumo", "Asking what using did for the person.", "Mapping the triggers before use and the effects that kept it going, such as relief, belonging, identity or structure, so each need can be met another way; the base of the community reinforcement approach. See Functional analysis."),
           G("m8m.9", "Social identity model of recovery", "Modelo de identidad social de la recuperación", "Recovery as moving from a using group to a recovery group.", "Best and colleagues’ (2016) model: recovery spreads through social networks as a person’s identity shifts from groups that use to groups that support recovery; promising, mostly observational evidence."),
           G("m8m.9", "Medication for opioid use disorder", "Medicamentos para el trastorno por consumo de opioides", "Methadone, buprenorphine or naltrexone to treat opioid use disorder.", "Medications that reduce craving, withdrawal and illicit opioid use; methadone and buprenorphine lower overdose death (Santo et al. 2021), and stopping them raises risk. Often shortened to MOUD."),
+          /* phase 3o-1: AD lessons 1–2 */
+          G("m8a.1", "Relational-organismic model", "Modelo relacional-organísmico", "Addiction as a relationship the whole person takes part in.", "A synthesis framework, drawn from Bandura, Flores, Khantzian, Alexander and Hari, that treats addiction as a bond between an active organism and a substance or behaviour, held in a web of people, places, feelings and institutions; an integration, not a tested school."),
+          G("m8a.1", "Reciprocal determinism", "Determinismo recíproco", "Person, behaviour and surroundings keep shaping each other.", "Bandura’s (1977; 1978) principle that thoughts and feelings, behaviour and environment influence one another continuously, so none is only cause or only effect."),
+          G("m8a.1", "Agency within constraint", "Agencia dentro de los límites", "Real choices, made inside real limits.", "The view that a person is neither a powerless object nor an entirely free agent: they select, interpret and act, but within the pressures of body, history and setting (after Bandura 1977)."),
+          G("m8a.2", "Self-medication hypothesis", "Hipótesis de la automedicación", "Using a drug to ease painful feelings.", "Khantzian’s (1985; 1997) proposal that painful affect states make use compelling and steer people toward drugs that relieve their particular distress; the general link with distress is robust, the drug-matching claim mixed."),
+          G("m8a.2", "Attachment substitution", "Sustitución del apego", "A substance standing in for people.", "Flores’s (2004) idea that people who struggle to form or keep close bonds substitute chemical connections for human ones; a clinical theory, contested."),
+          G("m8a.2", "Dislocation theory", "Teoría de la dislocación", "Addiction as a response to losing one’s place.", "Alexander’s (2008; 2012) account that when people are cut off from belonging, roles and meaning, a narrowly focused lifestyle around a substance or activity can fill the gap; contested."),
+          G("m8a.2", "Psychosocial integration", "Integración psicosocial", "Belonging and purpose woven together.", "Alexander’s term for the lasting, two-way fit between a person and their community, giving both belonging and a sense of self; its loss is dislocation."),
+          G("m8a.2", "Cultural invitation (to use)", "Invitación cultural (al consumo)", "A culture selling a drug as a way to be.", "The messages through which a culture frames using as adulthood, relief, freedom or belonging, so the first use already arrives with a story attached."),
+          /* phase 3o-2: AD lessons 3–4 (Incentive sensitization in M2 lesson 11; Ecological systems theory in M0+ lesson 6) */
+          G("m8a.3", "Positive reinforcement", "Refuerzo positivo", "A behaviour repeated because it adds something good.", "Strengthening of a behaviour by a pleasant result that follows it, such as pleasure, intensity or belonging in a using group."),
+          G("m8a.3", "Negative reinforcement", "Refuerzo negativo", "A behaviour repeated because it takes something bad away.", "Strengthening of a behaviour because it ends or avoids something unpleasant, such as withdrawal or shame (Khantzian 1985); not punishment, which weakens a behaviour."),
+          G("m8a.3", "Cue reactivity", "Reactividad a señales", "Craving set off by reminders of use.", "Bodily and felt responses, such as craving and arousal, to people, places and objects linked with past use, often arriving before deliberation (Carter & Tiffany 1999)."),
+          G("m8a.3", "Allostasis", "Alostasis", "A body reset to a new normal by repeated use.", "Koob and Le Moal’s (2001) account in which repeated use shifts reward and stress systems to a new set-point, so the drug is needed to feel normal; robust in animal work, contested as a full human account."),
+          G("m8a.3", "Identity fusion", "Fusión de identidad", "Self and use grown together.", "In addiction, the merging of a person’s sense of self with using, so leaving can feel like losing or killing a version of the self."),
+          G("m8a.3", "Social lock-in", "Atrapamiento social", "A network that rewards staying and charges for leaving.", "The pull of a using network that gives company, status and help to those who stay, so leaving costs belonging."),
+          G("m8a.4", "Insecure attachment", "Apego inseguro", "Not trusting others to be there when needed.", "Anxious, avoidant or disorganized patterns of relating learned in early bonds; consistently linked to substance use disorder, though the studies are correlational (Schindler 2019)."),
+          G("m8a.4", "Microsystem", "Microsistema", "The people and places a person deals with directly.", "In Bronfenbrenner’s (1979) model, the immediate settings of face-to-face life, such as family, partner, friends and counselor."),
+          G("m8a.4", "Mesosystem", "Mesosistema", "Where a person’s settings meet.", "In Bronfenbrenner’s (1979) model, the links between microsystems, such as home and street, or clinic and court."),
+          G("m8a.4", "Exosystem", "Exosistema", "Settings a person is not in that still shape them.", "In Bronfenbrenner’s (1979) model, settings such as markets, housing, parole systems and media that affect a person without their direct part in them."),
+          G("m8a.4", "Macrosystem", "Macrosistema", "The culture around everything else.", "In Bronfenbrenner’s (1979) model, the overarching values, laws and patterns of a culture, such as stigma, isolation or belonging."),
+          G("m8a.4", "Chronosystem", "Cronosistema", "Change over time in a person’s life and world.", "In Bronfenbrenner’s model, the dimension of time: life transitions and history, such as attachment history, first use, institutions and ageing."),
+          G("m8a.5", "Behavioural economics of addiction", "Economía conductual de la adicción", "Addiction as choices that weigh now against later.", "Heyman’s (2009) account of drug use as voluntary operant behaviour shaped by its results, in which the failure is one of time horizon; it predicts quitting when later goods become vivid."),
+          G("m8a.5", "Local vs global choice", "Elección local frente a global", "The drug now against the life later.", "In Heyman’s (2009) terms, the local book values each choice on its own (the drug now) and the global book values the pattern over time (health, work, family); in addiction the local book prevails, choice by choice."),
+          G("m8a.5", "Moral model of addiction", "Modelo moral de la adicción", "Addiction as action a person answers for.", "At its strongest, the view that persons are answerable for patterned action and that responsibility which invites a person back into the moral community can be repair; it fails when it ignores trauma, poverty and brain change."),
+          G("m8a.6", "Learning model of addiction", "Modelo de la adicción como aprendizaje", "Addiction as deep, narrowed learning.", "Lewis’s (2015; 2018) view that the brain changes in addiction because brains change whenever a goal is pursued hard and often; addiction is accelerated, narrowed learning, and recovery is learning too; contested as a full account."),
+          G("m8a.6", "Spiritual malady", "Malestar espiritual", "In twelve-step terms, the inner sickness beneath the drinking.", "In AA’s account, alongside a bodily vulnerability and a mental obsession, a self-centred disconnection answered by fellowship, inventory, amends and a life beyond the self."),
+          G("m8a.6", "Harm reduction", "Reducción de daños", "Keeping people safer and alive while they still use.", "Public health practice that lowers the harms of drug use without requiring abstinence first, such as naloxone, overdose prevention, safer supplies and housing."),
+          G("m8a.6", "Twelve-Step Facilitation", "Facilitación de los Doce Pasos", "Therapy that helps people join and use AA or NA.", "A structured, manual-based treatment that encourages active involvement in twelve-step groups; with AA, as good as or better than other treatments for abstinence (Kelly, Humphreys & Ferri 2020)."),
+          /* phase 3o-4: AD lessons 7–8 */
+          G("m8a.7", "Relational synthesis", "Síntesis relacional", "One map that holds the others as levels.", "The relational-organismic map used as a frame that places the brain, choice, learning, twelve-step and public health maps as true at their own levels; a synthesis, untested as a whole."),
+          G("m8a.8", "Recovery as re-entry", "La recuperación como reingreso", "Recovery as moving into new bonds, not only leaving one.", "On the relational map, recovery as practising and being held in different relationships, with work, family, body and meaning, rather than only quitting an object."),
+          G("m8a.8", "Substitution (of the object)", "Sustitución (del objeto)", "A new object taking an old one’s job.", "When one addictive object goes, another often takes its place because the need under the bond is unmet; the relational map reads the circuit as the hardware and the relationship as the job."),
+          G("m8a.8", "Living in Balance", "Living in Balance (Vivir en equilibrio)", "A treatment that rebuilds neglected areas of life.", "Hoffman and Landry’s NIDA-funded treatment manual (Hazelden / Danya International), which treats addiction as a biopsychosocial problem that neglects whole life areas: body, mind, relationships, meaning, institutional life and balance."),
+          G("m8a.8", "Balance check", "Revisión del equilibrio", "Asking which area of life is starved.", "A clinical review across the six Living in Balance areas that asks which area is starved, and which new bond could take over the old object’s job."),
           G("m2.8", "Withdrawal", "Abstinencia (síndrome de)", "Feeling the opposite of the drug when it stops.", "A substance-specific syndrome of symptoms, often opposite to the drug’s effects, that follows reduction or cessation after adaptation."),
           /* phase 3h-1: M2 lessons 9–10 (Neuroplasticity already defined in M2 lesson 4) */
           G("m2.9", "Hebbian learning", "Aprendizaje hebbiano", "Links between cells that fire together grow stronger.", "Hebb’s (1949) principle that when one neuron repeatedly takes part in firing another, the connection between them strengthens; “cells that fire together wire together” is a slogan for it, and timing and weakening also matter."),
@@ -12430,6 +13366,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat([{ v: "m6.7", t: "M6 · " + lessonOf("m6.7").title }]);
         COLL.gloss.filters = COLL.gloss.filters.concat(["m7.7", "m7.8", "m7.9", "m7.10", "m7.11", "m7.12", "m7.13"].map(function (id) { return { v: id, t: "M7 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7", "m8m.8", "m8m.9"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8a.1", "m8a.2", "m8a.3", "m8a.4", "m8a.5", "m8a.6", "m8a.7", "m8a.8"].map(function (id) { return { v: id, t: "AD · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
@@ -12778,6 +13715,56 @@
             R("Santo et al.", 2021, "meta-analysis", "Time on methadone or buprenorphine went with lower overdose and all-cause death than time off treatment.", st("robust", "Large observational cohorts with consistent results; the highest risk is in the weeks after stopping or leaving prison.")),
             R("Laudet, Morgen & White", 2006, "observational", "In people in recovery, meaning in life and social support went with better quality of life and buffered stress.", st("contested", "Correlational and cross-sectional; purpose may follow recovery rather than cause it.")),
             R("Best et al.", 2016, "review", "The social identity model of recovery: recovery spreads as identity shifts from using groups to recovery groups.", st("contested", "A promising framework with mostly observational support; few trials."))];
+          /* ---- phase 3o-1: AD lessons 1–2 · models of addiction ---- */
+          REFS["m8a.1"] = [
+            R("Bandura", 1977, "review", "Social Learning Theory: people learn by watching others and from the results of their own acts, and they select and interpret their surroundings rather than simply absorbing them.", st("robust", "Modelling and reinforcement effects are repeated across many experiments and settings.")),
+            R("Bandura", 1978, "review", "The self system in reciprocal determinism (American Psychologist): person, behaviour and environment influence one another continuously.", st("contested", "A broad organising principle; useful, but hard to test as a whole.")),
+            R("Flores", 2004, "review", "Addiction as an Attachment Disorder: addiction as a disorder of self-regulation in which a substance stands in for human bonds.", st("contested", "A clinical theory built from practice and attachment research; few direct tests.")),
+            R("Hari", 2015, "review", "Chasing the Scream: a journalist’s case that connection is the opposite of addiction, quoting Peter Cohen on calling it bonding.", st("contested", "Popular journalism, not research; its strongest claims outrun the studies it draws on."))];
+          REFS["m8a.2"] = [
+            R("Khantzian", 1985, "case series", "The self-medication hypothesis (American Journal of Psychiatry): painful affect states make specific drugs compelling, drawn from clinical work with people using heroin and cocaine.", st("contested", "Distress and use are robustly linked; the specific drug-matching claim has mixed support.")),
+            R("Khantzian", 1997, "review", "The self-medication hypothesis revisited (Harvard Review of Psychiatry): suffering, not pleasure seeking, lies at the heart of many substance use disorders.", st("contested", "Clinical synthesis; prospective tests of drug matching are mixed.")),
+            R("Alexander", 2008, "review", "The Globalization of Addiction: when psychosocial integration fails, people adopt narrowly focused lifestyles around substances or activities.", st("contested", "A historical and social argument; hard to test directly, though isolation and risk are linked.")),
+            R("Bandura", 1977, "review", "Social Learning Theory: peers model behaviour, and its first rewards teach that it works.", st("robust", "Modelling and reinforcement effects are repeated across many experiments and settings."))];
+          /* ---- phase 3o-2: AD lessons 3–4 · why the bond holds; attachment and nested worlds ---- */
+          REFS["m8a.3"] = [
+            R("Robinson & Berridge", 1993, "review", "Incentive sensitization (Brain Research Reviews): repeated use sensitizes wanting separately from liking, so craving can grow while pleasure fades.", st("robust", "Backed by decades of animal work and human cue studies.")),
+            R("Koob & Le Moal", 2001, "review", "Drug addiction, dysregulation of reward, and allostasis (Neuropsychopharmacology): repeated use shifts reward and stress systems to a new set-point.", st("contested", "Robust in animal work; contested as a full account of human addiction.")),
+            R("Khantzian", 1985, "case series", "The self-medication hypothesis: people use to relieve painful feelings, so relief keeps use going.", st("contested", "Distress and use are robustly linked; the specific drug-matching claim has mixed support.")),
+            R("Carter & Tiffany", 1999, "meta-analysis", "Meta-analysis of cue-reactivity (Addiction): people with substance use disorders show strong craving and bodily arousal to drug cues.", st("robust", "Consistent across many lab studies; links from cue craving to later use are weaker.")),
+            R("Flores", 2004, "review", "Addiction as an Attachment Disorder: the substance as a reliable object that does not reject, until it does.", st("contested", "A clinical theory built from practice and attachment research; few direct tests."))];
+          REFS["m8a.4"] = [
+            R("Burkett & Young", 2012, "review", "The behavioral, anatomical and pharmacological parallels between social attachment, love and addiction (Psychopharmacology): dopamine, opioid and stress systems overlap.", st("contested", "Largely from animal work, such as prairie voles; contested for humans.")),
+            R("Schindler", 2019, "review", "Attachment and substance use disorders (Frontiers in Psychiatry): insecure attachment was consistently linked to substance use disorder across reviewed studies, and use impairs closeness.", st("robust", "A robust association across studies; correlational, so the direction is unclear.")),
+            R("Flores", 2004, "review", "Addiction as an Attachment Disorder: the substance as an attachment object, available, predictable and distressing when gone.", st("contested", "A clinical theory built from practice and attachment research; few direct tests.")),
+            R("Alvarez-Monjaras et al.", 2019, "review", "A developmental model of addictions (Attachment & Human Development): attachment shapes stress and reward regulation, and so vulnerability to substances.", st("contested", "An integrative model; not yet tested as a whole.")),
+            R("Bronfenbrenner", 1979, "review", "The Ecology of Human Development: development happens within nested systems, from the person out to culture and time.", st("robust", "The nested-systems framing is widely adopted; as a framework, it is used more than it is tested."))];
+          /* ---- phase 3o-3: AD lessons 5–6 · steelmen ---- */
+          REFS["m8a.5"] = [
+            R("Leshner", 1997, "review", "Addiction is a brain disease, and it matters (Science): “a chronic, relapsing disease that results from the prolonged effects of drugs on the brain”.", st("contested", "An influential position statement; the brain changes are documented, the disease framing is argued.")),
+            R("Volkow, Koob & McLellan", 2016, "review", "Neurobiologic advances from the brain disease model of addiction (NEJM): reward hijacked, cues sensitized, stress systems recruited, prefrontal control weakened.", st("robust", "The circuit changes are well documented in animals and people; whether “disease” is the best frame is argued.")),
+            R("Heyman", 2009, "review", "Addiction: A Disorder of Choice: drug use as voluntary operant behaviour; most people who meet criteria recover, many without treatment.", st("contested", "The high remission rates come from large surveys and are robust; the choice interpretation is argued.")),
+            R("Hall, Carter & Forlini", 2015, "review", "The brain disease model of addiction: is it supported by the evidence and has it delivered on its promises? (Lancet Psychiatry).", st("contested", "A critical review; it finds stigma not clearly reduced and few treatments from the model.")),
+            R("Satel & Lilienfeld", 2014, "review", "Addiction and the brain-disease fallacy (Front Psychiatry): brain change alone does not make a disease, and use stays responsive to consequences.", st("contested", "A critical essay; it argues from existing evidence rather than new data."))];
+          REFS["m8a.6"] = [
+            R("Lewis", 2015, "review", "The Biology of Desire: addiction as deep, accelerated learning, with recovery as further development.", st("contested", "A book-length argument from neuroscience and case stories; not a tested model.")),
+            R("Lewis", 2018, "review", "Brain change in addiction as learning, not disease (NEJM): the same neural changes follow any goal pursued hard and often.", st("contested", "A review essay; the learning frame is argued, not settled.")),
+            R("Kelly, Humphreys & Ferri", 2020, "meta-analysis", "Cochrane review: Alcoholics Anonymous and Twelve-Step Facilitation were as good as or better than other treatments for abstinence.", st("robust", "Many trials, including randomized ones; most participants were people with alcohol use problems.")),
+            R("Alexander", 2008, "review", "The Globalization of Addiction: addiction spreads when psychosocial integration collapses.", st("contested", "A historical and social argument; hard to test directly, though isolation and risk are linked.")),
+            R("Khantzian", 1997, "review", "The self-medication hypothesis revisited (Harvard Review of Psychiatry): use has a function, quieting specific pain.", st("contested", "Distress and use are robustly linked; the drug-matching claim has mixed support."))];
+          /* ---- phase 3o-4: AD lessons 7–8 · six maps side by side; recovery as re-entering relationships ---- */
+          REFS["m8a.7"] = [
+            R("Leshner", 1997, "review", "Addiction is a brain disease, and it matters (Science): the brain disease map, the most institutional of the six.", st("contested", "An influential position statement; the brain changes are documented, the disease framing is argued.")),
+            R("Heyman", 2009, "review", "Addiction: A Disorder of Choice: the choice map, the strongest rival on agency; most people who meet criteria recover.", st("contested", "The high remission rates come from large surveys and are robust; the choice interpretation is argued.")),
+            R("Lewis", 2018, "review", "Brain change in addiction as learning, not disease (NEJM): the learning map, the strongest rival on the brain.", st("contested", "A review essay; the learning frame is argued, not settled.")),
+            R("Jellinek", 1960, "review", "The Disease Concept of Alcoholism: the source of the twelve-step hybrid, the map most common in recovery culture.", st("contested", "A historical typology drawn from clinical and survey reports; widely cited, rarely tested in its original form.")),
+            R("Alexander", 2012, "review", "Substance Use & Misuse: the dislocation argument behind the public health map, the strongest rival on context.", st("contested", "A historical and social argument; hard to test directly, though isolation and risk are linked."))];
+          REFS["m8a.8"] = [
+            R("Schindler", 2019, "review", "Attachment and substance use disorders (Frontiers in Psychiatry): insecure attachment consistently linked to substance use disorder, and use impairs closeness.", st("robust", "A robust association across studies; correlational, so the direction is unclear.")),
+            R("Alvarez-Monjaras et al.", 2019, "review", "A developmental model of addictions (Attachment & Human Development): attachment shapes stress and reward regulation, and so recovery needs new regulating bonds.", st("contested", "An integrative model; not yet tested as a whole.")),
+            R("Kelly, Humphreys & Ferri", 2020, "meta-analysis", "Cochrane review: Alcoholics Anonymous and Twelve-Step Facilitation were as good as or better than other treatments for abstinence; fellowship as a bond that holds.", st("robust", "Many trials, including randomized ones; most participants were people with alcohol use problems.")),
+            R("Volkow, Koob & McLellan", 2016, "review", "Neurobiologic advances from the brain disease model of addiction (NEJM): the circuit changes any recovery map has to respect, and the case for medication.", st("robust", "The circuit changes are well documented in animals and people; whether “disease” is the best frame is argued.")),
+            R("Hall, Carter & Forlini", 2015, "review", "The brain disease model of addiction: is it supported by the evidence and has it delivered on its promises? (Lancet Psychiatry).", st("contested", "A critical review; it finds stigma not clearly reduced and few treatments from the model."))];
           /* ---- phase 3h-1: M2 lessons 9–10 · neuroplasticity ---- */
           REFS["m2.9"] = [
             R("Bliss & Lømo", 1973, "experiment", "In rabbits, quick bursts of stimulation to a hippocampal pathway left its connections responding more strongly for hours or longer: long-term potentiation.", st("robust", "Repeated across species and labs for decades; how far it explains learning in a whole animal is still studied.")),
