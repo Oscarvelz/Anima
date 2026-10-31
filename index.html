@@ -5273,7 +5273,8 @@
               };
               /* on-screen time: fast is ~1.3 s per step (readable on a phone), chunked lands a step every 1.1 s with a 3 s pause per tray */
               var FAST = { lead: 0.8, slot: 1.6, on: 1.3 }, CHK = { lead: 0.8, slot: 5.2, step: 1.1 }, STEPS = ["Predict", "Try it", "Spot it", "What it means"];
-              var fresh = function () { return { pred: null, mode: null, phase: null, ran: false, ranMode: null, pool: [], picks: {}, chal: null, t: 0 }; };
+              var fresh = function () { return { pred: null, mode: null, phase: null, ran: false, ranMode: null, pool: [], picks: {}, chal: null, t: 0, open: { toolkit: true } }; };
+              function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -5450,6 +5451,15 @@
                   ref("Melby-Lervåg &amp; Hulme", 2013, "meta-analysis", "Working memory training improves the trained tasks, with little lasting transfer to other abilities.", tag(" x-ev--d", "Debunked or revised")) +
                   ref("Schillinger et al.", 2003, "observational study", "Among patients with diabetes and limited health literacy, checking understanding by having patients say it back was linked to better outcomes, yet it was rarely done.", tag("", "Robust")) +
                   "</ol></section></section>" +
+                  '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: work with a small desk<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                  '<p class="x-lens__p">Say it to a client like this: “Your mind\'s workspace is small, like a desk that holds only a few things at once. Struggling to keep track isn\'t stupidity, it\'s a full desk.”</p>' +
+                  bullets("Notice overload", ["losing the thread mid-sentence", "forgetting what you came into the room for", "snapping when several people talk at once", "nodding along without taking it in"]) +
+                  bullets("What shrinks the desk", ["stress and fear", "poor sleep", "hunger", "alcohol and drugs", "early recovery and withdrawal", "multitasking", "phones buzzing"]) +
+                  bullets("Clear the desk", ["write it down — one notebook or phone note", "one task at a time", "break big tasks into small steps", "chunk numbers and lists into small groups", "finish or park a thought before starting another", "quiet space for important calls"]) +
+                  bullets("Outside helpers", ["calendar and alarms for court dates, appointments and medication", "checklists", "keep papers in one folder", "say it back — “So I need to…” — to check you got it"]) +
+                  bullets("For counsellors", ["give one or two points per session", "write them on a card", "repeat key points", "ask the client to explain it back (teach-back)", "slow down in groups", "don't read off long rules"]) +
+                  bullets("Grow it on purpose", ["sleep, exercise and steady sobriety help", "practise with real skills, like planning a day or budgeting", "these help more than brain-training games, which mostly improve only the game"]) +
+                  '<p class="x-lens__take">Don\'t carry it in your head — put it on paper, one step at a time.</p></details>' +
                   '<section class="x-lens__box glass" aria-label="Where this becomes a problem in therapy"><h3 class="x-lens__h">Where this becomes a problem in therapy<small>A missed step is often a full workbench</small></h3>' +
                   '<p class="x-lens__p"><b>Clients forget much of what we say.</b> People forget much of what clinicians tell them, and remember it less accurately when anxious (Kessels 2003)' + tag("", "Robust") + "</p>" +
                   '<p class="x-lens__p"><b>Some clients have even less to spare.</b> People in crisis, in early recovery or withdrawal, short on sleep, with trauma activated, or living with ADHD or a brain injury have even less workbench free.</p>' +
@@ -5476,6 +5486,7 @@
                 }
                 var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
               }
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
               function finish() { if (S.phase !== "show") return; S.phase = "recall"; S.picks = {}; S.pool = shuffle(IT.concat(LU)); paint(); live.textContent = "The counsellor has finished. Tap every step you remember, then press That’s all I remember."; var r = $('[data-step="2r"]', main); if (r) r.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); }
               function act(b) {
                 var a = b.dataset.act, v = b.dataset.v;
