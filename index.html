@@ -1900,6 +1900,10 @@
           { id: "m8s", code: "SG", part: "B", t: "Sex & gender differences", s: "Overlap first: what differs, by how much, and why it never judges the person", after: "m8",
             depth: ["What the evidence says differs between the sexes, and by how much, in words", "Read a group finding in class, clinic or the news without judging the person in front of you", "Biology, culture and combined profiles: the explanations weighed, and where each runs out"],
             lessons: ["Overlap first: the similarities finding", "What actually differs, and by how much", "Empathy, personality and the equality paradox", "Prevalence: who gets diagnosed with what", "Brains, hormones and explanations weighed", "The person in the chair: clinical rules"] },
+          /* phase 3k-1: EV · evolution & human nature (shell; lessons 1–2 built) */
+          { id: "m8e", code: "EV", part: "B", t: "Evolution & human nature", s: "Darwin to evolutionary psychology, its problems, and what is inborn", after: "m8",
+            depth: ["What Darwin actually said: selection without a designer, and minds continuous with animals", "Hear evolutionary claims in class, clinic or the news and ask what they explain", "The problems at full strength, the rivals inside evolution, and whether inborn tendencies exist"],
+            lessons: ["Darwin from Darwin: the mindless editor", "Descent and Expression: minds continuous with animals", "The modern programme and evolutionary psychiatry", "The problems at full strength: the spandrel drill", "Failed predictions, misuse, and rivals inside evolution", "Do inherent tendencies exist?"] },
           { id: "m9", code: "C", part: "C", t: "The effects library", s: "Classic social effects, with the replication crisis", after: "m0",
             depth: ["Conformity, obedience, attribution and dissonance", "Group pressure at work, in families and in programs", "Which classic effects replicated, and which didn’t"],
             lessons: ["Conformity (Asch)", "Obedience (Milgram)", "The bystander effect", "The fundamental attribution error", "Cognitive dissonance", "Social facilitation and loafing", "The Stanford prison study, re-examined", "The replication crisis"],
@@ -4946,6 +4950,21 @@
             claim: ["working taxonomy", "in the room", "the room", "clinical", "clinician*", "research question", "different question*", "primary adaptive", "maladaptive", "secondary", "instrumental", "taxonomia de trabajo", "en la sesion", "en consulta", "clinic*", "pregunta* distinta*", "primaria adaptativa", "desadaptativa", "secundaria"],
             ev: ["greenberg", "2002", "emotion focused", "process research", "therapy outcome*", "focused therapy", "centrada en las emociones", "investigacion de procesos", "resultados de la terapia"],
             charge: ["doesn t tell", "does not tell", "what to do", "lab debate", "unhelpful in the room", "no help", "next move", "no dice", "que hacer", "debate de laboratorio", "no ayuda", "siguiente paso"] }
+        ];
+        /* PHASE 3k-3: rival chips and cue lists for q-nature (m8e.6) */
+        var NATURE_VIEWS = [
+          { v: "nv-prepared", t: "Prepared, not programmed", at: [["m8e.6", 14], ["m8e.6", 2], ["m8e.6", 14]],
+            claim: ["prepared", "not programmed", "not blank", "starting point", "starting configuration", "settings", "tilt*", "bias*", "tuned", "dial*", "preparad*", "no programad*", "punto de partida", "configuracion inicial", "ajuste*", "sesgo*", "inclinacion*"],
+            ev: ["seligman", "1971", "ohman", "mineka", "2001", "cook", "snake*", "spider*", "flower*", "kagan", "1994", "temperament*", "fast to learn", "learned fast", "hard to unlearn", "serpiente*", "arana*", "flor*", "temperamento*"],
+            charge: ["destiny", "fixed", "fate", "blank slate", "too much", "too little", "either extreme", "built in plan", "programmed", "destino", "fijo", "pizarra en blanco", "demasiado", "extremo*", "programad*"] },
+          { v: "nv-nativist", t: "Strong nativism: much is built in", at: [["m8e.6", 12], ["m8e.6", 12], ["m8e.6", 12]],
+            claim: ["built in", "innate", "inborn", "nativ*", "starting kit", "universal grammar", "core knowledge", "rich structure", "innat*", "de nacimiento", "gramatica universal", "conocimiento nuclear", "estructura"],
+            ev: ["spelke", "2007", "infants look longer", "objects", "number", "agents", "chomsky", "polderman", "2015", "twins", "heritab*", "bebes", "objetos", "numero", "agentes", "gemelos", "heredabilidad"],
+            charge: ["assume the structure", "assumes the structure", "blank learner", "learns nothing", "cannot learn", "smuggle*", "suponen la estructura", "aprendiz en blanco", "no aprende nada", "no puede aprender"] },
+          { v: "nv-empiricist", t: "Mostly learned: start near blank", at: [["m8e.6", 13], ["m8e.6", 13], ["m8e.6", 13]],
+            claim: ["learned", "learning", "experience", "blank", "general learning", "empiric*", "near blank", "aprendid*", "aprendizaje", "experiencia", "en blanco", "empiris*"],
+            ev: ["saffran", "1996", "statistical learning", "syllables", "tomasello", "2003", "usage based", "temperament changes", "many change", "aprendizaje estadistico", "silabas", "basado en el uso", "cambian"],
+            charge: ["label for", "not yet explained", "shrinks", "dissolves", "gap*", "just a name", "etiqueta", "aun no explicado", "se encoge", "se disuelve", "solo un nombre"] }
         ];
         var LESSON_CONTENT = {
           /* ============ M0+ · THE FIELD ARGUES WITH ITSELF: steelman each side, declare no winner ============ */
@@ -8250,6 +8269,611 @@
                 "Lower help-seeking calls for a different way of asking, not less asking.")
             ]
           },
+          /* phase 3k-1: EV lessons 1–2 (psychology only; no numbers except years) */
+          "m8e.1": {
+            home: "A group member says evolution means we keep getting better and the strongest survive. What did Darwin actually say?",
+            keys: [["What are Darwin’s ingredients?", "Variation, heredity, and more offspring than can survive; together they produce natural selection (Darwin 1859)."],
+              ["Is natural selection a designer?", "No. It is a mindless editor: no plan, no direction, no ladder of progress. It keeps what works here and now."],
+              ["Does “survival of the fittest” mean the strongest?", "No. Fitness means leaving offspring in a given environment; the better-fitted to this environment, not the strongest."],
+              ["What is sexual selection?", "A second engine: traits spread because they win mates, through mate choice or rivalry, even at a cost to survival (Darwin 1871; Endler 1980)."],
+              ["Can selection be seen?", "Yes. Finch beaks on the Galápagos shifted with droughts within decades (Grant & Grant 2002). Robust."]],
+            steps: [
+              { kind: "hook", title: "Always getting better?", body: who("<b>Inés</b> runs a weekly support group. During a break, <b>Dev</b>, a group member, talks about a nature documentary he watched.") +
+                "<p>He says: “Evolution means we’re always getting better, and the strongest survive.” Two others nod. One says that is why people should toughen up.</p>" +
+                '<p class="hook">Is that what Darwin said?</p>' },
+              { kind: "predict", id: "m8e.1:predict", title: "Your call first",
+                case: ["Dev says evolution means always getting better.",
+                  "He says the strongest survive.",
+                  { t: "The group meets in a library room.", irrelevant: true },
+                  "Another member says this is why people should toughen up.",
+                  { t: "Dev watched the documentary at the weekend.", irrelevant: true }],
+                q: "Is a trait that helps an animal reproduce always good for its survival?",
+                options: ["Yes, reproducing and surviving go together", "No, a trait can win mates and still cost survival", "Only for animals that live in groups"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: no. A peacock’s tail wins mates and makes him easier to catch. Selection keeps what leaves offspring, not what is best or strongest.",
+                hints: ["Think of the peacock’s tail.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what selection counts, survival or offspring."] },
+              { kind: "idea", lvl: "f", title: "Misreading one: “survival of the strongest”", body: "<p>Darwin borrowed “survival of the fittest” from Herbert Spencer for a later edition of <i>On the Origin of Species</i>. <b>Fit</b> meant fitted, as a key fits a lock, not strong.</p>" +
+                "<p>A small, slow, quiet animal can be the better-fitted one if that is what lets it leave offspring where it lives.</p>" +
+                "<p><b>So:</b> selection favours the better-fitted to <i>this</i> environment, not the strongest.</p>" },
+              { kind: "idea", lvl: "f", title: "Misreading two: “evolution aims at humans”", body: "<p>The only drawing in <i>On the Origin of Species</i> (Darwin 1859) is a branching tree, not a ladder.</p>" +
+                "<p>Every living species sits at the tip of a branch, as long-evolved as we are. Nothing in the process points toward us, or toward anything.</p>" +
+                "<p><b>So:</b> there is no ladder of progress, and humans are not its top rung.</p>" },
+              { kind: "idea", lvl: "f", title: "Misreading three: “individuals evolve”", body: "<p>An animal does not evolve during its life. It is born with its traits, and it leaves more offspring or fewer.</p>" +
+                "<p>What changes is the population: across generations, some traits become more common and others rarer.</p>" +
+                "<p><b>So:</b> populations evolve; individuals do not.</p>" },
+              { kind: "idea", lvl: "f", title: "Ingredient one: variation", body: "<p>Darwin (1859) began from something any breeder knew: no two individuals of a species are quite alike. Beaks, colours, sizes and habits all vary.</p>" +
+                "<p><b>So:</b> without differences, there is nothing to select among.</p>" },
+              { kind: "idea", lvl: "f", title: "Ingredient two: heredity", body: "<p><b>Heredity</b> means offspring tend to resemble their parents. Darwin knew this happened, but not how; he had no working theory of inheritance.</p>" +
+                "<p><b>So:</b> only differences that are passed on can build up over generations.</p>" },
+              { kind: "idea", lvl: "f", title: "Ingredient three: more are born than survive", body: "<p>Reading Malthus, Darwin saw that living things produce far more young than can survive. Most die before they breed.</p>" +
+                "<p><b>So:</b> there is always a struggle, mostly quiet, over who leaves offspring.</p>" },
+              { kind: "idea", lvl: "f", title: "Natural selection: the mindless editor", body: "<p>Put the three together. Variants that happen to suit the local conditions leave more offspring, and those offspring inherit them. Over many generations the population changes. Darwin called this <b>natural selection</b>.</p>" +
+                "<p>Think of an editor with no plan for the book: it only cuts what fails here and now. No designer, no goal, no direction. What suits one setting can fail in the next.</p>" +
+                "<p><b>So:</b> selection keeps what works locally; it does not aim at better.</p>" },
+              { kind: "idea", lvl: "p", title: "Selection seen within decades", body: "<p>Peter and Rosemary Grant followed Darwin’s finches on a Galápagos island for decades (Grant & Grant 2002) " + ev("r") + ".</p>" +
+                "<p>After droughts left only large, hard seeds, birds with deeper beaks survived better and their young inherited deeper beaks. When the food changed, the direction changed too.</p>" +
+                "<p><b>So:</b> selection is observable, and it has no fixed direction.</p>" },
+              { kind: "idea", lvl: "p", title: "The second engine: sexual selection", body: "<p>In <i>The Descent of Man</i> (Darwin 1871), Darwin added <b>sexual selection</b>: traits spread because they help win mates, not because they help survival.</p>" +
+                "<p>It works two ways. <b>Mate choice</b>: one sex, often females, prefers certain displays, such as the peacock’s tail. <b>Rivalry</b>: members of one sex compete, as stags do with antlers.</p>" +
+                "<p><b>So:</b> a trait can be costly to survive with and still spread.</p>" },
+              { kind: "idea", lvl: "p", title: "Guppies caught between two pressures", body: "<p>Endler (1980) " + ev("r") + " studied guppies in streams. Where predators were many, males were drab. Where predators were few, males were bright, which females preferred.</p>" +
+                "<p>When he moved guppies from a dangerous stream to a safer one, the males grew brighter over generations.</p>" +
+                "<p><b>So:</b> mate choice pushes toward display; predators push back.</p>" },
+              { kind: "contrast", id: "m8e.1:contrast", title: "Two birds, one difference",
+                q: "Which made-up report describes sexual selection?",
+                cases: [
+                  { label: "Report A", s: ["A bird population was watched for many years.", { t: "The researchers worked in spring.", irrelevant: true }, { t: "Birds with thicker feathers survived cold winters better, and thick feathers became more common.", diff: true }] },
+                  { label: "Report B", s: ["A bird population was watched for many years.", { t: "The researchers worked in spring.", irrelevant: true }, { t: "Males with longer tails were chosen more by females, and long tails became more common, though they slowed the males in flight.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["How long the birds were watched", "Whether the trait spread by surviving or by winning mates", "Which season the researchers worked in", "Whether the trait became more common"],
+                feature: 1,
+                why: "Both traits spread. In Report A the trait helped birds survive: natural selection. In Report B it helped males win mates while costing them speed: sexual selection.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask what the trait helped the bird do."] },
+              { kind: "example", lvl: "p", title: "Inés answers Dev", body: who("<b>Inés</b> does not lecture. She keeps two lines ready.") +
+                '<p class="x-note">“Darwin meant fitted, like a key in a lock: what suits this place, not the strongest.” · <span lang="es">“Darwin quería decir ajustado, como una llave en una cerradura: lo que encaja en este lugar, no el más fuerte.”</span></p>' +
+                '<p class="x-note">“Evolution doesn’t aim anywhere, so it can’t tell us how people should be.” · <span lang="es">“La evolución no apunta a ningún sitio, así que no puede decirnos cómo debería ser la gente.”</span></p>' +
+                "<p><b>Person-first.</b> The point is Dev’s idea, not Dev; she thanks him for raising it.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Darwin had no mechanism of heredity. His own guess, blending and the passing on of acquired habits, was wrong. Inheritance was explained only later, when Mendel’s work was rediscovered and joined with Darwin’s in the <b>modern synthesis</b> of the mid-twentieth century. And some of Darwin’s social views, on race and on women, were of his time and are not supported by the science that followed.</p>' +
+                "<p><b>The answer.</b> Genetics supplied the missing piece and confirmed the logic of selection. His social views are not part of the theory, and the theory cannot rank people: it has no ladder to rank them on.</p>" },
+              { kind: "teachback", id: "m8e.1:teachback", title: "Teach it back", prompt: "Explain to Dev what Darwin actually said: the three misreadings retired, fitted to this environment rather than strongest, a branching tree rather than a ladder aimed at humans, and populations rather than individuals evolving; the ingredients from On the Origin of Species, variation, heredity, and more offspring than survive; natural selection as a mindless editor with no designer and no direction; selection observed in Galápagos finches by Grant and Grant; sexual selection from The Descent of Man, mate choice and rivalry, with the peacock’s tail; Endler’s guppies, caught between mate choice and predators; the contrast between natural and sexual selection; and the critique that Darwin had no mechanism of heredity until the modern synthesis, and held some social views of his time." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Selection observed within decades " + ev("r") + ". Sexual selection against survival " + ev("r") + ".</p>" +
+                "<p><b>So:</b> evolution is not progress and not strength; it is a mindless editor keeping whatever leaves offspring here and now.</p>" },
+              Q("What does “fittest” mean in Darwin’s theory?",
+                ["The strongest in a fight", "Best fitted to leave offspring here", "The most intelligent in a group", "The healthiest over a long life"], 1,
+                "Fitness is about leaving offspring in a given environment, not strength, intelligence or health."),
+              Q("Why are male guppies drab in streams with many predators?",
+                ["Bright males are eaten before breeding", "Females there prefer drab males", "Drab males grow faster in the cold", "The water washes out their colour"], 0,
+                "Predators remove the bright males that females would otherwise choose."),
+              Q("What did Darwin lack that the modern synthesis supplied?",
+                ["Evidence of variation", "A mechanism of heredity", "Any field observations", "The idea of selection"], 1,
+                "Darwin knew traits were inherited but not how; genetics explained it later.")
+            ]
+          },
+          "m8e.2": {
+            home: "A client’s face shows disgust a split second before he says “I’m fine with it”. What did Darwin start, and how far can a face be trusted?",
+            keys: [["What is the continuity thesis?", "Darwin’s claim in The Descent of Man (1871): human minds and morals differ from other animals’ in degree, not kind, with sympathy as a root of morality."],
+              ["What did The Expression of the Emotions (1872) do?", "Read feelings off faces and bodies across species, with three principles: serviceable habits, antithesis, and direct action of the nervous system."],
+              ["Are facial expressions recognized everywhere?", "Above chance across cultures (Ekman & Friesen 1971), but less reliably without word cues (Gendron et al. 2014). Debated."],
+              ["Do other primates show empathy?", "Consolation and other signs of empathy are well documented in primates (de Waal 2009); what they mean is contested."],
+              ["What is the verdict as of 2026?", "Some configurations are recognized above chance across cultures, far less reliably than the classic view held, and context does much of the work. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "A face before the words", body: who("<b>Marta</b> is a counsellor. Her client <b>Joel</b> is talking about his brother moving in with him.") +
+                "<p>When Marta asks how he feels about it, Joel’s upper lip lifts and his nose wrinkles for a split second. Then he says: “I’m fine with it.”</p>" +
+                '<p class="hook">What can Marta read from that face, and who first tried to read faces this way?</p>' },
+              { kind: "predict", id: "m8e.2:predict", title: "Your call first",
+                case: ["Joel’s upper lip lifted for a split second.",
+                  "His nose wrinkled at the same moment.",
+                  { t: "The session is in the afternoon.", irrelevant: true },
+                  "Then he said: “I’m fine with it.”",
+                  { t: "Joel is wearing a green jumper.", irrelevant: true },
+                  "Marta had just asked about his brother moving in."],
+                q: "What can Marta fairly take from the face?",
+                options: ["Proof that Joel is lying to her", "Something worth asking about gently", "Nothing, as faces carry no meaning"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: something worth asking about. A face can hint at a feeling, but how well faces map to feelings is debated. Only Joel can say what he felt.",
+                hints: ["Ask who knows what Joel felt.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what a face can suggest and what it cannot settle."] },
+              { kind: "idea", lvl: "f", title: "Minds continuous with animals", body: "<p>In <i>The Descent of Man</i> (Darwin 1871), Darwin argued that human mental powers, such as memory, attention, curiosity and reasoning, have forerunners in other animals.</p>" +
+                "<p>He called the difference between our minds and theirs one “of degree and not of kind”. This is the <b>continuity thesis</b>.</p>" +
+                "<p><b>So:</b> the human mind has a history, like the human body.</p>" },
+              { kind: "idea", lvl: "f", title: "Sympathy as the root of morality", body: "<p>Darwin traced morality to <b>social instincts</b>: the pull of social animals to stay with, help and defend others.</p>" +
+                "<p>Sympathy, feeling for another’s distress, was its root. Add language, memory and habit, and he thought a conscience would follow.</p>" +
+                "<p><b>So:</b> on Darwin’s view, morality grew from shared animal feeling, not only from reason.</p>" },
+              { kind: "idea", lvl: "f", title: "The first emotion scientist", body: "<p><i>The Expression of the Emotions in Man and Animals</i> (Darwin 1872) set out to read feelings off faces and bodies: in people, infants, dogs, cats and monkeys.</p>" +
+                "<p>He also wrote to observers in many countries, asking whether people there showed astonishment, shame or contempt the same way.</p>" +
+                "<p><b>So:</b> Darwin treated expression as something to observe and compare across species and cultures.</p>" },
+              { kind: "idea", lvl: "p", title: "Principle one: serviceable habits", body: "<p>Darwin’s first principle: movements that once served a purpose become habits tied to the feeling, and appear even when they no longer help.</p>" +
+                "<p>His example: in anger, people may uncover the teeth, as if ready to bite.</p>" +
+                "<p><b>So:</b> some expressions are leftovers of useful actions.</p>" },
+              { kind: "idea", lvl: "p", title: "Principle two: antithesis", body: "<p>His second principle: an opposite state of mind brings out opposite movements, even if they serve nothing.</p>" +
+                "<p>His example: a hostile dog stands stiff with head raised; the same dog greeting its owner crouches, wags and lowers its head.</p>" +
+                "<p><b>So:</b> some expressions are shaped as the opposite of others.</p>" },
+              { kind: "idea", lvl: "p", title: "Principle three: the nervous system acting directly", body: "<p>His third principle: strong excitement of the nervous system spills into the body, independent of will or habit.</p>" +
+                "<p>His example: trembling with fear or rage.</p>" +
+                "<p><b>So:</b> some expressions are the body overflowing.</p>" },
+              { kind: "idea", lvl: "p", title: "An early judgment study", body: "<p>Darwin had photographs of faces made to move by electrical stimulation, from the French physician Duchenne. He showed them to guests at his home, without telling them what was intended, and asked what emotion each face showed.</p>" +
+                "<p>Guests agreed on some faces and disagreed on others. Darwin trusted the faces they agreed on.</p>" +
+                "<p><b>So:</b> asking naive observers to judge faces, the method of later research, began here.</p>" },
+              { kind: "idea", lvl: "p", title: "Darwin’s own caution", body: "<p>Darwin did not claim to explain what emotions are. He offered a mechanism for why expressions exist and a mountain of observations of what they look like.</p>" +
+                "<p>That is not a psychology of emotion: it says little about feeling, thought or meaning.</p>" +
+                "<p><b>So:</b> use Darwin for where expressions come from, not for what a person feels.</p>" },
+              { kind: "idea", lvl: "p", title: "The line to basic emotions", body: "<p>Ekman built on Darwin. Ekman and Friesen (1971) " + ev("c") + " told members of the Fore of Papua New Guinea, then with little contact with outsiders, short stories and asked them to pick the matching face. They chose above chance for most emotions.</p>" +
+                "<p>This became the basis of <b>basic emotion</b> theory, and Barrett’s critique of it, met in the M7 lessons “What is an emotion? The census” and “Do primary emotions exist?”.</p>" +
+                "<p><b>So:</b> robust as a finding, debated in what it shows.</p>" },
+              { kind: "idea", lvl: "p", title: "Without the word cues", body: "<p>Gendron et al. (2014) " + ev("c") + " worked with the Himba of Namibia. When people sorted faces freely, without emotion words or stories, they grouped them far less in the Western pattern; many sorted by action, such as laughing or looking.</p>" +
+                "<p><b>So:</b> recognition looks weaker when the words that cue it are taken away.</p>" },
+              { kind: "idea", lvl: "p", title: "Empathy in other primates", body: "<p>de Waal (2009) " + ev("r") + ", building on his earlier <i>Good Natured</i> (1996), described chimpanzees comforting the loser of a fight, and other primates sharing and helping.</p>" +
+                "<p>Whether this is empathy in our sense, or something simpler, is contested.</p>" +
+                "<p><b>So:</b> the behaviour Darwin predicted is there; its meaning is argued.</p>" },
+              { kind: "contrast", id: "m8e.2:contrast", title: "Degree or kind?",
+                q: "Which made-up claim states the continuity thesis?",
+                cases: [
+                  { label: "Claim A", s: ["A writer compares human sympathy with a chimpanzee comforting a friend.", { t: "The essay appears in a magazine.", irrelevant: true }, { t: "She says human sympathy is the same capacity, much further developed.", diff: true }] },
+                  { label: "Claim B", s: ["A writer compares human sympathy with a chimpanzee comforting a friend.", { t: "The essay appears in a magazine.", irrelevant: true }, { t: "She says human sympathy is a different capacity, with nothing like it in any animal.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the essay appears", "A difference of degree versus a difference of kind", "Which animal is compared", "Whether sympathy is mentioned"],
+                feature: 1,
+                why: "Both compare the same behaviours. Claim A sees one capacity on a scale, a difference of degree: Darwin’s continuity. Claim B sees a human-only gap, a difference of kind.",
+                hints: ["Find the one sentence where the claims part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether the writer puts humans on the same scale."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Darwin’s principles lean on habits acquired in life being passed to offspring, which genetics later ruled out. And continuity invites reading human feelings into animals, and animal signals into human faces, more confidently than the evidence allows.</p>' +
+                "<p><b>The question.</b> Today’s debate keeps Darwin’s observations and argues over what faces show. The next two steps put each side in its strongest form.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Faces show universal emotions", body: "<p>On this view, a few emotions come with evolved facial signals, shared across humans and partly with other primates.</p>" +
+                "<p><b>Its evidence:</b> people in remote cultures matched faces to emotion stories above chance (Ekman & Friesen 1971), and Darwin’s observers reported similar expressions worldwide.</p>" +
+                "<p><b>Its charge:</b> taking away the words makes the task harder, not the signal weaker; a theory with no shared signals cannot explain why faces are read at all.</p>" +
+                "<p><b>So:</b> on this view, faces carry real, shared information about feeling.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Faces are read through culture and context", body: "<p>On the other view, the same feeling shows on the face in many ways, and people read faces using culture, words and situation.</p>" +
+                "<p><b>Its evidence:</b> recognition drops without word cues (Gendron et al. 2014), and reviews of spontaneous faces find people often do not make the classic expression when they feel the emotion (Barrett et al. 2019).</p>" +
+                "<p><b>Its charge:</b> posed faces and forced choices built the classic finding into the method.</p>" +
+                "<p><b>So:</b> on this view, a face is a clue read in context, not a readout.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides accept that recognition is above chance in some studies, and that it varies with method and culture. They disagree on how much the face carries and how much the reader adds.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Some facial configurations are recognized above chance across cultures, but far less reliably than the classic view held, and context does much of the work.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Large cross-cultural studies of spontaneous expressions showing tight face–emotion links.</dd></div></dl>" +
+                "<p><b>So:</b> treat a face as a reason to ask, not an answer.</p>" },
+              { kind: "example", lvl: "p", title: "Marta asks", body: who("<b>Marta</b> does not say “you look disgusted”. She keeps a line ready.") +
+                '<p class="x-note">“I noticed something cross your face just then. What was that like for you?” · <span lang="es">“Noté que algo te cruzó la cara hace un momento. ¿Qué sentiste?”</span></p>' +
+                "<p>Joel pauses, then says he is not fine: his brother’s habits bother him.</p>" +
+                "<p><b>Person-first.</b> Write “Joel, who said he was fine and then described feeling bothered”, not “a client in denial”.</p>" },
+              { kind: "teachback", id: "m8e.2:teachback", title: "Teach it back", prompt: "Explain to a trainee how Marta reads Joel’s face: Darwin’s continuity thesis from The Descent of Man, a difference of degree not kind, with social instincts and sympathy as the root of morality; The Expression of the Emotions, with its principles of serviceable habits, antithesis and direct action of the nervous system; his photographs shown to guests as an early judgment study; his caution, a mechanism and observations rather than a psychology; the line to basic emotions through Ekman and Friesen, and Barrett’s critique in the M7 lessons; recognition weaker without word cues in Gendron and colleagues’ work with the Himba; empathy in primates from de Waal, its meaning contested; the contrast between continuity and a human-only gap; both sides steelmanned, universal faces versus faces read in context; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Recognition across cultures " + ev("c") + ". Weaker without word cues " + ev("c") + ". Empathy-like behaviour in primates " + ev("r") + ".</p>" +
+                "<p><b>So:</b> Darwin made minds part of nature and faces worth studying; a face still tells you what to ask, and the person tells you what they feel.</p>" },
+              Q("What does the continuity thesis claim?",
+                ["Humans and animals have identical minds", "Minds differ in degree, not in kind", "Only humans have any emotions", "Animal minds cannot be studied"], 1,
+                "Darwin saw human mental powers as further developed forms of capacities other animals share."),
+              Q("A dog crouches and wags when greeting its owner, the opposite of its hostile stance. Which principle is this?",
+                ["Serviceable habits", "Direct action of the nervous system", "Antithesis", "Sexual selection"], 2,
+                "Antithesis: an opposite state of mind brings out opposite movements."),
+              Q("What is the 2026 verdict on facial expressions?",
+                ["Faces read the same everywhere, without fail", "Faces carry no information about feeling", "Settled, with high confidence", "Above chance, but weaker and context-bound"], 3,
+                "Confidence is moderate; tight face–emotion links in large studies of spontaneous expressions would change it.")
+            ]
+          },
+          /* phase 3k-2: EV lessons 3–4 (psychology only; no numbers except years) */
+          "m8e.3": {
+            home: "A woman in early recovery panics in a safe supermarket, and her cravings hit hardest at the sight of a bar sign. What does evolution have to say about that?",
+            keys: [["What did the modern programme claim?", "That the mind is a set of evolved mechanisms, each shaped for a recurring ancestral problem (Tooby & Cosmides 1992)."],
+              ["What is the environment of evolutionary adaptedness?", "The ancestral conditions a trait was shaped for: the design context, not a single time or place."],
+              ["What is the smoke-detector principle?", "A cheap false alarm beats a costly miss, so defences such as anxiety and pain over-fire by design (Nesse 2005)."],
+              ["What is evolutionary mismatch?", "Old dial settings meeting modern inputs: supernormal rewards in addiction, a hair-trigger alarm in a safe world, appetite amid engineered food."],
+              ["What is the verdict on massive modularity as of 2026?", "Some specialized learning biases are well supported; a mind built mostly of many innate modules is not. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Panic in a safe aisle", body: who("<b>Lena</b> is in early recovery from alcohol use. Her counsellor, <b>Ali</b>, asks about her week.") +
+                "<p>She says her heart raced and her breath went short in the supermarket, where nothing was wrong. On the walk home, a bar sign came into view and the craving was the strongest all week.</p>" +
+                "<p>She asks: “What is wrong with me?”</p>" +
+                '<p class="hook">Is her alarm broken, or doing a job it was built for?</p>' },
+              { kind: "predict", id: "m8e.3:predict", title: "Your call first",
+                case: ["Lena’s heart raced in the supermarket.",
+                  "Her breath went short there.",
+                  { t: "She shops on Tuesdays.", irrelevant: true },
+                  "Nothing in the shop was dangerous.",
+                  "Her craving peaked when a bar sign came into view.",
+                  { t: "She walked home by the park.", irrelevant: true }],
+                q: "From an evolutionary view, why might an alarm fire when nothing is wrong?",
+                options: ["The alarm is damaged and has stopped working", "Missing a real danger cost more than a false alarm", "Alarms fire at random, with no pattern at all"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: a missed danger could cost a life, and a false alarm costs a racing heart. An alarm tuned that way fires often when nothing is wrong. That is the smoke-detector principle, later in this lesson.",
+                hints: ["Compare the cost of a false alarm with the cost of a miss.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say which mistake an alarm should avoid most."] },
+              { kind: "idea", lvl: "f", title: "From Darwin to a programme", body: "<p>For most of the twentieth century, psychology used Darwin little. In <i>The Adapted Mind</i>, Tooby and Cosmides (1992) " + ev("c") + " set out a programme: the mind is a set of evolved mechanisms, each shaped to solve a problem our ancestors met again and again.</p>" +
+                "<p>They called the mechanisms <b>domain-specific</b>: one for spotting cheaters, one for choosing mates, one for fearing snakes, and so on.</p>" +
+                "<p><b>So:</b> evolutionary psychology asks what problem a mental tendency was shaped to solve.</p>" },
+              { kind: "idea", lvl: "f", title: "The design context", body: "<p>The <b>environment of evolutionary adaptedness</b>, or EEA, is Bowlby’s term for the conditions a trait was shaped in: small groups, foraging, predators, no fridges and no bars.</p>" +
+                "<p>It is not one place or date. It is the set of recurring problems that did the shaping.</p>" +
+                "<p><b>So:</b> to ask what a trait is for, ask what world it was built for.</p>" },
+              { kind: "idea", lvl: "p", title: "Mate preferences across cultures", body: "<p>Buss (1989) " + ev("r") + " asked people in many cultures what they wanted in a partner. Kindness and intelligence topped lists everywhere. On average, women rated a partner’s earning prospects higher, and men rated youth and looks higher.</p>" +
+                "<p>The pattern replicates as a description. Why it exists is argued: evolved preference, or the economic roles open to each sex, met in the SG lessons on social role theory.</p>" +
+                "<p><b>So:</b> robust as description; contested as explanation.</p>" },
+              { kind: "idea", lvl: "p", title: "Human universals as evidence", body: "<p>Brown (1991) " + ev("r") + " listed traits found in every documented culture: language, music, kinship terms, gossip, rules about sex, mourning the dead.</p>" +
+                "<p>A trait found everywhere hints at a shared human nature. But a universal can also come from shared problems that every culture solves the same way.</p>" +
+                "<p><b>So:</b> universals are a clue to evolved design, not proof of it.</p>" },
+              { kind: "idea", lvl: "p", title: "The developmental branch: attachment", body: "<p>Bowlby read infant attachment as an <b>evolved system</b>: babies who stayed close to a caregiver when afraid were more likely to survive, so seeking closeness under threat was built in.</p>" +
+                "<p>The system is universal; its patterns are shaped by the care a child gets. See the M6 lesson “Attachment”.</p>" +
+                "<p><b>So:</b> evolution sets up the system; experience tunes it.</p>" },
+              { kind: "idea", lvl: "p", title: "Evolutionary psychiatry", body: "<p>Nesse, in <i>Good Reasons for Bad Feelings</i> (Nesse 2019), asks of each symptom not only what went wrong, but why we are vulnerable at all.</p>" +
+                "<p>His answers come in kinds: some symptoms are <b>defences</b> working as built; some are <b>mismatches</b> between old design and a new world; some are the <b>price</b> of having defences at all.</p>" +
+                "<p><b>So:</b> a symptom may be a defence, a mismatch or a cost, not always a breakdown.</p>" },
+              { kind: "idea", lvl: "p", title: "The smoke-detector principle", body: "<p>A smoke detector that goes off for burnt toast is a nuisance. One that stays quiet in a fire is a disaster. So detectors are set to over-fire.</p>" +
+                "<p>Nesse (2005) " + ev("c") + " argued that defences such as anxiety, pain and nausea work the same way: when a false alarm is cheap and a miss is costly, the best alarm fires often when nothing is wrong. Over-firing is <b>by design</b>.</p>" +
+                "<p>Lena’s panic in a safe supermarket fits: an alarm built to err on the side of danger.</p>" +
+                "<p><b>So:</b> a defence that fires too often may be working as built.</p>" },
+              { kind: "idea", lvl: "p", title: "Mismatch: old dials, new inputs", body: "<p><b>Evolutionary mismatch</b> means a trait tuned for one world meeting another. It is the most useful idea evolution gives the clinic.</p>" +
+                "<p>The dial settings are Stone-Age; the inputs are modern.</p>" +
+                "<p><b>So:</b> a problem can sit in the fit between person and world, not only in the person.</p>" },
+              { kind: "idea", lvl: "p", title: "Mismatch one: supernormal rewards", body: "<p>A <b>supernormal stimulus</b> is an exaggerated version of a natural cue that draws a stronger response than the real thing; Tinbergen found gulls pecking harder at a fake beak than a real one.</p>" +
+                "<p>Alcohol and other drugs act straight on the brain’s wanting system, harder than food or company ever did. The bar sign became a learned cue for that reward. See the M2 lesson “When plasticity builds the problem, and therapy’s mechanism”.</p>" +
+                "<p><b>So:</b> addiction can be read as old wanting meeting a reward stronger than anything it was built for.</p>" },
+              { kind: "idea", lvl: "p", title: "Mismatch two: a hair-trigger in a safe world", body: "<p>An alarm tuned for predators and hostile strangers now meets crowded shops, bright lights and strangers who mean no harm.</p>" +
+                "<p>With few real dangers to calibrate on, and much to avoid, the alarm can stay on a hair-trigger.</p>" +
+                "<p><b>So:</b> anxiety may be a sensible setting in the wrong world.</p>" },
+              { kind: "idea", lvl: "p", title: "Mismatch three: appetite amid engineered food", body: "<p>A taste for sweet, fat and salt helped when such foods were rare.</p>" +
+                "<p>Food now can be built to hit those tastes harder than any fruit or meat, and it is everywhere.</p>" +
+                "<p><b>So:</b> overeating can be read as an old appetite meeting a new food supply, not a failure of will.</p>" },
+              { kind: "contrast", id: "m8e.3:contrast", title: "Defence or disorder?",
+                q: "Which made-up case describes a defence working as built, rather than a disorder?",
+                cases: [
+                  { label: "Case A", s: ["A man coughs a lot this week.", { t: "He works in an office.", irrelevant: true }, { t: "He breathed in dust while clearing a loft, and the cough clears it from his lungs.", diff: true }] },
+                  { label: "Case B", s: ["A man coughs a lot this week.", { t: "He works in an office.", irrelevant: true }, { t: "He has an infection filling his lungs, and the cough no longer clears it.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the man works", "Whether the cough is doing its job or the system has broken down", "How often he coughs", "Which week it happened"],
+                feature: 1,
+                why: "Both men cough. In Case A the cough is a defence doing its job, like a cough clearing dust. In Case B something has broken down, like pneumonia, and the cough is a sign of it. Ask whether the defence is protecting or the system is failing.",
+                hints: ["Find the one sentence where the cases part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask what the cough is doing for the man."] },
+              { kind: "example", lvl: "p", title: "Ali answers Lena", body: who("<b>Ali</b> does not tell Lena she is fine. He keeps a line ready.") +
+                '<p class="x-note">“Your alarm isn’t broken; it’s set for a more dangerous world. We can help it learn this one.” · <span lang="es">“Tu alarma no está rota; está ajustada para un mundo más peligroso. Podemos ayudarla a aprender este.”</span></p>' +
+                "<p>Then they plan gradual exposure for the supermarket, and a different route home past the bar.</p>" +
+                "<p><b>Person-first.</b> Write “Lena, who is in early recovery from alcohol use”, not “an alcoholic”.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>The mismatch story is easy to tell and hard to test. We have no direct record of ancestral anxiety or appetite, and almost any modern problem can be paired with a plausible ancestral world in which it would have helped.</p>' +
+                "<p><b>The answer.</b> Use mismatch as a frame that lowers shame and suggests where to intervene, not as a proven cause. Treatment still rests on what works in trials. The next lesson gives a drill for testing such stories.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · The mind is massively modular", body: "<p>On this view, the mind is built mostly of many specialized mechanisms, each shaped for one ancestral problem: <b>massive modularity</b>.</p>" +
+                "<p><b>Its evidence:</b> people reason far better about rules framed as spotting cheaters than the same logic in abstract form (Tooby & Cosmides 1992); fears of snakes and heights are learned faster than fears of newer dangers.</p>" +
+                "<p><b>Its charge:</b> a single all-purpose learner would face too many possibilities to learn anything in time; specialized tools are how evolution solves problems everywhere else in the body.</p>" +
+                "<p><b>So:</b> on this view, many specialized tools, not one general learner, make up the mind.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · The mind is mostly flexible learning", body: "<p>On the other view, the mind has some built-in biases, but most of its abilities come from flexible learning in a rich environment.</p>" +
+                "<p><b>Its evidence:</b> Fodor (2000), who first defined modules, argued that the mind’s central reasoning is not modular at all. Buller (2005) argued the brain is too plastic, and human environments too changeable, for fixed modules to be the rule.</p>" +
+                "<p><b>Its charge:</b> modules are named after the fact; few have been shown with their own development and their own ways of failing.</p>" +
+                "<p><b>So:</b> on this view, a flexible learner with some tilts, not a toolbox of modules, makes up the mind.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides accept that some learning is biased: some fears are learned faster than others. They disagree on whether such biases are the exception or the rule.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Some specialized learning biases are well supported; a mind built mostly of many innate modules is not.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Specific modules shown with dedicated development and failure patterns.</dd></div></dl>" +
+                "<p><b>So:</b> speak of evolved biases in learning, not of a mind made of modules.</p>" },
+              { kind: "teachback", id: "m8e.3:teachback", title: "Teach it back", prompt: "Explain to Lena’s care team what evolution adds: Tooby and Cosmides’ programme of evolved, domain-specific mechanisms; the environment of evolutionary adaptedness as design context; Buss’s mate-preference study, robust as description and contested as explanation; human universals from Brown as a clue, not proof; attachment as an evolved system from Bowlby; Nesse’s evolutionary psychiatry, with symptoms as defences, mismatches or the price of defences; the smoke-detector principle, a cheap false alarm beating a costly miss, applied to Lena’s panic; mismatch with supernormal rewards in addiction, a hair-trigger alarm in a safe world, and appetite amid engineered food; the contrast between a defence and a disorder, a cough clearing dust versus pneumonia; the critique that mismatch stories are easy to tell and hard to test; massive modularity and its critics Fodor and Buller, both steelmanned; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Domain-specific mechanisms " + ev("c") + ". Mate preferences as description " + ev("r") + ". Human universals " + ev("r") + ". The smoke-detector principle " + ev("c") + ".</p>" +
+                "<p><b>So:</b> evolution’s best gift to the clinic is a frame: many symptoms are defences set for another world, and a defence can learn this one.</p>" },
+              Q("What does the smoke-detector principle predict?",
+                ["Defences fire only when danger is real", "Defences over-fire, as false alarms are cheap", "Defences fade once danger has passed", "Defences fire at random, by chance alone"], 1,
+                "When a miss is costly and a false alarm is cheap, the best alarm fires often when nothing is wrong (Nesse 2005)."),
+              Q("Which is an example of evolutionary mismatch?",
+                ["A cough clearing dust from the lungs", "A child seeking a parent when afraid", "A sweet tooth amid engineered food", "A fever during an infection"], 2,
+                "An appetite tuned for scarce sweet foods meets a world full of food built to hit that taste."),
+              Q("What is the 2026 verdict on massive modularity?",
+                ["Settled: the mind is all modules", "Settled: there are no learning biases", "Biases supported; mostly modules, not", "Untested, so no verdict is possible"], 2,
+                "Confidence is moderate; modules with dedicated development and failure patterns would change it.")
+            ]
+          },
+          "m8e.4": {
+            home: "A magazine says women prefer pink because their ancestors gathered red berries. How do you test a story that sounds this neat?",
+            keys: [["What is a just-so story?", "An adaptive explanation that fits any outcome, and so explains none (Gould & Lewontin 1979)."],
+              ["Adaptation, byproduct or exaptation?", "Shaped for its job; a side effect of something else, like the navel; or shaped for one job and borrowed for another, like feathers (Gould & Vrba 1982)."],
+              ["What is the spandrel drill?", "Before telling an evolutionary story: name the byproduct alternative, name the observation that would separate them, and state what would make the claim fail."],
+              ["What is the EEA problem?", "The ancestral environment is partly inferred from the very traits it is then used to explain: a circle (Laland & Brown 2011)."],
+              ["What is the verdict on evolutionary psychology as of 2026?", "Productive where it makes risky, testable predictions; weak where it explains after the fact. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Pink, because of berries?", body: who("<b>Sara</b> is a psychology trainee. Her aunt sends her a magazine page.") +
+                "<p>The headline says women prefer pink because ancestral women gathered red berries and had to spot them among leaves. Her aunt writes: “So it’s in our genes!”</p>" +
+                '<p class="hook">The story sounds neat. How would anyone check it?</p>' },
+              { kind: "predict", id: "m8e.4:predict", title: "Your call first",
+                case: ["The magazine says women prefer pink.",
+                  "It says ancestral women gathered red berries.",
+                  { t: "The page has a photo of a strawberry.", irrelevant: true },
+                  "It says spotting berries shaped a taste for pink.",
+                  { t: "The magazine comes out monthly.", irrelevant: true }],
+                q: "Which fact would hurt the berry story most?",
+                options: ["Pink was once thought a colour for boys", "Some men also like the colour pink", "Berries come in colours other than red"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: if pink was a boys’ colour within living memory, the preference moves with culture far faster than evolution could. That is the strongest blow, and the lesson shows the record.",
+                hints: ["Ask how fast evolution can change a preference.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say which fact shows the preference changing quickly."] },
+              { kind: "idea", lvl: "f", title: "Where the berry story came from", body: "<p>Hurlbert and Ling (2007) " + ev("c") + " asked adults to pick between colours. Both sexes leaned toward blue; women leaned more than men toward reddish and purplish shades.</p>" +
+                "<p>The authors suggested, as a guess, that gathering ripe fruit might explain it. The magazine turned the guess into a fact.</p>" +
+                "<p><b>So:</b> a small lab difference plus a guess became a headline.</p>" },
+              { kind: "idea", lvl: "f", title: "Where the story fails", body: "<p>In the early twentieth century, shops and magazines in the United States often advised pink for boys and blue for girls; the swap settled only around the middle of the century (Paoletti 2012).</p>" +
+                "<p>LoBue and DeLoache (2011) " + ev("r") + " offered young children objects in many colours. Girls began to favour pink, and boys to avoid it, around toddlerhood, about when children learn which sex they are.</p>" +
+                "<p><b>So:</b> the preference arrives with gender learning and shifts with fashion; the berries are not needed.</p>" },
+              { kind: "idea", lvl: "f", title: "Spandrels and just-so stories", body: "<p>Gould and Lewontin (1979) " + ev("r") + " pointed to the spandrels of a cathedral: the curved panels where arches meet a dome. They are richly painted, so they look designed for the painting, but they are a side effect of building arches.</p>" +
+                "<p>Their charge: evolutionary stories often treat every trait as designed for something, and invent a fitting past. A <b>just-so story</b>, after Kipling’s tales of how the leopard got its spots, fits any outcome, and so explains none.</p>" +
+                "<p><b>So:</b> a story that would fit the opposite result too has not explained anything.</p>" },
+              { kind: "idea", lvl: "p", title: "Adaptation: shaped for the job", body: "<p>An <b>adaptation</b> is a trait shaped by selection for the job it does now.</p>" +
+                "<p>The eye is the classic case: its parts fit together to form images, and it is hard to see what else they would be for.</p>" +
+                "<p><b>So:</b> call a trait an adaptation only when its design fits the job and little else.</p>" },
+              { kind: "idea", lvl: "p", title: "Byproduct: a side effect", body: "<p>A <b>byproduct</b>, or spandrel, comes along with something that was selected, without being selected itself.</p>" +
+                "<p>The navel is the classic case: it is the scar of the umbilical cord, which was selected; the navel itself does no job.</p>" +
+                "<p><b>So:</b> some traits exist only because something else did.</p>" },
+              { kind: "idea", lvl: "p", title: "Exaptation: borrowed for a new job", body: "<p>Gould and Vrba (1982) named the <b>exaptation</b>: a trait shaped for one job, or for none, that is later put to another use.</p>" +
+                "<p>Feathers are the classic case: they likely first served warmth or display in dinosaurs, and only later flight.</p>" +
+                "<p><b>So:</b> what a trait does now may not be what it was shaped for.</p>" },
+              { kind: "idea", lvl: "p", title: "The spandrel drill", body: "<p>Before you tell any evolutionary story, in class, clinic or a group, run the drill on it:</p>" +
+                "<ul><li><b>Byproduct.</b> Name the byproduct alternative: what else could produce this trait as a side effect?</li>" +
+                "<li><b>Separator.</b> Name the observation that would tell the two stories apart.</li>" +
+                "<li><b>Failure.</b> State what result would make the adaptive claim fail.</li></ul>" +
+                "<p>If you cannot fill in all three, the story is not ready to tell.</p>" +
+                "<p><b>So:</b> no evolutionary story without its rival, its test, and its way to fail.</p>" },
+              { kind: "example", lvl: "p", title: "Worked item: pink preference", body: "<p><b>Trait and story.</b> Girls prefer pink, because ancestral women gathered berries.</p>" +
+                "<ul><li><b>Byproduct.</b> The preference is a side effect of learning gender: children adopt what their culture marks as theirs.</li>" +
+                "<li><b>Separator.</b> Does it appear before or after children learn their gender, and does it follow fashion across places and times?</li>" +
+                "<li><b>Failure.</b> The berry claim fails if the preference appears only with gender learning and flips with fashion.</li></ul>" +
+                "<p>The record: it appears around toddlerhood (LoBue & DeLoache 2011), and it flipped within a century.</p>" +
+                "<p><b>So:</b> the berry story fails its own test.</p>" },
+              { kind: "example", lvl: "p", title: "Worked item: a religion module", body: "<p><b>Trait and story.</b> Religion is found in every culture, so the mind has an evolved religion module.</p>" +
+                "<ul><li><b>Byproduct.</b> Belief in gods is a side effect of tools built for other jobs, such as detecting agents behind events and reading other minds (Boyer 2001).</li>" +
+                "<li><b>Separator.</b> Does religious thinking develop and fail on its own schedule, or does it rise and fall with general social reasoning and with what a culture teaches?</li>" +
+                "<li><b>Failure.</b> The module claim fails if religious belief tracks general mind-reading and upbringing, with no pattern of its own.</li></ul>" +
+                "<p><b>So:</b> being universal does not settle it; the separating observation does.</p>" },
+              { kind: "idea", lvl: "p", title: "Falsifiability pressure", body: "<p>A claim is scientific when some possible observation could show it wrong. That test was met in the M0+ lesson “Is psychology a science?”.</p>" +
+                "<p>An evolutionary story built after the trait is known, and adjusted to fit any finding, never risks failing.</p>" +
+                "<p><b>So:</b> the drill’s third step, what would make it fail, is the one that makes a story science.</p>" },
+              { kind: "idea", lvl: "p", title: "The EEA problem: a circle", body: "<p>We have little direct record of how our ancestors lived, felt or chose. So the ancestral environment is often reconstructed partly from the traits we see today.</p>" +
+                "<p>Then that same environment is used to explain those traits. Laland and Brown (2011) " + ev("r") + " name this circularity.</p>" +
+                "<p><b>So:</b> an ancestral world inferred from a trait cannot also be the evidence for why the trait exists.</p>" },
+              { kind: "contrast", id: "m8e.4:contrast", title: "Adaptation or byproduct?",
+                q: "Which made-up report points to a byproduct rather than an adaptation?",
+                cases: [
+                  { label: "Report A", s: ["Researchers study a trait in a bird species.", { t: "The work was done in a forest.", irrelevant: true }, { t: "The trait appears only alongside a larger feature that was selected, and does no job of its own.", diff: true }] },
+                  { label: "Report B", s: ["Researchers study a trait in a bird species.", { t: "The work was done in a forest.", irrelevant: true }, { t: "The trait’s parts fit a specific job, and birds with more of it do that job better.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the work was done", "Whether the trait does a job or rides along with something else", "Which species was studied", "Whether researchers studied the trait"],
+                feature: 1,
+                why: "Both reports study a trait. In Report A it rides along with a selected feature and does nothing itself: a byproduct, like the navel. In Report B its design fits a job and more of it helps: an adaptation.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether the trait does a job of its own."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>The byproduct story can be just as untested as the adaptive one. “It’s a spandrel” is also told after the fact, and used without limit it would block any adaptive hypothesis, including true ones like the eye.</p>' +
+                "<p><b>The answer.</b> The drill does not favour byproducts. It asks both stories for a separating observation, and lets the evidence choose.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Evolutionary psychology is a productive programme", body: "<p>On this view, asking what a mind was shaped for generates hypotheses no other approach would think to test.</p>" +
+                "<p><b>Its evidence:</b> predictions about cheater detection, fear learning and attachment were made in advance and found support; mate-preference patterns replicate across cultures (Buss 1989).</p>" +
+                "<p><b>Its charge:</b> bad stories exist in every field; the cure is better tests, not dropping the question of function.</p>" +
+                "<p><b>So:</b> on this view, the programme earns its keep through the predictions it makes.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Evolutionary psychology is mostly untestable storytelling", body: "<p>On the other view, most evolutionary explanations of the mind cannot be tested, because the past they rely on is unknown.</p>" +
+                "<p><b>Its evidence:</b> stories such as the berry account fail when checked; the ancestral environment is inferred from the traits it explains (Laland & Brown 2011); Gould and Lewontin (1979) showed how readily stories fit any result.</p>" +
+                "<p><b>Its charge:</b> a field that can explain a finding and its opposite is telling stories, however good.</p>" +
+                "<p><b>So:</b> on this view, most of the programme explains after the fact.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree that some claims were tested and some were only told. They disagree on which kind dominates.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Productive where it makes risky, testable predictions; weak where it explains after the fact.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A track record of novel predictions surviving replication, or failing.</dd></div></dl>" +
+                "<p><b>So:</b> judge each evolutionary claim by its prediction, not by its story.</p>" },
+              { kind: "example", lvl: "p", title: "Sara replies", body: who("<b>Sara</b> does not mock the magazine. She keeps a line ready.") +
+                '<p class="x-note">“It’s a neat story, but pink was a boys’ colour a few generations ago, so it can’t just be genes.” · <span lang="es">“Es una historia bonita, pero el rosa era un color de niños hace unas generaciones, así que no pueden ser solo los genes.”</span></p>' +
+                "<p><b>Person-first.</b> The aim is the claim, not her aunt; she thanks her for sending it.</p>" },
+              { kind: "teachback", id: "m8e.4:teachback", title: "Teach it back", prompt: "Explain to Sara’s aunt how to test the berry story: Hurlbert and Ling’s colour study and its guess about gathering; why it fails, with pink once a boys’ colour and LoBue and DeLoache finding the preference arriving around toddlerhood; Gould and Lewontin’s spandrels and the just-so story that fits any outcome; adaptation, byproduct and exaptation from Gould and Vrba, with the eye, the navel and feathers; the spandrel drill, naming the byproduct alternative, the separating observation, and what would make the claim fail, worked on pink preference and a religion module; falsifiability from the M0+ science lesson; the EEA circularity named by Laland and Brown; the contrast between adaptation and byproduct; the critique that byproduct stories can be untested too; both sides steelmanned, a productive programme versus untestable storytelling; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Pink preference from gathering " + ev("c") + ". Preference arriving with gender learning " + ev("r") + ". The spandrels critique " + ev("r") + ". The EEA circularity " + ev("r") + ".</p>" +
+                "<p><b>So:</b> an evolutionary story earns a hearing only when it names its rival, its test, and its way to fail.</p>" },
+              { kind: "idea", lvl: "f", title: "Your turn: run the drill alone", body: "<p><b>Trait and story.</b> People in every culture make music, so music evolved to help win mates.</p>" +
+                "<p>The next three questions are the drill’s three steps. Answer them before telling this story, or any other.</p>" },
+              Q("Drill step one: which is the byproduct alternative for music?",
+                ["Music evolved because it helped win mates", "Music rides on hearing, rhythm and language", "Music is found in every known culture", "Music is enjoyed more by some people"], 1,
+                "A byproduct account says music is a side effect of tools selected for other jobs, such as hearing and language; the others restate the story or the trait."),
+              Q("Drill step two: which observation would best separate the two stories?",
+                ["Whether people enjoy music when alone", "Whether music skill predicts mate success", "Whether music is old in human history", "Whether music differs between cultures"], 1,
+                "If music evolved to win mates, skill should affect mating success and be more striking in the sex that competes more; a byproduct account predicts no such link."),
+              Q("Drill step three: what would make the mating claim fail?",
+                ["Music skill shows no link to mate choice", "Some cultures use music in religious rites", "Some musicians never have any children", "Music is pleasant to many listeners"], 0,
+                "A claim that skill helps win mates fails if skill shows no link to mate choice; a single childless musician or other uses of music decide nothing.")
+            ]
+          },
+          /* phase 3k-3: EV lessons 5–6 (psychology only; no numbers except years) */
+          "m8e.5": {
+            home: "A podcast host says women’s tastes in men shift across the month, so dating advice should follow the calendar. What happened when the idea was retested?",
+            keys: [["What did the ovulatory-cycle hypothesis claim?", "That near ovulation women prefer more masculine men, especially as short-term partners (Gildersleeve et al. 2014 in favour; Wood et al. 2014 against)."],
+              ["What did the large retests find?", "Large preregistered studies following the same women found little or no shift in preferences across the cycle (Jones et al. 2018; Stern et al. 2021)."],
+              ["What is the naturalistic fallacy?", "Reasoning from “this is natural” to “this is good”. A scientific claim says what is; it cannot by itself say what ought to be."],
+              ["What are the rivals inside evolution?", "Gene-culture coevolution, culture as a second, often faster, inheritance system (Boyd & Richerson 1985; Henrich 2016), and niche construction, organisms building the environments that then select them (Odling-Smee, Laland & Feldman 2003)."],
+              ["What is the verdict as of 2026?", "Both inheritance systems matter; for many human differences, culture moves faster and explains more of the variation between groups. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Dating by the calendar?", body: who("<b>Nadia</b> is a counselling trainee. A client quotes a podcast to her.") +
+                "<p>The host says women’s tastes in men change across the month: rugged men at one point, gentle men at another. So, he says, dating advice should follow the calendar.</p>" +
+                '<p class="hook">It was once a celebrated finding. What happened to it?</p>' },
+              { kind: "predict", id: "m8e.5:predict", title: "Your call first",
+                case: ["The host says women’s tastes in men shift across the month.",
+                  { t: "The podcast has a large audience.", irrelevant: true },
+                  "He cites studies from the early part of this century.",
+                  "He gives dating tips tied to the calendar.",
+                  { t: "The episode ran long.", irrelevant: true }],
+                q: "What would best show whether the host is right?",
+                options: ["Track the same women’s ratings across many cycles", "Ask listeners whether the advice worked for them", "Count how often the idea is shared online"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: following the same women across their cycles, in large studies planned in advance, is the test. That test was run, and the lesson shows what it found.",
+                hints: ["Ask what kind of study could catch a change within one person.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say who should be measured, and how often."] },
+              { kind: "idea", lvl: "f", title: "A beautiful theory", body: "<p>The <b>ovulatory-cycle hypothesis</b> said that when women are most fertile, they prefer more masculine, rugged men, especially as short-term partners.</p>" +
+                "<p>It fit an evolutionary story neatly, and many small studies reported it. A meta-analysis by Gildersleeve et al. (2014) " + ev("d") + " pooled them and found support.</p>" +
+                "<p>The same year, Wood et al. (2014) pooled the studies differently and found little effect.</p>" +
+                "<p><b>So:</b> two summaries of the same literature disagreed; a new test was needed.</p>" },
+              { kind: "idea", lvl: "f", title: "The retests", body: "<p>Jones et al. (2018) " + ev("r") + " followed many women over several cycles, measured their hormones, and planned the analysis before seeing the data. Preferences for masculine faces did not track fertility.</p>" +
+                "<p>Stern et al. (2021) " + ev("r") + " ran a similar large, preregistered study on bodies and behaviour. They found little or no shift.</p>" +
+                "<p><b>So:</b> the effect shrank or failed on retest; the calendar advice rests on it.</p>" },
+              { kind: "idea", lvl: "p", title: "Why it looked real", body: "<p>Most early studies were small, tested each woman once, and could choose when to count a woman as fertile. Null results often went unpublished.</p>" +
+                "<p>That is the recipe the C+ lesson “The day a famous study failed” describes: flexible choices, a file drawer, and small samples.</p>" +
+                "<p><b>So:</b> a beautiful theory met the replication crisis, and the theory gave way.</p>" },
+              { kind: "idea", lvl: "p", title: "Misuse: eugenics", body: "<p>Francis Galton, Darwin’s cousin, coined the word <b>eugenics</b> in 1883: the plan to “improve” people by controlling who has children.</p>" +
+                "<p>It grew in Darwin’s shadow and in Galton’s hands, and it became a respectable cause among scientists and reformers.</p>" +
+                "<p><b>So:</b> the field’s history includes its theft for a political programme.</p>" },
+              { kind: "idea", lvl: "p", title: "From idea to law", body: "<p>In the twentieth century, many countries passed laws for forced sterilisation of people the state labelled unfit, often poor people, people with disabilities, and minorities.</p>" +
+                "<p>In Buck v. Bell (1927), the United States Supreme Court upheld the forced sterilisation of Carrie Buck, a young woman judged “feeble-minded” on thin evidence. Nazi Germany later drew on such laws.</p>" +
+                "<p><b>So:</b> real people paid for a science turned into policy.</p>" },
+              { kind: "idea", lvl: "p", title: "The science and its theft", body: "<p>Darwin described how populations change. Eugenics added a value, that some people are worth more, and a plan to act on it.</p>" +
+                "<p>Its factual premises failed too: traits arise from many genes and from experience, and most variation lies within groups, not between them.</p>" +
+                "<p><b>So:</b> a description of nature is not a licence to rank people.</p>" },
+              { kind: "idea", lvl: "p", title: "The naturalistic fallacy", body: "<p>The <b>naturalistic fallacy</b> is reasoning from “this is natural” to “this is good” or “this should stay”.</p>" +
+                "<p>Disease, infant death and violence are natural too. A finding that a tendency evolved says nothing about whether we should accept it.</p>" +
+                "<p>Because evolutionary claims were once used to justify harm, the field owes extra care: state what a finding does not show, and who it is about.</p>" +
+                "<p><b>So:</b> evolved is not the same as right, and the history obliges care.</p>" },
+              { kind: "contrast", id: "m8e.5:contrast", title: "Fallacy or scientific claim?",
+                q: "Which made-up report commits the naturalistic fallacy?",
+                cases: [
+                  { label: "Report A", s: ["A writer notes that a tendency appears in many cultures.", { t: "The article ran in a weekend paper.", irrelevant: true }, { t: "She concludes that since it evolved, schools should not try to change it.", diff: true }] },
+                  { label: "Report B", s: ["A writer notes that a tendency appears in many cultures.", { t: "The article ran in a weekend paper.", irrelevant: true }, { t: "She asks whether it also appears in children raised in very different settings.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the article ran", "Whether it moves from ‘evolved’ to ‘should’", "How many cultures were named", "Who wrote the article"],
+                feature: 1,
+                why: "Both notice the same pattern. Report A slides from ‘it evolved’ to ‘leave it alone’: a value smuggled in. Report B asks a question data can answer: a scientific claim.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether a sentence says what is, or what ought to be."] },
+              { kind: "idea", lvl: "m", title: "A rival inside evolution: culture inherits too", body: "<p>Boyd and Richerson (1985, 2005) argued for <b>gene-culture coevolution</b>: people inherit genes and also skills, norms and beliefs learned from others.</p>" +
+                "<p>Henrich (2016), in <i>The Secret of Our Success</i> " + ev("c") + ", argued that cultural inheritance is often faster, and that much of what makes humans distinct lives in it.</p>" +
+                "<p><b>So:</b> evolution runs on two tracks, and the cultural one can outpace the genetic.</p>" },
+              { kind: "example", lvl: "m", title: "Worked example: milk", body: "<p>Most adult mammals stop digesting milk sugar after weaning. In some human groups, many adults keep this ability: <b>lactase persistence</b>.</p>" +
+                "<p>It is common where people kept dairy animals over many generations, and rare where they did not. Dairying came first; the genes spread after, because drinking milk then paid off.</p>" +
+                "<p><b>So:</b> a cultural practice changed which genes were favoured.</p>" },
+              { kind: "idea", lvl: "m", title: "A rival inside evolution: niche construction", body: "<p>Odling-Smee, Laland and Feldman (2003) " + ev("c") + " named <b>niche construction</b>: organisms build parts of their environment, which then select them.</p>" +
+                "<p>Beavers build dams that shape their own lives. Humans build fire, farms, cities and schools, and those worlds shape which traits and skills pay off.</p>" +
+                "<p><b>So:</b> the environment is not only a fixed judge; organisms help write it.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>One failed hypothesis and an ugly history do not condemn a field. Dismissing evolutionary psychology because of eugenics judges ideas by their misusers, a fallacy of its own, and many evolutionary predictions have held up.</p>' +
+                "<p><b>The answer.</b> Agreed: the lesson asks for care, not silence. Each claim stands on its own evidence, and the cycle story fell on retest, not on its politics.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Genes-first evolutionary psychology", body: "<p>On this view, the deepest explanations of human minds lie in evolved mechanisms shaped by genetic selection.</p>" +
+                "<p><b>Its evidence:</b> human universals (Brown 1991), prepared fears, and mate-preference patterns found across many cultures (Buss 1989).</p>" +
+                "<p><b>Its charge:</b> culture-first accounts treat learning as unlimited and ignore that the capacity to learn culture itself evolved.</p>" +
+                "<p><b>So:</b> on this view, culture rides on a genetic base and cannot explain it away.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Culture-and-niche-first", body: "<p>On the other view, much of human psychology is inherited culturally and built into the niches people make.</p>" +
+                "<p><b>Its evidence:</b> gene-culture coevolution (Boyd & Richerson 1985; Henrich 2016), lactase persistence following dairying, and niche construction (Odling-Smee, Laland & Feldman 2003).</p>" +
+                "<p><b>Its charge:</b> genes-first accounts explain differences between groups with genes when cultural history explains them faster and better.</p>" +
+                "<p><b>So:</b> on this view, culture is a second engine, not a coat of paint.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides accept two inheritance systems. They disagree on which one explains more of how human groups differ.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Both inheritance systems matter; for many human differences, culture moves faster and explains more of the variation between groups.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Strong evidence that specific psychological differences between populations track genes rather than cultural history.</dd></div></dl>" +
+                "<p><b>So:</b> before reaching for genes to explain a group difference, check the cultural history.</p>" },
+              { kind: "example", lvl: "p", title: "Nadia replies", body: who("<b>Nadia</b> does not mock the podcast. She keeps a line ready.") +
+                '<p class="x-note">“That idea was popular, but large retests found little or no shift, so I wouldn’t plan dates by it.” · <span lang="es">“Esa idea fue popular, pero las réplicas grandes encontraron poco o ningún cambio, así que yo no planearía citas con ella.”</span></p>' +
+                "<p><b>Person-first.</b> The aim is the claim, not her client; she asks what drew him to the idea.</p>" },
+              { kind: "teachback", id: "m8e.5:teachback", title: "Teach it back", prompt: "Explain to Nadia’s client what happened to the cycle idea: the ovulatory-cycle hypothesis, Gildersleeve’s meta-analysis in favour and Wood’s against; the large preregistered retests of Jones and Stern finding little or no shift; why it looked real, as in the C+ lesson on the replication crisis; eugenics, coined by Galton, forced sterilisation laws and Buck v. Bell; the science versus its theft; the naturalistic fallacy and why the history obliges care; the contrast between that fallacy and a scientific claim; gene-culture coevolution from Boyd and Richerson and Henrich, with lactase persistence after dairying; niche construction from Odling-Smee, Laland and Feldman; the critique that misuse does not condemn a field; both sides steelmanned, genes-first versus culture-and-niche-first; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Cycle shifts in preference " + ev("d") + ". The large preregistered retests " + ev("r") + ". Gene-culture coevolution " + ev("c") + ". Niche construction " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a theory’s beauty is not evidence, natural is not good, and evolution has more than one way to inherit.</p>" },
+              Q("What did the large preregistered retests of the cycle hypothesis find?",
+                ["Strong shifts near the fertile window", "Little or no shift across the cycle", "Shifts only in short-term preferences", "Shifts only in women on the pill"], 1,
+                "Following the same women over several cycles, Jones et al. (2018) and Stern et al. (2021) found little or no shift."),
+              Q("Which statement commits the naturalistic fallacy?",
+                ["The trait evolved, so keep it as it is", "The trait appears in many cultures", "The trait may be a byproduct of others", "The trait varies a lot within groups"], 0,
+                "Moving from ‘it evolved’ to ‘we should keep it’ adds a value the finding cannot supply."),
+              Q("What does lactase persistence illustrate?",
+                ["Genes fixing a trait before culture", "Culture changing which genes spread", "Niche construction failing in humans", "A trait with no genetic basis at all"], 1,
+                "Dairying came first; genes for digesting milk as adults spread after, because the practice made them pay off.")
+            ]
+          },
+          "m8e.6": {
+            home: "A mother says her son “was born anxious: he was jumpy from his first weeks.” Do inborn tendencies exist, and what would that mean for him?",
+            keys: [["What is prepared learning?", "Some associations, such as fear of snakes and spiders, are learned fast and unlearned slowly, while others barely form (Seligman 1971; Öhman & Mineka 2001)."],
+              ["What is core knowledge?", "Expectations about objects, number and agents that infants show before they could have been taught them (Spelke 2007)."],
+              ["What does heritability describe?", "How much of the variation in a trait within a population tracks genetic differences; never one person’s fate, and never fixity (Polderman et al. 2015)."],
+              ["What is the empiricist counterweight?", "Much apparently innate structure dissolves under better learning accounts, such as infants’ statistical learning of speech (Saffran, Aslin & Newport 1996)."],
+              ["What is the verdict as of 2026?", "Minds arrive prepared, not programmed and not blank; ‘innate’ names a starting configuration, never a destiny. Confidence moderate-high."]],
+            steps: [
+              { kind: "hook", title: "Born anxious?", body: who("<b>Mrs. Reyes</b> brings her son, <b>Leo</b>, to a child clinician, <b>Dr. Amin</b>.") +
+                "<p>She says Leo startled at small sounds from his first weeks, cried hard when strangers held him, and still hangs back at birthday parties. Her own mother was the same.</p>" +
+                "<p>She says: “He was born anxious.”</p>" +
+                '<p class="hook">Is she right, and if so, what follows?</p>' },
+              { kind: "predict", id: "m8e.6:predict", title: "Your call first",
+                case: ["Leo startled at small sounds as a baby.",
+                  "He cried hard when strangers held him.",
+                  { t: "He was born in the spring.", irrelevant: true },
+                  "He still hangs back at parties.",
+                  { t: "The family lives near the clinic.", irrelevant: true }],
+                q: "What does a jumpy infancy most likely mean for Leo now?",
+                options: ["A starting tilt that experience can shift", "A fixed trait he will keep for life", "Nothing, since babies show no lasting traits"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: early wariness is a real tilt that often lasts in part, and many children change with experience. The lesson shows the evidence on both sides.",
+                hints: ["Ask whether early traits tend to vanish, stay fixed, or something in between.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what experience might do to a starting tilt."] },
+              { kind: "idea", lvl: "f", title: "Prepared learning", body: "<p>Seligman (1971) " + ev("r") + " noticed that phobias cluster around a few things, such as snakes, spiders, heights and the dark, not around cars or sockets, which are more dangerous today.</p>" +
+                "<p>Öhman and Mineka (2001) " + ev("r") + " showed that fears of snakes and spiders are learned fast and are hard to unlearn. This is <b>prepared learning</b>.</p>" +
+                "<p><b>So:</b> some lessons come easier because the mind is ready for them.</p>" },
+              { kind: "idea", lvl: "f", title: "Monkeys at the video", body: "<p>Cook and Mineka (1989) " + ev("r") + " raised monkeys in the lab with no fear of snakes. They then watched videos of other monkeys reacting in fear.</p>" +
+                "<p>When the video showed a snake, the watchers learned to fear snakes. When the same fear was edited to appear aimed at flowers, they learned nothing.</p>" +
+                "<p><b>So:</b> the same experience teaches one fear and not another.</p>" },
+              { kind: "idea", lvl: "f", title: "Core knowledge", body: "<p>Spelke (2007) " + ev("c") + " reviewed studies where infants look longer at events that break simple rules: an object passing through a wall, an amount changing for no reason, a hand reaching without a goal.</p>" +
+                "<p>On her reading, infants expect things about objects, number and agents before anyone could have taught them: <b>core knowledge</b>.</p>" +
+                "<p><b>So:</b> some expectations seem to come with the infant, not after lessons.</p>" },
+              { kind: "idea", lvl: "p", title: "Temperament", body: "<p>Kagan (1994) " + ev("r") + " found that some babies react strongly to new sights and sounds in their first months, with crying and much movement. Many grew into shy, wary children: an <b>inhibited</b> <b>temperament</b>.</p>" +
+                "<p>But many changed. Only a minority stayed strongly inhibited, and warm, steady parenting that gently encouraged new things helped.</p>" +
+                "<p><b>So:</b> a temperament is visible early and is a tilt, not a track.</p>" },
+              { kind: "idea", lvl: "p", title: "Heritability, in words", body: "<p>Polderman et al. (2015) " + ev("r") + " pooled twin studies on nearly every measured trait. Identical twins, who share all their genes, resembled each other more than fraternal twins, who share about half, on nearly every trait.</p>" +
+                "<p>That pattern is called <b>heritability</b>: how much of the differences between people in a group track their genetic differences.</p>" +
+                "<p><b>So:</b> genes help explain why people differ, on almost everything.</p>" },
+              { kind: "idea", lvl: "p", title: "Reading heritability carefully", body: "<p>Heritability is about variation in a population, in its setting. It says nothing about how much of one person’s trait comes from genes.</p>" +
+                "<p>It is not fixity either. Height is highly heritable, yet average height rose by about a head in a century of better food.</p>" +
+                "<p><b>So:</b> heritable describes a group’s differences, never one person’s fate.</p>" },
+              { kind: "contrast", id: "m8e.6:contrast", title: "Heritability or inevitability?",
+                q: "Which made-up report states a heritability finding, not an inevitability claim?",
+                cases: [
+                  { label: "Report A", s: ["A study looks at shyness in many families.", { t: "The families came from one region.", irrelevant: true }, { t: "Identical twins were more alike in shyness than fraternal twins.", diff: true }] },
+                  { label: "Report B", s: ["A study looks at shyness in many families.", { t: "The families came from one region.", irrelevant: true }, { t: "So a child with shy parents will be shy whatever happens.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the families came from", "Whether it describes group differences or one child’s fate", "Which trait was studied", "Whether families were involved"],
+                feature: 1,
+                why: "Both look at shyness. Report A describes how differences in a group track genes: heritability. Report B jumps to one child’s fixed future: inevitability, which heritability never shows.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether a sentence is about a group, or about one child’s future."] },
+              { kind: "idea", lvl: "p", title: "The empiricist counterweight", body: "<p>Saffran, Aslin and Newport (1996) " + ev("r") + " played infants a short stream of made-up syllables with no pauses. Afterwards the infants told apart ‘words’ from that stream and new mixes.</p>" +
+                "<p>They had tracked which sounds tend to follow which: <b>statistical learning</b>. Abilities once thought to need built-in rules can come from fast learning of patterns.</p>" +
+                "<p><b>So:</b> much apparently innate structure dissolves under a better learning account.</p>" },
+              { kind: "example", lvl: "m", title: "Worked example: the language fight", body: "<p><b>Nativist side.</b> Chomsky argued that children hear too little, too messy speech to work out grammar alone, so a universal grammar must be built in " + ev("c") + ".</p>" +
+                "<p><b>Usage-based side.</b> Tomasello (2003) and others argue that children build grammar step by step from patterns in the speech they hear, using general learning and reading others’ intentions " + ev("c") + ".</p>" +
+                "<p>The fight continues; the M5 lesson “How language develops” takes it further.</p>" +
+                "<p><b>So:</b> each better learning account shrinks what must be built in, but has not removed it.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>“Prepared, not programmed” can sound safe because it fits anything: any fast learning is called prepared, any change is called tuning. A middle view that no result could upset explains nothing.</p>' +
+                "<p><b>The answer.</b> It risks something: a prepared bias should show fast learning, slow unlearning and selectivity before relevant experience. If early learning fully explains a supposed bias, that bias falls.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Nativism: much is built in", body: "<p>On this view, minds arrive with rich built-in structure: expectations, learning rules and dispositions shaped by evolution.</p>" +
+                "<p><b>Its evidence:</b> core knowledge in infants (Spelke 2007), prepared fears (Öhman & Mineka 2001), early temperament (Kagan 1994), and heritability on nearly every trait (Polderman et al. 2015).</p>" +
+                "<p><b>Its charge:</b> learning accounts quietly assume the structure they claim to explain; a blank learner learns nothing.</p>" +
+                "<p><b>So:</b> on this view, learning needs a built-in starting kit.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Empiricism: mostly learned", body: "<p>On the other view, infants start with little more than powerful general learning, and the rest is built from experience.</p>" +
+                "<p><b>Its evidence:</b> statistical learning in infants (Saffran, Aslin & Newport 1996), usage-based accounts of language (Tomasello 2003), and temperament that often changes.</p>" +
+                "<p><b>Its charge:</b> ‘innate’ is often a label for what we have not yet explained, and it shrinks each time learning is studied well.</p>" +
+                "<p><b>So:</b> on this view, start near blank and explain the rest by learning.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides accept that infants learn fast and that some biases appear early. They disagree on how much structure must come first.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Minds arrive prepared, not programmed and not blank: biases, appetites and fears with settings, tuned by experience. ‘Innate’ names a starting configuration, never a destiny.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate-high.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Showing a ‘prepared’ bias fully explained by early learning.</dd></div></dl>" +
+                "<p><b>So:</b> inherent tendencies exist as starting settings, and experience keeps turning the dials.</p>" },
+              { kind: "teachback", id: "m8e.6:teachback", title: "Teach it back", prompt: "Steelman the answer to “do inherent psychological tendencies exist?” you find least convincing: its core claim, its best evidence, its charge against the others, and what it would say about Leo." },
+              { kind: "position", id: "m8e.6:position", qid: "q-nature", question: "Do inherent psychological tendencies exist?", title: "Weigh, then take a position", views: NATURE_VIEWS, about: "about whether inherent psychological tendencies exist" },
+              { kind: "example", lvl: "p", title: "Dr. Amin replies", body: who("<b>Dr. Amin</b> takes Mrs. Reyes’ worry seriously and answers in plain words.") +
+                '<p class="x-note">“A temperament is a starting point, not a sentence. We’ll work with how he’s built, and he’ll keep growing.” · <span lang="es">“Un temperamento es un punto de partida, no una sentencia. Trabajaremos con cómo es él, y seguirá creciendo.”</span></p>' +
+                "<p><b>Person-first.</b> Leo is a boy with a wary temperament, not “an anxious child”; the plan builds on his strengths.</p>" },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Prepared fears " + ev("r") + ". Core knowledge " + ev("c") + ". Early temperament " + ev("r") + ". Heritability on nearly every trait " + ev("r") + ". Statistical learning in infants " + ev("r") + ".</p>" +
+                "<p><b>So:</b> minds arrive prepared, not programmed and not blank. Your position on it stays dated and open to revision.</p>" },
+              Q("What did Cook and Mineka’s monkeys show?",
+                ["They learned to fear snakes, not flowers", "They learned fear of anything on video", "They feared snakes with no video at all", "They learned fear of flowers, not snakes"], 0,
+                "The same fearful reaction taught fear when paired with snakes and nothing when paired with flowers: prepared learning."),
+              Q("What does high heritability of a trait tell you?",
+                ["One person’s trait is mostly from genes", "The trait cannot change with experience", "Group differences in it track genes", "The trait is the same in every setting"], 2,
+                "It describes variation within a population in its setting; height is heritable yet rose with better food."),
+              Q("What is the 2026 verdict on inherent tendencies?",
+                ["Minds are fully programmed at birth", "Minds start blank and learn it all", "Prepared minds, tuned by experience", "No verdict, as the question is empty"], 2,
+                "Confidence is moderate-high; a ‘prepared’ bias fully explained by early learning would count against it.")
+            ]
+          },
           /* ============ M0 · HOW TO JUDGE A STUDY: concepts only, no numbers ============ */
           "m0.1": {
             home: "Teens who eat family dinner use fewer drugs. Does dinner do it?",
@@ -10295,7 +10919,32 @@
           G("m8s.5", "Biosocial model", "Modelo biosocial", "Biology and society shaping sex differences together.", "The view that physical sex differences make some roles easier for one sex in a given economy, and those roles then shape people, so most differences come from interaction (Wood & Eagly 2012); see Social role theory."),
           G("m8s.6", "Ecological fallacy", "Falacia ecológica", "Reading a group finding as a fact about one person.", "The error of inferring an individual’s traits from a group average or rate; a group difference cannot say whether a given client has a trait or condition."),
           G("m8s.6", "Diagnostic overshadowing", "Eclipsamiento diagnóstico", "Putting new symptoms down to a label already given.", "The error of attributing new or different symptoms to an existing diagnosis, so other conditions are missed, as when attention problems are put down to anxiety; see Gender bias in diagnosis."),
-          G("m8s.6", "Gender bias in diagnosis", "Sesgo de género en el diagnóstico", "Diagnoses shifted by a client’s sex rather than their symptoms.", "Systematic differences in diagnosis for identical presentations depending on the client’s sex (Garb 1997); identical vignettes drew histrionic diagnoses for women and antisocial for men (Ford & Widiger 1989).")
+          G("m8s.6", "Gender bias in diagnosis", "Sesgo de género en el diagnóstico", "Diagnoses shifted by a client’s sex rather than their symptoms.", "Systematic differences in diagnosis for identical presentations depending on the client’s sex (Garb 1997); identical vignettes drew histrionic diagnoses for women and antisocial for men (Ford & Widiger 1989)."),
+          /* phase 3k-1: EV lessons 1–2 (Natural selection and Adaptation already exist) */
+          G("m8e.1", "Sexual selection", "Selección sexual", "Traits spreading because they win mates.", "Darwin’s (1871) second engine of evolution: traits spread through mate choice or rivalry, even at a cost to survival, as with the peacock’s tail and the bright male guppies of safe streams (Endler 1980)."),
+          G("m8e.1", "Fitness (evolutionary)", "Aptitud (evolutiva)", "How well a trait helps leave offspring in a given place.", "Reproductive success in a particular environment; “fittest” means best fitted to local conditions, not strongest, and what is fit in one setting can fail in another."),
+          G("m8e.1", "Heredity", "Herencia", "Offspring tending to resemble their parents.", "The passing of traits from parents to offspring; Darwin knew it happened but not how, and its mechanism came later with genetics and the modern synthesis."),
+          G("m8e.2", "Continuity thesis", "Tesis de la continuidad", "Human and animal minds differ in degree, not kind.", "Darwin’s (1871) claim that human mental powers and morals, rooted in social instincts and sympathy, are further developed forms of capacities other animals share; contrasted with a human-only difference of kind."),
+          G("m8e.2", "Expression of emotion (Darwin)", "Expresión de las emociones (Darwin)", "Feelings shown in face and body, compared across species.", "Darwin’s (1872) study of how emotions show in faces and bodies across species, explained by serviceable habits, antithesis and direct action of the nervous system; the starting point of basic emotion research."),
+          /* phase 3k-2: EV lessons 3–4 (Evolutionary psychology already exists) */
+          G("m8e.3", "Environment of evolutionary adaptedness", "Entorno de adaptación evolutiva", "The ancestral conditions a trait was shaped for.", "Bowlby’s term, abbreviated EEA, for the set of recurring ancestral problems that shaped a trait, not a single time or place; partly inferred from the traits it explains (Laland & Brown 2011)."),
+          G("m8e.3", "Massive modularity", "Modularidad masiva", "The claim that the mind is mostly many specialized mechanisms.", "The strong claim that the mind consists mostly of many innate, domain-specific mechanisms, each shaped for one ancestral problem (Tooby & Cosmides 1992); criticized by Fodor (2000) and Buller (2005); as of 2026, specialized learning biases are supported, a mostly modular mind is not."),
+          G("m8e.3", "Human universals", "Universales humanos", "Traits found in every known culture.", "Features such as language, music, kinship terms and mourning recorded in every documented culture (Brown 1991); a clue to shared human nature, not proof of evolved design, since shared problems can yield shared solutions."),
+          G("m8e.3", "Smoke-detector principle", "Principio del detector de humo", "A cheap false alarm beats a costly miss.", "Nesse’s (2005) argument that defences such as anxiety, pain and nausea are set to over-fire because a false alarm costs little and a missed danger costs much; so frequent false alarms can be design, not breakdown."),
+          G("m8e.3", "Evolutionary mismatch", "Desajuste evolutivo", "An old trait meeting a world it was not built for.", "A trait tuned for ancestral conditions misfiring amid modern ones, as with supernormal rewards in addiction, a hair-trigger alarm in a safe world, and appetite amid engineered food (Nesse 2019); a useful clinical frame that is hard to test."),
+          G("m8e.3", "Supernormal stimulus", "Estímulo supernormal", "An exaggerated cue that draws a stronger response than the real thing.", "A cue that exaggerates a natural one and so triggers a stronger response, first shown by Tinbergen in gulls; used to read drugs and engineered food as rewards stronger than the wanting system was built for; see Incentive sensitization (M2)."),
+          G("m8e.4", "Spandrel (byproduct)", "Enjuta (subproducto)", "A trait that is a side effect of something else.", "Gould and Lewontin’s (1979) term, from the panels where cathedral arches meet: a trait that comes along with something selected without being selected itself, such as the navel; the alternative every adaptive story must face."),
+          G("m8e.4", "Exaptation", "Exaptación", "A trait shaped for one job and borrowed for another.", "Gould and Vrba’s (1982) term for a trait shaped for one use, or none, that is later put to a new one, as feathers likely served warmth or display before flight; see Spandrel (byproduct)."),
+          G("m8e.4", "Just-so story", "Historia de «así fue»", "An adaptive explanation that fits any outcome.", "An evolutionary story invented to fit a trait after it is known, which would fit the opposite result as well and so explains nothing (Gould & Lewontin 1979); the spandrel drill tests for it."),
+          G("m8e.5", "Ovulatory-cycle hypothesis", "Hipótesis del ciclo ovulatorio", "The claim that women’s tastes in men shift with fertility.", "The claim that near ovulation women prefer more masculine men, especially as short-term partners (Gildersleeve et al. 2014); large preregistered retests found little or no shift (Jones et al. 2018; Stern et al. 2021)."),
+          G("m8e.5", "Eugenics", "Eugenesia", "The plan to “improve” people by controlling who has children.", "A movement named by Galton (1883) that led to forced sterilisation laws in the twentieth century, upheld in the United States in Buck v. Bell (1927); a political theft of evolutionary ideas, resting on false premises."),
+          G("m8e.5", "Naturalistic fallacy", "Falacia naturalista", "Reasoning from natural to good.", "The error of concluding that a trait is good, or should stay, because it is natural or evolved; a scientific claim says what is, not what ought to be."),
+          G("m8e.5", "Gene-culture coevolution", "Coevolución gen-cultura", "Genes and culture shaping each other over time.", "The view that humans inherit both genes and culture, a second, often faster, inheritance system, and that each shapes the other, as when dairying favoured lactase persistence (Boyd & Richerson 1985; Henrich 2016)."),
+          G("m8e.5", "Niche construction", "Construcción de nicho", "Organisms building the environments that then select them.", "The process by which organisms change their surroundings, as beavers build dams and humans build farms and cities, so altering the selection they face (Odling-Smee, Laland & Feldman 2003)."),
+          G("m8e.6", "Prepared learning", "Aprendizaje preparado", "Some links learned fast and unlearned slowly.", "A readiness to learn certain associations, such as fear of snakes and spiders, quickly and to keep them, while others barely form (Seligman 1971; Öhman & Mineka 2001)."),
+          G("m8e.6", "Core knowledge", "Conocimiento nuclear", "Expectations about the world infants show before teaching.", "Spelke’s (2007) term for early expectations about objects, number and agents, inferred from infants looking longer at events that break them; its interpretation is debated."),
+          G("m8e.6", "Temperament", "Temperamento", "An early tilt in how a person reacts.", "Early-appearing differences in reactivity and self-regulation, such as the inhibited infants Kagan (1994) followed; a starting point that experience shapes, not a fixed fate."),
+          G("m8e.6", "Nativism", "Innatismo", "The view that much of the mind is built in.", "The view that minds arrive with rich built-in structure, such as core knowledge or a universal grammar; contrast Empiricism, which stresses learning from experience.")
         ];
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m0")).map(function (id) { return { v: id, t: "M0 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m1")).map(function (id) { return { v: id, t: "M1 · " + lessonOf(id).title }; }));
@@ -10307,6 +10956,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
 
         /* ============ CONTENT ENGINE (phase 2a): case bank, status discipline, references, validators. Data + checks only; lesson text untouched ============ */
         /* @engine-start */
@@ -10732,6 +11382,36 @@
             R("Addis & Mahalik", 2003, "review", "Men seek help less on average, shaped by norms of self-reliance and how help is offered.", st("robust", "Widely supported; varies with culture and setting.")),
             R("Martin, Neighbors & Griffith", 2013, "observational", "Counting anger, irritability, risk-taking and drinking as symptoms made depression about as common in men as in women.", st("contested", "Broader criteria may also capture problems that are not depression.")),
             R("Quinn & Madhoo", 2014, "review", "Women and girls with ADHD are more often inattentive, and are diagnosed late or first treated for anxiety or depression.", st("robust", "Consistent with later studies; how much is presentation versus recognition is debated."))];
+          /* phase 3k-1: EV lessons 1–2 */
+          REFS["m8e.1"] = [
+            R("Grant & Grant", 2002, "observational", "Decades of field records on Galápagos finches showed beak and body size shifting with droughts and food supply: selection observed within a human lifetime.", st("robust", "Long-running, replicated across seasons and species on the islands; the direction of change itself varied.")),
+            R("Endler", 1980, "experiment", "Guppies moved from streams with many predators to safer streams evolved brighter males over generations, as female choice outweighed predation.", st("robust", "Field and pond experiments agree, and later work confirmed the pattern across many streams."))];
+          REFS["m8e.2"] = [
+            R("Ekman & Friesen", 1971, "experiment", "Fore people of Papua New Guinea, with little outside contact, matched faces to emotion stories above chance for most emotions.", st("robust", "Replicated in many cultures, but debated: forced choice and story cues may inflate agreement.")),
+            R("Gendron et al.", 2014, "experiment", "Himba participants sorting faces freely, without emotion words, grouped them far less in the Western pattern.", st("contested", "Others argue free sorting understates recognition; the method is still argued.")),
+            R("de Waal", 2009, "review", "Building on Good Natured (1996), described consolation, sharing and helping in chimpanzees and other primates as roots of empathy.", st("robust", "Robust for the behaviour in primates; whether it is empathy in the human sense is contested."))];
+          /* phase 3k-2: EV lessons 3–4 */
+          REFS["m8e.3"] = [
+            R("Tooby & Cosmides", 1992, "review", "Set out the programme of the mind as evolved, domain-specific mechanisms, each shaped for a recurring ancestral problem.", st("contested", "Specialized learning biases are supported; a mind built mostly of innate modules is disputed (Fodor 2000; Buller 2005).")),
+            R("Buss", 1989, "observational", "Across many cultures, both sexes ranked kindness and intelligence highly; on average women rated earning prospects higher and men rated youth and looks higher.", st("robust", "Robust as a description; whether evolved preference or social roles explain it is contested (Eagly & Wood 2012).")),
+            R("Brown", 1991, "review", "Listed traits recorded in every documented culture, such as language, music, kinship terms and mourning.", st("robust", "Robust as a list; universals do not by themselves show evolved design.")),
+            R("Nesse", 2005, "review", "Argued that defences such as anxiety and pain over-fire because a false alarm is cheap and a missed danger is costly: the smoke-detector principle.", st("contested", "Widely accepted as reasoning; direct tests in people are few, and how alarms are set is hard to measure."))];
+          REFS["m8e.4"] = [
+            R("Gould & Lewontin", 1979, "review", "Argued that adaptive stories treat every trait as designed and invent fitting pasts, ignoring byproducts: the spandrels critique.", st("robust", "Robust as a methodological warning; critics reply that it can be overused against true adaptations.")),
+            R("Hurlbert & Ling", 2007, "experiment", "Adults of both sexes leaned toward blue; women leaned more toward reddish shades, and the authors speculated about fruit gathering.", st("contested", "Later studies found the sex difference small and inconsistent across cultures; the gathering account was never tested.")),
+            R("LoBue & DeLoache", 2011, "experiment", "Girls’ preference for pink, and boys’ avoidance of it, emerged around toddlerhood, about when children learn gender.", st("robust", "Fits the historical record of pink as a boys’ colour; a single lab’s sample, consistent with later work.")),
+            R("Laland & Brown", 2011, "review", "Reviewed evolutionary approaches to behaviour and named the circularity of inferring the ancestral environment from the traits it is used to explain.", st("robust", "Widely accepted as a problem; researchers differ on how much independent evidence of the past can fix it."))];
+          /* phase 3k-3: EV lessons 5–6 */
+          REFS["m8e.5"] = [
+            R("Gildersleeve et al.", 2014, "meta-analysis", "Pooled studies and reported that women near ovulation prefer more masculine men, especially as short-term partners.", st("debunked-or-revised", "Shrunk or failed on retest: large preregistered studies found little or no shift (Jones et al. 2018; Stern et al. 2021).")),
+            R("Jones et al.", 2018, "longitudinal", "Followed many women over several cycles with hormone measures and a preregistered plan; preferences for masculine faces did not track fertility.", st("robust", "Large, preregistered and repeated within each woman; consistent with Stern et al. (2021).")),
+            R("Henrich", 2016, "review", "The Secret of Our Success: argued that culture is a second, often faster, inheritance system that drives much of human evolution, building on Boyd and Richerson.", st("contested", "Cases such as lactase persistence are well supported; how much of human psychology culture explains is debated.")),
+            R("Odling-Smee, Laland & Feldman", 2003, "review", "Argued that organisms build parts of their environments, which then select them: niche construction.", st("contested", "The examples are accepted; whether it needs a new framework or fits the standard one is debated."))];
+          REFS["m8e.6"] = [
+            R("Öhman & Mineka", 2001, "review", "Fears of snakes and spiders are learned fast and unlearned slowly, compared with fears of other objects: a prepared fear module.", st("robust", "Supported in people and monkeys (Cook & Mineka 1989); whether early learning explains part of it is still tested.")),
+            R("Kagan", 1994, "longitudinal", "Some infants reacted strongly to novelty in the first months, and many became shy children; many others changed.", st("robust", "Early reactivity predicts later wariness modestly; many children change, and parenting matters.")),
+            R("Polderman et al.", 2015, "meta-analysis", "Pooled twin studies on nearly every measured trait: identical twins resembled each other more than fraternal twins on nearly all of them.", st("robust", "Very large and consistent; it describes variation in populations, not individual fate or fixity.")),
+            R("Saffran, Aslin & Newport", 1996, "experiment", "Infants who heard a short stream of made-up syllables later told apart its ‘words’ from new mixes: statistical learning.", st("robust", "Replicated widely; how far it explains grammar is contested."))];
           Object.keys(REFS).forEach(function (id) { if (LESSON_CONTENT[id]) LESSON_CONTENT[id].refs = REFS[id]; });
           /* fixture for the single-small-study flag: the same real study as above, deliberately mis-worded as robust */
           var REF_TESTS = [R("Rosenthal & Fode", 1963, "experiment", "Fixture: the maze-bright study, worded as robust.", st("robust", "Fixture only."), true)];
