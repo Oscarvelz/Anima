@@ -15883,6 +15883,193 @@
                 "Succeeding at the task yourself builds self-efficacy most; watching similar others and encouragement help less.")
             ]
           },
+          "m3.5": {
+            home: "Daniel is six months clean after residential treatment. The cravings faded in the clinic. Why might they come roaring back on his old street?",
+            keys: [["What is extinction, and what is an extinction burst?", "Extinction is the weakening of a learned response when the reinforcer (operant) or the unconditioned stimulus (classical) stops coming. Often, but not always, the response first gets stronger and more varied before it fades: an extinction burst.", "A vending machine stops giving snacks, and a man kicks it, shakes it and sings it a love song before finally shrugging and walking away."],
+              ["Does extinction erase the old learning?", "No. Bouton’s work shows extinction is new learning laid over the old: “the cue no longer predicts the drug, here”. The old link survives, and the new one is tied to the context where it was learned.", "A ghost habit hides quietly in the closet of the old apartment and only jumps out, shouting “Remember me?”, when you move back home."],
+              ["What is renewal?", "A response extinguished in one context returns when the person goes back to the original context: learned in A, extinguished in B, back in A (ABA renewal). It can also return in a brand-new context.", "The same closet ghost never follows you to the clinic; it waits in the old apartment, because the “no more” lesson was learned somewhere else."],
+              ["What are spontaneous recovery, reinstatement and rapid reacquisition?", "Spontaneous recovery: the response returns after time passes. Reinstatement: it returns after the unconditioned stimulus, a single exposure, or stress. Rapid reacquisition: once paired again, it is relearned faster than the first time.", "A tiny stress gremlin presses a big red “RESTART” button on an old craving, which wakes up from a long nap and remembers its lines on the first rehearsal."],
+              ["What is the abstinence violation effect?", "Marlatt and Gordon’s (1985) term for the guilt and “I’ve blown it anyway” thinking after one lapse, which makes a full relapse more likely. Relapse prevention treats a lapse as a slip to learn from.", "A painter spills one drop of paint and is about to dump the whole bucket “since it’s ruined anyway”, until a coach hands her a sponge: one drop is a slip, not the end."]],
+            steps: [
+              { kind: "hook", title: "Daniel drives home", body: who("<b>Daniel</b>, from M3 · Classical conditioning, six months clean.") +
+                "<p>He spent three months in residential treatment, two hours from his old neighbourhood. There, cravings faded week by week: in group, he talked through the old corner, looked at photos of it, and felt almost nothing by the end.</p>" +
+                "<p>Now his lease is up and the only flat he can afford is four streets from that corner. His sister is driving him back on Saturday.</p>" },
+              { kind: "predict", id: "m3.5:predict", title: "Your call first",
+                case: ["Daniel’s cravings faded during treatment, two hours away.",
+                  { t: "His sister’s car is grey.", irrelevant: true },
+                  "He used for years in the neighbourhood he is going back to.",
+                  "He has not been there since treatment.",
+                  { t: "The drive is on a Saturday.", irrelevant: true }],
+                q: "Will Daniel’s craving be strong on the first drive back?",
+                options: ["No: the cravings were extinguished, so they are gone", "It may well be: extinction learned in the clinic doesn’t fully travel to the old neighbourhood", "Only if he sees someone he used with"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: it may well be. Extinction is new learning, and it is tied to the place where it happened. Back in the context where the craving was first learned, the old link can return (renewal). That doesn’t mean he will use: it means the craving is predictable, so it can be planned for.",
+                hints: ["Ask where the cravings faded, and where Daniel is going.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether extinction erases the old link or adds a new one."] },
+              { kind: "idea", lvl: "f", title: "Extinction, and the burst before it", body: "<p><b>Extinction</b> is what happens when a learned response stops paying off. In classical conditioning, the cue keeps appearing without the unconditioned stimulus: the corner, but no drug. In operant conditioning, the behaviour keeps happening without the reinforcer: the button, but no snack. Over trials, the response weakens " + ev("r") + ".</p>" +
+                "<p>It often gets worse before it gets better. In an <b>extinction burst</b>, the behaviour briefly becomes more frequent, stronger or more varied, sometimes with frustration, before it fades. Bursts are common but not universal: in Lerman and Iwata’s (1995) review of clinical cases they appeared in under half.</p>" +
+                "<p><b>So:</b> when a familiar reward stops, expect a push before the fade, and don’t read the push as failure.</p>" },
+              { kind: "idea", lvl: "f", title: "New learning, not erasure", body: "<p>Mark Bouton’s research (2002, 2004) " + ev("r") + " shows that extinction does not delete the old link. The person learns a second, competing link, “here, the cue no longer predicts the drug”, and the old one waits underneath. Four effects show it:</p>" +
+                '<dl class="x-dossier"><div><dt>Spontaneous recovery</dt><dd>The response returns after time passes.</dd></div>' +
+                "<div><dt>Renewal</dt><dd>Learned in context A, extinguished in context B, it returns back in A (ABA), and can also return in a new context.</dd></div>" +
+                "<div><dt>Reinstatement</dt><dd>It returns after stress, or a single exposure to the drug or the unconditioned stimulus.</dd></div>" +
+                "<div><dt>Rapid reacquisition</dt><dd>Paired again, it is relearned faster than the first time.</dd></div></dl>" +
+                "<p><b>So:</b> the new learning is tied to its context; the old learning travels everywhere.</p>" },
+              { kind: "contrast", id: "m3.5:contrast", title: "Two clients, one difference",
+                q: "Whose cravings are more likely to come back strongly once they are home?",
+                cases: [
+                  { label: "Client A", s: ["Cravings to old cues faded during sessions in the clinic.", { t: "Sessions were on Tuesday afternoons.", irrelevant: true }, { t: "Practised only in the clinic room.", diff: true }, "Goes home to the old neighbourhood."] },
+                  { label: "Client B", s: ["Cravings to old cues faded during sessions in the clinic.", { t: "Sessions were on Tuesday afternoons.", irrelevant: true }, { t: "Also practised, with support, in real places: the old street, a shop, the bus stop.", diff: true }, "Goes home to the old neighbourhood."] }
+                ],
+                answer: 0,
+                features: ["Which day sessions were on", "Whether practice happened in real-life places too", "How strong cravings were in the clinic", "Where they went home to"],
+                feature: 1,
+                why: "Both extinguished cravings in the clinic. Client A’s new learning is tied to one room, so going back to the old context invites renewal. Client B practised across several real contexts, so the “no longer predicts” learning is more likely to be retrieved at home.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say where each client did the learning, not how well."] },
+              { kind: "idea", lvl: "p", title: "Cues, and making extinction travel", body: "<p><b>Cue reactivity</b> is the body’s response to drug cues: craving, a racing heart, changes in skin conductance. It is reliably measured in the lab " + ev("r") + " and links, more modestly, to later use.</p>" +
+                "<p>If extinction is context-bound, exposure should be built to travel. Michelle Craske’s <b>inhibitory learning approach</b> (2014) " + ev("c") + " suggests:</p>" +
+                '<dl class="x-dossier"><div><dt>Many contexts</dt><dd>Practise in different rooms, places, times and moods, not one clinic room.</dd></div>' +
+                "<div><dt>Violate the expectation</dt><dd>Aim for the moment the feared or craved outcome doesn’t happen, rather than waiting for the feeling to drop.</dd></div>" +
+                "<div><dt>Retrieval cues</dt><dd>Carry something from treatment, a card or a phrase, to bring the new learning back in old places.</dd></div>" +
+                "<div><dt>Safety behaviours</dt><dd>Never just ignore them. In anxiety, checking or clinging to a “safe” object can stop fear from updating, so name them and fade them gradually.</dd></div></dl>" +
+                "<p>Lab work suggests occasional reinforced trials during extinction can slow later rapid reacquisition, but in addiction that would mean planned drug use, which is not safe practice. And cue exposure therapy alone has had weak, mixed results for addiction (Conklin and Tiffany 2002).</p>" +
+                "<p><b>So:</b> spread new learning across places, and pair it with other supports.</p>" },
+              { kind: "idea", lvl: "m", title: "Relapse prevention", body: "<p><b>Relapse prevention</b> (Marlatt and Gordon 1985) " + ev("r") + " treats relapse as a process, not an event. It maps <b>high-risk situations</b> (places, people, moods, stress, celebration), builds coping responses for each, and plans for lapses.</p>" +
+                "<p>The <b>abstinence violation effect</b>: after one lapse, guilt and “I’ve blown it anyway” thinking make a full relapse more likely. Treat a lapse as a slip to learn from, not proof of failure.</p>" +
+                "<p><b>Leaving treatment or jail</b> is a high-risk context in its own right: old places, old people, stress, and often lower tolerance. The risk of overdose death is sharply raised in the first weeks after release from prison (Binswanger and colleagues 2007) " + ev("r") + ". Plan before discharge: first-day routine, who to call, how to get to meetings or medication, and naloxone in hand.</p>" +
+                "<p><b>Safety plans stay.</b> In addiction, coping safety steps, such as carrying naloxone or not carrying cash near the old corner, are protective; don’t fade them like anxiety safety behaviours.</p>" +
+                "<p><b>So:</b> expect old contexts to call old learning back, and rehearse the answer before you get there.</p>" },
+              { kind: "example", lvl: "p", title: "Daniel’s plan for Saturday", body: who("<b>Daniel</b>, planning with his counsellor before discharge.") +
+                '<dl class="x-dossier"><div><dt>Predict it</dt><dd>“The first drive past the corner may hit hard. That is renewal, not failure.”</dd></div>' +
+                "<div><dt>Practise in places</dt><dd>Two supported trips back before the move: the bus stop, the corner shop, at different times of day.</dd></div>" +
+                "<div><dt>Retrieval cue</dt><dd>The same wristband he wore through treatment, and a card with his three steps.</dd></div>" +
+                "<div><dt>High-risk map</dt><dd>Payday, a bad day at work, the old friend who lives nearby. A coping step for each.</dd></div>" +
+                "<div><dt>If he lapses</dt><dd>Call his sponsor that day; a lapse is a slip, not a verdict. Naloxone in the flat.</dd></div></dl>" +
+                '<p>Watch extinction and its burst happen live.</p><button type="button" class="x-lens__b press" data-scene="extinction">Open Extinction Burst Stage</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Relapse is not only conditioning. Withdrawal and its after-effects, stress, mental health, housing, money and social networks all shape it. So does meaning: whether a person has a life they want to protect, people who notice them, and reasons of their own. And people make choices; reducing relapse to cues returning can make them sound like passengers. Cue exposure alone has done poorly in addiction trials, which suggests cues are only part of the story.</p>' +
+                "<p><b>The counter.</b> Bouton’s return effects are among the most reliable findings in learning research, and they explain why relapse clusters in old places, under stress and after a single use. Relapse prevention already folds in thinking, coping and choice; the conditioning account tells it where to look.</p>" +
+                "<p><b>Person-first.</b> Say “a man in recovery”, not “a relapser” or “an addict”.</p>" +
+                "<p>Background: M3 · Classical conditioning; M3 · Operant conditioning.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Extinction burst.</b> A vending machine stops giving snacks, and a man kicks it, shakes it and sings it a love song before walking away.</p>" +
+                "<p><b>Not erasure; renewal.</b> A ghost habit hides in the closet of the old apartment and only jumps out when you move back home.</p>" +
+                "<p><b>Reinstatement.</b> A tiny stress gremlin presses a big red “RESTART” button on an old craving.</p>" +
+                "<p><b>Spontaneous recovery and rapid reacquisition.</b> The craving wakes from a long nap and remembers its lines on the first rehearsal.</p>" +
+                "<p><b>Abstinence violation effect.</b> One spilled drop of paint is not a reason to dump the whole bucket; a coach hands over a sponge.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.5:teachback", title: "Teach it back", prompt: "Explain to Daniel’s sister why his first drive home may be hard and what helps: extinction in classical and operant conditioning; the extinction burst, and that it is common but not universal; Bouton’s finding that extinction is new learning, not erasure; spontaneous recovery, ABA renewal, reinstatement by stress or a single use, and rapid reacquisition; cue reactivity; exposure in many contexts, retrieval cues and Craske’s inhibitory learning approach; why reinforced trials are not safe practice in addiction and why cue exposure alone has done poorly; safety behaviours in anxiety versus safety plans in addiction; relapse prevention, high-risk situations and the abstinence violation effect; the raised overdose risk after release; and the critique that relapse also involves withdrawal, stress, meaning, social networks and choice." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Extinction as new learning, with renewal and reinstatement " + ev("r") + ". Extinction bursts, common but not universal " + ev("r") + ". Inhibitory learning methods for exposure " + ev("c") + ". Cue exposure alone for addiction " + ev("c") + ". Relapse prevention " + ev("r") + ".</p>" +
+                "<p><b>So:</b> old learning waits in old places; plan for the place, the stress and the slip, and the craving becomes something expected rather than a surprise.</p>" },
+              Q("A rat’s lever-pressing is extinguished in a new box, then the rat is put back in the box where it first learned, and pressing returns. What is this?",
+                ["Spontaneous recovery", "ABA renewal", "Reinstatement", "An extinction burst"], 1,
+                "Learned in A, extinguished in B, returned in A: the response came back because of the context, which is renewal."),
+              Q("A child whose tantrums no longer get attention screams louder and longer for two days before the tantrums fade. What is this?",
+                ["Extinction burst", "Rapid reacquisition", "Negative reinforcement", "Spontaneous recovery"], 0,
+                "When reinforcement stops, behaviour often briefly gets stronger before it fades: an extinction burst."),
+              Q("Why does Bouton argue extinction is new learning rather than erasure?",
+                ["Because extinguished responses never weaken", "Because the response can return with time, context, stress or re-pairing", "Because extinction only works in animals", "Because extinction requires punishment"], 1,
+                "Spontaneous recovery, renewal, reinstatement and rapid reacquisition all show the old link survived underneath."),
+              Q("After one drink, a client thinks “I’ve ruined six months, so what’s the point?” and keeps drinking. What did Marlatt and Gordon call this?",
+                ["Cue reactivity", "The abstinence violation effect", "Reinstatement", "Learned helplessness"], 1,
+                "Guilt and all-or-nothing thinking after a lapse make relapse more likely; relapse prevention treats the lapse as a slip to learn from.")
+            ]
+          },
+          "m3.6": {
+            home: "Keisha’s program has a week to plan for its group. Which learning tools actually change behaviour, and which ones cross a line?",
+            keys: [["What is graded exposure?", "Facing a feared cue step by step, from least to most frightening, staying until the feared outcome doesn’t happen. It grew from Wolpe’s systematic desensitization (1958) and is a robust treatment for phobias, OCD (with response prevention) and PTSD (prolonged exposure).", "A staircase of fear where each step holds a slightly bigger spider in a party hat, and the climber only steps up once she feels calm on the step she’s on."],
+              ["What is contingency management, and what makes it work?", "Giving tangible rewards, such as vouchers or prize draws, for verified behaviour like a negative drug test. It is among the best-supported treatments for stimulant use; rewards work best when immediate and escalating with each clean test.", "A gumball machine that drops a prize the same second a clean test cup is handed in, and the prizes get a little bigger with every clean cup in a row."],
+              ["What is behavioural activation?", "A treatment for depression that schedules small, valued activities before motivation arrives, because action brings back reward and mood follows. Dimidjian and colleagues (2006) found it matched medication for more severe depression.", "A couch wears a “Closed for business” sign while a person schedules small walks, and each walk switches on another lamp in a dark house."],
+              ["What do CRA and CRAFT do?", "The community reinforcement approach makes sober life more rewarding: work, relationships, activities. CRAFT (Meyers) teaches families to reward sober behaviour, step back from rescuing use, and look after themselves; it gets more loved ones into treatment than confrontation or Al-Anon.", "A family throws a tiny confetti party for every sober evening, quietly lets the cold pizza stay cold after a using one, and still keeps a cup of tea for themselves."],
+              ["Why reinforce an alternative behaviour instead of punishing?", "Differential reinforcement of alternative behaviour (DRA) rewards a replacement that meets the same need. Aversive “therapies”, such as aversion therapy and conversion practices, caused harm and are rejected; behavioural tools need consent and dignity.", "A grumpy “NO!” megaphone is retired to a museum labelled “Didn’t work, did harm”, while a small brass band plays for the new behaviour."]],
+            steps: [
+              { kind: "hook", title: "A week to design", body: who("<b>Keisha</b>’s program, from M3 · Operant conditioning, at the Monday staff meeting.") +
+                "<p>The group has eight members. Four use methamphetamine or cocaine; one has panic attacks on buses; two say they stay in bed most days; Keisha still skips sessions when anxiety spikes.</p>" +
+                "<p>The program lead says: “One week, one plan. Use what we know about learning, and nothing we’d be ashamed of.”</p>" },
+              { kind: "predict", id: "m3.6:predict", title: "Your call first",
+                case: ["Four group members use stimulants.",
+                  { t: "The group room has blue chairs.", irrelevant: true },
+                  "Plan one: a weekly lecture on the harms of stimulants.",
+                  "Plan two: a voucher handed over right after each clean test.",
+                  { t: "The program opened in 2015.", irrelevant: true }],
+                q: "Which plan reduces stimulant use more?",
+                options: ["The weekly lecture: knowing the harms changes behaviour", "Immediate vouchers for clean tests", "Neither does anything"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: the vouchers. Contingency management is among the best-supported treatments for stimulant use, where no medication is yet approved. Information alone rarely changes behaviour; an immediate, reliable reward for the behaviour you want does. People are not ignorant of the harms; they need something that competes with the drug now.",
+                hints: ["Ask which plan puts a consequence right after the behaviour.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what follows a clean test under each plan."] },
+              { kind: "idea", lvl: "f", title: "Exposure: from Wolpe to now", body: "<p>Joseph Wolpe’s <b>systematic desensitization</b> (1958) paired relaxation with a graded <b>fear hierarchy</b>, imagined step by step, from least to most frightening.</p>" +
+                "<p>Later work showed the active part is <b>exposure</b> itself: facing the cue, in imagination or in real life, without escape. Modern forms are robust " + ev("r") + ":</p>" +
+                '<dl class="x-dossier"><div><dt>Phobias</dt><dd>Graded or intensive real-life exposure, often in few sessions.</dd></div>' +
+                "<div><dt>OCD</dt><dd><b>Exposure and response prevention</b> (ERP): face the trigger, don’t do the ritual.</dd></div>" +
+                "<div><dt>PTSD</dt><dd><b>Prolonged exposure</b> (Foa): revisit the memory and safe reminders until they lose their grip.</dd></div></dl>" +
+                "<p>The client agrees each step, and the pace is theirs. Exposure that is forced on someone is neither ethical nor effective.</p>" +
+                "<p><b>So:</b> fear shrinks when people stay with what they fear and the feared outcome doesn’t come.</p>" },
+              { kind: "idea", lvl: "f", title: "Contingency management", body: "<p><b>Contingency management</b> (CM) gives a tangible reward for a verified behaviour, usually a negative drug test. Nancy Petry developed the low-cost <b>prize draw</b> (“fishbowl”) version; others use vouchers exchangeable for goods.</p>" +
+                "<p>For stimulants it is among the best-supported treatments we have " + ev("r") + ". It works best when rewards are:</p>" +
+                '<dl class="x-dossier"><div><dt>Immediate</dt><dd>Given the same visit as the clean test.</dd></div>' +
+                "<div><dt>Certain</dt><dd>Every verified clean test earns something.</dd></div>" +
+                "<div><dt>Escalating</dt><dd>Bigger with each clean test in a row, reset after a positive one, then rebuilt.</dd></div></dl>" +
+                "<p>Its main barriers are cost and funding: many services lack money for rewards, and in the US, rules on incentive values have limited it.</p>" +
+                "<p><b>So:</b> a small reward now can beat a large harm later.</p>" },
+              { kind: "contrast", id: "m3.6:contrast", title: "Two plans, one difference",
+                q: "Which plan is likely to reduce stimulant use more?",
+                cases: [
+                  { label: "Plan A", s: ["Tests twice a week.", { t: "Vouchers are printed on green paper.", irrelevant: true }, { t: "Each clean test earns its voucher the same day.", diff: true }, "Same voucher values for the same tests."] },
+                  { label: "Plan B", s: ["Tests twice a week.", { t: "Vouchers are printed on green paper.", irrelevant: true }, { t: "All vouchers earned are handed out at the end of the month.", diff: true }, "Same voucher values for the same tests."] }
+                ],
+                answer: 0,
+                features: ["The colour of the vouchers", "When the voucher is given", "How often people are tested", "How much the vouchers are worth"],
+                feature: 1,
+                why: "Everything matches except timing. A reward weeks after the behaviour competes poorly with a drug that works in minutes; same-day vouchers tie the reward to the clean test. Delay weakens reinforcement.",
+                hints: ["Find the one sentence where the two plans part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say how long each plan waits between the clean test and the reward."] },
+              { kind: "idea", lvl: "p", title: "Making sober life rewarding", body: "<p><b>Token economies</b>, from Ayllon and Azrin’s 1960s hospital wards, let residents earn tokens for target behaviours. They changed behaviour, but often did not carry over to life outside, and raised ethical problems: US court rulings in the 1970s, such as Wyatt v. Stickney, held that basics like meals, a bed and privacy cannot be made into earned privileges.</p>" +
+                "<p>The <b>community reinforcement approach</b> (CRA) " + ev("r") + " widens the target: make work, relationships and leisure more rewarding than use. <b>CRAFT</b> (Meyers) teaches families to reward sober moments, let natural consequences of use stand, communicate without confrontation and care for themselves; Miller, Meyers and Tonigan (1999) found it got more loved ones into treatment than Al-Anon or confrontational interventions.</p>" +
+                "<p><b>Behavioural activation</b> (BA) for depression schedules small, valued activities before motivation arrives. Dimidjian and colleagues (2006) " + ev("r") + " found it matched antidepressants, and outdid cognitive therapy, for more severe depression.</p>" +
+                "<p><b>So:</b> the best competitor to a drug, or to bed, is a life with more rewards in it.</p>" },
+              { kind: "idea", lvl: "m", title: "Choosing targets, and the ethical line", body: "<p><b>Functional analysis</b> comes first: what comes before the behaviour, what follows it, and what need it meets. Then:</p>" +
+                '<dl class="x-dossier"><div><dt>Shape</dt><dd>Reinforce small steps toward a skill: ten minutes in group, then twenty, then speaking once.</dd></div>' +
+                "<div><dt>Reinforce the alternative</dt><dd><b>DRA</b>: reward a replacement that meets the same need, such as asking for a break instead of walking out. Punishment teaches what not to do, but not what to do instead, and harms trust.</dd></div>" +
+                "<div><dt>Consent and dignity</dt><dd>The person agrees the goals and the plan, can say no, and keeps their rights whatever they earn.</dd></div></dl>" +
+                "<p><b>Never aversive “therapies”.</b> Aversion therapy paired drinking, or in the past same-sex attraction, with nausea-inducing drugs or electric shock. Conversion practices did not change sexual orientation and caused lasting harm, including depression and suicidality; professional bodies now condemn them " + ev("r") + ".</p>" +
+                "<p><b>So:</b> learning tools are strong; use them with people, not on them.</p>" },
+              { kind: "example", lvl: "p", title: "The group’s week", body: who("<b>Keisha</b>’s program staff, Friday plan, agreed with each group member.") +
+                '<dl class="x-dossier"><div><dt>Stimulant use</dt><dd>Prize draws on the spot after each clean test, twice a week, escalating; a positive test resets, with no shaming.</dd></div>' +
+                "<div><dt>Panic on buses</dt><dd>A fear hierarchy built together: watch a bus, stand at the stop, ride one stop, ride to the program. Step up only when she’s ready.</dd></div>" +
+                "<div><dt>Staying in bed</dt><dd>Behavioural activation: one ten-minute walk and one call a day, scheduled, done before feeling like it.</dd></div>" +
+                "<div><dt>Keisha’s skips</dt><dd>Functional analysis showed escape from anxiety. DRA: she can ask for a five-minute break and come back; staying is shaped up a few minutes a week.</dd></div>" +
+                "<div><dt>Families</dt><dd>A CRAFT evening: reward sober time, step back from rescuing, look after yourselves.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Behavioural tools can feel controlling: being paid for a clean cup can feel like being managed, not helped, and power sits with staff. Gains often fade once rewards stop; CM effects shrink in many studies after incentives end. And reward schedules don’t give anyone a reason to stay well. Lasting change needs meaning, identity and relationships: people who matter, a role, a future worth protecting.</p>' +
+                "<p><b>The counter.</b> CM, exposure and BA are among the most reliably effective treatments in their areas, and a few months of abstinence can be the window in which work, housing and relationships rebuild. Done with consent, behavioural tools give people early wins they choose. The answer is to pair them with meaning and relationships, not drop them.</p>" +
+                "<p><b>Person-first.</b> Say “people who use stimulants”, not “meth users”.</p>" +
+                "<p>Background: M3 · Operant conditioning; M3 · Extinction, cues and relapse. Ahead: M8 onward, on meaning, relationships and recovery.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Graded exposure.</b> A staircase of fear, each step a slightly bigger spider in a party hat; the climber steps up only once calm.</p>" +
+                "<p><b>Contingency management.</b> A gumball machine drops a prize the same second a clean test cup is handed in, a little bigger with each clean cup in a row.</p>" +
+                "<p><b>Behavioural activation.</b> The couch wears a “Closed for business” sign while small scheduled walks each switch on a lamp.</p>" +
+                "<p><b>CRAFT.</b> A family throws a tiny confetti party for each sober evening, lets the cold pizza stay cold, and keeps a cup of tea for themselves.</p>" +
+                "<p><b>DRA, not punishment.</b> The “NO!” megaphone goes to a museum labelled “Didn’t work, did harm” while a brass band plays for the new behaviour.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.6:teachback", title: "Teach it back", prompt: "Explain to Keisha’s program lead how the week was designed: Wolpe’s systematic desensitization and fear hierarchy; exposure, exposure and response prevention for OCD and prolonged exposure for PTSD; contingency management, prize draws and vouchers, and why rewards should be immediate, certain and escalating; the cost and funding barriers; token economies and their ethical limits; the community reinforcement approach and CRAFT for families; behavioural activation and Dimidjian’s 2006 finding; functional analysis, shaping and reinforcing an alternative behaviour instead of punishing; consent and dignity; why aversion therapy and conversion practices are named as harmful; and the critiques that behavioural tools can feel controlling, that gains can fade when rewards stop, and that they must be paired with meaning and relationships." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Exposure for phobias, OCD and PTSD " + ev("r") + ". Contingency management for stimulants " + ev("r") + ". CRA and CRAFT " + ev("r") + ". Behavioural activation for depression " + ev("r") + ". Durability once rewards stop " + ev("c") + ". Aversive and conversion practices " + ev("d") + ".</p>" +
+                "<p><b>So:</b> the principles that build a habit can build recovery too, when people choose the goals and the rewards sit inside a life worth having.</p>" },
+              Q("Which feature most strengthens contingency management?",
+                ["Rewards given at the end of each month", "Rewards given the same visit as the clean test", "A lecture before each test", "Fines for positive tests"], 1,
+                "Immediacy ties the reward to the behaviour; delayed rewards compete poorly with a drug that works in minutes."),
+              Q("A client with OCD touches a doorknob she fears is contaminated and then does not wash her hands. What treatment is this?",
+                ["Systematic desensitization", "Exposure and response prevention", "Behavioural activation", "Aversion therapy"], 1,
+                "Facing the trigger (exposure) without the ritual (response prevention) is ERP, a robust treatment for OCD."),
+              Q("A depressed client is asked to take a short walk each day before she feels like it. What is the idea behind this?",
+                ["Waiting for motivation before acting", "Action first; reward and mood tend to follow", "Punishing time in bed", "Exposure to feared memories"], 1,
+                "Behavioural activation schedules small valued activities so that action brings back reward, rather than waiting for motivation."),
+              Q("A client walks out of group when anxious. Staff teach her to ask for a five-minute break and praise her for coming back. What is this?",
+                ["Positive punishment", "Differential reinforcement of an alternative behaviour", "Extinction burst", "Token economy"], 1,
+                "A replacement behaviour that meets the same need (escape from anxiety, briefly) is reinforced instead of punishing the walk-out.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -17353,6 +17540,22 @@
           G("m3.4", "Social cognitive theory", "Teoría social cognitiva", "Bandura’s theory of learning through people, thought and setting.", "Bandura’s framework joining observational learning, self-efficacy and reciprocal determinism: the person, their behaviour and their environment shape one another."),
           G("m3.4", "Video modeling", "Modelado por video", "Teaching a skill with short videos of it being done.", "An intervention in which a learner watches a recorded model perform a skill, then practises it; well supported for teaching social and daily-living skills to autistic children."),
           G("m3.4", "Peer recovery support", "Apoyo de pares en la recuperación", "Help from people with lived experience of recovery.", "Support given by peers who are in recovery themselves, who act as similar, credible models of coping; the evidence is promising but varies in quality."),
+          G("m3.5", "Extinction burst", "Explosión de extinción", "A brief surge in behaviour when its reward stops.", "When reinforcement stops, a behaviour often briefly becomes more frequent, intense or varied before it fades; common but not universal, seen in under half of clinical cases in Lerman and Iwata (1995)."),
+          G("m3.5", "Spontaneous recovery", "Recuperación espontánea", "An extinguished response returns after time passes.", "The reappearance of an extinguished conditioned response after a delay, without new pairings; one of the effects showing extinction is new learning, not erasure (Bouton)."),
+          G("m3.5", "Renewal effect", "Efecto de renovación", "An extinguished response returns in the old context.", "A response learned in context A and extinguished in context B returns when the person goes back to A (ABA renewal), and can also return in a new context; extinction is context-bound."),
+          G("m3.5", "Reinstatement", "Reinstauración", "An extinguished response returns after stress or one exposure.", "The return of an extinguished response after exposure to the unconditioned stimulus alone, a single drug use, or stress; a model of relapse in addiction research."),
+          G("m3.5", "Rapid reacquisition", "Readquisición rápida", "Relearning an old link faster than the first time.", "After extinction, a response paired again with its outcome is relearned faster than it was originally learned, showing the original learning survived."),
+          G("m3.5", "Abstinence violation effect", "Efecto de violación de la abstinencia", "“I’ve blown it anyway” after one lapse.", "Marlatt and Gordon’s (1985) term for the guilt and all-or-nothing thinking after a single lapse that makes a full relapse more likely; relapse prevention treats lapses as slips to learn from."),
+          G("m3.5", "High-risk situation", "Situación de alto riesgo", "A setting or state that makes relapse more likely.", "In relapse prevention, a place, person, mood, stressor or event linked to past use, such as release from treatment or jail, which is mapped in advance and paired with coping responses."),
+          G("m3.5", "Safety behaviour", "Conducta de seguridad", "Something done to feel safe that can keep fear going.", "In anxiety, an action such as checking or carrying a “safe” object that can stop fear from updating during exposure; named and faded gradually, never simply ignored. Distinct from protective safety plans in addiction."),
+          G("m3.6", "Systematic desensitization", "Desensibilización sistemática", "Facing fears step by step while relaxed.", "Wolpe’s (1958) treatment pairing relaxation with an imagined fear hierarchy, from least to most frightening; later work found exposure itself to be the active ingredient."),
+          G("m3.6", "Fear hierarchy", "Jerarquía del miedo", "A ranked list of feared situations.", "A list of feared cues built with the client, ordered from least to most frightening, used to pace graded exposure."),
+          G("m3.6", "Exposure and response prevention", "Exposición con prevención de respuesta", "Facing a trigger without doing the ritual.", "The leading behavioural treatment for OCD: the person faces obsession triggers while refraining from compulsions, so that anxiety and the feared outcome are disconfirmed."),
+          G("m3.6", "Prolonged exposure", "Exposición prolongada", "Revisiting a trauma memory until it loses its grip.", "Foa’s treatment for PTSD combining repeated imaginal revisiting of the trauma memory with real-life exposure to safe reminders; robust in meta-analyses."),
+          G("m3.6", "Token economy", "Economía de fichas", "Earning tokens for target behaviours.", "A system, first used on psychiatric wards by Ayllon and Azrin in the 1960s, where tokens earned for target behaviours are exchanged for goods; gains often did not generalize, and basic rights cannot be made earned privileges."),
+          G("m3.6", "Behavioural activation", "Activación conductual", "Doing small valued things before feeling like it.", "A treatment for depression that schedules rewarding and valued activities before motivation returns; Dimidjian et al. (2006) found it matched antidepressants for more severe depression."),
+          G("m3.6", "Differential reinforcement of alternative behaviour", "Reforzamiento diferencial de conducta alternativa", "Rewarding a replacement behaviour instead of punishing.", "DRA: reinforcing a behaviour that meets the same need as the problem behaviour, such as asking for a break instead of walking out, while the problem behaviour no longer pays off."),
+          G("m3.6", "Aversion therapy", "Terapia de aversión", "Pairing a behaviour with something unpleasant.", "Pairing a behaviour with nausea-inducing drugs or shock; historically used for drinking and, harmfully, in conversion practices against same-sex attraction, which caused lasting harm and are condemned."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -17859,6 +18062,18 @@
             R("Bandura", 1977, "review", "Self-efficacy, the belief that one can carry out a behaviour, predicts effort and change; mastery experiences are its strongest source.", st("robust", "Widely supported across health, education and therapy research.")),
             R("Anderson et al.", 2010, "meta-analysis", "Violent video game play was linked with small increases in aggressive thoughts, feelings and behaviour.", st("contested", "Critics argue the effects are smaller once study quality and publication bias are accounted for; no link to serious violence has been shown.")),
             R("Bellini & Akullian", 2007, "meta-analysis", "Video modeling and video self-modeling improved social, communication and functional skills in autistic children and adolescents, with gains that lasted.", st("robust", "Based on single-case designs; consistent enough to be counted an evidence-based practice."))];
+          REFS["m3.5"] = [
+            R("Bouton", 2004, "review", "Extinction is new, context-dependent learning rather than erasure: extinguished responses return through spontaneous recovery, renewal, reinstatement and rapid reacquisition.", st("robust", "Replicated across species, procedures and labs; a basis for modern accounts of relapse.")),
+            R("Lerman & Iwata", 1995, "review", "Across clinical cases of extinction, bursts in responding appeared in under half, more often when extinction was used alone.", st("robust", "Bursts are well documented but not inevitable.")),
+            R("Craske et al.", 2014, "review", "Proposed an inhibitory learning approach to exposure: violate expectancies, vary contexts, use retrieval cues and remove safety behaviours to make extinction learning last.", st("contested", "Well grounded in lab findings; clinical trials testing each strategy are still limited.")),
+            R("Conklin & Tiffany", 2002, "meta-analysis", "Cue exposure treatments for addiction showed no consistent benefit over control treatments.", st("robust", "The weak results are consistent; context-bound extinction is one proposed reason.")),
+            R("Marlatt & Gordon", 1985, "review", "Relapse prevention: relapse as a process shaped by high-risk situations, coping, expectancies and the abstinence violation effect.", st("robust", "Meta-analyses support relapse prevention, especially for alcohol problems."))];
+          REFS["m3.6"] = [
+            R("Wolpe", 1958, "review", "Systematic desensitization: pairing relaxation with a graded fear hierarchy reduced phobic anxiety.", st("robust", "Effective, though later work showed exposure itself is the active ingredient.")),
+            R("Powers et al.", 2010, "meta-analysis", "Prolonged exposure for PTSD produced large improvements compared with control conditions, maintained at follow-up.", st("robust", "Consistent with exposure-based treatments across phobias, OCD and PTSD.")),
+            R("Petry et al.", 2005, "experiment", "In a multisite trial, adding prize-based contingency management to usual care increased stimulant-negative tests and retention.", st("robust", "CM is among the best-supported treatments for stimulant use; effects often shrink after incentives end.")),
+            R("Miller, Meyers & Tonigan", 1999, "experiment", "CRAFT engaged more treatment-refusing loved ones in treatment (about 64%) than a confrontational intervention or Al-Anon facilitation.", st("robust", "Replicated in later CRAFT trials.")),
+            R("Dimidjian et al.", 2006, "experiment", "For more severe depression, behavioural activation matched antidepressant medication and outperformed cognitive therapy.", st("robust", "Behavioural activation is supported by later meta-analyses."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
