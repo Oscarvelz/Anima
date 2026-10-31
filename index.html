@@ -618,6 +618,8 @@
       .x-lens__h { margin: 0; font: 600 15px/1.3 var(--display); }
       .x-lens__h small { display: block; margin-top: 2px; font: 400 13px/1.4 var(--sans); color: var(--dim); }
       .x-lens__row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .x-lablinks { margin-top: 14px; }
+      .x-lablinks .eyebrow { margin-bottom: 8px; }
       .x-lens__b { min-height: var(--tap); padding: 6px 14px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); font: 500 13px/1.25 var(--sans); text-align: left; }
       .x-lens__b[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 45%, transparent); }
       .x-lens__b.is-seen::after { content: " ✓"; color: var(--dim); }
@@ -2940,6 +2942,28 @@
 
         var sceneSeq = 0;
         function findScene(id) { return LAB_SCENES.filter(function (s) { return s.id === id; })[0]; }
+        var SCENE_LESSONS = { schedules: ["m3.3", "m3.5"], extinction: ["m3.3", "m3.5", "m8a.3"], eyewitness: ["m4.5", "m4.6"], workingmemory: ["m4.1", "m4.2"], biasarcade: ["m5.2", "m5.3"], attachment: ["m6.2", "m8a.4"], doseshield: ["m6.2", "m6.7"], fivelenses: ["m7.4", "m7.9", "m7.13"], bigfive: ["m8.2", "m8.4"], pressureroom: ["m9.2", "m9.7"], bystander: ["m9.3"], dissonance: ["m9.5"] };
+        var LESSON_SCENES = null;
+        function scenesForLesson(id) {
+          try {
+            if (!LESSON_SCENES) {
+              var M = {}, add = function (l, s) { if (s && findScene(s)) { (M[l] = M[l] || []); if (M[l].indexOf(s) < 0) M[l].push(s); } };
+              Object.keys(SCENE_LESSONS).forEach(function (s) { SCENE_LESSONS[s].forEach(function (l) { add(l, s); }); });
+              Object.keys(LESSON_CONTENT).forEach(function (l) {
+                var c = LESSON_CONTENT[l] || {}; add(l, c.scene);
+                (c.steps || []).forEach(function (st) { var re = /data-scene="([^"]+)"/g, m; while ((m = re.exec((st && st.body) || ""))) add(l, m[1]); });
+              });
+              LESSON_SCENES = M;
+            }
+            return (LESSON_SCENES[id] || []).slice();
+          } catch (e) { return []; }
+        }
+        function labRow(id, skip) {
+          var ss = scenesForLesson(id).filter(function (s) { return s !== skip; });
+          if (!ss.length) return "";
+          return '<div class="x-lablinks"><p class="eyebrow">Try it in the Lab</p><div class="x-lens__row">' + ss.map(function (s) { return '<button type="button" class="x-lens__b press" data-scene="' + esc(s) + '">' + esc(findScene(s).name) + "</button>"; }).join("") + "</div></div>";
+        }
+        function wireLab(L) { L.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("button[data-scene]"); if (!b) return; e.stopPropagation(); History.closeTop(); Lab.focus = null; openScene(b.dataset.scene); }); }
         /* host: mount inline (lesson split view) instead of full screen; returns a teardown */
         function openScene(id, host) {
           var sc = findScene(id);
@@ -18096,7 +18120,7 @@
               } else body = stepBody(s);
               var lvl = s.lvl ? '<span class="x-lvl' + LVL[s.lvl][1] + '">' + LVL[s.lvl][0] + "</span>" : "";
               var kind = mast ? "Mastery check" : gate ? "Mastery gate" : s.kind === "quiz" ? KIND.quiz + " · answer from memory" : KIND[s.kind];
-              $("#pl-stage", el).innerHTML = '<article class="scard glass' + ((P.hint[P.i] || 0) >= 2 ? " x-dimirr" : "") + '"><p class="eyebrow">' + kind + lvl + "</p><h2>" + esc(s.title) + "</h2>" + body + "</article>" + (!gate && last && L.refs && L.refs.length ? Engine.strip(L.refs) : "");
+              $("#pl-stage", el).innerHTML = '<article class="scard glass' + ((P.hint[P.i] || 0) >= 2 ? " x-dimirr" : "") + '"><p class="eyebrow">' + kind + lvl + "</p><h2>" + esc(s.title) + "</h2>" + body + "</article>" + (!gate && last && L.refs && L.refs.length ? Engine.strip(L.refs) : "") + (!gate && !mast && last ? labRow(id, L.scene) : "");
               if (s.kind === "position") posMount($(".x-pos", el), s.qid, function () { $("[data-pl=next]", el).disabled = waits(s, P.i); });
               $("#pl-count", el).textContent = (again ? "Review · " : "") + (P.i + 1) + " / " + L.steps.length;
               Array.prototype.forEach.call(el.querySelectorAll(".rail span"), function (r, k) { r.classList.toggle("is-on", k <= P.i); r.classList.toggle("is-cur", k === P.i); });
@@ -18495,8 +18519,9 @@
 
         function lockedCard(l) {
           var m = l.mod, msg = !modUnlocked(m) ? lockText(m) : "Arriving in the next update. The Map shows every lesson title so you can see what’s coming.";
-          var L = dialog(l.title, '<p class="eyebrow">' + esc(lessonLabel(l.id) + " · " + m.t) + '</p><p class="x-lock">' + I.lock + "<span>" + esc(msg) + "</span></p>" +
+          var L = dialog(l.title, '<p class="eyebrow">' + esc(lessonLabel(l.id) + " · " + m.t) + '</p><p class="x-lock">' + I.lock + "<span>" + esc(msg) + "</span></p>" + labRow(l.id) +
             '<div class="x-acts"><button type="button" class="start press" data-x="close">Got it</button></div>');
+          wireLab(L);
           $('[data-x="close"]', L).focus();
         }
         function openLesson(id) {
@@ -18529,7 +18554,8 @@
           var g = GLOSSARY[i];
           var L = dialog(g.en, '<div class="x-gl-card"><dl>' +
             [["Español", g.es], ["In plain words", g.d], ["Technical definition", g.tech], ["Where you meet it", lessonLabel(g.l) + " · " + lessonOf(g.l).title]].map(function (r) { return '<div><dt class="eyebrow">' + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("") +
-            '</dl></div><div class="x-acts"><button type="button" class="start press" data-x="lesson">Open the lesson</button><button type="button" class="danger press" data-x="close">Close</button></div>');
+            "</dl>" + labRow(g.l) + '</div><div class="x-acts"><button type="button" class="start press" data-x="lesson">Open the lesson</button><button type="button" class="danger press" data-x="close">Close</button></div>');
+          wireLab(L);
           $('[data-x="lesson"]', L).addEventListener("click", function (e) { e.stopPropagation(); History.closeTop(); openLesson(g.l); });
           $('[data-x="close"]', L).focus();
         }
