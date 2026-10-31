@@ -15691,6 +15691,198 @@
                 "Each step closer to the goal is reinforced in turn. That is shaping.")
             ]
           },
+          "m3.3": {
+            home: "Rafael checks his phone dozens of times an hour and keeps tapping a slot app “just till I win back”. Why do unpredictable rewards hold on so hard?",
+            keys: [["What is the difference between continuous and partial reinforcement?", "Continuous reinforcement rewards every response and builds a behaviour fast; partial (intermittent) reinforcement rewards only some responses and builds it more slowly, but makes it last longer.", "A vending machine drops a snack for every coin, while the claw machine beside it wins only now and then: every time is continuous, only sometimes is partial."],
+              ["What is a fixed-ratio schedule?", "A reward after a set number of responses, as in piecework. It produces a high rate of responding with a pause just after each reward.", "A factory worker gets a banana for every tenth box packed, takes a nap after each banana, then springs up to pack the next ten."],
+              ["What is a variable-ratio schedule?", "A reward after an unpredictable number of responses, averaging some value, as in slot machines. It produces a high, steady rate and is the most resistant to extinction.", "A slot machine in a magician’s cape pulls coins out of random people’s ears, never after the same number of pulls, so everyone keeps pulling fast and steady."],
+              ["What is a fixed-interval schedule?", "The first response after a set time is rewarded, as with a paycheck or the mail. Responding drops after each reward and rises as the time nears, a “scallop” on the record.", "The mailman only ever comes on Fridays, and the dog ignores the door all week, then starts pacing at it on Thursday night."],
+              ["What is a variable-interval schedule?", "The first response after an unpredictable time is rewarded, as with checking messages or fishing. It produces a slow, steady rate of responding.", "A fisherman casts at a slow, steady pace all afternoon, because the fish bite at random times and casting faster never brings the next bite sooner."],
+              ["What is the partial reinforcement extinction effect?", "Behaviour rewarded only some of the time keeps going longer after rewards stop than behaviour rewarded every time; a robust finding.", "When both machines go dry, people give the vending machine one shake and walk away, but stay at the claw machine for hours."]],
+            steps: [
+              { kind: "hook", title: "Rafael and his phone", body: who("<b>Rafael</b>, on a weeknight at home.") +
+                "<p>He picks up his phone dozens of times an hour. Most times nothing is new. Now and then there’s a message, and he feels a small lift.</p>" +
+                "<p>On the same phone is a slot app. He’s down for the week. “Just till I win back,” he says, and taps spin again.</p>" },
+              { kind: "predict", id: "m3.3:predict", title: "Your call first",
+                case: ["Rafael’s slot app pays out at unpredictable moments.",
+                  { t: "The app has a purple theme.", irrelevant: true },
+                  "He has played it for months.",
+                  "Tonight it stops paying out entirely.",
+                  { t: "He plays on the sofa.", irrelevant: true }],
+                q: "If the app stops paying, will Rafael quit fast or slow?",
+                options: ["Fast: no wins means no reason to play", "Slow: unpredictable wins taught him that dry spells end", "Instantly: he’ll notice the change"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: slow. His wins always came after an unpredictable number of spins, so a long losing run looks just like the runs that came before a win. Behaviour rewarded this way is the hardest to extinguish.",
+                hints: ["Ask how the wins came before tonight: every time, or only sometimes?",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether a losing streak is new to him."] },
+              { kind: "idea", lvl: "f", title: "Every time, or only sometimes", body: "<p>A <b>schedule of reinforcement</b> is the rule for which responses get rewarded. Charles Ferster and B. F. Skinner (1957) " + ev("r") + " recorded pigeons on dozens of schedules over thousands of hours, and found that each rule produces its own pattern of responding.</p>" +
+                "<p><b>Continuous reinforcement</b> rewards every response: learning is fast, but the behaviour fades fast once rewards stop. <b>Partial</b> (intermittent) reinforcement rewards only some responses: learning is slower, but the behaviour lasts.</p>" +
+                "<p><b>So:</b> to teach something new, reward every time; to make it last, reward only sometimes.</p>" },
+              { kind: "idea", lvl: "f", title: "Four basic schedules", body: "<p>Partial schedules vary on two questions: is the reward tied to a <b>count</b> of responses (ratio) or to <b>time</b> passing (interval)? And is that number <b>fixed</b> or <b>variable</b>?</p>" +
+                '<dl class="x-dossier"><div><dt>Fixed ratio</dt><dd>Every Nth response: paid per ten boxes packed.</dd></div>' +
+                "<div><dt>Variable ratio</dt><dd>After an unpredictable count: a slot machine.</dd></div>" +
+                "<div><dt>Fixed interval</dt><dd>First response after a set time: checking for a monthly paycheck.</dd></div>" +
+                "<div><dt>Variable interval</dt><dd>First response after an unpredictable time: checking for messages.</dd></div></dl>" +
+                "<p><b>So:</b> ask whether the reward depends on how much you do, or on when you do it.</p>" },
+              { kind: "idea", lvl: "p", title: "Ratio schedules: piecework and slots", body: "<p><b>Fixed ratio.</b> Responding is fast, then stops for a while just after each reward, the <b>post-reinforcement pause</b>. Piecework pay works this way: a burst of work, a break, another burst.</p>" +
+                "<p><b>Variable ratio.</b> Since the next response might be the winner, there is no reason to pause. Responding is high and steady, and it is the <b>most resistant to extinction</b> of the four. Slot machines pay this way.</p>" +
+                "<p><b>So:</b> on ratio schedules, more responses mean more rewards, so responding is fast; unpredictability removes the pause.</p>" },
+              { kind: "idea", lvl: "p", title: "Interval schedules: the scallop and the steady check", body: "<p><b>Fixed interval.</b> Just after a reward there is little responding, because no response can pay yet; as the time nears, responding speeds up. On a cumulative record this draws a curve called the <b>scallop</b>. Think of checking the mailbox more as the delivery time nears, or the bank app on payday.</p>" +
+                "<p><b>Variable interval.</b> A reward could become available at any moment, but responding faster doesn’t bring it sooner. The result is a <b>slow, steady</b> rate: checking for messages, or casting while fishing.</p>" +
+                "<p>Rafael’s phone checking is close to variable interval: messages arrive at unpredictable times, so he checks steadily all evening.</p>" +
+                "<p><b>So:</b> on interval schedules, time sets the reward, so responding follows the clock.</p>" },
+              { kind: "contrast", id: "m3.3:contrast", title: "Two players, one difference",
+                q: "Which player keeps pulling longer after the payouts stop?",
+                cases: [
+                  { label: "Player A", s: ["Plays the same game for a month.", { t: "Plays in the evening.", irrelevant: true }, { t: "Every pull paid out.", diff: true }, "Then the machine stops paying."] },
+                  { label: "Player B", s: ["Plays the same game for a month.", { t: "Plays in the evening.", irrelevant: true }, { t: "Pulls paid out unpredictably, only some of the time.", diff: true }, "Then the machine stops paying."] }
+                ],
+                answer: 1,
+                features: ["When they play", "Whether every pull paid or only some did", "How long they played", "Which game it was"],
+                feature: 1,
+                why: "Player A notices the change at once: a pull that pays nothing has never happened before. For Player B, a losing pull is normal, so the dry spell is hard to tell from the ones that ended in a win. That is the partial reinforcement extinction effect.",
+                hints: ["Find the one sentence where the two players part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which player has lost many pulls in a row before."] },
+              { kind: "idea", lvl: "p", title: "Why partial rewards last", body: "<p>The <b>partial reinforcement extinction effect</b> " + ev("r") + " is one of the best-replicated findings in learning (reviewed by Jenkins and Stanley 1950): behaviour rewarded only some of the time persists longer once rewards stop.</p>" +
+                "<p>One reason: after continuous reward, the first miss is a clear signal that things have changed. After partial reward, misses are part of the pattern, so extinction looks like just another dry spell.</p>" +
+                "<p><b>So:</b> the less predictable the reward was, the longer a person keeps going when it ends.</p>" },
+              { kind: "idea", lvl: "p", title: "Near-misses", body: "<p>Two cherries and a third just above the line is still a loss, but it doesn’t feel like one. Clark and colleagues (2009) found that near-misses were rated as unpleasant, yet raised the wish to keep playing and engaged reward-related brain areas that wins also engage.</p>" +
+                "<p>The finding that near-misses boost the urge to play has held up well in lab studies; how far they drive problem gambling in real life is still argued.</p>" +
+                "<p><b>So:</b> games can be designed so that losses feel like almost-wins, which keeps play going.</p>" },
+              { kind: "idea", lvl: "m", title: "Schedules in the clinic", body: "<p><b>Contingency management needs immediate, reliable rewards.</b> Vouchers work better when they are given soon after a verified negative test and are worth more (Lussier and colleagues 2006) " + ev("r") + ". A reward that comes days later, or only sometimes at first, teaches little.</p>" +
+                "<p><b>Thinning.</b> Once a habit is built on frequent rewards, they can be spaced out bit by bit, which makes the habit more durable. Some programmes use a prize draw, where each verified goal earns a draw and only some draws win, which adds partial reinforcement on purpose.</p>" +
+                "<p><b>Gambling disorder.</b> DSM-5 (2013) places it with the substance-related and addictive disorders, the only behavioural addiction there. One criterion is “chasing” losses: going back to win back what was lost, as in “just till I win back”.</p>" +
+                "<p><b>So:</b> build a new habit with dense, immediate rewards, then thin them slowly; and treat chasing losses as a warning sign.</p>" },
+              { kind: "example", lvl: "p", title: "Rafael’s schedules, mapped", body: who("<b>Rafael</b>, mapping his evening with a counsellor.") +
+                '<dl class="x-dossier"><div><dt>Phone checking</dt><dd>Close to variable interval: messages come at unpredictable times, so he checks slowly and steadily.</dd></div>' +
+                "<div><dt>Slot app</dt><dd>Variable ratio: wins after an unpredictable number of spins, plus near-misses. High, steady play, slow to fade.</dd></div>" +
+                "<div><dt>“Just till I win back”</dt><dd>Chasing losses, one of the DSM-5 criteria for gambling disorder; worth a full assessment.</dd></div>" +
+                "<div><dt>Plan</dt><dd>Remove the app; check messages at set times; expect urges to last a while after stopping, since partial rewards fade slowly.</dd></div></dl>" +
+                '<p>Try each schedule yourself and watch the patterns form.</p><button type="button" class="x-lens__b press" data-scene="schedules">Open The Schedules Machine</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Lab schedules are clean; life is not. Rafael’s evening mixes many schedules at once, and they shift. And people follow rules and beliefs, not only schedules: “I’m due for a win” keeps him spinning even though each spin is independent, the gambler’s fallacy. In lab studies, adults often don’t show the animal patterns, such as the scallop, because what they’ve been told, or tell themselves, shapes how they respond.</p>' +
+                "<p><b>The counter.</b> The schedule still sets the conditions those beliefs grow in: “I’m due” takes hold on machines that pay unpredictably. Schedule ideas and work on beliefs fit together, which is why treatment for gambling often targets both.</p>" +
+                "<p><b>Person-first.</b> Say “a person with gambling disorder”, not “a gambler” or “an addict”.</p>" +
+                "<p>Background: M3 · Operant conditioning.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Continuous and partial.</b> A vending machine drops a snack for every coin; the claw machine beside it wins only now and then.</p>" +
+                "<p><b>Fixed ratio.</b> A factory worker gets a banana for every tenth box, naps after each banana, then springs up to pack the next ten.</p>" +
+                "<p><b>Variable ratio.</b> A slot machine in a magician’s cape pulls coins out of random ears, never after the same number of pulls, so everyone keeps pulling.</p>" +
+                "<p><b>Fixed interval.</b> The mailman only comes on Fridays, and the dog starts pacing at the door on Thursday night.</p>" +
+                "<p><b>Variable interval.</b> A fisherman casts slow and steady all afternoon, because the fish bite at random times.</p>" +
+                "<p><b>Partial reinforcement extinction effect.</b> When both machines go dry, the vending machine gets one shake; the claw machine gets hours.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.3:teachback", title: "Teach it back", prompt: "Explain to Rafael why his phone and his slot app are so hard to put down: continuous versus partial reinforcement; Ferster and Skinner’s schedules; fixed ratio with its pause after reward, and variable ratio with its high, steady rate and resistance to extinction; fixed interval with its scallop, and variable interval with its slow, steady checking; the partial reinforcement extinction effect and why it happens; near-misses, and how well that finding holds; contingency management with immediate, reliable rewards, and thinning a schedule once a habit is built; gambling disorder in DSM-5 and chasing losses; and the critique that life mixes schedules and people follow beliefs like “I’m due”." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Schedule effects " + ev("r") + ". The partial reinforcement extinction effect " + ev("r") + ". Near-misses raising the urge to play: strong in the lab; their role in real-world problem gambling " + ev("c") + ". Immediate, reliable rewards in contingency management " + ev("r") + ".</p>" +
+                "<p><b>So:</b> how often and how predictably a behaviour pays decides how fast it runs and how long it outlasts the rewards; unpredictable payoffs hold on hardest.</p>" },
+              Q("A worker is paid for every 20 shirts she sews, and takes a short break after each batch. Which schedule is this?",
+                ["Fixed ratio", "Variable ratio", "Fixed interval", "Variable interval"], 0,
+                "The reward comes after a set number of responses, and the pause after each reward is typical of a fixed-ratio schedule."),
+              Q("Which behaviour would be hardest to extinguish?",
+                ["One rewarded every time", "One rewarded on a variable-ratio schedule", "One rewarded on a fixed-interval schedule", "One never rewarded"], 1,
+                "Variable-ratio reinforcement produces the most persistence once rewards stop, because a dry spell looks like the runs that came before a win."),
+              Q("A student studies little after each monthly exam and crams as the next one nears. What pattern is this?",
+                ["The post-reinforcement pause of a variable ratio", "The fixed-interval scallop", "The steady rate of a variable interval", "Continuous reinforcement"], 1,
+                "Responding drops after the reward and rises as the set time nears: the fixed-interval scallop."),
+              Q("A clinic starts contingency management. What does the evidence say makes the vouchers work best?",
+                ["Giving them weeks later, as a lump sum", "Giving them soon after each verified goal, and making them worth more", "Giving them at random, whether or not the goal is met", "Giving them only at the end of treatment"], 1,
+                "Vouchers work better when they are immediate and of higher value; rewards must be tied quickly and reliably to the goal.")
+            ]
+          },
+          "m3.4": {
+            home: "Javier, 15, has never been rewarded for using, but he’s watched his older cousin use and be admired for it. Can you learn a behaviour just by watching?",
+            keys: [["What did Bandura’s Bobo doll studies show?", "Bandura, Ross and Ross (1961): children who watched an adult hit and shout at an inflatable Bobo doll later copied those acts more than children who saw a calm adult. Behaviour can be learned by watching, without any reward to the learner.", "A giant inflatable clown keeps bouncing back up while a row of tiny kids takes notes on clipboards: they learn by watching."],
+              ["What are the four processes of observational learning?", "Attention (noticing the model), retention (remembering what was done), reproduction (being able to do it), and motivation (having a reason to do it). All four are needed.", "A ninja must pass four doors in order, labelled Attention, Memory, Can-I-Do-It and Want-To; if any door stays shut, no move comes out the other side."],
+              ["What is vicarious reinforcement?", "Seeing a model rewarded makes the watcher more likely to copy the behaviour; seeing a model punished (vicarious punishment) makes it less likely.", "A kid watches his big sister get a gold medal for eating broccoli and reaches for the broccoli; another watches someone get a pie in the face for touching the cake and backs away."],
+              ["What is the learning versus performance distinction?", "Learning a behaviour is not the same as doing it. In Bandura (1965), children who saw a model punished copied less, but when offered rewards for imitating, they reproduced the acts as well as the others.", "A kid has learned the karate kick perfectly but only shows it when someone offers a golden sticker."],
+              ["What is self-efficacy?", "Bandura’s (1977) term for a person’s belief that they can carry out a behaviour. Mastery experiences, doing it yourself, are its strongest source; watching similar others succeed also helps.", "A small climber who has made it to the top of three little boulders wears a cape that says “I can”, and it grows a bit bigger after each climb she finishes herself."]],
+            steps: [
+              { kind: "hook", title: "Javier is watching", body: who("<b>Javier</b>, 15, at a family gathering.") +
+                "<p>His older cousin uses, and at parties people gather round him. He’s funny, confident, the one everyone wants to sit next to. Javier has never used. He watches everything his cousin does.</p>" +
+                "<p>Months later, at a peer-recovery group his aunt found, Javier watches an older member describe a craving out loud, breathe through it, and call his sponsor. Javier remembers that too.</p>" },
+              { kind: "predict", id: "m3.4:predict", title: "Your call first",
+                case: ["Javier has watched his cousin use many times.",
+                  { t: "The cousin drives a blue car.", irrelevant: true },
+                  "People admire the cousin and gather round him.",
+                  "Javier has never been rewarded for using himself.",
+                  { t: "The gatherings are on Sundays.", irrelevant: true }],
+                q: "Will Javier copy his cousin even though he’s never been rewarded himself?",
+                options: ["No: without his own reward there’s nothing to learn", "He may: he has learned it by watching, and seen it pay off for someone he admires", "Only if someone tells him to"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: he may. People learn by watching, and seeing a model rewarded makes copying more likely, especially when the model is admired and similar. Whether he acts on it also depends on his own reasons, values and chances, so watching raises the risk; it doesn’t decide it.",
+                hints: ["Ask what Javier has seen happen to his cousin.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether you must be rewarded yourself to learn something."] },
+              { kind: "idea", lvl: "f", title: "The Bobo doll", body: "<p>Albert Bandura, Dorothea Ross and Sheila Ross (1961) " + ev("r") + " had preschool children watch an adult in a playroom. Some saw the adult punch, kick and hit an inflatable Bobo doll with a mallet, saying things like “Sock him in the nose”. Others saw a calm adult, or no adult.</p>" +
+                "<p>Left later with toys, including a Bobo doll, the children who had seen the aggressive model copied many of the same acts and words; the others rarely did. No one had rewarded them.</p>" +
+                "<p><b>So:</b> <b>observational learning</b>, learning by watching a model, can teach a behaviour with no reward to the learner.</p>" },
+              { kind: "idea", lvl: "f", title: "Four processes", body: "<p>Bandura described four processes that must all happen for watching to become doing.</p>" +
+                '<dl class="x-dossier"><div><dt>Attention</dt><dd>Noticing the model and what they do.</dd></div>' +
+                "<div><dt>Retention</dt><dd>Remembering it, in images or words.</dd></div>" +
+                "<div><dt>Reproduction</dt><dd>Being able to do it yourself.</dd></div>" +
+                "<div><dt>Motivation</dt><dd>Having a reason to do it.</dd></div></dl>" +
+                "<p><b>So:</b> when someone doesn’t copy what they saw, ask which of the four broke down.</p>" },
+              { kind: "idea", lvl: "p", title: "Watching others’ consequences", body: "<p>In 1965 Bandura showed children a film of a model hitting Bobo. In one version the model was praised and given treats; in another, scolded; in a third, nothing happened. Children who saw the model punished copied least. This is <b>vicarious reinforcement</b> and <b>vicarious punishment</b>: other people’s consequences change our behaviour.</p>" +
+                "<p>Models also matter more when they are <b>similar</b> to us, <b>high in status</b>, and <b>rewarded</b>. Javier’s cousin is all three: family, older, admired.</p>" +
+                "<p><b>So:</b> people watch what happens to others, and act on it.</p>" },
+              { kind: "contrast", id: "m3.4:contrast", title: "Two kids, one difference",
+                q: "Which child is more likely to hit the doll when left alone with it?",
+                cases: [
+                  { label: "Child A", s: ["Watches an adult hit the Bobo doll.", { t: "The room has a red rug.", irrelevant: true }, { t: "Afterwards, the adult is praised: “Strong champion!”", diff: true }, "Then the child is left alone with the doll."] },
+                  { label: "Child B", s: ["Watches an adult hit the Bobo doll.", { t: "The room has a red rug.", irrelevant: true }, { t: "Afterwards, the adult is scolded: “Don’t do that again!”", diff: true }, "Then the child is left alone with the doll."] }
+                ],
+                answer: 0,
+                features: ["What colour the rug is", "What happened to the model afterwards", "What the model did to the doll", "Whether the child was left alone"],
+                feature: 1,
+                why: "Both saw exactly the same acts. Child A saw them rewarded (vicarious reinforcement), so is more likely to copy them; Child B saw them punished (vicarious punishment). But both have learned the acts, as the next step shows.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what happened to the adult, not what the adult did."] },
+              { kind: "idea", lvl: "p", title: "Learned is not the same as done", body: "<p>In the same 1965 study, Bandura then offered every child juice and stickers for each act they could show him. Now the children who had seen the model punished reproduced the acts about as well as the rest.</p>" +
+                "<p>They had <b>learned</b> all along; they just hadn’t <b>performed</b> it until there was a reason. This is the <b>learning versus performance distinction</b>.</p>" +
+                "<p><b>So:</b> not doing something is not proof someone hasn’t learned it; a new incentive can bring it out.</p>" },
+              { kind: "idea", lvl: "p", title: "Self-efficacy and social cognitive theory", body: "<p><b>Self-efficacy</b> (Bandura 1977) " + ev("r") + " is the belief that you can do a particular thing. Its strongest source is <b>mastery experiences</b>, succeeding yourself; others are watching similar people succeed, encouragement, and how your body feels.</p>" +
+                "<p>Bandura’s <b>social cognitive theory</b> joins these ideas. Its core is <b>reciprocal determinism</b>: the person, their behaviour and their environment keep shaping one another. Javier isn’t only shaped by his cousin; who he chooses to spend time with shapes what he sees next.</p>" +
+                "<p><b>So:</b> what people believe they can do shapes what they try.</p>" },
+              { kind: "idea", lvl: "p", title: "Screens and aggression", body: "<p>Bobo led to a long debate about violent media. Meta-analyses such as Anderson and colleagues (2010) report a small link between violent video game play and aggressive thoughts and behaviour. Critics argue the effects are smaller still once weaker studies and publication bias are accounted for, and no link to serious violence has been shown " + ev("c") + ".</p>" +
+                "<p><b>So:</b> media can model behaviour, but the size of its effect on real aggression is still argued.</p>" },
+              { kind: "idea", lvl: "m", title: "Modeling in the clinic", body: "<p><b>Skills training.</b> Behavioural skills training follows a pattern: explain, <b>model</b>, rehearse, give feedback. Seeing a refusal skill done well makes it easier to try.</p>" +
+                "<p><b>Video modeling.</b> Short videos of a skill being done are well supported for teaching social and daily-living skills to autistic children (Bellini and Akullian 2007) " + ev("r") + ".</p>" +
+                "<p><b>Peer recovery support.</b> Peers with lived experience act as similar, credible models of coping. The evidence is promising, but studies vary in quality. Models who show a struggle and then cope, like the older member in Javier’s group, are often more useful than ones who make it look easy.</p>" +
+                "<p><b>Self-disclosure, with care.</b> A counsellor’s own story can model hope, but keep it brief and for the client’s benefit, not the counsellor’s; too much moves the focus away from the client.</p>" +
+                "<p><b>So:</b> people in treatment are always watching; what staff and peers model is part of the treatment.</p>" },
+              { kind: "example", lvl: "p", title: "Javier’s two models", body: who("<b>Javier</b>, talking it through with a youth counsellor.") +
+                '<dl class="x-dossier"><div><dt>Cousin</dt><dd>Similar, high status, admired: a strong model, with use shown as paying off.</dd></div>' +
+                "<div><dt>Group member</dt><dd>Older, also similar, shows a craving and copes with it out loud: a coping model.</dd></div>" +
+                "<div><dt>Four processes</dt><dd>Attention: he notices both. Retention: he remembers the breathing and the call. Reproduction: practise it in session. Motivation: link it to what he values.</dd></div>" +
+                "<div><dt>Plan</dt><dd>Role-play the craving plan; build self-efficacy through small successes; spend time with people whose coping he admires.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Bobo is a toy designed to be hit: it is weighted to bounce back up. Hitting it may be play, not aggression, and children may have done what they thought the adults wanted. The tests came minutes after watching, so the studies say little about real aggression toward people or about lasting change. And people don’t copy whoever is in front of them: they choose models by their values and identity. Javier may admire his cousin and still decide that isn’t who he wants to be.</p>' +
+                "<p><b>The counter.</b> The core finding, that people learn new behaviours by watching, has held up across many settings, from skills training to video modeling. The four processes and self-efficacy leave room for values: motivation and identity are part of the model, not outside it.</p>" +
+                "<p><b>Person-first.</b> Say “a teenager whose cousin uses”, not “an at-risk kid”.</p>" +
+                "<p>Background: M3 · Operant conditioning.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Bobo doll.</b> A giant inflatable clown keeps bouncing back up while a row of tiny kids takes notes on clipboards: they learn by watching.</p>" +
+                "<p><b>Four processes.</b> A ninja must pass four doors in order, Attention, Memory, Can-I-Do-It and Want-To; if one stays shut, no move comes out.</p>" +
+                "<p><b>Vicarious reinforcement.</b> A kid sees his sister get a gold medal for eating broccoli and reaches for the broccoli; another sees a pie in the face for touching the cake and backs away.</p>" +
+                "<p><b>Learning versus performance.</b> A kid has learned the karate kick perfectly but only shows it when someone offers a golden sticker.</p>" +
+                "<p><b>Self-efficacy.</b> A small climber’s “I can” cape grows a bit bigger after each climb she finishes herself.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m3.4:teachback", title: "Teach it back", prompt: "Explain to Javier’s counsellor how watching shapes what he might do: the Bobo doll studies of 1961 and what they showed; attention, retention, reproduction and motivation; vicarious reinforcement and punishment from the 1965 study; the learning versus performance distinction, shown when incentives were offered; why similar, high-status, rewarded models matter most; self-efficacy and mastery experiences; social cognitive theory and reciprocal determinism; modeling in skills training, video modeling, peer recovery support and careful self-disclosure; the contested media violence debate; and the critiques that Bobo is a toy designed to be hit, that play is not real aggression, and that people choose models by values and identity." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Learning by watching " + ev("r") + ". Bobo as a model of real-world aggression " + ev("c") + ". Self-efficacy " + ev("r") + ". Video modeling for skills " + ev("r") + ". Violent media and aggression " + ev("c") + ".</p>" +
+                "<p><b>So:</b> people learn from what they see others do and what happens to them; recovery can use that too, by giving people models of coping worth copying.</p>" },
+              Q("A child sees her brother scolded for lying, and lies less herself. What is this?",
+                ["Vicarious punishment", "Negative reinforcement", "Shaping", "Positive punishment of the child"], 0,
+                "The consequence happened to the model, not to her, and her own behaviour became less likely. That is vicarious punishment."),
+              Q("In Bandura’s 1965 study, what happened when children who had seen the model punished were offered rewards for imitating?",
+                ["They still refused to imitate", "They reproduced the acts about as well as the other children", "They became more aggressive than any other group", "They forgot what the model had done"], 1,
+                "They had learned the acts all along but not performed them: the learning versus performance distinction."),
+              Q("A client watches a role-play of refusing a drink, remembers it and wants to use it, but can’t yet say it smoothly. Which process needs work?",
+                ["Attention", "Retention", "Reproduction", "Motivation"], 2,
+                "He noticed, remembers and wants to; what’s missing is being able to do it, which practice builds."),
+              Q("According to Bandura, what is the strongest source of self-efficacy?",
+                ["Being told you can do it", "Mastery experiences: succeeding yourself", "Watching a famous person succeed", "Feeling calm"], 1,
+                "Succeeding at the task yourself builds self-efficacy most; watching similar others and encouragement help less.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -17139,6 +17331,28 @@
           G("m3.2", "Shaping", "Moldeamiento", "Rewarding each step closer to a goal.", "Teaching a new behaviour by reinforcing successive approximations to it, raising the bar as each step is reached; used by Skinner with pigeons and in therapy to reward small steps."),
           G("m3.2", "Avoidance learning", "Aprendizaje de evitación", "Staying away because staying away brings relief.", "Learning in which escaping or preventing something unpleasant is negatively reinforced; it keeps anxiety going because the person never learns the feared situation is bearable; see Experiential avoidance."),
           G("m3.2", "ABC analysis", "Análisis ABC", "Antecedent, behaviour, consequence.", "A simple functional analysis that maps what comes before a behaviour, the behaviour, and what follows it, to find what keeps the behaviour going; see Functional analysis."),
+          G("m3.3", "Schedule of reinforcement", "Programa de reforzamiento", "The rule for which responses get rewarded.", "A rule stating which responses are reinforced, by count (ratio) or by time (interval), fixed or variable; mapped by Ferster and Skinner (1957), each produces its own pattern of responding."),
+          G("m3.3", "Continuous reinforcement", "Reforzamiento continuo", "Rewarding every response.", "Reinforcing every instance of a behaviour; learning is fast, but the behaviour fades quickly once rewards stop; see Partial reinforcement."),
+          G("m3.3", "Partial reinforcement", "Reforzamiento parcial", "Rewarding only some responses.", "Also called intermittent reinforcement: only some responses are reinforced; learning is slower, but the behaviour persists longer once rewards stop."),
+          G("m3.3", "Fixed-ratio schedule", "Programa de razón fija", "A reward after a set number of responses.", "Reinforcement after every Nth response, as in piecework pay; produces a high rate of responding with a pause just after each reward."),
+          G("m3.3", "Variable-ratio schedule", "Programa de razón variable", "A reward after an unpredictable number of responses.", "Reinforcement after a number of responses that varies around an average, as in slot machines; produces a high, steady rate and is the most resistant to extinction."),
+          G("m3.3", "Fixed-interval schedule", "Programa de intervalo fijo", "The first response after a set time is rewarded.", "Reinforcement for the first response after a fixed time, as with a paycheck; responding drops after each reward and rises as the time nears, a scallop on the record."),
+          G("m3.3", "Variable-interval schedule", "Programa de intervalo variable", "The first response after an unpredictable time is rewarded.", "Reinforcement for the first response after a time that varies, as with checking messages or fishing; produces a slow, steady rate of responding."),
+          G("m3.3", "Partial reinforcement extinction effect", "Efecto de reforzamiento parcial en la extinción", "Sometimes-rewarded behaviour lasts longer after rewards stop.", "The robust finding that behaviour reinforced only some of the time persists longer in extinction than behaviour reinforced every time, partly because a dry spell is hard to tell from extinction."),
+          G("m3.3", "Near-miss effect", "Efecto de casi acierto", "Almost winning keeps people playing.", "Losses that look close to a win, such as two matching symbols and a third just off, raise the urge to keep gambling in lab studies (Clark et al. 2009); their role in real-world problem gambling is still argued."),
+          G("m3.3", "Schedule thinning", "Adelgazamiento del programa", "Spacing out rewards once a habit is built.", "Gradually moving from frequent to less frequent reinforcement after a behaviour is established, which keeps it going with fewer rewards and makes it more durable."),
+          G("m3.3", "Gambling disorder", "Trastorno por juego", "Persistent gambling that causes harm.", "A DSM-5 diagnosis placed with the substance-related and addictive disorders, the only behavioural addiction there; criteria include chasing losses and needing larger bets for the same excitement."),
+          G("m3.4", "Observational learning", "Aprendizaje observacional", "Learning by watching others.", "Acquiring a behaviour by watching a model, without being rewarded oneself; shown in Bandura’s Bobo doll studies and explained by attention, retention, reproduction and motivation."),
+          G("m3.4", "Bobo doll studies", "Estudios del muñeco Bobo", "Children copied an adult hitting an inflatable doll.", "Bandura, Ross and Ross (1961) and Bandura (1965): children who watched an adult attack a Bobo doll copied the acts; critics note the doll is designed to be hit and the tests were short-term."),
+          G("m3.4", "Vicarious reinforcement", "Reforzamiento vicario", "Seeing a model rewarded makes copying more likely.", "An increase in imitating a behaviour after seeing a model rewarded for it; its opposite, vicarious punishment, lowers imitation after seeing a model punished."),
+          G("m3.4", "Vicarious punishment", "Castigo vicario", "Seeing a model punished makes copying less likely.", "A decrease in imitating a behaviour after seeing a model punished for it, as in Bandura (1965); the behaviour may still be learned; see Learning–performance distinction."),
+          G("m3.4", "Learning–performance distinction", "Distinción entre aprendizaje y ejecución", "Learning something is not the same as doing it.", "A behaviour can be learned without being shown until there is an incentive; in Bandura (1965), children who saw a model punished reproduced the acts once offered rewards."),
+          G("m3.4", "Modeling", "Modelado", "Showing a behaviour so others can learn it.", "Demonstrating a behaviour for someone to observe and imitate; models are copied more when they are similar, high in status and rewarded; used in skills training."),
+          G("m3.4", "Self-efficacy", "Autoeficacia", "Belief that you can do a particular thing.", "Bandura’s (1977) term for confidence in one’s ability to carry out a behaviour; built most by mastery experiences, and also by watching similar others, encouragement and bodily states."),
+          G("m3.4", "Mastery experience", "Experiencia de dominio", "Succeeding at something yourself.", "Direct experience of succeeding at a task, the strongest source of self-efficacy in Bandura’s account; small, achievable successes build it step by step."),
+          G("m3.4", "Social cognitive theory", "Teoría social cognitiva", "Bandura’s theory of learning through people, thought and setting.", "Bandura’s framework joining observational learning, self-efficacy and reciprocal determinism: the person, their behaviour and their environment shape one another."),
+          G("m3.4", "Video modeling", "Modelado por video", "Teaching a skill with short videos of it being done.", "An intervention in which a learner watches a recorded model perform a skill, then practises it; well supported for teaching social and daily-living skills to autistic children."),
+          G("m3.4", "Peer recovery support", "Apoyo de pares en la recuperación", "Help from people with lived experience of recovery.", "Support given by peers who are in recovery themselves, who act as similar, credible models of coping; the evidence is promising but varies in quality."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -17634,6 +17848,17 @@
             R("Gershoff & Grogan-Kaylor", 2016, "meta-analysis", "Across studies of over 160,000 children, spanking was linked with more aggression and other poor outcomes, and not with better behaviour.", st("contested", "The associations are consistent; because most studies are observational, how much spanking causes them is argued.")),
             R("Prendergast et al.", 2006, "meta-analysis", "Contingency management, rewarding verified drug abstinence, reduced use across many trials and drug types.", st("robust", "Effects are strongest during treatment and can fade after rewards stop.")),
             R("De Crescenzo et al.", 2018, "meta-analysis", "Among psychosocial treatments for cocaine and amphetamine use, contingency management was the most effective, at the end of treatment and later.", st("robust", "A large network meta-analysis; few medicines help with stimulants, so this result shapes practice."))];
+          REFS["m3.3"] = [
+            R("Ferster & Skinner", 1957, "experiment", "Schedules of Reinforcement: pigeons on dozens of schedules showed distinct patterns, such as the fixed-ratio pause, the fixed-interval scallop and the steady variable-ratio rate.", st("robust", "The basic schedule patterns replicate in animals; human performance often differs because people follow rules and beliefs.")),
+            R("Jenkins & Stanley", 1950, "review", "Across many studies, behaviour reinforced only some of the time persisted longer in extinction than behaviour reinforced every time.", st("robust", "The partial reinforcement extinction effect is one of the best-replicated findings in learning.")),
+            R("Clark et al.", 2009, "experiment", "Near-misses on a slot-machine task were rated as unpleasant yet raised the desire to play and engaged reward-related brain areas that wins also engage.", st("contested", "The boost to the urge to play replicates well in the lab; how far near-misses drive real-world problem gambling is still argued.")),
+            R("Lussier et al.", 2006, "meta-analysis", "Voucher-based reinforcement reduced drug use, with larger effects when vouchers came sooner after a verified goal and were worth more.", st("robust", "Consistent across many trials; effects can fade after rewards stop."))];
+          REFS["m3.4"] = [
+            R("Bandura, Ross & Ross", 1961, "experiment", "Preschool children who watched an adult attack a Bobo doll later copied many of the same acts and words more than children who saw a calm adult or none.", st("contested", "Imitation of a model is robust; as evidence about real aggression it is limited, since the doll is designed to be hit and testing was short-term.")),
+            R("Bandura", 1965, "experiment", "Children who saw a model punished imitated less, but reproduced the acts as well as others once offered rewards: learning is not the same as performance.", st("robust", "Vicarious consequences and the learning–performance distinction are widely supported.")),
+            R("Bandura", 1977, "review", "Self-efficacy, the belief that one can carry out a behaviour, predicts effort and change; mastery experiences are its strongest source.", st("robust", "Widely supported across health, education and therapy research.")),
+            R("Anderson et al.", 2010, "meta-analysis", "Violent video game play was linked with small increases in aggressive thoughts, feelings and behaviour.", st("contested", "Critics argue the effects are smaller once study quality and publication bias are accounted for; no link to serious violence has been shown.")),
+            R("Bellini & Akullian", 2007, "meta-analysis", "Video modeling and video self-modeling improved social, communication and functional skills in autistic children and adolescents, with gains that lasted.", st("robust", "Based on single-case designs; consistent enough to be counted an evidence-based practice."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
