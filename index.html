@@ -6592,6 +6592,209 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* L24 The Pressure Room: Milgram obedience as a grid of forty data figures (lit = continued). Context card, predict at three checkpoints, variations, real-world challenge, reveal. No one is shocked; saves nothing. */
+          {
+            id: "pressureroom", name: "The Pressure Room", kicker: "C · Obedience", hue: ["#ffb38a", "#c4b0ff"], gallery: true, order: 6.4, dom: true,
+            idea: "Would ordinary people obey an authority who told them to hurt a stranger? Guess first, then see what Milgram found.",
+            see: "Forty small figures stand for forty participants. Lit figures kept going; switch the setting and watch how many stay lit.",
+            why: "The situation, not just character, drives obedience: closeness of the victim, presence of authority, others refusing and legitimacy all move it.",
+            use: "Institutions are authority systems. Notice the small steps, protect dissent, and keep your own judgment.",
+            cap: "Read the history, predict how far people went, change the setting, then spot the levers in real workplaces.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["Context", "Predict", "Variations", "Challenge", "Reveal"], WORD = ["one", "two", "three", "four", "five"];
+              var ON = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"], TEN = ["", "", "twenty", "thirty", "forty"];
+              function nw(n) { return n < 20 ? ON[n] : TEN[n / 10 | 0] + (n % 10 ? "-" + ON[n % 10] : ""); }
+              function up(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+              var LVL = [["Slight shock", "#9fe3c4"], ["Moderate", "#b8e3a8"], ["Strong", "#d9e08f"], ["Very strong", "#f5c76b"], ["Intense", "#ffb38a"], ["Extreme intensity", "#ff9f8f"], ["Danger: severe shock", "#ff9aa8"], ["XXX", "#e98ab0"]];
+              var CX = [["Jerusalem, 1961", "Adolf Eichmann, a chief organizer of the deportations in the Holocaust, is on trial. His defence: he was following orders."],
+                ["Yale, months later", "Stanley Milgram begins his studies with a plain question: would ordinary people obey an authority who told them to hurt a stranger?"],
+                ["Hannah Arendt, 1963", "Reporting on the trial, Arendt writes <i>Eichmann in Jerusalem: A Report on the Banality of Evil</i>. Her claim: great evil was carried out by people who were not monsters but thoughtless, careerist functionaries who had stopped thinking for themselves. Later evidence challenges that picture — see the Reveal."]];
+              var CP = [["Strong", "keep going past Strong", 40, "Every one of the forty went past Strong."], ["Danger: severe shock", "reach Danger: severe shock", 27, "Twenty-seven of forty reached Danger: severe shock."], ["XXX", "go all the way to XXX, the last switch", 26, "Twenty-six of forty went all the way to XXX."]];
+              var LEV = ["closeness of the victim", "presence of authority", "others refusing", "legitimacy"];
+              var V = [["Baseline: Yale lab, learner behind a wall", 26, "About two in three", -1, "The standard setup Milgram published in 1963."],
+                ["Teacher holds the learner’s hand on the plate", 12, "About a third", 0, "With the harm right under their own hand, far fewer could go on."],
+                ["Experimenter gives orders by phone", 9, "About one in five", 1, "With the authority out of the room, many teachers quietly gave lower shocks or stopped."],
+                ["Two peers refuse", 4, "About one in ten", 2, "Seeing others say no showed that refusing was possible — and gave cover."],
+                ["Run-down office in Bridgeport, not Yale", 19, "Just under half", 3, "Without the university’s prestige, somewhat fewer went on — but still many."],
+                ["Orders come from an ordinary person", 8, "About one in five", 3, "Without a lab coat and a scientist’s role, the orders lost most of their pull."]];
+              var CH = [
+                { s: "A correctional officer is told by the shift sergeant to skip dinner for a person who is incarcerated, as punishment for talking back. Everyone on the unit has done it before; no one has ever said no.", lv: 2,
+                  why: "No one has modelled refusal, so it feels impossible. In Milgram’s two-peers variation, obedience collapsed once others said no.",
+                  br: [["Say no out loud, name it as a rights issue, and bring in a colleague or the grievance route so you are not refusing alone.", true], ["Do it this once and raise it at the next staff meeting.", false], ["Skip the meal but slip the person a snack later.", false]],
+                  bw: "Withholding food as punishment is harm whatever the unit’s habit. Refusing early, out loud and with an ally is the two-peers effect in real life; complying “this once” is the first small step." },
+                { s: "A night nurse gets a phone call from a doctor she has never met, ordering twice the maximum dose printed on the label of a drug not on the ward list. In Hofling’s 1966 hospital study, almost every nurse called this way started to give the drug before being stopped.", lv: 3,
+                  why: "The title “doctor” and the hospital hierarchy did the work. Distance usually weakens orders, yet the role felt legitimate enough to override the label.",
+                  br: [["Check the order against the label and policy, and refuse to give it until a prescriber confirms in person or in writing.", true], ["Give half the dose as a compromise.", false], ["Give it, then note in the chart that the doctor ordered it.", false]],
+                  bw: "Verifying puts your own judgment back in the loop. Half an unsafe dose is still unsafe, and “the doctor said so” does not move the responsibility off you." },
+                { s: "A new counselor’s supervisor tells them to write a client’s discharge as “noncompliant” to free a bed. The counselor has never met the client — just a name in the file.", lv: 0,
+                  why: "The harm lands on someone the counselor never sees, so it feels like paperwork. In Milgram’s touch variation, bringing the victim close cut obedience sharply.",
+                  br: [["Meet or call the client first, write only what you observed, and take the request to clinical supervision if it continues.", true], ["Write it as told, since the supervisor carries the responsibility.", false], ["Write it vaguely so it can’t be checked.", false]],
+                  bw: "Making contact puts the person back behind the file, and accurate records are an ethical duty (ACA Code of Ethics). Authority does not take responsibility for a false record off the writer." }];
+              var LO = CH.map(function () { return optOrder(LEV.length); }), BO = CH.map(function (c) { return optOrder(c.br.length); });
+              var fresh = function () { return { ci: 0, cd: false, p: [20, 20, 20], shown: false, anC: 40, anV: 40, v: 0, vt: {}, ch: 0, al: {}, ab: {}, done: {}, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false, sx = null;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) { return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) { return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>"; }).join("") + "</p>"; }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of five · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) { return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") + "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>"; }
+              function goStep(n) { var s = $('[data-step="' + n + '"]', main); if (!s) return; s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var f = s.querySelector("button:not(:disabled), input:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true }); }
+              function cnt(o) { return Object.keys(o).filter(function (k) { return o[k]; }).length; }
+              function T(x, y, s, fill) { return '<text x="' + x + '" y="' + y + '" style="fill:' + fill + ';font:500 12px var(--sans)">' + esc(s) + "</text>"; }
+              function figs(n, ghost, y0, col) {
+                var s = "", i, x, y, on, gh;
+                for (i = 0; i < 40; i++) { x = 10 + (i % 20) * 17; y = y0 + (i / 20 | 0) * 22; on = i < n; gh = !on && i < ghost;
+                  s += '<g fill="' + (on ? col : gh ? "none" : "#3a3d63") + '"' + (gh ? ' stroke="' + col + '" stroke-width="1.2"' : "") + '><circle cx="' + (x + 8) + '" cy="' + (y + 5) + '" r="3.5"/><rect x="' + (x + 3.5) + '" y="' + (y + 10) + '" width="9" height="9" rx="3"/></g>'; }
+                return s;
+              }
+              function cpSVG(i) {
+                var g = S.p[i], d = Math.min(CP[i][2], S.anC), h = S.shown ? 130 : 66;
+                var lbl = "You guessed " + nw(g) + " of forty would " + CP[i][1] + "." + (S.shown ? " In Milgram 1963, " + nw(CP[i][2]) + " of forty did." : "");
+                return '<svg class="x-mem__svg" viewBox="0 0 360 ' + h + '" role="img" aria-label="' + esc(lbl) + '" style="background:#1b1d33">' + T(12, 16, "Your guess: " + nw(g) + " of forty", "#eef0ff") + figs(g, 0, 22, "#c4b0ff") +
+                  (S.shown ? T(12, 82, "Milgram 1963: " + nw(CP[i][2]) + " of forty", "#eef0ff") + figs(d, 0, 88, "#ffb38a") : "") + "</svg>";
+              }
+              function varSVG() {
+                var o = V[S.v], n = Math.min(o[1], S.anV);
+                return '<svg class="x-mem__svg" viewBox="0 0 360 66" role="img" aria-label="' + esc(o[0] + ": " + nw(o[1]) + " of forty went to the end, against twenty-six at baseline.") + '" style="background:#1b1d33">' + T(12, 16, "Went to XXX: " + o[2].toLowerCase(), "#eef0ff") + figs(n, S.v ? 26 : 0, 22, "#ffb38a") + "</svg>";
+              }
+              function render() { [0, 1, 2].forEach(function (i) { var g = $('[data-k="c' + i + '"]', main); if (g) g.innerHTML = cpSVG(i); }); var v = $('[data-k="var"]', main); if (v) v.innerHTML = varSVG(); }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                var dt = A.last != null ? Math.min(0.05, (now - A.last) / 1000) : 0, k = "an" + A.k; A.last = now; A.acc += dt;
+                if (A.acc >= 0.03) { A.acc = 0; S[k]++; render(); }
+                if (S[k] >= 40) { S[k] = 40; A = null; render(); return; }
+                kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function play(k) { halt(); if (A) S["an" + A.k] = 40; A = null; if (RM) { S["an" + k] = 40; render(); return; } S["an" + k] = 0; A = { k: k, last: null, acc: 0 }; render(); kick(); }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) { var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {} return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>"; }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function strip() { return '<div role="list" aria-label="The generator’s switch labels, lowest to highest" style="display:flex;flex-wrap:wrap;gap:6px;margin:4px 0">' + LVL.map(function (l, i) { var c = i === 2 || i === 6 || i === 7; return '<span role="listitem" style="padding:4px 10px;border-radius:999px;background:' + l[1] + ";color:#1b1d33;font:" + (c ? 600 : 500) + " 12px var(--sans)" + (c ? ";outline:2px solid var(--primary);outline-offset:1px" : "") + '">' + l[0] + (c ? " · checkpoint" : "") + "</span>"; }).join("") + "</div>"; }
+              function gap(i) { var x = CP[i][2] - S.p[i]; return x === 0 ? "Spot on." : up(nw(Math.abs(x))) + (x > 0 ? " more went on than you expected." : " fewer went on than you expected."); }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") : null;
+                halt();
+                var vn = cnt(S.vt), allDone = cnt(S.done) === CH.length, n = !S.cd ? 0 : !S.shown ? 1 : !vn ? 2 : !allDone ? 3 : 4;
+                var h = trail(n) + msect("Before the experiment", "One short card · swipe or tap Next",
+                  '<div data-swipe style="touch-action:pan-y"><p class="x-lens__p" style="font-size:15px"><b>' + CX[S.ci][0] + '</b></p><p class="x-lens__p">' + CX[S.ci][1] + '</p><p class="fineprint" style="margin:0">Card ' + WORD[S.ci] + " of three</p></div>" +
+                  '<p class="fineprint" style="margin:0">The Holocaust murdered six million Jews and millions of others, among them Roma, disabled people, Poles and Soviet prisoners of war.</p>' +
+                  '<div class="x-lens__row">' + (S.ci ? '<button type="button" class="x-lens__b press" data-act="cb" style="min-height:44px">Back</button>' : "") +
+                  (S.ci < 2 ? '<button type="button" class="start press x-lens__go" data-act="cn" style="min-height:52px;flex:1">Next</button>' : !S.cd ? '<button type="button" class="start press x-lens__go" data-act="cd" style="min-height:52px;flex:1">Next: Predict ↓</button>' : "") + "</div>", 1);
+                h += msect("Predict: how far would they go?", !S.cd ? "Read the context card first." : "Forty ordinary people from New Haven sit, one by one, at a generator. An experimenter in a grey coat tells them to keep going. No one here is shocked: these figures are data.",
+                  S.cd ? strip() + [0, 1, 2].map(function (i) {
+                    return '<div style="display:grid;gap:6px"><label class="x-aim__sl"><b>' + CP[i][0] + "</b> · how many will " + CP[i][1] + '? <b data-w="p' + i + '">' + nw(S.p[i]) + '</b><input type="range" class="x-eyes__range" data-act="pp" data-v="' + i + '" min="0" max="40" step="1" value="' + S.p[i] + '" aria-valuetext="' + nw(S.p[i]) + ' of forty"' + (S.shown ? " disabled" : "") + "><span><b>None</b><b>Half</b><b>All forty</b></span></label>" +
+                      '<div data-k="c' + i + '">' + cpSVG(i) + "</div>" + (S.shown ? '<p class="x-lens__p x-mem__fb"><b>' + gap(i) + "</b> " + CP[i][3] + "</p>" : "") + "</div>";
+                  }).join("") +
+                    (!S.shown ? '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="show" style="min-height:52px">Show Milgram’s data</button></div>' :
+                      '<div class="x-lens__p x-mem__fb" aria-live="polite"><p class="x-lens__p" style="margin:0">All forty went at least into the <b>Intense</b> range, where the learner pounds on the wall. Twenty-six of forty went to the end. The learner was an actor and received nothing.</p><p class="x-lens__p" style="margin:6px 0 0">Psychiatrists Milgram polled predicted only about <b>one in a thousand</b> would go to the end.</p></div>' +
+                      '<p class="x-lens__take">The gap between your guess and the data is the lesson: we expect character to stop people, and underestimate the situation.</p>' + (n === 1 || n === 2 && !vn ? next(3) : "")) : "", 2);
+                if (S.shown) {
+                  var o = V[S.v];
+                  h += msect("Variations: change the room", "Pick one setting at a time. Lit figures went to XXX; outlined ones went to the end at baseline but stopped here.",
+                    '<div class="x-lens__row" role="group" aria-label="Setting">' + V.map(function (x, i) { var on = S.v === i; return '<button type="button" class="x-lens__b press" data-act="var" data-v="' + i + '" aria-pressed="' + on + '" style="flex:1 1 14rem;min-height:44px;text-align:left' + (on ? ";border-color:#ffb38a" : "") + '">' + esc(x[0]) + "</button>"; }).join("") + "</div>" +
+                    '<div data-k="var">' + varSVG() + "</div>" +
+                    '<div class="x-lens__p x-mem__fb" aria-live="polite"><p class="x-lens__p" style="margin:0"><b>' + esc(o[2]) + "</b> went to the end. " + esc(o[4]) + '</p><p class="x-lens__p" style="margin:6px 0 0"><b>What changed:</b> ' + (o[3] < 0 ? "nothing yet — pick a setting." : LEV.map(function (l, i) { return i === o[3] ? '<b style="text-decoration:underline">' + l + "</b>" : l; }).join(" / ")) + "</p></div>" +
+                    (vn && n === 2 ? next(4) : !vn ? '<p class="fineprint" style="margin:0">Try at least one setting to unlock the challenge.</p>' : ""), 3);
+                }
+                if (S.shown && vn) {
+                  var c = S.ch, C = CH[c], al = S.al[c], ab = S.ab[c];
+                  var body = '<p class="x-lens__p" style="font-size:15px"><b>Situation ' + WORD[c] + " of three:</b> " + esc(C.s) + "</p>" +
+                    '<p class="x-lens__p"><b>Which lever is at work?</b></p><div class="x-lens__row x-mem__opts" role="group" aria-label="Which lever">' + LO[c].map(function (k, d) {
+                      var i = optPick(LO[c], d), on = al === i, ok = i === C.lv;
+                      return '<button type="button" class="x-lens__b press" data-act="lv" data-v="' + d + '" aria-pressed="' + on + '"' + (al != null ? " disabled" : "") + ' style="flex:1 1 12rem;min-height:44px;text-align:left">' + up(LEV[i]) + (al != null && ok ? " · right answer" : "") + "</button>" +
+                        (on ? '<p class="x-lens__p x-mem__fb"><b>' + (ok ? "Right." : "Not quite.") + "</b> The lever is " + LEV[C.lv] + ". " + esc(C.why) + "</p>" : "");
+                    }).join("") + "</div>" +
+                    '<p class="x-lens__p"><b>Best way to break it?</b></p><div class="x-lens__row x-mem__opts" role="group" aria-label="Best way to break it">' + BO[c].map(function (k, d) {
+                      var i = optPick(BO[c], d), b = C.br[i], on = ab === i;
+                      return '<button type="button" class="x-lens__b press" data-act="br" data-v="' + d + '" aria-pressed="' + on + '"' + (ab != null ? " disabled" : "") + ' style="flex:1 1 14rem;min-height:48px;text-align:left">' + esc(b[0]) + (ab != null && b[1] ? " · best" : "") + "</button>" +
+                        (on ? '<p class="x-lens__p x-mem__fb"><b>' + (b[1] ? "Right." : "Not quite.") + "</b> " + esc(C.bw) + "</p>" : "");
+                    }).join("") + "</div>" +
+                    (al != null && ab != null ? '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="nx" style="min-height:52px">' + (allDone ? "See another situation" : "Next situation") + "</button></div>" : "") +
+                    (allDone ? '<p class="x-lens__take">Each case ran on a lever Milgram measured — and each could be broken by one person thinking out loud.</p>' + (n === 3 || n === 4 ? next(5) : "") : "");
+                  h += msect("Challenge: spot the lever", "Three real-world situations. Pick the lever, then the best way to break it.", body, 4);
+                }
+                h += det("reveal", "Reveal", "History and critique · readable any time",
+                  '<p class="x-lens__p"><b>The studies.</b> Milgram published the first study in 1963 and the full set of variations in <i>Obedience to Authority</i> (1974). Teachers believed they were shocking a learner; the learner was an actor.</p>' +
+                  '<p class="x-lens__p"><b>Ethics.</b> Deception and visible distress — sweating, trembling, nervous laughter — drew sharp criticism and helped bring in modern ethics review.</p>' +
+                  '<p class="x-lens__p"><b>Replication.</b> Burger (2009) ran a partial replication that stopped at the Strong level, where the learner first protests, and found rates similar to Milgram’s.</p>' +
+                  '<p class="x-lens__p"><b>The archives.</b> Gina Perry (2013) found experimenters went off script, pressing well beyond the set prods, and many participants doubted the shocks were real.</p>' +
+                  '<p class="x-lens__p"><b>Engaged followership.</b> Haslam and Reicher (2012) argue people obey when they identify with the cause — here, science. The prod that was a true order, “you have no other choice”, mostly made people refuse.</p>' +
+                  '<p class="x-lens__p"><b>Arendt critiqued.</b> Bettina Stangneth (2014), using Eichmann’s own writings, shows he was a committed antisemite, not merely a thoughtless functionary. And “only following orders” was rejected as a defence at Nuremberg.</p>' +
+                  '<p class="x-mr__status">High obedience under legitimate authority ' + tag("", "Robust") + " · “People obey blindly, like machines” " + tag(" x-ev--d", "Debunked or revised") + " · Banality of evil as a full account of Eichmann " + tag(" x-ev--c", "Contested") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Milgram", 1963, "laboratory experiment", "Behavioral study of obedience: most participants went to the end of the generator.", tag("", "Robust")) +
+                  ref("Arendt", 1963, "trial report", "Eichmann in Jerusalem: A Report on the Banality of Evil.", tag(" x-ev--c", "Contested")) +
+                  ref("Burger", 2009, "partial replication", "Stopping at the Strong level, obedience rates were similar to Milgram’s.", tag("", "Robust")) +
+                  ref("Haslam & Reicher", 2012, "theory and reanalysis", "Engaged followership: obedience rests on identifying with the cause.", tag(" x-ev--c", "Contested")) +
+                  ref("Perry", 2013, "archival study", "Behind the Shock Machine: off-script experimenters and doubting participants.", tag(" x-ev--c", "Contested")) +
+                  "</ol></section>", false, 5);
+                h += det("therapy", "Where this becomes a problem in therapy", "Authority systems, compliance and dissent · readable any time",
+                  '<p class="x-lens__p"><b>Institutions are authority systems.</b> Prisons, mandated programs and hospitals run on orders. Staff can drift into harm step by step, each step “just policy”.</p>' +
+                  '<p class="x-lens__p"><b>Orders that break ethics.</b> Falsifying notes, punitive sanctions, breaking confidentiality: “I was told to” does not make them right.</p>' +
+                  '<p class="x-lens__p"><b>Compliance is not engagement.</b> A mandated client who shows up and agrees is obeying the court. Obedience to the court is not change.</p>' +
+                  '<p class="x-lens__p"><b>The power gap in the room.</b> Clients may agree just to please the counsellor. Ask, and make disagreement safe.</p>' +
+                  '<p class="x-lens__p"><b>Histories of harm under orders.</b> When a person describes crimes committed under orders, in a gang or under coercion, understand the pressure without excusing the harm.</p>' +
+                  '<p class="x-lens__p"><b>Labels close the case.</b> Calling someone “evil” ends the inquiry; looking at the situation opens it.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Protect dissent: use supervision and your ethics code (ACA).</li><li>Name the pressure out loud, early.</li><li>Find allies who will refuse with you — the two-peers effect.</li><li>Use person-first language: a person who is incarcerated, not “an inmate”.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Authority doesn\'t remove responsibility — notice the small steps, say no out loud early, and never let \'just policy\' replace your own judgment or the client\'s dignity.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m9.2", "Obedience (Milgram)") + lessonBtn("m9.7", "The Stanford prison study, re-examined") +
+                  '<button type="button" class="x-lens__b press" data-act="fx">Effects library: Obedience</button></div></section>';
+                main.innerHTML = h;
+                if (A) kick();
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v, c = S.ch;
+                if (a === "cn") { S.ci = Math.min(2, S.ci + 1); live.textContent = CX[S.ci][0] + ". " + CX[S.ci][1].replace(/<[^>]+>/g, ""); }
+                else if (a === "cb") { S.ci = Math.max(0, S.ci - 1); live.textContent = CX[S.ci][0] + "."; }
+                else if (a === "cd") { S.cd = true; paint(); goStep(2); live.textContent = "Predict: drag each slider to your guess."; return; }
+                else if (a === "show") { S.shown = true; paint(); play("C"); live.textContent = CP.map(function (p, i) { return p[0] + ": you guessed " + nw(S.p[i]) + ", " + nw(p[2]) + " did"; }).join("; ") + ". Psychiatrists predicted about one in a thousand would go to the end."; return; }
+                else if (a === "var") { S.v = +v || 0; if (S.v) S.vt[S.v] = true; paint(); play("V"); var o = V[S.v]; live.textContent = o[0] + ": " + o[2].toLowerCase() + " went to the end." + (o[3] < 0 ? "" : " What changed: " + LEV[o[3]] + "."); return; }
+                else if (a === "lv") { if (S.al[c] != null) return; S.al[c] = optPick(LO[c], v); if (S.ab[c] != null) S.done[c] = true; live.textContent = (S.al[c] === CH[c].lv ? "Right" : "Not quite") + ". The lever is " + LEV[CH[c].lv] + ". " + CH[c].why; }
+                else if (a === "br") { if (S.ab[c] != null) return; S.ab[c] = optPick(BO[c], v); if (S.al[c] != null) S.done[c] = true; live.textContent = (CH[c].br[S.ab[c]][1] ? "Right. " : "Not quite. ") + CH[c].bw; }
+                else if (a === "nx") { S.ch = (c + 1) % CH.length; delete S.al[S.ch]; delete S.ab[S.ch]; LO[S.ch] = optOrder(LEV.length); BO[S.ch] = optOrder(CH[S.ch].br.length); paint(); live.textContent = "Situation " + WORD[S.ch] + ": " + CH[S.ch].s; var s4 = $('[data-step="4"]', main); if (s4) { s4.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var fb = s4.querySelector("button:not(:disabled)"); if (fb) fb.focus({ preventScroll: true }); } return; }
+                else if (a === "fx") { if (typeof openEffect === "function") openEffect("fx-obedience"); return; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && b.tagName === "BUTTON") { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]"); if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("pointerdown", function (e) { sx = e.target.closest("[data-swipe]") ? e.clientX : null; });
+              wrap.addEventListener("pointerup", function (e) { if (sx == null) return; var dx = e.clientX - sx; sx = null; if (Math.abs(dx) < 40) return; var ci = Math.max(0, Math.min(2, S.ci + (dx < 0 ? 1 : -1))); if (ci !== S.ci) { S.ci = ci; paint(); live.textContent = CX[ci][0] + "."; } });
+              wrap.addEventListener("input", function (e) {
+                var t = e.target; if (!t.dataset || t.dataset.act !== "pp" || S.shown) return;
+                var i = +t.dataset.v, val = Math.max(0, Math.min(40, Math.round(+t.value))); S.p[i] = val;
+                t.setAttribute("aria-valuetext", nw(val) + " of forty"); var lb = $('[data-w="p' + i + '"]', main); if (lb) lb.textContent = nw(val);
+                var g = $('[data-k="c' + i + '"]', main); if (g) g.innerHTML = cpSVG(i);
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { halt(); A = null; S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
