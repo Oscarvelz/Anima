@@ -976,6 +976,13 @@
       .x-cmp__you { background: var(--surface-2); border-left: 3px solid var(--border); }
       .x-illus { padding: 10px 14px; border-radius: var(--r-s); border: 1px solid var(--bad); background: var(--surface-2); font-size: 14px; }
       @media (max-width: 520px) { .x-grade--4 { grid-template-columns: 1fr 1fr; } .x-cmp { grid-template-columns: 1fr; } }
+      /* Phase R-B: personal hooks, Feynman prompt, calibration panel */
+      .x-hook { display: grid; gap: 8px; padding: 14px; border-radius: var(--r-s); border: 1px dashed var(--border); }
+      .x-hook .x-tb { margin-top: 0; }
+      .x-hook__cue { padding: 12px 14px; border-radius: var(--r-s); background: var(--surface-2); border-left: 3px solid var(--primary); font-size: 14px; }
+      .x-calib__rows { display: grid; gap: 6px; font-size: 14px; }
+      .x-calib__v { font-weight: 600; }
+      .x-rc__m .is-hook { color: var(--primary); }
 
       /* glossary */
       .x-search { position: relative; }
@@ -1751,7 +1758,7 @@
           missing: function (e) { return !!e && (e.code === "PGRST205" || e.status === 404 || /could not find the table/i.test(e.message || "")); },
           /* the cloud copy: compact, no transient UI state; essentials only past 60 KB */
           cloud: function (o) {
-            var c = { app: o.app, kind: o.kind, version: o.version, exportedAt: o.exportedAt, settings: o.settings, theme: o.theme, xp: o.xp, streak: o.streak, lastDay: o.lastDay, lessons: o.lessons, srs: o.srs, quizHistory: o.quizHistory, teachbacks: o.teachbacks || {}, positions: o.positions || {}, hints: o.hints || {}, mastery: o.mastery || {}, kits: o.kits || {} };
+            var c = { app: o.app, kind: o.kind, version: o.version, exportedAt: o.exportedAt, settings: o.settings, theme: o.theme, xp: o.xp, streak: o.streak, lastDay: o.lastDay, lessons: o.lessons, srs: o.srs, quizHistory: o.quizHistory, teachbacks: o.teachbacks || {}, positions: o.positions || {}, hints: o.hints || {}, mastery: o.mastery || {}, kits: o.kits || {}, hooks: o.hooks || {} };
             if (JSON.stringify(c).length > 60000) delete c.quizHistory;
             return c;
           },
@@ -1840,12 +1847,14 @@
             var ks = {}, lk = l.kits || {}, rk = r.kits || {};
             Object.keys(lk).concat(Object.keys(rk)).forEach(function (k) { var a = lk[k], b = rk[k]; ks[k] = !a ? b : !b ? a : (b.at || 0) > (a.at || 0) ? b : a; });
             o.kits = ks;
+            /* Phase R-B personal hooks: per card, the newest 'at' wins */
+            o.hooks = Hooks.merge(l.hooks, r.hooks);
             o.exportedAt = new Date(Math.max(Date.parse(l.exportedAt) || 0, Date.parse(r.exportedAt) || 0, rAt || 0)).toISOString();
             o.account = l.account;
             return o;
           },
           differs: function (a, b) {
-            var key = function (o) { return JSON.stringify([o.xp, o.streak, o.lessons, o.srs, o.quizHistory, o.settings, o.theme, o.teachbacks || {}, o.positions || {}, o.hints || {}, o.mastery || {}, o.kits || {}]); };
+            var key = function (o) { return JSON.stringify([o.xp, o.streak, o.lessons, o.srs, o.quizHistory, o.settings, o.theme, o.teachbacks || {}, o.positions || {}, o.hints || {}, o.mastery || {}, o.kits || {}, o.hooks || {}]); };
             return key(a) !== key(b);
           },
           begin: function () { if (Sync.on()) Sync.pull(); else Sync.set("off"); }
@@ -2102,6 +2111,7 @@
           ivl = Math.min(SRS_MAX, Math.max(1, ivl));
           if (wrong && conf === "high") { n.illus = true; ivl = 1; } /* illusion of knowing: back tomorrow */
           if (conf) n.conf = conf;
+          n.last = wrong ? "wrong" : "right"; /* Phase R-B: last result, for the calibration panel */
           n.b = 0; SRS_DAYS.forEach(function (d, j) { if (d <= ivl) n.b = j; });
           n.ivl = ivl; n.ease = Math.round(ease * 100) / 100; n.reps = (n.reps || 0) + 1;
           n.due = addDays(ivl); n.at = Date.now();
@@ -2141,8 +2151,39 @@
             return out;
           },
           ids: function () { return Object.keys(prefs.srs || {}).filter(function (k) { return !!cardOf(k); }); },
-          due: function () { var end = addDays(1); return Srs.ids().filter(function (k) { return prefs.srs[k].due < end; }); }
+          due: function () { var end = addDays(1); return Srs.ids().filter(function (k) { return prefs.srs[k].due < end; }); },
+          /* Phase R-B mixed practice: up to n cards, round-robin across modules (3+ when available), soonest-due first within each */
+          mixed: function (n) {
+            var g = {}, mods = [], out = [];
+            Srs.ids().sort(function (a, b) { return prefs.srs[a].due - prefs.srs[b].due; }).forEach(function (id) { var m = srsMod(id); if (!g[m]) { g[m] = []; mods.push(m); } g[m].push(id); });
+            while (out.length < n && mods.some(function (m) { return g[m].length; })) mods.forEach(function (m) { if (out.length < n && g[m].length) out.push(g[m].shift()); });
+            return Srs.interleave(out);
+          }
         };
+        /* ---- Phase R-B personal hooks: prefs.hooks = { [cardId]: { t, at } }; an empty t is a cleared hook (kept so the clear syncs) ---- */
+        function hookClean(s) { return String(s == null ? "" : s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 300); }
+        var Hooks = {
+          get: function (id) { var h = (prefs.hooks || {})[id]; return h && h.t ? h.t : ""; },
+          set: function (id, t) { if (!prefs.hooks) prefs.hooks = {}; prefs.hooks[id] = { t: hookClean(t), at: Date.now() }; savePrefs(); },
+          /* import validation: strings only, at most 300 characters, sanitized; cards that exist */
+          clean: function (o, known) { var out = {}; if (!o || typeof o !== "object") return out; Object.keys(o).forEach(function (k) { var h = o[k]; if (h && typeof h.t === "string" && h.t.length <= 300 && (!known || known(k))) out[k] = { t: hookClean(h.t), at: isFinite(h.at) ? +h.at : 0 }; }); return out; },
+          /* merge: per card, the newest 'at' wins */
+          merge: function (l, r) { var o = {}; l = l || {}; r = r || {}; Object.keys(l).concat(Object.keys(r)).forEach(function (k) { var a = l[k], b = r[k]; o[k] = !a ? b : !b ? a : (b.at || 0) > (a.at || 0) ? b : a; }); return o; }
+        };
+        /* ---- Phase R-B calibration: confidence vs. last result, from prefs.srs entries ---- */
+        function calibOf(srs) {
+          var hi = { n: 0, ok: 0 }, lo = { n: 0, ok: 0 }, mid = { n: 0, ok: 0 }, total = 0;
+          Object.keys(srs || {}).forEach(function (k) {
+            var e = srs[k]; if (!e || !e.conf || (e.last !== "right" && e.last !== "wrong")) return;
+            var b = e.conf === "high" ? hi : e.conf === "low" ? lo : mid; b.n++; total++; if (e.last === "right") b.ok++;
+          });
+          var verdict = null;
+          if (total >= 5) {
+            var over = hi.n ? Math.max(0, 0.75 - hi.ok / hi.n) : 0, under = lo.n ? Math.max(0, lo.ok / lo.n - 0.6) : 0;
+            verdict = over > under ? "Overconfident — slow down and recall before you check" : under > over ? "Underconfident — you know more than you think" : "Well calibrated";
+          }
+          return { hi: hi, lo: lo, mid: mid, total: total, verdict: verdict };
+        }
         /* ---- C14 Memory Kits: one per module; palace stations become "p:<module>:<n>" review cards ---- */
         var MEMORYKITS = {
           m0: { moduleId: "m0",
@@ -5289,14 +5330,23 @@
             var q = '<section class="x-queue glass" aria-label="Today’s queue"><p class="eyebrow">Today’s queue</p><p class="x-queue__n">' + due.length + '<span class="dim" style="font:400 15px var(--sans)"> card' + (due.length === 1 ? "" : "s") + " due</span></p>" +
               (due.length ? '<div class="x-acts"><button type="button" class="start press" data-queue="today">Start today’s queue</button></div>'
                 : '<p class="dim">' + (ids.length ? "Nothing due today. Next card comes back " + esc(dueWord(prefs.srs[next].due)) + "." : "Finish a lesson and its key ideas arrive here, plus any question you miss.") + "</p>" +
-                  (ids.length ? '<div class="x-acts"><button type="button" class="danger press" data-queue="ahead">Study ahead (no schedule change)</button></div>' : '<div class="x-acts"><button type="button" class="start press" data-go="map">Open the map</button></div>')) + "</section>" +
+                  (ids.length ? '<div class="x-acts"><button type="button" class="danger press" data-queue="ahead">Study ahead (no schedule change)</button></div>' : '<div class="x-acts"><button type="button" class="start press" data-go="map">Open the map</button></div>')) +
+              (ids.length ? '<div class="x-acts"><button type="button" class="danger press" data-queue="mix">Mixed practice (interleaved)</button></div>' : "") + "</section>" +
+              (function () {
+                /* Phase R-B calibration panel: words, not charts; silent until 5 rated cards */
+                var k = calibOf(prefs.srs), line = function (b, w) { return b.n ? "Rated " + w + ": " + b.ok + " of " + b.n + " recalled" : "Rated " + w + ": none yet"; };
+                return '<section class="x-queue glass x-calib" aria-label="Calibration"><p class="eyebrow">How well your confidence matches your recall</p>' +
+                  (k.verdict ? '<div class="x-calib__rows"><p>' + line(k.hi, "High") + "</p><p>" + line(k.lo, "Low") + '</p><p class="x-calib__v">' + esc(k.verdict) + "</p></div>"
+                    : '<p class="dim">Rate ' + Math.max(1, 5 - k.total) + " more card" + (5 - k.total === 1 ? "" : "s") + " with a confidence level to see this.</p>") +
+                  '<p class="dim">Review now uses five pillars: recall before recognition, spacing that grows, mixed topics, your own hooks, and honest confidence.</p></section>';
+              })() +
               '<section class="x-curve glass">' + curve + "<p><b>Why spaced review:</b> Ebbinghaus’s forgetting curve shows memories fade fast at first, then slowly — and every well-timed recall flattens the curve, so intervals grow from 1, 3 and 7 days to about 16, then longer, adjusted by how well and how surely you recall. A miss starts the card over at 1 day, and a card you felt sure about but missed comes back tomorrow.</p></section>";
             var cards = ids.map(cardOf).filter(function (c) {
               return s.f === "all" || (s.f === "today" ? due.indexOf(c.id) > -1 : s.f === "key" ? c.kind === "key" : s.f === "illus" ? !!prefs.srs[c.id].illus : c.kind === "q");
             }).sort(s.sort === "az" ? function (a, b) { return a.front.localeCompare(b.front); } : function (a, b) { return prefs.srs[a.id].due - prefs.srs[b.id].due; });
             var list = ids.length ? viewBar("review", "cards") + '<div class="x-cards"' + layoutAttr("review") + ">" + (cards.length ? cards.map(function (c) {
               var st = prefs.srs[c.id], isDue = st.due < now;
-              return '<button type="button" class="x-rc glass press" data-card="' + c.id + '"><span class="x-rc__f">' + esc(c.front) + '</span><span class="x-rc__m"><span>' + cardKind(c) + " · " + esc(c.src) + "</span><span>Every " + Srs.every(st) + " day" + (Srs.every(st) > 1 ? "s" : "") + '</span><span class="' + (isDue ? "is-due" : "") + '">' + (isDue ? "Due today" : "Due " + esc(dueWord(st.due))) + "</span></span></button>";
+              return '<button type="button" class="x-rc glass press" data-card="' + c.id + '"><span class="x-rc__f">' + esc(c.front) + '</span><span class="x-rc__m"><span>' + cardKind(c) + " · " + esc(c.src) + "</span><span>Every " + Srs.every(st) + " day" + (Srs.every(st) > 1 ? "s" : "") + '</span><span class="' + (isDue ? "is-due" : "") + '">' + (isDue ? "Due today" : "Due " + esc(dueWord(st.due))) + "</span>" + (Hooks.get(c.id) ? '<span class="is-hook">Hooked</span>' : "") + "</span></button>";
             }).join("") : '<p class="x-empty-s">No cards match this filter.</p>') + "</div>" : "";
             return '<div><h1 class="greet">Review</h1><p class="dim">Spaced retrieval: answer first, then check. Re-reading notes is review, not learning; recalling is what makes it last.</p></div>' + q + list;
           },
@@ -15593,9 +15643,12 @@
 
         /* ============ REVIEW SESSION: today's queue, one card at a time ============ */
         function openQueue(mode) {
-          var ids = Srs.interleave(mode === "ahead" ? Srs.ids().sort(function (a, b) { return prefs.srs[a].due - prefs.srs[b].due; }).slice(0, 10) : Srs.due());
+          /* Phase R-B: "mix" is Mixed practice, run as Study ahead (only misses move the schedule) over up to 12 cards from 3+ modules */
+          var mixMode = mode === "mix";
+          if (mixMode) mode = "ahead";
+          var ids = mixMode ? Srs.mixed(12) : Srs.interleave(mode === "ahead" ? Srs.ids().sort(function (a, b) { return prefs.srs[a].due - prefs.srs[b].due; }).slice(0, 10) : Srs.due());
           if (!ids.length) return UI.toast("Nothing due right now");
-          var fresh = function () { return { conf: null, typed: "", checked: false, opts: false, pick: null, rated: null, prev: null, illus: false, cz: undefined }; };
+          var fresh = function () { return { conf: null, typed: "", checked: false, opts: false, pick: null, rated: null, prev: null, illus: false, cz: undefined, cue: false, fey: false }; };
           var opener = doc.activeElement, i = 0, st = fresh(), right = 0, sure = { ok: 0, miss: 0 }, fooled = [], el = doc.createElement("div");
           var CONF = [["low", "Low"], ["mid", "Medium"], ["high", "High"]], RATES = [["again", "Again"], ["hard", "Hard"], ["good", "Good"], ["easy", "Easy"]];
           var STOP = ["because", "without", "between", "through", "another", "something", "someone", "however", "therefore", "should", "whether", "itself", "before", "rather", "around", "within", "during", "others", "people", "things", "really", "either", "neither", "although", "always", "become", "becomes", "instead", "nothing", "everything", "usually", "simply", "actually"];
@@ -15621,6 +15674,8 @@
             st.prev = c0 ? JSON.parse(JSON.stringify(c0)) : null;
             if (mode !== "ahead") Srs.rate(id, r, st.conf); else if (!ok) Srs.rate(id, "again", st.conf);
             st.rated = r;
+            /* Phase R-B Feynman prompt: every 4th card, and any card right with low confidence */
+            st.fey = (i + 1) % 4 === 0 || (ok && st.conf === "low");
             if (ok) right++;
             if (st.conf === "high") {
               if (ok) sure.ok++;
@@ -15629,9 +15684,23 @@
             savePrefs();
           }
           function next() { i++; st = fresh(); paint(); }
+          /* Phase R-B: the hook field after the answer shows (the Feynman card takes its place when due), and the cue before answering */
+          function feyBox() {
+            return '<div class="x-hook"><p class="eyebrow">Optional · explain it simply</p><label for="q-fey">Explain it to a twelve-year-old in two sentences, or give an analogy</label>' +
+              '<textarea id="q-fey" class="x-tb" rows="3" maxlength="300"></textarea><div class="x-acts"><button type="button" class="start press" data-q="feysave">Save as my hook</button><button type="button" class="danger press" data-q="feyskip">Skip</button></div></div>';
+          }
+          function hookBox(id) {
+            if (st.fey) return feyBox();
+            return '<div class="x-hook"><label class="eyebrow" for="q-hook">Your hook</label><p class="dim">Add an image, analogy, or link to your own life that will bring this back</p>' +
+              '<textarea id="q-hook" class="x-tb" rows="2" maxlength="300">' + esc(Hooks.get(id)) + '</textarea><div class="x-acts"><button type="button" class="danger press" data-q="hooksave">Save</button></div></div>';
+          }
+          function cueBox(id) {
+            var h = Hooks.get(id); if (!h) return "";
+            return st.cue ? '<p class="x-hook__cue"><b>Your hook:</b> ' + esc(h) + "</p>" : '<div class="x-acts"><button type="button" class="danger press" data-q="cue">Need a cue? Show my hook</button></div>';
+          }
           el.className = "player"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Review queue");
           el.innerHTML = '<div class="player__in" style="max-width:40rem"><div class="player__top"><button type="button" class="iconbtn press" data-q="close" aria-label="Close review">✕</button>' +
-            '<span class="mark">' + (mode === "ahead" ? "Study ahead" : "Today’s queue") + '</span><span class="eyebrow" id="q-count"></span></div>' +
+            '<span class="mark">' + (mixMode ? "Mixed practice" : mode === "ahead" ? "Study ahead" : "Today’s queue") + '</span><span class="eyebrow" id="q-count"></span></div>' +
             '<div class="rail" aria-hidden="true">' + ids.map(function () { return "<span></span>"; }).join("") + '</div><div class="stage" id="q-stage" aria-live="polite"></div></div>';
           function paint() {
             var stage = $("#q-stage", el);
@@ -15659,7 +15728,7 @@
             } else if (c.kind === "q") {
               if (!st.opts) {
                 body += '<label class="dim" for="q-own">Answer in your own words before you see the options</label><textarea id="q-own" class="x-tb" rows="3">' + esc(st.typed) + "</textarea>" +
-                  '<div class="x-acts"><button type="button" class="start press" data-q="opts">Show options</button></div>';
+                  '<div class="x-acts"><button type="button" class="start press" data-q="opts">Show options</button></div>' + cueBox(ids[i]);
               } else {
                 body += (st.typed ? '<p class="dim">You wrote: ' + esc(st.typed) + "</p>" : "") + c.options.map(function (o, k) {
                   var cls = st.pick == null ? "" : k === c.answer ? " is-right" : k === st.pick ? " is-wrong" : "";
@@ -15670,16 +15739,17 @@
                   /* corrective feedback: the right option and its reason, never just "wrong" */
                   body += '<p class="why' + (ok ? "" : " is-bad") + '">' + (ok ? "" : "<b>The answer: " + esc(c.options[c.answer]) + ".</b> ") + esc(c.why) + "</p>" + banner +
                     '<p class="dim">' + (mode === "ahead" && ok ? "Study ahead: the schedule doesn’t change." : "Comes back " + inWords(Srs.every(e)) + ".") + "</p>" +
-                    '<div class="x-acts">' + nextBtn + (ok && mode !== "ahead" && st.rated !== "easy" ? '<button type="button" class="danger press" data-q="easy">Easy · ' + esc(inWordsEasy()) + "</button>" : "") + "</div>";
-                }
+                    hookBox(ids[i]) +
+                    '<div class="x-acts">' + nextBtn + (ok && mode !== "ahead" && st.rated !== "easy" && !st.cue ? '<button type="button" class="danger press" data-q="easy">Easy · ' + esc(inWordsEasy()) + "</button>" : "") + "</div>";
+                } else body += cueBox(ids[i]);
               }
             } else if (st.rated) {
-              body += '<p class="x-flash__a">' + esc(c.back) + "</p>" + banner + '<div class="x-acts">' + nextBtn + "</div>";
+              body += '<p class="x-flash__a">' + esc(c.back) + "</p>" + banner + hookBox(ids[i]) + '<div class="x-acts">' + nextBtn + "</div>";
             } else if (!st.checked) {
               body += st.cz
                 ? '<p class="x-flash__a">' + esc(st.cz.pre) + "<b>_____</b>" + esc(st.cz.post) + '</p><label class="dim" for="q-own">Type the missing word</label><input id="q-own" class="x-tb" type="text" autocomplete="off" spellcheck="false" value="' + esc(st.typed) + '">'
                 : '<label class="dim" for="q-own">Type your answer from memory</label><textarea id="q-own" class="x-tb" rows="3">' + esc(st.typed) + "</textarea>";
-              body += '<div class="x-acts"><button type="button" class="start press" data-q="check">Check</button></div>';
+              body += '<div class="x-acts"><button type="button" class="start press" data-q="check">Check</button></div>' + cueBox(ids[i]);
             } else {
               if (st.cz) {
                 var hit = norm(st.typed) === norm(st.cz.word);
@@ -15688,9 +15758,9 @@
               } else {
                 body += '<div class="x-cmp"><div class="x-cmp__you"><p class="eyebrow">You wrote</p><p>' + (st.typed ? esc(st.typed) : '<span class="dim">Nothing typed</span>') + '</p></div><div class="x-flash__a"><p class="eyebrow">Answer</p><p>' + esc(c.back) + "</p></div></div>";
               }
-              body += '<p class="dim">How well did you recall it?</p><div class="x-grade x-grade--4" role="group" aria-label="Rate your recall">' + RATES.map(function (r) {
+              body += '<p class="dim">How well did you recall it?</p><div class="x-grade x-grade--4" role="group" aria-label="Rate your recall">' + RATES.filter(function (r) { return !(st.cue && r[0] === "easy"); }).map(function (r) {
                 return '<button type="button" class="press' + (r[0] === "again" ? " is-miss" : r[0] === "good" ? " is-good" : "") + '" data-rate="' + r[0] + '">' + r[1] + "<small>" + esc(when(r[0])) + "</small></button>";
-              }).join("") + "</div>";
+              }).join("") + "</div>" + (st.cue ? '<p class="dim">You used your hook, so the top rating is Good.</p>' : "") + hookBox(ids[i]);
             }
             stage.innerHTML = '<article class="scard glass x-flash"><p class="eyebrow">' + cardKind(c) + " · " + esc(c.src) + "</p>" + body + "</article>";
             var f = $("[data-conf], #q-own, [data-rate=good], [data-q=next], .qopt", stage); if (f) f.focus({ preventScroll: true });
@@ -15706,8 +15776,13 @@
             var c = cardOf(ids[i]);
             if (t.dataset.conf && !st.conf) { st.conf = t.dataset.conf; return paint(); }
             if (a === "check" || a === "opts") { var fld = $("#q-own", el); st.typed = fld ? fld.value.trim() : ""; st[a === "check" ? "checked" : "opts"] = true; return paint(); }
-            if (t.dataset.rate && st.checked && !st.rated) { grade(t.dataset.rate); return st.illus ? paint() : next(); }
-            if (a === "easy" && st.rated && st.rated !== "again" && mode !== "ahead") {
+            /* Phase R-B hooks: the cue keeps what was typed; saving never grades */
+            if (a === "cue") { var fq = $("#q-own", el); if (fq) st.typed = fq.value; st.cue = true; return paint(); }
+            if (a === "hooksave") { var hf = $("#q-hook", el); Hooks.set(ids[i], hf ? hf.value : ""); return UI.toast(Hooks.get(ids[i]) ? "Hook saved" : "Hook cleared"); }
+            if (a === "feysave") { var ff = $("#q-fey", el), fv = ff ? hookClean(ff.value) : ""; if (!fv) return UI.toast("Write a sentence or two first, or Skip"); Hooks.set(ids[i], fv); st.fey = false; UI.toast("Saved as your hook"); return paint(); }
+            if (a === "feyskip") { st.fey = false; return paint(); }
+            if (t.dataset.rate && st.checked && !st.rated) { grade(st.cue && t.dataset.rate === "easy" ? "good" : t.dataset.rate); return st.illus || st.fey ? paint() : next(); }
+            if (a === "easy" && st.rated && st.rated !== "again" && mode !== "ahead" && !st.cue) {
               if (st.prev) prefs.srs[ids[i]] = st.prev; else delete prefs.srs[ids[i]];
               Srs.rate(ids[i], "easy", st.conf); st.rated = "easy"; savePrefs();
               return next();
@@ -15886,7 +15961,8 @@
               positions: JSON.parse(JSON.stringify(prefs.positions || {})),
               hints: Object.assign({}, prefs.hints || {}),
               mastery: masteryOut(),
-              kits: JSON.parse(JSON.stringify(prefs.kits || {}))
+              kits: JSON.parse(JSON.stringify(prefs.kits || {})),
+              hooks: JSON.parse(JSON.stringify(prefs.hooks || {}))
             };
           },
           encode: function (o) { var s = JSON.stringify(o); try { return btoa(unescape(encodeURIComponent(s))); } catch (e) { return s; } },
@@ -15917,8 +15993,10 @@
                 if (isFinite(c.lapses) && c.lapses >= 0) srs[k].lapses = c.lapses | 0;
                 if (c.conf === "low" || c.conf === "mid" || c.conf === "high") srs[k].conf = c.conf;
                 if (c.illus === true) srs[k].illus = true;
+                if (c.last === "right" || c.last === "wrong") srs[k].last = c.last;
               } });
             o.srs = srs;
+            o.hooks = Hooks.clean(o.hooks, cardOf);
             return o;
           },
           apply: function (o) {
@@ -15932,6 +16010,7 @@
             if (o.hints && typeof o.hints === "object") prefs.hints = o.hints;
             if (o.mastery && typeof o.mastery === "object") masteryIn(o.mastery);
             if (o.kits && typeof o.kits === "object") prefs.kits = o.kits;
+            if (o.hooks && typeof o.hooks === "object") prefs.hooks = o.hooks;
             if (pick(s.goal, GOALS)) prefs.goal = s.goal;
             if (typeof s.remind === "boolean") prefs.remind = s.remind;
             if (s.vb && typeof s.vb === "object") prefs.vb = s.vb;
