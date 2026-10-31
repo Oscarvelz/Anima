@@ -4905,6 +4905,212 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* PHASE 3q-4 · L17 Working Memory Theatre: the client at the end of a stressful first session hears the discharge plan. One manipulation (fast under stress vs chunked with a written card), a real recall task with lures, live words, challenge, reveal, therapy section, so what. Page-only 2D SVG; animates only while visible, stops on exit; reduced motion drops the shaking; stores nothing. */
+          {
+            id: "workingmemory", name: "Working Memory Theatre", kicker: "M4 · Working memory", hue: ["#b49cff", "#7fe9ff"], gallery: true, order: 5.8, dom: true,
+            idea: "Play a client at the end of a stressful first session. Hear the discharge plan, fast or chunked, then try to recall it. See how little fits on the mental workbench.",
+            see: "Plan steps appear on a small stage, one at a time with a ticking clock and a buzzing phone, or grouped under three headings with a written card. Then you pick what you remember.",
+            why: "Working memory holds only a few chunks at once, and stress shrinks it further. Chunking and writing things down make a plan fit.",
+            use: "Discharge plans, intake, psychoeducation, homework, handouts, and the counsellor’s own case notes.",
+            cap: "Predict how much of a plan a stressed client keeps. Then choose how it’s delivered, run it, and recall what you can.",
+            /* id, text, group index (Today, This week, People to call) */
+            IT: [["probation", "Call probation officer", 2], ["meds", "Pick up medication", 0], ["group", "Group on Tuesday evening", 1], ["idcard", "Bring ID", 0], ["screen", "Drug screen before noon", 0], ["sponsor", "Call sponsor", 2], ["release", "Sign release form", 1]],
+            LU: [["fees", "Pay court fees"], ["doctor", "Doctor on Friday"], ["landlord", "Call landlord"]],
+            flat: function (box, ctl) {
+              var sc = this, IT = sc.IT, LU = sc.LU, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var GR = ["Today", "This week", "People to call"];
+              var MODES = [["fast", "All at once, spoken fast"], ["chunk", "Chunked into three groups, with a written card"]];
+              var PRED = [["all", "Nearly all of them"], ["half", "About half, or fewer"], ["first", "Only the first one"]];
+              var CH = [["loud", "Say it again louder"], ["chunk", "Chunk it, write it, and ask the client to say it back"], ["detail", "Add more detail so nothing is missed"]];
+              var CFB = {
+                loud: "Not quite. Louder adds pressure, not room. The workbench stays the same size, and a raised voice can add the stress that shrinks it.",
+                chunk: "Yes. Chunking fits the plan into a few pieces, writing moves it off the workbench onto paper, and teach-back shows what actually landed while there is still time to fix it.",
+                detail: "Not quite. More detail means more to hold. The key steps get buried, and the middle of the list drops out first."
+              };
+              var FAST = { lead: 0.5, slot: 0.85, on: 0.6 }, CHK = { lead: 0.5, slot: 3.6, step: 0.45 };
+              var fresh = function () { return { pred: null, mode: null, phase: null, ran: false, ranMode: null, pool: [], picks: {}, chal: null }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function sect(title, sub, body) { return '<section class="x-lens__box glass" aria-label="' + esc(title) + '"><h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function btn(act, v, label, on, dis) { return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + !!on + '"' + (dis ? " disabled" : "") + ">" + esc(label) + "</button>"; }
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function stage(label) {
+                return '<svg data-stage="run" viewBox="0 0 360 184" role="img" aria-label="' + esc(label) + '" style="display:block;width:100%;height:auto;max-height:280px">' +
+                  '<g aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">' +
+                  '<rect x="50" y="26" width="260" height="128" rx="12" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>' +
+                  '<g data-k="clock" opacity="0"><g transform="translate(26 50)" stroke="var(--gold)"><circle r="13"/><path d="M0 0V-8M0 0L6 3M-5 -17H5"/></g></g>' +
+                  '<g data-k="phone" opacity="0"><g transform="translate(334 50)" stroke="var(--coral)"><rect x="-7" y="-13" width="14" height="26" rx="3"/><path d="M-2 8H2"/><path data-k="buzz" d="M-13 -6q-3 6 0 12M13 -6q3 6 0 12"/></g></g>' +
+                  '<g data-k="paper" opacity="0"><g transform="translate(334 50)" stroke="var(--primary)"><path d="M-10 -14H5L10 -9V14H-10Z"/><path d="M5 -14V-9H10M-6 -4H6M-6 1H6M-6 6H2"/></g></g>' +
+                  '</g><g fill="var(--text)" style="font:14px var(--sans)" text-anchor="middle">' +
+                  '<text data-k="h" x="180" y="56" fill="var(--primary)" style="font:600 13px var(--sans)"></text>' +
+                  '<text data-k="l0" x="180" y="88"></text><text data-k="l1" x="180" y="110"></text><text data-k="l2" x="180" y="132"></text>' +
+                  '<text data-k="one" x="180" y="96" style="font:600 17px var(--sans)"></text></g>' +
+                  '<text data-k="cap" x="180" y="176" fill="var(--dim)" text-anchor="middle" style="font:12px var(--sans)"></text></svg>';
+              }
+              function set(g, k, t) { var el = $('[data-k="' + k + '"]', g); if (el && el.textContent !== t) el.textContent = t; }
+              function op(g, k, o, tr) { var el = $('[data-k="' + k + '"]', g); if (!el) return; el.setAttribute("opacity", o); el.setAttribute("transform", tr || ""); }
+              function loadWord(mode, n) { return mode === "chunk" ? "light (a few labelled chunks, one card)" : n <= 2 ? "light" : n <= 4 ? "heavy" : "overloaded"; }
+              function render(a) {
+                var g = a.svg, t = a.t, m = a.mode, now, load, said = "";
+                ["h", "l0", "l1", "l2", "one"].forEach(function (k) { set(g, k, ""); });
+                if (m === "fast") {
+                  var k = Math.floor((t - FAST.lead) / FAST.slot), w = t - FAST.lead - k * FAST.slot, n = t < FAST.lead ? 0 : Math.min(IT.length, k + 1);
+                  if (t >= FAST.lead && k < IT.length && w < FAST.on) { said = IT[k][1]; set(g, "one", said); }
+                  var sh = !RM && t < a.dur, buzz = sh && Math.floor(t * 1.6) % 2 === 0;
+                  op(g, "clock", "1", sh ? "translate(" + (Math.sin(t * 47) * 1.6).toFixed(2) + " 0)" : "");
+                  op(g, "phone", "1", buzz ? "translate(" + (Math.sin(t * 71) * 2.2).toFixed(2) + " 0)" : "");
+                  op(g, "buzz", RM || buzz ? "1" : "0.25"); op(g, "paper", "0");
+                  set(g, "cap", "Spoken fast. The clock ticks, the phone buzzes.");
+                  now = t < FAST.lead ? "The counsellor starts talking" : "Hearing the plan, one step after another"; load = loadWord("fast", n);
+                } else {
+                  var gi = Math.min(GR.length - 1, Math.max(0, Math.floor((t - CHK.lead) / CHK.slot))), wi = t - CHK.lead - gi * CHK.slot;
+                  if (t >= CHK.lead) {
+                    set(g, "h", GR[gi]);
+                    IT.filter(function (r) { return r[2] === gi; }).forEach(function (r, j) { if (wi >= j * CHK.step) { set(g, "l" + j, r[1]); said = r[1]; } });
+                  }
+                  op(g, "clock", "0"); op(g, "phone", "0"); op(g, "paper", "1");
+                  set(g, "cap", "Chunked and labelled. A written card goes home too.");
+                  now = t < CHK.lead ? "The counsellor slows down" : "Group: " + GR[gi]; load = loadWord("chunk");
+                }
+                if (a.out) { if (a.out[0] && a.out[0].textContent !== now) a.out[0].textContent = now; if (a.out[1] && a.out[1].textContent !== load) a.out[1].textContent = load; }
+                if (said && said !== a.said) { a.said = said; live.textContent = said; }
+              }
+              function still(g, mode) {
+                if (!g) return;
+                ["h", "l0", "l1", "l2", "one"].forEach(function (k) { set(g, k, ""); });
+                op(g, "clock", mode === "fast" ? "1" : "0"); op(g, "phone", mode === "fast" ? "1" : "0"); op(g, "paper", mode === "chunk" ? "1" : "0");
+                if (S.phase) { set(g, "h", "The counsellor has finished"); set(g, "l1", "Now: what do you still have?"); set(g, "cap", "Recall below, without looking back."); }
+                else { set(g, "h", "Your discharge plan"); set(g, "l1", "Seven steps, at the end of a long session"); set(g, "cap", mode ? "Press Run when ready." : "Choose how it’s delivered."); }
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.t += Math.min(0.05, (now - A.last) / 1000);
+                A.last = now;
+                if (A.t >= A.dur) { A = null; finish(); return; }
+                render(A); kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+              function result() {
+                var held = IT.filter(function (r) { return S.picks[r[0]]; }), lures = LU.filter(function (r) { return S.picks[r[0]]; });
+                var miss = IT.map(function (r, k) { return S.picks[r[0]] ? -1 : k; }).filter(function (k) { return k >= 0; });
+                var mid = miss.filter(function (k) { return k > 0 && k < IT.length - 1; }).length, edges = S.picks[IT[0][0]] || S.picks[IT[IT.length - 1][0]];
+                var head = held.length >= 6 ? "You held most of it." : held.length >= 3 ? "You held about half." : "You held only a little of it.";
+                var slip = [];
+                if (!miss.length) slip.push("nothing from the plan");
+                else if (mid && edges && mid === miss.length) slip.push("middle items");
+                else slip.push("items from across the list");
+                if (lures.length) slip.push("lures crept in");
+                var know = S.ranMode === "fast"
+                  ? (held.length >= 6 ? "You held a lot, but a stressed client in crisis often won’t. Fast delivery leaves no card to check later, and a missed step will look like noncompliance." : "Delivered fast under stress, the plan overloaded the workbench. A missed appointment next week would be overload, not resistance.")
+                  : (held.length >= 6 ? "Chunked and written, the plan fit. The card goes home, so whatever slips can be found again." : "Even chunked, some steps slipped. The written card covers them, and asking the client to say it back would show the gap now.");
+                return { head: head, lure: lures.length ? "A lure slipped in — memory filled a gap with something plausible." : "", slip: slip.join(" · "), know: know, lures: lures };
+              }
+              function paint() {
+                var a = doc.activeElement, keep = a && wrap.contains(a) && a.dataset && a.dataset.act ? '[data-act="' + a.dataset.act + '"]' + (a.dataset.v != null ? '[data-v="' + a.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var showing = S.phase === "show", done = S.phase === "done", R = done ? result() : null;
+                var h = sect("Predict first", "A counsellor gives a stressed client seven plan steps out loud at the end of a session. How many will the client still have an hour later?",
+                  '<div class="x-lens__row" role="group" aria-label="Your prediction">' + PRED.map(function (o) { return btn("pred", o[0], o[1], S.pred === o[0], !!S.pred); }).join("") + "</div>" +
+                  (S.pred ? '<p class="x-lens__p" aria-live="polite"><b>' + (S.pred === "half" ? "Right: about half, or fewer." : "Not quite: about half, or fewer.") + "</b> People forget much of what clinicians tell them, and remember it less accurately when anxious (Kessels 2003). Now you are the client. Try it below.</p>" : ""));
+                h += sect("You are the client", S.pred ? "End of a stressful first session. The counsellor gives the discharge plan. Choose how it’s delivered, then press Run. Watch closely: you’ll be asked to recall it." : "Make your prediction to start.",
+                  '<p class="x-lens__p"><b>How it’s delivered</b></p><div class="x-lens__row" role="group" aria-label="How it’s delivered">' + MODES.map(function (m) { return btn("mode", m[0], m[1], S.mode === m[0], !S.pred || showing); }).join("") +
+                  '<button type="button" class="start press x-lens__go" data-act="run"' + (S.pred && S.mode && !showing ? "" : " disabled") + ">" + (S.ran ? "Run again" : "Run") + "</button></div>" +
+                  stage(showing ? "The plan is being delivered, " + (S.mode === "fast" ? "one step at a time, fast, with a ticking clock and a buzzing phone." : "in three labelled groups with a written card.") : S.phase ? "The counsellor has finished. Recall below." : "A small stage where the plan will appear.") +
+                  (S.phase ? '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    '<li><b>Now:</b> <span data-o="0">' + (showing ? "…" : done ? "Recall finished" : "Plan given. Tap what you remember below.") + "</span></li>" +
+                    '<li><b>Load on working memory:</b> <span data-o="1">' + (showing ? "…" : loadWord(S.ranMode, IT.length)) + "</span></li>" +
+                    "<li><b>What slipped:</b> " + (done ? esc(R.slip) : "…") + "</li>" +
+                    "<li><b>What the counsellor should know:</b> " + (done ? esc(R.know) : "…") + "</li></ul>" : ""));
+                if (S.phase === "recall" || done) h += sect("Recall", done ? "Here is what you picked. Plan steps are marked; lures were never said." : "Tap every step you remember. Some of these were never in the plan.",
+                  '<div class="x-lens__row" role="group" aria-label="Steps you remember">' + S.pool.map(function (r) {
+                    var lure = LU.some(function (l) { return l[0] === r[0]; }), lab = done ? r[1] + (lure ? " · never said" : S.picks[r[0]] ? " · held" : " · slipped") : r[1];
+                    return btn("pick", r[0], lab, !!S.picks[r[0]], done);
+                  }).join("") + "</div>" +
+                  (done ? '<p class="x-lens__p" aria-live="polite"><b>' + esc(R.head) + "</b> " + (R.lure ? esc(R.lure) + " (" + R.lures.map(function (l) { return "“" + esc(l[1]) + "”"; }).join(", ") + ")" : "No lures crept in.") + (S.ranMode === "fast" ? " Try the chunked delivery with Run again to compare." : " Try the fast delivery with Run again to compare.") + "</p>"
+                    : '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="recall">That’s all I remember</button></div>'));
+                if (S.ran) h += sect("Challenge", "Which change would help most next time?",
+                  '<div class="x-lens__row" role="group" aria-label="Which change would help most">' + CH.map(function (o) { return btn("chal", o[0], o[1], S.chal === o[0]); }).join("") + "</div>" +
+                  (S.chal ? '<p class="x-lens__p" aria-live="polite">' + esc(CFB[S.chal]) + "</p>" : ""));
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="Reveal"><h3 class="x-lens__h">Reveal<small>Working memory is a small mental workbench</small></h3>' +
+                  '<p class="x-lens__p"><b>The workbench.</b> Working memory is where you hold and work on what you need right now. Baddeley and Hitch (1974) described it as several parts working together: a store for sounds and words, a sketchpad for images and places, and a central executive that steers attention. Baddeley (2000) added an episodic buffer that binds these into one scene and links them to long-term memory.</p>' +
+                  '<p class="x-lens__p"><b>It holds only a few chunks.</b> Miller (1956) put the span at seven, plus or minus two. Cowan (2001) revised it downward to about four chunks once rehearsal and grouping are stripped out. That the bench is small is robust' + tag("", "Robust") + " the exact number is contested" + tag(" x-ev--c", "Contested") + "</p>" +
+                  '<p class="x-lens__p"><b>Chunking extends it.</b> Seven loose steps become three labelled groups, and each group takes one slot. A written card moves the plan off the bench entirely.</p>' +
+                  '<p class="x-lens__p"><b>Stress and anxiety tax it.</b> Worry competes for the same attentional control the plan needs, so an anxious mind has less bench to spare (Eysenck et al. 2007, attentional control theory).</p>' +
+                  '<p class="x-lens__p"><b>Brain training doesn’t widen the bench.</b> Training games improve the trained task, but the gains rarely transfer to everyday memory or thinking (Melby-Lervåg &amp; Hulme 2013; Simons et al. 2016).</p>' +
+                  '<p class="x-mr__status">Limited capacity' + tag("", "Robust") + "· Exact capacity number" + tag(" x-ev--c", "Contested") + "· Far transfer from brain training" + tag(" x-ev--d", "Debunked or revised") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Baddeley &amp; Hitch", 1974, "experiments and model", "Proposed working memory as a system of cooperating parts rather than a single short-term store.", tag("", "Robust")) +
+                  ref("Cowan", 2001, "review", "Capacity is about four chunks, not seven, once rehearsal and grouping are controlled.", tag(" x-ev--c", "Contested")) +
+                  ref("Kessels", 2003, "review", "Patients forget much of what clinicians tell them, and recall it less accurately when anxious.", tag("", "Robust")) +
+                  ref("Melby-Lervåg &amp; Hulme", 2013, "meta-analysis", "Working memory training improves the trained tasks, with little lasting transfer to other abilities.", tag(" x-ev--d", "Debunked or revised")) +
+                  ref("Schillinger et al.", 2003, "observational study", "Among patients with diabetes and limited health literacy, checking understanding by having patients say it back was linked to better outcomes, yet it was rarely done.", tag("", "Robust")) +
+                  "</ol></section></section>" +
+                  '<section class="x-lens__box glass" aria-label="Where this becomes a problem in therapy"><h3 class="x-lens__h">Where this becomes a problem in therapy<small>A missed step is often a full workbench</small></h3>' +
+                  '<p class="x-lens__p"><b>Clients forget much of what we say.</b> People forget much of what clinicians tell them, and remember it less accurately when anxious (Kessels 2003)' + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p"><b>Some clients have even less to spare.</b> People in crisis, in early recovery or withdrawal, short on sleep, with trauma activated, or living with ADHD or a brain injury have even less workbench free.</p>' +
+                  '<p class="x-lens__p"><b>Overload looks like resistance.</b> A missed appointment or skipped homework can read as resistance or noncompliance when it is overload.</p>' +
+                  '<p class="x-lens__p"><b>Our formats overflow the bench.</b> Long intakes, rapid psychoeducation, dense handouts and jargon all exceed capacity.</p>' +
+                  '<p class="x-lens__p"><b>The counsellor’s bench is small too.</b> Notes written from memory after a long session drift.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Give one to three key points per session.</li>" +
+                  "<li>Chunk and label: Today, This week, People to call.</li>" +
+                  "<li>Write it down in plain words.</li>" +
+                  "<li>Use teach-back: “Tell me in your own words what you’ll do tomorrow” (Schillinger et al. 2003).</li>" +
+                  "<li>Repeat the plan at the start of the next session.</li>" +
+                  "<li>Reduce stress in the room before giving instructions.</li>" +
+                  "<li>Write your notes soon after the session.</li></ul></section>" +
+                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">A forgotten plan is usually an overloaded workbench, not a lack of motivation — give less, chunk it, write it, and have the client say it back.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m4.2", "Working memory") + lessonBtn("m4.1", "Encoding, storage and retrieval") + "</div></section>";
+                main.innerHTML = h;
+                var g = $('[data-stage="run"]', main);
+                if (showing && g) {
+                  A = { svg: g, mode: S.ranMode, t: 0, last: null, said: "", dur: S.ranMode === "fast" ? FAST.lead + IT.length * FAST.slot : CHK.lead + GR.length * CHK.slot, out: [0, 1].map(function (k) { return $('[data-o="' + k + '"]', main); }) };
+                  render(A); kick();
+                } else still(g, S.phase ? S.ranMode : S.mode);
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function finish() { S.phase = "recall"; S.picks = {}; S.pool = shuffle(IT.concat(LU)); paint(); live.textContent = "The counsellor has finished. Tap every step you remember, then press That’s all I remember."; }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "half" ? "Right" : "Not quite") + ": about half, or fewer. Choose how the plan is delivered."; }
+                else if (a === "mode") { if (!S.pred || S.phase === "show") return; S.mode = v; live.textContent = (v === "fast" ? "All at once, spoken fast" : "Chunked into three groups, with a written card") + ". Press Run."; }
+                else if (a === "run") { if (!S.pred || !S.mode || S.phase === "show") return; S.phase = "show"; S.ranMode = S.mode; S.picks = {}; S.pool = []; live.textContent = "The counsellor starts giving the plan."; }
+                else if (a === "pick") { if (S.phase !== "recall") return; if (S.picks[v]) delete S.picks[v]; else S.picks[v] = true; }
+                else if (a === "recall") { if (S.phase !== "recall") return; S.phase = "done"; S.ran = true; var R = result(); live.textContent = R.head + " " + R.lure + " What slipped: " + R.slip + ". " + R.know; }
+                else if (a === "chal") { if (!S.ran) return; S.chal = v; live.textContent = CFB[v]; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && !b.disabled) act(b);
+              });
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
