@@ -6179,6 +6179,247 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* L22 One Event, Five Lenses: the same night-time footsteps run through five emotion theories; each lens reorders and relights an Event · Body · Meaning · Feeling strip. Saves nothing. */
+          {
+            id: "fivelenses", name: "One Event, Five Lenses", kicker: "M7 · Emotion", hue: ["#c4b0ff", "#ff9aa8"], gallery: true, order: 6.2, dom: true,
+            idea: "One frightening moment, five theories of emotion. Each puts a different link first: the body, the brain, a label, a judgment or a prediction.",
+            see: "A person walking at night hears fast footsteps behind them. Below, four tiles — Event, Body, Meaning, Feeling — reorder and relight for each lens.",
+            why: "Each theory catches something real and misses something else. None of them is the event itself.",
+            use: "Choosing where to start with a client: body, meaning or context, and helping them find their own words.",
+            cap: "Predict what comes first. Then look through five lenses, test them on new events, and see where one lens goes wrong in therapy.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["Predict", "Five lenses", "Test them", "Reveal"], WORD = ["one", "two", "three", "four"];
+              var PRED = [["body", "The body reacts", false], ["feel", "The feeling of fear", false], ["thought", "A thought: “I’m in danger”", false], ["each", "Each theory answers differently", true]];
+              var TL = { E: ["Event", "#a9acd6"], B: ["Body", "#ff9aa8"], M: ["Meaning", "#f5c76b"], F: ["Feeling", "#c4b0ff"] };
+              /* [name, year, sequence of columns, what matters most, gets right, struggles, status class, status] */
+              var LENS = [
+                ["James–Lange", "James 1884", [["E"], ["B"], ["F"]], "The body moves first; the feeling is the mind noticing it. We don’t run because we’re afraid — we’re afraid because we run.", "Body signals really do shape what we feel.", "Body patterns overlap a lot across emotions, so the body alone can’t say which one this is.", " x-ev--c", "Contested"],
+                ["Cannon–Bard", "Cannon 1927", [["E"], ["B", "F"]], "The brain fires the body and the feeling together, side by side; neither causes the other.", "Feelings can arrive fast, with no time to read the body first.", "Underplays how much body feedback shapes and colours a feeling.", " x-ev--d", "Debunked or revised"],
+                ["Schachter–Singer", "Schachter & Singer 1962", [["E"], ["B"], ["M"], ["F"]], "Arousal plus a label: the body revs up, and the context tells you what to call it.", "Context changes how we read the same arousal.", "The key study replicated poorly; arousal is not as blank as the theory needs.", " x-ev--c", "Contested"],
+                ["Appraisal", "Lazarus 1991", [["E"], ["M"], ["B", "F"]], "Meaning first: is this a threat to me, and can I cope? That judgment shapes body and feeling.", "Explains why the same event frightens one person and not another.", "Some reactions outrun thought — the Zajonc debate on whether feeling needs thinking.", "", "Robust as a family"],
+                ["Constructed", "Barrett 2017", [["M"], ["E", "B"], ["F"]], "The brain predicts from past experience and emotion concepts, then builds a feeling from body and context.", "Emotion categories vary by person and by culture.", "Hard to test directly; critics defend basic emotions shared across people.", " x-ev--c", "Contested"]
+              ];
+              var EV = [
+                ["An unexpected call from a probation officer", [
+                  "Heart pounds and stomach drops; feeling that pounding is the dread.",
+                  "The brain fires the jolt and the dread at the same moment.",
+                  "Arousal hits; seeing who’s calling, they label it fear, not excitement.",
+                  "“Am I in trouble? Can I handle this?” — that judgment makes it dread.",
+                  "Past calls like this predict trouble, so dread is built before they answer."]],
+                ["A surprise compliment in group", [
+                  "The face flushes and warmth spreads; noticing that warmth is the pleasure.",
+                  "Flush and pleasure arrive together, sparked by one brain signal.",
+                  "A rush of arousal; with others smiling, they read it as pride, not embarrassment.",
+                  "“Do they mean it? Is it safe to take in?” That judgment decides pride or unease.",
+                  "With few past compliments to draw on, the brain may build it as awkwardness."]],
+                ["A craving when passing an old corner", [
+                  "Mouth waters, heart quickens; feeling that pull in the body is the craving.",
+                  "The corner sets off the body’s pull and the urge at once, side by side.",
+                  "A jolt of arousal; this corner tells them it must be wanting to use.",
+                  "“Just once” versus “I’ve got a plan” — the judgment shapes the urge.",
+                  "Years of using here mean the brain predicts the high and builds craving on arrival."]]
+              ];
+              var WHY = ["James–Lange: body first, the feeling reads it.", "Cannon–Bard: body and feeling together, from the brain.", "Schachter–Singer: arousal, then a label from context.", "Appraisal: the meaning comes first.", "Constructed: a prediction from the past builds the feeling."];
+              function opts(i) { return [i, (i + 1) % 5, (i + 3) % 5]; }
+              var POrd = optOrder(PRED.length), OO = EV.map(function () { return LENS.map(function () { return optOrder(3); }); });
+              var fresh = function () { return { pred: null, lens: -1, seen: {}, ev: 0, pk: {}, chk: {}, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false, P = {}, ph = 0;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) {
+                return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) {
+                  return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>";
+                }).join("") + "</p>";
+              }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of four · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) {
+                return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") +
+                  "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>";
+              }
+              function goStep(n) {
+                var s = $('[data-step="' + n + '"]', main); if (!s) return;
+                s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" });
+                var f = s.querySelector("button:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true });
+              }
+              function cnt(o) { return Object.keys(o).filter(function (k) { return o[k]; }).length; }
+              function T(x, y, s, fill, anchor, wt, size) { return '<text x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + ' style="fill:' + fill + ";font:" + (wt || 500) + " " + (size || 12) + 'px var(--sans)">' + esc(s) + "</text>"; }
+              /* tile targets: x,y centre and opacity for the current lens */
+              function targets() {
+                var L = S.lens >= 0 ? LENS[S.lens] : null, cols = L ? L[2].slice() : [["E"], ["B"], ["M"], ["F"]], used = {}, out = {}, k, j;
+                cols.forEach(function (c) { c.forEach(function (t) { used[t] = 1; }); });
+                var dim = ["E", "B", "M", "F"].filter(function (t) { return !used[t]; });
+                var nc = cols.length + (dim.length ? 1 : 0), sw = 340 / nc;
+                for (k = 0; k < cols.length; k++) for (j = 0; j < cols[k].length; j++) out[cols[k][j]] = { x: 10 + sw * (k + 0.5), y: cols[k].length > 1 ? 146 + j * 40 : 166, o: 1 };
+                dim.forEach(function (t, j) { out[t] = { x: 10 + sw * (nc - 0.5), y: dim.length > 1 ? 146 + j * 40 : 166, o: 0.3 }; });
+                return { t: out, cols: cols, sw: sw, dim: dim.length };
+              }
+              function stageSVG() {
+                var G = targets(), L = S.lens >= 0 ? LENS[S.lens] : null, s = "", i, k;
+                var lbl = "A person walks at night; fast footsteps come from behind. " + (L ? L[0] + " order: " + G.cols.map(function (c) { return c.map(function (t) { return TL[t][0]; }).join(" and "); }).join(", then ") + "." : "Event, Body, Meaning and Feeling, before any lens.");
+                s += '<svg class="x-mem__svg" viewBox="0 0 360 226" role="img" aria-label="' + esc(lbl) + '" style="background:#1b1d33">';
+                s += '<path d="M0 96H360" stroke="#4a4d78" stroke-width="2"/><circle cx="330" cy="22" r="9" fill="#eef0ff" opacity="0.8"/>';
+                for (i = 0; i < 6; i++) {
+                  var lit = RM ? 0.8 : 0.25 + 0.75 * Math.max(0, 1 - Math.abs(((ph * 3) % 6) - i) / 1.5);
+                  s += '<ellipse cx="' + (30 + i * 30) + '" cy="' + (i % 2 ? 90 : 84) + '" rx="7" ry="3.5" fill="#ff9aa8" opacity="' + lit.toFixed(2) + '"/>';
+                }
+                s += T(105, 70, "fast footsteps", "#ff9aa8", "middle", 600);
+                s += '<g transform="translate(270 94)"><path d="M-5 -26L-10 0M5 -26L10 0" stroke="#c4b0ff" stroke-width="4" stroke-linecap="round"/><rect x="-9" y="-58" width="18" height="34" rx="7" fill="#c4b0ff"/><circle cx="-2" cy="-68" r="9" fill="#eef0ff"/></g>';
+                s += T(270, 114, "walking home", "#eef0ff", "middle", 600);
+                s += '<path d="M0 124H360" stroke="#4a4d78" stroke-width="1"/>';
+                if (L) for (k = 0; k < G.cols.length - 1; k++) { var x1 = 10 + G.sw * (k + 0.5) + 30, x2 = 10 + G.sw * (k + 1.5) - 30; if (x2 - x1 > 4) s += '<path d="M' + x1.toFixed(1) + " 166H" + (x2 - 3).toFixed(1) + '" stroke="#eef0ff" stroke-width="2"/><path d="M' + (x2 - 5).toFixed(1) + " 161L" + x2.toFixed(1) + " 166L" + (x2 - 5).toFixed(1) + ' 171" fill="none" stroke="#eef0ff" stroke-width="2"/>'; }
+                ["E", "B", "M", "F"].forEach(function (t) {
+                  var p = P[t] || G.t[t];
+                  s += '<g opacity="' + p.o.toFixed(2) + '"><rect x="' + (p.x - 30).toFixed(1) + '" y="' + (p.y - 15).toFixed(1) + '" width="60" height="30" rx="8" fill="' + TL[t][1] + '"/>' + T(p.x.toFixed(1), (p.y + 4).toFixed(1), TL[t][0], "#1b1d33", "middle", 600) + "</g>";
+                });
+                if (L && G.dim) s += T(10 + G.sw * ((G.cols.length + 1) - 0.5), 216, "set aside", "#a9acd6", "middle");
+                if (L && L[2].some(function (c) { return c.length > 1; })) s += T(180, 216, "stacked tiles happen together", "#a9acd6", "middle");
+                return s + "</svg>";
+              }
+              function render() { var g = $('[data-k="stage"]', main); if (g) g.innerHTML = stageSVG(); }
+              function snap() { var G = targets(); ["E", "B", "M", "F"].forEach(function (t) { P[t] = { x: G.t[t].x, y: G.t[t].y, o: G.t[t].o }; }); }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                var dt = A.last != null ? Math.min(0.05, (now - A.last) / 1000) : 0; A.last = now; A.left -= dt; ph += dt;
+                var G = targets(), f = Math.min(1, dt * 6), done = true;
+                ["E", "B", "M", "F"].forEach(function (t) {
+                  var p = P[t], q = G.t[t]; p.x += (q.x - p.x) * f; p.y += (q.y - p.y) * f; p.o += (q.o - p.o) * f;
+                  if (Math.abs(q.x - p.x) > 0.3 || Math.abs(q.y - p.y) > 0.3) done = false;
+                });
+                if (done && A.left <= 0) { snap(); render(); A = null; return; }
+                render(); kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function play() { if (RM) { snap(); render(); return; } A = { last: null, left: 2.4 }; kick(); }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") + (fa.dataset.c != null ? '[data-c="' + fa.dataset.c + '"]' : "") : null;
+                halt();
+                var seenAll = cnt(S.seen) === LENS.length, allDone = !!S.chk[EV.length - 1];
+                var n = !S.pred ? 0 : !seenAll ? 1 : !allDone ? 2 : 3, L = S.lens >= 0 ? LENS[S.lens] : null;
+                var h = trail(n) + msect("Predict first", "Walking home at night, a person hears fast footsteps behind them. What comes first?",
+                  '<div class="x-lens__row x-mem__opts" role="group" aria-label="Your prediction">' + POrd.map(function (k, d) {
+                    var o = PRED[optPick(POrd, d)], on = S.pred === o[0];
+                    return '<button type="button" class="x-lens__b press" data-act="pred" data-v="' + d + '" aria-pressed="' + on + '"' + (S.pred ? " disabled" : "") + ' style="min-height:48px">' + esc(o[1]) + (S.pred && o[2] ? " · best answer" : "") + "</button>" +
+                      (on ? '<p class="x-lens__p x-mem__fb" aria-live="polite"><b>' + (o[2] ? "Right." : "Not quite — but that is one real theory.") + "</b> Psychology has no single answer. James–Lange puts the body first; Cannon–Bard has body and feeling fire together; Schachter–Singer adds a label from context; appraisal puts the meaning first; constructed emotion starts with a prediction from past experience. Whichever you picked is probably the lens you already use. Try all five below.</p>" : "");
+                  }).join("") + "</div>" + (S.pred && n === 1 ? next(2) : ""), 1);
+                h += msect("Look through five lenses", !S.pred ? "Make your prediction above first." : "Tap each lens. The tiles reorder to show what that theory puts first.",
+                  (S.pred ? '<div class="x-lens__row" role="group" aria-label="Lenses">' + LENS.map(function (l, i) {
+                    var on = S.lens === i;
+                    return '<button type="button" class="x-lens__b press" data-act="lens" data-v="' + i + '" aria-pressed="' + on + '" style="flex:1 1 9rem;min-height:56px;text-align:left' + (on ? ";border-color:#c4b0ff" : "") + '"><b>' + esc(l[0]) + "</b><br><small>" + esc(l[1]) + (S.seen[i] && !on ? " · seen" : "") + "</small></button>";
+                  }).join("") + "</div>" : "") +
+                  '<div data-k="stage">' + stageSVG() + "</div>" +
+                  (L ? '<div class="x-lens__p x-mem__fb" aria-live="polite"><p class="x-lens__p" style="margin:0"><b>What matters most:</b> ' + esc(L[3]) + '</p><p class="x-lens__p" style="margin:6px 0 0"><b>Gets right:</b> ' + esc(L[4]) + '</p><p class="x-lens__p" style="margin:6px 0 0"><b>Struggles:</b> ' + esc(L[5]) + '</p><p class="x-mr__status" style="margin:6px 0 0">' + esc(L[1]) + tag(L[6], L[7]) + "</p></div>" : "") +
+                  (S.pred && !seenAll ? '<p class="fineprint" style="margin:0">Look through all five lenses to unlock the test.</p>' : "") +
+                  (seenAll && n === 2 && !cnt(S.pk) ? next(3) : ""), 2);
+                if (seenAll) {
+                  var e = S.ev, E = EV[e], ck = !!S.chk[e], ready = LENS.every(function (l, i) { return S.pk[e + "-" + i] != null; });
+                  var body = '<p class="x-lens__p" style="font-size:15px"><b>Event ' + WORD[e] + " of three:</b> " + esc(E[0]) + ".</p>" + LENS.map(function (l, i) {
+                    var key = e + "-" + i, pick = S.pk[key], ord = OO[e][i], O = opts(i);
+                    return '<div style="display:grid;gap:6px"><p class="x-lens__p"><b>' + esc(l[0]) + "</b> would say…</p>" + '<div class="x-lens__row x-mem__opts" role="group" aria-label="' + esc(l[0]) + '">' + ord.map(function (kk, d) {
+                      var li = O[optPick(ord, d)], on = pick === li;
+                      return '<button type="button" class="x-lens__b press" data-act="pick" data-c="' + i + '" data-v="' + d + '" aria-pressed="' + on + '"' + (ck ? " disabled" : "") + ' style="flex:1 1 12rem;min-height:48px;text-align:left' + (on ? ";border-color:#c4b0ff" : "") + '">' + esc(E[1][li]) + (ck && li === i ? " · best answer" : "") + "</button>";
+                    }).join("") + "</div>" + (ck ? '<p class="x-lens__p x-mem__fb"><b>' + (pick === i ? "Right." : "Not quite.") + "</b> " + esc(WHY[i]) + "</p>" : "") + "</div>";
+                  }).join("");
+                  body += ck ? (e < EV.length - 1 ? '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="nev" style="min-height:52px">Next event</button></div>'
+                      : '<p class="x-lens__take">Same event, five accounts — none of them is the event itself.</p>' + (n === 3 ? next(4) : ""))
+                    : '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="chk" style="min-height:52px"' + (ready ? "" : " disabled") + ">Check my answers</button></div>";
+                  h += msect("Predict before you slide", "For each lens, pick the story that lens would tell. Then check.", body, 3);
+                }
+                h += det("reveal", "Reveal", "A century-long argument about what comes first · readable any time",
+                  '<p class="x-lens__p"><b>Body first.</b> William James argued that we feel afraid because we notice our body reacting (James 1884).</p>' +
+                  '<p class="x-lens__p"><b>The brain pushes back.</b> Walter Cannon showed that body changes are slow and similar across emotions, and proposed that the brain triggers body and feeling together (Cannon 1927).</p>' +
+                  '<p class="x-lens__p"><b>Arousal plus a label.</b> Schachter and Singer suggested that we read general arousal through the situation around us (Schachter & Singer 1962). Later attempts to repeat their key study had mixed results.</p>' +
+                  '<p class="x-lens__p"><b>Meaning matters.</b> Appraisal theory put judgments about threat and coping at the centre (Lazarus 1991). Robert Zajonc argued that some feelings come before any thought, and the debate shaped the field.</p>' +
+                  '<p class="x-lens__p"><b>Built, not triggered.</b> Constructed emotion theory says the brain builds emotions from predictions, body signals and learned concepts (Barrett 2017). Defenders of basic emotions still dispute it.</p>' +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("James", 1884, "theoretical essay", "“What is an emotion?” The feeling is the perception of bodily change.", tag(" x-ev--c", "Contested")) +
+                  ref("Cannon", 1927, "critique and physiology", "Body changes are too slow and too alike to explain distinct emotions; the brain drives both.", tag(" x-ev--d", "Debunked or revised")) +
+                  ref("Schachter & Singer", 1962, "experiment", "Injected arousal was labelled as euphoria or anger depending on the setting; replications were weak.", tag(" x-ev--c", "Contested")) +
+                  ref("Lazarus", 1991, "book", "Emotion and Adaptation: appraisals of threat and coping shape each emotion.", tag("", "Robust as a family")) +
+                  ref("Barrett", 2017, "book", "How Emotions Are Made: the brain constructs emotions from prediction and concepts.", tag(" x-ev--c", "Contested")) +
+                  "</ol></section>", false, 4);
+                h += det("therapy", "Where this becomes a problem in therapy", "One-lens counselling, and what to do instead · readable any time",
+                  '<p class="x-lens__p"><b>One-lens counsellors.</b> Only the body (“just breathe”), only thoughts (“just reframe”), or only context (“anyone would feel that”). Each helps some clients and misses the rest.</p>' +
+                  '<p class="x-lens__p"><b>Body before words.</b> Craving and trauma responses often hit the body first. Asking “why do you feel that?” too early can feel like an interrogation.</p>' +
+                  '<p class="x-lens__p"><b>Whose words?</b> Labelling a feeling for the client is quick; helping them build their own words takes longer and lasts. Finer emotion words (granularity) help regulation; some people struggle to name feelings at all (alexithymia).</p><div class="x-lens__row">' + lessonBtn("m7.13", "Alexithymia") + "</div>" +
+                  '<p class="x-lens__p"><b>Culture shapes the words.</b> Emotion words and what counts as a feeling differ across cultures and families. Don’t assume your categories are theirs.</p>' +
+                  '<p class="x-lens__p"><b>Arousal misread.</b> In reentry and addiction work, a racing heart or a raised voice can be misread as aggression or as using, when it may be fear, shame or overwhelm.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Notice body, meaning and context together before naming anything.</li>" +
+                  "<li>Start with the body when it is loud; ask for meaning once there is safety.</li>" +
+                  "<li>Offer words as questions, and let the client keep or change them.</li>" +
+                  "<li>Check your read of arousal before writing it down.</li>" +
+                  "<li>Choose the lens that gives this person a usable next step.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Every theory is a lens, not the event — notice body, meaning and context together, and help the client find their own words for what they feel.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m7.4", "Theories of emotion") + lessonBtn("m7.9", "Do primary emotions exist?") + "</div></section>";
+                main.innerHTML = h;
+                if (!P.E) snap();
+                if (A) kick();
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") {
+                  if (S.pred) return; var o = PRED[optPick(POrd, v)]; if (!o) return; S.pred = o[0];
+                  live.textContent = (o[2] ? "Right" : "Not quite") + ": each theory puts a different link first. Now try the five lenses.";
+                  paint(); play(); return;
+                }
+                else if (a === "lens") {
+                  if (!S.pred) return; var i = +v; if (!LENS[i]) return; S.lens = i; S.seen[i] = 1;
+                  live.textContent = LENS[i][0] + ". " + LENS[i][3] + " Status: " + LENS[i][7] + ".";
+                  paint(); play(); return;
+                }
+                else if (a === "pick") {
+                  var c = +b.dataset.c, e = S.ev; if (S.chk[e] || !LENS[c]) return;
+                  var li = opts(c)[optPick(OO[e][c], v)]; S.pk[e + "-" + c] = li;
+                  live.textContent = LENS[c][0] + ": picked “" + EV[e][1][li] + "”";
+                }
+                else if (a === "chk") {
+                  var e2 = S.ev; if (!LENS.every(function (l, i) { return S.pk[e2 + "-" + i] != null; })) return; S.chk[e2] = true;
+                  var r = LENS.filter(function (l, i) { return S.pk[e2 + "-" + i] === i; }).length;
+                  live.textContent = (r === LENS.length ? "All matched." : "Some didn’t match; read the why under each.") + (e2 === EV.length - 1 ? " Same event, five accounts — none of them is the event itself." : "");
+                }
+                else if (a === "nev") {
+                  if (!S.chk[S.ev] || S.ev >= EV.length - 1) return; S.ev++; live.textContent = "Next event: " + EV[S.ev][0] + ".";
+                  paint(); var s3 = $('[data-step="3"]', main); if (s3) { s3.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var fb = s3.querySelector('[data-act="pick"]'); if (fb) fb.focus({ preventScroll: true }); } return;
+                }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && b.tagName === "BUTTON") { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]");
+                if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { halt(); A = null; S = fresh(); P = {}; paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint(); play();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
