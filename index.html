@@ -6420,6 +6420,178 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* L23 Big Five Mirror: five trait sliders shift the likelihoods of a figure's week (rooms, conflict, plans, setback); runs vary, a strong situation flattens differences. Saves nothing. */
+          {
+            id: "bigfive", name: "Big Five Mirror", kicker: "M8 · Personality", hue: ["#9fe3c4", "#f5c76b"], gallery: true, order: 6.3, dom: true,
+            idea: "Five traits shape a week: which rooms someone picks, how they handle a clash, whether plans hold. Traits shift the odds; they don’t write a script.",
+            see: "Five sliders set a profile. A seven-day strip fills in, Mon to Sun, and changes a little every time you run it.",
+            why: "Traits predict patterns across many moments far better than any single act, and strong situations can drown them out.",
+            use: "Reading a client in their situation, building skills where a trait gets in the way, and expecting change.",
+            cap: "Predict a week from a profile, run the week a few times, then build the profile that fits a described week.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["Predict", "Mirror", "Build the profile", "Reveal"], WORD = ["one", "two", "three", "four"], LV = ["low", "middle", "high"];
+              var TR = [["O", "Openness"], ["C", "Conscientiousness"], ["E", "Extraversion"], ["A", "Agreeableness"], ["N", "Emotional sensitivity (Neuroticism)"]];
+              var PRED = [["Out with people most nights and says yes to every invite; skips the budgeting class twice and forgets a promised call.", true],
+                ["Stays in most evenings with a book, finishes every task early and keeps a tidy planner.", false],
+                ["Lies awake replaying a small argument, cancels a plan out of worry and apologises a lot.", false]];
+              var DAYS = [["Mon", "Evening out", "r"], ["Tue", "Gym plan with a friend", "p"], ["Wed", "Roommate clash", "c"], ["Thu", "Evening out", "r"], ["Fri", "Job turns them down", "s"], ["Sat", "Evening out", "r"], ["Sun", "Family call planned", "p"]];
+              var OUT = { r: [["party", "#ff9aa8"], ["quiet room", "#a9acd6"], ["library", "#f5c76b"], ["new gallery", "#c4b0ff"]], c: [["yields", "#9fe3c4"], ["argues", "#ff9aa8"], ["cools off", "#a9acd6"]], p: [["keeps the plan", "#9fe3c4"], ["drops the plan", "#ff9aa8"]], s: [["ruminates", "#c4b0ff"], ["bounces back", "#9fe3c4"]] };
+              var W = [
+                ["Spends most evenings alone with books and a new language app — content, not lonely or worried. Tries a new museum on Sunday. Keeps every appointment and lets a roommate pick the show.", { O: 2, C: 2, E: 0, A: 2, N: 0 }, "Extraversion is low, but emotional sensitivity is low too: solitude is chosen and enjoyed, not feared."],
+                ["Wants to go to the house meeting but skips it, worried about saying the wrong thing. Lies awake replaying a text. Still keeps every work shift, sticks to familiar places and is easygoing with others.", { O: 1, C: 2, E: 1, A: 1, N: 2 }, "Emotional sensitivity is high: the staying away comes from worry, while the wish for company is still there."],
+                ["Tries a new gallery, a cooking class and a protest march; double-books and drops two plans; argues hard in a house meeting; shrugs off a rejected application by evening.", { O: 2, C: 0, E: 2, A: 0, N: 0 }, "Dropped plans point to low conscientiousness; arguing hard points to low agreeableness; shrugging off the rejection points to low emotional sensitivity."]
+              ];
+              function mid() { return { O: 1, C: 1, E: 1, A: 1, N: 1 }; }
+              var POrd = optOrder(PRED.length);
+              var fresh = function () { return { pred: null, tr: mid(), sit: 0, wk: null, prev: null, runs: 0, shown: 7, ch: 0, cv: W.map(mid), ck: {}, done: {}, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) { return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) { return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>"; }).join("") + "</p>"; }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of four · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) { return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") + "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>"; }
+              function goStep(n) { var s = $('[data-step="' + n + '"]', main); if (!s) return; s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var f = s.querySelector("button:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true }); }
+              function cnt(o) { return Object.keys(o).filter(function (k) { return o[k]; }).length; }
+              function T(x, y, s, fill, anchor, wt) { return '<text x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + ' style="fill:' + fill + ";font:" + (wt || 500) + ' 12px var(--sans)">' + esc(s) + "</text>"; }
+              function draw(lg) { var e = lg.map(Math.exp), t = e.reduce(function (a, b) { return a + b; }, 0), r = Math.random() * t, i; for (i = 0; i < e.length; i++) { r -= e[i]; if (r <= 0) return i; } return e.length - 1; }
+              function sim() {
+                var k = S.sit ? 0.35 : 1, P = S.sit ? 1.4 : 0, t = function (x) { return (S.tr[x] - 1) * k; };
+                return DAYS.map(function (d) {
+                  if (d[2] === "r") return draw([1.3 * t("E"), -1.3 * t("E") + 0.5 * t("N"), 1.3 * t("C") + P, 1.3 * t("O")]);
+                  if (d[2] === "c") return draw([1.3 * t("A") + P, -1.3 * t("A") + 0.6 * t("N"), 0.9 * t("C") - 0.5 * t("N")]);
+                  if (d[2] === "p") return draw([1.5 * t("C") + (S.sit ? 1.2 : 0.4), 0]);
+                  return draw([1.4 * t("N") + (S.sit ? 0.6 : 0), -1.4 * t("N")]);
+                });
+              }
+              function stageSVG() {
+                var s = "", lbl = S.wk ? "The week: " + DAYS.map(function (d, i) { return d[0] + ", " + d[1] + ": " + OUT[d[2]][S.wk[i]][0]; }).join("; ") + "." : "Seven empty days, Mon to Sun, waiting for a run.";
+                s += '<svg class="x-mem__svg" viewBox="0 0 360 214" role="img" aria-label="' + esc(lbl) + '" style="background:#1b1d33">';
+                DAYS.forEach(function (d, i) {
+                  var y = 6 + i * 29, o = S.wk && i < S.shown ? OUT[d[2]][S.wk[i]] : null, ch = o && S.prev && S.prev[i] !== S.wk[i];
+                  s += '<rect x="4" y="' + y + '" width="352" height="25" rx="7" fill="#262946"/>' + T(12, y + 17, d[0], "#eef0ff", "", 600) + T(50, y + 17, d[1], "#a9acd6");
+                  s += o ? '<rect x="226" y="' + (y + 3) + '" width="124" height="19" rx="9" fill="' + o[1] + '"' + (ch ? ' stroke="#eef0ff" stroke-width="2"' : "") + "/>" + T(288, y + 17, o[0], "#1b1d33", "middle", 600) : '<rect x="226" y="' + (y + 3) + '" width="124" height="19" rx="9" fill="none" stroke="#4a4d78" stroke-dasharray="3 3"/>';
+                });
+                return s + "</svg>";
+              }
+              function render() { var g = $('[data-k="stage"]', main); if (g) g.innerHTML = stageSVG(); }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                var dt = A.last != null ? Math.min(0.05, (now - A.last) / 1000) : 0; A.last = now; A.acc += dt;
+                if (A.acc >= 0.2) { A.acc = 0; S.shown++; render(); }
+                if (S.shown >= 7) { S.shown = 7; A = null; render(); return; }
+                kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function play() { if (RM) { S.shown = 7; render(); return; } S.shown = 0; A = { last: null, acc: 0 }; render(); kick(); }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) { var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {} return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>"; }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function sliders(g, o, dis) { return '<div style="display:grid;gap:10px">' + TR.map(function (r) { var v = o[r[0]]; return '<label class="x-aim__sl">' + esc(r[1]) + ': <b data-w="' + g + r[0] + '">' + LV[v] + '</b><input type="range" class="x-eyes__range" data-act="sl" data-c="' + g + '" data-v="' + r[0] + '" min="0" max="2" step="1" value="' + v + '" aria-valuetext="' + LV[v] + '"' + (dis ? " disabled" : "") + "><span><b>Low</b><b>Middle</b><b>High</b></span></label>"; }).join("") + "</div>"; }
+              var HI = { O: ["the new gallery", "familiar rooms"], C: ["the library and kept plans", "dropped plans"], E: ["the party", "the quiet room"], A: ["giving way in a clash", "arguing"], N: ["ruminating after a setback", "bouncing back"] };
+              function expl() { var a = TR.filter(function (r) { return S.tr[r[0]] !== 1; }).map(function (r) { var v = S.tr[r[0]]; return LV[v] + " " + r[1].replace(" (Neuroticism)", "").toLowerCase() + " makes " + HI[r[0]][v ? 0 : 1] + " more likely"; }); return a.length ? a.join("; ") + " — more likely, never certain." : "All middle: every option stays open."; }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") + (fa.dataset.c != null ? '[data-c="' + fa.dataset.c + '"]' : "") : null;
+                halt();
+                var allDone = cnt(S.done) === W.length, n = !S.pred ? 0 : S.runs < 2 ? 1 : !allDone ? 2 : 3;
+                var h = trail(n) + msect("Predict first", "Profile: high extraversion, low conscientiousness; openness, agreeableness and emotional sensitivity in the middle. Which week fits best?",
+                  '<div class="x-lens__row x-mem__opts" role="group" aria-label="Your prediction">' + POrd.map(function (k, d) {
+                    var o = PRED[optPick(POrd, d)], on = S.pred === o[0];
+                    return '<button type="button" class="x-lens__b press" data-act="pred" data-v="' + d + '" aria-pressed="' + on + '"' + (S.pred ? " disabled" : "") + ' style="flex:1 1 14rem;min-height:48px;text-align:left">' + esc(o[0]) + (S.pred && o[1] ? " · best fit" : "") + "</button>" +
+                      (on ? '<p class="x-lens__p x-mem__fb" aria-live="polite"><b>' + (o[1] ? "Right." : "Not quite.") + "</b> High extraversion pulls toward people and parties; low conscientiousness makes dropped plans and forgotten calls more likely. The quiet, planned week fits low extraversion and high conscientiousness; the worried week fits high emotional sensitivity. “Fits best” is the point: this person can still have a quiet night.</p>" : "");
+                  }).join("") + "</div>" + (S.pred && n === 1 ? next(2) : ""), 1);
+                h += msect("Mirror: run the week", !S.pred ? "Make your prediction above first." : "Set the five traits, pick the situation, then run the week. Run it again: the week shifts a little each time.",
+                  S.pred ? sliders("m", S.tr) +
+                    '<div class="x-lens__row" role="group" aria-label="Situation"><span class="x-lens__p" style="align-self:center"><b>Situation:</b></span>' + ["Calm week", "High-pressure week"].map(function (t, i) { return '<button type="button" class="x-lens__b press" data-act="sit" data-v="' + i + '" aria-pressed="' + (S.sit === i) + '" style="min-height:44px' + (S.sit === i ? ";border-color:#9fe3c4" : "") + '">' + t + "</button>"; }).join("") + "</div>" +
+                    '<div data-k="stage">' + stageSVG() + "</div>" +
+                    '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="run" style="min-height:52px">' + (S.runs ? "Run again" : "Run the week") + "</button></div>" +
+                    (S.wk ? '<div class="x-lens__p x-mem__fb" aria-live="polite"><p class="x-lens__p" style="margin:0"><b>Tendencies:</b> ' + esc(expl()) + "</p>" +
+                      (S.prev ? '<p class="x-lens__p" style="margin:6px 0 0"><b>Since last run:</b> ' + (function () { var c = DAYS.filter(function (d, i) { return S.prev[i] !== S.wk[i]; }).map(function (d) { return d[0]; }); return c.length ? c.join(", ") + " changed (outlined). Same profile, a different week: traits are tendencies, not scripts." : "nothing changed this time. Run again — it rarely stays put."; })() + "</p>" : "") +
+                      '<p class="x-lens__p" style="margin:6px 0 0"><b>' + (S.sit ? "High-pressure week:" : "Calm week:") + "</b> " + (S.sit ? "deadlines and house rules push almost everyone to the library, to give way and to keep plans, so different profiles look alike. A strong situation flattens trait differences (person × situation)." : "few demands, so traits have room to show. Switch to a high-pressure week and compare.") + "</p></div>" : "") +
+                    (S.runs === 1 ? '<p class="fineprint" style="margin:0">Run the week at least once more to unlock the challenge.</p>' : "") + (n === 2 && !cnt(S.done) ? next(3) : "")
+                  : "", 2);
+                if (S.runs >= 2) {
+                  var w = S.ch, Wk = W[w], ck = !!S.ck[w], cv = S.cv[w];
+                  var body = '<p class="x-lens__p" style="font-size:15px"><b>Week ' + WORD[w] + " of three:</b> " + esc(Wk[0]) + "</p>" + sliders("c", cv) +
+                    (ck ? '<div class="x-lens__p x-mem__fb" aria-live="polite"><ul style="margin:0;padding-left:18px;display:grid;gap:4px">' + TR.map(function (r) { var d = cv[r[0]] - Wk[1][r[0]]; return "<li><b>" + esc(r[1]) + ":</b> " + (d === 0 ? "close" : d > 0 ? "too high" : "too low") + "</li>"; }).join("") + '</ul><p class="x-lens__p" style="margin:6px 0 0"><b>The clue:</b> ' + esc(Wk[2]) + "</p></div>" : "") +
+                    ((S.done[0] || S.done[1]) ? '<div class="aside" style="margin:0"><p class="x-lens__p"><b>Tricky pair: staying away is not one thing.</b> Low extraversion means enjoying solitude and quiet without distress — the person is content alone. High emotional sensitivity can look the same from outside, but the staying away is driven by worry, and the person may want company. Ask how being alone feels, not just whether they go.</p></div>' : "") +
+                    '<div class="x-lens__row">' + (ck ? '<button type="button" class="start press x-lens__go" data-act="nw" style="min-height:52px">Next described week</button>' : '<button type="button" class="start press x-lens__go" data-act="chk" style="min-height:52px">Check my profile</button>') + "</div>" +
+                    (allDone ? '<p class="x-lens__take">Each week had a clue trait — and the same quiet evening can come from very different people.</p>' + (n === 3 ? next(4) : "") : "");
+                  h += msect("Build the profile", "Set the five sliders to fit the week described, then check. Three weeks rotate.", body, 3);
+                }
+                h += det("reveal", "Reveal", "Where the Big Five came from, and how far it reaches · readable any time",
+                  '<p class="x-lens__p"><b>Words first.</b> The lexical hypothesis says the traits that matter most get words in everyday language. Sorting thousands of trait words kept producing five broad factors (Goldberg 1990).</p>' +
+                  '<p class="x-lens__p"><b>The five-factor model.</b> Costa and McCrae built questionnaires for openness, conscientiousness, extraversion, agreeableness and neuroticism (Costa & McCrae 1992). The structure replicates across many cultures and languages, with limits: some factors come out less clearly in some places.</p>' +
+                  '<p class="x-lens__p"><b>Stable, not fixed.</b> Traits are moderately stable, yet they keep changing through adulthood. Most people become more conscientious, agreeable and calm with age — the maturity principle (Roberts et al. 2006).</p>' +
+                  '<p class="x-lens__p"><b>Person or situation?</b> Mischel argued that traits predict single behaviours poorly (Mischel 1968). The answer that emerged: people show stable if-then signatures (“if criticised, then withdraws”), and traits predict behaviour added up across many situations far better than one act.</p>' +
+                  '<p class="x-lens__p"><b>A sixth factor.</b> The HEXACO model adds honesty-humility (Ashton & Lee 2007). Myers-Briggs types sort people into boxes that the evidence does not support; traits run on a continuum, so type schemes are ' + tag(" x-ev--d", "Debunked or revised") + "</p>" +
+                  '<p class="x-mr__status">Big Five structure ' + tag("", "Robust") + ' · Single behaviours predicted weakly, aggregated behaviour more strongly ' + tag("", "Robust") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Mischel", 1968, "book", "Personality and Assessment: traits predict single behaviours weakly; situations matter.", tag("", "Robust")) +
+                  ref("Goldberg", 1990, "lexical factor analysis", "Trait words in everyday language cluster into five broad factors.", tag("", "Robust")) +
+                  ref("Costa & McCrae", 1992, "questionnaire development", "The NEO measures of the five-factor model.", tag("", "Robust")) +
+                  ref("Roberts et al.", 2006, "meta-analysis", "Mean-level trait change across the lifespan; the maturity principle.", tag("", "Robust")) +
+                  ref("Ashton & Lee", 2007, "theory and review", "The HEXACO model adds honesty-humility as a sixth factor.", tag(" x-ev--c", "Contested")) +
+                  "</ol></section>", false, 4);
+                h += det("therapy", "Where this becomes a problem in therapy", "Traits as labels, and what to do instead · readable any time",
+                  '<p class="x-lens__p"><b>Traits turned into labels.</b> “Lazy”, “antisocial”, “difficult client” close the door on curiosity and follow a person through their file.</p>' +
+                  '<p class="x-lens__p"><b>A strong situation mistaken for personality.</b> Jail, a shelter or early recovery shape behaviour hard. Guardedness or flat mood there may be the setting, not the person.</p>' +
+                  '<p class="x-lens__p"><b>Low conscientiousness read as moral failure.</b> Missed appointments often point to skills and supports to build — structure, reminders, routines — not bad character.</p>' +
+                  '<p class="x-lens__p"><b>High emotional sensitivity as a flaw.</b> It is a target for skills (calming, worry time, problem solving), not something wrong with the person.</p>' +
+                  '<p class="x-lens__p"><b>One style for everyone.</b> A client who is introverted may go quiet in group; offer a different door in, such as pairs, writing first or a one-to-one check-in.</p>' +
+                  '<p class="x-lens__p"><b>Diagnosing from a week.</b> Personality disorders are not just extreme traits; they involve lasting distress and impairment and need proper assessment. Don’t diagnose from a snapshot.</p>' +
+                  '<p class="x-lens__p"><b>Expecting no change.</b> Traits shift, especially with new roles, recovery and relationships.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Describe behaviour in context instead of naming a trait.</li><li>Ask what the setting demands before reading personality.</li><li>Build skills and supports where a trait gets in the way.</li><li>Fit your approach to the person’s style.</li><li>Revisit your read as the person’s life changes.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Traits are tendencies, not verdicts — read the person in their situation, build skills where a trait gets in the way, and expect people to change.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m8.2", "Traits and the Big Five") + lessonBtn("m8.4", "Social-cognitive views") + "</div></section>";
+                main.innerHTML = h;
+                if (A) kick();
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") { if (S.pred) return; var o = PRED[optPick(POrd, v)]; if (!o) return; S.pred = o[0]; live.textContent = (o[1] ? "Right" : "Not quite") + ": the social, unplanned week fits best. Now run the mirror."; }
+                else if (a === "sit") { S.sit = +v ? 1 : 0; live.textContent = (S.sit ? "High-pressure" : "Calm") + " week selected. Run the week to see it."; }
+                else if (a === "run") { S.prev = S.wk; S.wk = sim(); S.runs++; live.textContent = "Week run. " + DAYS.map(function (d, i) { return d[0] + ": " + OUT[d[2]][S.wk[i]][0]; }).join(", ") + "."; paint(); play(); return; }
+                else if (a === "chk") { var w = S.ch; S.ck[w] = true; S.done[w] = true; live.textContent = TR.map(function (r) { var d = S.cv[w][r[0]] - W[w][1][r[0]]; return r[1] + " " + (d === 0 ? "close" : d > 0 ? "too high" : "too low"); }).join(", ") + ". " + W[w][2]; }
+                else if (a === "nw") { S.ck[S.ch] = false; S.ch = (S.ch + 1) % W.length; live.textContent = "Week " + WORD[S.ch] + ": " + W[S.ch][0]; paint(); var s3 = $('[data-step="3"]', main); if (s3) { s3.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" }); var fi = s3.querySelector("input"); if (fi) fi.focus({ preventScroll: true }); } return; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && b.tagName === "BUTTON") { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]"); if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("input", function (e) {
+                var t = e.target; if (!t.dataset || t.dataset.act !== "sl") return;
+                var k = t.dataset.v, v = Math.max(0, Math.min(2, Math.round(+t.value))), o = t.dataset.c === "m" ? S.tr : S.cv[S.ch]; o[k] = v;
+                t.setAttribute("aria-valuetext", LV[v]); var lb = $('[data-w="' + t.dataset.c + k + '"]', main); if (lb) lb.textContent = LV[v];
+              });
+              wrap.addEventListener("change", function (e) { var t = e.target; if (t.dataset && t.dataset.act === "sl" && t.dataset.c === "c" && S.ck[S.ch]) { S.ck[S.ch] = false; paint(); } });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { halt(); A = null; S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
