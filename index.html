@@ -1904,6 +1904,10 @@
           { id: "m8e", code: "EV", part: "B", t: "Evolution & human nature", s: "Darwin to evolutionary psychology, its problems, and what is inborn", after: "m8",
             depth: ["What Darwin actually said: selection without a designer, and minds continuous with animals", "Hear evolutionary claims in class, clinic or the news and ask what they explain", "The problems at full strength, the rivals inside evolution, and whether inborn tendencies exist"],
             lessons: ["Darwin from Darwin: the mindless editor", "Descent and Expression: minds continuous with animals", "The modern programme and evolutionary psychiatry", "The problems at full strength: the spandrel drill", "Failed predictions, misuse, and rivals inside evolution", "Do inherent tendencies exist?"] },
+          /* phase 3l-1: CM · consciousness & mindfulness (shell; lessons 1–2 built) */
+          { id: "m8c", code: "CM", part: "B", t: "Consciousness & mindfulness", s: "What awareness is, and what to do with it", after: "m8",
+            depth: ["What consciousness is, its levels and contents, and what mindfulness means before it is praised", "Hear claims about awareness and mindfulness in class, clinic or the news, and match them to the evidence", "The hard problem, the rival theories and their tests, and mindfulness evidence weighed with its harms"],
+            lessons: ["The hard problem, and psychology’s first subject", "Theories of consciousness; attention vs awareness", "Mindfulness, defined before it is praised", "The therapy map: MBSR, MBCT, DBT, ACT", "Mechanisms: proposed vs proven", "Evidence, hype, and adverse effects", "Consciousness as a clinical tool"] },
           { id: "m9", code: "C", part: "C", t: "The effects library", s: "Classic social effects, with the replication crisis", after: "m0",
             depth: ["Conformity, obedience, attribution and dissonance", "Group pressure at work, in families and in programs", "Which classic effects replicated, and which didn’t"],
             lessons: ["Conformity (Asch)", "Obedience (Milgram)", "The bystander effect", "The fundamental attribution error", "Cognitive dissonance", "Social facilitation and loafing", "The Stanford prison study, re-examined", "The replication crisis"],
@@ -8874,6 +8878,673 @@
                 "Confidence is moderate-high; a ‘prepared’ bias fully explained by early learning would count against it.")
             ]
           },
+          /* phase 3l-1: CM lessons 1–2 (psychology only; no numbers except years) */
+          "m8c.1": {
+            home: "A client wakes from surgery and says no time passed at all. Where did “I” go, and why is that question so hard?",
+            keys: [["What are levels and contents of consciousness?", "The level is how conscious a person is, from coma to alert waking; the contents are what they are conscious of. Dreaming has a low level of wakefulness but rich contents."],
+              ["What is the hard problem?", "Chalmers (1995): why any processing in the brain is accompanied by experience at all. Explaining functions such as attention, report and memory are the “easy” problems by comparison."],
+              ["What did Nagel (1974) ask?", "What it is like to be a bat: an organism is conscious if there is something it is like to be it, which outside description seems to leave out."],
+              ["How has psychology treated consciousness?", "It was the first subject (Wundt; James 1890), expelled by behaviourism (Watson 1913), and brought back by cognitive science and neuroscience (Crick & Koch 1990)."],
+              ["What is the verdict as of 2026?", "No theory explains why experience exists; whether the problem is real or an illusion of how we think about it is unresolved. Confidence low."]],
+            steps: [
+              { kind: "hook", title: "Gone, with no time passing", body: who("<b>Tomás</b> is a counsellor. His client <b>Nadia</b> had an operation under general anaesthesia last week.") +
+                "<p>She says: “I was gone. No time passed at all. One moment I was counting, the next I was in recovery. When I sleep, I know the night went by. This was different.”</p>" +
+                "<p>Then she asks: “Where did <i>I</i> go?”</p>" +
+                '<p class="hook">What can Tomás honestly tell her, and why has her question puzzled psychology from its first day?</p>' },
+              { kind: "predict", id: "m8c.1:predict", title: "Your call first",
+                case: ["Nadia had general anaesthesia for an operation.",
+                  "She remembers counting, then waking in recovery.",
+                  { t: "The hospital is near her home.", irrelevant: true },
+                  "She says no time seemed to pass in between.",
+                  "She says ordinary sleep feels different: she knows the night went by.",
+                  { t: "She drinks tea during the session.", irrelevant: true }],
+                q: "What best describes what happened to Nadia’s consciousness?",
+                options: ["She was conscious but cannot remember it", "Its level was lowered until nothing was experienced", "She was in a deep, ordinary night’s sleep"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: anaesthesia lowers the level of consciousness until, for most people, nothing is experienced. Rare cases of awareness under anaesthesia exist, so the first option is not impossible; it is just not the usual story. Why experience switches off, or on, is still unexplained.",
+                hints: ["Ask what she says about time passing.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: compare what she reports about anaesthesia with what she reports about sleep."] },
+              { kind: "idea", lvl: "f", title: "Levels and contents", body: "<p>Consciousness has two sides. Its <b>level</b> is how conscious a person is, from coma to alert waking. Its <b>contents</b> are what they are conscious of: a sound, a worry, a colour.</p>" +
+                "<p>Laureys (2005) drew this as a map, with wakefulness on one side and awareness on the other.</p>" +
+                "<p><b>So:</b> ask two questions about any state: how conscious, and conscious of what.</p>" },
+              { kind: "idea", lvl: "f", title: "Coma, sleep, dreams, waking", body: "<p>In <b>coma</b>, both are absent: no waking, no signs of awareness. In <b>dreamless sleep</b>, the level drops and contents fade. In <b>dreaming</b>, wakefulness stays low, yet contents can be vivid. In <b>waking</b>, both are high.</p>" +
+                "<p>General <b>anaesthesia</b> lowers the level on purpose, and for most people contents vanish, including the sense of time passing.</p>" +
+                "<p><b>So:</b> Nadia’s “no time at all” fits a level turned down, not a gap she forgot.</p>" },
+              { kind: "idea", lvl: "f", title: "The easy problems", body: "<p>Chalmers (1995) " + ev("c") + " sorted questions about the mind into two kinds. The <b>easy problems</b> ask how the brain does things: tells sounds apart, focuses attention, stores memories, reports what it sees, wakes and sleeps.</p>" +
+                "<p>They are not easy to solve. They are “easy” because we know what an answer would look like: a mechanism that does the job.</p>" +
+                "<p><b>So:</b> almost every other question in this app is an easy problem in this sense.</p>" },
+              { kind: "idea", lvl: "f", title: "The hard problem", body: "<p>The <b>hard problem</b> asks something else: why is any of that processing accompanied by experience at all? Why does seeing red feel like something, rather than happening in the dark?</p>" +
+                "<p>Explain every function, Chalmers argued, and this question still seems left over.</p>" +
+                "<p><b>So:</b> the hard problem is about why experience exists, not what the brain does.</p>" },
+              { kind: "idea", lvl: "p", title: "What it is like to be a bat", body: "<p>Nagel (1974) asked what it is like to be a bat, a creature that finds its way by echoes. We could learn every fact about its brain and still not know how echoes feel to it.</p>" +
+                "<p>His test: a creature is conscious if there is <i>something it is like</i> to be it.</p>" +
+                "<p><b>So:</b> experience seems to be known from the inside in a way outside description leaves out.</p>" },
+              { kind: "idea", lvl: "p", title: "Psychology’s first subject", body: "<p>Psychology began as the study of consciousness. Wundt opened his laboratory in Leipzig in 1879 and trained observers in <b>introspection</b>: careful reports of their own sensations.</p>" +
+                "<p>James (1890), in <i>The Principles of Psychology</i>, described a <b>stream of consciousness</b>: thought flowing, never quite the same twice.</p>" +
+                "<p><b>So:</b> Nadia’s question was the field’s founding question.</p>" },
+              { kind: "idea", lvl: "p", title: "Expelled", body: "<p>Introspection had a flaw: trained observers in different laboratories disagreed, and no one could check whose report was right.</p>" +
+                "<p>Watson (1913) " + ev("r") + " declared that psychology should study behaviour, what anyone can observe, and drop consciousness. For decades, behaviourism mostly did.</p>" +
+                "<p><b>So:</b> consciousness was pushed out because it could not be checked from outside.</p>" },
+              { kind: "idea", lvl: "p", title: "Returned", body: "<p>From the middle of the century, cognitive science brought inner processes back: memory, attention, mental images, studied with careful tasks.</p>" +
+                "<p>Crick and Koch (1990) " + ev("r") + " argued that the time had come to search for the brain activity that goes with conscious experience. Their own early proposal did not hold, but the search they called for became a field.</p>" +
+                "<p><b>So:</b> consciousness came back by being measured through what people report and do.</p>" },
+              { kind: "idea", lvl: "p", title: "A lesson in humility", body: "<p>The arc runs: first subject, expelled, returned. Each turn was sure of itself. The founders trusted introspection too much; the behaviourists dismissed experience too fast.</p>" +
+                "<p><b>So:</b> hold today’s confident claims about consciousness, in either direction, loosely.</p>" },
+              { kind: "contrast", id: "m8c.1:contrast", title: "Level or content?",
+                q: "Which made-up note describes a change in the level of consciousness?",
+                cases: [
+                  { label: "Note A", s: ["Sam is on the ward after an operation.", { t: "The note was written at the end of a shift.", irrelevant: true }, { t: "Sam, drowsy an hour ago, now opens his eyes to his name and answers questions.", diff: true }] },
+                  { label: "Note B", s: ["Sam is on the ward after an operation.", { t: "The note was written at the end of a shift.", irrelevant: true }, { t: "Sam, alert all afternoon, now notices a dull ache in his knee he had not felt before.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["When the note was written", "How conscious Sam is versus what he is conscious of", "Whether Sam had an operation", "Which ward Sam is on"],
+                feature: 1,
+                why: "Both notes describe Sam after the same operation. Note A shows him becoming more conscious overall: a change in level. In Note B he is alert throughout, and something new enters awareness: a change in content.",
+                hints: ["Find the one sentence where the notes part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether Sam became more conscious, or conscious of something new."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>The hard problem may rest on intuition rather than evidence: it says experience seems left over after every function is explained, and seemings about our own minds have misled psychology before. Critics add that it names a puzzle without suggesting any test.</p>' +
+                "<p><b>The question.</b> Is the hard problem a real gap in nature, or a trick of how minds think about themselves? The next two steps put each side in its strongest form.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · The hard problem is real", body: "<p>On this view, experience is the one thing we know directly, and no account of what the brain does explains why it is felt.</p>" +
+                "<p><b>Its evidence:</b> every theory so far explains functions, such as report or attention, and leaves the question of feeling open (Chalmers 1995; Nagel 1974).</p>" +
+                "<p><b>Its charge:</b> calling experience an illusion does not remove it, because seeming is itself an experience.</p>" +
+                "<p><b>So:</b> on this view, a full science of the mind must explain experience, not explain it away.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · It will dissolve like vitalism", body: "<p>On the other view, the hard problem will go the way of vitalism: life once seemed to need a special force, until biology explained its functions one by one and nothing was left over.</p>" +
+                "<p><b>Its evidence:</b> people’s reports about their own experience are often wrong, so the sense of something extra is weak evidence (Dennett 1991). <b>Illusionism</b> holds that experience only seems to have special inner qualities, and the task is to explain why it seems so (Frankish 2016).</p>" +
+                "<p><b>Its charge:</b> a problem defined so that no evidence could solve it is not a scientific problem.</p>" +
+                "<p><b>So:</b> on this view, explain the easy problems, plus why we think there is a hard one, and the work is done.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides accept that brain processes and experience go together, and that the easy problems are worth solving. They disagree on whether anything is left once those are solved.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>No theory explains why experience exists; whether the problem is real or an illusion of how we think about it is unresolved.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Low.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A theory that predicts which systems are conscious and survives tests.</dd></div></dl>" +
+                "<p><b>So:</b> say what is known about levels and contents, and say plainly that the deeper question is open.</p>" },
+              { kind: "example", lvl: "p", title: "Tomás answers", body: who("<b>Tomás</b> does not pretend to know where “I” goes. He keeps a line ready.") +
+                '<p class="x-note">“The anaesthetic turned your consciousness down until there was nothing to experience, not even time. Why it switches back on as you is a question science hasn’t answered. How has it been for you since?” · <span lang="es">“La anestesia bajó tu consciencia hasta que no hubo nada que experimentar, ni siquiera el tiempo. Por qué vuelve a encenderse siendo tú es algo que la ciencia aún no ha respondido. ¿Cómo has estado desde entonces?”</span></p>' +
+                "<p>Nadia says the not-knowing unsettles her, and that it helps to hear it is not just her.</p>" +
+                "<p><b>Person-first.</b> Write “Nadia, who was unsettled by the gap after anaesthesia”, not “an anxious post-surgical patient”.</p>" },
+              { kind: "teachback", id: "m8c.1:teachback", title: "Teach it back", prompt: "Explain to a trainee how Tomás answers Nadia: levels versus contents of consciousness, with coma, dreamless sleep, dreaming, waking and anaesthesia placed on the map; the easy problems and the hard problem as Chalmers named them, why any processing is accompanied by experience; Nagel’s question of what it is like to be a bat; consciousness as psychology’s first subject, with Wundt’s introspection and James’s stream of consciousness; its expulsion by Watson’s behaviourism and return through cognitive science and Crick and Koch; the arc as a lesson in humility; the contrast between a change in level and a change in content; both sides steelmanned, the hard problem as real versus dissolving like vitalism, with Dennett and Frankish’s illusionism; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Levels and contents as a map " + ev("r") + ". The hard problem as a real gap " + ev("c") + ". Illusionism " + ev("c") + ".</p>" +
+                "<p><b>So:</b> psychology can describe how conscious a person is and of what; why there is experience at all remains open, and saying so honestly is part of the answer.</p>" },
+              Q("A person is dreaming vividly. How do level and contents compare?",
+                ["High wakefulness, no contents", "Low wakefulness, rich contents", "Low wakefulness, no contents", "High wakefulness, rich contents"], 1,
+                "In dreaming, wakefulness stays low while contents can be vivid: level and contents come apart."),
+              Q("Which question is the hard problem?",
+                ["How the brain stores memories", "How attention picks one sound", "Why processing is felt at all", "How people report what they see"], 2,
+                "The others are easy problems: functions with a mechanism to find. The hard problem asks why any of it is experienced."),
+              Q("What is the 2026 verdict on the hard problem?",
+                ["Illusionism has dissolved it", "Neuroscience has now solved it", "Settled, with high confidence", "Unresolved, with low confidence"], 3,
+                "No theory explains why experience exists; a theory that predicts which systems are conscious and survives tests would change it.")
+            ]
+          },
+          "m8c.2": {
+            home: "A man says he sees nothing on his left, yet points to things there when asked to guess. What does that tell us about awareness?",
+            keys: [["What is blindsight?", "After damage to the visual cortex, some people respond accurately to things in an area where they report seeing nothing (Weiskrantz 1986)."],
+              ["What do the main theories say?", "Global workspace: conscious contents are broadcast to the whole mind (Baars 1988; Dehaene). Integrated information: consciousness is how unified a system is (Tononi 2004). Higher-order: a state is conscious when the mind represents it (Rosenthal; Lau)."],
+              ["Are attention and awareness the same?", "No: they can come apart (Koch & Tsuchiya 2007), and people can miss what they are not attending to (Simons & Chabris 1999)."],
+              ["What did the adversarial test find?", "Neither global workspace nor integrated information theory had its predictions fully confirmed (Cogitate Consortium 2025). Contested."],
+              ["What is the verdict as of 2026?", "Workspace accounts best fit reportable awareness; no theory is confirmed. Confidence low-moderate."]],
+            steps: [
+              { kind: "hook", title: "Seeing nothing, pointing anyway", body: who("<b>Inés</b> is a neuropsychologist. Her patient <b>Mr Adeyemi</b> had a stroke at the back of his brain.") +
+                "<p>He says he sees nothing at all on his left side. Inés holds up objects there and asks him to point, “just guess”. He points to them accurately, and says he is only guessing.</p>" +
+                '<p class="hook">How can a person point to what he says he cannot see, and what does that tell us about awareness?</p>' },
+              { kind: "predict", id: "m8c.2:predict", title: "Your call first",
+                case: ["Mr Adeyemi had a stroke at the back of his brain.",
+                  "He says he sees nothing on his left side.",
+                  { t: "The clinic room has a window.", irrelevant: true },
+                  "Asked to guess, he points to objects on his left accurately.",
+                  "He says he is only guessing.",
+                  { t: "His daughter drove him to the appointment.", irrelevant: true }],
+                q: "What best explains his accurate pointing?",
+                options: ["He sees them but will not say so", "Some vision works without awareness", "His sight on the left has returned"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: some visual processing can guide action without awareness. This is called blindsight. It means seeing and being aware of seeing can come apart.",
+                hints: ["Ask what he reports and what he does.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: put his words beside his pointing and say where they disagree."] },
+              { kind: "idea", lvl: "f", title: "Blindsight", body: "<p>Weiskrantz (1986) " + ev("r") + " studied people with damage to the main visual area of the brain. They reported no vision in part of their field, yet when made to guess, they located objects and movement there well above what chance would predict.</p>" +
+                "<p>Other routes from the eyes seem to carry information that guides action without reaching awareness.</p>" +
+                "<p><b>So:</b> the brain can process what a person does not experience.</p>" },
+              { kind: "idea", lvl: "f", title: "Attention is not awareness", body: "<p>It is tempting to think attention and awareness are one thing: what you attend to, you are aware of. Koch and Tsuchiya (2007) " + ev("c") + " argued they can come apart.</p>" +
+                "<p><b>Attention without awareness:</b> a cue too brief to see can still pull attention toward a spot. <b>Awareness with little attention:</b> people busy with a hard task can still report the gist of a scene at the edge of view.</p>" +
+                "<p><b>So:</b> attention selects; awareness is experiencing. They often go together, but not always.</p>" },
+              { kind: "idea", lvl: "f", title: "Attention as gatekeeper", body: "<p>Simons and Chabris (1999) " + ev("r") + " asked people to count passes in a basketball video. Many failed to notice a person in a gorilla suit walking through the scene.</p>" +
+                "<p>This is <b>inattentional blindness</b>: what is not attended often never reaches awareness.</p>" +
+                "<p><b>So:</b> attention usually controls the gate, even if it is not the same as what passes through.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Global workspace theory", body: "<p>On this view, most processing runs in separate, unconscious systems. A content becomes conscious when it wins entry to a shared <b>workspace</b> and is broadcast to the whole mind: memory, planning, speech (Baars 1988).</p>" +
+                "<p><b>Its evidence:</b> Dehaene and colleagues found that a seen stimulus, unlike an unseen one, triggers a sudden, widespread surge of brain activity, which they call <b>ignition</b> (Dehaene & Changeux 2011).</p>" +
+                "<p><b>Its charge:</b> it explains why conscious contents can be reported, remembered and used flexibly, which rivals leave vague.</p>" +
+                "<p><b>So:</b> on this view, being conscious of something is that thing being available to the whole mind.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Integrated information theory", body: "<p>On this view, consciousness is how far a system forms a unified whole: its parts affect one another so tightly that the whole does more than the parts would separately (Tononi 2004).</p>" +
+                "<p><b>Its evidence:</b> it starts from features of experience, such as being unified and specific, and predicts that brain regions richly linked in loops matter more than regions that only pass signals on.</p>" +
+                "<p><b>Its charge:</b> theories that start from report explain access to information, not experience itself.</p>" +
+                "<p><b>So:</b> on this view, consciousness is about how a system is built, not what it broadcasts. It also implies some simple systems are slightly conscious, which critics find hard to accept.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Higher-order theories", body: "<p>On this view, a mental state is conscious when the mind represents it: when you are, in some sense, aware of being in it (Rosenthal 2005; Lau & Rosenthal 2011).</p>" +
+                "<p><b>Its evidence:</b> blindsight fits neatly: the visual information is there, but the mind’s monitoring of it is missing, so it is not experienced.</p>" +
+                "<p><b>Its charge:</b> it explains the difference between merely processing and knowing you perceive, which broadcast alone may not.</p>" +
+                "<p><b>So:</b> on this view, consciousness is the mind keeping track of its own states.</p>" },
+              { kind: "idea", lvl: "m", title: "The adversarial test", body: "<p>In an <b>adversarial collaboration</b>, rival camps agree on predictions before the data come in. The Cogitate Consortium tested global workspace against integrated information theory (Melloni et al. 2023; Cogitate Consortium 2025) " + ev("c") + ".</p>" +
+                "<p>Neither theory’s predictions fully held. Integrated information theory predicted lasting coordination at the back of the brain, which was not found. Global workspace theory predicted a fresh ignition when a stimulus ended, and front-of-brain coding of all conscious contents; neither showed up clearly.</p>" +
+                "<p>In 2023, a large group of researchers signed a letter calling integrated information theory pseudoscience. Many others objected that the label was unfair and harmful to the field.</p>" +
+                "<p><b>So:</b> the test was a model of how to settle disputes; its results and the letter are still argued over.</p>" },
+              { kind: "idea", lvl: "p", title: "Awareness in the clinic", body: "<p>Some people after severe brain injury are awake but show no signs of awareness. Owen et al. (2006) " + ev("c") + " asked one such woman, in a brain scanner, to imagine playing tennis or walking through her home. Her brain activity matched that of healthy volunteers.</p>" +
+                "<p>Later studies found such <b>covert awareness</b> in some, not most, unresponsive patients. See D6 on disorders of consciousness.</p>" +
+                "<p><b>So:</b> no response does not always mean no awareness; talk near every patient as if they might hear.</p>" },
+              { kind: "contrast", id: "m8c.2:contrast", title: "Attention or awareness?",
+                q: "Which made-up case shows attention without awareness?",
+                cases: [
+                  { label: "Case A", s: ["A volunteer keeps her eyes on the centre of a screen during a hard task.", { t: "The lab is on the ground floor.", irrelevant: true }, { t: "An arrow flashed too briefly to see draws her attention and speeds her response, yet she reports seeing nothing.", diff: true }] },
+                  { label: "Case B", s: ["A volunteer keeps her eyes on the centre of a screen during a hard task.", { t: "The lab is on the ground floor.", irrelevant: true }, { t: "With her attention held on the task, she still reports the gist of a photo flashed at the side: “a beach”.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the lab is", "Attention moved without seeing, versus seeing with attention elsewhere", "How hard the task is", "Whether a screen is used"],
+                feature: 1,
+                why: "Both volunteers do the same task. In Case A, attention shifts but nothing is experienced: attention without awareness (Kentridge, Heywood & Weiskrantz 1999). In Case B, the gist is experienced while attention is elsewhere: awareness with little attention (Li et al. 2002).",
+                hints: ["Find the one sentence where the cases part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask in each case whether she reports seeing anything."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Every theory is tested through report, yet report is exactly what workspace theory says consciousness is for, so the method may favour it. And each theory can be adjusted after a failed prediction, which makes decisive tests rare.</p>' +
+                "<p><b>The question.</b> Which theory best fits the evidence today, and how sure can anyone be?</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>All three theories accept blindsight, inattentional blindness and ignition-like surges as data. They disagree on whether consciousness is broadcast, structure, or self-monitoring.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Workspace accounts best fit reportable awareness; no theory is confirmed.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Low-moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A decisive adversarial test.</dd></div></dl>" +
+                "<p><b>So:</b> use the theories as lenses, and none as settled fact.</p>" },
+              { kind: "example", lvl: "p", title: "Inés explains", body: who("<b>Inés</b> does not tell Mr Adeyemi he can secretly see. She keeps a line ready.") +
+                '<p class="x-note">“Part of your brain still picks up what’s on your left, even though it doesn’t reach your awareness. That’s why your guesses are good. We can use it in your rehabilitation.” · <span lang="es">“Una parte de tu cerebro todavía capta lo que hay a tu izquierda, aunque no llegue a tu consciencia. Por eso aciertas al adivinar. Podemos aprovecharlo en tu rehabilitación.”</span></p>' +
+                "<p>Mr Adeyemi says he had worried he was imagining things.</p>" +
+                "<p><b>Person-first.</b> Write “Mr Adeyemi, who has lost awareness of his left visual field after a stroke”, not “a blindsight case”.</p>" },
+              { kind: "teachback", id: "m8c.2:teachback", title: "Teach it back", prompt: "Explain to a trainee how Inés reads Mr Adeyemi’s pointing: blindsight as Weiskrantz described it; attention and awareness coming apart, with Koch and Tsuchiya, and inattentional blindness from Simons and Chabris’s gorilla study; the three live theories steelmanned, global workspace with Baars and Dehaene’s broadcast and ignition, integrated information with Tononi’s unified whole, and higher-order theories with Rosenthal and Lau; the Cogitate adversarial collaboration, where neither theory’s predictions fully held, and the contested pseudoscience letter; covert awareness in some unresponsive patients from Owen and colleagues; the contrast between attention without awareness and awareness with little attention; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Blindsight " + ev("r") + ". Inattentional blindness " + ev("r") + ". Attention and awareness apart " + ev("c") + ". The adversarial test results " + ev("c") + ". Covert awareness in some patients " + ev("c") + ".</p>" +
+                "<p><b>So:</b> the brain does much without awareness, attention usually guards the gate, and which theory explains awareness is still being tested.</p>" },
+              Q("What defines blindsight?",
+                ["Accurate guesses where nothing is seen", "Slowly losing sight on one side", "Seeing things that are not there", "Full sight with no memory of it"], 0,
+                "People report no vision in part of their field, yet respond accurately to things there."),
+              Q("A cue too brief to see still speeds a response toward its location. What does this show?",
+                ["Awareness without any attention", "Inattentional blindness at work", "Attention without awareness", "Ignition in the workspace"], 2,
+                "Attention shifted, but nothing was experienced: attention and awareness came apart."),
+              Q("What is the 2026 verdict on theories of consciousness?",
+                ["Integrated information is confirmed", "Workspace fits report; none confirmed", "Higher-order theory is confirmed", "All three have been refuted"], 1,
+                "Confidence is low-moderate; a decisive adversarial test would change it.")
+            ]
+          },
+          /* phase 3l-2: CM lessons 3–4 (psychology only; no numbers except years) */
+          "m8c.3": {
+            home: "A client says he tried mindfulness, couldn’t empty his mind, and failed. What is mindfulness, before anyone praises it?",
+            keys: [["How is mindfulness defined in psychology?", "Paying attention, on purpose, in the present moment, non-judgmentally (Kabat-Zinn 1994). It is not emptying the mind."],
+              ["What are Bishop et al.’s (2004) two components?", "Self-regulation of attention, and an orientation of curiosity, openness and acceptance toward what is noticed."],
+              ["Where does the word come from?", "Sati, a Pali word with the sense of remembering or bearing in mind. In its Buddhist home it sits inside a path that includes ethics; the clinical form is an adaptation."],
+              ["What do mindfulness scales measure?", "Self-report scales such as the MAAS (Brown & Ryan 2003) and FFMQ (Baer et al. 2006) ask people to rate themselves. Scores may rise from learning the vocabulary, and meditators may read items differently (Grossman 2011)."],
+              ["What is the verdict as of 2026?", "The secular form can be offered ethically if its roots are named and it is not sold as the whole tradition. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "“So I failed”", body: who("<b>Lucía</b> is a counsellor. Her client <b>Daniel</b> tried a mindfulness recording at home last week.") +
+                "<p>He says: “I tried mindfulness. I’m supposed to empty my mind and I can’t. My thoughts kept going back to work. So I failed.”</p>" +
+                '<p class="hook">What is Daniel actually being asked to do, and has he failed at it?</p>' },
+              { kind: "predict", id: "m8c.3:predict", title: "Your call first",
+                case: ["Daniel played a guided recording on several evenings.",
+                  "The recording asked him to rest his attention on his breathing.",
+                  { t: "He sat on the sofa in his living room.", irrelevant: true },
+                  "His thoughts kept drifting to work.",
+                  "Each time he noticed, he stopped the recording.",
+                  { t: "He works as a secondary school teacher.", irrelevant: true }],
+                q: "On the usual clinical definition, what was Daniel doing when he noticed his thoughts had drifted?",
+                options: ["Failing at the practice", "Doing the practice", "Relaxing, not practising"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: noticing the drift is the practice. The task is to notice where attention went and bring it back, without judging the drift. Stopping the recording each time cut short the very moment the practice trains.",
+                hints: ["Ask what the recording asked him to do with his attention.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what happened just before he stopped the recording."] },
+              { kind: "idea", lvl: "f", title: "A working definition", body: "<p>Kabat-Zinn (1994) " + ev("c") + " gave the definition most clinicians use: mindfulness is <b>paying attention, on purpose, in the present moment, non-judgmentally</b>.</p>" +
+                "<p>Each part matters. <i>On purpose</i>: it is chosen, not drifted into. <i>In the present moment</i>: what is happening now, not the replayed past or the imagined future. <i>Non-judgmentally</i>: noticing without grading what turns up.</p>" +
+                "<p><b>So:</b> mindfulness is a way of paying attention, defined by how, not by what the mind contains.</p>" },
+              { kind: "idea", lvl: "f", title: "Not an empty mind", body: "<p>Nothing in that definition asks for a blank mind. Minds wander; that is what they do.</p>" +
+                "<p>In practice, the cycle is: attention rests somewhere, drifts, the drift is noticed, attention comes back. The noticing and the returning are the exercise, like lifting a weight is the exercise, not holding it still forever.</p>" +
+                "<p><b>So:</b> a wandering mind is not a failed practice; it is the material the practice works with.</p>" },
+              { kind: "idea", lvl: "p", title: "Two components", body: "<p>Bishop et al. (2004) " + ev("c") + " brought researchers together to agree an operational definition, one that studies could test. They named two parts.</p>" +
+                "<p><b>Self-regulation of attention:</b> keeping attention on present experience and noticing when it moves. <b>Orientation to experience:</b> meeting whatever is noticed with curiosity, openness and acceptance, even when it is unpleasant.</p>" +
+                "<p><b>So:</b> mindfulness is both where attention goes and the attitude it brings.</p>" },
+              { kind: "contrast", id: "m8c.3:contrast", title: "Mindfulness or emptying?",
+                q: "Which made-up instruction describes mindfulness practice?",
+                cases: [
+                  { label: "Case A", s: ["A teacher guides a group to rest attention on the breath.", { t: "The class meets in a community hall.", irrelevant: true }, { t: "“When a thought comes, push it away until your mind is clear.”", diff: true }] },
+                  { label: "Case B", s: ["A teacher guides a group to rest attention on the breath.", { t: "The class meets in a community hall.", irrelevant: true }, { t: "“When a thought comes, notice it, and gently bring attention back.”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where the class meets", "Clearing thoughts away versus noticing and returning", "Whether the breath is used", "Who leads the group"],
+                feature: 1,
+                why: "Both groups attend to the breath. Case A aims at an empty mind and treats thoughts as enemies. Case B notices thoughts without judging them and returns attention: the definition from Kabat-Zinn (1994) and the attention component from Bishop et al. (2004).",
+                hints: ["Find the one sentence where the cases part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what each teacher wants done with a thought."] },
+              { kind: "idea", lvl: "f", title: "Not relaxation either", body: "<p>Relaxation aims at a state: calm muscles, slow breathing, feeling better. Mindfulness aims at noticing, whatever is there.</p>" +
+                "<p>If tension or sadness turns up, relaxation tries to lower it. Mindfulness notices it, with curiosity, and lets it be. People often feel calmer, but calm is a by-product, not the goal.</p>" +
+                "<p><b>So:</b> a practice that went tense but was noticed clearly still counts as practice.</p>" },
+              { kind: "idea", lvl: "p", title: "Where the word comes from", body: "<p>“Mindfulness” translates <b>sati</b>, a word from Pali, the language of early Buddhist texts. Its root sense is <b>remembering</b>, or <b>bearing in mind</b>: keeping something present. Rhys Davids chose the English word in 1881.</p>" +
+                "<p>In its home tradition, right mindfulness is one part of a path that also includes ethical conduct, wise understanding and concentration. It is practised for the sake of ending suffering, and is meant to work together with knowing what is wholesome.</p>" +
+                "<p><b>So:</b> the word has a home, and in that home it was never only attention.</p>" },
+              { kind: "idea", lvl: "p", title: "The clinical adaptation", body: "<p>Kabat-Zinn (2011) has described presenting the practice without Buddhist terms, so that hospitals and people of any faith or none could use it.</p>" +
+                "<p><b>Kept:</b> the attention practices, the non-judging attitude, and teachers who practise themselves. <b>Set aside:</b> explicit ethical teaching, doctrine, and the tradition’s own goal; the aim became reducing stress and symptoms.</p>" +
+                "<p>Both camps argue about it: some say the adaptation is faithful to the core; others say the core was the whole (Monteiro, Musten & Compson 2015).</p>" +
+                "<p><b>So:</b> clinical mindfulness is an adaptation, and it is honest to say so.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Secular adaptation made it widely helpful", body: "<p>On this view, taking the practice out of its religious frame is what let it help so many people.</p>" +
+                "<p><b>Its evidence:</b> the secular form entered hospitals, schools and clinics, could be tested in trials, and now has good evidence for some uses, such as preventing depression from returning (see the next lesson).</p>" +
+                "<p><b>Its charge:</b> insisting on the whole tradition would keep help from people who would never join a religious practice, and the clinical form still trains teachers in care and safety.</p>" +
+                "<p><b>So:</b> on this view, adaptation is how a good practice travels.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Removing the ethics changed what it is", body: "<p>On the other view, sati was never bare attention. It meant remembering what matters, held inside an ethical path.</p>" +
+                "<p><b>Its evidence:</b> attention alone can serve any goal, including ones the tradition would call harmful, and critics point to its use to make people tolerate bad conditions rather than change them (Monteiro, Musten & Compson 2015).</p>" +
+                "<p><b>Its charge:</b> calling the adapted form “mindfulness” borrows the authority of an old tradition while dropping what that tradition thought made it safe and good.</p>" +
+                "<p><b>So:</b> on this view, the clinical form is a different practice wearing an old name.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree the clinical form came from Buddhist practice and that something was left out. They disagree on whether what was left out was packaging or the heart of it.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>The secular form can be offered ethically if its roots are named and it is not sold as the whole tradition.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Evidence that the stripped-down form causes harm the full tradition guards against.</dd></div></dl>" +
+                "<p><b>So:</b> name the roots, name the adaptation, and offer the practice without overselling it.</p>" },
+              { kind: "idea", lvl: "p", title: "Measuring it: self-report scales", body: "<p>To study mindfulness, researchers needed a way to measure it. Most use questionnaires people fill in about themselves.</p>" +
+                "<p>The <b>MAAS</b> (Brown & Ryan 2003) " + ev("c") + " asks how often people act on autopilot, such as eating without noticing. The <b>FFMQ</b> (Baer et al. 2006) " + ev("c") + " pooled earlier scales into several facets: observing, describing, acting with awareness, not judging and not reacting.</p>" +
+                "<p><b>So:</b> most claims that mindfulness rose rest on what people say about their own attention.</p>" },
+              { kind: "idea", lvl: "m", title: "What do the scores measure?", body: "<p>Grossman (2011) " + ev("c") + " asked whether these scales measure mindfulness at all. Two problems stand out.</p>" +
+                "<p><b>Learning the vocabulary:</b> after a course, people know what “non-judging” is supposed to sound like, so scores can rise from learning the words, not changing the attention. <b>Reading items differently:</b> a meditator and a non-meditator may understand the same item in different ways; some items do seem to work differently across the two groups (Van Dam, Earleywine & Danoff-Burg 2009).</p>" +
+                "<p><b>So:</b> a higher score is a claim to check, not proof that attention changed.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Much of the evidence that mindfulness changes people rests on scales that may track familiarity with mindfulness language rather than attention itself. If so, “mindfulness went up and distress went down” could mean only that people learned how to describe themselves.</p>' +
+                "<p><b>The question.</b> What else, beyond a questionnaire, would convince you that someone’s attention had changed: behaviour, others’ reports, or attention tasks?</p>" },
+              { kind: "example", lvl: "p", title: "Lucía answers", body: who("<b>Lucía</b> does not give Daniel a lecture on definitions. She keeps a line ready.") +
+                '<p class="x-note">“You didn’t fail — noticing your mind wandered IS the practice.” · <span lang="es">“No fallaste: darte cuenta de que tu mente se fue ES la práctica.”</span></p>' +
+                "<p>Then she suggests he keep the recording playing next time, and simply notice each drift and come back.</p>" +
+                "<p>Daniel laughs and says he must have practised a lot, then.</p>" +
+                "<p><b>Person-first.</b> Write “Daniel, who found mindfulness practice discouraging”, not “a non-compliant meditator”.</p>" },
+              { kind: "teachback", id: "m8c.3:teachback", title: "Teach it back", prompt: "Explain to a trainee how Lucía answers Daniel: Kabat-Zinn’s definition, paying attention on purpose, in the present moment, non-judgmentally, and why it is not emptying the mind; noticing and returning as the practice; Bishop and colleagues’ two components, self-regulation of attention and an orientation of curiosity, openness and acceptance; the contrast with emptying the mind and with relaxation; the Buddhist roots, sati as remembering or bearing in mind, inside a path with ethics; what the clinical adaptation kept and set aside; both sides steelmanned, secular adaptation as widely helpful versus removing the ethics as changing what it is; the dated verdict with its confidence and defeater; and the measurement problem, the MAAS and FFMQ as self-report scales and Grossman’s critique of learned vocabulary and items read differently." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>The working definition " + ev("c") + ". The two components " + ev("c") + ". Self-report scales as measures " + ev("c") + ". The vocabulary critique " + ev("c") + ".</p>" +
+                "<p><b>So:</b> mindfulness is attention, on purpose and without judging, not an empty mind; it has roots worth naming, and its measures are still argued over.</p>" },
+              Q("What does the clinical definition of mindfulness ask for?",
+                ["A mind cleared of all thought", "Deep calm in body and breath", "Attention to now, without judging", "Belief in Buddhist teaching"], 2,
+                "Kabat-Zinn (1994): paying attention, on purpose, in the present moment, non-judgmentally. A wandering mind is part of it."),
+              Q("A person feels tense during practice and notices the tension with curiosity. How does this count?",
+                ["As mindfulness practice", "As failed relaxation", "As failed mindfulness", "As neither of the two"], 0,
+                "Mindfulness aims at noticing whatever is there, not at feeling calm; calm is a by-product."),
+              Q("What is Grossman’s (2011) concern about mindfulness scales?",
+                ["They are too long to complete", "Scores may reflect learned words", "They were never published", "They only measure relaxation"], 1,
+                "Scores can rise from learning the vocabulary, and meditators and non-meditators may read items differently.")
+            ]
+          },
+          "m8c.4": {
+            home: "A woman who has had depression before, and is well now, fears the next episode starts with a bad morning. Which mindfulness therapy fits, and how good is the evidence?",
+            keys: [["What is MBSR?", "Mindfulness-based stress reduction: an eight-week group, first reported with people living with chronic pain (Kabat-Zinn 1982), now used for stress and pain."],
+              ["What is MBCT, and what is its best evidence?", "Mindfulness-based cognitive therapy (Segal, Williams & Teasdale 2002) teaches decentering from depressive thinking. Its best evidence is preventing relapse in recurrent depression (Kuyken et al. 2016)."],
+              ["Where does mindfulness sit in DBT and ACT?", "In DBT, mindfulness is the core skill set, with wise mind and the observe, describe and participate skills (Linehan 1993). In ACT, it appears as present-moment awareness and self-as-context, the observer stance (Hayes)."],
+              ["How is MBCT different from CBT?", "CBT works on changing the content of a thought; MBCT works on changing one’s relationship to it."],
+              ["How do mindfulness therapies compare with others?", "Better than no treatment and roughly equal to other evidence-based treatments (Goldberg et al. 2018); some trials compared only with a waitlist."]],
+            steps: [
+              { kind: "hook", title: "A bad morning that spirals", body: who("<b>Joaquín</b> is a clinical psychologist. His client <b>Helen</b> has had three past episodes of depression and is well now.") +
+                "<p>She says: “I’m fine at the moment. But I know how it starts. A bad morning, a thought like ‘here we go again’, and then it spirals. I’m scared of the next bad morning.”</p>" +
+                '<p class="hook">Of the mindfulness therapies, which was built for Helen’s fear, and how strong is the evidence behind it?</p>' },
+              { kind: "predict", id: "m8c.4:predict", title: "Your call first",
+                case: ["Helen has had three past episodes of depression.",
+                  "She has been well for some months.",
+                  { t: "She walks her dog every evening.", irrelevant: true },
+                  "She says episodes have started with a low morning and the thought “here we go again”.",
+                  "She asks how to stop the next one starting.",
+                  { t: "She works in a public library.", irrelevant: true }],
+                q: "MBCT was built to stop depression coming back. Who would you expect it to help most?",
+                options: ["People with many past episodes", "People in their first episode", "People with stress but no episodes"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: early trials found the benefit concentrated in people who had had more past episodes, three or more, and little or none for those with fewer (Teasdale et al. 2000; Ma & Teasdale 2004). A later pooled analysis found it helped more when leftover symptoms were higher (Kuyken et al. 2016). Helen fits the group it was built for.",
+                hints: ["Ask what MBCT was built to prevent.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say how often depression has returned for Helen."] },
+              { kind: "idea", lvl: "f", title: "MBSR: the parent programme", body: "<p><b>Mindfulness-based stress reduction</b> began at a hospital clinic. Kabat-Zinn (1982) " + ev("c") + " reported on people living with chronic pain who took part in a meditation group; they reported less pain and distress afterward, though there was no comparison group.</p>" +
+                "<p>It is now usually an eight-week group: weekly classes, daily home practice and a day of silent practice, for stress and long-term pain.</p>" +
+                "<p><b>So:</b> MBSR is where the clinical mindfulness programmes started, and it was built for stress and pain.</p>" },
+              { kind: "idea", lvl: "f", title: "MBCT: stepping back from depressive thinking", body: "<p>Segal, Williams and Teasdale (2002) " + ev("c") + " joined MBSR with ideas from cognitive therapy to make <b>mindfulness-based cognitive therapy</b>, for people who have recovered from depression.</p>" +
+                "<p>Its key skill is <b>decentering</b>: seeing thoughts such as “here we go again” as passing mental events, not facts about oneself or the future.</p>" +
+                "<p><b>So:</b> MBCT teaches people to notice the first turn of a spiral and step back from it.</p>" },
+              { kind: "idea", lvl: "p", title: "MBCT’s best evidence: relapse", body: "<p>Kuyken et al. (2016) " + ev("r") + " pooled data from individual people across the main trials. Those who had MBCT were less likely to have depression return than those who did not, including when compared with staying on antidepressants.</p>" +
+                "<p>The evidence is strongest for <b>relapse prevention</b> in recurrent depression. For an episode already under way, it is thinner.</p>" +
+                "<p><b>So:</b> MBCT’s home ground is keeping depression from coming back.</p>" },
+              { kind: "idea", lvl: "p", title: "Who benefits most", body: "<p>In early trials, MBCT helped mainly people with three or more past episodes (Teasdale et al. 2000; Ma & Teasdale 2004) " + ev("c") + ".</p>" +
+                "<p>One explanation: after repeated episodes, a low mood more easily wakes old patterns of negative thinking, so a skill for catching that automatic spiral has more to work on.</p>" +
+                "<p><b>So:</b> the more often depression has returned, the better MBCT seems to fit.</p>" },
+              { kind: "idea", lvl: "p", title: "DBT: mindfulness as the core skill", body: "<p>Linehan (1993) " + ev("r") + " built <b>dialectical behaviour therapy</b> for people who live with intense, fast-changing emotions and repeated self-harm. Mindfulness is its core skill set, taught before the others.</p>" +
+                "<p><b>Wise mind</b> is the meeting of emotion mind and reasonable mind. The “what” skills are to <b>observe</b>, to <b>describe</b> in words, and to <b>participate</b> fully in the moment.</p>" +
+                "<p><b>So:</b> in DBT, mindfulness is the base the other skills stand on.</p>" },
+              { kind: "idea", lvl: "p", title: "ACT: the observer stance", body: "<p>In <b>acceptance and commitment therapy</b>, developed by Hayes and colleagues, mindfulness appears as two processes. <b>Present-moment awareness</b> is contact with what is happening now. <b>Self-as-context</b> is the observer stance: the part of you that notices thoughts and feelings, and is not the same as any of them.</p>" +
+                "<p>In ACT, these serve action toward one’s values. See Part F, acceptance and commitment therapy.</p>" +
+                "<p><b>So:</b> in ACT, mindfulness makes room for living by one’s values.</p>" },
+              { kind: "idea", lvl: "p", title: "The clinician’s own discipline", body: "<p>Mindfulness is also something clinicians practise, not only teach. <b>Therapist presence</b> means being fully attentive and open with the client in the session (Geller & Greenberg 2012) " + ev("c") + ".</p>" +
+                "<p>Teachers of MBSR and MBCT are expected to keep their own practice. See Part H, the clinician’s own discipline.</p>" +
+                "<p><b>So:</b> the map includes the person holding it.</p>" },
+              { kind: "contrast", id: "m8c.4:contrast", title: "Content or relationship?",
+                q: "Which made-up session works on Helen’s relationship to a thought, not its content?",
+                cases: [
+                  { label: "Session A", s: ["Helen describes the thought “here we go again” on a low morning.", { t: "The session is on a Tuesday.", irrelevant: true }, { t: "Joaquín asks her to say it as “I’m having the thought that here we go again”, and watch it pass.", diff: true }] },
+                  { label: "Session B", s: ["Helen describes the thought “here we go again” on a low morning.", { t: "The session is on a Tuesday.", irrelevant: true }, { t: "Joaquín asks her to list evidence for and against the thought, and write a more balanced one.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Which day the session is", "Stepping back from the thought versus testing whether it is true", "What the thought says", "Whether Helen is depressed now"],
+                feature: 1,
+                why: "Both sessions start from the same thought. Session B tests and rewrites its content, as in CBT. Session A leaves the content alone and changes how Helen holds it, as a passing mental event: decentering, as in MBCT (Segal, Williams & Teasdale 2002).",
+                hints: ["Find the one sentence where the sessions part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask in each session whether Joaquín wants the thought changed."] },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Some trials compared mindfulness programmes with a waitlist, people getting nothing yet, rather than with an active treatment. Beating no treatment is a low bar. Goldberg et al. (2018) found that, against other evidence-based treatments, mindfulness programmes were roughly equal, not better.</p>' +
+                "<p><b>The question.</b> When a study says a mindfulness therapy works, what was it compared with, and what does that change about the claim?</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Mindfulness programmes beat no treatment and roughly match other evidence-based treatments. MBCT stands out for keeping recurrent depression from returning.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>MBCT is a sound option for preventing relapse in recurrent depression; mindfulness therapies in general are one good choice among several, not a superior one.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate-high for MBCT and relapse; moderate for the rest.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Large trials against active treatments that find no relapse benefit.</dd></div></dl>" +
+                "<p><b>So:</b> match the therapy to the problem, and ask what each study compared it with.</p>" },
+              { kind: "example", lvl: "p", title: "Joaquín answers", body: who("<b>Joaquín</b> does not promise Helen there will be no more bad mornings. He keeps a line ready.") +
+                '<p class="x-note">“A bad morning doesn’t have to become an episode. MBCT teaches you to notice that first thought and step back from it, and it has its best evidence with people who’ve been where you have.” · <span lang="es">“Una mala mañana no tiene por qué convertirse en un episodio. La MBCT te enseña a notar ese primer pensamiento y tomar distancia, y tiene su mejor evidencia en personas que han pasado por lo que tú.”</span></p>' +
+                "<p>Helen says it helps to think of the morning as a moment to notice, not a verdict.</p>" +
+                "<p><b>Person-first.</b> Write “Helen, who has had depression before”, not “a recurrent depressive”.</p>" },
+              { kind: "teachback", id: "m8c.4:teachback", title: "Teach it back", prompt: "Explain to a trainee how Joaquín maps the options for Helen: MBSR from Kabat-Zinn as an eight-week group for stress and chronic pain; MBCT from Segal, Williams and Teasdale, with decentering from depressive thinking; its best evidence, preventing relapse in recurrent depression in Kuyken and colleagues’ pooled analysis; who benefits most, people with more past episodes; DBT from Linehan, with mindfulness as the core skill set, wise mind, and observe, describe and participate; ACT from Hayes, with present-moment awareness and self-as-context as the observer stance; therapist presence as the clinician’s own discipline; the contrast between changing the content of a thought in CBT and changing one’s relationship to it in MBCT; the waitlist critique and Goldberg and colleagues’ finding of rough equality with other evidence-based treatments; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>MBCT preventing relapse " + ev("r") + ". DBT’s skills-based treatment " + ev("r") + ". Mindfulness roughly equal to other evidence-based treatments " + ev("r") + ". Most benefit for more past episodes " + ev("c") + ". MBSR’s early pain findings " + ev("c") + ".</p>" +
+                "<p><b>So:</b> each mindfulness therapy has its own job; MBCT’s is keeping depression from coming back, and that is where its evidence is strongest.</p>" },
+              Q("What is MBCT’s best-supported use?",
+                ["Treating a first episode", "Preventing depression relapse", "Reducing chronic back pain", "Replacing all medication"], 1,
+                "Kuyken et al. (2016): people with recurrent depression who had MBCT were less likely to relapse."),
+              Q("A client learns to say “I’m having the thought that I’m useless” and let it pass. What is this?",
+                ["Decentering", "Disputing the thought", "Emptying the mind", "Relaxation training"], 0,
+                "The content is left alone; the relationship to the thought changes, as in MBCT."),
+              Q("What did Goldberg et al. (2018) find about mindfulness therapies?",
+                ["Better than every other therapy", "No better than no treatment", "Roughly equal to proven treatments", "Helpful only for chronic pain"], 2,
+                "They beat no treatment and roughly matched other evidence-based treatments.")
+            ]
+          },
+          /* ============ phase 3l-3: CM lesson 5 · Mechanisms: proposed vs proven ============ */
+          "m8c.5": {
+            home: "After a month of practice, a client says the thought “I’m worthless” still comes, but now it’s like a car passing outside. What changed, and how sure can anyone be?",
+            keys: [["What are the main proposed mechanisms of mindfulness?", "Attention regulation (Tang, Hölzel & Posner 2015), body awareness or interoception (Farb et al. 2015), emotion regulation (Hölzel et al. 2011), and decentering or reperceiving (Shapiro et al. 2006; Bernstein et al. 2015)."],
+              ["What is decentering, or reperceiving?", "Seeing thoughts as thoughts: passing mental events, not facts about oneself."],
+              ["What does mediation evidence show?", "Changes in mindfulness and in repetitive negative thinking partly account for outcomes (Gu et al. 2015), but most studies are weak at showing the change came first."],
+              ["Does mindfulness change brain structure?", "Not established. A randomized trial found little structural change (Kral et al. 2022); earlier claims came mostly from small studies."],
+              ["What is the verdict as of 2026?", "Decentering and reduced rumination are the best-supported pathways, partially supported; brain-structure claims are not established. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "A car passing outside", body: who("<b>Joaquín</b> is a clinical psychologist. His client <b>Amara</b> has practised mindfulness most days for a month.") +
+                "<p>She says: “The thought ‘I’m worthless’ still comes. But now it’s like a car passing outside. I hear it, and it goes.”</p>" +
+                '<p class="hook">Something changed for Amara. Which proposed mechanism fits, and how much of it has been shown rather than assumed?</p>' },
+              { kind: "predict", id: "m8c.5:predict", title: "Your call first",
+                case: ["Amara has practised most days for a month.",
+                  "The thought “I’m worthless” still comes.",
+                  { t: "She practises before breakfast.", irrelevant: true },
+                  "She says it now feels like a car passing outside.",
+                  "She says she hears it, and it goes.",
+                  { t: "She uses a cushion her sister gave her.", irrelevant: true }],
+                q: "From what Amara reports, what seems to have changed?",
+                options: ["How often the thought comes", "How she relates to the thought", "What the thought says"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: the thought still comes and still says the same thing. What changed is her stance toward it: she sees it as a passing event, not a fact. That is decentering, also called reperceiving (Shapiro et al. 2006). Whether that change caused her feeling better is a separate question, and the harder one.",
+                hints: ["Ask what stayed the same in her report.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether the thought has stopped."] },
+              { kind: "idea", lvl: "f", title: "Proposed, partially supported, established", body: "<p>A <b>mechanism</b> is how a treatment works: the change inside the person that leads to the change in outcome.</p>" +
+                "<p>This lesson labels each one. <b>Proposed:</b> a plausible idea, little tested. <b>Partially supported:</b> some good evidence, gaps remain. <b>Established:</b> shown repeatedly, including that it comes before the outcome. In the app’s tags, the first two read " + ev("c") + " and the last " + ev("r") + ".</p>" +
+                "<p><b>So:</b> a story about how something works is not yet evidence that it works that way.</p>" },
+              { kind: "idea", lvl: "p", title: "Attention regulation · partially supported", body: "<p>Tang, Hölzel and Posner (2015) " + ev("c") + " reviewed the idea that practice trains <b>attention regulation</b>: holding attention, noticing when it drifts, and bringing it back.</p>" +
+                "<p>Some attention tasks improve after training, but results vary across studies and tasks, and it is unclear how much this explains symptom change.</p>" +
+                "<p><b>So:</b> practice may train attention; that this is what helps people is not yet shown. Status: partially supported.</p>" },
+              { kind: "idea", lvl: "p", title: "Body awareness · proposed", body: "<p><b>Interoception</b> is sensing the inside of the body: heartbeat, breath, tension, hunger. Farb et al. (2015) " + ev("c") + " reviewed the idea that mindfulness sharpens it, so early signs of stress or low mood are caught sooner.</p>" +
+                "<p>Self-reported body awareness often rises; objective tests, such as sensing one’s heartbeat, show mixed results.</p>" +
+                "<p><b>So:</b> body awareness is a plausible route, still mostly a proposal. Status: proposed.</p>" },
+              { kind: "idea", lvl: "p", title: "Emotion regulation · partially supported", body: "<p>Hölzel et al. (2011) " + ev("c") + " offered a framework in which mindfulness helps people manage feelings: noticing them early, letting them rise and fall, and reacting less.</p>" +
+                "<p>Studies find less emotional reactivity after training, but a framework joins many ideas, and few studies test each part on its own.</p>" +
+                "<p><b>So:</b> emotion regulation is a useful map; its parts are tested unevenly. Status: partially supported.</p>" },
+              { kind: "idea", lvl: "p", title: "Decentering, or reperceiving · partially supported", body: "<p>Shapiro et al. (2006) " + ev("c") + " called it <b>reperceiving</b>: stepping back so that thoughts are seen <b>as thoughts</b>, not as truths. Bernstein et al. (2015) " + ev("c") + " gathered related ideas under <b>decentering</b>.</p>" +
+                "<p>This is what Amara describes. It is the mechanism MBCT was built around (CM lesson 4), and it fits the keep-the-person protocol: a belief is held at a distance, never attacked (M8+ lesson 7).</p>" +
+                "<p><b>So:</b> decentering is the closest match to Amara’s words, and one of the best-studied pathways. Status: partially supported.</p>" },
+              { kind: "idea", lvl: "m", title: "Mediation: what came first?", body: "<p><b>Mediation evidence</b> asks whether the proposed mechanism changes, and whether that change accounts for the outcome.</p>" +
+                "<p>Gu et al. (2015) " + ev("c") + " pooled such studies: changes in mindfulness and in <b>repetitive negative thinking</b>, such as rumination and worry, partly accounted for better outcomes. But most studies measured mechanism and outcome at the same moments, so they could not show the mechanism changed first.</p>" +
+                "<p><b>So:</b> the pathways are linked with outcomes; the order, and so the cause, is mostly unshown.</p>" },
+              { kind: "idea", lvl: "m", title: "Brain-change claims: handle with care", body: "<p>Popular articles say meditation “rewires” or “grows” the brain. Early studies were small and often compared people who chose to meditate with people who did not.</p>" +
+                "<p>Kral et al. (2022) " + ev("c") + " ran a randomized trial with brain scans before and after MBSR and found little structural change compared with control groups. That is weak evidence for the popular claim, not proof that nothing changes. For what scans can and cannot show, see M5+ lesson 5.</p>" +
+                "<p><b>So:</b> brain-structure claims are not established; treat a glowing scan as a question, not an answer.</p>" },
+              { kind: "contrast", id: "m8c.5:contrast", title: "Plausible or shown?",
+                q: "Which made-up study does more to show that decentering is how the course helped?",
+                cases: [
+                  { label: "Study A", s: ["People take an eight-week mindfulness course and their low mood eases.", { t: "The course runs in a community clinic.", irrelevant: true }, { t: "Decentering and mood are both measured once, at the end, and go together.", diff: true }] },
+                  { label: "Study B", s: ["People take an eight-week mindfulness course and their low mood eases.", { t: "The course runs in a community clinic.", irrelevant: true }, { t: "Decentering is measured every week and rises before mood improves.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where the course runs", "Whether the mechanism was seen to change before the outcome", "Whether mood eased", "How long the course lasted"],
+                feature: 1,
+                why: "Both studies find decentering and better mood together. Study A shows only that they go together; mood could have lifted first and made stepping back easier. Study B shows decentering changing first, the timing a mechanism claim needs. This is the gap Gu et al. (2015) found in most studies.",
+                hints: ["Find the one sentence where the studies part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say when each study measured decentering."] },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Decentering is the active ingredient", body: "<p>On this view, the specific skill of seeing thoughts as thoughts is what does the work.</p>" +
+                "<p><b>Its evidence:</b> decentering rises with practice, it is linked with lower rumination and better outcomes (Gu et al. 2015), and MBCT, built to teach it, prevents relapse in recurrent depression (Kuyken et al. 2016).</p>" +
+                "<p><b>Its charge:</b> calling it all “common factors” ignores that clients describe exactly this change, as Amara does, and that it fits the treatment’s design.</p>" +
+                "<p><b>So:</b> on this view, teach decentering on purpose; it is the point.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Common factors do most of the work", body: "<p>On the other view, much of the benefit comes from what all good therapies share: <b>common factors</b> such as expectation of help, group support and a warm, skilled therapist.</p>" +
+                "<p><b>Its evidence:</b> mindfulness programmes roughly match other evidence-based treatments (Goldberg et al. 2018), and most mediation studies cannot show the specific skill changed before the outcome.</p>" +
+                "<p><b>Its charge:</b> naming a special ingredient without timing evidence turns a plausible story into a sales point.</p>" +
+                "<p><b>So:</b> on this view, the group and the relationship may matter as much as the technique.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree outcomes improve and decentering rises. They disagree on how much the specific skill, rather than what all therapies share, explains.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Decentering and reduced rumination are the best-supported pathways, partially supported; brain-structure claims are not established.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Well-timed mediation studies showing outcomes change before the proposed mechanism.</dd></div></dl>" +
+                "<p><b>So:</b> name the likely pathway, and say how far it has been shown.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Most mechanism studies measure the proposed mechanism and the outcome at the same times, by self-report, against weak control groups. That cannot separate a cause from a by-product: feeling better could make it easier to step back from thoughts, not the other way round.</p>' +
+                "<p><b>The question.</b> What design would you need to show that decentering came first and did the work?</p>" },
+              { kind: "example", lvl: "p", title: "Joaquín answers", body: who("<b>Joaquín</b> does not tell Amara her brain has been rewired. He keeps a line ready.") +
+                '<p class="x-note">“The thought still visits, but you’re seeing it as a thought, not a fact. That stepping back is one of the best-supported ways this practice seems to help.” · <span lang="es">“El pensamiento sigue apareciendo, pero ahora lo ves como un pensamiento, no como un hecho. Ese tomar distancia es una de las vías mejor respaldadas por las que esta práctica parece ayudar.”</span></p>' +
+                "<p>Amara says she likes that it is something she is doing, not something done to her.</p>" +
+                "<p><b>Person-first.</b> Write “Amara, who lives with harsh self-critical thoughts”, not “a self-critical depressive”.</p>" },
+              { kind: "teachback", id: "m8c.5:teachback", title: "Teach it back", prompt: "Explain to a trainee how Joaquín reads Amara’s car-passing-outside report: what a mechanism is, and the difference between proposed, partially supported and established; attention regulation from Tang, Hölzel and Posner; body awareness, or interoception, from Farb and colleagues; emotion regulation from Hölzel and colleagues’ framework; decentering, or reperceiving, from Shapiro and colleagues and Bernstein and colleagues, thoughts seen as thoughts; Gu and colleagues’ mediation finding on mindfulness and repetitive negative thinking, and why timing is the weak point; why brain-structure claims need caution, with Kral and colleagues’ randomized trial; the contrast between a plausible and a shown mechanism; both sides steelmanned, decentering as the active ingredient versus common factors; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Attention regulation " + ev("c") + ". Body awareness " + ev("c") + ". Emotion regulation " + ev("c") + ". Decentering " + ev("c") + ". Mediation through rumination " + ev("c") + ". Brain-structure change " + ev("c") + ".</p>" +
+                "<p><b>So:</b> mindfulness probably helps partly by changing how people relate to their thoughts; how much, and in what order, is still being shown.</p>" },
+              Q("A client says a harsh thought still comes but now feels like “just a thought”. Which mechanism is this?",
+                ["Attention regulation", "Decentering", "Interoception", "Thought suppression"], 1,
+                "The thought is unchanged; it is seen as a mental event, not a fact: decentering, or reperceiving (Shapiro et al. 2006)."),
+              Q("What is the main weakness Gu et al. (2015) found in mindfulness mediation studies?",
+                ["They rarely used questionnaires", "They seldom showed what came first", "They studied only brain scans", "They found no links with outcome"], 1,
+                "Mechanism and outcome were mostly measured at the same moments, so the order could not be shown."),
+              Q("What did Kral et al. (2022) find about MBSR and brain structure?",
+                ["Large growth in many regions", "Little structural change", "Shrinkage after training", "Change only in experts"], 1,
+                "A randomized trial found little structural change: weak evidence for the popular claim, not proof of none.")
+            ]
+          },
+          /* ============ phase 3l-3: CM lesson 6 · Evidence, hype, and adverse effects ============ */
+          "m8c.6": {
+            home: "A man with a history of trauma joins an intensive meditation retreat at work’s suggestion. On day four he feels unreal and sees flashes of old scenes. What does the evidence promise, and what does it warn?",
+            keys: [["What does mindfulness have moderate evidence for?", "Anxiety, depression symptoms and pain (Goyal et al. 2014; Hilton et al. 2017). MBCT for relapse prevention is the strongest single claim (Kuyken et al. 2016)."],
+              ["What is “Mind the hype”?", "Van Dam et al. (2018) warned that popular claims run far ahead of the evidence, with weak or absent support for many of them."],
+              ["What is McMindfulness?", "Purser’s (2019) term for mindfulness sold as a productivity patch, stripped of its ethics."],
+              ["What adverse effects are reported?", "Anxiety spikes, depersonalization, traumatic re-experiencing, and rarely psychosis in vulnerable people (Lindahl et al. 2017; Farias et al. 2020)."],
+              ["What are the clinical duties?", "Screen for trauma, psychosis and dissociation history; pace; offer eyes-open, shorter and anchored options and alternatives; use trauma-sensitive mindfulness (Treleaven 2018)."],
+              ["What is the verdict as of 2026?", "Helpful for some conditions at moderate size; adverse effects are real, under-measured, and mostly manageable with screening and pacing. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Day four of the retreat", body: who("<b>Nadia</b> is a clinical psychologist. Her client <b>Rafael</b>, who lived through a violent assault years ago, joined a silent meditation retreat at his manager’s suggestion.") +
+                "<p>On day four he calls her: “I feel like I’m not real, like I’m watching myself. And I keep seeing flashes of that night. They told me to sit with it.”</p>" +
+                '<p class="hook">Is this the practice working, or a known adverse effect? And what was Nadia’s job before he ever went?</p>' },
+              { kind: "predict", id: "m8c.6:predict", title: "Your call first",
+                case: ["Rafael has a history of trauma.",
+                  "He is on an intensive retreat with long silent sittings.",
+                  { t: "The retreat centre is in the hills.", irrelevant: true },
+                  "He says he feels unreal, as if watching himself.",
+                  "He reports flashes of old scenes from the assault.",
+                  { t: "His manager attended the same retreat last year.", irrelevant: true }],
+                q: "What would you expect a careful clinician to advise first?",
+                options: ["Push on; it often passes", "Pause and adjust the practice", "Add longer silent sittings"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: pause and adjust. Feeling unreal and re-experiencing old scenes are reported adverse effects of intensive practice, more likely after trauma (Lindahl et al. 2017). Grounding, eyes open, shorter practice, or stopping, come before any more sitting (Treleaven 2018).",
+                hints: ["Ask what his history makes more likely.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: name what he is feeling."] },
+              { kind: "idea", lvl: "p", title: "What the evidence supports", body: "<p>Goyal et al. (2014) " + ev("r") + ", a meta-analysis in JAMA Internal Medicine, found moderate evidence that meditation programmes ease <b>anxiety</b>, <b>depression symptoms</b> and <b>pain</b>. Hilton et al. (2017) " + ev("c") + " found modest benefits for chronic pain, with low-quality evidence.</p>" +
+                "<p>Moderate means a real but not large help for many people, about what other active treatments give.</p>" +
+                "<p><b>So:</b> mindfulness helps with some common problems, at moderate size.</p>" },
+              { kind: "idea", lvl: "p", title: "The strongest single claim", body: "<p>The best-supported use is MBCT for preventing relapse in recurrent depression (Kuyken et al. 2016), covered in CM lesson 4.</p>" +
+                "<p><b>So:</b> when someone asks what mindfulness is best shown to do, this is the answer.</p>" },
+              { kind: "idea", lvl: "m", title: "Mind the hype", body: "<p>Van Dam et al. (2018) " + ev("r") + ", in a paper called “Mind the hype”, warned that claims run ahead of the science: for sharper focus at work, better leadership, higher grades, slower ageing and more, evidence is weak or absent.</p>" +
+                "<p>They noted loose definitions, small samples, weak control groups and self-report, and few studies looking for harm.</p>" +
+                "<p><b>So:</b> for most of the popular list, the honest answer is “not yet shown”.</p>" },
+              { kind: "idea", lvl: "m", title: "McMindfulness", body: "<p>Purser (2019) coined <b>McMindfulness</b> for mindfulness sold as a productivity patch: a way to make workers calmer and more efficient, stripped of the ethics it came with (CM lesson 3).</p>" +
+                "<p>His charge: it puts stress inside the person and leaves the conditions causing it untouched. Rafael went on a retreat because work suggested it, not because anyone asked what he needed.</p>" +
+                "<p><b>So:</b> ask who is selling the practice, and what problem it is meant to hide.</p>" },
+              { kind: "idea", lvl: "p", title: "Adverse effects, plainly", body: "<p><b>Meditation adverse effects</b> are unwanted experiences during or after practice that cause distress or difficulty. Reported ones include <b>anxiety spikes</b> and panic, <b>depersonalization</b>, feeling unreal or detached from oneself, <b>traumatic re-experiencing</b>, and, rarely, <b>psychosis</b> in people already vulnerable.</p>" +
+                "<p>Lindahl et al. (2017) " + ev("c") + ", the Varieties of Contemplative Experience study led with Britton, interviewed practitioners and teachers and found such effects across traditions, sometimes lasting and impairing.</p>" +
+                "<p><b>So:</b> these effects are real, and they are not a sign that someone is “doing it wrong”.</p>" },
+              { kind: "idea", lvl: "m", title: "How common, and why under-counted", body: "<p>Farias et al. (2020) " + ev("c") + " reviewed studies that asked about harm and found adverse effects were not rare, both on retreats and in ordinary programmes, and more likely in people with past anxiety or depression.</p>" +
+                "<p>Most trials never asked. A trial that does not look for harm will not find it, and silence in its report says nothing about safety.</p>" +
+                "<p><b>So:</b> “no harms reported” is not “no harms”.</p>" },
+              { kind: "idea", lvl: "p", title: "Duty one: screen", body: "<p>Before recommending intensive practice, ask about a history of <b>trauma</b>, <b>psychosis</b> and <b>dissociation</b>. These are not reasons to refuse, but they change the plan.</p>" +
+                "<p><b>So:</b> screening is the first clinical duty, not a footnote.</p>" },
+              { kind: "idea", lvl: "p", title: "Duty two: pace and offer options", body: "<p><b>Trauma-sensitive mindfulness</b> (Treleaven 2018) adapts the practice for people with trauma: <b>eyes open</b>, <b>shorter</b> sittings, attention <b>anchored</b> on something steady outside the body, such as sounds or feet on the floor, and freedom to stop.</p>" +
+                "<p>Pace slowly, check in often, and keep <b>alternatives</b> ready, such as movement practices or another therapy altogether.</p>" +
+                "<p><b>So:</b> the person sets the dose; the practice fits them, not the reverse.</p>" },
+              { kind: "contrast", id: "m8c.6:contrast", title: "No evidence of effect, or evidence of no effect?",
+                q: "Which made-up report supports saying “the course does not help sleep in this group”?",
+                cases: [
+                  { label: "Report A", s: ["A trial tests a mindfulness course for sleep problems and finds no clear difference from the control group.", { t: "Participants were recruited through local doctors.", irrelevant: true }, { t: "The trial was small, and its results were too uncertain to rule out a real benefit.", diff: true }] },
+                  { label: "Report B", s: ["A trial tests a mindfulness course for sleep problems and finds no clear difference from the control group.", { t: "Participants were recruited through local doctors.", irrelevant: true }, { t: "The trial was large, planned in advance, and precise enough to rule out any worthwhile benefit.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["How participants were recruited", "Whether the trial was precise enough to rule out a benefit", "Whether a difference was found", "Which problem was studied"],
+                feature: 1,
+                why: "Both find no clear difference. Report A is <b>no evidence of effect</b>: too small to tell, so the question stays open. Report B is <b>evidence of no effect</b>: large and precise enough that a worthwhile benefit would have shown. The same rule applies to harms: trials that never measured them give no evidence of harm, not evidence of safety.",
+                hints: ["Find the one sentence where the reports part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask whether each trial could have detected a benefit."] },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Mindfulness is a broadly safe, helpful skill", body: "<p>On this view, mindfulness is a gentle, low-cost skill that helps many people and harms few.</p>" +
+                "<p><b>Its evidence:</b> moderate benefits for anxiety, depression symptoms and pain (Goyal et al. 2014), strong relapse evidence for MBCT (Kuyken et al. 2016), and most serious reports come from intensive retreats, not weekly classes.</p>" +
+                "<p><b>Its charge:</b> stressing rare harms could scare people away from a skill that helps them, and other treatments carry risks too.</p>" +
+                "<p><b>So:</b> on this view, offer it widely, with ordinary care.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · Its harms are under-counted", body: "<p>On the other view, the safety picture is unknown because trials rarely measure harm.</p>" +
+                "<p><b>Its evidence:</b> where researchers asked, adverse effects were not rare (Farias et al. 2020), and they occurred across traditions and settings, sometimes lasting (Lindahl et al. 2017).</p>" +
+                "<p><b>Its charge:</b> calling a practice “safe” because no one looked for harm mistakes no evidence of harm for evidence of no harm.</p>" +
+                "<p><b>So:</b> on this view, measure harm in every trial, and screen before every referral.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree mindfulness helps some people with some problems and that some people are harmed. They disagree on how often, and on how loudly to say so.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Helpful for some conditions at moderate size; adverse effects are real, under-measured, and mostly manageable with screening and pacing.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Large trials that systematically measure harms and find them negligible — or common.</dd></div></dl>" +
+                "<p><b>So:</b> offer it where it is shown to help, screen first, and keep watching.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Both halves of the picture are poorly measured. Many benefit trials were small, compared mindfulness with doing nothing, and relied on self-report; most never asked about harm. So the benefits may be over-sized and the risks under-sized at the same time.</p>' +
+                "<p><b>The question.</b> If you designed the next trial, what would you measure so that both benefit and harm could be fairly sized?</p>" },
+              { kind: "example", lvl: "p", title: "Nadia answers", body: who("<b>Nadia</b> tells Rafael to stop the sitting, open his eyes and feel his feet on the floor. Then she sets out how they will adjust. She keeps a line ready for every client before practice begins.") +
+                '<p class="x-note">“If it starts to feel unreal or overwhelming, you can stop, open your eyes, and we’ll adjust — that’s information, not failure.” · <span lang="es">“Si empieza a sentirse irreal o abrumador, puedes parar, abrir los ojos y lo ajustamos: es información, no un fracaso.”</span></p>' +
+                "<p>Rafael leaves the retreat. Later they try short, eyes-open practice anchored on sounds, and he decides when to stop.</p>" +
+                "<p><b>Person-first.</b> Write “Rafael, who has a history of trauma”, not “a trauma case”.</p>" },
+              { kind: "teachback", id: "m8c.6:teachback", title: "Teach it back", prompt: "Explain to a trainee what Nadia should have known before Rafael’s retreat: the moderate evidence for anxiety, depression symptoms and pain from Goyal and colleagues and Hilton and colleagues; MBCT relapse prevention as the strongest single claim; Van Dam and colleagues’ warning to mind the hype; Purser’s McMindfulness critique of mindfulness sold as a productivity patch without its ethics; the adverse effects, anxiety spikes, depersonalization, traumatic re-experiencing and rare psychosis in the vulnerable, from Lindahl and colleagues with Britton and from Farias and colleagues; the clinical duties of screening for trauma, psychosis and dissociation, pacing, eyes-open, shorter and anchored options, alternatives, and trauma-sensitive mindfulness from Treleaven; the contrast between no evidence of effect and evidence of no effect; both sides steelmanned, broadly safe versus harms under-counted; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Moderate benefit for anxiety, depression symptoms and pain " + ev("r") + ". Benefit for chronic pain " + ev("c") + ". The hype warning " + ev("r") + ". Adverse effects across traditions " + ev("c") + ". How often harms occur " + ev("c") + ".</p>" +
+                "<p><b>So:</b> mindfulness is a real treatment with real benefits and real risks; screen, pace, and never call it safe just because no one looked.</p>" },
+              Q("A client on a retreat says she feels unreal, as if watching herself. What is this?",
+                ["Depersonalization", "Deep concentration", "Decentering", "Ordinary relaxation"], 0,
+                "Feeling unreal or detached from oneself is depersonalization, a reported adverse effect of intensive practice."),
+              Q("A small trial finds no clear benefit of mindfulness for sleep. What can you conclude?",
+                ["The course has no effect on sleep", "The question remains open", "The course harms sleep", "Sleep needs no treatment"], 1,
+                "A small, uncertain trial gives no evidence of effect, which is not evidence of no effect."),
+              Q("Which step comes first before referring someone with trauma to intensive practice?",
+                ["Booking the longest retreat", "Screening their history", "Promising it is safe", "Ending all other care"], 1,
+                "Screen for trauma, psychosis and dissociation history, then pace and adapt the practice (Treleaven 2018).")
+            ]
+          },
+          /* ============ phase 3l-4: CM lesson 7 · Consciousness as a clinical tool (final) ============ */
+          "m8c.7": {
+            home: "A woman with health anxiety checks her pulse many times a day: “If I stop watching it, something will happen.” How does a clinician use awareness itself to help?",
+            keys: [["What does metacognitive therapy work on?", "The relationship to thoughts, not their content: beliefs about worry, such as “worrying keeps me safe” or “my worry is dangerous”, and the habit of worry about worry (Wells 2009)."],
+              ["What are the attention training technique and detached mindfulness?", "Tools of metacognitive therapy: practice in shifting attention flexibly among sounds, and noticing a thought without engaging with it or acting on it (Wells 2009)."],
+              ["What is self-monitoring reactivity?", "Recording a behaviour tends to change it: the diary is assessment and treatment at once (Korotitsch & Nelson-Gray 1999)."],
+              ["Why does awareness matter inside exposure?", "Inhibitory learning: the client must notice the fear and notice that the feared outcome did not come, so the expectation is violated (Craske et al. 2014)."],
+              ["What is mentalization?", "Holding one’s own and others’ minds in mind; the target of mentalization-based treatment for borderline personality disorder (Bateman & Fonagy 2009)."],
+              ["How can countertransference be used?", "The therapist’s own reactions, noticed and managed, read as data about the client and the relationship (Hayes, Gelso & Hummel 2011)."],
+              ["What is the verdict on metacognitive therapy as of 2026?", "Promising for anxiety and depression with a distinct focus on beliefs about thinking; trials are fewer and many come from its developers’ group. Confidence low-moderate."]],
+            steps: [
+              { kind: "hook", title: "Watching the pulse", body: who("<b>Tomás</b> is a clinical psychologist. His client <b>Lucía</b>, who lives with health anxiety, has had her heart checked by doctors and told it is healthy.") +
+                "<p>She keeps her fingers on her wrist on the bus, at her desk and in bed. “If I stop watching it, something will happen,” she says.</p>" +
+                '<p class="hook">Mindfulness is one way to work with awareness. What else can a clinician do with consciousness itself?</p>' },
+              { kind: "predict", id: "m8c.7:predict", title: "Your call first",
+                case: ["Lucía checks her pulse many times a day.",
+                  "Her heart has been checked and found healthy.",
+                  { t: "She takes the bus to work.", irrelevant: true },
+                  "She says that if she stops watching, something will happen.",
+                  "She feels calmer for a moment after each check, then the urge returns.",
+                  { t: "Her sister works as a nurse.", irrelevant: true }],
+                q: "What would you expect a metacognitive therapist to target first?",
+                options: ["Her belief that watching keeps her safe", "Proof that her heart is healthy", "Teaching her to check more accurately"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: her belief that watching keeps her safe. More reassurance about her heart answers the content of the worry; metacognitive therapy works on her relationship to it, and on the belief that monitoring protects her (Wells 2009).",
+                hints: ["Ask what keeps the checking going, not what it is about.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: name what she believes the checking does."] },
+              { kind: "idea", lvl: "p", title: "Attention as the target", body: "<p>Wells (2009) " + ev("c") + " built <b>metacognitive therapy</b> on a simple shift: work on the <b>relationship to thoughts</b>, not on whether each thought is true.</p>" +
+                "<p>Its targets are beliefs about thinking: “worrying keeps me safe”, “watching my body protects me”, and the opposite fear, “my worrying will make me ill”. That second layer is <b>worry about worry</b>.</p>" +
+                "<p>Lucía’s “If I stop watching it, something will happen” is such a belief: it says monitoring itself is protective.</p>" +
+                "<p><b>So:</b> the clinician asks what the client believes about her own attention, and works there.</p>" },
+              { kind: "idea", lvl: "p", title: "Training attention, and stepping back", body: "<p>The <b>attention training technique</b> is a short practice in which the client listens to several sounds at once and moves attention among them on instruction. The point is not relaxation; it is learning that attention can be steered, even with worry present.</p>" +
+                "<p><b>Detached mindfulness</b> means noticing a thought, such as “my heart is skipping”, and letting it be there without arguing with it, checking, or acting on it.</p>" +
+                "<p>Unlike most mindfulness programmes, these are brief, targeted exercises, not a daily meditation practice.</p>" +
+                "<p><b>So:</b> attention is trained as a skill aimed at one habit, not as a general calm.</p>" },
+              { kind: "idea", lvl: "p", title: "The diary changes what it records", body: "<p><b>Self-monitoring</b> asks a client to record a behaviour as it happens: each urge to check, what came before, what she did.</p>" +
+                "<p>Korotitsch & Nelson-Gray (1999) " + ev("r") + " reviewed a known effect: <b>self-monitoring reactivity</b>. Recording a behaviour tends to change it, often in the direction the person wants. The diary is <b>assessment</b> and <b>treatment</b> at once.</p>" +
+                "<p>For assessment, that is a problem to note: the baseline shifts once it is recorded. See Part E on assessment.</p>" +
+                "<p><b>So:</b> noticing a habit on paper can loosen it; read the record knowing it has already changed what it measures.</p>" },
+              { kind: "idea", lvl: "p", title: "Awareness inside exposure", body: "<p>In exposure, Lucía would stop checking and stay with the urge. Craske et al. (2014) " + ev("c") + " describe this through <b>inhibitory learning</b>: the old fear is not erased; a new memory, “this was safe”, is learned to compete with it.</p>" +
+                "<p>That new learning needs awareness. She must <b>notice the fear</b> and <b>notice that the catastrophe did not come</b>. The gap between what she expected and what happened is <b>expectancy violation</b>.</p>" +
+                "<p>Distraction during exposure, or a hidden safety habit, can block that noticing.</p>" +
+                "<p><b>So:</b> exposure works best when the client is awake to both the fear and its non-catastrophe.</p>" },
+              { kind: "idea", lvl: "p", title: "Holding minds in mind", body: "<p><b>Mentalization</b> is the capacity to hold one’s own and others’ minds in mind: to see behaviour as driven by feelings, wishes and beliefs, and to know these can be misread.</p>" +
+                "<p>Fonagy and Bateman built mentalization-based treatment for people living with borderline personality disorder, whose mentalizing can collapse under emotional stress. Bateman & Fonagy (2009) " + ev("c") + " compared it with structured clinical management in a randomized trial; both groups improved, and those in mentalization-based treatment improved more.</p>" +
+                "<p><b>So:</b> awareness of minds, one’s own and others’, can itself be the treatment target.</p>" },
+              { kind: "idea", lvl: "m", title: "The therapist’s consciousness as an instrument", body: "<p><b>Countertransference</b> is the therapist’s own reactions to a client: boredom, protectiveness, irritation, the urge to reassure.</p>" +
+                "<p>Hayes, Gelso & Hummel (2011) " + ev("c") + " pooled studies: acting out these reactions went with slightly worse outcomes, while <b>managing</b> them, by noticing and reflecting, went with better ones.</p>" +
+                "<p>Tomás notices a pull to tell Lucía, again, that her heart is fine. He reads it as data: the reassurance loop she lives in is now in the room. See Part H, the clinician’s own discipline.</p>" +
+                "<p><b>So:</b> the therapist’s noticed reaction is information; unnoticed, it becomes action.</p>" },
+              { kind: "contrast", id: "m8c.7:contrast", title: "Watching a symptom, or noticing it once?",
+                q: "Which made-up moment shows awareness that loosens the worry rather than feeds it?",
+                cases: [
+                  { label: "Moment A", s: ["At her desk, Lucía feels a flutter in her chest.", { t: "It is a grey afternoon.", irrelevant: true }, { t: "She keeps her attention on her chest, checks her pulse, then checks again to be sure.", diff: true }] },
+                  { label: "Moment B", s: ["At her desk, Lucía feels a flutter in her chest.", { t: "It is a grey afternoon.", irrelevant: true }, { t: "She notes “a flutter, and the thought that something is wrong”, then turns back to her work.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["The weather that day", "Whether attention stays on the body or returns", "Whether she felt a flutter", "Where she was sitting"],
+                feature: 1,
+                why: "Both notice the same sensation. Moment A is <b>watching</b>: attention locks onto the symptom and checking keeps the threat alive. Moment B is <b>noticing once and returning</b>: the sensation and the thought are named, then attention goes back to the task. Awareness helps when it lets go; it harms when it becomes monitoring.",
+                hints: ["Find the one sentence where the moments part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say where her attention goes after the flutter."] },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · MCT has a distinct mechanism", body: "<p>On this view, metacognitive therapy is a different treatment because it changes something different: <b>beliefs about thinking</b>, not beliefs about the world.</p>" +
+                "<p><b>Its evidence:</b> it does not challenge whether a worry is true, and its tools, attention training and detached mindfulness, have no direct match in standard cognitive therapy. Its trials report good results for anxiety and depression, and change in metacognitive beliefs tracks improvement (Wells 2009).</p>" +
+                "<p><b>Its charge:</b> calling it cognitive therapy under another name ignores what the therapist actually does in the room.</p>" +
+                "<p><b>So:</b> on this view, it should be tested and offered as its own treatment.</p>" },
+              { kind: "idea", lvl: "m", steelman: true, title: "Steelman ✓ · MCT is CBT under another name", body: "<p>On the other view, metacognitive therapy is a variant of cognitive behavioural therapy with new labels.</p>" +
+                "<p><b>Its evidence:</b> it still identifies unhelpful beliefs and tests them with behavioural experiments, as cognitive therapy does. Beliefs about worry are still beliefs, and cognitive therapy has long targeted safety behaviours such as checking.</p>" +
+                "<p><b>Its charge:</b> a new name and a new mechanism should be shown in independent trials, not assumed from the theory.</p>" +
+                "<p><b>So:</b> on this view, judge it by head-to-head trials against standard cognitive therapy.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: the dated verdict", body: "<p>Both sides agree the therapy targets thinking about thinking and that early results are encouraging. They disagree on whether its mechanism is new, and how far the results can be trusted yet.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>MCT shows promising results for anxiety and depression with a distinct focus on beliefs about thinking, but trials are fewer and many come from its developers’ group.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Low-moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Large independent trials against CBT.</dd></div></dl>" +
+                "<p><b>So:</b> a reasonable option for worry and rumination, held with caution until others test it.</p>" },
+              { kind: "mastery", lvl: "m", title: "The strongest critique", body: '<p class="x-crit"><b>Strongest critique</b>Every tool in this lesson relies on awareness that is itself hard to measure. Self-monitoring changes what it records, mentalization and countertransference are judged largely by clinicians and clients themselves, and the main metacognitive trials come mostly from a single group. Claims that awareness is the active ingredient are plausible, but rarely shown apart from the warmth and structure of therapy.</p>' +
+                "<p><b>The question.</b> How would you show that it was the change in awareness, not the relationship, that helped Lucía?</p>" },
+              { kind: "example", lvl: "p", title: "Tomás answers", body: who("<b>Tomás</b> does not reassure Lucía about her heart. He asks what she believes the checking does, and they write the answer down.") +
+                "<p>They agree on a week of recording each urge to check, a short attention training practice, and then exposure: sitting with the urge, noticing the fear, and noticing what does not happen.</p>" +
+                "<p>When he feels the pull to reassure her, he names it to himself and uses it as a clue to the loop she lives in.</p>" +
+                "<p><b>Person-first.</b> Write “Lucía, who lives with health anxiety”, not “a hypochondriac”.</p>" },
+              { kind: "teachback", id: "m8c.7:teachback", title: "Teach it back", prompt: "Explain to a trainee how Tomás uses consciousness with Lucía beyond mindfulness: Wells’s metacognitive therapy and its focus on the relationship to thoughts, beliefs about worry and worry about worry; the attention training technique and detached mindfulness; self-monitoring as assessment and treatment, and reactivity, from Korotitsch and Nelson-Gray; awareness inside exposure, inhibitory learning and expectancy violation, from Craske and colleagues; mentalization and mentalization-based treatment for borderline personality disorder from Bateman and Fonagy; countertransference read as data from Hayes, Gelso and Hummel; the contrast between watching a symptom and noticing it once and returning; both sides steelmanned, a distinct mechanism versus CBT under another name; and the dated verdict with its confidence and defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Metacognitive therapy’s distinct mechanism " + ev("c") + ". Self-monitoring reactivity " + ev("r") + ". Inhibitory learning in exposure " + ev("c") + ". Mentalization-based treatment " + ev("c") + ". Managing countertransference " + ev("c") + ".</p>" +
+                "<p><b>So:</b> a clinician uses consciousness as a target, a measure and an instrument; awareness helps when it notices and lets go, and harms when it turns into watching.</p>" },
+              Q("Lucía now writes down each urge to check, and the urges become less frequent. What does this show?",
+                ["Self-monitoring reactivity", "Expectancy violation", "Detached mindfulness", "Countertransference"], 0,
+                "Recording a behaviour tends to change it, so the diary is treatment as well as assessment (Korotitsch & Nelson-Gray 1999)."),
+              Q("In exposure, why does it matter that Lucía notices the feared outcome did not happen?",
+                ["It erases the old fear memory", "It builds a competing safe memory", "It proves her heart is healthy", "It ends the need for therapy"], 1,
+                "In inhibitory learning, noticing the gap between expectation and outcome builds a new memory that competes with the old fear (Craske et al. 2014)."),
+              Q("A therapist feels a strong urge to rescue a client and pauses to reflect on it. What is being used?",
+                ["Mentalization of the client only", "Attention training", "Countertransference as data", "Self-monitoring by the client"], 2,
+                "The therapist’s own noticed reaction is read as information; managing it went with better outcomes (Hayes, Gelso & Hummel 2011)."),
+              { kind: "exercise", lvl: "f", title: "Notice and name", body: "<p>Do this now, for about three minutes. It is practice, not a test.</p>" +
+                '<p class="x-note">You can stop at any time, for any reason. If anything feels unpleasant, open your eyes, look around the room, and come back to this page.</p>' +
+                "<p><b>Settle.</b> Sit as you are. Keep your eyes open, resting on one spot, or close them: your choice.</p>" +
+                "<p><b>Anchor.</b> Notice your breath where it is easiest to feel, or the soles of your feet on the floor. Choose whichever feels steadier.</p>" +
+                "<p><b>Name.</b> When something pulls your attention, give it a quiet label: “thinking”, “feeling”, “hearing”. No need to judge it or follow it.</p>" +
+                "<p><b>Return.</b> Then bring attention back to the breath or the feet. Drifting is not a mistake; each return is the practice.</p>" +
+                "<p>Keep going: notice, name, return. When you are ready, open your eyes if they were closed, and move on to the debrief.</p>" },
+              { kind: "debrief", id: "m8c.7:debrief", title: "Debrief", prompt: "What did you notice? What happened to your attention? Note any non-effects or unpleasant effects too.",
+                body: '<p class="x-note">“Let’s treat what happened as data — including what didn’t change.” · <span lang="es">“Tratemos lo que pasó como datos, incluso lo que no cambió.”</span></p>' +
+                  "<p>Like any intervention, this practice gets a debrief. Nothing happening, boredom, or discomfort are recorded as data, not failure.</p>" }
+            ]
+          },
           /* ============ M0 · HOW TO JUDGE A STUDY: concepts only, no numbers ============ */
           "m0.1": {
             home: "Teens who eat family dinner use fewer drugs. Does dinner do it?",
@@ -10944,7 +11615,46 @@
           G("m8e.6", "Prepared learning", "Aprendizaje preparado", "Some links learned fast and unlearned slowly.", "A readiness to learn certain associations, such as fear of snakes and spiders, quickly and to keep them, while others barely form (Seligman 1971; Öhman & Mineka 2001)."),
           G("m8e.6", "Core knowledge", "Conocimiento nuclear", "Expectations about the world infants show before teaching.", "Spelke’s (2007) term for early expectations about objects, number and agents, inferred from infants looking longer at events that break them; its interpretation is debated."),
           G("m8e.6", "Temperament", "Temperamento", "An early tilt in how a person reacts.", "Early-appearing differences in reactivity and self-regulation, such as the inhibited infants Kagan (1994) followed; a starting point that experience shapes, not a fixed fate."),
-          G("m8e.6", "Nativism", "Innatismo", "The view that much of the mind is built in.", "The view that minds arrive with rich built-in structure, such as core knowledge or a universal grammar; contrast Empiricism, which stresses learning from experience.")
+          G("m8e.6", "Nativism", "Innatismo", "The view that much of the mind is built in.", "The view that minds arrive with rich built-in structure, such as core knowledge or a universal grammar; contrast Empiricism, which stresses learning from experience."),
+          /* phase 3l-1: CM lessons 1–2 (Introspection already exists) */
+          G("m8c.1", "Consciousness", "Consciencia", "Experience: there being something it is like to be you.", "The state of having experience, described by its level (how conscious, from coma to alert waking) and its contents (what one is conscious of); psychology’s first subject (Wundt; James 1890), expelled by behaviourism and returned via cognitive science."),
+          G("m8c.1", "Hard problem of consciousness", "Problema difícil de la consciencia", "Why brain processing is felt at all.", "Chalmers’s (1995) name for the question of why any processing is accompanied by experience, set against the “easy” problems of explaining functions such as attention, memory and report; whether it is a real problem is contested; see Illusionism."),
+          G("m8c.1", "Levels vs contents of consciousness", "Niveles frente a contenidos de la consciencia", "How conscious someone is, versus what they are conscious of.", "The distinction between the level of consciousness, from coma through dreamless sleep to waking, and its contents, the particular experiences; they come apart, as in dreaming, with low wakefulness and rich contents (Laureys 2005)."),
+          G("m8c.1", "Illusionism", "Ilusionismo", "The view that experience only seems to have special inner qualities.", "The position that the apparently ineffable qualities of experience are a misrepresentation, so the task is to explain why there seems to be a hard problem (Frankish 2016; Dennett 1991); contested; see Hard problem of consciousness."),
+          G("m8c.2", "Global workspace theory", "Teoría del espacio de trabajo global", "Conscious contents are those broadcast to the whole mind.", "The theory that a content becomes conscious when it enters a shared workspace and is made available to memory, planning and report, marked in the brain by a sudden widespread surge called ignition (Baars 1988; Dehaene & Changeux 2011); not fully supported in an adversarial test (Cogitate Consortium 2025)."),
+          G("m8c.2", "Integrated information theory", "Teoría de la información integrada", "Consciousness as how unified a system is.", "Tononi’s (2004) theory that consciousness is the degree to which a system’s parts form a unified whole that does more than the parts separately; predictions not fully supported in an adversarial test (Cogitate Consortium 2025), and called pseudoscience in a contested letter (2023)."),
+          G("m8c.2", "Higher-order theory", "Teoría de orden superior", "A state is conscious when the mind represents it.", "The family of theories in which a mental state is conscious when the mind forms a representation of being in that state (Rosenthal 2005; Lau & Rosenthal 2011); offers an account of blindsight as processing without monitoring."),
+          G("m8c.2", "Blindsight", "Visión ciega", "Responding accurately to things a person says they cannot see.", "Accurate guessing or pointing to stimuli in part of the visual field where a person, after damage to the visual cortex, reports no vision (Weiskrantz 1986); evidence that processing and awareness come apart."),
+          G("m8c.2", "Inattentional blindness", "Ceguera por falta de atención", "Missing something obvious because attention is elsewhere.", "Failure to notice a clearly visible, unexpected object while attending to something else, as with the gorilla in the basketball video (Simons & Chabris 1999); evidence that attention usually gates awareness."),
+          /* phase 3l-2: CM lessons 3–4 */
+          G("m8c.3", "Mindfulness", "Atención plena (mindfulness)", "Paying attention to now, on purpose, without judging.", "Paying attention, on purpose, in the present moment, non-judgmentally (Kabat-Zinn 1994); two components, self-regulation of attention and an orientation of curiosity, openness and acceptance (Bishop et al. 2004); not emptying the mind; adapted from Buddhist sati, remembering or bearing in mind."),
+          G("m8c.3", "Mindfulness self-report scale", "Escala de autoinforme de mindfulness", "A questionnaire on which people rate their own mindfulness.", "Questionnaires such as the MAAS (Brown & Ryan 2003) and FFMQ (Baer et al. 2006); critics note scores can rise from learning the vocabulary and that meditators and non-meditators may read items differently (Grossman 2011)."),
+          G("m8c.4", "MBSR (mindfulness-based stress reduction)", "MBSR (reducción del estrés basada en mindfulness)", "An eight-week mindfulness group for stress and pain.", "The first clinical mindfulness programme, from a hospital clinic, first reported with people living with chronic pain (Kabat-Zinn 1982); now usually an eight-week group with daily home practice."),
+          G("m8c.4", "MBCT (mindfulness-based cognitive therapy)", "MBCT (terapia cognitiva basada en mindfulness)", "A mindfulness group to keep depression from returning.", "MBSR combined with ideas from cognitive therapy for people who have recovered from depression (Segal, Williams & Teasdale 2002); best evidence is relapse prevention in recurrent depression (Kuyken et al. 2016)."),
+          G("m8c.4", "Decentering", "Descentramiento", "Seeing thoughts as passing events, not facts.", "Relating to thoughts and feelings as mental events rather than truths about oneself or the world; the key skill of MBCT, which changes one’s relationship to a thought rather than its content, as CBT does."),
+          G("m8c.4", "Relapse prevention", "Prevención de recaídas", "Helping someone who has recovered stay well.", "Treatment aimed at stopping a condition, such as depression, from returning after recovery; MBCT’s strongest evidence (Kuyken et al. 2016), with early trials finding most benefit for people with more past episodes."),
+          G("m8c.4", "DBT (dialectical behaviour therapy)", "DBT (terapia dialéctica conductual)", "A skills therapy with mindfulness at its core.", "Linehan’s (1993) therapy for people with intense, fast-changing emotions and repeated self-harm; mindfulness is the core skill set, including wise mind and the observe, describe and participate skills."),
+          G("m8c.4", "Wise mind", "Mente sabia", "Where emotion and reason meet.", "In DBT, the state that integrates emotion mind and reasonable mind, reached through mindfulness skills (Linehan 1993)."),
+          G("m8c.4", "ACT (acceptance and commitment therapy)", "ACT (terapia de aceptación y compromiso)", "A therapy of acceptance, awareness and values-based action.", "The therapy developed by Hayes and colleagues in which present-moment awareness and self-as-context, alongside acceptance, serve action toward chosen values; see Part F."),
+          G("m8c.4", "Self-as-context", "Yo como contexto", "The observer that notices thoughts without being them.", "In ACT, the stance of a self that observes thoughts, feelings and roles while not being identical to any of them; one of ACT’s mindfulness processes, with present-moment awareness."),
+          /* phase 3l-3: CM lessons 5–6 (Common factors already exists) */
+          G("m8c.5", "Attention regulation", "Regulación de la atención", "Holding attention, noticing drift, and bringing it back.", "A proposed mechanism of mindfulness in which practice trains sustaining and steering attention (Tang, Hölzel & Posner 2015); partially supported, since results vary across tasks and its link with symptom change is unclear."),
+          G("m8c.5", "Interoception", "Interocepción", "Sensing the inside of the body.", "Awareness of internal body signals such as heartbeat, breath and tension; proposed as a mindfulness mechanism (Farb et al. 2015), with self-reported gains but mixed results on objective tests."),
+          G("m8c.5", "Reperceiving", "Repercepción", "Seeing thoughts as thoughts.", "Shapiro et al.’s (2006) term for the shift in which thoughts and feelings are seen as passing mental events rather than truths; closely related to Decentering (Bernstein et al. 2015); partially supported as a mechanism."),
+          G("m8c.5", "Mediation (mechanism) evidence", "Evidencia de mediación (mecanismo)", "Evidence that a change inside the person explains the outcome.", "Studies testing whether a proposed mechanism changes and accounts for the outcome; for mindfulness, changes in mindfulness and repetitive negative thinking partly account for outcomes (Gu et al. 2015), but most studies cannot show the mechanism changed first."),
+          G("m8c.6", "McMindfulness", "McMindfulness", "Mindfulness sold as a productivity patch, without its ethics.", "Purser’s (2019) critique of mindfulness marketed to make people calmer and more efficient while leaving the causes of stress untouched and its ethical roots behind."),
+          G("m8c.6", "Meditation adverse effects", "Efectos adversos de la meditación", "Unwanted, distressing experiences during or after practice.", "Reported effects such as anxiety spikes, depersonalization, traumatic re-experiencing and, rarely, psychosis in vulnerable people (Lindahl et al. 2017; Farias et al. 2020); under-measured because most trials do not ask."),
+          G("m8c.6", "Depersonalization", "Despersonalización", "Feeling unreal, or detached from oneself.", "An experience of unreality or detachment from one’s own mind or body, as if watching oneself from outside; among the reported adverse effects of intensive meditation (Lindahl et al. 2017)."),
+          G("m8c.6", "Trauma-sensitive mindfulness", "Mindfulness sensible al trauma", "Mindfulness adapted so it is safe for people with trauma.", "Treleaven’s (2018) adaptations: screening, pacing, eyes-open and shorter practice, anchors outside the body, freedom to stop, and alternatives; see Meditation adverse effects."),
+          /* phase 3l-4: CM lesson 7 */
+          G("m8c.7", "Metacognitive therapy", "Terapia metacognitiva", "A therapy that changes how people relate to their thoughts.", "Wells’s (2009) therapy that targets beliefs about thinking, such as “worry keeps me safe” or “my worry is dangerous”, and worry about worry, rather than whether each thought is true; promising for anxiety and depression, with fewer independent trials than CBT."),
+          G("m8c.7", "Attention training technique", "Técnica de entrenamiento atencional", "Practice in steering attention among sounds.", "A brief metacognitive therapy exercise in which a person shifts attention among several sounds on instruction, to learn that attention can be steered even while worry is present (Wells 2009); not a relaxation method."),
+          G("m8c.7", "Detached mindfulness", "Mindfulness desapegado", "Noticing a thought without engaging with it.", "In metacognitive therapy, letting a thought be there without analysing, arguing with, checking or acting on it (Wells 2009); briefer and more targeted than meditation-based mindfulness."),
+          G("m8c.7", "Self-monitoring reactivity", "Reactividad del automonitoreo", "Recording a behaviour changes it.", "The tendency of a behaviour to change, often in the desired direction, once a person starts recording it, so self-monitoring is both assessment and treatment (Korotitsch & Nelson-Gray 1999); see Part E."),
+          G("m8c.7", "Inhibitory learning", "Aprendizaje inhibitorio", "Learning a new safe memory that competes with fear.", "The account of exposure in which the old fear memory remains and a new “this was safe” memory is learned to compete with it; requires noticing the fear and its non-catastrophe (Craske et al. 2014)."),
+          G("m8c.7", "Expectancy violation", "Violación de expectativas", "The gap between what was feared and what happened.", "In inhibitory learning, the mismatch between an expected catastrophe and the actual outcome, thought to drive new learning during exposure (Craske et al. 2014); see Inhibitory learning."),
+          G("m8c.7", "Mentalization", "Mentalización", "Holding one’s own and others’ minds in mind.", "The capacity to understand behaviour in terms of feelings, wishes and beliefs, one’s own and others’; the target of mentalization-based treatment for borderline personality disorder (Bateman & Fonagy 2009)."),
+          G("m8c.7", "Countertransference", "Contratransferencia", "The therapist’s own reactions to a client.", "The therapist’s emotional reactions to a client; acting them out went with slightly worse outcomes, while noticing and managing them, and reading them as data, went with better ones (Hayes, Gelso & Hummel 2011); see Part H.")
         ];
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m0")).map(function (id) { return { v: id, t: "M0 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m1")).map(function (id) { return { v: id, t: "M1 · " + lessonOf(id).title }; }));
@@ -10957,6 +11667,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8c.1", "m8c.2", "m8c.3", "m8c.4", "m8c.5", "m8c.6", "m8c.7"].map(function (id) { return { v: id, t: "CM · " + lessonOf(id).title }; }));
 
         /* ============ CONTENT ENGINE (phase 2a): case bank, status discipline, references, validators. Data + checks only; lesson text untouched ============ */
         /* @engine-start */
@@ -11412,6 +12123,51 @@
             R("Kagan", 1994, "longitudinal", "Some infants reacted strongly to novelty in the first months, and many became shy children; many others changed.", st("robust", "Early reactivity predicts later wariness modestly; many children change, and parenting matters.")),
             R("Polderman et al.", 2015, "meta-analysis", "Pooled twin studies on nearly every measured trait: identical twins resembled each other more than fraternal twins on nearly all of them.", st("robust", "Very large and consistent; it describes variation in populations, not individual fate or fixity.")),
             R("Saffran, Aslin & Newport", 1996, "experiment", "Infants who heard a short stream of made-up syllables later told apart its ‘words’ from new mixes: statistical learning.", st("robust", "Replicated widely; how far it explains grammar is contested."))];
+          /* phase 3l-1: CM lessons 1–2 */
+          REFS["m8c.1"] = [
+            R("Chalmers", 1995, "review", "Separated the easy problems of explaining mental functions from the hard problem of why any processing is accompanied by experience.", st("contested", "Widely accepted as a framing; whether the hard problem is real or an illusion is disputed (Dennett 1991; Frankish 2016).")),
+            R("Nagel", 1974, "review", "Argued that an organism is conscious if there is something it is like to be it, which physical description of a bat seems to leave out.", st("contested", "Influential as a test of consciousness; whether it shows a gap in explanation is disputed.")),
+            R("Watson", 1913, "review", "Declared that psychology should study observable behaviour and drop consciousness and introspection.", st("debunked-or-revised", "Behaviourism’s methods endure; its exclusion of consciousness was reversed by cognitive science and neuroscience.")),
+            R("Crick & Koch", 1990, "review", "Argued that the brain activity accompanying conscious experience could be studied scientifically, starting with vision.", st("debunked-or-revised", "The search for neural correlates became a thriving field; their own early proposal about synchronized firing did not hold."))];
+          REFS["m8c.2"] = [
+            R("Weiskrantz", 1986, "case series", "People with damage to the visual cortex located stimuli well above chance in parts of the field where they reported no vision.", st("robust", "Replicated in several patients; whether faint residual awareness explains some of it is debated (Overgaard 2011).")),
+            R("Simons & Chabris", 1999, "experiment", "Many people counting basketball passes failed to notice a person in a gorilla suit walking through the scene.", st("robust", "Widely replicated; how often it happens varies with task and expectation.")),
+            R("Koch & Tsuchiya", 2007, "review", "Argued that attention and awareness are distinct processes that can occur without each other.", st("contested", "Attention without awareness is well supported; whether awareness can occur with no attention at all is disputed.")),
+            R("Cogitate Consortium", 2025, "experiment", "A preregistered adversarial test of global workspace and integrated information theory found that neither theory’s predictions fully held.", st("contested", "Interpretation is disputed by both camps; the 2023 letter calling integrated information theory pseudoscience drew wide objection.")),
+            R("Owen et al.", 2006, "case series", "A woman who showed no outward signs of awareness produced brain activity like healthy volunteers when asked to imagine playing tennis or walking through her home.", st("contested", "A single patient; later studies found covert awareness in some, not most, unresponsive patients."), true)];
+          /* phase 3l-2: CM lessons 3–4 */
+          REFS["m8c.3"] = [
+            R("Kabat-Zinn", 1994, "review", "Defined mindfulness as paying attention, on purpose, in the present moment, non-judgmentally.", st("contested", "The most used working definition; scholars of Buddhism argue it leaves out remembering and ethics.")),
+            R("Bishop et al.", 2004, "review", "Proposed an operational definition with two components: self-regulation of attention, and an orientation of curiosity, openness and acceptance.", st("contested", "Widely cited; how well the two components can be measured separately is still debated.")),
+            R("Brown & Ryan", 2003, "observational", "Built the MAAS, a self-report scale of everyday attention, and linked higher scores with greater well-being.", st("contested", "Reliable as a questionnaire; whether it measures mindfulness or only absent-mindedness is disputed (Grossman 2011).")),
+            R("Baer et al.", 2006, "observational", "Pooled earlier mindfulness questionnaires into the FFMQ, with facets such as observing, describing, acting with awareness, not judging and not reacting.", st("contested", "Widely used; some items work differently for meditators and non-meditators (Van Dam et al. 2009).")),
+            R("Grossman", 2011, "review", "Argued that mindfulness scales may track learned vocabulary and that meditators and non-meditators may read items differently.", st("contested", "Taken seriously by scale authors; how large the problem is remains debated."))];
+          REFS["m8c.4"] = [
+            R("Kabat-Zinn", 1982, "case series", "People living with chronic pain who took part in a meditation group reported less pain and distress afterward.", st("contested", "No comparison group; later controlled trials found modest benefits for pain and stress."), true),
+            R("Segal, Williams & Teasdale", 2002, "review", "Set out MBCT, joining MBSR with cognitive therapy to teach decentering to people who have recovered from depression.", st("contested", "The relapse benefit is robust (Kuyken et al. 2016); whether decentering is how it works is still tested.")),
+            R("Kuyken et al.", 2016, "meta-analysis", "Pooled individual data from the main trials: people with recurrent depression who had MBCT were less likely to relapse, including against antidepressants.", st("robust", "Large, consistent pooled analysis; benefit was larger with more leftover symptoms.")),
+            R("Linehan", 1993, "review", "Set out DBT, with mindfulness as its core skill set, for people with intense emotions and repeated self-harm.", st("robust", "Trials show less self-harm than comparison treatments (Linehan et al. 2006); mindfulness’s own share is unclear.")),
+            R("Goldberg et al.", 2018, "meta-analysis", "Mindfulness programmes for psychological problems beat no treatment and were roughly equal to other evidence-based treatments.", st("robust", "Large and consistent; many included trials were small or compared only with a waitlist."))];
+          /* phase 3l-3: CM lessons 5–6 */
+          REFS["m8c.5"] = [
+            R("Tang, Hölzel & Posner", 2015, "review", "Reviewed the neuroscience of meditation and proposed attention regulation, body awareness and emotion regulation as interacting mechanisms.", st("contested", "Partially supported: attention gains vary across tasks, and their link with symptom change is unclear.")),
+            R("Hölzel et al.", 2011, "review", "Set out a framework in which mindfulness works through attention, body awareness, emotion regulation and a changed view of the self.", st("contested", "A useful map; few studies test each component on its own.")),
+            R("Shapiro et al.", 2006, "review", "Proposed reperceiving, seeing thoughts as thoughts, as the central shift through which mindfulness helps.", st("contested", "Partially supported; related decentering measures track outcomes (Bernstein et al. 2015), timing is rarely shown.")),
+            R("Gu et al.", 2015, "meta-analysis", "Pooled mediation studies: changes in mindfulness and in repetitive negative thinking partly accounted for the effects of mindfulness programmes.", st("contested", "Consistent links; most studies measured mechanism and outcome together, so the order is unshown.")),
+            R("Kral et al.", 2022, "experiment", "A randomized trial with brain scans before and after MBSR found little structural brain change compared with control groups.", st("contested", "Well designed; it weakens popular brain-change claims without proving that nothing changes."))];
+          REFS["m8c.6"] = [
+            R("Goyal et al.", 2014, "meta-analysis", "Pooled trials of meditation programmes: moderate evidence of easing anxiety, depression symptoms and pain; low or insufficient evidence for many other outcomes.", st("robust", "Large systematic review in JAMA Internal Medicine; benefits similar to other active treatments.")),
+            R("Hilton et al.", 2017, "meta-analysis", "Mindfulness meditation was linked with modest improvements in chronic pain compared with control groups.", st("contested", "Benefit found, but the quality of the evidence was rated low.")),
+            R("Van Dam et al.", 2018, "review", "“Mind the hype”: popular claims for mindfulness run far ahead of the evidence, with loose definitions, weak designs and little harm monitoring.", st("robust", "Widely endorsed by researchers in the field; its critique of the literature is largely accepted.")),
+            R("Lindahl et al.", 2017, "observational", "The Varieties of Contemplative Experience study interviewed practitioners and teachers and documented distressing effects across traditions, sometimes lasting.", st("contested", "Rich, careful interviews; it shows what happens, not how often (Farias et al. 2020).")),
+            R("Farias et al.", 2020, "review", "Reviewed studies that asked about harm: meditation adverse effects were not rare, on retreats and in ordinary programmes.", st("contested", "Few studies measured harm well, so how common it is remains uncertain."))];
+          /* phase 3l-4: CM lesson 7 */
+          REFS["m8c.7"] = [
+            R("Wells", 2009, "review", "Set out metacognitive therapy for anxiety and depression: work on beliefs about thinking and worry about worry, with attention training and detached mindfulness.", st("contested", "Promising trial results; fewer trials than CBT, and many from the developers’ group.")),
+            R("Korotitsch & Nelson-Gray", 1999, "review", "Reviewed self-monitoring in assessment: recording a behaviour tends to change it, so the record is also a treatment.", st("robust", "Reactivity is well documented; its size varies with what is recorded and how.")),
+            R("Craske et al.", 2014, "review", "Set out an inhibitory learning approach to exposure: noticing that the feared outcome does not come builds a new, competing safe memory.", st("contested", "Influential; trials testing expectancy violation directly give mixed results.")),
+            R("Bateman & Fonagy", 2009, "experiment", "A randomized trial: people with borderline personality disorder improved in both mentalization-based treatment and structured clinical management, more in the former.", st("contested", "Well run; independent replications are still few.")),
+            R("Hayes, Gelso & Hummel", 2011, "meta-analysis", "Pooled studies of countertransference: acting it out went with slightly worse outcomes; managing it went with better ones.", st("contested", "Consistent direction; few studies, many relying on ratings by the people involved."))];
           Object.keys(REFS).forEach(function (id) { if (LESSON_CONTENT[id]) LESSON_CONTENT[id].refs = REFS[id]; });
           /* fixture for the single-small-study flag: the same real study as above, deliberately mis-worded as robust */
           var REF_TESTS = [R("Rosenthal & Fode", 1963, "experiment", "Fixture: the maze-bright study, worded as robust.", st("robust", "Fixture only."), true)];
@@ -11956,6 +12712,13 @@
                   '<textarea class="x-tb" rows="6" aria-label="Your explanation" placeholder="How it works, then one example of your own">' + esc(tb ? tb.text : "") + "</textarea>" +
                   '<div class="x-acts"><button type="button" class="start press" data-tb="1">Save</button></div><div class="x-tb__msg" aria-live="polite">' + (tb ? tbFeedback(tb.text) : "") + "</div>";
               }
+              /* phase 3l-4: debrief reuses the teach-back input; stored under teachbacks["<lesson>:debrief"] so it saves and syncs without its own field */
+              if (s.kind === "debrief") {
+                var db = (prefs.teachbacks || {})[id + ":debrief"];
+                return '<p class="x-q">' + esc(s.prompt || "What did you notice?") + "</p>" + (s.body || "") +
+                  '<textarea class="x-tb" rows="6" aria-label="Your debrief" placeholder="What you noticed, what attention did, and anything that did not change or felt unpleasant">' + esc(db ? db.text : "") + "</textarea>" +
+                  '<div class="x-acts"><button type="button" class="start press" data-db="1">Save</button></div><div class="x-tb__msg" aria-live="polite">' + (db ? '<p class="dim">Saved as data.</p>' : "") + "</div>";
+              }
               return recall(P.i) + s.body;
             }
             /* C5: checklist of the concept's components after Save; each missing one links to the step that teaches it */
@@ -11968,7 +12731,7 @@
                     (it.ok ? "" : "<p>" + esc(it.c.say) + "</p>" + '<button type="button" class="danger press" data-goto="' + it.c.taughtAt.lessonId + ":" + it.c.taughtAt.stepIndex + '">Go to the step that teaches it</button>') + "</li>";
                 }).join("") + "</ul>";
             }
-            KIND.predict = "Predict first"; KIND.contrast = "Spot the difference"; KIND.teachback = "Teach it back"; KIND.position = "Take a position";
+            KIND.predict = "Predict first"; KIND.contrast = "Spot the difference"; KIND.teachback = "Teach it back"; KIND.position = "Take a position"; KIND.exercise = "Do it"; KIND.debrief = "Debrief";
             function paint() {
               var s = L.steps[P.i], last = P.i === L.steps.length - 1, body;
               if (s.kind === "quiz") {
@@ -12108,6 +12871,14 @@
                 var gp = b.dataset.goto.split(":");
                 if (gp[0] === id && !gate) { P.i = Math.max(0, Math.min(L.steps.length - 1, +gp[1] || 0)); paint(); $("#pl-stage", el).scrollTop = 0; return; }
                 History.closeTop(); return gotoStep(b.dataset.goto);
+              }
+              if (b.dataset.db) {
+                var dta = $(".x-tb", el), dtxt = dta ? dta.value.trim() : "";
+                if (preview) { $(".x-tb__msg", el).innerHTML = '<p class="dim">Preview: not saved.</p>'; return; }
+                prefs.teachbacks = prefs.teachbacks || {}; prefs.teachbacks[id + ":debrief"] = { text: dtxt, at: Date.now(), clean: false };
+                savePrefs();
+                $(".x-tb__msg", el).innerHTML = '<p class="dim">Saved as data.</p>';
+                return;
               }
               if (b.dataset.tb) {
                 var ta = $(".x-tb", el), txt = ta ? ta.value.trim() : "", chk = checkTeachback(txt, id);
