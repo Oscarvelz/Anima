@@ -5923,6 +5923,262 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* L21 Dose & Shield: adverse childhood experiences stack as weights on a figure and a group risk curve climbs; protective factors arrive as shields that bend it down, never to the floor. A crowd of dots shows many outcomes at the same weight. Memory-scene clarity conventions (step trail, one primary button per step, feedback under the tap). Page-only 2D SVG; the curve eases only while visible, stops on exit; reduced motion jumps; stores nothing. */
+          {
+            id: "doseshield", name: "Dose & Shield", kicker: "M6 · Lifespan", hue: ["#f5c76b", "#5eead4"], gallery: true, order: 6.1, dom: true,
+            idea: "Hard childhood experiences stack like weights and a group’s risk curve climbs. Add shields and the curve bends down, never to the floor and never into destiny.",
+            see: "A figure on a path carries the weights you add, with shields around it. Beside it, a crowd at the same weight lives many different lives. Below, a group risk curve in words, from lower odds to higher odds.",
+            why: "The ACE dose–response pattern is real across groups. Protective factors bend it. Neither tells you who one person will become.",
+            use: "Intake and history-taking, records and court or reentry reports, trauma-informed care, and every session as one more steady adult.",
+            cap: "Predict what many hard experiences tell us. Then add weights and shields, prove a high ACE count is not a prediction, and read what it means.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["Predict", "Build it", "Prove it", "What it means"], WORD = ["one", "two", "three", "four"];
+              var PRED = [["set", "A lot — their path is largely set", false], ["odds", "It raises the odds across a group, but says little about one person", true], ["none", "Nothing at all", false]];
+              var WTS = [["abuse", "Abuse"], ["neglect", "Neglect"], ["viol", "Household violence"], ["jail", "A parent incarcerated"], ["subst", "Household substance use"], ["loss", "Loss of a parent"]];
+              var SHD = [["adult", "One steady caring adult"], ["school", "Safe relationships at school"], ["belong", "Community and belonging"], ["skills", "Own skills: emotion regulation and problem-solving"], ["treat", "Access to treatment"], ["meaning", "Meaning, faith or culture"]];
+              var CH = [
+                ["reoff", "“Her score is high, so she will likely reoffend.”", false, "That’s a misuse. A group pattern is being turned into a forecast about one woman, and it ignores everything that helped her."],
+                ["clinic", "“High scores across a clinic population suggest we screen more carefully and build supports.”", true, "That’s a fair use. It reads the pattern at the group level and answers it with care, not labels."],
+                ["start", "“His score tells me where to start asking, not who he is.”", true, "That’s a fair use. The score opens a conversation about what happened and what helped; it doesn’t close one."]
+              ];
+              var MODEL = "An ACE count describes the odds across a group, not the path of one person: people with the same count live very different lives, and what helped them — a steady adult, belonging, skills, treatment — can bend the path at any age.";
+              var POrd = optOrder(PRED.length), COrd = optOrder(CH.length), FOrd = {}; /* Phase R-D: fresh order per mount; data-v is the display slot, mapped back with optPick */
+              CH.forEach(function (c) { FOrd[c[0]] = optOrder(2); });
+              var N = 24, RANK = optOrder(N), XY = [];
+              for (var q = 0; q < N; q++) XY.push([150 + (q % 8) * 25 + ((q * 7) % 5) - 2, 34 + Math.floor(q / 8) * 30 + ((q * 3) % 4) * 2]);
+              var fresh = function () { return { pred: null, w: {}, s: {}, built: false, ch: {}, typed: "", cmp: false, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false, D = { w: 0, s: 0 };
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) {
+                return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) {
+                  return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>";
+                }).join("") + "</p>";
+              }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of four · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) {
+                return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") +
+                  "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>";
+              }
+              function goStep(n) {
+                var s = $('[data-step="' + n + '"]', main); if (!s) return;
+                s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" });
+                var f = s.querySelector("button:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true });
+              }
+              function cnt(o) { return Object.keys(o).filter(function (k) { return o[k]; }).length; }
+              /* group odds in [0,1]: a dose shape that steepens with weights; shields bend it down but never to the floor */
+              function odds(w, s) { return 0.16 - 0.006 * s + 0.72 * Math.pow(w / 6, 1.5) * (1 - 0.085 * s); }
+              var FLOOR = 0.06;
+              function wLvl(w) { return w <= 0 ? "None yet" : w < 3 ? "Light" : w < 4 ? "Moderate" : w < 5 ? "Heavy" : "Very heavy"; }
+              function sLvl(s) { return s <= 0 ? "None yet" : s < 3 ? "Some" : s < 5 ? "Strong" : "Very strong"; }
+              function groupWord(w, s) {
+                if (!w && !s) return "Across a group with few hard experiences, the odds of later struggles are lower, but never zero.";
+                if (!w) return "Shields lower the odds even before any weight arrives.";
+                if (!s) return "Across a group carrying this much, the odds of later health and mental-health struggles climb, and climb faster as weights stack.";
+                return "Across a group with these weights and these shields, the curve bends down but stays above the floor. Shields soften the burden; they don’t erase it.";
+              }
+              function personWord(w) {
+                return w ? "Whether this person will flourish or struggle. At the same weight, the crowd holds both. Ask what happened and what helped." : "Who this person will become. Even with no weights, some in the crowd struggle and most do well.";
+              }
+              function T(x, y, s, fill, anchor, wt, size, extra) { return '<text x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + (extra || "") + ' style="fill:' + fill + ";font:" + (wt || 500) + " " + (size || 12) + 'px var(--sans)">' + esc(s) + "</text>"; }
+              function px(w) { return 52 + (w / 6) * 284; }
+              function py(v) { return 288 - v * 116; }
+              function curve(s, upto, attrs) {
+                var p = "", k, x;
+                for (k = 0; k <= 30; k++) { x = (upto * k) / 30; p += (k ? "L" : "M") + px(x).toFixed(1) + " " + py(odds(x, s)).toFixed(1); }
+                return '<path d="' + p + '" fill="none" ' + attrs + "/>";
+              }
+              function stageSVG() {
+                var wn = cnt(S.w), sn = cnt(S.s), dw = D.w, ds = D.s, v = odds(dw, ds), k = Math.round(v * N), i, s = "";
+                var lean = (dw * 2.2).toFixed(1);
+                var lbl = "Weights: " + wLvl(wn).toLowerCase() + ". Shields: " + sLvl(sn).toLowerCase() + ". The group curve " + (wn ? "climbs" : "sits low") + (sn && wn ? " and bends down, above the floor" : "") + ". In the crowd at this weight, some flourish and some struggle.";
+                s += '<svg class="x-mem__svg" viewBox="0 0 360 318" role="img" aria-label="' + esc(lbl) + '" style="background:#1b1d33">';
+                /* path and figure */
+                s += '<path d="M8 124H128" stroke="#4a4d78" stroke-width="2" stroke-dasharray="6 4"/>' + T(68, 142, "one person", "#eef0ff", "middle", 600);
+                for (i = 0; i < sn; i++) s += '<path d="M' + (68 - 26 - i * 4) + " 120 A" + (28 + i * 4) + " " + (40 + i * 4) + " 0 0 1 " + (68 + 26 + i * 4) + ' 120" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linecap="round" opacity="' + (0.95 - i * 0.08).toFixed(2) + '"/>';
+                s += '<g transform="translate(68 122) rotate(' + lean + ')"><rect x="-8" y="-40" width="16" height="32" rx="6" fill="#c4b0ff"/><path d="M-4 -8L-6 0M4 -8L6 0" stroke="#c4b0ff" stroke-width="4" stroke-linecap="round"/><circle cy="-50" r="9" fill="#eef0ff"/>';
+                for (i = 0; i < wn; i++) s += '<rect x="' + (-24 - (i % 2) * 2) + '" y="' + (-24 - i * 9) + '" width="16" height="8" rx="2" fill="#f5c76b" stroke="#1b1d33" stroke-width="1"/>';
+                s += "</g>";
+                /* crowd at the same weight */
+                s += T(250, 16, "others at the same weight", "#eef0ff", "middle", 600);
+                for (i = 0; i < N; i++) {
+                  var st = RANK[i] < k, c = XY[i];
+                  s += st ? '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="6" fill="none" stroke="#ff9aa8" stroke-width="2"/>' : '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="6.5" fill="#7ee2a0"/>';
+                }
+                s += '<circle cx="160" cy="137" r="5.5" fill="#7ee2a0"/>' + T(170, 141, "doing well", "#eef0ff") + '<circle cx="250" cy="137" r="5" fill="none" stroke="#ff9aa8" stroke-width="2"/>' + T(260, 141, "struggling", "#eef0ff");
+                /* group risk curve */
+                s += '<path d="M0 154H360" stroke="#4a4d78" stroke-width="1"/>' + T(52, 172, "Group risk curve · for a group, not a person", "#eef0ff", "", 600);
+                s += '<path d="M52 180V288H336" fill="none" stroke="#a9acd6" stroke-width="1"/>';
+                s += '<path d="M52 ' + py(FLOOR).toFixed(1) + 'H336" stroke="#a9acd6" stroke-width="1" stroke-dasharray="3 4"/>' + T(336, py(FLOOR) - 4, "the floor · never reached", "#a9acd6", "end");
+                if (ds > 0.02) s += curve(0, 6, 'stroke="#f5c76b" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.7"');
+                s += curve(ds, 6, 'stroke="#c4b0ff" stroke-width="1.5" opacity="0.35"');
+                if (dw > 0.02) s += curve(ds, dw, 'stroke="#c4b0ff" stroke-width="3" stroke-linecap="round"');
+                s += '<circle cx="' + px(dw).toFixed(1) + '" cy="' + py(v).toFixed(1) + '" r="5.5" fill="#c4b0ff" stroke="#1b1d33" stroke-width="2"/>';
+                if (ds > 0.02) s += T(336, py(odds(6, 0)) + 14, "without shields", "#f5c76b", "end");
+                s += T(20, 234, "lower odds → higher odds", "#a9acd6", "middle", 500, 12, ' transform="rotate(-90 20 234)"');
+                s += T(194, 306, "fewer weights → more weights", "#a9acd6", "middle");
+                return s + "</svg>";
+              }
+              function render() { var g = $('[data-k="stage"]', main); if (g) g.innerHTML = stageSVG(); }
+              function target() { return { w: cnt(S.w), s: cnt(S.s) }; }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                var dt = A.last != null ? Math.min(0.05, (now - A.last) / 1000) : 0; A.last = now;
+                var t = target(), f = Math.min(1, dt * 5);
+                D.w += (t.w - D.w) * f; D.s += (t.s - D.s) * f;
+                if (Math.abs(t.w - D.w) < 0.01 && Math.abs(t.s - D.s) < 0.01) { D.w = t.w; D.s = t.s; render(); A = null; return; }
+                render(); kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function chips(act, list, on) {
+                return '<div class="x-lens__row" role="group" aria-label="' + (act === "wt" ? "Weights" : "Shields") + '">' + list.map(function (o) {
+                  var p = !!on[o[0]];
+                  return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + o[0] + '" aria-pressed="' + p + '" style="flex:1 1 9rem;min-height:48px;text-align:left' + (p ? ";border-color:" + (act === "wt" ? "#f5c76b" : "#5eead4") : "") + '">' + (p ? (act === "wt" ? "■ " : "◠ ") : "+ ") + esc(o[1]) + "</button>";
+                }).join("") + "</div>";
+              }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") + (fa.dataset.c != null ? '[data-c="' + fa.dataset.c + '"]' : "") : null;
+                halt();
+                var wn = cnt(S.w), sn = cnt(S.s), allCh = CH.every(function (c) { return S.ch[c[0]]; });
+                var n = !S.pred ? 0 : !S.built ? 1 : !S.cmp ? 2 : 3;
+                var po = S.pred ? PRED.filter(function (o) { return o[0] === S.pred; })[0] : null;
+                var h = trail(n) + msect("Predict first", "A child lives through many hard experiences. What does that tell us about who they’ll become?",
+                  '<div class="x-lens__row x-mem__opts" role="group" aria-label="Your prediction">' + POrd.map(function (k, d) {
+                    var o = PRED[optPick(POrd, d)], on = S.pred === o[0];
+                    return '<button type="button" class="x-lens__b press" data-act="pred" data-v="' + d + '" aria-pressed="' + on + '"' + (S.pred ? " disabled" : "") + ">" + esc(o[1]) + (S.pred && o[2] ? " · best answer" : "") + "</button>" +
+                      (on ? '<p class="x-lens__p x-mem__fb" aria-live="polite"><b>' + (o[2] ? "Right." : "Not quite.") + "</b> Many hard experiences raise the odds of later health and mental-health struggles across a group: more adversity, on average, goes with more risk (Felitti et al. 1998). But a group pattern can’t say which person in that group will struggle, and many people who carried a lot do well (Masten 2001). Build it below.</p>" : "");
+                  }).join("") + "</div>" + (S.pred && n === 1 ? next(2) : ""), 1);
+                h += msect("Weights and shields", !S.pred ? "Make your prediction above first." : "Tap weights to add hard experiences. Then tap shields to add what protects. Watch the curve and the crowd.",
+                  (!S.pred ? "" :
+                    '<p class="x-lens__p"><b>Weights</b> · hard experiences in childhood</p>' + chips("wt", WTS, S.w) +
+                    '<p class="x-lens__p"><b>Shields</b> · what protects</p>' + chips("sh", SHD, S.s)) +
+                  '<div data-k="stage">' + stageSVG() + "</div>" +
+                  (S.pred ? '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    "<li><b>Weight level:</b> " + esc(wLvl(wn)) + "</li>" +
+                    "<li><b>Shield level:</b> " + esc(sLvl(sn)) + "</li>" +
+                    "<li><b>What this says about the group:</b> " + esc(groupWord(wn, sn)) + "</li>" +
+                    "<li><b>What this can’t tell you about this person:</b> " + esc(personWord(wn)) + "</li></ul>" : "") +
+                  (S.built ? '<p class="x-lens__p x-mem__fb" aria-live="polite">The curve bent but never reached the floor, and the crowd never turned all one colour. Group odds are real; one person’s path is not written in them.</p>' + (n === 2 ? next(3) : "") : "") +
+                  '<p class="fineprint" style="margin:0">The curve shows a shape, not real values. It is about groups, never a score for one person.</p>', 2);
+                if (S.built) {
+                  var body = CH.map(function (c0, d0) {
+                    var c = CH[optPick(COrd, d0)], pick = S.ch[c[0]], ord = FOrd[c[0]];
+                    return '<div style="display:grid;gap:6px"><p class="x-lens__p" style="font-size:15px;line-height:1.45"><b>' + esc(c[1]) + '</b></p><div class="x-lens__row x-mem__opts" role="group" aria-label="' + esc(c[1]) + '">' + ord.map(function (k, d) {
+                      var val = optPick(ord, d) === 0 ? "fair" : "mis", on = pick === val, ok = (val === "fair") === c[2];
+                      return '<button type="button" class="x-lens__b press" data-act="chal" data-c="' + c[0] + '" data-v="' + d + '" aria-pressed="' + on + '"' + (pick ? " disabled" : "") + ">" + (val === "fair" ? "Fair use" : "Misuse") + (pick && ok ? " · best answer" : "") + "</button>" +
+                        (on ? '<p class="x-lens__p x-mem__fb" aria-live="polite"><b>' + (ok ? "Right." : "Not quite.") + "</b> " + esc(c[3]) + "</p>" : "");
+                    }).join("") + "</div></div>";
+                  }).join("");
+                  if (allCh) body += '<label class="x-lens__p" for="ds-own" style="margin-top:6px"><b>In your own words, why can’t a high ACE count predict one person?</b></label>' +
+                    '<input id="ds-own" class="x-tb" type="text" autocomplete="off" data-k="own" style="margin-top:0;min-height:48px" placeholder="One line, in your own words" value="' + esc(S.typed) + '"' + (S.cmp ? " readonly" : "") + ">" +
+                    (S.cmp ? '<div class="x-lens__p x-mem__fb" aria-live="polite"><p class="x-lens__p" style="margin:0"><b>You wrote:</b> ' + esc(S.typed) + '</p><p class="x-lens__p" style="margin:6px 0 0"><b>A model answer:</b> ' + esc(MODEL) + '</p><p class="x-lens__p" style="margin:6px 0 0">No score. Look for the two moves: group odds, not one path; and what helped can change it.</p></div>' + (n === 3 ? next(4) : "")
+                      : '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="cmp" style="min-height:52px"' + (S.typed.trim() ? "" : " disabled") + ">Compare with a model answer</button></div>");
+                  body += '<p class="fineprint" style="margin:0">Nothing you type is saved.</p>';
+                  h += msect("Prove it’s not a prediction", "Three statements about ACE scores. Is each a fair use or a misuse?", body, 3);
+                }
+                h += det("reveal", "Reveal", "A burden across groups, not a forecast for one · readable any time",
+                  '<p class="x-lens__p"><b>The original study.</b> The CDC–Kaiser study asked adults about abuse, neglect and household challenges in childhood. More categories went with more later health problems, a dose–response pattern (Felitti et al. 1998)' + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p"><b>Who was asked, and how.</b> The sample was mostly white, insured and middle-class, and adults recalled their childhoods years later, so memory and who was missing both shape the picture.</p>' +
+                  '<p class="x-lens__p"><b>Ordinary magic.</b> Resilience is common and comes from ordinary supports: caring relationships, self-regulation, a sense of agency (Masten 2001).</p>' +
+                  '<p class="x-lens__p"><b>Good things count too.</b> Adults who recalled positive childhood experiences, such as feeling heard and belonging, had better mental health even alongside ACEs (Bethell et al. 2019).</p>' +
+                  '<p class="x-lens__p"><b>Not for screening one person.</b> Original ACE researchers warned against using the score to screen or sort individuals (Anda et al. 2020).</p>' +
+                  '<p class="x-lens__p"><b>Criticisms.</b> The list is narrow: it misses racism, community violence and poverty. Items aren’t weighted, so very different harms count the same. Timing, duration and meaning matter, and the score ignores them.</p>' +
+                  '<p class="x-mr__status">Dose–response at group level' + tag("", "Robust") + "· Individual prediction or screening by score" + tag(" x-ev--d", "Debunked or revised") + "· Resilience factors" + tag("", "Robust") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Felitti et al.", 1998, "retrospective cohort", "The CDC–Kaiser ACE study: more categories of childhood adversity went with more adult health problems, across a mostly white, insured, middle-class sample.", tag("", "Robust")) +
+                  ref("Masten", 2001, "review", "“Ordinary magic”: resilience arises from common protective systems, not rare traits.", tag("", "Robust")) +
+                  ref("Bethell et al.", 2019, "population survey", "Positive childhood experiences went with better adult mental and relational health, even with ACEs.", tag(" x-ev--c", "Contested")) +
+                  ref("Anda et al.", 2020, "commentary", "Original ACE researchers caution against using ACE scores to screen or predict for individuals.", tag("", "Robust")) +
+                  ref("SAMHSA", 2014, "guidance", "Trauma-informed care: safety, trustworthiness, choice, collaboration and empowerment, and avoiding re-traumatization.", tag("", "Robust")) +
+                  "</ol></section>", false, 4);
+                h += det("therapy", "Where this becomes a problem in therapy", "Scores as fate, and what to do instead · readable any time",
+                  '<p class="x-lens__p"><b>A score treated as fate.</b> Clients come to see themselves as “damaged goods”, and counsellors can quietly expect less. Both lower the ceiling.</p>' +
+                  '<p class="x-lens__p"><b>Deterministic language travels.</b> Phrases like “set up to fail” in records and court or reentry reports follow a person into every later decision.</p>' +
+                  '<p class="x-lens__p"><b>Strengths get missed.</b> Focusing on the history can hide the protective factors and skills a person has right now.</p>' +
+                  '<p class="x-lens__p"><b>Two opposite errors.</b> Using the trauma history to explain away present responsibility, or ignoring it altogether. Both miss the person.</p>' +
+                  '<p class="x-lens__p"><b>Disclosure on demand re-traumatizes.</b> Pressing for the full story before there is safety can do harm. Let the person set the pace.</p>' +
+                  '<p class="x-lens__p"><b>Heavy loads in reentry work.</b> People who were incarcerated and people in reentry often carry high ACE loads. Trauma-informed care, in SAMHSA’s principles (2014), means safety, choice, collaboration, trustworthiness and empowerment.</p>' +
+                  '<p class="x-lens__p"><b>Every session can be a shield.</b> A steady, predictable adult is one of the strongest protective factors, and that can be you.</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Ask what happened and what helped, not only what’s wrong.</li>" +
+                  "<li>Write burdens and strengths side by side, in person-first, non-deterministic words.</li>" +
+                  "<li>Never use a score to predict, sort or sentence one person.</li>" +
+                  "<li>Offer choice about what to share and when.</li>" +
+                  "<li>Hold present responsibility and past harm together.</li>" +
+                  "<li>Be consistent: same time, clear boundaries, follow through.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">An ACE score describes a burden, not a destiny — ask what happened and what helped, and become one more shield.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m6.7", "ACEs: dose, response, and limits") + lessonBtn("m6.2", "Attachment") + "</div></section>";
+                main.innerHTML = h;
+                var t = target();
+                if (RM) { D.w = t.w; D.s = t.s; render(); }
+                else if (Math.abs(t.w - D.w) > 0.01 || Math.abs(t.s - D.s) > 0.01) { A = { last: null }; kick(); }
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") {
+                  if (S.pred) return; var o = PRED[optPick(POrd, v)]; if (!o) return; S.pred = o[0];
+                  live.textContent = (o[2] ? "Right" : "Not quite") + ": many hard experiences raise the odds across a group, but say little about one person. Now add weights and shields.";
+                }
+                else if (a === "wt" || a === "sh") {
+                  if (!S.pred) return; var M = a === "wt" ? S.w : S.s, L = a === "wt" ? WTS : SHD;
+                  M[v] = !M[v]; if (cnt(S.w) && cnt(S.s)) S.built = true;
+                  var nm = L.filter(function (x) { return x[0] === v; })[0][1];
+                  live.textContent = (M[v] ? (a === "wt" ? "Weight added: " : "Shield added: ") : "Removed: ") + nm + ". Weight level " + wLvl(cnt(S.w)).toLowerCase() + ", shield level " + sLvl(cnt(S.s)).toLowerCase() + ". " + groupWord(cnt(S.w), cnt(S.s));
+                }
+                else if (a === "chal") {
+                  if (!S.built) return; var c = CH.filter(function (x) { return x[0] === b.dataset.c; })[0]; if (!c || S.ch[c[0]]) return;
+                  var val = optPick(FOrd[c[0]], v) === 0 ? "fair" : "mis"; S.ch[c[0]] = val;
+                  live.textContent = ((val === "fair") === c[2] ? "Right. " : "Not quite. ") + c[3];
+                }
+                else if (a === "cmp") {
+                  if (!S.typed.trim() || S.cmp) return; S.cmp = true; live.textContent = "A model answer: " + MODEL;
+                }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b && b.tagName === "BUTTON") { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]");
+                if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("input", function (e) {
+                var t = e.target; if (!t || t.id !== "ds-own" || S.cmp) return;
+                S.typed = t.value; var c = $('[data-act="cmp"]', main); if (c) c.disabled = !S.typed.trim();
+              });
+              wrap.addEventListener("keydown", function (e) {
+                var t = e.target; if (t && t.id === "ds-own" && e.key === "Enter") { e.preventDefault(); var c = $('[data-act="cmp"]', main); if (c && !c.disabled) { act(c); var nx = $('[data-next="4"]', main); if (nx) nx.focus({ preventScroll: true }); } }
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); D = { w: 0, s: 0 }; paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
