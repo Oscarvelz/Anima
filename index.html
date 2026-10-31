@@ -848,6 +848,8 @@
       .x-today .dim { margin-bottom: 12px; max-width: 30ch; }
       .x-today__q { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 13.5px; color: var(--dim); }
       .x-today__q b { color: var(--text); font-family: var(--mono); }
+      .dim.x-studytime { font-size: 13px; }
+      .x-today .x-studytime { margin-top: -6px; margin-bottom: 14px; max-width: none; }
       .x-spiral { grid-area: spiral; position: relative; overflow: hidden; min-height: 300px; border-radius: var(--r-plate); color: #eef0ff; border: 1px solid rgba(167, 139, 250, 0.25); background: radial-gradient(80% 70% at 50% 45%, #1d1650, #070818 78%); box-shadow: var(--ring), var(--shadow); }
       .x-spiral .x-hero3d { position: absolute; inset: 0; touch-action: pan-y; cursor: grab; }
       .x-hero3d canvas { display: block; width: 100%; height: 100%; }
@@ -1593,6 +1595,103 @@
             });
           }
         };
+
+        /* ============ STUDY TIME (shared contract: studytime.anima / anima_studytime; additive, never touches anima_progress) ============ */
+        var StudyTime = (function () {
+          var APP = "anima", LK = "studytime." + APP, CK = APP + "_studytime";
+          var lastInput = 0, last = 0, pend = 0, lastFlush = 0, lastCloud = 0, cloudBusy = false, started = false;
+          function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+          function dev() { var d = ls("studytime.device"); if (!d) { d = Math.random().toString(36).slice(2, 12); while (d.length < 10) d += Math.random().toString(36).slice(2); d = d.slice(0, 10); ls("studytime.device", d); } return d; }
+          function day(t) { var x = t ? new Date(t) : new Date(); var m = x.getMonth() + 1, dd = x.getDate(); return x.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (dd < 10 ? "0" : "") + dd; }
+          function blank() { return { v: 1, devices: {}, updatedAt: new Date(0).toISOString() }; }
+          function parse(raw) { var o = null; try { o = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { o = null; } if (!o || typeof o !== "object" || !o.devices || typeof o.devices !== "object") return blank(); return o; }
+          function merge(a, b) {
+            a = parse(a); b = parse(b); var out = { v: 1, devices: {}, updatedAt: (a.updatedAt || "") > (b.updatedAt || "") ? a.updatedAt : b.updatedAt };
+            [a, b].forEach(function (s) {
+              Object.keys(s.devices).forEach(function (d) {
+                var days = (s.devices[d] && s.devices[d].days) || {}, od = out.devices[d] || (out.devices[d] = { days: {} });
+                Object.keys(days).forEach(function (k) { var n = Math.max(0, Math.floor(+days[k] || 0)); if (!(od.days[k] >= n)) od.days[k] = n; });
+              });
+            });
+            return out;
+          }
+          function read() { return parse(ls(LK)); }
+          function same(a, b) { return JSON.stringify(a.devices) === JSON.stringify(b.devices); }
+          function flush() {
+            var add = Math.floor(pend); if (add <= 0) return;
+            pend -= add;
+            var cur = read(), d = dev(), k = day(), o = merge(cur, blank());
+            var dd = o.devices[d] || (o.devices[d] = { days: {} });
+            dd.days[k] = (dd.days[k] || 0) + add;
+            o.updatedAt = new Date().toISOString();
+            ls(LK, JSON.stringify(o));
+            lastFlush = Date.now();
+          }
+          function on() { try { return typeof Sync !== "undefined" && Sync.on(); } catch (e) { return false; } }
+          function pushCloud(keep) {
+            if (!on() || cloudBusy) return;
+            cloudBusy = true; lastCloud = Date.now();
+            var body = {}; body[CK] = JSON.stringify(read());
+            Cloud.req("/auth/v1/user", { method: "PUT", keepalive: keep === true, body: { data: body } })
+              .then(function (res) { if (res && res.ok) Cloud.stale = true; }, function () {})
+              .then(function () { cloudBusy = false; });
+          }
+          function pullCloud() {
+            if (!on()) return;
+            Cloud.req("/auth/v1/user").then(function (res) {
+              if (!res || !res.ok) return;
+              var md = (res.data && (res.data.user_metadata || (res.data.user && res.data.user.user_metadata))) || {};
+              if (!md[CK]) { pushCloud(); return; }
+              flush();
+              var loc = read(), m = merge(loc, md[CK]);
+              if (!same(loc, m)) { ls(LK, JSON.stringify(m)); paint(); }
+              if (!same(parse(md[CK]), m)) pushCloud();
+            }, function () {});
+          }
+          function active() {
+            if (document.visibilityState !== "visible") return false;
+            if (document.hasFocus && !document.hasFocus()) return false;
+            var media = false; try { var v = document.querySelectorAll("video,audio"); for (var i = 0; i < v.length; i++) if (!v[i].paused && !v[i].ended) { media = true; break; } } catch (e) {}
+            return media || Date.now() - lastInput < 90000;
+          }
+          function tick() {
+            var now = Date.now(), dt = last ? (now - last) / 1000 : 0; last = now;
+            if (dt > 5) dt = 5; if (dt < 0) dt = 0;
+            if (!active()) return;
+            pend += dt;
+            if (now - lastFlush >= 15000) { flush(); paint(); }
+            if (now - lastCloud >= 60000) pushCloud();
+          }
+          function hide() { flush(); paint(); pushCloud(true); last = 0; }
+          function totals() {
+            flush();
+            var o = read(), t = day(), today = 0, all = 0;
+            Object.keys(o.devices).forEach(function (d) { var days = o.devices[d].days || {}; Object.keys(days).forEach(function (k) { all += days[k]; if (k === t) today += days[k]; }); });
+            return { today: today, all: all };
+          }
+          function fmt(s) { var m = Math.floor(s / 60), h = Math.floor(m / 60); m = m % 60; return h ? h + " h " + m + " min" : m + " min"; }
+          function paint() {
+            var els = document.querySelectorAll("[data-studytime]"); if (!els.length) return;
+            var t = totals();
+            for (var i = 0; i < els.length; i++) els[i].textContent = "Time studied · today " + fmt(t.today) + " · all time " + fmt(t.all);
+          }
+          function start() {
+            if (started) return; started = true;
+            var mark = function () { lastInput = Date.now(); };
+            ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (e) { window.addEventListener(e, mark, { passive: true, capture: true }); });
+            window.addEventListener("scroll", mark, { passive: true, capture: true });
+            document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") hide(); else { last = 0; pullCloud(); } });
+            window.addEventListener("blur", hide);
+            window.addEventListener("pagehide", hide);
+            window.addEventListener("storage", function (e) { if (e.key === LK) paint(); });
+            dev(); mark(); last = Date.now();
+            setInterval(tick, 1000);
+            setTimeout(pullCloud, 4000);
+            setInterval(paint, 30000);
+            paint();
+          }
+          return { start: start, merge: merge, totals: totals, fmt: fmt, paint: paint, pull: pullCloud, push: pushCloud };
+        })();
 
         /* ============ SYNC ============ */
         var Sync = {
@@ -4659,6 +4758,7 @@
             Sync.paint();
             if (State.tab === "glossary") filterGloss();
             if ($(".x-hero3d", v)) mountHero3D($(".x-hero3d", v));
+            try { StudyTime.paint(); } catch (e) {}
           },
           greeting: function () {
             var h = new Date().getHours();
@@ -4691,6 +4791,7 @@
               '<p class="eyebrow">Today’s session · ' + prefs.goal + " min goal" + (nid ? " · " + esc(lessonLabel(nid)) : "") + "</p>" +
               "<h2>" + head + "</h2>" + '<p class="dim">' + sub + "</p>" +
               '<p class="x-today__q">' + I.review + "<span><b>" + due + "</b> review" + (due === 1 ? "" : "s") + " due today</span></p>" +
+              '<p class="dim x-studytime" data-studytime></p>' +
               '<div class="x-acts">' + act + "</div></section>" +
               '<section class="x-spiral" aria-label="Neural network forming the letter psi"><div class="x-hero3d" aria-hidden="true"></div>' +
               '<div class="x-spiral__cap"><p class="eyebrow">ψ · psyche</p><b>The mind, made visible.</b><span>Neurons and synapses in the shape of ψ. Drag to turn it.</span></div></section>' +
@@ -4788,6 +4889,7 @@
                   : '<div class="rows">' + (u.name ? row("Name", u.name) : "") + (u.email ? row("Email", u.email) : "") + row("Account", "On this device only") + "</div>" +
                     '<p class="dim">Sign in or create an account to sync progress across devices. Everything on this device is merged into your account.</p>' +
                     '<div class="x-acts"><button type="button" class="start press" id="go-signin">Sign in to sync</button></div>') +
+                '<p class="dim x-studytime" data-studytime></p>' +
                 '<p class="eyebrow">Backup status</p><div class="rows">' +
                 row("Last local", UI.when(meta.localAt)) + row("Last online", UI.when(meta.onlineAt)) + row("Last sync", UI.when(meta.syncAt)) +
                 row("This device", meta.device) + row("Revision", "r" + meta.rev) + "</div>" +
@@ -15170,6 +15272,7 @@
             else if (img) { img.addEventListener("load", make); img.addEventListener("error", make); setTimeout(make, 4000); }
             else make();
             Pwa.sw();
+            try { StudyTime.start(); } catch (e) {}
           },
           /* the icon, cropped to its centre square */
           crop: function (img, n) {
