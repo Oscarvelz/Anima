@@ -4715,6 +4715,196 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* PHASE 3q-3 · L16 Eyewitness Reconstruction: a minor bump, then a leading question a week later. The verb in the question rebuilds the memory: speed rises, glass appears, confidence climbs. Predict, one manipulation, live words, challenge, reveal, therapy section, so what. Page-only 2D SVG; animates only while visible, stops on exit; stores nothing. */
+          {
+            id: "eyewitness", name: "Eyewitness Reconstruction", kicker: "M4 · Memory is reconstructive", hue: ["#7fe9ff", "#ff8a9a"], gallery: true, order: 5.7, dom: true,
+            idea: "Watch a minor car bump, then change one word in the question asked a week later. See the memory rebuild itself with details that were never there.",
+            see: "Two small cars bump. Beside them, a faded sketch of the memory gains dents, skid marks and broken glass as the verb in the question grows stronger.",
+            why: "Memory is rebuilt each time it is recalled, not replayed. The wording of a question can add details, and confidence rises even as accuracy falls.",
+            use: "Intake and assessment questions, case notes and reports, forensic and reentry settings, and any work with memories of trauma.",
+            cap: "Predict what a leading question does to memory. Then choose the verb, run it, and tap the detail that was never there.",
+            /* verb, speed word, glass word, confidence word (indexes) */
+            V: [["contacted", 0, 0, 0], ["hit", 1, 0, 0], ["bumped", 1, 1, 1], ["collided", 2, 1, 2], ["smashed", 3, 2, 3]],
+            flat: function (box, ctl) {
+              var sc = this, V = sc.V, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var SP = ["low", "moderate", "high", "very high"], GL = ["unlikely", "possible", "likely"], CF = ["moderate", "fairly high", "high", "very high"];
+              var PRED = [["none", "Nothing — I remember what I saw"], ["rise", "My speed estimate rises, and I may ‘remember’ broken glass that wasn’t there"], ["acc", "I become more accurate because I’m asked carefully"]];
+              var HIT = [["shards", "Glass shards"], ["cars", "The cars"], ["road", "The road"]];
+              var FB = {
+                shards: "Right. The original was a minor bump and no glass broke. The shards were added by the word “smashed”, then remembered as if seen. This is the detail people asked with “smashed” most often reported.",
+                cars: "Not this one. Both cars really were there, and the memory kept them. What changed is the damage drawn onto them, and what lies on the road beneath them.",
+                road: "Not this one. The road was in the original scene. Look at what lies on it: the glass shards were never there."
+              };
+              var fresh = function () { return { pred: null, v: null, run: null, ran: false, rAnim: false, tap: null }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function sect(title, sub, body) { return '<section class="x-lens__box glass" aria-label="' + esc(title) + '"><h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function btn(act, v, label, on, dis) { return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + v + '" aria-pressed="' + !!on + '"' + (dis ? " disabled" : "") + ">" + esc(label) + "</button>"; }
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function car(k, x, flip, extra) {
+                return '<g data-k="' + k + '" transform="translate(' + x + ' 118)' + (flip ? " scale(-1 1)" : "") + '"' + (extra || "") + '>' +
+                  '<rect x="0" y="0" width="34" height="12" rx="4"/><path d="M7 0L11 -8H24L28 0"/><circle cx="8" cy="13" r="3.5"/><circle cx="26" cy="13" r="3.5"/></g>';
+              }
+              function road(dx) {
+                return '<path d="M' + dx + " 137H" + (dx + 170) + "M" + dx + " 162H" + (dx + 170) + '" stroke="var(--dim)" stroke-opacity="0.6" stroke-width="1"/>' +
+                  '<path d="M' + (dx + 6) + " 150H" + (dx + 164) + '" stroke="var(--dim)" stroke-opacity="0.45" stroke-dasharray="8 8" stroke-width="1"/>';
+              }
+              /* memory-only details, each with the verb level it first appears at */
+              var DET = [
+                [1, '<path d="M80 120l3 3l-3 3l3 3" stroke="var(--gold)"/>'],
+                [2, '<path d="M92 120l-3 3l3 3l-3 3" stroke="var(--gold)"/><path d="M18 141H46M20 145H44" stroke="var(--gold)" stroke-dasharray="4 3"/>'],
+                [3, '<path d="M66 118l4 4l4 -4l4 4M106 118l-4 4l-4 -4l-4 4" stroke="var(--gold)"/><path d="M80 146l4 -5l3 6zM92 152l5 -3l0 6zM74 155l4 -2l-1 5z" stroke="var(--coral)"/>'],
+                [4, '<path d="M66 144l4 -4l2 5zM100 142l5 1l-3 4zM106 156l4 -5l2 6zM86 158l4 -3l1 4zM96 147l3 -4l2 5zM70 151l-3 4l5 0z" stroke="var(--coral)"/><path d="M84 104q-4 -6 0 -12q4 -6 0 -12M92 104q-4 -6 0 -12q4 -6 0 -12" stroke="var(--gold)" stroke-opacity="0.8"/>']
+              ];
+              function stage(id, label, chal) {
+                var g = '<svg data-stage="' + id + '" viewBox="0 0 360 172" role="img" aria-label="' + esc(label) + '" style="display:block;width:100%;height:auto;max-height:260px">' +
+                  '<g aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">' +
+                  road(0) + car("ca", 8, false, ' stroke="var(--text)"') + car("cb", 164, true, ' stroke="var(--primary)"') +
+                  '<path data-k="bump" d="M86 108v-6M80 110l-4 -4M92 110l4 -4" stroke="var(--dim)" opacity="0"/>' +
+                  '<line x1="180" y1="24" x2="180" y2="164" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>' +
+                  '<g transform="translate(180 0)">' + road(0) +
+                  '<g stroke="var(--dim)" stroke-dasharray="3 3" opacity="0.55">' + car("ga", 52, false) + car("gb", 120, true) + "</g>" +
+                  DET.map(function (d) { return '<g data-min="' + d[0] + '" opacity="0">' + d[1] + "</g>"; }).join("") +
+                  (chal ? HIT.slice().reverse().map(function (h) {
+                    var r = { road: [2, 136, 166, 28], cars: [48, 100, 76, 36], shards: [62, 138, 52, 24] }[h[0]];
+                    return '<rect data-hit="' + h[0] + '" x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="6" fill="transparent" stroke="var(--primary)" stroke-width="2" stroke-opacity="0" style="cursor:pointer;pointer-events:all"/>';
+                  }).join("") : "") +
+                  '<text data-k="q" x="86" y="80" fill="var(--dim)" stroke="none" text-anchor="middle" style="font:600 22px var(--sans)" opacity="0">?</text></g></g>' +
+                  '<g aria-hidden="true" fill="var(--dim)" style="font:12px var(--sans)"><text x="86" y="16" text-anchor="middle">What happened</text>' +
+                  '<text x="266" y="16" text-anchor="middle">Your memory, a week later</text></g></svg>';
+                return g;
+              }
+              function clamp(x) { return Math.max(0, Math.min(1, x)); }
+              function render(a) {
+                var g = a.svg, i = a.i, p = a.p, c = clamp(p / 0.3), e = c * c * (3 - 2 * c);
+                $('[data-k="ca"]', g).setAttribute("transform", "translate(" + (8 + 44 * e).toFixed(1) + " 118)");
+                $('[data-k="cb"]', g).setAttribute("transform", "translate(" + (164 - 44 * e).toFixed(1) + " 118) scale(-1 1)");
+                $('[data-k="bump"]', g).setAttribute("opacity", c >= 1 && (p < 0.42 || p >= 1) ? "1" : "0");
+                var q = clamp((p - 0.35) / 0.6);
+                Array.prototype.forEach.call(g.querySelectorAll("[data-min]"), function (el) { var m = +el.getAttribute("data-min"); el.setAttribute("opacity", i >= m ? clamp(q * i - (m - 1)).toFixed(2) : "0"); });
+                if (a.out) {
+                  var r = V[i], step = function (t, list) { return q <= 0 ? "…" : list[Math.min(t, Math.floor(q * (t + 1)))]; };
+                  var w = [p < 0.3 ? "Watching a minor bump" : p < 0.35 ? "A week later, the question is asked" : p < 1 ? "Rebuilding the memory" : "Memory rebuilt",
+                    step(r[1], SP), step(r[2], GL), q <= 0 ? "…" : step(r[3], CF) + " (confidence rises even as accuracy falls)"];
+                  a.out.forEach(function (el, k) { if (el && el.textContent !== w[k]) el.textContent = w[k]; });
+                }
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.p += Math.min(0.05, (now - A.last) / 1000) / A.dur;
+                A.last = now; if (A.p > 1) A.p = 1;
+                render(A);
+                if (A.p < 1) kick(); else A.done = true;
+              }
+              function kick() { if (!raf && A && !A.done && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              function show(svg, i, anim, out, upto) {
+                if (!svg) return;
+                var a = { svg: svg, i: i, p: upto != null ? upto : anim && !RM ? 0 : 1, dur: 6, last: null, out: out, done: false };
+                if (!anim || RM || upto != null) { a.done = true; render(a); return; }
+                halt(); A = a; render(a); kick();
+              }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function paint() {
+                var a = doc.activeElement, keep = a && wrap.contains(a) && a.dataset && a.dataset.act ? '[data-act="' + a.dataset.act + '"]' + (a.dataset.v != null ? '[data-v="' + a.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var right = S.pred === "rise", sv = S.v != null ? V[S.v][0] : "…";
+                var h = sect("Predict first", "You saw a minor car bump. A week later someone asks: “How fast were the cars going when they SMASHED into each other?” What happens to your memory?",
+                  stage("pred", "Two cars in a minor bump. The memory a week later is hidden.") +
+                  '<div class="x-lens__row" role="group" aria-label="Your prediction">' + PRED.map(function (o) { return btn("pred", o[0], o[1], S.pred === o[0], !!S.pred); }).join("") + "</div>" +
+                  (S.pred ? '<p class="x-lens__p" aria-live="polite"><b>' + (right ? "Right: the estimate rises, and false details can appear." : "Not quite: the estimate rises, and false details can appear.") + "</b> The word in the question becomes part of the memory. Change the verb below and watch it happen.</p>" : ""));
+                h += sect("The question asked a week later", S.pred ? "“How fast were the cars going when they " + esc(sv) + " each other?” Choose a verb, then press Run." : "Make your prediction to start.",
+                  '<div class="x-lens__row" role="group" aria-label="Verb in the question">' + V.map(function (r, k) { return btn("verb", k, r[0], S.v === k, !S.pred); }).join("") +
+                  '<button type="button" class="start press x-lens__go" data-act="run"' + (S.pred && S.v != null ? "" : " disabled") + ">Run</button></div>" +
+                  (S.run ? stage("run", "The bump was minor. Asked with “" + V[S.run.i][0] + "”, the memory " + (S.run.i ? "gains details that were never there." : "stays close to what happened.")) +
+                    '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    "<li><b>Question used:</b> “…when they " + esc(V[S.run.i][0]) + " each other?”</li>" +
+                    '<li><b>Now:</b> <span data-o="0"></span></li><li><b>Speed you’d estimate:</b> <span data-o="1"></span></li>' +
+                    '<li><b>Broken glass recalled:</b> <span data-o="2"></span></li><li><b>Confidence:</b> <span data-o="3"></span></li></ul>' : ""));
+                if (S.ran) h += sect("Challenge", "This is the memory of someone asked with “smashed”. Which detail was never there? Tap the memory sketch, or pick one.",
+                  stage("chal", "The memory after the question used smashed: the faded cars, the road, and added glass shards.", true) +
+                  '<div class="x-lens__row" role="group" aria-label="Details">' + HIT.map(function (m) { return btn("tap", m[0], m[1], S.tap === m[0]); }).join("") + "</div>" +
+                  (S.tap ? '<p class="x-lens__p" aria-live="polite"><b>' + esc(HIT.filter(function (m) { return m[0] === S.tap; })[0][1]) + ".</b> " + esc(FB[S.tap]) + "</p>" : ""));
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="Reveal"><h3 class="x-lens__h">Reveal<small>Memory is rebuilt each time it is recalled, not replayed</small></h3>' +
+                  '<p class="x-lens__p"><b>The verb changed the memory.</b> Loftus and Palmer (1974) showed people a film of a car accident, then asked how fast the cars were going when they contacted, hit, bumped, collided or smashed. The stronger the verb, the higher the speed estimate. A week later, people asked with “smashed” more often reported broken glass that was never in the film.</p>' +
+                  '<p class="x-lens__p"><b>The misinformation effect.</b> Information met after an event, in a question, a conversation or a news story, can blend into the memory of the event itself' + tag("", "Robust") + " Loftus (2005) reviews three decades of this work.</p>" +
+                  '<p class="x-lens__p"><b>Whole false events.</b> In the “lost in the mall” study (Loftus &amp; Pickrell 1995), suggestion backed by family members led some participants to recall a childhood event that never happened. That this can happen is robust; how often is contested, as rates vary widely across studies (Scoboria et al. 2017 mega-analysis).</p>' +
+                  '<p class="x-lens__p"><b>Confidence is not accuracy.</b> Confidence grows with retelling, so confidence at trial says little. Confidence at a fair, first lineup, recorded before any feedback, is informative (Wixted &amp; Wells 2017).</p>' +
+                  '<p class="x-mr__status">Misinformation effect' + tag("", "Robust") + "· Rich false memories can be implanted" + tag("", "Robust") + "· How often" + tag(" x-ev--c", "Contested") + "· “Confidence never predicts accuracy”" + tag(" x-ev--d", "Debunked or revised") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Loftus &amp; Palmer", 1974, "experiment", "The verb in a question changed speed estimates; the “smashed” group more often reported broken glass that wasn’t there.", tag("", "Robust")) +
+                  ref("Loftus", 2005, "review", "Misleading information after an event alters memory of the event: the misinformation effect.", tag("", "Robust")) +
+                  ref("Loftus &amp; Pickrell", 1995, "experiment", "Suggestion from family led some participants to recall being lost in a mall as a child, an event that never happened.", tag("", "Robust")) +
+                  ref("Geraerts et al.", 2007, "corroboration study", "Memories recovered spontaneously outside therapy were corroborated about as often as continuous memories; memories recovered in suggestive therapy were rarely corroborated.", tag(" x-ev--c", "Contested")) +
+                  ref("Wixted &amp; Wells", 2017, "review", "Confidence at trial is not accuracy, but initial confidence at a fair first lineup is informative.", tag("", "Robust")) +
+                  "</ol></section></section>" +
+                  '<section class="x-lens__box glass" aria-label="Where this becomes a problem in therapy"><h3 class="x-lens__h">Where this becomes a problem in therapy<small>The same nudge that adds glass to a car crash can add a story to a life</small></h3>' +
+                  '<p class="x-lens__p"><b>The memory wars.</b> In the 1990s some therapists searched for “repressed” memories using suggestive techniques: repeated guided imagery, hypnosis, dream interpretation, suggestive questioning, and symptom lists said to “prove” hidden abuse. Some clients came to believe in abuse that later evidence showed did not happen. Families were torn apart and lawsuits followed (Loftus 1993; Lindsay &amp; Read 1994). Many people, often called retractors, later withdrew their accounts.</p>' +
+                  '<p class="x-lens__p"><b>Imagination inflation.</b> Simply imagining an event makes people more confident it happened (Garry et al. 1996)' + tag("", "Robust") + " Guided imagery used to “find” a memory is imagination practice.</p>" +
+                  '<p class="x-lens__p"><b>The other side, at full strength.</b> Abuse is common, and people who disclose it are often disbelieved. Some people do forget and later remember real abuse, especially when the memory returns spontaneously, outside therapy. Geraerts et al. (2007) found spontaneously recovered memories were corroborated about as often as continuous ones, while memories recovered in suggestive therapy were rarely corroborated. The problem is technique, not believing clients.</p>' +
+                  '<p class="x-lens__p"><b>The counsellor’s own role.</b> Leading questions creep into intake, assessment and case notes. Expectation and diagnosis can shape what a client “remembers”. A counsellor’s confident retelling in notes or court reports can harden into “fact”. In forensic and reentry settings, how a question is asked can change a statement that follows a person for years.</p>' +
+                  '<p class="x-mr__status">Suggestive “recovery” techniques as a route to hidden truth' + tag(" x-ev--d", "Debunked or revised") + "· Imagination inflation" + tag("", "Robust") + "· Real abuse can be forgotten and later remembered" + tag(" x-ev--c", "Contested") + "</p>" +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Ask open, non-leading questions: “Tell me what happened”, not “Did he hurt you?”</li>" +
+                  "<li>Don’t search for memories the client doesn’t report.</li>" +
+                  "<li>Don’t use hypnosis or guided imagery to “recover” memories.</li>" +
+                  "<li>Work with the meaning and impact of what the client does remember.</li>" +
+                  "<li>Document the client’s own words, in quotes.</li>" +
+                  "<li>Stay neutral about historical truth when it is unknown, while taking distress seriously.</li>" +
+                  "<li>Refer forensic questions to forensic specialists.</li></ul></section>" +
+                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Every question you ask is also a nudge: ask open, write the client’s own words, never go digging for memories with suggestion — and believe the distress without manufacturing the story.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m4.5", "Memory is reconstructive") + lessonBtn("m4.6", "Trauma and memory controversies") + "</div></section>";
+                main.innerHTML = h;
+                var pg = $('[data-stage="pred"]', main);
+                show(pg, 0, false, null, 0.3);
+                if (pg) $('[data-k="q"]', pg).setAttribute("opacity", "1");
+                if (S.run) show($('[data-stage="run"]', main), S.run.i, S.rAnim, [0, 1, 2, 3].map(function (k) { return $('[data-o="' + k + '"]', main); }));
+                var cg = $('[data-stage="chal"]', main);
+                if (cg) { show(cg, 4, false, null); if (S.tap) $('[data-hit="' + S.tap + '"]', cg).setAttribute("stroke-opacity", "1"); }
+                S.rAnim = false;
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "rise" ? "Right" : "Not quite") + ": the speed estimate rises, and false details can appear. Choose a verb for the question."; }
+                else if (a === "verb") { if (!S.pred) return; S.v = +v; live.textContent = "Verb “" + V[S.v][0] + "” selected. Press Run."; }
+                else if (a === "run") {
+                  if (!S.pred || S.v == null) return; S.run = { i: S.v }; S.ran = true; S.rAnim = true;
+                  var r = V[S.v]; live.textContent = "Running with “" + r[0] + "”. Speed you’d estimate: " + SP[r[1]] + ". Broken glass recalled: " + GL[r[2]] + ". Confidence: " + CF[r[3]] + ", rising even as accuracy falls.";
+                }
+                else if (a === "tap") { if (!S.ran) return; S.tap = v; live.textContent = FB[v]; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b) { if (!b.disabled) act(b); return; }
+                var t = e.target.closest && e.target.closest('svg[data-stage="chal"] [data-hit]');
+                if (t && S.ran) act({ dataset: { act: "tap", v: t.getAttribute("data-hit") } });
+              });
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
