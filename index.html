@@ -1897,7 +1897,9 @@
             lessons: ["Psychodynamic views", "Traits and the Big Five", "The humanistic self", "Social-cognitive views", "Assessing personality", "Personality across cultures"] },
           { id: "m8m", code: "M8+", part: "B", t: "Meaning, beliefs & stories", s: "What meaning is, how beliefs form, and how to work with them", after: "m8",
             depth: ["What meaning is, where it comes from, and how beliefs and schemas form", "Hear meaning and core beliefs in clients’ stories, and work with them", "Measurement, culture, and the limits of meaning and schema theories"],
-            lessons: ["What meaning is, and is not", "Frankl and the three paths", "The other voices of meaning", "Making meaning in practice", "How beliefs are made", "Core beliefs and schemas", "Working with a core belief without diminishing the person"] },
+            lessons: ["What meaning is, and is not", "Frankl and the three paths", "The other voices of meaning", "Making meaning in practice", "How beliefs are made", "Core beliefs and schemas", "Working with a core belief without diminishing the person",
+              /* phase 3n-1: addiction, environment and meaning (appended; lessons 1–7 unchanged) */
+              "Vietnam and Rat Park: environment and addiction", "Connection, meaning and recovery in the room"] },
           /* phase 3j-1: SG · sex & gender differences (shell; lessons 1–2 built) */
           { id: "m8s", code: "SG", part: "B", t: "Sex & gender differences", s: "Overlap first: what differs, by how much, and why it never judges the person", after: "m8",
             depth: ["What the evidence says differs between the sexes, and by how much, in words", "Read a group finding in class, clinic or the news without judging the person in front of you", "Biology, culture and combined profiles: the explanations weighed, and where each runs out"],
@@ -7261,6 +7263,218 @@
                 "Faith-rooted beliefs are her ground: talk about their function in her terms, never their truth.")
             ]
           },
+          /* ---- phase 3n-1: M8+ lesson 8 · Vietnam and Rat Park: environment and addiction (no numbers except years) ---- */
+          "m8m.8": {
+            home: "Marcus hasn’t used in years inside. The bus home passes the corner where he used to buy. What happens at that corner?",
+            keys: [["What did Robins’s Vietnam study find?", "About one in five enlisted men reported being addicted to heroin in Vietnam; back home, only about one in twenty of them were readdicted in the first year, and about one in eight at any point over three years, far fewer than among people treated for heroin addiction in the United States."],
+              ["What did Rat Park find?", "Rats in a large, social, enriched colony drank far less morphine solution than rats housed alone in small cages (Alexander, Coambs & Hadaway 1978)."],
+              ["How well has Rat Park held up?", "Not directly replicated (Petrie 1996 found no housing effect), but conceptually supported: enrichment and social contact often reduce drug taking in animals (Gage & Sumnall 2019; Venniro et al. 2018)."],
+              ["What is the dated verdict?", "As of 2026: addiction involves real brain changes, but environment, cues, connection and alternatives strongly shape who starts, who stops and who relapses; confidence moderate-high."]],
+            steps: [
+              { kind: "hook", title: "Marcus, before release", body: who("<b>Marcus</b> is finishing a long sentence. He meets his reentry counsellor for a release plan.") +
+                "<p>He says he hasn’t used heroin in years, not once inside.</p>" +
+                "<p>Then he adds: “The bus home goes right past the corner where I used to buy.”</p>" },
+              { kind: "predict", id: "m8m.8:predict", title: "Your call first",
+                case: ["Marcus has not used heroin in years while inside.",
+                  "He used to buy on a corner his bus home passes.",
+                  { t: "He has been reading a lot of westerns lately.", irrelevant: true },
+                  "He says he feels fine about drugs right now.",
+                  { t: "His release is set for a Tuesday.", irrelevant: true },
+                  "He has never seen that corner sober as a free man."],
+                q: "When the bus passes the corner on his first day out, what is Marcus most likely to feel?",
+                options: ["A sudden, strong pull to use, despite the years without", "Very little, since the years without have worn the pull away", "Mild disgust, since time away has turned the pull against itself"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s what’s most likely: a sudden pull. Years without use in one place do not erase cues learned in another. The corner, the street and the hour were paired with heroin, and they are still out there. Many people describe exactly this on release, though not everyone feels it.",
+                hints: ["Ask where Marcus stopped using, and where the cues are.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what the corner was paired with, many times over."] },
+              { kind: "idea", lvl: "f", title: "Vietnam: heroin everywhere", body: "<p>In the early nineteen-seventies, US officials feared a wave of soldiers coming home addicted. Lee Robins led the study that followed them (Robins, Davis & Goodwin 1974) " + ev("r") + ".</p>" +
+                "<p>In Vietnam, heroin was cheap, pure and everywhere. Stress, boredom and peers who used did the rest. About one in five enlisted men reported being addicted there.</p>" +
+                "<p><b>So:</b> put ordinary young men in a setting full of cheap drugs, stress and using peers, and many become addicted.</p>" },
+              { kind: "idea", lvl: "f", title: "Vietnam: coming home", body: "<p>Before the flight home, men were urine-tested, a programme nicknamed “Operation Golden Flow”. Men who tested positive were kept until they were drug-free.</p>" +
+                "<p>Back home, only about one in twenty of those addicted in Vietnam were readdicted in the first year, and about one in eight at any point in three years (Robins 1993). That is far lower than among people treated for heroin addiction in the United States.</p>" +
+                "<p><b>So:</b> when the setting changed, most men stopped being addicted, and stayed stopped.</p>" },
+              { kind: "idea", lvl: "p", title: "What the study did not show", body: "<p>Read the finding precisely (Hall & Weier 2017) " + ev("r") + ".</p>" +
+                "<p><b>Use, not readdiction.</b> Many men used opioids again now and then without becoming readdicted. <b>Other drugs.</b> Some shifted to amphetamines or alcohol. <b>Treatment.</b> Treatment in Vietnam made no difference to readdiction. <b>A different group.</b> Most had not used heroin before the war, and those with earlier problems relapsed more.</p>" +
+                "<p><b>So:</b> Vietnam shows how much setting matters for people who started in that setting; it does not show heroin is harmless.</p>" },
+              { kind: "idea", lvl: "p", title: "What it means: the setting drives use", body: "<p>Setting, cues, availability, price and social norms drive use, not the molecule alone. The same drug, in a different life, did something different.</p>" +
+                "<p>Cues keep their pull because learning is tied to context; see “Extinction, cues and relapse” in Learning & conditioning, and “When plasticity builds the problem, and therapy’s mechanism” in Biological bases.</p>" +
+                "<p><b>So:</b> ask about the drug, and ask just as hard about the life around it.</p>" },
+              { kind: "idea", lvl: "f", title: "Rat Park: the old paradigm", body: "<p>Mid-century addiction research used rats alone in small cages, pressing a lever for drug. With unlimited intravenous access, some took drug until they died (Woods 1978; Bozarth & Wise 1985) " + ev("r") + ".</p>" +
+                "<p>Those studies were read as proof that the drug itself enslaves.</p>" +
+                "<p><b>So:</b> the classic picture of addiction came from animals with nothing else to do.</p>" },
+              { kind: "idea", lvl: "p", title: "Rat Park: the experiment", body: "<p>Bruce Alexander and colleagues built <b>Rat Park</b>: a large, enriched colony with other rats, space, toys and places to nest (Alexander, Coambs & Hadaway 1978) " + ev("c") + ".</p>" +
+                "<p>Park rats drank far less morphine solution than rats housed alone. When the morphine’s effects were blocked with naloxone, park rats drank it more readily (Hadaway et al. 1979), hinting they avoided the intoxication itself.</p>" +
+                "<p><b>So:</b> rats with a life chose less of the drug.</p>" },
+              { kind: "idea", lvl: "p", title: "What Rat Park did not show", body: "<p>Popular retellings exaggerate. Park rats did drink some morphine; “happy rats never touch drugs” is not what was found.</p>" +
+                "<p>And the overdose deaths in the story were not in Rat Park. They came from the older isolated-cage studies, with intravenous access.</p>" +
+                "<p><b>So:</b> tell Rat Park as it happened, or a client who checks will stop trusting the rest.</p>" },
+              { kind: "idea", lvl: "m", title: "Has Rat Park held up?", body: "<p><b>Not directly.</b> Petrie (1996) repeated it and found no housing effect. The originals had small samples, oral morphine that tastes bitter, and measurement problems.</p>" +
+                "<p><b>Conceptually, yes.</b> A review called it “conceptual but not direct replication” (Gage & Sumnall 2019) " + ev("c") + ". Enrichment and social housing often reduce drug taking, with exceptions by genes, sex, age and drug.</p>" +
+                "<p><b>So:</b> the idea survived better than the experiment.</p>" },
+              { kind: "idea", lvl: "p", title: "The modern test: a friend or the drug", body: "<p>Venniro and colleagues (2018, Nature Neuroscience) " + ev("r") + " trained rats to take heroin or methamphetamine, then offered a choice: the drug, or time with another rat.</p>" +
+                "<p>Most chose the social partner, and later showed less craving than rats that had not had the choice. This is robust in animals; people are more complicated.</p>" +
+                "<p><b>So:</b> a rewarding alternative can outcompete a drug, even after addiction has formed.</p>" },
+              { kind: "contrast", id: "m8m.8:contrast", title: "Two men, one difference",
+                q: "Which account shows the life’s pull, rather than the drug’s pull, shaping the first year home?",
+                cases: [
+                  { label: "Man A", s: ["He used heroin daily before prison.", { t: "He wears his brother’s old jacket.", irrelevant: true }, "He has not used in years inside.", { t: "He goes back to his old block, the old friends and no work.", diff: true }] },
+                  { label: "Man B", s: ["He used heroin daily before prison.", { t: "He wears his brother’s old jacket.", irrelevant: true }, "He has not used in years inside.", { t: "He moves to a sober house across town with a job starting that week.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["How long he used before prison", "What his days and setting hold when he gets out", "What he is wearing", "How long he went without inside"],
+                feature: 1,
+                why: "Same drug, same history, same years without. The only difference is the life waiting outside: cues, people and something to do. Man B’s setting competes with the drug; Man A’s invites it back. Neither outcome is certain.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which man walks back into his old cues."] },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Addiction is a chronic brain disease", body: "<p><b>The brain changes.</b> Repeated use alters reward, stress and self-control circuits, and some changes last long after use stops (Leshner 1997; Volkow, Koob & McLellan 2016).</p>" +
+                "<p><b>Relapse risk is real.</b> Many people relapse after long abstinence, as with other chronic illnesses.</p>" +
+                "<p><b>It reduces blame.</b> Calling it a disease moves people toward treatment and away from punishment, and backs medical care such as medication.</p>" +
+                "<p><b>So:</b> on this side, addiction is a lasting brain condition that deserves medical care, not moral judgment.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Addiction is learned and shaped by environment", body: "<p><b>Most people stop.</b> Heyman (2009) argued addiction is a disorder of choice: most people who meet criteria remit, many without treatment, and choices respond to costs and alternatives.</p>" +
+                "<p><b>All learning changes the brain.</b> Lewis (2015) argued addiction is deep learning, like falling in love, not a disease; brain change alone does not make it one.</p>" +
+                "<p><b>Connection matters.</b> Hari (2015) popularized “the opposite of addiction is connection”. Vietnam and the animal choice studies fit.</p>" +
+                "<p><b>So:</b> on this side, addiction is learned behaviour shaped by setting and alternatives, and changing the life changes the behaviour.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh: what each side gets right", body: "<p><b>Real on both sides.</b> Brain changes are real, and so is relapse risk. Vietnam shows most people can stop when the environment changes.</p>" +
+                "<p><b>Selection.</b> The people who reach treatment are a harder-hit group: more severe, more problems, fewer resources. Heyman’s point is that most people with addiction remit, many without treatment; clinics mostly see the ones who don’t.</p>" +
+                "<p><b>So:</b> both stories describe real people; they are often describing different people.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Addiction involves real brain changes, but environment, cues, connection and alternatives strongly shape who starts, who stops and who relapses. Neither “just chemistry” nor “just environment” fits.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate-high.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Evidence that changing environment and alternatives does not change outcomes for people with severe dependence.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "Marcus: a reverse Vietnam", body: who("<b>His counsellor</b> names it: going home is Vietnam in reverse. The old cues are waiting.") +
+                '<dl class="x-dossier"><div><dt>The corner</dt><dd>Another bus route, or the same bus with a plan: sit on the far side, call his sponsor as it passes.</dd></div>' +
+                "<div><dt>The people</dt><dd>Who he used with, who he’ll avoid, and who he’ll see instead in the first week.</dd></div>" +
+                "<div><dt>The payday</dt><dd>His first paycheque or release money: where it goes before he has cash in hand.</dd></div>" +
+                "<div><dt>The hour</dt><dd>The time of day he used to buy, filled in advance.</dd></div>" +
+                "<div><dt>The safety net</dt><dd>Tolerance is lower after years without; naloxone in his bag, and medication offered.</dd></div></dl>" +
+                '<p class="x-note">For the room: “The corner will still be there. Let’s decide now what you’ll do when the bus passes it.” · <span lang="es">“La esquina va a seguir ahí. Decidamos ahora qué vas a hacer cuando el autobús pase por ella.”</span></p>' +
+                '<p class="x-note">For the room: “Feeling the pull there doesn’t mean you’ve failed. It means the cue still works.” · <span lang="es">“Sentir el impulso ahí no significa que hayas fallado. Significa que la señal todavía funciona.”</span></p>' },
+              { kind: "mastery", lvl: "m", title: "When the environment story misleads", body: '<p class="x-crit"><b>Strongest critique</b>Vietnam’s soldiers were mostly young men who started using in the war and had a home to return to; people in reentry often used long before prison and go back to the very setting where it began. Rat Park is a weak base for policy. And “change your environment” can sound like blame to someone whose parole, housing and money leave no choice of where to live, or can be used to skip medication that keeps people alive.</p>' +
+                "<p><b>The counter.</b> Use the environment story to plan, never to judge: map the cues he cannot avoid, build alternatives where he can, and pair it with medication and naloxone.</p>" +
+                "<p><b>Person-first.</b> Say “a person with a substance use disorder” or “people who use drugs”, never “addicts”.</p>" },
+              { kind: "teachback", id: "m8m.8:teachback", title: "Teach it back", prompt: "Explain to Marcus’s case manager why the corner on his bus route matters after years without using: Robins’s Vietnam study, about one in five addicted in Vietnam and about one in twenty readdicted in the first year home, with its caveats of occasional use, other drugs, no effect of treatment and a different group; Rat Park, the isolated-cage paradigm, the enriched colony drinking less morphine, and what popular retellings get wrong; its status, not directly replicated but conceptually supported, with Venniro’s rats choosing a social partner over heroin; the brain disease and learned-behaviour views steelmanned and weighed, with selection into treatment; the dated verdict, confidence moderate-high, and its defeater; and a reverse-Vietnam plan for the corner, the people and the payday." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Vietnam’s low readdiction on return " + ev("r") + ". Rat Park as a direct finding " + ev("c") + ". Enrichment and social choice reducing drug taking in animals " + ev("r") + ". Brain disease and choice models as full accounts " + ev("c") + ".</p>" +
+                "<p><b>So:</b> the drug pulls, and so does the life around it. For someone coming home, plan for the corner, the people and the payday before the bus leaves.</p>" },
+              Q("What did Robins find for men addicted to heroin in Vietnam once they were home?",
+                ["Most were readdicted within the first year", "Only about one in twenty were readdicted in the first year", "None used any opioid again after returning", "Treatment in Vietnam explained who stayed off"], 1,
+                "About one in twenty were readdicted in the first year and about one in eight over three years; many used occasionally, and treatment made no difference."),
+              Q("Which statement about Rat Park is accurate?",
+                ["Park rats never touched the morphine at all", "Rats overdosed in the isolated cages of Rat Park", "Park rats drank far less morphine solution than isolated rats", "It has been directly replicated many times"], 2,
+                "Park rats drank less, not none; the deaths came from older intravenous studies, and a direct repeat found no housing effect."),
+              Q("Why might clinics see more relapse than the Vietnam study did?",
+                ["People who reach treatment are often a harder-hit group", "Clinics use weaker treatments than the army did", "Heroin today is less addictive than it was then", "Veterans were asked fewer questions about use"], 0,
+                "Selection: people in treatment often have more severe problems and fewer resources; many others remit without treatment.")
+            ]
+          },
+          /* ---- phase 3n-1: M8+ lesson 9 · connection, meaning and recovery in the room (no numbers except years) ---- */
+          "m8m.9": {
+            home: "Rosa is three months clean. “My days are empty — before, at least, using was something.” What fills the space?",
+            keys: [["What does a functional analysis of use ask?", "What using did for the person, such as relief, belonging, identity or structure, so that recovery can meet those needs another way."],
+              ["What is recovery capital?", "The social, physical, human and cultural resources a person can draw on to start and keep recovery (Granfield & Cloud 1999; Best & Laudet 2010)."],
+              ["Which approaches to building a rewarding life have robust evidence?", "The Community Reinforcement Approach, CRAFT for families, contingency management and mutual help with Twelve-Step facilitation; meaning-centred work and the social identity model are promising but contested."],
+              ["What is the dated verdict?", "As of 2026: both. Medication and monitoring keep people alive and stable, and meaning, connection and rewarding alternatives keep recovery worth having; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Rosa, three months in", body: who("<b>Rosa</b> is three months into recovery from methamphetamine and alcohol, living in transitional housing after release.") +
+                "<p>She has not used since she got out. Her tests are clean.</p>" +
+                "<p>She tells her counsellor: “I’m clean, but my days are empty. Before, at least, using was something.”</p>" },
+              { kind: "predict", id: "m8m.9:predict", title: "Your call first",
+                case: ["Rosa has not used in three months.",
+                  "She says her days are empty.",
+                  { t: "She prefers her coffee black.", irrelevant: true },
+                  "Her old friends all still use.",
+                  { t: "Her room faces the street.", irrelevant: true },
+                  "She has no work or classes yet."],
+                q: "If nothing about her days changes, what is most likely over the next few months?",
+                options: ["Her risk of returning to use stays raised while her days stay empty", "Her risk falls steadily, because time clean builds strength on its own", "Her risk stays low, because the hardest part, withdrawal, is behind her"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s what’s most likely: her risk stays raised. Using did jobs for Rosa: something to do, people to be with, a break from feeling. Stopping removed the behaviour but left the jobs undone. Time clean helps, but an empty life is a common road back.",
+                hints: ["Ask what using gave Rosa besides the drug.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: list what fills her days now."] },
+              { kind: "idea", lvl: "f", title: "What using did for her", body: "<p>Use serves functions: <b>relief</b> from pain or feeling, <b>belonging</b> with people who used, <b>identity</b>, someone known on the street, and <b>structure</b>, a reason to get up and a plan for the day.</p>" +
+                "<p>A <b>functional analysis of use</b> asks what came before using and what using did, so each job can be met another way (Meyers & Smith 1995) " + ev("r") + ".</p>" +
+                "<p><b>So:</b> when a person stops, the void must be filled with something that does those jobs.</p>" },
+              { kind: "idea", lvl: "f", title: "The void, in meaning terms", body: "<p>Using gave Rosa’s days a crude version of meaning: coherence (each day made sense), purpose (getting and using) and significance (she mattered to someone). See “What meaning is, and is not” earlier in this module.</p>" +
+                "<p>Frankl’s paths point to what can replace it: something to create or do, someone or something to love, and a stance toward what cannot be changed. See “Frankl and the three paths”.</p>" +
+                "<p><b>So:</b> ask what she will build, gently, in her terms, using the keep-the-person protocol from “Working with a core belief without diminishing the person”.</p>" },
+              { kind: "idea", lvl: "p", title: "Recovery capital", body: "<p><b>Recovery capital</b> is what a person can draw on to start and keep recovery (Granfield & Cloud 1999; Best & Laudet 2010) " + ev("r") + ". <b>Social</b>: people who support recovery. <b>Physical</b>: housing, money, transport. <b>Human</b>: skills, health, hope. <b>Cultural</b>: values and communities that fit.</p>" +
+                "<p>Granfield and Cloud studied <b>natural recovery</b>, people who stopped without treatment; they tended to have more of this capital.</p>" +
+                "<p><b>So:</b> count her capital with her, and build what is thin.</p>" },
+              { kind: "idea", lvl: "p", title: "Purpose and staying in recovery", body: "<p>In people in recovery, a sense of meaning and support went with better quality of life and buffered stress (Laudet, Morgen & White 2006) " + ev("c") + ". In cocaine treatment, purpose in life predicted better outcomes (Martin et al. 2011).</p>" +
+                "<p>These are correlations: purpose may help recovery, or recovery may bring purpose.</p>" +
+                "<p><b>So:</b> purpose is worth building, but don’t promise it will hold recovery on its own.</p>" },
+              { kind: "contrast", id: "m8m.9:contrast", title: "Two plans, one difference",
+                q: "Which plan replaces what using did for Rosa, not just removes it?",
+                cases: [
+                  { label: "Plan A", s: ["Rosa keeps attending her outpatient group.", { t: "The plan is written on a blue form.", irrelevant: true }, "She stays away from her old friends.", { t: "In the evenings, the hour she used to use, she stays in her room and keeps busy alone.", diff: true }] },
+                  { label: "Plan B", s: ["Rosa keeps attending her outpatient group.", { t: "The plan is written on a blue form.", irrelevant: true }, "She stays away from her old friends.", { t: "In the evenings, the hour she used to use, she cooks at a peer centre where people expect her.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Whether she attends her group", "What fills the hour she used to use", "The colour of the form", "Whether she avoids old friends"],
+                feature: 1,
+                why: "Both remove the behaviour and the old company. Only Plan B gives the evening hour something that does using’s jobs: structure, people and being expected somewhere. Removing a behaviour is not the same as replacing its function.",
+                hints: ["Find the one sentence where the two plans part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which plan gives her somewhere to belong at that hour."] },
+              { kind: "idea", lvl: "p", title: "Community Reinforcement Approach", body: "<p>The <b>Community Reinforcement Approach</b> (Azrin 1976; Meyers & Smith) " + ev("r") + " makes a sober life more rewarding than using: work, relationships, recreation and skills, built from a functional analysis.</p>" +
+                "<p>It does not wait for motivation; it builds reasons to stay.</p>" +
+                "<p><b>So:</b> make not using pay off in her actual days.</p>" },
+              { kind: "idea", lvl: "p", title: "CRAFT: working through family", body: "<p><b>CRAFT</b>, Community Reinforcement and Family Training (Meyers et al.; Roozen et al. 2010) " + ev("r") + ", teaches families to reward sober time, let natural consequences land, stay safe and invite treatment.</p>" +
+                "<p>It gets loved ones into treatment more often than confrontation or family support groups alone.</p>" +
+                "<p><b>So:</b> a family can be recovery capital, if they are taught how.</p>" },
+              { kind: "idea", lvl: "p", title: "Contingency management", body: "<p><b>Contingency management</b> gives tangible rewards, such as vouchers, for verified goals like negative tests (Davis et al. 2016; Bolívar et al. 2021) " + ev("r") + ".</p>" +
+                "<p>It has the strongest evidence of any treatment for stimulant use, where no medication is approved, and it is among the least used.</p>" +
+                "<p><b>So:</b> for Rosa’s methamphetamine use, ask whether contingency management is available.</p>" },
+              { kind: "idea", lvl: "p", title: "Mutual help and Twelve-Step facilitation", body: "<p>A Cochrane review found Alcoholics Anonymous and Twelve-Step facilitation as good as or better than other treatments for abstinence (Kelly, Humphreys & Ferri 2020) " + ev("r") + ".</p>" +
+                "<p>Mutual help supplies what Rosa lost: people, a place to be, a role and a daily rhythm. Other groups, such as SMART Recovery or faith-based groups, suit some people better.</p>" +
+                "<p><b>So:</b> help her try a group, and actively link her, not just hand over a list.</p>" },
+              { kind: "idea", lvl: "m", title: "Meaning-centred work", body: "<p>Logotherapy and other meaning-centred work have been applied to addiction (Thompson 2016) " + ev("c") + ". The studies are small and few.</p>" +
+                "<p>The ideas fit the clinic well; the evidence that they add to standard care is thin.</p>" +
+                "<p><b>So:</b> use meaning questions inside proven treatment, not instead of it.</p>" },
+              { kind: "idea", lvl: "m", title: "A new “us”: social identity", body: "<p>The <b>social identity model of recovery</b> (Best et al. 2016) " + ev("c") + " says recovery spreads through groups: moving from a using group to a recovery group changes who a person is.</p>" +
+                "<p>It is promising, with mostly observational support.</p>" +
+                "<p><b>So:</b> ask who Rosa’s “we” is now, and help her find one that supports recovery.</p>" },
+              { kind: "mastery", lvl: "m", title: "When “connection cures” goes too far", body: '<p class="x-crit"><b>Strongest critique</b>“Connection cures addiction” oversimplifies. Some people relapse amid love and purpose. Withdrawal is real, and medication matters: methadone and buprenorphine reduce overdose death (Santo et al. 2021) ' + ev("r") + ". A slogan can push people off medication that keeps them alive.</p>" +
+                "<p><b>The counter.</b> Build meaning and connection alongside medication and monitoring, never in their place. Don’t trade evidence-based medication for a slogan.</p>" +
+                "<p><b>Person-first.</b> Say “a person in recovery” or “a person with a substance use disorder”, never “an addict”.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Recovery is mainly building a meaningful life", body: "<p><b>Stopping leaves a gap.</b> Use did jobs; unless something else does them, the old life pulls back.</p>" +
+                "<p><b>The evidence fits.</b> Recovery capital, community reinforcement, mutual help and contingency management all work by making a sober life rewarding.</p>" +
+                "<p><b>People say so.</b> People in long recovery describe purpose, people and a new identity as what kept them.</p>" +
+                "<p><b>So:</b> on this side, recovery lasts when life without the drug is worth having.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Recovery is mainly managing a chronic condition", body: "<p><b>Medication saves lives.</b> Methadone and buprenorphine cut overdose death; stopping them raises risk.</p>" +
+                "<p><b>Relapse is part of the course.</b> As with other chronic illnesses, care should be long-term, with monitoring and early re-intervention.</p>" +
+                "<p><b>Meaning can’t be prescribed.</b> Purpose and connection are hard to deliver and their trials are thin; medication and monitoring are measurable.</p>" +
+                "<p><b>So:</b> on this side, recovery is kept by ongoing treatment, as with any chronic condition.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first: one keeps people alive, the other gives a reason to stay. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Both. Medication and monitoring keep people alive and stable, and meaning, connection and rewarding alternatives keep recovery worth having.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Trials showing meaning-focused additions add nothing beyond standard care.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "Rosa, the next session", body: who("<b>Her counsellor</b> runs a functional analysis, then plans the week.") +
+                '<dl class="x-dossier"><div><dt>Asked</dt><dd>“What did using do for you that nothing else was doing?”</dd></div>' +
+                "<div><dt>Her reply</dt><dd>“It gave me somewhere to be at night, and people who knew me.”</dd></div>" +
+                "<div><dt>Replaced</dt><dd>Evenings at a peer centre; a women’s recovery meeting twice a week; a referral for contingency management.</dd></div>" +
+                "<div><dt>Kept</dt><dd>Her outpatient group and regular testing.</dd></div>" +
+                "<div><dt>Not done</dt><dd>No lecture about what she should find meaningful. She names it.</dd></div></dl>" +
+                '<p class="x-note">For the room: “What did using do for you that nothing else was doing? Let’s find other ways to get that need met.” · <span lang="es">“¿Qué hacía el consumo por ti que nada más estaba haciendo? Busquemos otras maneras de cubrir esa necesidad.”</span></p>' +
+                '<p class="x-note">For the room: “Let’s plan for the first week home: where you’ll be, who you’ll call, what you’ll do at the hour you used to use.” · <span lang="es">“Planeemos tu primera semana en casa: dónde vas a estar, a quién vas a llamar y qué harás a la hora en que solías consumir.”</span></p>' },
+              { kind: "teachback", id: "m8m.9:teachback", title: "Teach it back", prompt: "Explain to Rosa’s housing worker why “clean but empty” is a risk: the functions using served, relief, belonging, identity and structure, and why the void must be filled; recovery capital, social, physical, human and cultural, and purpose in life as a contested, correlational predictor; the robust approaches, the Community Reinforcement Approach, CRAFT, contingency management for stimulants and mutual help with Twelve-Step facilitation, and the contested ones, meaning-centred work and the social identity model; the critique that connection does not cure addiction and that medication reduces overdose death; both sides steelmanned, the dated verdict, confidence moderate, and its defeater; and the difference between removing a behaviour and replacing its function." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Community Reinforcement Approach, CRAFT, contingency management and Twelve-Step facilitation " + ev("r") + ". Medication reducing overdose death " + ev("r") + ". Purpose predicting recovery " + ev("c") + ". Meaning-centred work and the social identity model " + ev("c") + ".</p>" +
+                "<p><b>So:</b> removing a behaviour is not enough; replace what it did, and keep the medication that keeps the person alive.</p>" },
+              Q("A client says using was the only thing that gave her days structure. What does a functional analysis suggest?",
+                ["Find other ways to meet the need for structure", "Tell her structure is not a real reason to use", "Focus only on avoiding people who use", "Wait until the urge for structure fades"], 0,
+                "Use did a job; recovery lasts better when another activity does that job."),
+              Q("Which treatment has the strongest evidence for stimulant use?",
+                ["Meaning-centred group therapy", "Contingency management", "A course of methadone", "The social identity model"], 1,
+                "Contingency management has the strongest evidence for stimulants and is among the least used."),
+              Q("A client on buprenorphine says a peer told him real recovery means stopping it and finding connection. What fits the evidence?",
+                ["Taper soon, since connection is what matters", "Keep the medication and build connection too", "Stop the groups, since they conflict with medication", "Switch to contingency management instead"], 1,
+                "Medication reduces overdose death; meaning and connection add to it, not replace it.")
+            ]
+          },
           /* ============ phase 3i-1: M5+ · THE COMPUTATIONAL MIRROR, lessons 1–2 (concepts in words, no formulas) ============ */
           "m5c.1": {
             home: "Daniela’s phone app got her handwritten “a” wrong for a while, then right. Did it learn what a letter is?",
@@ -11101,7 +11315,7 @@
                 hints: ["Ask what was the same for both groups, and what was not.",
                   "The sentences that don’t decide it are dimmed. Read what’s left.",
                   "Step one, aloud: say what differs between the rooms."] },
-              { kind: "idea", lvl: "f", title: "A live person, not a screen", body: "<p>Kuhl, Tsao and Liu (2003) " + ev("r") + " ran this study. Babies with a live Mandarin speaker kept the ability to tell apart Mandarin sounds that English does not use. Babies with video or audio alone lost it, like babies who heard no Mandarin.</p>" +
+              { kind: "idea", lvl: "f", title: "A live person, not a screen", body: "<p>Kuhl, Tsao and Liu (2003) " + ev("c") + " ran this study. Babies with a live Mandarin speaker kept the ability to tell apart Mandarin sounds that English does not use. Babies with video or audio alone lost it, like babies who heard no Mandarin.</p>" +
                 "<p>Status, honestly: a single influential study, consistent with later work on social learning, but not often repeated at scale.</p>" +
                 "<p><b>So:</b> for early speech sounds, hearing is not enough; a social partner seems to switch learning on.</p>" },
               { kind: "idea", lvl: "f", title: "Looking at the same thing", body: "<p>Bruner (1983) " + ev("c") + " answered Chomsky’s language acquisition device with a <b>language acquisition support system</b>: the routines adults build with children, such as games of peekaboo and looking at books together.</p>" +
@@ -11166,7 +11380,7 @@
                 "<p><b>Person-first.</b> Say “a child who speaks two languages” or “a child learning English”, not “a non-native child” as a label for who the child is.</p>" +
                 "<p>Background: M3 · Chomsky’s review. Ahead: M5+ · Deep networks as models of mind.</p>" },
               { kind: "teachback", id: "m3.10:teachback", title: "Teach it back", prompt: "Explain to a friend why babies kept Mandarin sounds from a live speaker but not from video, and what the rivals to inborn grammar claim: Kuhl, Tsao and Liu as a single influential study; Bruner’s language acquisition support system and joint attention; statistical learning from Saffran, Aslin and Newport, robust, and its limits for grammar; how it differs from reinforcement, with no reward needed; Tomasello’s usage-based theory, intention-reading and pattern-finding, verb islands and construction grammar; Evans and Levinson on universals; Everett on Pirahã and recursion, disputed by Nevins, Pesetsky and Rodrigues; both sides steelmanned; what large language models do and do not show; and the dated verdict, as of 2026, social and statistical learning established, sufficiency open, confidence moderate, with its defeater." },
-              { kind: "idea", lvl: "f", title: "So", body: "<p>A live partner aiding infant sound learning " + ev("r") + ". Statistical learning of words " + ev("r") + ". Statistical learning reaching grammar " + ev("c") + ". Usage-based theory as a full account " + ev("c") + ". Pirahã lacking recursion " + ev("c") + ".</p>" +
+              { kind: "idea", lvl: "f", title: "So", body: "<p>A live partner aiding infant sound learning " + ev("c") + ". Statistical learning of words " + ev("r") + ". Statistical learning reaching grammar " + ev("c") + ". Usage-based theory as a full account " + ev("c") + ". Pirahã lacking recursion " + ev("c") + ".</p>" +
                 "<p><b>So:</b> children learn from people and patterns; whether that is all they need is still argued.</p>" },
               Q("Babies hear a syllable stream with nothing following their listening, yet later react to the runs that held together. What is this?",
                 ["Reinforcement of listening by a reward", "Statistical learning of which sounds go together", "Imitation of the syllables they heard", "Correction of their errors by an adult"], 1,
@@ -12029,6 +12243,18 @@
           G("m8m.7", "Socratic dialogue", "Diálogo socrático", "A curious, questioning conversation, not a cross-examination.", "A style of therapeutic questioning that helps a client examine beliefs and meanings through open, curious questions (Kazantzis et al. 2018); evidence for its specific effects is contested; see Guided discovery (M8+ lesson 7)."),
           G("m8m.7", "Collaborative empiricism", "Empirismo colaborativo", "Client and therapist test a belief together; the client judges.", "In cognitive therapy, a working relationship in which client and therapist investigate beliefs together as co-investigators, with the client as final judge of the evidence (Tee & Kazantzis 2011); see Core belief (M8+ lesson 6)."),
           G("m8m.7", "Behavioural experiment", "Experimento conductual", "A real-life test, designed with the client, of what a belief predicts.", "A planned activity in which a client tests a belief’s predictions in real life and reviews what happened (Bennett-Levy et al. 2004); best designed by the client; see Collaborative empiricism (M8+ lesson 7)."),
+          /* phase 3n-1: M8+ lessons 8–9 · addiction, environment and meaning */
+          G("m8m.8", "Rat Park", "Rat Park (parque de ratas)", "A big, social rat colony where rats took far less morphine than rats caged alone.", "Alexander, Coambs and Hadaway’s (1978) experiment comparing rats in a large, enriched, social colony with rats housed alone; park rats drank far less morphine solution. Not directly replicated (Petrie 1996) but conceptually supported (Gage & Sumnall 2019); popular retellings exaggerate it."),
+          G("m8m.8", "Environmental enrichment", "Enriquecimiento ambiental", "Giving animals space, company and things to do.", "Housing lab animals with more space, social partners and objects to explore; in many studies it reduces drug taking, with exceptions by genes, sex, age and drug (Gage & Sumnall 2019)."),
+          G("m8m.8", "Vietnam heroin study", "Estudio de la heroína en Vietnam", "Most soldiers addicted in Vietnam did not stay addicted once home.", "Robins and colleagues’ follow-up of US enlisted men (Robins, Davis & Goodwin 1974; Robins 1993): about one in five reported heroin addiction in Vietnam, but only about one in twenty of them were readdicted in the first year home; evidence that setting, cues and availability shape addiction."),
+          G("m8m.8", "Brain disease model of addiction", "Modelo de la adicción como enfermedad cerebral", "Addiction as a chronic illness of lasting brain changes.", "The view that repeated drug use changes reward, stress and self-control circuits in lasting ways, producing a chronic, relapsing condition that warrants medical care (Leshner 1997; Volkow, Koob & McLellan 2016); contested as a full account."),
+          G("m8m.8", "Choice model of addiction", "Modelo de la adicción como elección", "Addiction as learned behaviour that responds to costs and alternatives.", "The view that addiction is a disorder of choice or deep learning shaped by environment, costs and alternatives, pointing to high rates of remission, often without treatment (Heyman 2009; Lewis 2015); contested as a full account."),
+          G("m8m.9", "Natural recovery", "Recuperación natural", "Getting over an addiction without formal treatment.", "Recovery from a substance use disorder without professional treatment or mutual help, common in population studies (Granfield & Cloud 1999; Heyman 2009); often linked to more recovery capital. Also called spontaneous remission."),
+          G("m8m.9", "Community reinforcement approach", "Enfoque de refuerzo comunitario", "Making a sober life more rewarding than using.", "A behavioural treatment that rearranges work, relationships, recreation and skills so that a life without drugs pays off more than using, guided by a functional analysis (Azrin 1976; Meyers & Smith); robust evidence."),
+          G("m8m.9", "CRAFT", "CRAFT (refuerzo comunitario y entrenamiento familiar)", "Teaching families to help a loved one into treatment.", "Community Reinforcement and Family Training: families learn to reward sober time, allow natural consequences, stay safe and invite treatment; it engages loved ones in treatment more often than confrontation or family support groups (Meyers et al.; Roozen et al. 2010)."),
+          G("m8m.9", "Functional analysis of use", "Análisis funcional del consumo", "Asking what using did for the person.", "Mapping the triggers before use and the effects that kept it going, such as relief, belonging, identity or structure, so each need can be met another way; the base of the community reinforcement approach. See Functional analysis."),
+          G("m8m.9", "Social identity model of recovery", "Modelo de identidad social de la recuperación", "Recovery as moving from a using group to a recovery group.", "Best and colleagues’ (2016) model: recovery spreads through social networks as a person’s identity shifts from groups that use to groups that support recovery; promising, mostly observational evidence."),
+          G("m8m.9", "Medication for opioid use disorder", "Medicamentos para el trastorno por consumo de opioides", "Methadone, buprenorphine or naltrexone to treat opioid use disorder.", "Medications that reduce craving, withdrawal and illicit opioid use; methadone and buprenorphine lower overdose death (Santo et al. 2021), and stopping them raises risk. Often shortened to MOUD."),
           G("m2.8", "Withdrawal", "Abstinencia (síndrome de)", "Feeling the opposite of the drug when it stops.", "A substance-specific syndrome of symptoms, often opposite to the drug’s effects, that follows reduction or cessation after adaptation."),
           /* phase 3h-1: M2 lessons 9–10 (Neuroplasticity already defined in M2 lesson 4) */
           G("m2.9", "Hebbian learning", "Aprendizaje hebbiano", "Links between cells that fire together grow stronger.", "Hebb’s (1949) principle that when one neuron repeatedly takes part in firing another, the connection between them strengthens; “cells that fire together wire together” is a slogan for it, and timing and weakening also matter."),
@@ -12203,7 +12429,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m9r")).map(function (id) { return { v: id, t: "C+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat([{ v: "m6.7", t: "M6 · " + lessonOf("m6.7").title }]);
         COLL.gloss.filters = COLL.gloss.filters.concat(["m7.7", "m7.8", "m7.9", "m7.10", "m7.11", "m7.12", "m7.13"].map(function (id) { return { v: id, t: "M7 · " + lessonOf(id).title }; }));
-        COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7", "m8m.8", "m8m.9"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
@@ -12539,6 +12765,19 @@
             R("Kazantzis et al.", 2018, "review", "Socratic dialogue and guided discovery in cognitive behavioural therapy: definitions, methods and early evidence that Socratic questioning predicts symptom change.", st("contested", "A small, mostly correlational evidence base; written by researchers who champion the method.")),
             R("Tee & Kazantzis", 2011, "review", "Collaborative empiricism: client and therapist as co-investigators, a defining feature of cognitive therapy that has had little direct study.", st("contested", "A conceptual review that itself notes how little direct evidence exists.")),
             R("Bennett-Levy et al.", 2004, "review", "Oxford Guide to Behavioural Experiments: planned real-life tests of beliefs, with the case that they can change belief more than talk alone.", st("contested", "A clinical guide; the claim that experiments beat verbal methods rests on a few small studies."))];
+          /* ---- phase 3n-1: M8+ lessons 8 and 9 · addiction, environment and meaning ---- */
+          REFS["m8m.8"] = [
+            R("Robins, Davis & Goodwin", 1974, "observational", "About one in five enlisted men reported heroin addiction in Vietnam; once home, few were readdicted, far fewer than among people treated for heroin addiction in the United States.", st("robust", "A large, carefully sampled follow-up with urine checks, reviewed again by Robins (1993) and Hall & Weier (2017); the men differed from typical civilian users.")),
+            R("Alexander, Coambs & Hadaway", 1978, "experiment", "Rats in a large, enriched social colony drank far less morphine solution than rats housed alone in small cages.", st("contested", "Small samples and bitter oral morphine; a direct repeat found no housing effect (Petrie 1996)."), true),
+            R("Gage & Sumnall", 2019, "review", "Rat Park’s legacy: a conceptual but not direct replication, with enrichment and social housing often reducing drug taking in animals.", st("contested", "A narrative review; enrichment effects vary by genes, sex, age and drug.")),
+            R("Venniro et al.", 2018, "experiment", "Rats trained to take heroin or methamphetamine mostly chose time with another rat over the drug, and later showed less craving.", st("robust", "Repeated across drugs and procedures in animals; how far it carries to people is untested.")),
+            R("Volkow, Koob & McLellan", 2016, "review", "Neurobiologic advances from the brain disease model of addiction: lasting changes in reward, stress and self-control circuits.", st("contested", "The brain changes are well documented; whether “disease” is the best frame is argued (Heyman 2009; Lewis 2015)."))];
+          REFS["m8m.9"] = [
+            R("Kelly, Humphreys & Ferri", 2020, "meta-analysis", "Cochrane review: Alcoholics Anonymous and Twelve-Step facilitation were as good as or better than other treatments for abstinence.", st("robust", "Many trials, including randomized ones; most participants were people with alcohol use problems.")),
+            R("Davis et al.", 2016, "meta-analysis", "Contingency management improved abstinence across substances, with the strongest support for stimulants (backed by Bolívar et al. 2021).", st("robust", "Consistent across many trials; effects can fade after rewards stop, and the approach is rarely offered.")),
+            R("Santo et al.", 2021, "meta-analysis", "Time on methadone or buprenorphine went with lower overdose and all-cause death than time off treatment.", st("robust", "Large observational cohorts with consistent results; the highest risk is in the weeks after stopping or leaving prison.")),
+            R("Laudet, Morgen & White", 2006, "observational", "In people in recovery, meaning in life and social support went with better quality of life and buffered stress.", st("contested", "Correlational and cross-sectional; purpose may follow recovery rather than cause it.")),
+            R("Best et al.", 2016, "review", "The social identity model of recovery: recovery spreads as identity shifts from using groups to recovery groups.", st("contested", "A promising framework with mostly observational support; few trials."))];
           /* ---- phase 3h-1: M2 lessons 9–10 · neuroplasticity ---- */
           REFS["m2.9"] = [
             R("Bliss & Lømo", 1973, "experiment", "In rabbits, quick bursts of stimulation to a hippocampal pathway left its connections responding more strongly for hours or longer: long-term potentiation.", st("robust", "Repeated across species and labs for decades; how far it explains learning in a whole animal is still studied.")),
