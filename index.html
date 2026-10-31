@@ -2099,8 +2099,8 @@
         /* ============ REVIEW: expanding spaced repetition (SM-2 style): 1 → 3 → 7 → ~16 → ~37 days, set by how well and how surely you recall ============ */
         var SRS_DAYS = [1, 3, 7, 30], DAYMS = 864e5, SRS_MAX = 365;
         /* the next schedule for one entry; optional fields (ivl, ease, reps, lapses, conf, illus) ride inside the old {b, due, at} shape */
-        function srsNext(c, r, conf) {
-          var ivl = c ? c.ivl || SRS_DAYS[c.b || 0] : 0, ease = (c && c.ease) || 2.3, wrong = r === "again", n = {}, k;
+        function srsNext(c, r, conf, cued) {
+          var ivl = c ? c.ivl || SRS_DAYS[c.b || 0] : 0, gap = ivl, ease = (c && c.ease) || 2.3, wrong = r === "again", n = {}, k;
           for (k in c || {}) n[k] = c[k];
           if (r === "good" && conf === "low") r = "hard"; /* right but unsure: no full growth */
           var good = ivl < 1 ? 1 : ivl < 3 ? 3 : ivl < 7 ? 7 : Math.round(ivl * ease);
@@ -2110,6 +2110,14 @@
           else ivl = good;
           ivl = Math.min(SRS_MAX, Math.max(1, ivl));
           if (wrong && conf === "high") { n.illus = true; ivl = 1; } /* illusion of knowing: back tomorrow */
+          /* the flag clears only after two correct scheduled recalls, the last after a gap of 7+ days; any miss resets the count; recalls after the hook cue don't count */
+          if (n.illus) {
+            if (wrong) n.illusOk = 0;
+            else if (!cued) {
+              n.illusOk = (n.illusOk || 0) + 1;
+              if (n.illusOk >= 2 && gap >= 7) { n.illus = false; delete n.illusOk; }
+            }
+          } else delete n.illusOk;
           if (conf) n.conf = conf;
           n.last = wrong ? "wrong" : "right"; /* Phase R-B: last result, for the calibration panel */
           n.b = 0; SRS_DAYS.forEach(function (d, j) { if (d <= ivl) n.b = j; });
@@ -2128,11 +2136,11 @@
           miss: function (id) {
             if (!prefs.srs) prefs.srs = {};
             var c = prefs.srs[id], n = { b: 0, due: addDays(SRS_DAYS[0]), at: Date.now() };
-            if (c) { ["ease", "reps", "conf", "illus"].forEach(function (k) { if (c[k] != null) n[k] = c[k]; }); n.lapses = (c.lapses || 0) + 1; }
+            if (c) { ["ease", "reps", "conf", "illus"].forEach(function (k) { if (c[k] != null) n[k] = c[k]; }); n.lapses = (c.lapses || 0) + 1; if (n.illus) n.illusOk = 0; }
             prefs.srs[id] = n;
           },
           /* r: again | hard | good | easy; conf (optional): low | mid | high, chosen before answering */
-          rate: function (id, r, conf) { if (!prefs.srs) prefs.srs = {}; return (prefs.srs[id] = srsNext(prefs.srs[id], r, conf)); },
+          rate: function (id, r, conf, cued) { if (!prefs.srs) prefs.srs = {}; return (prefs.srs[id] = srsNext(prefs.srs[id], r, conf, cued)); },
           preview: function (id, r, conf) { return srsNext((prefs.srs || {})[id], r, conf); },
           grade: function (id, ok) { Srs.rate(id, ok ? "good" : "again"); },
           every: function (c) { return (c && (c.ivl || SRS_DAYS[c.b || 0])) || SRS_DAYS[0]; },
@@ -2314,7 +2322,7 @@
             filters: [{ v: "all", t: "All modules" }, { v: "open", t: "Open now" }, { v: "A", t: "Part A · Foundations" }, { v: "B", t: "Part B · Core processes" }, { v: "C", t: "Part C · Social" }] },
           gloss: { v0: "medium", wide: "grid", sorts: [{ v: "az", t: "A–Z" }, { v: "za", t: "Z–A" }, { v: "path", t: "Lesson order" }], filters: [{ v: "all", t: "All lessons" }] },
           lab: { v0: "large", wide: "grid", sorts: [{ v: "path", t: "Timeline order" }, { v: "az", t: "A–Z" }, { v: "za", t: "Z–A" }], filters: [{ v: "all", t: "All scenes" }] },
-          review: { v0: "medium", wide: "grid", sorts: [{ v: "due", t: "Due soonest" }, { v: "az", t: "A–Z" }], filters: [{ v: "all", t: "All cards" }, { v: "today", t: "Due today" }, { v: "key", t: "Key ideas" }, { v: "q", t: "Missed questions" }, { v: "illus", t: "Felt sure, missed" }] }
+          review: { v0: "medium", wide: "grid", sorts: [{ v: "due", t: "Due soonest" }, { v: "az", t: "A–Z" }], filters: [{ v: "all", t: "All cards" }, { v: "today", t: "Due today" }, { v: "key", t: "Key ideas" }, { v: "q", t: "Missed questions" }, { v: "illus", t: "Felt sure, missed", s: "Felt sure, missed — clears after two correct recalls, the last after a week or more." }] }
         };
         function vb(k) {
           var d = (prefs.vb || {})[k] || {}, c = COLL[k], sorts = c.sorts.map(function (s) { return s.v; }), fs = c.filters.map(function (f) { return f.v; });
@@ -15672,7 +15680,7 @@
           function grade(r) {
             var id = ids[i], c0 = prefs.srs[id], ok = r !== "again";
             st.prev = c0 ? JSON.parse(JSON.stringify(c0)) : null;
-            if (mode !== "ahead") Srs.rate(id, r, st.conf); else if (!ok) Srs.rate(id, "again", st.conf);
+            if (mode !== "ahead") Srs.rate(id, r, st.conf, st.cue); else if (!ok) Srs.rate(id, "again", st.conf);
             st.rated = r;
             /* Phase R-B Feynman prompt: every 4th card, and any card right with low confidence */
             st.fey = (i + 1) % 4 === 0 || (ok && st.conf === "low");
@@ -15992,7 +16000,7 @@
                 if (isFinite(c.reps) && c.reps >= 0) srs[k].reps = c.reps | 0;
                 if (isFinite(c.lapses) && c.lapses >= 0) srs[k].lapses = c.lapses | 0;
                 if (c.conf === "low" || c.conf === "mid" || c.conf === "high") srs[k].conf = c.conf;
-                if (c.illus === true) srs[k].illus = true;
+                if (c.illus === true) { srs[k].illus = true; if (isFinite(c.illusOk) && c.illusOk >= 0 && c.illusOk <= 9) srs[k].illusOk = c.illusOk | 0; }
                 if (c.last === "right" || c.last === "wrong") srs[k].last = c.last;
               } });
             o.srs = srs;
@@ -16185,7 +16193,7 @@
             return UI.select({
               title: "Sort & filter",
               options: [{ head: "Sort" }].concat(cs.sorts.map(function (s) { return { v: "s:" + s.v, t: s.t, on: now.sort === s.v }; }))
-                .concat(cs.filters.length > 1 ? [{ head: "Show" }].concat(cs.filters.map(function (l) { return { v: "f:" + l.v, t: l.t, on: now.f === l.v }; })) : []),
+                .concat(cs.filters.length > 1 ? [{ head: "Show" }].concat(cs.filters.map(function (l) { return { v: "f:" + l.v, t: l.t, s: l.s, on: now.f === l.v }; })) : []),
               onPick: function (v) {
                 vbSet(kf, v.indexOf("s:") === 0 ? { sort: v.slice(2) } : { f: v.slice(2) });
                 Views.render();
