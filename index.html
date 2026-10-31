@@ -1914,7 +1914,7 @@
           /* phase 3o-1: AD · models of addiction, six maps (shell; lessons 1–2 built) */
           { id: "m8a", code: "AD", part: "B", t: "Models of addiction: six maps", s: "Addiction as a relationship, and the strongest versions of its rivals", after: "m8",
             depth: ["Addiction as a relationship the person takes part in: how the bond starts and why it holds", "Read a client’s use as a web of bonds, and hear each rival map at its strongest", "Six maps side by side: what each explains, what each misses, and where the evidence runs out"],
-            lessons: ["Addiction as relationship: the organism participates", "How the bond starts", "Why the bond holds", "Attachment and nested worlds", "Steelmen I: brain disease and choice", "Steelmen II: learning, 12-step, public health and trauma", "Six maps side by side", "Recovery as re-entering relationships"] },
+            lessons: ["Addiction as relationship: the organism participates", "How the bond starts", "Why the bond holds", "Attachment and nested worlds", "Steelmen I: brain disease and choice", "Steelmen II: learning, 12-step, public health and trauma", "Six maps side by side", "Recovery as re-entering relationships", "Living in Balance: a curriculum for the whole life", "CBI-SUA: changing thinking in justice settings", "Both curricula, one client, six maps"] },
           /* phase 3j-1: SG · sex & gender differences (shell; lessons 1–2 built) */
           { id: "m8s", code: "SG", part: "B", t: "Sex & gender differences", s: "Overlap first: what differs, by how much, and why it never judges the person", after: "m8",
             depth: ["What the evidence says differs between the sexes, and by how much, in words", "Read a group finding in class, clinic or the news without judging the person in front of you", "Biology, culture and combined profiles: the explanations weighed, and where each runs out"],
@@ -8305,7 +8305,7 @@
                 "<li><b>Keeping</b> it is learning, identity and context as much as compulsion.</li>" +
                 "<li>Treatment that ignores the <b>need under the bond</b> leaves the relationship hungry.</li>" +
                 "<li><b>Recovery</b> is practising and being held in different relationships.</li></ul>" +
-                "<p><b>So:</b> the module’s eight lessons fold into one sentence about bonds started, kept and replaced.</p>" },
+                "<p><b>So:</b> the module’s eleven lessons fold into one sentence about bonds started, kept and replaced.</p>" },
               { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · What still favours the relational map", body: "<p><b>It absorbs the rivals’ best facts</b> as descriptions of how the organism participates: circuits, choices, learning, fellowship and cages.</p>" +
                 "<p><b>It keeps the person on stage.</b> Disease and population models are true at their level, and false when they are the only level.</p>" +
                 "<p><b>It explains substitution.</b> When one object goes, another often takes its place: the circuit is the hardware, the relationship is the job.</p>" +
@@ -8373,7 +8373,287 @@
                 "<li>Satel, S., &amp; Lilienfeld, S. O. (2014). <i>Frontiers in Psychiatry</i>.</li>" +
                 "<li>Schindler, A. (2019). <i>Frontiers in Psychiatry</i>, 10.</li>" +
                 "<li>Volkow, N. D., Koob, G. F., &amp; McLellan, A. T. (2016). <i>New England Journal of Medicine</i>, 374.</li></ul>" +
+                "<p><b>Curricula</b> (Living in Balance and CBI-SUA lessons)</p>" +
+                "<ul>" +
+                "<li>Bonta, J., &amp; Andrews, D. A. (2017). <i>The psychology of criminal conduct</i>. Routledge.</li>" +
+                "<li>Continuum of Evidence, Penn State. Living in Balance fact sheet.</li>" +
+                "<li>Hoffman, J. A., et al. (1993). <i>Living in balance</i>: a comprehensive cocaine treatment and relapse prevention manual. Danya International / NIDA; Hazelden 2025 version.</li>" +
+                "<li>Hoffman, J. A., Caudill, B. D., Koman, J. J., Luckey, J. W., Flynn, P. M., &amp; Hubbard, R. L. (1996). <i>Journal of Substance Abuse Treatment</i>.</li>" +
+                "<li>Landenberger, N. A., &amp; Lipsey, M. W. (2005). <i>Journal of Experimental Criminology</i>.</li>" +
+                "<li>Lipsey, M. W. (2009). <i>Victims &amp; Offenders</i>.</li>" +
+                "<li>Magill, M., et al. (2019). <i>Journal of Consulting and Clinical Psychology</i>.</li>" +
+                "<li>McHugh, R. K., Hearon, B. A., &amp; Otto, M. W. (2010). <i>Psychiatric Clinics of North America</i>.</li>" +
+                "<li>University of Cincinnati Corrections Institute (2021). <i>Cognitive-Behavioral Interventions – Substance Use Adult</i>: curriculum overview.</li></ul>" +
                 '<p class="dim">Volume and issue numbers appear in this list only.</p>' }
+            ]
+          },
+          /* ---- phase 3p-1: AD lessons 9–10 · Living in Balance; CBI-SUA (principles in own words; no worksheets or session scripts) ---- */
+          "m8a.9": {
+            home: "Andrés tells his group: “I’ve been clean before; it’s the rest of my life that falls apart.” What would a curriculum for the whole life do with that?",
+            keys: [["What is Living in Balance?", "A manual-guided group and individual programme developed by Danya International with NIDA funding (Hoffman et al. 1993), published by Hazelden; its current major update is the 2025 version, with Core Program, Recovery Management and Co-occurring Disorders components."],
+              ["What is its core idea?", "Addiction neglects whole areas of life, so treatment rebuilds them, alongside relapse-prevention skills."],
+              ["What is the evidence status?", "Contested: small early trials, mostly with cocaine, run with the developers; no peer-reviewed evaluation of the updated versions was located (Continuum of Evidence, Penn State)."],
+              ["What is the dated verdict?", "As of 2026: a reasonable structured frame, best used with the strongest specific methods, not instead of them. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, in group", body: who("<b>Andrés</b>, in his thirties, is in a reentry group.") +
+                "<p>He says: “I’ve been clean before; it’s the rest of my life that falls apart.”</p>" +
+                '<p class="hook">The counselor writes down his words and asks nothing yet.</p>' },
+              { kind: "predict", id: "m8a.9:predict", title: "Your call first",
+                case: ["Andrés says he has been clean before.",
+                  { t: "The group meets on a weekday evening.", irrelevant: true },
+                  "He says the rest of his life falls apart.",
+                  { t: "He sits near the door.", irrelevant: true },
+                  "He is in a reentry program."],
+                q: "What is he pointing to?",
+                options: ["Areas of life that stayed neglected after he stopped using", "Proof that treatment cannot work for him", "Only a lack of willpower"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading this lesson builds: stopping was not the hard part for him; the life around stopping was. A whole-life curriculum treats those areas as part of the treatment.",
+                hints: ["Read every fact; don’t let one cancel the others.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what he has already done, and what he says goes wrong after."] },
+              { kind: "idea", lvl: "f", title: "What Living in Balance is", body: "<p>A <b>manual-guided</b> programme for groups and individual sessions, developed by Danya International with NIDA funding (Hoffman et al. 1993, a comprehensive cocaine treatment and relapse prevention manual) and published by Hazelden.</p>" +
+                "<p>The current major update is the <b>2025 version</b>, in three components: Core Program, Recovery Management and Co-occurring Disorders.</p>" +
+                "<p><b>So:</b> it is a structured curriculum, not a theory: a set of topics delivered in a planned order.</p>" },
+              { kind: "idea", lvl: "p", title: "What it draws on, and what it covers", body: "<p>It blends <b>cognitive, behavioural, experiential and twelve-step</b> approaches, with a strong <b>relapse-prevention</b> emphasis.</p>" +
+                "<p>Its sessions cover drug education, relapse prevention and self-help groups, and also physical health, psychosocial life and everyday living skills.</p>" +
+                "<p>On the six maps, it sits mostly on the <b>learning</b> and <b>relational, biopsychosocial</b> maps, with some <b>twelve-step</b>.</p>" +
+                "<p><b>So:</b> skills for the drug, and skills for the life around it, in one programme.</p>" },
+              { kind: "idea", lvl: "p", title: "The core idea: rebuild what use neglected", body: "<p>Use does not only add a harm; it <b>neglects whole areas of life</b>. Treatment rebuilds them.</p>" +
+                "<p>These are the six areas of the previous lesson: body, mind, relationships, meaning, institutional life and balance. Andrés’s sentence names the gap exactly: stopping held, the areas did not.</p>" +
+                "<p><b>So:</b> a stop without a rebuilt life is a stop with nothing to hold it.</p>" },
+              { kind: "contrast", id: "m8a.9:contrast", title: "Two plans, one difference",
+                q: "Which plan follows the Living in Balance idea?",
+                cases: [
+                  { label: "Plan A", s: ["Andrés attends group twice a week.", { t: "Group meets at the clinic.", irrelevant: true }, "He practises turning down offers to use.", { t: "Nothing else in his week is planned.", diff: true }] },
+                  { label: "Plan B", s: ["Andrés attends group twice a week.", { t: "Group meets at the clinic.", irrelevant: true }, "He practises turning down offers to use.", { t: "Sessions also cover his health, his job search and his family.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where group meets", "Whether neglected life areas are part of the plan", "How often he attends", "Whether he practises refusal skills"],
+                feature: 1,
+                why: "Both plans keep the relapse-prevention skill. Plan B also rebuilds the areas he says fall apart; Plan A leaves the rest of his week empty.",
+                hints: ["Find the one sentence where the two plans part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what each plan does outside refusal practice."] },
+              { kind: "idea", lvl: "m", title: "The evidence, and its limits", body: "<p>It was first tested in a NIDA-funded randomised project, <b>Strategies to Enhance Cocaine Treatment and Outpatient Retention</b> (1990–1993), at a Washington, D.C. and a Los Angeles outpatient site. Most people were referred by criminal justice or employee-assistance programmes, with cocaine as the main drug; the comparison was a manualised twelve-step group programme.</p>" +
+                "<p>Hoffman et al. (1996, Journal of Substance Abuse Treatment) reported twelve-month gains, including less regular cocaine and other drug use " + ev("c") + ". SAMHSA’s registry reviewed it in 2007, on retention, exposure, and cocaine and alcohol use.</p>" +
+                "<p><b>Status: contested.</b> The trials were small and early, mostly about cocaine, and run with the developers; no peer-reviewed evaluation of the updated versions was located (Continuum of Evidence, Penn State).</p>" +
+                "<p><b>So:</b> promising and old; the current version is untested.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · A broad life-skills curriculum is what reentry clients need", body: "<p><b>Reentry breaks many things at once</b>: housing, work, family, health and routine.</p>" +
+                "<p><b>Use often follows a life coming apart</b>, as Andrés says, not only a craving.</p>" +
+                "<p><b>One manual covers many needs</b> and keeps delivery consistent across staff and sites.</p>" +
+                "<p><b>So:</b> on this side, breadth is the treatment, because the problem is broad.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Breadth dilutes the active ingredient", body: "<p><b>Focused methods have stronger evidence.</b> CBT for substance use disorders works with modest effects (McHugh, Hearon &amp; Otto 2010) " + ev("r") + ", and contingency management rewards verified goals " + ev("r") + ".</p>" +
+                "<p><b>Time is finite.</b> A session on everything is a session not spent on what works best.</p>" +
+                "<p><b>A broad package is hard to test:</b> no one can say which part helped.</p>" +
+                "<p><b>So:</b> on this side, give the strongest specific methods first, and add breadth around them.</p>" },
+              { kind: "mastery", lvl: "m", title: "It must stay honest", body: '<p class="x-crit"><b>Strongest critique</b>The evidence is small, old, mostly about cocaine and run by the developers, and the version in use today has no peer-reviewed evaluation. A curriculum that covers everything can look effective without showing which part does the work.</p>' +
+                "<p><b>The counter.</b> Use it as a frame that holds relapse-prevention skills, contingency management and medication when indicated, and track use and retention for each person.</p>" +
+                "<p><b>Copyright.</b> This lesson teaches the principles and structure in its own words; the manual’s worksheets and sessions stay in the manual.</p>" +
+                "<p><b>Person-first.</b> Say “a person in recovery”, never “an addict”.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>A reasonable structured frame, best used with the strongest specific methods (relapse-prevention skills, contingency management, medication when indicated) rather than instead of them.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A modern independent trial showing it outperforms focused CBT on use and retention.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "Andrés’s sentence, in the frame", body: who("<b>His counselor</b> sets his words against the curriculum, without assuming.") +
+                '<dl class="x-dossier"><div><dt>Observed</dt><dd>“I’ve been clean before; it’s the rest of my life that falls apart.”</dd></div>' +
+                "<div><dt>Keep</dt><dd>Relapse-prevention skills, and medication or contingency management if they fit.</dd></div>" +
+                "<div><dt>Add</dt><dd>Ask which area fell apart last time, and plan sessions on it.</dd></div>" +
+                "<div><dt>Not assumed</dt><dd>That he lacks motivation, or which area it is.</dd></div></dl>" +
+                '<p class="x-note">For the room: “Which part of your life got left behind while you were using?” · <span lang="es">“¿Qué parte de tu vida quedó atrás mientras usabas?”</span></p>' },
+              { kind: "teachback", id: "m8a.9:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager what Living in Balance offers him: a manual-guided group and individual programme from Danya International with NIDA funding, published by Hazelden, with its 2025 update; its blend of cognitive, behavioural, experiential and twelve-step approaches and its relapse-prevention emphasis; the core idea that use neglects whole life areas and treatment rebuilds them; the early randomised trial against a twelve-step programme, mostly cocaine and developer-run, so contested; both steelmen, breadth for reentry versus focused methods; the strongest critique; and the dated verdict, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>CBT for substance use disorders " + ev("r") + ". Contingency management " + ev("r") + ". Living in Balance’s early trials " + ev("c") + ". The updated versions: no peer-reviewed evaluation located " + ev("c") + ".</p>" +
+                "<p><b>So:</b> rebuild the life around stopping, but keep the strongest specific methods at the centre.</p>" },
+              Q("What is the core idea of Living in Balance?",
+                ["Willpower is the whole of recovery", "Use neglects whole areas of life, so treatment rebuilds them", "Only medication matters", "Group therapy should avoid relapse prevention"], 1,
+                "It pairs relapse-prevention skills with rebuilding health, relationships, work and living skills."),
+              Q("Why is its evidence status contested?",
+                ["It has never been tested at all", "Small early trials, mostly cocaine, developer-involved, and no peer-reviewed test of updated versions", "It was shown to cause harm", "It only uses medication"], 1,
+                "The early trial was randomised but small and developer-run; the current version is untested."),
+              Q("Which finding would most damage the app’s dated verdict?",
+                ["A modern independent trial showing it outperforms focused CBT on use and retention", "CBT having modest effects", "Reentry clients losing housing", "SAMHSA reviewing it in 2007"], 0,
+                "That is the named defeater: it would make the broad programme a first choice, not a frame around focused methods.")
+            ]
+          },
+          "m8a.10": {
+            home: "Andrés tells his group: “When my PO yells at me, I think ‘nobody respects me’, and then I want to get high.” Where does a skills curriculum step in?",
+            keys: [["What is CBI-SUA?", "The University of Cincinnati Corrections Institute’s Cognitive-Behavioral Interventions – Substance Use Adult: a group, skill-building curriculum of several dozen sessions for justice-involved adults with moderate to high substance-use need; it replaces the older CBI-SA."],
+              ["What does “risk” mean in it?", "The propensity to reoffend, not the risk of overdose or harm."],
+              ["What is Risk–Need–Responsivity?", "Andrews and Bonta’s principles: match intensity to risk, target criminogenic needs such as substance use, and deliver in ways people learn (Bonta & Andrews 2017)."],
+              ["What is a thinking chain?", "Situation, thought, feeling, urge, action, consequence: a way to find the thought that leads to use and try a replacement."]],
+            steps: [
+              { kind: "hook", title: "Andrés, in group", body: who("<b>Andrés</b>, in his thirties, is on supervision after prison and in a skills group.") +
+                "<p>He says: “When my PO yells at me, I think ‘nobody respects me’, and then I want to get high.”</p>" +
+                '<p class="hook">His PO is his supervising probation or parole officer.</p>' },
+              { kind: "predict", id: "m8a.10:predict", title: "Your call first",
+                case: ["Andrés says his PO yells at him.",
+                  { t: "His PO’s office is downtown.", irrelevant: true },
+                  "He says he then thinks “nobody respects me”.",
+                  "He says he then wants to get high.",
+                  { t: "He takes the bus to his meetings.", irrelevant: true }],
+                q: "Where could a skills group most usefully step in first?",
+                options: ["Between the thought and the urge", "Only after he has used", "Nowhere, until the PO changes"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading this lesson builds: he has already named a chain, event, thought, urge. The thought is the link he can practise changing, while the grievance about being yelled at stays real.",
+                hints: ["Read every fact; don’t let one cancel the others.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: put his words in order, from what happened to what he wants."] },
+              { kind: "idea", lvl: "f", title: "What CBI-SUA is", body: "<p>The University of Cincinnati Corrections Institute’s <b>Cognitive-Behavioral Interventions – Substance Use Adult</b>, for people in the justice system with <b>moderate to high substance-use need</b>.</p>" +
+                "<p>A group, skill-building curriculum of several dozen sessions; it replaces the older CBI-SA.</p>" +
+                "<p>In it, <b>“risk” means the propensity to reoffend</b>, not overdose or harm.</p>" +
+                "<p><b>So:</b> a structured skills group, built for justice settings.</p>" },
+              { kind: "idea", lvl: "p", title: "The flow of the modules", body: "<ul><li><b>Readiness</b>, optional, before treatment begins.</li>" +
+                "<li><b>Motivational engagement</b>: why change, in the person’s own terms.</li>" +
+                "<li><b>Cognitive restructuring</b>: thoughts lead to feelings and actions; spot risky thinking and replace it.</li>" +
+                "<li><b>Emotional regulation</b>: notice and manage strong feelings.</li>" +
+                "<li><b>Social skills</b>: handle people and pressure.</li>" +
+                "<li><b>Problem solving</b>: work through a problem step by step.</li>" +
+                "<li><b>Success planning</b>: a plan for high-risk situations and relapse.</li></ul>" +
+                "<p><b>So:</b> from wanting to change, to thinking, feeling and acting differently, to a plan.</p>" },
+              { kind: "idea", lvl: "p", title: "Risk–Need–Responsivity", body: "<p>Its base is <b>Risk–Need–Responsivity</b> (Andrews &amp; Bonta; Bonta &amp; Andrews 2017, The Psychology of Criminal Conduct) " + ev("r") + ".</p>" +
+                "<ul><li><b>Risk</b>: match intensity to the risk of reoffending.</li>" +
+                "<li><b>Need</b>: target <b>criminogenic needs</b>, changeable factors tied to reoffending; substance use is one.</li>" +
+                "<li><b>Responsivity</b>: deliver in ways people learn: cognitive-behavioural, active practice, role-play and homework, and fitted to trauma, literacy and language, including delivery in Spanish.</li></ul>" +
+                "<p><b>So:</b> who gets how much, aimed at what, delivered how.</p>" },
+              { kind: "example", lvl: "p", title: "A thinking chain, built with Andrés", body: who("<b>His facilitator</b> builds the chain with him from his own words, asking where she does not know.") +
+                '<dl class="x-dossier"><div><dt>Situation</dt><dd>His PO yells at him (his report).</dd></div>' +
+                "<div><dt>Thought</dt><dd>“Nobody respects me.”</dd></div>" +
+                "<div><dt>Feeling</dt><dd>Ask: he may name anger, shame, or both.</dd></div>" +
+                "<div><dt>Urge</dt><dd>To get high (his words).</dd></div>" +
+                "<div><dt>Action</dt><dd>Ask: what did he do next, last time?</dd></div>" +
+                "<div><dt>Consequence</dt><dd>Ask: what followed, that day and later, for supervision and for him?</dd></div>" +
+                "<div><dt>Replacement</dt><dd>“He was out of line. I still want to finish supervision and keep what I’ve built.”</dd></div></dl>" +
+                '<p class="x-note">For the room: “That thought makes sense after being yelled at. Where does it lead you, and is there another thought that gets you what you actually want?” · <span lang="es">“Ese pensamiento tiene sentido después de que te gritaron. ¿A dónde te lleva, y hay otro pensamiento que te consiga lo que de verdad quieres?”</span></p>' +
+                "<p><b>So:</b> the replacement keeps the grievance and changes where the thought leads.</p>" },
+              { kind: "contrast", id: "m8a.10:contrast", title: "Two sentences, one difference",
+                q: "Which sentence holds a conclusion to restructure, not only a grievance to validate?",
+                cases: [
+                  { label: "Sentence A", s: ["Andrés’s PO raised his voice at him.", { t: "It was a morning visit.", irrelevant: true }, "Andrés says he felt angry.", { t: "He says: “He had no right to talk to me like that.”", diff: true }] },
+                  { label: "Sentence B", s: ["Andrés’s PO raised his voice at him.", { t: "It was a morning visit.", irrelevant: true }, "Andrés says he felt angry.", { t: "He says: “Nobody respects me, so why stay clean.”", diff: true }] }
+                ],
+                answer: 1,
+                features: ["When the visit was", "Whether the words stay with the event or jump to a sweeping conclusion that leads to use", "Whether he felt angry", "What the PO did"],
+                feature: 1,
+                why: "A is a real grievance about one event: validate it. B jumps from one event to “nobody” and on to using: that conclusion is the risky thought. Validate the grievance, restructure the conclusion.",
+                hints: ["Find the one sentence where the two part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say how far each sentence reaches beyond what happened."] },
+              { kind: "idea", lvl: "m", title: "The evidence, and its limits", body: "<p><b>CBT for substance use disorders</b> works, with modest effects (McHugh, Hearon &amp; Otto 2010; Magill et al. 2019) " + ev("r") + ".</p>" +
+                "<p><b>CBT programmes in corrections</b> reduce reoffending (Landenberger &amp; Lipsey 2005) " + ev("r") + ".</p>" +
+                "<p><b>CBI-SUA itself</b> has few independent peer-reviewed outcome trials " + ev("c") + ". Delivery quality, fidelity, group size and trained facilitators, predicts results (Lipsey 2009).</p>" +
+                "<p>On the six maps it sits on <b>learning</b> and <b>choice and economics</b>, with some <b>brain</b> in its cue and craving skills.</p>" +
+                "<p><b>So:</b> the method is well supported; this curriculum is a reasonable but lightly tested version of it.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Teach skills to change thinking", body: "<p><b>The chain is real.</b> Andrés names it himself: event, thought, urge.</p>" +
+                "<p><b>Skills travel.</b> He cannot control his PO, but he carries his thinking into every meeting.</p>" +
+                "<p><b>The evidence backs it:</b> CBT reduces both use and reoffending.</p>" +
+                "<p><b>So:</b> on this side, the thought is the link he can change today.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Change the environment first", body: "<p><b>Context drives use.</b> Housing, poverty, supervision and the cages of the public health map shape the chain before any thought.</p>" +
+                "<p><b>Skills without supports blame the person</b> for conditions they did not choose.</p>" +
+                "<p><b>Stable housing, work and medication</b> remove triggers no reframe can.</p>" +
+                "<p><b>So:</b> on this side, fix the situation, and fewer thoughts need fixing.</p>" },
+              { kind: "mastery", lvl: "m", title: "It must stay honest", body: '<p class="x-crit"><b>Strongest critique</b>From the public health map: a curriculum can treat structural problems, housing, poverty, cages, as “thinking errors”, and teach a person to rethink an injustice instead of naming it. And the curriculum itself has few independent trials.</p>' +
+                "<p><b>The counter.</b> Validate real grievances, restructure only the conclusions that lead to harm, and pair the group with concrete reentry supports and medication where indicated. Fidelity matters: trained facilitators and small groups.</p>" +
+                "<p><b>Copyright.</b> This lesson teaches the principles and structure in its own words; the curriculum’s worksheets and session scripts stay in the curriculum.</p>" +
+                "<p><b>Person-first.</b> Say “a person on parole”, never “an offender” or “an addict”.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Skills training works best when paired with concrete reentry supports and medication where indicated.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate-high for CBT generally; moderate for this curriculum.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Rigorous trials showing no added effect over supportive reentry services.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "teachback", id: "m8a.10:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager what CBI-SUA would do with his words: the University of Cincinnati Corrections Institute curriculum for justice-involved adults with moderate to high substance-use need, replacing CBI-SA, where risk means propensity to reoffend; its flow from readiness and motivational engagement through cognitive restructuring, emotional regulation, social skills and problem solving to success planning; Risk–Need–Responsivity, with criminogenic needs and responsivity to trauma, literacy and language; his thinking chain and a replacement thought; a real grievance versus a risky conclusion; the evidence, CBT robust and this curriculum contested, with fidelity mattering; both steelmen, skills versus environment; the strongest critique; and the dated verdict with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>CBT for substance use disorders " + ev("r") + ". CBT in corrections reducing reoffending " + ev("r") + ". Risk–Need–Responsivity " + ev("r") + ". CBI-SUA as a specific curriculum " + ev("c") + ".</p>" +
+                "<p><b>So:</b> validate the grievance, restructure the conclusion, and change the situation too.</p>" },
+              Q("In CBI-SUA, what does “risk” mean?",
+                ["The risk of overdose", "The propensity to reoffend", "The risk of losing housing", "The risk of dropping out of group"], 1,
+                "In Risk–Need–Responsivity, risk is the likelihood of reoffending, and intensity is matched to it."),
+              Q("Andrés says his PO had no right to yell at him. What should the facilitator do first?",
+                ["Call it a thinking error", "Validate the grievance, then look at where his conclusion leads", "Tell him to report the PO and skip group", "Ignore it and move to the next module"], 1,
+                "A real grievance is not a thinking error; the risky part is the jump to “nobody respects me” and on to using."),
+              Q("Which finding would most damage the app’s dated verdict?",
+                ["CBT having modest effects on use", "Rigorous trials showing no added effect over supportive reentry services", "Fidelity predicting results", "Substance use being a criminogenic need"], 1,
+                "That is the named defeater: if the skills add nothing beyond supports, pairing them is not the best plan.")
+            ]
+          },
+          /* ---- phase 3p-2: AD lesson 11 · both curricula together (own words; no worksheets) ---- */
+          "m8a.11": {
+            home: "In one week Andrés attends a Living in Balance session on physical health and a CBI-SUA session on problem solving. He says the first “feels like my whole life” and the second “feels like homework that works”. How do the two fit?",
+            keys: [["How do Living in Balance and CBI-SUA fit together?", "Living in Balance gives breadth: whole-life areas, relapse prevention and recovery management. CBI-SUA gives a focused, risk-targeted skills engine: thinking chains, emotional regulation, social skills, problem solving and a success plan."],
+              ["Where does each sit on the six maps?", "Living in Balance: relational and biopsychosocial, learning, and some twelve-step. CBI-SUA: learning and choice, organised by Risk–Need–Responsivity."],
+              ["What does neither cover alone?", "Medication for opioid use disorder, contingency management, and housing and work, the public health map."],
+              ["What is the weighed state?", "As of 2026: a broad recovery frame, a focused cognitive-behavioural engine and medical and structural supports together fit the best evidence better than either curriculum alone. Confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Andrés, two groups in one week", body: who("<b>Andrés</b>, in his thirties, is on supervision after prison and attends two groups.") +
+                "<p>In the same week he goes to a Living in Balance session on physical health and a CBI-SUA session on problem solving.</p>" +
+                '<p class="hook">He says the first “feels like my whole life”, and the second “feels like homework that works”.</p>' },
+              { kind: "predict", id: "m8a.11:predict", title: "Your call first",
+                case: ["Andrés attends a Living in Balance session on physical health.",
+                  { t: "Both groups meet at the same clinic.", irrelevant: true },
+                  "The same week, he attends a CBI-SUA session on problem solving.",
+                  "He says the first “feels like my whole life”.",
+                  { t: "He arrives early to both.", irrelevant: true },
+                  "He says the second “feels like homework that works”."],
+                q: "What do his two sentences suggest about the two groups?",
+                options: ["They do different jobs, and both are landing", "One of them is wasted time", "He should pick one and drop the other"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the reading this lesson builds: he names breadth in one and a working skill in the other. Two curricula, two jobs; the plan fits them together rather than choosing.",
+                hints: ["Read every fact; don’t let one cancel the others.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what each sentence praises."] },
+              { kind: "idea", lvl: "f", title: "Breadth and engine", body: "<p><b>Living in Balance gives breadth</b>: the whole-life areas, relapse prevention, and recovery management over time.</p>" +
+                "<p><b>CBI-SUA gives a focused engine</b>, aimed at risk of reoffending: thinking chains, emotional regulation, social skills, problem solving and a success plan.</p>" +
+                "<p><b>So:</b> one holds the life together; the other drives specific change.</p>" },
+              { kind: "idea", lvl: "p", title: "Each on the six maps", body: "<ul><li><b>Living in Balance</b>: the <b>relational, biopsychosocial</b> map, the <b>learning</b> map, and some <b>twelve-step</b>.</li>" +
+                "<li><b>CBI-SUA</b>: the <b>learning</b> and <b>choice</b> maps, with Risk–Need–Responsivity setting dose, target and delivery.</li></ul>" +
+                "<p>They overlap on learning: both teach skills. Both are thin on the <b>brain</b> and <b>public health</b> maps.</p>" +
+                "<p><b>So:</b> together they cover four maps well and two poorly.</p>" },
+              { kind: "idea", lvl: "p", title: "What neither covers alone", body: "<ul><li><b>Medication for opioid use disorder</b>: methadone or buprenorphine lower overdose death " + ev("r") + ".</li>" +
+                "<li><b>Contingency management</b>: rewards for verified goals improve abstinence " + ev("r") + ".</li>" +
+                "<li><b>Housing and work</b>: the public health map’s supports, which no group session supplies.</li></ul>" +
+                "<p>See Medication for opioid use disorder (M8+, “Connection, meaning and recovery in the room”).</p>" +
+                "<p><b>So:</b> two curricula still leave medicine and structure to others on the team.</p>" },
+              { kind: "example", lvl: "p", title: "A one-page session plan, in words", body: who("<b>His case manager</b> keeps one page a week, in her own words, not the curricula’s worksheets, and asks where she does not know.") +
+                '<dl class="x-dossier"><div><dt>The bond’s job</dt><dd>Ask: what did using do for him, relief, company, respect? (AD, “How the bond starts”)</dd></div>' +
+                "<div><dt>The hold</dt><dd>Ask: what keeps the pull alive this week? (AD, “Why the bond holds”)</dd></div>" +
+                "<div><dt>The starved area</dt><dd>Ask: which life area feels emptiest now? (AD, “Recovery as re-entering relationships”)</dd></div>" +
+                "<div><dt>The risky chain</dt><dd>Ask: which thought led toward use this week, and what replaced it? (AD, “CBI-SUA: changing thinking in justice settings”)</dd></div>" +
+                "<div><dt>One reentry support</dt><dd>One concrete step: a housing call, a job lead, or a question about medication.</dd></div></dl>" +
+                '<p class="x-note">For the room: “This week, what’s one skill you practiced and one part of your life you fed?” · <span lang="es">“Esta semana, ¿qué habilidad practicaste y qué parte de tu vida alimentaste?”</span></p>' +
+                "<p><b>So:</b> one page links both groups to the earlier lessons and to one real support.</p>" },
+              { kind: "idea", lvl: "p", title: "Responsivity: fit the delivery to him", body: "<ul><li><b>Spanish delivery</b>: offer sessions and materials in Spanish if he prefers it.</li>" +
+                "<li><b>Literacy</b>: lean on talk, role-play and practice over written forms.</li>" +
+                "<li><b>Trauma</b>: predictability and choice, no forced disclosure, and real grievances validated.</li></ul>" +
+                "<p><b>Person-first.</b> Say “a person on parole”, never “an offender” or “an addict”.</p>" +
+                "<p><b>So:</b> the same content lands only if it reaches him in a way he can use.</p>" },
+              { kind: "contrast", id: "m8a.11:contrast", title: "Two plans, one difference",
+                q: "Which plan fits the combined approach?",
+                cases: [
+                  { label: "Plan A", s: ["Andrés attends Living in Balance and CBI-SUA.", { t: "Both meet on weekdays.", irrelevant: true }, "His case manager keeps a weekly one-page plan.", { t: "Nothing in the plan touches housing or medication.", diff: true }] },
+                  { label: "Plan B", s: ["Andrés attends Living in Balance and CBI-SUA.", { t: "Both meet on weekdays.", irrelevant: true }, "His case manager keeps a weekly one-page plan.", { t: "The plan also links him to housing help and a medication review.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Which days the groups meet", "Whether medical and structural supports sit beside the curricula", "Whether he attends both groups", "Whether a weekly plan exists"],
+                feature: 1,
+                why: "Both plans pair breadth with a skills engine. Only Plan B adds what neither curriculum covers alone: housing and a medication review.",
+                hints: ["Find the one sentence where the two plans part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what each plan does beyond the two groups."] },
+              { kind: "idea", lvl: "m", title: "Weighed state, dated", body: "<p>Weigh it yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Combining a broad recovery frame with a focused cognitive-behavioural engine and medical and structural supports fits the best evidence better than either curriculum alone.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Trials showing the combination adds nothing over the single curriculum.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated position, and name what would change it.</p>" },
+              { kind: "teachback", id: "m8a.11:teachback", title: "Teach it back", prompt: "Explain to Andrés’s case manager how his two groups fit: Living in Balance as breadth, whole-life areas, relapse prevention and recovery management; CBI-SUA as a focused, risk-targeted skills engine, thinking chains, emotional regulation, social skills, problem solving and a success plan; where each sits on the six maps; what neither covers alone, medication for opioid use disorder, contingency management, housing and work; the one-page plan, the bond’s job, the hold, the starved area, the risky chain and one reentry support; responsivity to Spanish, literacy and trauma; and the dated weighed state with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Medication for opioid use disorder " + ev("r") + ". Contingency management " + ev("r") + ". CBT in corrections " + ev("r") + ". Living in Balance’s early trials " + ev("c") + ". The combination as tested here " + ev("c") + ".</p>" +
+                "<p><b>So:</b> breadth to hold the life, an engine to change the thinking, and medicine and structure beside both.</p>" },
+              Q("Andrés says CBI-SUA “feels like homework that works”. Which job in a combined plan is that group doing?",
+                ["The focused skills engine", "The whole-life breadth", "Medication for opioid use disorder", "Housing support"], 0,
+                "CBI-SUA is the risk-targeted skills engine; Living in Balance carries the breadth."),
+              Q("Andrés attends both groups, and nothing in his plan touches housing, work or medication. Which map is thinnest?",
+                ["Learning", "Relational", "Public health", "Choice"], 2,
+                "Both curricula teach skills; housing and work belong to the public health map, and neither supplies them."),
+              Q("Which finding would most damage the weighed state?",
+                ["CBT having modest effects", "Trials showing the combination adds nothing over the single curriculum", "Medication lowering overdose death", "Fidelity predicting results"], 1,
+                "That is the named defeater: if combining adds nothing, one curriculum would do.")
             ]
           },
           /* ============ phase 3i-1: M5+ · THE COMPUTATIONAL MIRROR, lessons 1–2 (concepts in words, no formulas) ============ */
@@ -13191,6 +13471,14 @@
           G("m8a.8", "Substitution (of the object)", "Sustitución (del objeto)", "A new object taking an old one’s job.", "When one addictive object goes, another often takes its place because the need under the bond is unmet; the relational map reads the circuit as the hardware and the relationship as the job."),
           G("m8a.8", "Living in Balance", "Living in Balance (Vivir en equilibrio)", "A treatment that rebuilds neglected areas of life.", "Hoffman and Landry’s NIDA-funded treatment manual (Hazelden / Danya International), which treats addiction as a biopsychosocial problem that neglects whole life areas: body, mind, relationships, meaning, institutional life and balance."),
           G("m8a.8", "Balance check", "Revisión del equilibrio", "Asking which area of life is starved.", "A clinical review across the six Living in Balance areas that asks which area is starved, and which new bond could take over the old object’s job."),
+          G("m8a.10", "CBI-SUA", "CBI-SUA (Intervenciones Cognitivo-Conductuales para el Uso de Sustancias, adultos)", "A skills group for justice-involved adults who use substances.", "The University of Cincinnati Corrections Institute’s Cognitive-Behavioral Interventions – Substance Use Adult: a group, skill-building curriculum for people in the justice system with moderate to high substance-use need, replacing CBI-SA; contested as a specific curriculum."),
+          G("m8a.10", "Risk–Need–Responsivity", "Riesgo–Necesidad–Responsividad", "Who gets how much treatment, aimed at what, delivered how.", "Andrews and Bonta’s principles for justice settings: match intensity to the risk of reoffending, target criminogenic needs, and deliver in ways people learn, fitted to trauma, literacy and language (Bonta & Andrews 2017)."),
+          G("m8a.10", "Criminogenic need", "Necesidad criminógena", "A changeable factor tied to reoffending.", "In Risk–Need–Responsivity, a dynamic factor linked to reoffending that treatment can change, such as substance use or antisocial thinking."),
+          G("m8a.10", "Cognitive restructuring", "Reestructuración cognitiva", "Spotting a risky thought and trying a better one.", "A CBT skill based on thoughts leading to feelings and actions: identify the thought that leads to harm, test it, and replace it with one that serves the person’s goals."),
+          G("m8a.10", "Thinking chain", "Cadena de pensamiento", "From what happened to what followed, link by link.", "A CBT exercise that lays out situation, thought, feeling, urge, action and consequence, to find the link a person can change and try a replacement thought."),
+          G("m8a.10", "Relapse prevention (substance use)", "Prevención de recaídas (consumo de sustancias)", "Skills to keep a lapse from becoming a return to use.", "A cognitive-behavioural approach that maps high-risk situations, thinking chains and urges, rehearses coping, and plans what to do after a slip; CBI-SUA’s success plan and Living in Balance both build on it. Separate from relapse prevention for depression."),
+          G("m8a.11", "Recovery management", "Gestión de la recuperación", "Supporting recovery over the long run, not one episode.", "Treating recovery as ongoing, with check-ins, support and early re-engagement after treatment ends; one of the Living in Balance components, and the breadth half of a combined plan."),
+          G("m8a.10", "Fidelity (programme)", "Fidelidad (del programa)", "Delivering a programme the way it was designed.", "How closely a programme is run as intended, with trained facilitators, suitable group sizes and the planned content; it predicts results in justice settings (Lipsey 2009)."),
           G("m2.8", "Withdrawal", "Abstinencia (síndrome de)", "Feeling the opposite of the drug when it stops.", "A substance-specific syndrome of symptoms, often opposite to the drug’s effects, that follows reduction or cessation after adaptation."),
           /* phase 3h-1: M2 lessons 9–10 (Neuroplasticity already defined in M2 lesson 4) */
           G("m2.9", "Hebbian learning", "Aprendizaje hebbiano", "Links between cells that fire together grow stronger.", "Hebb’s (1949) principle that when one neuron repeatedly takes part in firing another, the connection between them strengthens; “cells that fire together wire together” is a slogan for it, and timing and weakening also matter."),
@@ -13366,7 +13654,7 @@
         COLL.gloss.filters = COLL.gloss.filters.concat([{ v: "m6.7", t: "M6 · " + lessonOf("m6.7").title }]);
         COLL.gloss.filters = COLL.gloss.filters.concat(["m7.7", "m7.8", "m7.9", "m7.10", "m7.11", "m7.12", "m7.13"].map(function (id) { return { v: id, t: "M7 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8m.1", "m8m.2", "m8m.3", "m8m.4", "m8m.5", "m8m.6", "m8m.7", "m8m.8", "m8m.9"].map(function (id) { return { v: id, t: "M8+ · " + lessonOf(id).title }; }));
-        COLL.gloss.filters = COLL.gloss.filters.concat(["m8a.1", "m8a.2", "m8a.3", "m8a.4", "m8a.5", "m8a.6", "m8a.7", "m8a.8"].map(function (id) { return { v: id, t: "AD · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m8a.1", "m8a.2", "m8a.3", "m8a.4", "m8a.5", "m8a.6", "m8a.7", "m8a.8", "m8a.9", "m8a.10", "m8a.11"].map(function (id) { return { v: id, t: "AD · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m5c.1", "m5c.2", "m5c.3", "m5c.4", "m5c.5", "m5c.6"].map(function (id) { return { v: id, t: "M5+ · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
@@ -13763,8 +14051,25 @@
             R("Schindler", 2019, "review", "Attachment and substance use disorders (Frontiers in Psychiatry): insecure attachment consistently linked to substance use disorder, and use impairs closeness.", st("robust", "A robust association across studies; correlational, so the direction is unclear.")),
             R("Alvarez-Monjaras et al.", 2019, "review", "A developmental model of addictions (Attachment & Human Development): attachment shapes stress and reward regulation, and so recovery needs new regulating bonds.", st("contested", "An integrative model; not yet tested as a whole.")),
             R("Kelly, Humphreys & Ferri", 2020, "meta-analysis", "Cochrane review: Alcoholics Anonymous and Twelve-Step Facilitation were as good as or better than other treatments for abstinence; fellowship as a bond that holds.", st("robust", "Many trials, including randomized ones; most participants were people with alcohol use problems.")),
-            R("Volkow, Koob & McLellan", 2016, "review", "Neurobiologic advances from the brain disease model of addiction (NEJM): the circuit changes any recovery map has to respect, and the case for medication.", st("robust", "The circuit changes are well documented in animals and people; whether “disease” is the best frame is argued.")),
+            R("Hoffman et al.", 1993, "review", "The Living in Balance manual (Danya International, NIDA-funded; Hazelden 2025 version): the curriculum behind the balance check.", st("contested", "A treatment manual, not an outcome study; it describes the programme.")),
             R("Hall, Carter & Forlini", 2015, "review", "The brain disease model of addiction: is it supported by the evidence and has it delivered on its promises? (Lancet Psychiatry).", st("contested", "A critical review; it finds stigma not clearly reduced and few treatments from the model."))];
+          /* ---- phase 3p-1: AD lessons 9–10 · Living in Balance; CBI-SUA ---- */
+          REFS["m8a.9"] = [
+            R("Hoffman et al.", 1993, "review", "A comprehensive cocaine abuse treatment and relapse prevention manual: the NIDA-funded Living in Balance manual from Danya International, later published by Hazelden.", st("contested", "A treatment manual, not an outcome study; it describes the programme.")),
+            R("Hoffman et al.", 1996, "experiment", "Journal of Substance Abuse Treatment: against a manualised twelve-step group programme, twelve-month gains including less regular cocaine and other drug use.", st("contested", "Small early randomised trials, mostly cocaine, run with the developers; not replicated independently.")),
+            R("SAMHSA", 2007, "review", "The national registry review of Living in Balance, rating outcomes on retention, exposure, and cocaine and alcohol use.", st("contested", "A registry review of the early trials; no peer-reviewed test of the updated versions located.")),
+            R("McHugh, Hearon & Otto", 2010, "review", "CBT for substance use disorders: effective with modest effects; the focused method the breadth critique points to.", st("robust", "Supported across many trials and meta-analyses; effects are modest."))];
+          REFS["m8a.10"] = [
+            R("Bonta & Andrews", 2017, "review", "The Psychology of Criminal Conduct: the Risk–Need–Responsivity principles behind CBI-SUA.", st("robust", "Backed by many meta-analyses of correctional programmes; the curriculum built on it is less tested.")),
+            R("Magill et al.", 2019, "meta-analysis", "CBT for alcohol and other drug use: benefits over minimal treatment, smaller against other active treatments.", st("robust", "Many randomised trials pooled; effects are modest.")),
+            R("Landenberger & Lipsey", 2005, "meta-analysis", "Cognitive-behavioural programmes for people in the justice system reduced reoffending.", st("robust", "Many studies pooled; quality of delivery shaped the size of the effect.")),
+            R("Lipsey", 2009, "meta-analysis", "In justice programmes, quality of implementation predicted results as much as the brand of programme.", st("robust", "A large meta-analysis of many studies; it supports fidelity, not any one curriculum."))];
+          /* ---- phase 3p-2: AD lesson 11 · both curricula together ---- */
+          REFS["m8a.11"] = [
+            R("Hoffman et al.", 1996, "experiment", "Journal of Substance Abuse Treatment: the early Living in Balance trial, the evidence behind the breadth half of the plan.", st("contested", "Small early randomised trials, mostly cocaine, run with the developers; not replicated independently.")),
+            R("Landenberger & Lipsey", 2005, "meta-analysis", "Cognitive-behavioural programmes for people in the justice system reduced reoffending: the evidence behind the engine half.", st("robust", "Many studies pooled; quality of delivery shaped the size of the effect.")),
+            R("Santo et al.", 2021, "meta-analysis", "Time on methadone or buprenorphine went with lower overdose and all-cause death: the medical support neither curriculum supplies.", st("robust", "Large observational cohorts with consistent results; the highest risk is in the weeks after stopping or leaving prison.")),
+            R("Davis et al.", 2016, "meta-analysis", "Contingency management improved abstinence across substances: the reward-based method neither curriculum supplies.", st("robust", "Consistent across many trials; effects can fade after rewards stop, and the approach is rarely offered."))];
           /* ---- phase 3h-1: M2 lessons 9–10 · neuroplasticity ---- */
           REFS["m2.9"] = [
             R("Bliss & Lømo", 1973, "experiment", "In rabbits, quick bursts of stimulation to a hippocampal pathway left its connections responding more strongly for hours or longer: long-term potentiation.", st("robust", "Repeated across species and labs for decades; how far it explains learning in a whole animal is still studied.")),
