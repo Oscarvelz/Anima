@@ -5651,6 +5651,240 @@
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
           },
+          /* PHASE 3q-6 · L19 Attachment Theatre: a playroom stage in three beats (play, separation with a stranger, reunion). One manipulation (how the caregiver usually responds at home), live word readouts, Spot it with adult statements, collapsible reveal and therapy sections, so what. Memory-scene clarity conventions (step trail, one primary button per step, feedback beside the tap). Page-only 2D SVG; animates only while visible, stops on exit; reduced motion shows the final reunion; stores nothing. */
+          {
+            id: "attachment", name: "Attachment Theatre", kicker: "M6 · Attachment", hue: ["#ff9aa8", "#c4b0ff"], gallery: true, order: 6.0, dom: true,
+            idea: "A toddler, a caregiver, a stranger and a door. Choose how the caregiver usually responds at home, then watch what the toddler does when the caregiver comes back.",
+            see: "A small playroom in three beats: play together, the caregiver leaves while a stranger stays, then the reunion. Words beside the stage name the strategy and what it protects.",
+            why: "Children learn a strategy for keeping their caregiver close. Calm on the surface can still be stress underneath, and the same strategies show up in adults.",
+            use: "Building the alliance, missed sessions, endings, “neediness” and “resistance”, and work with clients separated by incarceration, foster care or loss.",
+            cap: "Predict what a securely attached toddler does. Then choose the home pattern, run the playroom, and spot the strategy in adult words.",
+            flat: function (box, ctl) {
+              var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
+              var STEPS = ["Predict", "Try it", "Spot it", "What it means"], WORD = ["one", "two", "three", "four"];
+              var PRED = [["ignore", "Ignores the caregiver to show independence", false], ["secure", "Gets upset at the separation, seeks comfort on return, then goes back to playing", true], ["stays", "Stays upset and can’t be comforted", false]];
+              var RESP = [["cons", "Consistent & warm"], ["unp", "Unpredictable"], ["dist", "Distant or rejecting"]];
+              var CH = [
+                ["avoid", "“I don’t need anyone, I handle it”", true, "Yes. Stating self-reliance this firmly can be an avoidant strategy: keep needs quiet so no one can refuse them. Like the toddler who kept playing, the body may still be stressed underneath."],
+                ["anx", "“I text my partner all day so they don’t leave”", false, "Not this one. Checking in to keep someone close fits an anxious strategy: turning the alarm up so help stays near."],
+                ["sec", "“When I’m upset I call my sister, then I’m OK”", false, "Not this one. Reaching out, being comforted and recovering fits a secure strategy."]
+              ];
+              var B = 3.2, END = 3 * B + 0.8;
+              var KF = {
+                cons: [[0, 95, 150, 1, "c0"], [B, 95, 150, 1, "c0"], [B + 1.2, 190, 290, 0.3, "c1"], [2 * B, 190, 290, 0.3, "c1"], [2 * B + 1.2, 214, 245, 1, "c2a"], [2 * B + 2, 214, 245, 1, "c2h"], [3 * B + 0.8, 95, 245, 1, "c2b"]],
+                unp: [[0, 120, 150, 1, "u0"], [B, 120, 150, 1, "u0"], [B + 1.2, 235, 290, 0.3, "u1"], [2 * B, 235, 290, 0.3, "u1"], [2 * B + 1.2, 218, 245, 1, "u2"], [3 * B + 0.8, 218, 245, 1, "u2"]],
+                dist: [[0, 95, 150, 1, "d0"], [B, 95, 150, 1, "d0"], [B + 1.2, 95, 290, 0.3, "d1"], [2 * B, 95, 290, 0.3, "d1"], [2 * B + 1.2, 95, 245, 1, "d2"], [3 * B + 0.8, 95, 245, 1, "d2"]]
+              };
+              /* band text, look, facing */
+              var MOOD = {
+                c0: ["plays, checks in with the caregiver", "calm", 1], c1: ["upset, goes toward the door", "upset", 1], c2a: ["seeks contact with the caregiver", "upset", 1],
+                c2h: ["is held and calms quickly", "calm", 1], c2b: ["calm again, back to the toys", "calm", -1],
+                u0: ["plays little, stays close", "calm", 1], u1: ["very upset at the separation", "upset", 1], u2: ["clings and pushes away, hard to soothe", "cling", 1],
+                d0: ["plays, rarely checks in", "calm", -1], d1: ["looks calm, keeps playing", "calm", -1], d2: ["looks away, keeps playing", "away", -1]
+              };
+              var BEAT = ["Play with the caregiver", "The caregiver leaves; the stranger stays", "The caregiver returns: reunion"];
+              var INFO = {
+                cons: ["Secure: seeks contact, calms, returns to the toys", "uses the caregiver as a safe base to explore from", "Expects help to come, can ask for it, and recovers."],
+                unp: ["Ambivalent or resistant: clings and resists, hard to soothe", "keeps an unpredictable caregiver close by turning the alarm up", "May look “needy” or test limits. It’s a learned way to keep help close."],
+                dist: ["Avoidant: looks away and keeps playing, but the body is still stressed — heart rate up (Sroufe & Waters 1977)", "keeps a distant caregiver close by not asking too much", "May look “fine” or “resistant” and miss sessions. Calm on the surface isn’t the same as not caring."]
+              };
+              var fresh = function () { return { pred: null, resp: null, phase: null, ranResp: null, ran: false, chal: null, t: 0, open: {} }; };
+              var S = fresh(); Lab.focus = null;
+              var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+              var A = null, raf = 0, vis = true, gone = false;
+              box.removeAttribute("tabindex"); box.setAttribute("role", "region"); box.setAttribute("aria-label", sc.name);
+              box.style.touchAction = "auto"; box.style.cursor = "auto";
+              var wrap = doc.createElement("div"); wrap.className = "x-lens x-mem"; wrap.innerHTML = '<div class="x-lens__in"></div>'; box.appendChild(wrap);
+              var inn = wrap.firstChild, main = doc.createElement("div"), live = doc.createElement("p");
+              if (cap && !ov.classList.contains("x-lab--inline")) { cap.classList.add("x-lens__cap"); inn.appendChild(cap); }
+              main.style.display = "contents"; live.setAttribute("aria-live", "polite");
+              live.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+              inn.appendChild(main); inn.appendChild(live);
+              function tag(cls, t) { return '<span class="x-ev' + cls + '">' + t + "</span>"; }
+              function trail(n) {
+                return '<p class="x-mem__steps" aria-label="Where you are"><span>Step:</span>' + STEPS.map(function (s, k) {
+                  return (k ? '<span aria-hidden="true">→</span>' : "") + "<span" + (k === n ? ' class="is-now" aria-current="step"' : k < n ? ' class="is-done"' : "") + ">" + s + "</span>";
+                }).join("") + "</p>";
+              }
+              function eb(n) { return '<p class="x-mem__eb">Step ' + WORD[n - 1] + " of four · " + STEPS[n - 1] + "</p>"; }
+              function next(n) { return '<div class="x-lens__row"><button type="button" class="x-lens__b press x-mem__next" data-next="' + n + '">Next: ' + STEPS[n - 1] + " ↓</button></div>"; }
+              function msect(title, sub, body, n) { return '<section class="x-lens__box glass" data-step="' + n + '" aria-label="' + esc(title) + '">' + eb(n) + '<h3 class="x-lens__h">' + title + (sub ? "<small>" + sub + "</small>" : "") + "</h3>" + body + "</section>"; }
+              function det(k, title, sub, body, strong, n) {
+                return '<details class="x-lens__box glass x-posl__h" data-det="' + k + '"' + (n ? ' data-step="' + n + '"' : "") + (S.open[k] ? " open" : "") + (strong ? ' style="border:2px solid var(--primary)"' : "") +
+                  "><summary>" + (n ? eb(n) : "") + '<h3 class="x-lens__h" style="margin:0">' + title + "<small>" + sub + "</small></h3></summary>" + body + "</details>";
+              }
+              function goStep(n) {
+                var s = $('[data-step="' + n + '"]', main); if (!s) return;
+                s.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" });
+                var f = s.querySelector("button:not(:disabled)") || s.querySelector("summary"); if (f) f.focus({ preventScroll: true });
+              }
+              /* options with the feedback placed right under the tapped one */
+              function opts(act, list, pick, fb, label) {
+                return '<div class="x-lens__row x-mem__opts" role="group" aria-label="' + esc(label) + '">' + list.map(function (o) {
+                  var on = pick === o[0];
+                  return '<button type="button" class="x-lens__b press" data-act="' + act + '" data-v="' + o[0] + '" aria-pressed="' + on + '"' + (pick ? " disabled" : "") + ">" + esc(o[1]) + (pick && o[2] ? " · best answer" : "") + "</button>" +
+                    (on ? '<p class="x-lens__p x-mem__fb" aria-live="polite">' + fb + "</p>" : "");
+                }).join("") + "</div>";
+              }
+              function pose(resp, t) {
+                var K = KF[resp]; if (!K) return { tx: 95, cx: 150, op: 1, m: null, b: -1 };
+                var b = t < B ? 0 : t < 2 * B ? 1 : 2;
+                if (t >= K[K.length - 1][0]) { var L = K[K.length - 1]; return { tx: L[1], cx: L[2], op: L[3], m: L[4], b: b }; }
+                for (var i = 0; i < K.length - 1; i++) if (t < K[i + 1][0]) break;
+                var a = K[i], z = K[i + 1], f = z[0] > a[0] ? Math.max(0, Math.min(1, (t - a[0]) / (z[0] - a[0]))) : 1;
+                f = f * f * (3 - 2 * f);
+                return { tx: a[1] + (z[1] - a[1]) * f, cx: a[2] + (z[2] - a[2]) * f, op: a[3] + (z[3] - a[3]) * f, m: t <= 0 ? a[4] : z[4], b: b };
+              }
+              function T(x, y, s, fill, anchor, w, size) { return '<text x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + ' style="fill:' + fill + ";font:" + (w || 500) + " " + (size || 15) + 'px var(--sans)">' + esc(s) + "</text>"; }
+              function stageSVG(resp, t, moving) {
+                var p = pose(resp, t), M = p.m ? MOOD[p.m] : null, look = M ? M[1] : "calm", face = M ? M[2] : 1;
+                var heart = resp === "dist" && t >= B + 0.6;
+                var l1 = M ? "Toddler " + M[0] : "Pick a home pattern, then press Run";
+                var l2 = heart ? "♥ body still stressed — heart rate up" : p.b >= 0 ? BEAT[p.b] : "The playroom, before the visit";
+                var sh = moving && !RM && (look === "upset" || look === "cling") ? Math.sin(t * 28) * 1.6 : 0;
+                var s = '<svg class="x-mem__svg" viewBox="0 0 320 244" role="img" aria-label="' + esc("Playroom. " + l1 + ". " + l2 + ".") + '" style="background:#1b1d33">' +
+                  '<rect x="0" y="0" width="320" height="58" fill="#14152a"/>' +
+                  T(10, 24, l1.length > 40 ? M[0] : l1, "#eef0ff", "", 600, 14) + T(10, 47, l2, heart ? "#ff9aa8" : "#a9acd6", "", heart ? 600 : 500, 14) +
+                  '<path d="M0 200H320" stroke="#4a4d78" stroke-width="1.5"/>' +
+                  /* door */
+                  '<rect x="272" y="86" width="40" height="114" rx="3" fill="#24264a" stroke="#a9acd6" stroke-width="1.5"/><circle cx="280" cy="146" r="2.5" fill="#a9acd6"/>' + T(292, 79, "door", "#eef0ff", "middle") +
+                  /* toys */
+                  '<rect x="12" y="206" width="16" height="16" rx="2" fill="#f5c76b"/><rect x="30" y="210" width="14" height="12" rx="2" fill="#ff9aa8"/><rect x="20" y="192" width="12" height="12" rx="2" fill="#5eead4"/>' + T(28, 240, "toys", "#eef0ff", "middle") +
+                  /* stranger */
+                  '<g transform="translate(196 150)"><rect x="-9" y="-36" width="18" height="34" rx="7" fill="#7d80a8"/><circle cy="-45" r="9" fill="#cfd1ec"/>' + T(0, -60, "stranger", "#eef0ff", "middle") + "</g>" +
+                  /* caregiver */
+                  '<g transform="translate(' + p.cx.toFixed(1) + ' 222)" opacity="' + p.op.toFixed(2) + '"><rect x="-11" y="-48" width="22" height="46" rx="8" fill="#c4b0ff"/><circle cy="-58" r="11" fill="#eef0ff"/>' + T(p.op < 0.6 ? 20 : 0, -76, p.op < 0.6 ? "caregiver (out)" : "caregiver", "#eef0ff", p.op < 0.6 ? "end" : "middle", 600) + "</g>" +
+                  /* toddler */
+                  '<g transform="translate(' + (p.tx + sh).toFixed(1) + ' 222)"><rect x="-8" y="-26" width="16" height="24" rx="6" fill="#5eead4"/><circle cy="-35" r="9" fill="#eef0ff"/><circle cx="' + (face * 4) + '" cy="-36" r="1.8" fill="#14152a"/>' +
+                  (look === "upset" || look === "cling" ? '<path d="M' + (face * 3 - 7) + " -31v6M" + (face * 3 + 7) + ' -31v6" stroke="#7fe9ff" stroke-width="2" stroke-linecap="round"/>' : "") +
+                  (look === "cling" ? '<path d="M7 -18L22 -26M7 -12L20 -6" stroke="#f5c76b" stroke-width="2.5" stroke-linecap="round"/>' : "") +
+                  (heart ? T(-22, -38, "♥", "#ff9aa8", "middle", 600, 16) : "") +
+                  T(0, 18, "toddler", "#eef0ff", "middle", 600) + "</g></svg>";
+                return s;
+              }
+              function words(resp, t) {
+                var p = pose(resp, t), I = INFO[resp], at = p.b >= 2 && t >= 2 * B + 1.2;
+                return [p.b >= 0 ? BEAT[p.b] : "Not started", at ? I[0] : "Shown at the reunion", at ? I[1] : "Shown at the reunion", at ? I[2] : "Shown at the reunion"];
+              }
+              function render(a) {
+                var g = $('[data-k="stage"]', main); if (g) g.innerHTML = stageSVG(a.resp, a.t, true);
+                var w = words(a.resp, a.t);
+                a.out.forEach(function (o, k) { if (o && o.textContent !== w[k]) { o.textContent = w[k]; if (k === 0) live.textContent = w[0] + "."; } });
+              }
+              function frame(now) {
+                raf = 0; if (!A || gone) return;
+                if (A.last != null) A.t += Math.min(0.05, (now - A.last) / 1000);
+                A.last = now; S.t = A.t;
+                if (A.t >= END) { A = null; finish(); return; }
+                render(A); kick();
+              }
+              function kick() { if (!raf && A && vis && !doc.hidden && !gone) raf = requestAnimationFrame(frame); }
+              function halt() { if (raf) cancelAnimationFrame(raf); raf = 0; if (A) A.last = null; }
+              var io = window.IntersectionObserver ? new IntersectionObserver(function (es) { vis = es[es.length - 1].isIntersecting; if (vis) kick(); else halt(); }) : null;
+              if (io) io.observe(box);
+              function onVis() { if (doc.hidden) halt(); else kick(); }
+              doc.addEventListener("visibilitychange", onVis);
+              function lessonBtn(id, label) {
+                var open = false; try { open = !!(LESSON_CONTENT[id] && (isOpen(id) || canPreview(id))); } catch (e) {}
+                return '<button type="button" class="x-lens__b press" ' + (open ? 'data-lesson="' : 'data-locked="') + id + '">' + esc(label) + "</button>";
+              }
+              function ref(who, year, design, finding, t) { return '<li><p class="x-refs__who"><b>' + who + "</b> (" + year + ") · " + design + t + "</p><p>" + finding + "</p></li>"; }
+              function paint() {
+                var fa = doc.activeElement, keep = fa && wrap.contains(fa) && fa.dataset && fa.dataset.act ? '[data-act="' + fa.dataset.act + '"]' + (fa.dataset.v != null ? '[data-v="' + fa.dataset.v + '"]' : "") : null;
+                halt(); A = null;
+                var running = S.phase === "run", done = S.phase === "done", n = !S.pred ? 0 : !S.ran ? 1 : !S.chal ? 2 : 3;
+                var po = PRED.filter(function (o) { return o[0] === S.pred; })[0];
+                var h = trail(n) + msect("Predict first", "A toddler’s caregiver leaves the room for a few minutes, then returns. What does a securely attached toddler usually do? Tap your prediction.",
+                  opts("pred", PRED, S.pred, po ? "<b>" + (po[2] ? "Right." : "Not quite.") + "</b> Securely attached toddlers usually protest the separation, seek comfort on return, calm quickly and go back to playing (Ainsworth et al. 1978). Now run the playroom below." : "", "Your prediction") +
+                  (S.pred && n === 1 && !S.phase ? next(2) : ""), 1);
+                var shown = S.phase ? S.ranResp : S.resp, w = S.phase ? words(S.ranResp, done ? END : S.t) : null;
+                h += msect("The playroom", !S.pred ? "Make your prediction above first." : "Choose how the caregiver usually responds at home, then press Run. Watch the reunion.",
+                  (!S.pred ? "" : '<p class="x-lens__p"><b>How the caregiver usually responds at home</b></p><div class="x-lens__row" role="group" aria-label="How the caregiver usually responds at home">' +
+                    RESP.map(function (r) { return '<button type="button" class="x-lens__b press" data-act="resp" data-v="' + r[0] + '" aria-pressed="' + (S.resp === r[0]) + '"' + (running ? " disabled" : "") + ' style="flex:1 1 8rem;min-height:48px;text-align:center">' + esc(r[1]) + "</button>"; }).join("") + "</div>" +
+                    '<div class="x-lens__row"><button type="button" class="start press x-lens__go" data-act="run" style="min-height:52px"' + (S.resp && !running ? "" : " disabled") + ">" + (S.ran ? "Run again" : "Run") + "</button></div>") +
+                  '<div data-k="stage">' + stageSVG(shown, done ? END : S.phase ? S.t : -1, false) + "</div>" +
+                  (w ? '<ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                    '<li><b>Beat:</b> <span data-o="0">' + esc(w[0]) + "</span></li>" +
+                    '<li><b>Toddler’s strategy:</b> <span data-o="1">' + esc(w[1]) + "</span></li>" +
+                    '<li><b>What it protects:</b> <span data-o="2">' + esc(w[2]) + "</span></li>" +
+                    '<li><b>Counsellor meaning:</b> <span data-o="3">' + esc(w[3]) + "</span></li></ul>" : "") +
+                  (done ? '<p class="x-lens__p x-mem__fb" aria-live="polite">Each pattern is a strategy that fits the care the toddler gets. ' + (S.ranResp === "dist" ? "The quiet toddler is not unbothered: heart rate rises during the separation (Sroufe &amp; Waters 1977). " : "") + "Pick another home pattern and press Run again to compare.</p>" + (n === 2 ? next(3) : "") : "") +
+                  '<p class="fineprint" style="margin:0">A fourth pattern, disorganized (Main &amp; Solomon 1990), is linked to frightening or frightened caregiving and isn’t shown as a toggle.</p>', 2);
+                if (S.ran) {
+                  var co = CH.filter(function (o) { return o[0] === S.chal; })[0];
+                  h += msect("Spot it", "Three adult clients. Which statement most likely reflects an avoidant strategy rather than true not-caring?",
+                    opts("chal", CH, S.chal, co ? "<b>" + esc(co[3].split(". ")[0]) + ".</b> " + esc(co[3].slice(co[3].indexOf(". ") + 2)) : "", "Which statement") +
+                    '<p class="fineprint" style="margin:0">These are strategies, not diagnoses. One sentence never tells you someone’s attachment style.</p>' + (S.chal && n === 3 ? next(4) : ""), 3);
+                }
+                h += det("reveal", "Reveal", "Attachment is a strategy for staying safe · readable any time",
+                  '<p class="x-lens__p"><b>An evolved bond for safety.</b> Bowlby (1969) described attachment as a bond that keeps a young child close to a protector when frightened, tired or hurt.</p>' +
+                  '<p class="x-lens__p"><b>The Strange Situation and the secure base.</b> Ainsworth et al. (1978) watched toddlers through short separations and reunions. Secure toddlers use the caregiver as a base to explore from and a haven to return to' + tag("", "Robust") + "</p>" +
+                  '<p class="x-lens__p"><b>Avoidance is adaptive, not a lack of feeling.</b> Avoidant toddlers look calm, but their heart rate rises at separation (Sroufe &amp; Waters 1977). Not asking keeps a distant caregiver near.</p>' +
+                  '<p class="x-lens__p"><b>Adults too.</b> Hazan &amp; Shaver (1987) found similar patterns in adult romantic relationships.</p>' +
+                  '<p class="x-lens__p"><b>Dimensions, not boxes.</b> Attachment is better measured as two dimensions, anxiety and avoidance, than as fixed types (Fraley &amp; Spieker 2003).</p>' +
+                  '<p class="x-lens__p"><b>Culture shapes the mix.</b> The share of each pattern varies across countries (van IJzendoorn &amp; Kroonenberg 1988).</p>' +
+                  '<p class="x-lens__p"><b>Not destiny.</b> Early attachment predicts later outcomes only modestly, and it can change with later relationships.</p>' +
+                  '<p class="x-mr__status">Secure-base behaviour and the Strange Situation patterns' + tag("", "Robust") + "· Attachment as fixed types for life" + tag(" x-ev--d", "Debunked or revised") + "· Cultural universality of the distribution" + tag(" x-ev--c", "Contested") + "· “Attachment therapy” and holding therapy (Chaffin et al. 2006)" + tag(" x-ev--d", "Debunked") + "</p>" +
+                  '<section class="x-refs" aria-label="Key sources" style="margin-top:4px"><p class="eyebrow">Key sources</p><ol style="list-style:none;padding-left:0">' +
+                  ref("Bowlby", 1969, "theory", "Attachment as an evolved bond that keeps a child close to a protector.", tag("", "Robust")) +
+                  ref("Ainsworth et al.", 1978, "observational study", "The Strange Situation: secure, avoidant and ambivalent patterns at reunion, and the secure base.", tag("", "Robust")) +
+                  ref("Fraley &amp; Spieker", 2003, "taxometric analysis", "Attachment differences fit dimensions of anxiety and avoidance better than fixed categories.", tag(" x-ev--c", "Contested")) +
+                  ref("Levy et al.", 2018, "meta-analysis", "Client attachment anxiety relates modestly to poorer therapy outcomes; secure attachment to better ones.", tag(" x-ev--c", "Contested")) +
+                  ref("Chaffin et al.", 2006, "task force report", "Coercive “attachment therapy” and holding therapy are unsupported, have caused deaths, and should not be used.", tag("", "Robust")) +
+                  "</ol></section>", false, 4);
+                h += det("therapy", "Where this becomes a problem in therapy", "Distance and clinging in the room · readable any time",
+                  '<p class="x-lens__p"><b>The room can be a secure base.</b> The counselling relationship can work as a secure base (Bowlby 1988), and client attachment anxiety relates modestly to outcomes (Levy et al. 2018).</p>' +
+                  '<p class="x-lens__p"><b>Avoidant strategies look “fine” or “resistant”.</b> Clients may play things down and miss sessions.</p>' +
+                  '<p class="x-lens__p"><b>Anxious strategies look like “neediness”.</b> Clients may call often or test boundaries. Both are learned ways to stay safe.</p>' +
+                  '<p class="x-lens__p"><b>Pop-psychology labels stick.</b> Attachment labels get pinned on adults from a few behaviours.</p>' +
+                  '<p class="x-lens__p"><b>Coercion harms.</b> Coercive “attachment therapy”, with restraint and holding, caused deaths and is condemned (Chaffin et al. 2006).</p>' +
+                  '<p class="x-lens__p"><b>Separations are common here.</b> In reentry and addiction work, many clients have been separated through incarceration, foster care and loss.</p>' +
+                  '<p class="x-lens__p"><b>Ruptures happen.</b> Repairing them predicts better outcomes (Safran, Muran &amp; Eubanks-Carter 2011).</p>' +
+                  '<p class="x-lens__p"><b>What to do</b></p><ul class="x-lens__p" style="margin:0;padding-left:18px;display:grid;gap:4px">' +
+                  "<li>Be predictable: same time, clear boundaries, warn about absences and endings.</li>" +
+                  "<li>Name ruptures and repair them out loud.</li>" +
+                  "<li>Read distance or clinging as strategies to understand, not traits to judge.</li>" +
+                  "<li>Never diagnose attachment style from casual behaviour.</li>" +
+                  "<li>Avoid any coercive technique.</li>" +
+                  "<li>Plan endings early.</li></ul>", true);
+                h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__take">Distance and clinging are old strategies for staying safe, not character flaws — be the steady, predictable person in the room, repair ruptures out loud, and never force closeness.</p>' +
+                  '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m6.2", "Attachment") + lessonBtn("m8a.4", "Attachment and nested worlds") + "</div></section>";
+                main.innerHTML = h;
+                if (running) { A = { resp: S.ranResp, t: S.t || 0, last: null, out: [0, 1, 2, 3].map(function (k) { return $('[data-o="' + k + '"]', main); }) }; render(A); kick(); }
+                var f = keep && $(keep, main); if (f && !f.disabled) f.focus({ preventScroll: true });
+              }
+              function finish() {
+                if (S.phase !== "run") return;
+                S.phase = "done"; S.ran = true; S.t = END; paint();
+                var I = INFO[S.ranResp]; live.textContent = "Reunion. Strategy: " + I[0] + ". What it protects: " + I[1] + ". Counsellor meaning: " + I[2];
+              }
+              function act(b) {
+                var a = b.dataset.act, v = b.dataset.v;
+                if (a === "pred") { if (S.pred) return; S.pred = v; live.textContent = (v === "secure" ? "Right" : "Not quite") + ": a secure toddler protests, seeks comfort on return, then goes back to playing. Choose the home pattern."; }
+                else if (a === "resp") { if (!S.pred || S.phase === "run") return; S.resp = v; live.textContent = RESP.filter(function (r) { return r[0] === v; })[0][1] + ". Press Run."; }
+                else if (a === "run") {
+                  if (!S.pred || !S.resp || S.phase === "run") return;
+                  S.ranResp = S.resp; S.t = 0;
+                  if (RM) { S.phase = "run"; finish(); return; }
+                  S.phase = "run"; live.textContent = BEAT[0] + ".";
+                }
+                else if (a === "chal") { if (!S.ran || S.chal) return; S.chal = v; live.textContent = CH.filter(function (o) { return o[0] === v; })[0][3]; }
+                else return;
+                paint();
+              }
+              wrap.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-act]");
+                if (b) { if (!b.disabled) act(b); return; }
+                var nx = e.target.closest("[data-next]");
+                if (nx) goStep(nx.getAttribute("data-next"));
+              });
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over."; } }]);
+              paint();
+              return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
+            }
+          },
           {
             id: "memory", name: "Memory Curve", kicker: "Learn how to learn", hue: ["#7fe9ff", "#b49cff"], gallery: true, order: -1, dom: true,
             idea: "Watch one fact fade from memory, then tap Review now to pull it back. Compare cramming with spacing, and recall with re-reading.",
