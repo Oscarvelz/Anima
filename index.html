@@ -4638,7 +4638,7 @@
               var sc = this, ov = box.closest(".x-lab"), cap = ov && $(".x-lab__cap", ov);
               var K = {}; sc.SCH.forEach(function (r) { K[r[0]] = r; });
               var KEYS = ["fr", "vr", "fi", "vi"];
-              var fresh = function () { return { hid: KEYS[Math.floor(Math.random() * 4)], guess: null, k: null, ext: false, run: null, ran: false, pAnim: true, rAnim: false }; };
+              var fresh = function () { return { hid: KEYS[Math.floor(Math.random() * 4)], guess: null, k: null, ext: false, run: null, ran: false, pAnim: true, rAnim: false, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -4740,8 +4740,20 @@
                   '<p class="x-lens__p"><b>When rewards stop,</b> variable schedules keep behaviour going longest: the partial-reinforcement extinction effect' + tag("", "Robust") + "</p>" +
                   '<p class="x-lens__p"><b>In the clinic:</b> a drug that only sometimes brings the hoped-for high, or attention that only sometimes follows a tantrum, works like a variable schedule. The behaviour keeps going long after the payoff becomes rare.</p>' +
                   '<p class="x-mr__status">Schedule effects in animals and many human settings' + tag("", "Robust") + "· As a full account of complex human behaviour" + tag(" x-ev--c", "Contested") + "</p>" +
-                  '<p class="x-lens__p">Ferster &amp; Skinner 1957, Schedules of Reinforcement.</p></section>' +
-                  '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
+                  '<p class="x-lens__p">Ferster &amp; Skinner 1957, Schedules of Reinforcement.</p></section>';
+                (function () {
+                  function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
+                  h += '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: build habits that stick<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                    '<p class="x-lens__p">Say it to a client like this: “How often something pays off shapes how hard you chase it. You can use that on purpose.”</p>' +
+                    bullets("Notice the hook", ["slot machines, scratch-offs, phones and drugs pay off unpredictably", "unpredictable payoffs are the hardest to quit", "“maybe this time” is the hook talking"]) +
+                    bullets("Steady it", ["remove the unpredictable payoff: delete the app, block the site, avoid the dealer, no “just checking”", "expect a burst of urges when the payoff stops", "urge-surf it"]) +
+                    bullets("Start new habits", ["reward every time at first: tick a box, a small treat, tell someone", "fast, sure rewards build a habit quickly"]) +
+                    bullets("Make them last", ["once the habit is going, thin the rewards and make them less predictable: surprise rewards, weekly check-ins", "unpredictable rewards make good habits hard to break too"]) +
+                    bullets("Use time wisely", ["rewards that come on a fixed clock (payday, monthly visits) make effort drop right after", "add small checkpoints in between"]) +
+                    bullets("For counsellors and parents", ["catch the good behaviour often at first", "be consistent with limits: giving in sometimes teaches persistence", "contingency management (rewards for clean tests) works best when rewards are immediate and reliable"]) +
+                    '<p class="x-lens__take">Reward new habits every time, then now and then — and take away the slot machine.</p></details>';
+                })();
+                if (S.ran) h += '<section class="x-lens__box glass" aria-label="So what for practice"><h3 class="x-lens__h">So what for practice</h3>' +
                   '<p class="x-lens__take">Rewards that come unpredictably build the most stubborn habits — the same rule that keeps a slot player pulling keeps a craving alive, and it is why contingency management pays reliably and promptly.</p>' +
                   '<p class="x-lens__p"><b>Linked lessons</b></p><div class="x-lens__row">' + lessonBtn("m3.3", "Schedules of reinforcement") + lessonBtn("m3.5", "Extinction, cues and relapse") + "</div></section>";
                 main.innerHTML = h;
@@ -4764,7 +4776,8 @@
                 paint();
               }
               wrap.addEventListener("click", function (e) { var b = e.target.closest("[data-act]"); if (!b || b.disabled) return; act(b); });
-              flatButtons(ctl, [{ t: "Start over", fn: function () { S = fresh(); paint(); wrap.scrollTop = 0; live.textContent = "Started over with a new mystery line."; } }]);
+              wrap.addEventListener("toggle", function (e) { var t = e.target; if (t && t.dataset && t.dataset.det) S.open[t.dataset.det] = t.open; }, true);
+              flatButtons(ctl, [{ t: "Start over", fn: function () { var o = S.open; S = fresh(); S.open = o; paint(); wrap.scrollTop = 0; live.textContent = "Started over with a new mystery line."; } }]);
               paint();
               return function () { gone = true; halt(); A = null; if (io) io.disconnect(); doc.removeEventListener("visibilitychange", onVis); };
             }
@@ -5560,7 +5573,7 @@
               var PRED = [["yes", "Yes, experience cancels bias"], ["struct", "Experience helps less than people think; structure helps more"], ["untrained", "Bias only affects untrained people"]];
               PRED = optShuffle(PRED); RD = RD.map(function (r) { return Object.assign({}, r, { opts: optShuffle(r.opts) }); }); /* Phase R-D */
               var NUM = ["One", "Two", "Three"], BIG = "flex:1 1 100%;min-height:56px;font-size:15px;border-radius:16px;text-align:left";
-              var fresh = function (k) { return { pred: k ? k.pred : null, slow: k ? k.slow : null, prev: k ? k.prev : null, open: k ? k.open : {}, play: false, r: 0, card: false, ans: [], done: false }; };
+              var fresh = function (k) { return { pred: k ? k.pred : null, slow: k ? k.slow : null, prev: k ? k.prev : null, open: k ? k.open : { toolkit: true }, play: false, r: 0, card: false, ans: [], done: false }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -5664,6 +5677,17 @@
                   ref("Jones et al.", 2008, "review", "Diagnostic overshadowing: physical symptoms in people with mental illness are put down to the known label and missed.", tag("", "Robust")) +
                   ref("Lord, Lepper &amp; Preston", 1984, "experiments", "Asking people to consider the opposite reduced biased judgment more than telling them to be unbiased.", tag("", "Robust")) +
                   "</ol></section>");
+                (function () {
+                  function bullets(title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; }
+                  h += '<details class="x-lens__box glass x-posl__h" data-det="toolkit"' + (S.open.toolkit ? " open" : "") + ' style="border:2px solid var(--primary)"><summary><h3 class="x-lens__h" style="margin:0">Teach it: catch your mind\'s shortcuts<small>A client toolkit, in plain words · readable any time</small></h3></summary>' +
+                    '<p class="x-lens__p">Say it to a client like this: “Our minds take shortcuts to save time. Usually they help; sometimes they trick us. You can learn to spot the trick.”</p>' +
+                    bullets("Notice", ["strong certainty, fast", "only seeing what fits what you already believe (confirmation bias)", "judging by the latest or scariest story (availability)", "the first number or label sticking (anchoring)", "“it worked for my friend” stories"]) +
+                    bullets("Slow down", ["pause for important choices", "ask “what would prove me wrong?”, “what\'s the other side?”, “what would I tell a friend?”", "sleep on big decisions"]) +
+                    bullets("Check thinking traps in recovery", ["“one won\'t hurt”", "“I\'ve already blown it, so why stop” (all-or-nothing)", "“I\'m the exception”", "“everyone uses”", "name the trap, then answer it"]) +
+                    bullets("Use shortcuts on purpose", ["make good choices the default: no alcohol at home, gym bag by the door, autopay bills", "plan ahead with “if-then” rules: “If I get paid, then I pay rent first”"]) +
+                    bullets("For counsellors", ["write down your first impression and look for evidence against it", "use checklists and structured screens", "ask a colleague", "don\'t stop at the first diagnosis"]) +
+                    '<p class="x-lens__take">Fast thinking is fine for small things — slow down when it matters.</p></details>';
+                })();
                 h += det("therapy", "Where this becomes a problem in therapy", "Labels, first impressions and missed illness" + after,
                   '<p class="x-lens__p"><b>Labels travel.</b> Words in referrals and records, such as “manipulative”, “noncompliant” or “drug-seeking”, anchor every later clinician and follow clients through justice and treatment systems.</p>' +
                   '<p class="x-lens__p"><b>The first formulation locks in.</b> Confirmation bias filters what clients say, so what fits is heard and what doesn’t is lost.</p>' +
