@@ -1872,7 +1872,9 @@
               "The changing brain: wiring by use", "Maps that grow, and the neurogenesis debate", "When plasticity builds the problem, and therapy’s mechanism", "The drivers: attention, repetition, spacing, sleep, error"] },
           { id: "m3", code: "M3", part: "B", t: "Learning & conditioning", s: "How experience rewires behavior", after: "m2",
             depth: ["Classical, operant and observational learning", "Cues, cravings and rewards in daily life and recovery", "Where conditioning stops explaining behavior"],
-            lessons: ["Classical conditioning", "Operant conditioning", "Schedules of reinforcement", "Observational learning", "Extinction, cues and relapse", "Learning principles in treatment"] },
+            lessons: ["Classical conditioning", "Operant conditioning", "Schedules of reinforcement", "Observational learning", "Extinction, cues and relapse", "Learning principles in treatment",
+              /* phase 3m-1: the Chomsky block (appended; lessons 1–6 unchanged) */
+              "Skinner’s Verbal Behavior: language as operant", "Chomsky’s review: the debate with the behaviourist", "Natural experiments: Nicaraguan Sign Language and critical periods", "The rivals: social, statistical and usage-based", "The weighed state, and language in the clinic"] },
           { id: "m4", code: "M4", part: "B", t: "Memory", s: "How we keep, lose and rebuild the past", after: "m3",
             depth: ["Encoding, storage, retrieval and the memory systems", "Why clients, witnesses and students remember differently", "Reconstruction, false memories and the trauma-memory debate"],
             lessons: ["Encoding, storage and retrieval", "Working memory", "Long-term memory systems", "Forgetting and interference", "Memory is reconstructive", "Trauma and memory controversies"] },
@@ -4969,6 +4971,21 @@
             claim: ["learned", "learning", "experience", "blank", "general learning", "empiric*", "near blank", "aprendid*", "aprendizaje", "experiencia", "en blanco", "empiris*"],
             ev: ["saffran", "1996", "statistical learning", "syllables", "tomasello", "2003", "usage based", "temperament changes", "many change", "aprendizaje estadistico", "silabas", "basado en el uso", "cambian"],
             charge: ["label for", "not yet explained", "shrinks", "dissolves", "gap*", "just a name", "etiqueta", "aun no explicado", "se encoge", "se disuelve", "solo un nombre"] }
+        ];
+        /* PHASE 3m-3: rival chips and cue lists for q-language (m3.11), pointing to m3.8–m3.10 */
+        var LANG_VIEWS = [
+          { v: "lv-interaction", t: "Prepared minds, statistical ears, social worlds", at: [["m3.10", 14], ["m3.10", 2], ["m3.9", 13]],
+            claim: ["prepared", "statistical", "social", "together", "interaction", "all three", "combin*", "biases", "partner*", "preparad*", "estadistic*", "social*", "juntos", "interaccion", "combina*", "sesgo*"],
+            ev: ["kuhl", "2003", "live speaker", "live person", "video", "saffran", "1996", "managua", "nicaragua*", "senghas", "2004", "joint attention", "hablante en vivo", "persona en vivo", "atencion conjunta"],
+            charge: ["neither", "pure", "alone", "not enough", "one sided", "too narrow", "ignore*", "ninguna", "pura*", "solo", "no basta", "unilateral"] },
+          { v: "lv-nativist", t: "Mainly an inborn grammar unfolding", at: [["m3.8", 8], ["m3.8", 6], ["m3.10", 12]],
+            claim: ["inborn", "innate", "universal grammar", "unfold*", "built in", "acquisition device", "nativ*", "innat*", "gramatica universal", "dispositivo", "se despliega", "despliega*"],
+            ev: ["crain", "nakayama", "1987", "structure dependence", "brown", "hanlon", "1970", "no correction", "goed", "managua", "mayberry", "1993", "dependencia estructural", "sin correccion"],
+            charge: ["poverty", "input is poor", "too little input", "far more input", "language models", "not shown", "where not what", "pobreza", "estimulo", "modelos de lenguaje", "no han mostrado"] },
+          { v: "lv-learning", t: "Mainly learned from use and interaction", at: [["m3.10", 7], ["m3.10", 4], ["m3.10", 11]],
+            claim: ["learned", "use", "usage", "interaction", "intention*", "pattern*", "construction*", "general skills", "aprendid*", "uso", "interaccion", "intencion*", "patron*", "construccion*"],
+            ev: ["tomasello", "2003", "saffran", "1996", "statistical learning", "verb island*", "evans", "levinson", "2009", "kuhl", "islas verbales", "aprendizaje estadistico"],
+            charge: ["label", "names the ability", "not explained", "exceptions", "no universals", "extra", "unneeded", "etiqueta", "excepciones", "sin universales", "innecesari*"] }
         ];
         var LESSON_CONTENT = {
           /* ============ M0+ · THE FIELD ARGUES WITH ITSELF: steelman each side, declare no winner ============ */
@@ -10772,6 +10789,497 @@
                 ["He is right; logic lives only in the left half", "He should train only his right half instead", "Scans don’t support left-brain and right-brain people", "His claim can’t be tested by any method"], 2,
                 "Some functions lean to one side, but people don’t divide into overall left-brained and right-brained types (Nielsen et al. 2013).")
             ]
+          },
+          /* ============ phase 3m-1: M3 · THE CHOMSKY BLOCK, lessons 7–8 (built lessons inside a still-locked module; open as Preview) ============ */
+          "m3.7": {
+            home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
+            keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
+              ["What is a mand?", "A request, kept going because it gets the thing asked for: “more juice!” followed by juice."],
+              ["What is a tact?", "Naming something present, kept going by social approval: “dog!” followed by “yes, a dog!”"],
+              ["What are echoic and intraverbal behaviour?", "Echoic is repeating what someone just said; intraverbal is answering words with words, such as “moo” to “what does a cow say?”"]],
+            steps: [
+              { kind: "hook", title: "Maya at breakfast", body: who("<b>Maya</b>, two years old, at breakfast with her dad.") +
+                "<p>She holds up her empty cup: “More juice!” He smiles and pours.</p>" +
+                "<p>Later she runs in from the garden: “I goed outside!”</p>" },
+              { kind: "predict", id: "m3.7:predict", title: "Your call first",
+                case: ["Maya says “more juice!” and her dad pours juice.",
+                  { t: "Her cup is green.", irrelevant: true },
+                  "The adults around her say “went”, never “goed”.",
+                  "She says “I goed outside!”",
+                  { t: "It is a sunny morning.", irrelevant: true }],
+                q: "Does “goed” fit an account where speech is learned by copying what gets rewarded?",
+                options: ["Yes: she copied it from adults, who rewarded it", "Not easily: no one around her says “goed”", "Yes: any word that earns a smile is learned so"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: not easily. No one modelled “goed”, so she cannot have copied it, and no one rewarded it before she said it. Something in her made it up. Hold that thought: it is where the next lesson’s debate begins.",
+                hints: ["Ask where she could have heard “goed”.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what the adults around her say instead."] },
+              { kind: "idea", lvl: "f", title: "Language as behaviour", body: "<p>Skinner’s <b>Verbal Behavior</b> (1957) " + ev("c") + " made a bold claim: speaking is behaviour like any other. It is shaped by its consequences, as a pigeon’s pecking is.</p>" +
+                "<p>The consequences come from listeners. What they do after we speak makes that kind of speech more or less likely next time.</p>" +
+                "<p><b>So:</b> on this view, there is no special language machine; there is a speaker, a listener and what follows.</p>" },
+              { kind: "idea", lvl: "f", title: "The mand: asking", body: "<p>A <b>mand</b> is a request. It is kept going because it gets the thing asked for.</p>" +
+                "<p>Maya’s “more juice!” is a mand: the juice that follows makes asking more likely next time she is thirsty.</p>" +
+                "<p><b>So:</b> a mand is controlled by what the speaker wants, and paid for by getting it.</p>" },
+              { kind: "idea", lvl: "f", title: "The tact: naming", body: "<p>A <b>tact</b> is naming something that is there. It is kept going by social approval, not by getting the thing.</p>" +
+                "<p>Maya points at the window: “Dog!” Her dad says, “Yes, a dog!” She does not get the dog; she gets his attention and approval.</p>" +
+                "<p><b>So:</b> a tact is controlled by what is in front of the speaker, and paid for by the listener’s response.</p>" },
+              { kind: "contrast", id: "m3.7:contrast", title: "Two mornings, one difference",
+                q: "Which account is a mand?",
+                cases: [
+                  { label: "Account A", s: ["Maya sees a ball under the table.", { t: "Her dad is reading the paper.", irrelevant: true }, "She says “Ball!”", { t: "Her dad says, “Yes, that’s a ball!” and goes on reading.", diff: true }] },
+                  { label: "Account B", s: ["Maya sees a ball under the table.", { t: "Her dad is reading the paper.", irrelevant: true }, "She says “Ball!”", { t: "Her dad picks up the ball and hands it to her.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Which word she says", "Whether what follows is the thing itself or approval", "Where the ball is", "What her dad is doing at first"],
+                feature: 1,
+                why: "Same word, same ball, same dad. In Account A what follows is approval, which keeps naming going: a tact. In Account B what follows is the ball, which keeps asking going: a mand. Skinner sorted speech by what controls it and what follows it, not by the words.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what Maya ends up with in each account."] },
+              { kind: "idea", lvl: "p", title: "The echoic: repeating", body: "<p>An <b>echoic</b> is repeating what someone has just said. Her dad says “banana”; Maya says “nana”, and he beams.</p>" +
+                "<p>In Skinner’s account, echoics let adults shape new sounds and words step by step, rewarding closer and closer copies.</p>" +
+                "<p><b>So:</b> an echoic is controlled by another person’s words, and matches them in sound.</p>" },
+              { kind: "idea", lvl: "p", title: "The intraverbal: answering", body: "<p>An <b>intraverbal</b> is answering words with different words. “What does a cow say?” “Moo!” No cow is present.</p>" +
+                "<p>Skinner placed conversation, songs, counting and much of school knowledge here: words set off by other words.</p>" +
+                "<p><b>So:</b> an intraverbal is controlled by what was said, but does not repeat it.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Skinner at his strongest", body: "<p><b>Parsimony.</b> The same few principles that explain other learning explain speech too. No new machinery is needed.</p>" +
+                "<p><b>Nothing unseen.</b> The account does not posit a hidden mental grammar that no one can observe. Every unit is something a person says, in a setting, with a consequence.</p>" +
+                "<p><b>Consequences really do shape speech.</b> Children talk more, and differently, when listeners respond. A theory of language that ignores the listener leaves something out.</p>" +
+                "<p><b>So:</b> on this view, the burden is on anyone who adds an inner grammar to show what it explains that consequences cannot.</p>" },
+              { kind: "idea", lvl: "p", title: "Evidence: mothers shape babbling", body: "<p>Goldstein and Schwade (2008) " + ev("r") + " watched infants babble while their mothers responded. When mothers answered right after a babble, the babies’ sounds quickly became more like speech, matching the pattern the mothers used.</p>" +
+                "<p>Babies whose mothers responded just as often, but not timed to the babbling, did not change in the same way. Earlier work with the same design found similar effects (Goldstein, King and West 2003).</p>" +
+                "<p><b>So:</b> social feedback, timed to what the child does, shapes early speech sounds. Skinner was right about that much.</p>" },
+              { kind: "idea", lvl: "m", title: "The living heir: verbal behaviour programmes", body: "<p>Skinner’s categories live on in applied behaviour analysis. <b>Verbal behaviour programmes</b> teach children with autism or language delays to mand first, because asking pays off at once, then to tact, echo and answer (Sundberg and Michael 2001) " + ev("c") + ".</p>" +
+                "<p>Status, honestly: widely used, with support mostly from small studies of a few children each. How they compare with other approaches, and how families and autistic adults judge them, is weighed later in M3, in “The weighed state, and language in the clinic”.</p>" +
+                "<p><b>So:</b> a theory can lose an argument about grammar and still give clinicians useful tools.</p>" },
+              { kind: "example", lvl: "p", title: "Maya’s day, read Skinner’s way", body: who("<b>Maya</b>, as her dad heard her over one day.") +
+                '<dl class="x-dossier"><div><dt>“More juice!”</dt><dd>Mand: a request, followed by juice.</dd></div>' +
+                "<div><dt>“Dog!”</dt><dd>Tact: naming what is there, followed by “yes, a dog!”</dd></div>" +
+                "<div><dt>“Nana”</dt><dd>Echoic: repeating “banana”, followed by a beam.</dd></div>" +
+                "<div><dt>“Moo!”</dt><dd>Intraverbal: an answer to “what does a cow say?”</dd></div>" +
+                "<div><dt>“I goed outside!”</dt><dd>Hard to place: no one says it to her, and no one rewarded it first.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the account strains", body: '<p class="x-crit"><b>Strongest critique</b>It arrived two years later. In his review of the book (Chomsky 1959), Noam Chomsky argued that Skinner’s terms work in the lab but, stretched to cover talk, explain nothing; that children produce sentences they have never heard, like “I goed outside”; and that reward and copying cannot account for grammar.</p>' +
+                "<p><b>The counter.</b> Skinner’s supporters reply that consequences still shape when, how and how much children speak, as the babbling studies show. The next lesson stages the debate in full.</p>" +
+                "<p><b>Person-first.</b> Say “a child with a language delay” or “a child with autism”, never “a delayed child”. Many autistic adults prefer “autistic person”; ask, and follow their lead.</p>" +
+                "<p>Background: M1 · Behaviorism.</p>" },
+              { kind: "teachback", id: "m3.7:teachback", title: "Teach it back", prompt: "Explain to Maya’s dad how Skinner would account for her talk: language as behaviour shaped by consequences in Verbal Behavior; the mand as a request paid for by getting the thing, the tact as naming paid for by approval, the echoic as repeating and the intraverbal as answering words with words; Skinner’s case at its strongest, parsimony, no unseen grammar and real effects of social feedback, with Goldstein and Schwade’s babbling study as robust evidence; verbal behaviour programmes as the living heir, with their contested status; and why “I goed outside” strains the account, the critique Chomsky made two years later." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Verbal Behavior as a full account of language " + ev("c") + ". Social feedback shaping early speech sounds " + ev("r") + ". Verbal behaviour programmes in the clinic " + ev("c") + ".</p>" +
+                "<p><b>So:</b> consequences shape speech; whether they explain grammar is the question the next lesson argues.</p>" },
+              Q("A toddler says “up!” with her arms raised, and her mum lifts her. In Skinner’s terms, what is “up!”?",
+                ["A mand, followed by the thing she asked for", "A tact, naming something that is present", "An echoic, repeating what her mum just said", "An intraverbal, answering a spoken question"], 0,
+                "What follows is the lift itself, which keeps asking going. That makes it a mand."),
+              Q("A boy sees a fire engine and shouts “truck!” His grandad says, “Yes, a big red truck!” What is “truck!”?",
+                ["A mand, since he wants to ride in the truck", "A tact, kept going by his grandad’s approval", "An echoic, since he heard the word earlier", "An intraverbal, set off by his grandad’s words"], 1,
+                "He names what is present and gets approval, not the truck. That is a tact."),
+              Q("Which observation fits Skinner’s account best?",
+                ["Babies’ babbling becomes more speech-like when mothers respond right away", "Children say “goed” though no one around them says it", "Children make sentences that no one has said to them", "Children rarely get corrected on grammar, yet learn it"], 0,
+                "Timed social responses shaping babbling is just what Skinner predicts. The other three are the observations Chomsky used against him.")
+            ]
+          },
+          "m3.8": {
+            home: "A child says a sentence nobody ever said to her. Copied, rewarded, or built? The debate that launched a field.",
+            keys: [["What did Chomsky’s review (1959) argue?", "That Skinner’s terms, stretched from the lab to talk, explain nothing; that language is generative; that children reach rules their input does not show them; and that errors like “goed” show rule-making."],
+              ["What is the poverty of the stimulus?", "The argument that what children hear is too thin to teach the rules they end up with, so some knowledge must come built in. Contested."],
+              ["What is structure dependence?", "Grammar rules work on phrases, not word order: from “the man who is tall is happy”, children ask “Is the man who is tall happy?”, never “Is the man who tall is happy?” (Crain and Nakayama 1987)."],
+              ["What is the dated verdict?", "As of 2026: the review won the historical argument and launched cognitive science, but neither pure reinforcement nor a settled universal grammar won; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Lena and her doll", body: who("<b>Lena</b>, four years old, playing on the floor.") +
+                "<p>She tells her mum: “The moon is following our car because it wants to come home with us.” Her mum has never said that sentence, and neither has anyone else she knows.</p>" +
+                "<p>Then she turns to her doll, who has “said” something: “No, you don’t say ‘I goed’. You say ‘I went’.”</p>" },
+              { kind: "predict", id: "m3.8:predict", title: "Your call first",
+                case: ["Lena says a sentence about the moon that no one has said to her.",
+                  { t: "Her doll has a red dress.", irrelevant: true },
+                  "Each of its words she has heard many times.",
+                  "She corrects her doll’s “goed” to “went”.",
+                  { t: "The rug is soft.", irrelevant: true }],
+                q: "Where did the moon sentence most likely come from?",
+                options: ["She copied it whole from something she heard", "She built it from words and patterns she knows", "She said it before, and someone rewarded it"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: she built it. The words are familiar; the sentence is new, so it was not copied or rewarded before. Almost everyone agrees on that. The fight is over how she learned the patterns she built it from.",
+                hints: ["Ask whether anyone could have said this sentence to her.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what is familiar to her, and what is new."] },
+              { kind: "idea", lvl: "f", title: "The review: terms stretched until they explain nothing", body: "<p>In his review of Verbal Behavior (Chomsky 1959) " + ev("c") + ", the young linguist Noam Chomsky granted that reinforcement and stimulus control are precise in the lab, with a rat, a lever and food.</p>" +
+                "<p>But applied to talk, he argued, they lose their meaning. If saying a word to yourself, or a poem no one hears, still counts as “reinforced”, the word no longer predicts anything. It just relabels what happened.</p>" +
+                "<p><b>So:</b> a term that fits every case explains none of them.</p>" },
+              { kind: "idea", lvl: "f", title: "Generativity: endless sentences, finite means", body: "<p>Lena knows a limited stock of words and rules, yet she can make and understand sentences without end, most of them new. This is <b>generativity</b>.</p>" +
+                "<p>Chomsky’s point: a list of learned responses, however long, cannot cover sentences no one has met yet. Something must generate them.</p>" +
+                "<p><b>So:</b> knowing a language is knowing a system that builds sentences, not a store of ones heard before.</p>" },
+              { kind: "idea", lvl: "p", title: "“Goed”: the error that gives the game away", body: "<p>Many children first say “went” correctly, then start saying “goed”, “mouses” and “foots”, then return to the right forms. Applying a rule beyond where it belongs is <b>overregularization</b> " + ev("r") + ".</p>" +
+                "<p>No adult says “goed”, so it cannot be copied, and it is not rewarded into being. It looks like the child has found the rule “add -ed for the past” and is using it everywhere.</p>" +
+                "<p><b>So:</b> errors like these show a child making rules, not only imitating.</p>" },
+              { kind: "idea", lvl: "p", title: "Hardly anyone corrects grammar", body: "<p>Brown and Hanlon (1970) " + ev("r") + " recorded parents talking with their young children. Parents approved or corrected what was true or false, not whether it was grammatical.</p>" +
+                "<p>A child who said a true thing in broken grammar got “that’s right”; a well-formed false one got corrected. Information about which sentences are not allowed, <b>negative evidence</b>, was scarce.</p>" +
+                "<p><b>So:</b> if no one tells children that “goed” is wrong, reinforcement cannot be what removes it. Later work argues parents give subtler hints, such as repeating the sentence correctly; how much these help is debated.</p>" },
+              { kind: "idea", lvl: "p", title: "Rules the input doesn’t show", body: "<p>Take “The man who is tall is happy.” To make a question, a simple rule would be: move the first “is” to the front. That gives “Is the man who tall is happy?”, which no one says.</p>" +
+                "<p>The right rule moves the “is” of the main sentence, skipping the one inside “who is tall”: “Is the man who is tall happy?” This is <b>structure dependence</b>: rules work on phrases, not on word order.</p>" +
+                "<p>Crain and Nakayama (1987) " + ev("r") + " asked young children to turn such sentences into questions. They made other errors, but not the “first is” kind.</p>" +
+                "<p>The <b>poverty of the stimulus</b> argument " + ev("c") + " says that sentences which would teach the right rule are rare in what children hear, so the knowledge must partly come built in.</p>" +
+                "<p><b>So:</b> children seem to reach rules that their input under-determines. Whether the input is really that poor is the contested part.</p>" },
+              { kind: "contrast", id: "m3.8:contrast", title: "Two words, one difference",
+                q: "Which account shows a generated rule rather than a learned habit?",
+                cases: [
+                  { label: "Account A", s: ["A boy looks at his shoes.", { t: "He is sitting on the stairs.", irrelevant: true }, "He wants to talk about both of them.", { t: "He says “feet”, a form he has heard many times.", diff: true }] },
+                  { label: "Account B", s: ["A boy looks at his shoes.", { t: "He is sitting on the stairs.", irrelevant: true }, "He wants to talk about both of them.", { t: "He says “foots”, a form no one around him uses.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["Where he is sitting", "Whether the form was heard or built by a rule", "What he is looking at", "What he wants to say"],
+                feature: 1,
+                why: "Same boy, same shoes, same wish. “Feet” could be a habit learned from hearing it again and again. “Foots” was never heard, so it was built by applying a rule, “add -s for more than one”, where it doesn’t belong.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask which word he could have heard."] },
+              { kind: "idea", lvl: "p", title: "Universal grammar and the acquisition device", body: "<p>In <i>Aspects of the Theory of Syntax</i> (Chomsky 1965) " + ev("c") + ", Chomsky proposed that children come equipped with a <b>language acquisition device</b>: an inborn capacity that turns the speech they hear into a grammar.</p>" +
+                "<p>Its content he called <b>universal grammar</b>: principles shared by every human language, which the input only has to tune.</p>" +
+                "<p><b>So:</b> on this view, children don’t learn grammar from scratch; they recognise which of the possible human grammars they are hearing.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Turn one: Skinner’s side", body: "<p><b>Speaking is something people do.</b> It happens in settings, to listeners, with effects. A science of it should study those, and the babbling studies show that listeners’ responses shape it.</p>" +
+                "<p><b>Novelty is not magic.</b> Pigeons and people combine learned pieces into new sequences; a new sentence can be built from learned parts and frames, without a hidden grammar.</p>" +
+                "<p><b>An inner grammar explains by naming.</b> Saying a child has a “language acquisition device” labels the ability without showing how it works. That is the very fault charged against Skinner.</p>" +
+                "<p><b>So:</b> on this side, the task is to trace speech to its history and consequences, and to add no inner machinery that is not shown to be needed.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Turn two: Chomsky’s side", body: "<p><b>Grammar is a system, not a habit.</b> People judge sentences they have never heard as fine or wrong, and agree. That knowledge is about structure, not about past rewards.</p>" +
+                "<p><b>The input is too thin.</b> Children hear limited, messy speech, get almost no correction of grammar, and still reach the same complex rules, quickly, across very different homes.</p>" +
+                "<p><b>Errors show rules.</b> “Goed” and “foots” are what a rule-maker produces, and children avoid the errors a simple word-order rule would make.</p>" +
+                "<p><b>So:</b> on this side, the mind brings structure to language, and the scientist’s job is to describe it.</p>" },
+              { kind: "idea", lvl: "p", title: "Turn three · MacCorquodale’s reply", body: "<p>Skinner never replied in print. Kenneth MacCorquodale did, in 1970 " + ev("c") + ": Chomsky had attacked a caricature.</p>" +
+                "<p>The review, he argued, read Skinner as a lab theory of stimulus and response chains, driven by hunger and thirst. But Verbal Behavior was an interpretation, using operants defined by what they do, not a claim that every utterance was trained.</p>" +
+                "<p>Palmer (2006) renewed the defence: much of the review misread Skinner, and behaviour analysts kept the framework because it guides teaching that works.</p>" +
+                "<p><b>So:</b> the reply charges that the review refuted a theory Skinner did not hold.</p>" },
+              { kind: "idea", lvl: "p", title: "Turn four · Chomsky’s rejoinder", body: "<p>Chomsky’s answer, across his later writing and interviews: if Skinner’s terms are only an interpretation, they make no testable claim about language at all.</p>" +
+                "<p>The review’s challenge still stood, he held: show how consequences produce new sentences, structure dependence and “goed”. No reply did so.</p>" +
+                "<p><b>So:</b> on this rejoinder, softening the theory to escape the critique also empties it.</p>" },
+              { kind: "idea", lvl: "m", title: "Weigh it: what each got right", body: "<p><b>Chomsky was right</b> that imitation and simple reinforcement alone cannot explain grammar. Children build sentences no one said, overregularize, and get little correction.</p>" +
+                "<p><b>Skinner was right</b> that social feedback and use matter. Responsive listeners shape early speech, and how much children are talked with tracks how their language grows.</p>" +
+                "<p><b>What came after.</b> Later work brought learning back, but not as simple reinforcement. Infants track patterns in the speech stream (Saffran, Aslin and Newport 1996), and usage-based accounts build grammar from social use. Claims of universals met challenges from languages that break them (Evans and Levinson 2009).</p>" +
+                "<p><b>So:</b> each side won a piece; the learning that returned was statistical and social, not the kind Skinner described.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh the turns yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>The review won the historical argument and helped launch cognitive science. But pure reinforcement was not replaced by a settled universal grammar: both pure accounts have failed.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A learning model that acquires full grammar from realistic child input alone, or a grammatical universal that survives every language tested.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated, moderate position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "Lena, read both ways", body: who("<b>Lena</b>, at four.") +
+                '<dl class="x-dossier"><div><dt>The moon sentence</dt><dd>Chomsky: generated by her grammar. Skinner’s heirs: built from learned frames and pieces.</dd></div>' +
+                "<div><dt>Correcting the doll</dt><dd>She can judge “goed” as wrong: knowledge about structure, which both sides must explain.</dd></div>" +
+                "<div><dt>Her earlier “goed”</dt><dd>Overregularization: a rule applied too widely, not a copy.</dd></div>" +
+                "<div><dt>Her talkative mum</dt><dd>Social feedback likely helped her language grow, as Skinner stressed.</dd></div>" +
+                "<div><dt>Not claimed</dt><dd>Which inborn knowledge, if any, she needed. That is still argued.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the poverty argument is weakest", body: '<p class="x-crit"><b>Strongest critique</b>The poverty of the stimulus argument rests on claims about what children hear, and for decades these were asserted more than measured. When large records of real speech to children were searched, some of the supposedly missing evidence turned up (Pullum and Scholz 2002), and learners that track patterns can pick up more structure than the argument allowed.</p>' +
+                "<p><b>The counter.</b> Defenders reply that finding some helpful sentences is not showing they are enough, and that children still avoid errors no evidence rules out. Rival accounts are taken up later in M3, in “The rivals: social, statistical and usage-based”, and critical periods in “Natural experiments: Nicaraguan Sign Language and critical periods”.</p>" +
+                "<p><b>Person-first.</b> Say “a child who is learning to talk” or “a child with a language disorder”, not “a late talker” as a label for who the child is.</p>" +
+                "<p>Background: M1 · Behaviorism. Ahead: M5 · How language develops.</p>" },
+              { kind: "teachback", id: "m3.8:teachback", title: "Teach it back", prompt: "Explain to a friend how Lena could say a sentence no one ever said to her, and what the Skinner and Chomsky debate decided: Chomsky’s review, that Skinner’s terms stretched to talk explain nothing; generativity; overregularization like “goed” as rule-making; scarce negative evidence from Brown and Hanlon; structure dependence with “Is the man who is tall happy?” and Crain and Nakayama, and the contested poverty of the stimulus; universal grammar and the language acquisition device; both sides steelmanned, MacCorquodale’s caricature reply and Chomsky’s rejoinder; what each got right; and the dated verdict, as of 2026, both pure accounts failed, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Overregularization in children’s speech " + ev("r") + ". Scarce explicit correction of grammar " + ev("r") + ". Children avoiding structure-independent questions " + ev("r") + ". Poverty of the stimulus as proof of inborn grammar " + ev("c") + ". Universal grammar " + ev("c") + ".</p>" +
+                "<p><b>So:</b> grammar is not just copied or rewarded, but how much is built in remains open.</p>" },
+              Q("A three-year-old says “I runned to the park.” What does this best show?",
+                ["She is copying a form she heard from adults", "She is applying a past-tense rule too widely", "She was rewarded for saying “runned” before", "She has not yet heard the word “ran” at all"], 1,
+                "No adult says “runned”, so she is not copying it. Applying “add -ed” beyond where it belongs is overregularization."),
+              Q("Why did Brown and Hanlon’s finding matter to the debate?",
+                ["Parents rarely corrected grammar, so reward can’t remove errors", "Parents corrected grammar often, so reward explains it", "Parents never spoke to children in full sentences", "Parents corrected only children who spoke early"], 0,
+                "Parents responded to whether a statement was true, not whether it was grammatical, so negative evidence was scarce."),
+              Q("Which statement best fits the app’s dated verdict on the debate?",
+                ["Reinforcement fully explains how children learn grammar", "Universal grammar is settled and needs no more tests", "Both pure accounts failed; confidence is moderate", "The debate was about words and changed nothing"], 2,
+                "The review won historically, but neither pure reinforcement nor a settled universal grammar holds; a strong learning model or a true universal would shift the verdict.")
+            ]
+          },
+          "m3.9": {
+            home: "Deaf children in new schools started signing in ways no one taught them. What natural experiments say about inborn language and timing.",
+            keys: [["What happened in Managua?", "Deaf children brought together in new schools in the late 1970s and 1980s built a new sign language among themselves, and younger cohorts made it more systematic (Kegl, Senghas and Coppola 1999; Senghas, Kita and Özyürek 2004)."],
+              ["What is the difference between a critical and a sensitive period?", "A critical period is a hard cutoff: after it, the learning cannot happen. A sensitive period is gradual: learning gets harder with later starts, but no door slams shut."],
+              ["What do late first-language learners show?", "Deaf people who met sign language late, with no full language before it, use it less fluently than early learners, even after many years (Mayberry 1993). Robust."],
+              ["What is the dated verdict?", "As of 2026: children bring powerful inborn biases that can build grammar from thin input, but only inside a community of users; whether those biases are language-specific is unresolved; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "A playground in Managua", body: who("<b>A group of deaf children</b>, Managua, the late 1970s and 1980s.") +
+                "<p>New schools bring deaf children together, many for the first time. At home most had used only a few gestures with their hearing families.</p>" +
+                "<p>The teachers teach lip-reading and spoken Spanish. On the playground and the school bus, the children sign to each other, in ways the teachers had not taught and cannot follow.</p>" },
+              { kind: "predict", id: "m3.9:predict", title: "Your call first",
+                case: ["Before school, most children used only a few home gestures.",
+                  { t: "The school bus is yellow.", irrelevant: true },
+                  "The teachers teach spoken Spanish, not signing.",
+                  "Children who join later, younger, sign more regularly than the first group.",
+                  { t: "The playground has a mango tree.", irrelevant: true }],
+                q: "Where did the regular patterns in the younger children’s signing most likely come from?",
+                options: ["They copied them from their teachers’ lessons", "They built them while learning from older children", "They brought them from their families’ home gestures"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: they built them while learning from older children. The teachers did not sign, and home gestures were sparse. The younger children took the older children’s signing and made it more regular. Both camps agree on that. They disagree about what made it possible.",
+                hints: ["Ask who around them actually signed.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what the younger children had to learn from."] },
+              { kind: "idea", lvl: "f", title: "A language born in a schoolyard", body: "<p>Researchers who studied the Managua schools described what happened as the birth of a new language: <b>Nicaraguan Sign Language</b> (Kegl, Senghas and Coppola 1999) " + ev("r") + ".</p>" +
+                "<p>The first children pooled their home gestures into a shared way of signing. Each new group of children learned it from the ones before.</p>" +
+                "<p><b>So:</b> a language can arise among children who have no full language to copy.</p>" },
+              { kind: "idea", lvl: "f", title: "Younger cohorts made it more systematic", body: "<p>Senghas, Kita and Özyürek (2004, in Science) " + ev("r") + " showed signers a cartoon of a cat rolling down a hill, and compared their signs with hearing Nicaraguans’ gestures.</p>" +
+                "<p>Hearing speakers gestured the rolling and the going down as one whole motion. Signers from later cohorts more often broke it into separate parts, “rolling” and then “down”, which can be recombined like words.</p>" +
+                "<p><b>So:</b> the children did not just copy the language; each cohort added grammar to it.</p>" },
+              { kind: "idea", lvl: "p", title: "Two readings of the same playground", body: "<p><b>The Chomsky camp</b> reads it as an inborn capacity surfacing: give children too little language, and they make more, along the lines a language faculty would predict.</p>" +
+                "<p><b>The rivals</b> read it as children’s learning biases, such as a pull toward regular, reusable parts, working inside a social community. It took a community, and successive cohorts, not a single child.</p>" +
+                "<p><b>So:</b> both sides agree children created grammar. They disagree about whether what they used was language-specific.</p>" },
+              { kind: "idea", lvl: "p", title: "Creoles: a similar story, more disputed", body: "<p>When adults from different language groups were thrown together, often under colonial plantation slavery, they built simple contact languages. Children who grew up with these often turned them into full languages, called <b>creoles</b>.</p>" +
+                "<p>Bickerton (1984) " + ev("c") + " proposed a <b>language bioprogram</b>: creoles look alike because children fall back on an inborn default grammar.</p>" +
+                "<p>Critics reply that creoles also carry features from the languages around them, and that adults shaped them too.</p>" +
+                "<p><b>So:</b> creoles fit the idea that children add grammar, but the bioprogram behind them is contested.</p>" },
+              { kind: "idea", lvl: "p", title: "Critical or sensitive?", body: "<p>A <b>critical period</b> is a hard cutoff: a window after which some learning can no longer happen at all.</p>" +
+                "<p>A <b>sensitive period</b> is gradual: learning is easiest early and gets harder with later starts, but no door slams shut.</p>" +
+                "<p><b>So:</b> the question for language is not only whether timing matters, but whether it ends in a cliff or a slope.</p>" },
+              { kind: "contrast", id: "m3.9:contrast", title: "Two studies, one difference",
+                q: "Which account describes a sensitive period rather than a critical one?",
+                cases: [
+                  { label: "Account A", s: ["Researchers test adults who began a second language at different ages.", { t: "The tests take place in a quiet room.", irrelevant: true }, "All of them have used the language for many years.", { t: "Scores drift lower step by step the later people began, with no sudden drop.", diff: true }] },
+                  { label: "Account B", s: ["Researchers test adults who began a second language at different ages.", { t: "The tests take place in a quiet room.", irrelevant: true }, "All of them have used the language for many years.", { t: "Early starters all score like natives; past one age, scores fall away at once.", diff: true }] }
+                ],
+                answer: 0,
+                features: ["Where the tests take place", "Whether the decline with age is gradual or sudden", "How long people have used the language", "Which language they learned"],
+                feature: 1,
+                why: "Same people, same tests, same years of use. Account A shows a slope: later starts do a bit worse, with no cutoff. That is a sensitive period. Account B shows a cliff at one age: a critical period.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: describe the shape of the scores against starting age."] },
+              { kind: "idea", lvl: "p", title: "Genie: a case that cannot carry the weight", body: "<p>Genie was found in 1970, aged thirteen, after being isolated and severely abused by her father since infancy. Curtiss (1977) " + ev("c") + " documented that she learned many words but never fully mastered grammar.</p>" +
+                "<p>Status, honestly: a single case, confounded by abuse, malnutrition and possible early disability. Her poor grammar cannot be pinned on timing alone.</p>" +
+                "<p><b>Ethics.</b> Genie was studied while her care was unstable, and researchers were later criticised for putting research before her welfare. Her case is a warning about studying people in crisis.</p>" +
+                "<p><b>So:</b> Genie fits the timing idea, but cannot test it.</p>" },
+              { kind: "idea", lvl: "p", title: "Late first-language learners of sign", body: "<p>Some deaf children grow up without access to any full language, because no one around them signs. Mayberry (1993) " + ev("r") + " compared deaf adults who first met sign language at different ages.</p>" +
+                "<p>Those who learned it late as their first language understood and used it less fluently than early learners, even after many years. They also did worse than people who learned sign late as a second language, after a spoken first one.</p>" +
+                "<p><b>So:</b> early access to some full language matters, and these cases have no abuse to confound them.</p>" },
+              { kind: "idea", lvl: "p", title: "Second languages: a slope, not a cliff", body: "<p>Johnson and Newport (1989) " + ev("c") + " tested immigrants to the United States on English grammar. Those who arrived as young children did as well as natives; later arrivals did steadily worse.</p>" +
+                "<p>Hartshorne, Tenenbaum and Pinker (2018) " + ev("r") + " tested a very large online sample. Grammar learning stayed strong well into the teenage years, then declined gradually.</p>" +
+                "<p><b>So:</b> for second languages, age effects look like a sensitive period, a slope rather than a sharp cutoff.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · These cases show an innate language faculty", body: "<p><b>Grammar from almost nothing.</b> The Managua children had sparse home gestures and no signing teachers, yet built word order, reusable parts and grammar within a few cohorts.</p>" +
+                "<p><b>Children, not adults, did it.</b> The younger learners added the structure, as they do in creoles. That is what an inborn capacity, strongest early, predicts.</p>" +
+                "<p><b>Timing is biological.</b> Late first-language learners stay less fluent for life. A general learner that simply needed more practice should catch up.</p>" +
+                "<p><b>So:</b> on this side, children carry a capacity built for language, which needs only a trigger.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · They show strong learning biases needing a community", body: "<p><b>It took a community.</b> Isolated deaf children with home signs build some structure, but not a full language. Nicaraguan Sign Language arose only once many children met and signed every day.</p>" +
+                "<p><b>It took cohorts.</b> The grammar grew as each group learned from the last. That is how learning biases work: small pulls toward regularity, compounded through passing it on.</p>" +
+                "<p><b>The biases may not be about language.</b> Children regularize patterns in games and made-up rules too. A pull toward regular, reusable parts need not be grammar-specific.</p>" +
+                "<p><b>So:</b> on this side, children bring strong learning biases, and a community of users turns them into a language.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Children bring powerful inborn biases that can build grammar from thin input, but only inside a community of users. Whether those biases are language-specific is unresolved.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Evidence that the same systematization arises from general learning biases in non-language tasks, or that it does not.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated, moderate position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "Managua, read both ways", body: who("<b>The Managua schools</b>, over successive cohorts.") +
+                '<dl class="x-dossier"><div><dt>Home gestures</dt><dd>The thin input both sides start from.</dd></div>' +
+                "<div><dt>The first group</dt><dd>Pooled gestures into shared signing: a community at work.</dd></div>" +
+                "<div><dt>Younger cohorts</dt><dd>Broke motion into separate parts. Chomsky camp: an inborn capacity surfacing. Rivals: learning biases compounding across cohorts.</dd></div>" +
+                "<div><dt>Not claimed</dt><dd>That the biases are, or are not, specific to language. That is still open.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the natural experiments are weakest", body: '<p class="x-crit"><b>Strongest critique</b>Natural experiments are not controlled. The Managua children differed in age, home life and hearing history; Genie’s case is tangled with abuse; late learners of sign often lacked schooling and social contact as well as language. Each case fits both camps, so none can pick between them on its own.</p>' +
+                "<p><b>The counter.</b> Defenders reply that the pattern holds across very different cases, and that cohort comparisons within one community control for much. Rival accounts are set out in the next lesson, “The rivals: social, statistical and usage-based”.</p>" +
+                "<p><b>Person-first, and Deaf culture.</b> Say “a deaf child” or “deaf children”, accepted usage in the community, or “a child who is deaf”; avoid “hearing-impaired”. Capital-D <b>Deaf</b> names a cultural community with its own signed language, not only a hearing level.</p>" +
+                "<p>Background: M2 · sensitive periods. Ahead: M5 · How language develops.</p>" },
+              { kind: "teachback", id: "m3.9:teachback", title: "Teach it back", prompt: "Explain to a friend what the Managua schools showed: deaf children building Nicaraguan Sign Language among themselves (Kegl, Senghas and Coppola); younger cohorts breaking motion into separate parts (Senghas, Kita and Özyürek); how the Chomsky camp and the rivals each read it; creoles and Bickerton’s contested bioprogram; the difference between a critical and a sensitive period; Genie as a single case confounded by abuse, with its ethics; late first-language learners of sign (Mayberry) as robust; second-language age effects as a slope, not a cliff (Johnson and Newport, Hartshorne, Tenenbaum and Pinker); both sides steelmanned; and the dated verdict, as of 2026, inborn biases inside a community, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Children adding grammar to Nicaraguan Sign Language " + ev("r") + ". The creole bioprogram " + ev("c") + ". Genie as evidence for a critical period " + ev("c") + ". Lasting costs of late first-language learning " + ev("r") + ". A gradual decline in second-language learning " + ev("r") + ".</p>" +
+                "<p><b>So:</b> children can build grammar, but only together, and early access to a full language matters.</p>" },
+              Q("Later cohorts of Nicaraguan signers broke a rolling-down motion into separate signs. What does this best show?",
+                ["Children added structure the input did not hold", "Children copied the signs their teachers used", "Children kept their home gestures unchanged", "Children learned spoken Spanish more slowly"], 0,
+                "The teachers did not sign and the earlier signing kept the motion whole. The younger children made it more systematic."),
+              Q("Grammar learning in a second language declines steadily with later starts, with no sudden drop. Which term fits?",
+                ["A critical period", "A sensitive period", "A language bioprogram", "Negative evidence"], 1,
+                "A gradual decline without a cutoff is a sensitive period, as Hartshorne, Tenenbaum and Pinker found."),
+              Q("Why can’t Genie’s case settle whether language has a critical period?",
+                ["She learned grammar fully once she was found", "She was a single case, confounded by severe abuse", "She learned a sign language rather than English", "She was studied only briefly, for a few weeks"], 1,
+                "One case, with abuse and neglect as rival causes, cannot separate timing from everything else she endured.")
+            ]
+          },
+          "m3.10": {
+            home: "Babies learn sounds from a live person but not from a screen. Social, statistical and usage-based rivals to inborn grammar.",
+            keys: [["What did Kuhl, Tsao and Liu (2003) find?", "Nine-month-olds from English-speaking homes kept Mandarin sound distinctions after sessions with a live speaker, but not after the same sessions on video."],
+              ["What is statistical learning?", "Tracking which sounds tend to go together, with no reward: infants pick out word-like units from a stream of syllables (Saffran, Aslin and Newport 1996)."],
+              ["What is usage-based theory?", "The view that children build language from reading others’ intentions and finding patterns in what they hear, starting with item-based pieces like verb islands (Tomasello 2003)."],
+              ["What is the dated verdict?", "As of 2026: social and statistical learning are established parts of acquisition; whether they suffice without language-specific inborn structure is the live question; confidence moderate."]],
+            steps: [
+              { kind: "hook", title: "Two rooms of babies", body: who("<b>Two groups of nine-month-olds</b>, from English-speaking homes.") +
+                "<p>Over a few weeks, each group hears the same Mandarin sessions: the same stories, the same toys, the same words.</p>" +
+                "<p>One group hears them from a Mandarin speaker sitting on the floor with them. The other group watches the same speaker on video.</p>" },
+              { kind: "predict", id: "m3.10:predict", title: "Your call first",
+                case: ["Both groups hear the same Mandarin words and stories.",
+                  { t: "The room has a blue carpet.", irrelevant: true },
+                  "One group has the speaker in the room; the other sees her on a screen.",
+                  "Afterwards, both groups are tested on telling apart Mandarin sounds.",
+                  { t: "The sessions happen in the morning.", irrelevant: true }],
+                q: "Which group do you expect to tell the Mandarin sounds apart better?",
+                options: ["The group with the speaker in the room", "The group who watched the video", "Both groups about the same"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: the group with the speaker in the room. They kept the Mandarin sound distinctions; the video group did not, though they heard the same sounds. Something about a live person mattered.",
+                hints: ["Ask what was the same for both groups, and what was not.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what differs between the rooms."] },
+              { kind: "idea", lvl: "f", title: "A live person, not a screen", body: "<p>Kuhl, Tsao and Liu (2003) " + ev("r") + " ran this study. Babies with a live Mandarin speaker kept the ability to tell apart Mandarin sounds that English does not use. Babies with video or audio alone lost it, like babies who heard no Mandarin.</p>" +
+                "<p>Status, honestly: a single influential study, consistent with later work on social learning, but not often repeated at scale.</p>" +
+                "<p><b>So:</b> for early speech sounds, hearing is not enough; a social partner seems to switch learning on.</p>" },
+              { kind: "idea", lvl: "f", title: "Looking at the same thing", body: "<p>Bruner (1983) " + ev("c") + " answered Chomsky’s language acquisition device with a <b>language acquisition support system</b>: the routines adults build with children, such as games of peekaboo and looking at books together.</p>" +
+                "<p>At its heart is <b>joint attention</b>: child and adult attending to the same thing, and each knowing the other is. Tomasello stressed that infants come to share attention this way toward the end of their first year.</p>" +
+                "<p><b>So:</b> on the social view, language is learned inside shared attention, where words can be tied to what they name.</p>" },
+              { kind: "idea", lvl: "f", title: "Babies count without counting", body: "<p>Saffran, Aslin and Newport (1996) " + ev("r") + " played eight-month-olds a stream of made-up syllables with no pauses. Within the stream, some syllables always followed each other, like sounds inside a word; others did not, like sounds across a word boundary.</p>" +
+                "<p>After only a couple of minutes, babies listened differently to the syllable runs that held together. They had tracked which sounds go together. This is <b>statistical learning</b>.</p>" +
+                "<p><b>So:</b> infants pick up patterns from what they hear, with no teaching and no reward.</p>" },
+              { kind: "contrast", id: "m3.10:contrast", title: "Two babies, one difference",
+                q: "Which account shows learning with no reward?",
+                cases: [
+                  { label: "Account A", s: ["A baby hears a stream of made-up syllables.", { t: "She sits on her mother’s lap.", irrelevant: true }, { t: "Nothing follows her listening: no toy, no smile.", diff: true }, "Later she listens differently to syllable runs that held together."] },
+                  { label: "Account B", s: ["A baby hears a stream of made-up syllables.", { t: "She sits on her mother’s lap.", irrelevant: true }, { t: "A toy lights up each time she turns toward one syllable run.", diff: true }, "Later she listens differently to syllable runs that held together."] }
+                ],
+                answer: 0,
+                features: ["Whose lap she sits on", "Whether anything follows her listening", "What syllables she hears", "How she responds later"],
+                feature: 1,
+                why: "Same baby, same syllables, same change later. In Account B a lit-up toy follows her turning: reinforcement could explain it. In Account A nothing follows, yet she still learned. That is statistical learning: no reward needed.",
+                hints: ["Find the one sentence where the two accounts part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what happens right after she listens in each."] },
+              { kind: "idea", lvl: "p", title: "Can it reach grammar?", body: "<p>Finding words in a stream of sound is one thing. Grammar involves rules over phrases, such as structure dependence, which is not a matter of which sound follows which.</p>" +
+                "<p>Later studies show infants and adults can track some patterns over categories and longer distances, but how far statistical learning reaches into grammar is contested " + ev("c") + ".</p>" +
+                "<p><b>So:</b> statistical learning is real; whether it scales from words to grammar is the open part.</p>" },
+              { kind: "idea", lvl: "p", title: "Usage-based: intentions and patterns", body: "<p>Tomasello (2003) " + ev("c") + " built a full rival account, <b>usage-based theory</b>. Children learn language with two general skills.</p>" +
+                "<p><b>Intention-reading:</b> working out what others mean, through joint attention. <b>Pattern-finding:</b> spotting what recurs across what they hear, as in statistical learning.</p>" +
+                "<p><b>So:</b> on this view, no language-specific inborn grammar is needed; social and pattern skills are enough.</p>" },
+              { kind: "idea", lvl: "p", title: "Verb islands and constructions", body: "<p>Early speech looks item-based. A toddler may say “cut bread”, “cut paper”, “cut it”, yet use “draw” only in one fixed frame. Each verb is its own little island of grammar: <b>verb islands</b>.</p>" +
+                "<p>Only later do children link the islands into general patterns. <b>Construction grammar</b> describes language as a store of such form-and-meaning pairings, from single words to frames like “the more you…, the more you…”.</p>" +
+                "<p><b>So:</b> on this view, grammar grows upward from particular pieces, not down from general rules.</p>" },
+              { kind: "idea", lvl: "p", title: "Are there language universals?", body: "<p>Evans and Levinson (2009) " + ev("c") + ", in a paper titled “The myth of language universals”, surveyed the world’s languages and argued that nearly every proposed universal has exceptions: languages without fixed word order, without adjectives, even without some sound types.</p>" +
+                "<p>Defenders of universal grammar reply that universals are abstract principles, not surface features, so surface variety does not refute them.</p>" +
+                "<p><b>So:</b> the claim that all languages share deep principles is contested by the diversity of real languages.</p>" },
+              { kind: "idea", lvl: "p", title: "Pirahã and recursion", body: "<p><b>Recursion</b> is putting a phrase inside another of the same kind: “the dog that chased the cat that ate the mouse”. Chomsky and colleagues proposed it as the core of the language faculty.</p>" +
+                "<p>Everett (2005) " + ev("c") + ", after years living with the Pirahã of the Amazon, reported that their language lacks recursion, shaped by a culture focused on immediate experience.</p>" +
+                "<p>Nevins, Pesetsky and Rodrigues (2009) disputed this, reanalysing his own data and arguing that Pirahã does have embedding. Few outsiders speak the language, so the dispute is hard to settle.</p>" +
+                "<p><b>So:</b> a single language could, in principle, test a universal; this one remains contested.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Usage-based: general skills are enough", body: "<p><b>Every ingredient is shown.</b> Infants track sound patterns, share attention and read intentions. These are measured, not posited.</p>" +
+                "<p><b>Early speech fits.</b> Item-based verb islands are what learning from particular pieces predicts, and not what an inborn general grammar predicts.</p>" +
+                "<p><b>Languages vary too much.</b> If universals keep meeting exceptions, an inborn grammar has little left to explain.</p>" +
+                "<p><b>So:</b> on this side, language is learned with general social and pattern skills, and inborn grammar is an extra no one needs.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · The nativist reply: the input is still poor", body: "<p><b>Some structures remain unexplained.</b> Children reach structure dependence and avoid errors their input gives no evidence against. Tracking which sound follows which has not been shown to get them there.</p>" +
+                "<p><b>Social learning explains where, not what.</b> A live partner may switch learning on, but that does not say what children learn, or why it is so alike across homes.</p>" +
+                "<p><b>Universals are abstract.</b> Surface variety does not refute deep principles, and disputed cases like Pirahã do not settle it.</p>" +
+                "<p><b>So:</b> on this side, social and statistical learning are real, but still need inborn structure to reach adult grammar.</p>" },
+              { kind: "idea", lvl: "m", title: "What large language models add", body: "<p>Large language models learn from enormous amounts of text, far more than a child hears in a childhood, and with no built-in grammar. They produce fluent, grammatical sentences.</p>" +
+                "<p><b>It cuts both ways.</b> For usage-based views, they show that pattern-finding alone can reach grammar. For nativists, they show it takes vastly more input than a child gets, so children must bring something more; and they learn from text, without shared attention or a world.</p>" +
+                "<p><b>So:</b> machines learning grammar from text do not settle how children learn it. The models themselves are weighed in M5+ · Deep networks as models of mind.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Social and statistical learning are established parts of acquisition. Whether they suffice without language-specific inborn structure is the live question.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>Learning models given realistic child input reaching adult grammar, or a universal surviving all tests.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated, moderate position, and name what would change it.</p>" },
+              { kind: "example", lvl: "p", title: "The two rooms, read by each rival", body: who("<b>The nine-month-olds</b>, live speaker against video.") +
+                '<dl class="x-dossier"><div><dt>Social view</dt><dd>The live speaker shared attention with them, which switched learning on.</dd></div>' +
+                "<div><dt>Statistical view</dt><dd>Both groups heard the same patterns; attention decided how much of them was tracked.</dd></div>" +
+                "<div><dt>Usage-based view</dt><dd>Intention-reading and pattern-finding work together, as here.</dd></div>" +
+                "<div><dt>Nativist view</dt><dd>A social trigger for sounds, saying little about grammar.</dd></div>" +
+                "<div><dt>Not claimed</dt><dd>That screens harm babies’ language. The study tested one kind of learning, over a few weeks.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the rivals are weakest", body: '<p class="x-crit"><b>Strongest critique</b>The rivals show how children learn sounds, words and early frames, but none has yet shown, step by step, how general skills alone reach the complex rules adults know, such as structure dependence, from the input a real child hears. Promising pieces are not yet a full account.</p>' +
+                "<p><b>The counter.</b> Usage-based researchers reply that the nativist account has not shown its inborn grammar either, and that their pieces are at least measured. The weighed state comes in the next lesson, “The weighed state, and language in the clinic”.</p>" +
+                "<p><b>Person-first.</b> Say “a child who speaks two languages” or “a child learning English”, not “a non-native child” as a label for who the child is.</p>" +
+                "<p>Background: M3 · Chomsky’s review. Ahead: M5+ · Deep networks as models of mind.</p>" },
+              { kind: "teachback", id: "m3.10:teachback", title: "Teach it back", prompt: "Explain to a friend why babies kept Mandarin sounds from a live speaker but not from video, and what the rivals to inborn grammar claim: Kuhl, Tsao and Liu as a single influential study; Bruner’s language acquisition support system and joint attention; statistical learning from Saffran, Aslin and Newport, robust, and its limits for grammar; how it differs from reinforcement, with no reward needed; Tomasello’s usage-based theory, intention-reading and pattern-finding, verb islands and construction grammar; Evans and Levinson on universals; Everett on Pirahã and recursion, disputed by Nevins, Pesetsky and Rodrigues; both sides steelmanned; what large language models do and do not show; and the dated verdict, as of 2026, social and statistical learning established, sufficiency open, confidence moderate, with its defeater." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>A live partner aiding infant sound learning " + ev("r") + ". Statistical learning of words " + ev("r") + ". Statistical learning reaching grammar " + ev("c") + ". Usage-based theory as a full account " + ev("c") + ". Pirahã lacking recursion " + ev("c") + ".</p>" +
+                "<p><b>So:</b> children learn from people and patterns; whether that is all they need is still argued.</p>" },
+              Q("Babies hear a syllable stream with nothing following their listening, yet later react to the runs that held together. What is this?",
+                ["Reinforcement of listening by a reward", "Statistical learning of which sounds go together", "Imitation of the syllables they heard", "Correction of their errors by an adult"], 1,
+                "Nothing followed their listening, so no reward shaped it. Tracking which syllables go together is statistical learning."),
+              Q("A toddler says “cut bread” and “cut paper” but uses “draw” in only one fixed frame. Which idea does this fit best?",
+                ["Verb islands, from usage-based theory", "Overregularization of a past-tense rule", "A critical period closing for verbs", "Recursion inside a noun phrase"], 0,
+                "Each verb carries its own small grammar early on. Usage-based theory calls these verb islands."),
+              Q("Why do large language models cut both ways in this debate?",
+                ["They reach grammar, but from far more text than a child hears", "They prove children learn from video as well as from people", "They show universal grammar is built into every language", "They learn only words, never sentences or grammar"], 0,
+                "Pattern-finding reached grammar, which helps usage-based views; but it took vastly more input, which helps nativists.")
+            ]
+          },
+          /* phase 3m-3: M3 lesson 11 · the Chomsky block, final */
+          "m3.11": {
+            home: "A boy mixes Spanish and English and a pamphlet says “pick one language”. The weighed state of the debate, and what it means in the clinic.",
+            keys: [["What is the dated verdict on how language is acquired?", "As of 2026: neither pure account held; children arrive prepared, learn statistically, and need social partners; how much inborn structure is specific to language remains open; confidence moderate."],
+              ["Does learning two languages cause language delay or disorder?", "No. Children learning two languages from early on reach milestones in the same broad range as children learning one (Paradis, Genesee and Crago 2011)."],
+              ["What is conceptual vocabulary?", "A count of each idea a child can name, in either language, counted once: the fair way to measure a bilingual child’s words."],
+              ["How do you tell a typical bilingual pattern from a language disorder?", "A gap in one language filled by the other is typical. A true disorder shows in both languages."]],
+            steps: [
+              { kind: "hook", title: "“Pick one language”", body: who("<b>Carmen</b> is raising her three-year-old son, <b>Mateo</b>, in Spanish and English.") +
+                "<p>She says he mixes both languages in one sentence: “Mami, quiero the red one.” He says fewer words than his cousin of the same age, who hears only English.</p>" +
+                "<p>In the pediatrician’s waiting room, a pamphlet reads: “Pick one language.”</p>" },
+              { kind: "predict", id: "m3.11:predict", title: "Your call first",
+                case: ["Mateo hears Spanish and English at home.",
+                  { t: "The waiting room has a fish tank.", irrelevant: true },
+                  "He mixes both languages in one sentence.",
+                  "He says fewer English words than his cousin, who hears only English.",
+                  { t: "His mother brought a snack for the wait.", irrelevant: true }],
+                q: "What do you expect research says about his mixing and his smaller English vocabulary?",
+                options: ["Both are common in children learning two languages", "Both are early signs of a language disorder", "Both show that two languages confuse him"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: both are common in children learning two languages from early on. His mixing follows rules, and his words are spread across two languages. On its own, neither points to a disorder. The lesson shows why, and what would.",
+                hints: ["Ask what is true of most children who hear two languages at home.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say how many languages his words are spread across."] },
+              { kind: "idea", lvl: "f", title: "Where three lessons left it", body: "<p>In “Chomsky’s review: the debate with the behaviourist”, reinforcement alone could not explain grammar. In “Natural experiments: Nicaraguan Sign Language and critical periods”, children built grammar, but only together. In “The rivals: social, statistical and usage-based”, babies learned sounds from a live person and tracked patterns in sound.</p>" +
+                "<p>Neither pure account held: not an inborn grammar unfolding on its own, and not learning from scratch.</p>" +
+                "<p><b>So:</b> the debate did not end with a winner; it ended with a blend, and an open question inside it.</p>" },
+              { kind: "idea", lvl: "f", title: "Prepared minds, statistical ears, social worlds", body: "<p><b>Prepared minds.</b> Children arrive with biases: they attend to speech and faces, and, as the Managua cohorts showed, they push what they hear toward structure.</p>" +
+                "<p><b>Statistical ears.</b> They track which sounds and words go together, with no reward needed.</p>" +
+                "<p><b>Social worlds.</b> They learn inside shared attention with people who talk with them; a screen alone did not do it.</p>" +
+                "<p><b>So:</b> inborn biases, statistical learning and social interaction work together; take any one away and learning suffers.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Nativist core: some structure is built for language", body: "<p><b>Its claim.</b> Beyond general learning, children bring structure specific to language that shapes what they can learn.</p>" +
+                "<p><b>Its evidence.</b> Children form questions by structure, never by word order, with no correction (Crain & Nakayama 1987). Younger Managua signers added structure their input lacked. Late first-language learners of sign carry lasting costs.</p>" +
+                "<p><b>Its charge.</b> No learning account has shown, step by step, how general skills reach adult grammar from what a real child hears; machines need vastly more input.</p>" +
+                "<p><b>So:</b> on this side, the blend still needs a language-specific core.</p>" },
+              { kind: "idea", lvl: "p", steelman: true, title: "Steelman ✓ · Learning-and-use account: general skills, used socially", body: "<p><b>Its claim.</b> Children learn language with general skills, reading intentions and finding patterns, used in conversation.</p>" +
+                "<p><b>Its evidence.</b> Infants track sound patterns (Saffran, Aslin & Newport 1996) and learn sounds from a live partner (Kuhl, Tsao & Liu 2003). Early speech grows from item-based verb islands (Tomasello 2003). Languages vary more than universals predict (Evans & Levinson 2009).</p>" +
+                "<p><b>Its charge.</b> A language-specific core names the ability without explaining it, and its proposed universals keep meeting exceptions.</p>" +
+                "<p><b>So:</b> on this side, the blend needs no core built only for language.</p>" },
+              { kind: "idea", lvl: "m", title: "Decide: the app’s dated verdict", body: "<p>Weigh both sides yourself first. Then compare with the app’s position, which is dated and can change.</p>" +
+                '<dl class="x-dossier"><div><dt>As of 2026</dt><dd>Neither pure account held. Children arrive prepared, learn statistically, and need social partners. How much inborn structure is specific to language remains open.</dd></div>' +
+                "<div><dt>Confidence</dt><dd>Moderate.</dd></div>" +
+                "<div><dt>Defeater</dt><dd>A decisive test of language-specific inborn structure.</dd></div></dl>" +
+                "<p><b>So:</b> hold a dated, moderate position, and name what would change it.</p>" },
+              { kind: "position", id: "m3.11:position", qid: "q-language", question: "How is language acquired?", title: "Weigh, then take a position", views: LANG_VIEWS, about: "about how language is acquired" },
+              { kind: "idea", lvl: "f", title: "Two languages don’t cause delay", body: "<p>Mateo is learning two languages from early on: <b>simultaneous bilingualism</b>. Such children reach milestones, such as first words and first word combinations, within the same broad range as children learning one language (Paradis, Genesee & Crago 2011) " + ev("r") + ".</p>" +
+                "<p>Bilingualism does not cause language delay or language disorder. Children who do have a language disorder can also learn two languages.</p>" +
+                "<p><b>So:</b> hearing two languages is not a risk to a child’s language.</p>" },
+              { kind: "idea", lvl: "f", title: "Mixing follows rules", body: "<p>Using two languages in one sentence is <b>code-switching</b>. Young bilingual children switch in ways that respect the grammar of both languages, much as bilingual adults do, and they switch to fill a word gap or to match the person they are talking to (Genesee 2009) " + ev("r") + ".</p>" +
+                "<p>“Quiero the red one” keeps a Spanish verb and an English phrase in an order both languages allow.</p>" +
+                "<p><b>So:</b> mixing is a bilingual skill, not a sign of confusion.</p>" },
+              { kind: "idea", lvl: "p", title: "Count both languages", body: "<p>A bilingual child’s words are split across two languages. Mateo may say “perro” but not “dog”, and “spoon” but not “cuchara”. Counted in one language, he can look behind his cousin; counted across both, often he is not.</p>" +
+                "<p><b>Conceptual vocabulary</b> counts each idea once, whichever language names it. Assess in both languages, with a bilingual clinician or an interpreter where needed.</p>" +
+                "<p><b>So:</b> testing a bilingual child in one language measures half of what he knows.</p>" },
+              { kind: "idea", lvl: "p", title: "“Pick one language” is unsupported", body: "<p>The pamphlet’s advice has no support in research on bilingual children, including children with language disorders.</p>" +
+                "<p>It also has costs. Dropping the home language can cut a child off from grandparents, from family closeness, and from his <b>heritage language</b>, the language of his family and community. Parents also tend to talk most richly in the language they know best.</p>" +
+                "<p><b>So:</b> advise families to keep the language of their heart, not to drop it.</p>" },
+              { kind: "contrast", id: "m3.11:contrast", title: "Two children, one difference",
+                q: "Which child’s pattern points to a possible language disorder?",
+                cases: [
+                  { label: "Child A", s: ["A boy hears Spanish and English at home.", { t: "He likes trains.", irrelevant: true }, "He says fewer English words than an English-only cousin.", { t: "Many words he lacks in English, he says in Spanish.", diff: true }] },
+                  { label: "Child B", s: ["A boy hears Spanish and English at home.", { t: "He likes trains.", irrelevant: true }, "He says fewer English words than an English-only cousin.", { t: "Words he lacks in English, he lacks in Spanish too.", diff: true }] }
+                ],
+                answer: 1,
+                features: ["What he likes to play with", "Whether his gaps show in both languages", "How many languages he hears", "How he compares with his cousin"],
+                feature: 1,
+                why: "Same home, same gap in English. Child A fills the gap in Spanish: a typical bilingual pattern. Child B has the gap in both languages: that is what a true language disorder looks like, and it is worth a full assessment.",
+                hints: ["Find the one sentence where the two children part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what happens to his missing English words in Spanish."] },
+              { kind: "idea", lvl: "p", title: "A real disorder, often missed", body: "<p><b>Developmental language disorder</b> is a lasting difficulty learning language that is not explained by hearing loss or another known condition. An international consensus, CATALISE (Bishop et al. 2017) " + ev("r") + ", set its name and criteria.</p>" +
+                "<p>It is common, yet often missed: children may seem only quiet, shy or slow to follow. In bilingual children it is missed when gaps are put down to bilingualism, and over-diagnosed when they are tested in one language.</p>" +
+                "<p><b>So:</b> a true disorder shows in both languages; when it does, don’t wait.</p>" },
+              { kind: "idea", lvl: "m", title: "The bilingual advantage, shrunk", body: "<p>Early studies suggested bilingual people do better at <b>executive function</b>: switching tasks, holding back a habit, keeping a goal in mind. This became known as the <b>bilingual advantage</b>.</p>" +
+                "<p>Paap and Greenberg (2013) " + ev("c") + " found no consistent advantage across many tasks. Lehtonen et al. (2018) " + ev("c") + ", pooling many studies, found it shrank to little or nothing once small studies and unpublished results were weighed. Defenders reply that it may appear in some groups or tasks.</p>" +
+                "<p><b>So:</b> don’t oversell it either way. The case for keeping two languages rests on family, culture and opportunity, not on a brain boost; and bilingualism does not harm thinking.</p>" },
+              { kind: "idea", lvl: "m", title: "Verbal behaviour programmes, weighed", body: "<p>Skinner’s living heir, met in “Skinner’s Verbal Behavior: language as operant”, is the <b>verbal behavior intervention</b> used in applied behaviour analysis with autistic children. It teaches requests first, then naming and answering.</p>" +
+                "<p><b>Evidence.</b> Some support for teaching requests and everyday communication, mostly from small studies of a few children each " + ev("c") + ".</p>" +
+                "<p><b>Critiques.</b> Autistic self-advocates and some researchers raise ethical concerns: many hours of drills, training for compliance, stopping harmless behaviours such as stimming, and goals set by others rather than with the child. Earlier forms used punishment. Defenders reply that current practice is play-based and seeks the child’s assent.</p>" +
+                "<p><b>Alternatives.</b> Naturalistic developmental behavioural interventions (Schreibman et al. 2015) " + ev("c") + " teach inside play and daily routines, following the child’s lead. <b>Augmentative and alternative communication</b>, such as pictures, signs or speech-generating devices, gives a voice now, and research suggests it does not hold back speech.</p>" +
+                "<p><b>So:</b> communication can be taught, but how, by whom and toward whose goals is contested; ask families and autistic people.</p>" },
+              { kind: "example", lvl: "p", title: "The pediatrician replies", body: who("<b>Carmen’s pediatrician</b> sets the pamphlet aside and answers in plain words.") +
+                '<p class="x-note">For the room: “Keep speaking the language of your heart at home — it won’t confuse him. If there’s a real delay, we’ll see it in both languages, and we’ll help.” · <span lang="es">“Sigue hablándole en el idioma de tu corazón en casa; no lo va a confundir. Si hay un retraso real, lo veremos en los dos idiomas, y lo ayudaremos.”</span></p>' +
+                "<p>Then she asks which words Mateo says in Spanish, and counts them with his English ones.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the weighed state is weakest", body: '<p class="x-crit"><b>Strongest critique</b>“Prepared minds, statistical ears, social worlds” can fit almost any result: any success is credited to the blend, any gap to one part of it. A position that no finding could upset settles little. And much of the clinical evidence on bilingual children comes from a few language pairs and communities, so it may not carry everywhere.</p>' +
+                "<p><b>The counter.</b> The blend does risk something: remove the social partner and learning should drop, as it did with video; a true disorder should show in both languages. The open question, how much is specific to language, is named, not hidden.</p>" +
+                "<p><b>Person-first, and neurodiversity.</b> Say “a child who speaks two languages”, not “a non-native child”. Many autistic people prefer “autistic person”; follow each person’s preference, and treat autism as a difference to support, not a defect to remove.</p>" +
+                "<p>Background: M3 · Skinner’s Verbal Behavior. Ahead: M5 · How language develops.</p>" },
+              { kind: "teachback", id: "m3.11:teachback", title: "Teach it back", prompt: "Explain to Carmen what the language debate concluded and what it means for Mateo: neither pure account held; prepared minds, statistical ears and social worlds; both sides steelmanned, the nativist core and the learning-and-use account; the dated verdict, as of 2026, confidence moderate, with its defeater; why bilingualism does not cause delay (Paradis, Genesee and Crago); code-switching as normal and rule-governed (Genesee); conceptual vocabulary and assessing in both languages; why “pick one language” is unsupported and costly; developmental language disorder as real and under-identified (CATALISE), and that a true disorder shows in both languages; the bilingual advantage as contested and shrunk (Paap and Greenberg, Lehtonen and colleagues); and verbal behaviour programmes, their evidence, the ethical critiques from autistic self-advocates, and alternatives such as naturalistic developmental behavioural interventions and augmentative and alternative communication." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Bilingualism not causing language delay " + ev("r") + ". Code-switching following rules " + ev("r") + ". A bilingual advantage in executive function " + ev("c") + ". Verbal behaviour programmes as the best route to communication " + ev("c") + ". Developmental language disorder being under-identified " + ev("r") + ".</p>" +
+                "<p><b>So:</b> keep both languages, count both, test both; and a real disorder shows in both.</p>" },
+              Q("A bilingual child says “perro” but not “dog”, and “spoon” but not “cuchara”. How should a clinician count his vocabulary?",
+                ["Each idea once, in either language", "Only words in the school language", "Only words he knows in both languages", "Only words in his stronger language"], 0,
+                "His words are split across two languages. Conceptual vocabulary counts each idea once, whichever language names it."),
+              Q("Which pattern most suggests a developmental language disorder in a bilingual child?",
+                ["Mixing both languages within one sentence", "Fewer words in one language than peers", "Difficulty with language in both languages", "Using the home language with grandparents"], 2,
+                "Mixing and a smaller vocabulary in one language are typical. A true disorder shows in both languages."),
+              Q("What is the fairest summary of the bilingual advantage in executive function?",
+                ["Large and found in nearly every study", "Shrunk to little or none once pooled", "Reversed, with bilinguals doing worse", "Settled as present in older adults only"], 1,
+                "Pooled studies (Lehtonen et al. 2018) found it shrank to little or nothing; bilingualism does not harm thinking either.")
+            ]
           }
         };
         /* retrieval questions get their titles from their position */
@@ -11654,7 +12162,39 @@
           G("m8c.7", "Inhibitory learning", "Aprendizaje inhibitorio", "Learning a new safe memory that competes with fear.", "The account of exposure in which the old fear memory remains and a new “this was safe” memory is learned to compete with it; requires noticing the fear and its non-catastrophe (Craske et al. 2014)."),
           G("m8c.7", "Expectancy violation", "Violación de expectativas", "The gap between what was feared and what happened.", "In inhibitory learning, the mismatch between an expected catastrophe and the actual outcome, thought to drive new learning during exposure (Craske et al. 2014); see Inhibitory learning."),
           G("m8c.7", "Mentalization", "Mentalización", "Holding one’s own and others’ minds in mind.", "The capacity to understand behaviour in terms of feelings, wishes and beliefs, one’s own and others’; the target of mentalization-based treatment for borderline personality disorder (Bateman & Fonagy 2009)."),
-          G("m8c.7", "Countertransference", "Contratransferencia", "The therapist’s own reactions to a client.", "The therapist’s emotional reactions to a client; acting them out went with slightly worse outcomes, while noticing and managing them, and reading them as data, went with better ones (Hayes, Gelso & Hummel 2011); see Part H.")
+          G("m8c.7", "Countertransference", "Contratransferencia", "The therapist’s own reactions to a client.", "The therapist’s emotional reactions to a client; acting them out went with slightly worse outcomes, while noticing and managing them, and reading them as data, went with better ones (Hayes, Gelso & Hummel 2011); see Part H."),
+          /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
+          G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
+          G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
+          G("m3.7", "Tact", "Tacto", "Naming something present, kept going by approval.", "In Skinner’s analysis, a verbal operant controlled by something in front of the speaker and reinforced by social approval, such as “dog!” followed by “yes, a dog!”; see Mand."),
+          G("m3.7", "Echoic", "Ecoica (conducta ecoica)", "Repeating what someone just said.", "In Skinner’s analysis, a verbal operant that matches another person’s words in sound, such as “nana” after “banana”; used to shape new sounds and words; see Intraverbal."),
+          G("m3.7", "Intraverbal", "Intraverbal (conducta intraverbal)", "Answering words with different words.", "In Skinner’s analysis, a verbal operant set off by others’ words but not repeating them, such as “moo” to “what does a cow say?”; covers conversation and much school knowledge; see Echoic."),
+          G("m3.8", "Poverty of the stimulus", "Pobreza del estímulo", "What children hear seems too thin to teach their grammar.", "The argument that the speech children hear under-determines the rules they acquire, so some knowledge must be inborn (Chomsky 1959, 1965); contested, since searches of real speech find some of the missing evidence (Pullum & Scholz 2002); see Structure dependence."),
+          G("m3.8", "Universal grammar", "Gramática universal", "Grammar principles proposed as shared by every language.", "Chomsky’s (1965) proposal that humans are born with principles common to all languages, which the input only tunes; contested, as claimed universals meet counterexamples (Evans & Levinson 2009); see Language acquisition device."),
+          G("m3.8", "Language acquisition device", "Dispositivo de adquisición del lenguaje", "A proposed inborn capacity for building a grammar.", "Chomsky’s (1965) term for an innate faculty that turns the speech a child hears into a grammar; criticised as naming the ability without explaining it; see Universal grammar."),
+          G("m3.8", "Overregularization", "Sobrerregularización", "Applying a grammar rule where it doesn’t belong.", "Errors such as “goed”, “mouses” or “foots”, often after the child used the correct form; since no one says them, they show rule-making rather than imitation; robust."),
+          G("m3.8", "Negative evidence", "Evidencia negativa", "Information that a sentence is not allowed.", "Feedback telling a learner which sentences are ungrammatical; explicit correction of grammar by parents is rare (Brown & Hanlon 1970), while the value of subtler feedback, such as correct repetitions, is debated."),
+          G("m3.8", "Structure dependence", "Dependencia estructural", "Grammar rules work on phrases, not word order.", "The property that rules operate on sentence structure: children ask “Is the man who is tall happy?”, never “Is the man who tall is happy?” (Crain & Nakayama 1987); see Poverty of the stimulus."),
+          G("m3.8", "Generativity", "Generatividad", "Making endless new sentences from limited words and rules.", "The capacity to produce and understand sentences never met before, from a finite stock of words and rules; central to Chomsky’s (1959) critique that learned responses cannot cover new sentences."),
+          /* phase 3m-2: M3 lessons 9–10 · the Chomsky block (Sensitive period already exists) */
+          G("m3.9", "Nicaraguan Sign Language", "Lengua de Señas Nicaragüense", "A sign language deaf children created in Managua.", "The language that arose among deaf children brought together in new Managua schools in the late 1970s and 1980s; younger cohorts made it more systematic (Kegl, Senghas & Coppola 1999; Senghas, Kita & Özyürek 2004); read as an inborn capacity or as learning biases within a community."),
+          G("m3.9", "Creole", "Criollo (lengua criolla)", "A full language grown from a simple contact language.", "A language that develops when children grow up with a pidgin, a simplified contact language, and give it full grammar; Bickerton’s (1984) language bioprogram, an inborn default grammar behind creoles, is contested."),
+          G("m3.9", "Critical period", "Periodo crítico", "A hard cutoff after which some learning cannot happen.", "A window after which a skill can no longer be acquired at all; for language, late first-language learners of sign show lasting costs (Mayberry 1993), while second-language age effects look gradual (Hartshorne, Tenenbaum & Pinker 2018); see Sensitive period."),
+          G("m3.10", "Statistical learning", "Aprendizaje estadístico", "Tracking which sounds or events go together, with no reward.", "Picking up regularities from input without teaching or reinforcement; infants find word-like units in a syllable stream (Saffran, Aslin & Newport 1996), robust; whether it reaches grammar is contested."),
+          G("m3.10", "Usage-based theory", "Teoría basada en el uso", "Language built from reading intentions and finding patterns.", "Tomasello’s (2003) account in which children learn language through intention-reading and pattern-finding, without language-specific inborn grammar, starting from item-based pieces such as verb islands; contested; see Construction grammar."),
+          G("m3.10", "Joint attention", "Atención conjunta", "Two people attending to the same thing, and knowing it.", "Child and adult focusing on the same object or event, each aware the other is; central to Bruner’s (1983) language acquisition support system and Tomasello’s account of word learning."),
+          G("m3.10", "Construction grammar", "Gramática de construcciones", "Language as a store of form-and-meaning patterns.", "The view that grammar consists of learned pairings of form and meaning, from single words to frames such as “the more…, the more…”; underpins usage-based theory (Tomasello 2003)."),
+          G("m3.10", "Recursion", "Recursividad", "Putting a phrase inside another of the same kind.", "Embedding structures within like structures, as in “the dog that chased the cat that ate the mouse”; proposed as the core of the language faculty; Everett’s (2005) claim that Pirahã lacks it is disputed (Nevins, Pesetsky & Rodrigues 2009)."),
+          G("m3.10", "Language universals", "Universales lingüísticos", "Features proposed as shared by every language.", "Properties claimed to hold in all human languages; Evans & Levinson (2009) argued nearly every proposed universal has exceptions, while defenders hold that universals are abstract principles; see Universal grammar."),
+          /* phase 3m-3: M3 lesson 11 · the Chomsky block, final */
+          G("m3.11", "Code-switching", "Alternancia de códigos", "Using two languages in one sentence or conversation.", "Moving between languages within or across sentences; in young bilingual children it respects the grammar of both languages and serves word gaps and listeners, so it is normal, not confusion (Genesee 2009; Paradis, Genesee & Crago 2011), robust."),
+          G("m3.11", "Simultaneous bilingualism", "Bilingüismo simultáneo", "Learning two languages together from early childhood.", "Acquiring two languages from infancy or the first years, rather than one after the other; such children reach milestones in the same broad range as children learning one language (Paradis, Genesee & Crago 2011)."),
+          G("m3.11", "Conceptual vocabulary", "Vocabulario conceptual", "Each idea a child can name, in either language, counted once.", "A vocabulary measure for bilingual children that credits a concept named in either language, avoiding the undercount from testing one language; see Developmental language disorder."),
+          G("m3.11", "Bilingual advantage", "Ventaja bilingüe", "The claim that bilinguals have better executive function.", "The proposal that managing two languages improves switching, inhibition and goal-keeping; contested, as large tests and pooled studies found it small or absent (Paap & Greenberg 2013; Lehtonen et al. 2018)."),
+          G("m3.11", "Developmental language disorder", "Trastorno del desarrollo del lenguaje", "A lasting difficulty learning language with no known cause.", "Persistent language difficulties not explained by hearing loss or another known condition; named by the CATALISE consensus (Bishop et al. 2017); common and under-identified; in bilingual children it shows in both languages."),
+          G("m3.11", "Verbal behavior intervention", "Intervención de conducta verbal", "Teaching language using Skinner’s verbal operants.", "An applied behaviour analysis approach, often with autistic children, that teaches mands first, then tacts and intraverbals (Sundberg & Michael 2001); some evidence for teaching requests; contested on evidence and ethics, including autistic self-advocates’ critiques; see Mand."),
+          G("m3.11", "Augmentative and alternative communication", "Comunicación aumentativa y alternativa", "Ways to communicate besides speech, or alongside it.", "Pictures, signs, letter boards and speech-generating devices that support or replace speech; gives a means of communication now, and evidence suggests it does not hold back speech; often shortened to AAC."),
+          G("m3.11", "Heritage language", "Lengua de herencia", "A family’s language, learned at home alongside the main one.", "A language spoken in a child’s family or community that differs from the main language of the society; advice to drop it is unsupported and can cost family bonds and identity.")
         ];
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m0")).map(function (id) { return { v: id, t: "M0 · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(lessonIds(modOf("m1")).map(function (id) { return { v: id, t: "M1 · " + lessonOf(id).title }; }));
@@ -11668,6 +12208,9 @@
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8s.1", "m8s.2", "m8s.3", "m8s.4", "m8s.5", "m8s.6"].map(function (id) { return { v: id, t: "SG · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8e.1", "m8e.2", "m8e.3", "m8e.4", "m8e.5", "m8e.6"].map(function (id) { return { v: id, t: "EV · " + lessonOf(id).title }; }));
         COLL.gloss.filters = COLL.gloss.filters.concat(["m8c.1", "m8c.2", "m8c.3", "m8c.4", "m8c.5", "m8c.6", "m8c.7"].map(function (id) { return { v: id, t: "CM · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m3.7", "m3.8"].map(function (id) { return { v: id, t: "M3 · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m3.9", "m3.10"].map(function (id) { return { v: id, t: "M3 · " + lessonOf(id).title }; }));
+        COLL.gloss.filters = COLL.gloss.filters.concat(["m3.11"].map(function (id) { return { v: id, t: "M3 · " + lessonOf(id).title }; }));
 
         /* ============ CONTENT ENGINE (phase 2a): case bank, status discipline, references, validators. Data + checks only; lesson text untouched ============ */
         /* @engine-start */
@@ -12021,6 +12564,38 @@
             R("Diekelmann & Born", 2010, "review", "Sleep after learning helps stabilize and strengthen new memories, with different sleep stages proposed to serve different kinds of memory.", st("contested", "That sleep helps memory is well supported; which stage does what, and how large the benefit is, are debated.")),
             R("Simons et al.", 2016, "review", "Brain-training games improve performance on the trained tasks and closely related ones, but there is little evidence of gains in everyday thinking.", st("robust", "A broad, critical review; later meta-analyses reach similar conclusions on far transfer.")),
             R("Nielsen et al.", 2013, "observational", "Brain scans from many people showed some functions lean to one side, but no evidence that people are overall left-brained or right-brained.", st("robust", "A large imaging sample, consistent with decades of work on how the hemispheres share functions."))];
+          /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
+          REFS["m3.7"] = [
+            R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
+            R("Goldstein & Schwade", 2008, "experiment", "When mothers responded right after their infants’ babbles, the babbling quickly became more speech-like and matched the mothers’ sound patterns; untimed responses did not do this.", st("robust", "Fits earlier and later studies of timed social feedback on infant vocal development across labs.")),
+            R("Sundberg & Michael", 2001, "review", "Argued that Skinner’s verbal operants give clinicians a practical way to teach language to children with autism, starting with mands.", st("contested", "Widely used; support comes mostly from small single-case studies, with few comparisons against other approaches.")),
+            R("Chomsky", 1959, "review", "Review of Verbal Behavior: argued that Skinner’s terms lose their meaning outside the lab and cannot explain new sentences or children’s grammar.", st("contested", "Historically decisive; its fairness to Skinner is disputed by behaviour analysts."))];
+          REFS["m3.8"] = [
+            R("Chomsky", 1959, "review", "Argued that reinforcement and stimulus control, stretched to language, explain nothing; that language is generative; and that children reach rules their input does not show.", st("contested", "Its critique of reinforcement as a full account is widely accepted; its fairness and its nativist conclusions are disputed.")),
+            R("Brown & Hanlon", 1970, "observational", "Parents approved or corrected what their children said for truth, not for grammar: explicit correction of grammar was rare.", st("robust", "The scarcity of explicit correction holds up; how much subtler feedback, such as correct repetitions, helps is debated.")),
+            R("Crain & Nakayama", 1987, "experiment", "Young children forming yes-no questions from sentences with a “who” phrase made errors, but never the kind a simple word-order rule would produce.", st("robust", "Children’s structure-dependent questions are well replicated; whether this requires inborn knowledge is the contested part.")),
+            R("MacCorquodale", 1970, "review", "Replied to Chomsky’s review that it attacked a caricature: Skinner offered an interpretation using functional units, not stimulus and response chains.", st("contested", "Accepted by many behaviour analysts; most linguists and cognitive scientists hold that the core challenges went unanswered.")),
+            R("Pullum & Scholz", 2002, "review", "Searched records of real language and found some of the sentences the poverty of the stimulus argument says children never hear.", st("contested", "Disputed over whether such sentences are frequent enough in speech to children to teach the rule."))];
+          /* phase 3m-2: M3 lessons 9–10 · the Chomsky block */
+          REFS["m3.9"] = [
+            R("Kegl, Senghas & Coppola", 1999, "observational", "Described deaf children in new Managua schools creating Nicaraguan Sign Language among themselves, from sparse home gestures and without signing teachers.", st("robust", "The emergence is well documented over decades; how to explain it is the contested part.")),
+            R("Senghas, Kita & Özyürek", 2004, "observational", "Younger cohorts of Nicaraguan signers more often broke motion into separate, recombinable parts than older signers or hearing Spanish speakers’ gestures.", st("robust", "Fits later cohort studies; whether the biases behind it are language-specific is unresolved.")),
+            R("Curtiss", 1977, "case series", "Genie, isolated and abused until thirteen, learned many words but never fully mastered grammar.", st("contested", "A single case confounded by abuse and possible early disability; the research also raised serious ethical concerns."), true),
+            R("Mayberry", 1993, "observational", "Deaf adults who met sign language late as their first language used it less fluently than early learners, and than late learners with a spoken first language.", st("robust", "Replicated in later studies of late first-language learners, including brain-imaging work.")),
+            R("Hartshorne, Tenenbaum & Pinker", 2018, "observational", "In a very large online sample, grammar learning stayed strong into the teenage years and then declined gradually, not at a sharp cutoff.", st("robust", "The gradual shape fits earlier work; the sample is cross-sectional and self-selected, and when decline begins is debated."))];
+          REFS["m3.10"] = [
+            R("Kuhl, Tsao & Liu", 2003, "experiment", "Nine-month-olds from English-speaking homes kept Mandarin sound distinctions after sessions with a live speaker, but not after the same sessions on video or audio.", st("contested", "A single influential study; consistent with later work on social learning, though rarely repeated at scale."), true),
+            R("Saffran, Aslin & Newport", 1996, "experiment", "Eight-month-olds heard a stream of made-up syllables and afterwards told apart syllable runs that held together from ones that did not.", st("robust", "Replicated widely across ages, senses and species; how far it reaches grammar is contested.")),
+            R("Tomasello", 2003, "review", "Constructing a Language: a usage-based theory in which children learn language through intention-reading and pattern-finding, starting with item-based verb islands.", st("contested", "Well supported for early speech; whether it reaches full adult grammar is debated.")),
+            R("Evans & Levinson", 2009, "review", "The myth of language universals: across the world’s languages, nearly every proposed universal has exceptions.", st("contested", "Widely cited; defenders reply that universal grammar concerns abstract principles, not surface features.")),
+            R("Everett", 2005, "observational", "Reported that the Pirahã language lacks recursion, shaped by a culture focused on immediate experience.", st("contested", "Disputed by reanalysis of the same data (Nevins, Pesetsky & Rodrigues 2009); few outsiders speak the language."), true)];
+          /* phase 3m-3: M3 lesson 11 · the Chomsky block, final (Genesee 2009 and Tomasello in text) */
+          REFS["m3.11"] = [
+            R("Paradis, Genesee & Crago", 2011, "review", "Children learning two languages from early on reach milestones in the same broad range as children learning one; code-switching follows rules, and bilingualism does not cause language disorder.", st("robust", "Draws on many studies across language pairs; most come from a limited set of communities.")),
+            R("Bishop et al.", 2017, "review", "The CATALISE consensus named developmental language disorder and set criteria, noting it is common and often missed.", st("robust", "An international, multi-round expert consensus built on a broad evidence base; terms are still being adopted.")),
+            R("Paap & Greenberg", 2013, "experiment", "Across many executive function tasks and large samples, bilingual adults showed no consistent advantage over people who speak one language.", st("contested", "Defenders argue the tasks or groups miss where the advantage appears.")),
+            R("Lehtonen et al.", 2018, "meta-analysis", "Pooling many studies of adults, the bilingual advantage in executive function shrank to little or nothing once publication bias was weighed.", st("contested", "Strong pooled evidence against a broad advantage; whether it holds in some groups or tasks is debated.")),
+            R("Schreibman et al.", 2015, "review", "Described naturalistic developmental behavioural interventions: teaching autistic children inside play and daily routines, following the child’s lead.", st("contested", "Promising, with growing trials; comparisons with other approaches are few and outcomes vary."))];
           /* phase 3i-1: M5+ lessons 1–2 */
           REFS["m5c.1"] = [
             R("McCulloch & Pitts", 1943, "review", "Proposed the artificial neuron: a simplified unit that combines incoming signals, some counting more than others, and fires past a threshold.", st("robust", "Robust as the founding model of neural networks; as a description of real neurons it is a deliberate simplification.")),
