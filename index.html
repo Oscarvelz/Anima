@@ -6658,7 +6658,7 @@
                   br: [["Meet or call the client first, write only what you observed, and take the request to clinical supervision if it continues.", true], ["Write it as told, since the supervisor carries the responsibility.", false], ["Write it vaguely so it can’t be checked.", false]],
                   bw: "Making contact puts the person back behind the file, and accurate records are an ethical duty (ACA Code of Ethics). Authority does not take responsibility for a false record off the writer." }];
               var LO = CH.map(function () { return optOrder(LEV.length); }), BO = CH.map(function (c) { return optOrder(c.br.length); });
-              var fresh = function () { return { ci: 0, cd: false, p: [20, 20, 20], shown: false, anC: 40, anV: 40, v: 0, vt: {}, ch: 0, al: {}, ab: {}, done: {}, open: {} }; };
+              var fresh = function () { return { ci: 0, cd: false, p: [20, 20, 20], shown: false, anC: 40, anV: 40, v: 0, vt: {}, ch: 0, al: {}, ab: {}, done: {}, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false, sx = null;
@@ -6771,6 +6771,16 @@
                   ref("Haslam & Reicher", 2012, "theory and reanalysis", "Engaged followership: obedience rests on identifying with the cause.", tag(" x-ev--c", "Contested")) +
                   ref("Perry", 2013, "archival study", "Behind the Shock Machine: off-script experimenters and doubting participants.", tag(" x-ev--c", "Contested")) +
                   "</ol></section>", false, 5);
+                var bullets = function (title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; };
+                h += det("toolkit", "Teach it: stay yourself under pressure", "A client toolkit, in plain words · readable any time",
+                  '<p class="x-lens__p">Say it to a client like this: “Most harm in groups is done step by step by people following someone else\'s lead. Saying no is a skill you can practise.”</p>' +
+                  bullets("Notice the pull", ["small first steps: “just this once”", "someone else taking “responsibility”", "uniforms and titles", "“everyone's doing it”", "being far from the person hurt"]) +
+                  bullets("Steady yourself", ["pause", "ask: “would I do this if it were my choice alone?”", "picture the person affected up close", "remember: responsibility stays with you"]) +
+                  bullets("Say no well", ["say it early, short and calm: “I'm not doing that”", "ask a question that slows things: “Is this in writing? Who approved this?”", "find one ally — when even one other person refuses, most people stop", "step away from the situation"]) +
+                  bullets("For clients: gangs, co-defendants, using friends, family pressure", ["rehearse a refusal line", "plan your exits", "choose people who support the new you", "probation and program rules are real authority — comply with lawful rules while keeping your own voice and rights: ask, appeal, document"]) +
+                  bullets("For staff and counsellors", ["use your ethics code, supervision and documentation", "speak up early", "don't let “policy” replace judgment or a client's dignity"]) +
+                  bullets("Understanding the past", ["many clients did harm under orders or pressure", "understand the pull without erasing the harm", "responsibility and compassion can sit together"]) +
+                  '<p class="x-lens__take">Pressure explains, it doesn\'t excuse — notice the step, say no early, find one ally.</p>', true);
                 h += det("therapy", "Where this becomes a problem in therapy", "Authority systems, compliance and dissent · readable any time",
                   '<p class="x-lens__p"><b>Institutions are authority systems.</b> Prisons, mandated programs and hospitals run on orders. Staff can drift into harm step by step, each step “just policy”.</p>' +
                   '<p class="x-lens__p"><b>Orders that break ethics.</b> Falsifying notes, punitive sanctions, breaking confidentiality: “I was told to” does not make them right.</p>' +
@@ -6854,7 +6864,7 @@
                   br: [["Say plainly what you see, call one staff member by name to come, and separate the two people before it starts.", true], ["Keep watching so you don't escalate it or look foolish.", false], ["Let it play out and file a report about it afterwards.", false]],
                   bw: "Speaking and moving unblocks <b>act</b>, the step audience inhibition holds shut, and calling one colleague by name unblocks <b>take responsibility</b>. The “no snitching” silence is pluralistic ignorance: many people in that room privately want it stopped." }];
               var PO = optOrder(PR.length), BO = CH.map(function (c) { return optOrder(c.br.length); });
-              var fresh = function () { return { cd: false, pk: null, w: 1, added: false, m: {}, ch: 0, ab: {}, done: {}, open: {} }; };
+              var fresh = function () { return { cd: false, pk: null, w: 1, added: false, m: {}, ch: 0, ab: {}, done: {}, open: { toolkit: true } }; };
               var S = fresh(); Lab.focus = null;
               var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
               var A = null, raf = 0, vis = true, gone = false;
@@ -6978,6 +6988,17 @@
                   ref("Fischer et al.", 2011, "meta-analysis", "The bystander effect shrinks, and can reverse, when danger is clear.", tag("", "Robust")) +
                   ref("Philpot et al.", 2020, "CCTV observation", "In real street conflicts, someone intervened in about nine in ten cases.", tag("", "Robust")) +
                   "</ol></section>", false, 5);
+                var bullets = function (title, items) { return '<p class="x-lens__p"><b>' + title + "</b></p><ul class=\"x-lens__p\" style=\"margin:0 0 10px;padding-left:18px;display:grid;gap:4px\">" + items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>"; };
+                h += det("toolkit", "Teach it: be the one who acts", "A client toolkit, in plain words · readable any time",
+                  '<p class="x-lens__p">Say it to a client like this: “In a crowd, everyone waits for someone else. You can be the someone.”</p>' +
+                  bullets("Notice the freeze", ["everyone looking calm doesn't mean it's fine — they're all checking each other (pluralistic ignorance)", "the thought “someone else will” is the trap"]) +
+                  bullets("The five steps, as a skill", ["notice", "decide it's an emergency", "say “it's on me”", "know one thing to do", "do it"]) +
+                  bullets("Act well", ["say it out loud: “This is an emergency”", "point at one person and give a task: “You in the grey jacket, call emergency services”", "for an overdose: call, give naloxone if you have it, check breathing, recovery position, stay — Good Samaritan laws in most US states (including Florida) protect people who call for an overdose", "for a fight: don't jump in alone — get distance, get help, distract"]) +
+                  bullets("The four D's of safe intervening", ["Direct: speak up", "Distract: interrupt", "Delegate: get staff, police or others", "Delay: check on the person after"]) +
+                  bullets("In group or on a unit", ["if someone hints at suicide or harm, tell staff — it's not snitching, it's saving a life"]) +
+                  bullets("Grow it", ["carry naloxone", "learn basic first aid and CPR", "decide ahead of time “I'll act” — pre-commitment beats freezing"]) +
+                  bullets("If you didn't help before", ["the situation was built to freeze people", "grief and guilt are human", "let it shape what you do next"]) +
+                  '<p class="x-lens__take">Name the emergency, name the person, do one thing.</p>', true);
                 h += det("therapy", "Where this becomes a problem in therapy", "Group rooms, staff teams and overdose response · readable any time",
                   '<p class="x-lens__p"><b>Silence after a disclosure of risk.</b> In group therapy, a member hints at suicide and the room goes quiet — each person assuming the counsellor heard it and has it handled. Say it out loud, in the room.</p>' +
                   '<p class="x-lens__p"><b>Diffusion inside institutions.</b> Staff teams assume someone else filed the report, made the call, did the safety check. Mandated reporting and suicide risk belong to <b>you</b>, by name, until you have confirmed otherwise.</p>' +
