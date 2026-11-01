@@ -198,6 +198,8 @@
       .x-keep { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: var(--text); cursor: pointer; user-select: none; }
       .x-keep input { width: 20px; height: 20px; margin: 0; accent-color: var(--primary); flex: none; }
       .x-authalt { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px; margin-top: 4px; }
+      #reset-box > .tagline { margin-bottom: 14px; }
+      #reset-box > .x-link { display: block; margin: 8px auto 0; }
       .x-link { min-height: var(--tap); padding: 0 4px; font-size: 13px; color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
       .chip[data-state="live"] { color: var(--text); }
       .chip[data-state="syncing"] svg { animation: pulse 1.4s var(--ease) infinite; }
@@ -1589,6 +1591,18 @@
         </div>
         <label class="x-keep"><input type="checkbox" id="i-keep" checked /> <span>Keep me signed in</span></label>
         <button type="button" class="cta press" id="submit">Sign in</button>
+        <section id="reset-box" aria-label="Set a new password" hidden>
+          <p class="tagline">Set a new password for <strong id="reset-email"></strong>. It works in Numina and Psygma too.</p>
+          <div class="field field--pw">
+            <label for="i-npw">New password</label>
+            <div class="field__box">
+              <input id="i-npw" type="password" autocomplete="new-password" placeholder="At least 8 characters" />
+              <button type="button" class="eye press" id="eye2" aria-pressed="false" aria-label="Show password" aria-controls="i-npw"></button>
+            </div>
+          </div>
+          <button type="button" class="cta press" id="setpw">Save new password</button>
+          <button type="button" class="x-link press" id="skipreset">Not now</button>
+        </section>
         <p class="alert" id="alert" role="alert"></p>
         <div class="x-authalt">
           <button type="button" class="x-link press" id="forgot">Forgot password?</button>
@@ -1810,7 +1824,7 @@
           /* old on-device accounts: only read now, to carry a name over to the cloud account */
           accounts: function () { return Store.get(K.accounts, {}); },
           signUp: function (name, email, pw) {
-            return Cloud.raw("/auth/v1/signup", { method: "POST", body: { email: email, password: pw, data: name ? { name: name } : {} } }).then(function (res) {
+            return Cloud.raw("/auth/v1/signup?redirect_to=" + encodeURIComponent(location.origin + location.pathname), { method: "POST", body: { email: email, password: pw, data: name ? { name: name } : {} } }).then(function (res) {
               if (!res.ok) throw Cloud.err(res);
               if (!res.data || !res.data.access_token) { var c = new Error("Check your email to confirm, then sign in."); c.code = "confirm"; throw c; }
               return Auth.online(res.data, name);
@@ -1834,7 +1848,7 @@
             return Auth.start({ name: s.user.name, email: s.user.email, id: s.user.id, cloud: true });
           },
           recover: function (email) {
-            return Cloud.raw("/auth/v1/recover", { method: "POST", body: { email: email } }).then(function (res) { if (!res.ok) throw Cloud.err(res); });
+            return Cloud.raw("/auth/v1/recover?redirect_to=" + encodeURIComponent(location.origin + location.pathname), { method: "POST", body: { email: email } }).then(function (res) { if (!res.ok) throw Cloud.err(res); });
           },
           guest: function () { return Auth.start({ name: "", email: "", local: true }); },
           start: function (user) {
@@ -23389,6 +23403,92 @@
         });
         $("#guest").addEventListener("click", function () { Auth.guest(); enterApp(); });
 
+        /* ============ AUTH LINKS: email confirmation / password reset landing (#access_token=… or #error_description=…) ============ */
+        var AuthLink = (function () {
+          function loginParts() {
+            return [$("#tab-in").parentNode, $("#i-email").closest(".field"), $("#i-pw").closest(".field"), $("#i-keep").closest(".x-keep"), $("#submit"), $(".x-authalt"), $("#auth-form .auth__foot")];
+          }
+          function resetMode(on) {
+            loginParts().forEach(function (el) { if (el) el.hidden = on; });
+            $("#f-name").hidden = true;
+            $("#reset-box").hidden = !on;
+            if (!on) { setMode("in"); $("#i-npw").value = ""; }
+          }
+          function showReset(email) {
+            $("#login").hidden = false;
+            $("#app").hidden = true;
+            say("");
+            $("#reset-email").textContent = email || "your account";
+            resetMode(true);
+            try { $("#i-npw").focus(); } catch (y) {}
+          }
+          var saving = false;
+          function save() {
+            if (saving) return;
+            var pw = $("#i-npw").value, b = $("#setpw");
+            if (pw.length < 8) { say("Password needs at least 8 characters."); return; }
+            say("");
+            saving = true; b.disabled = true; b.textContent = "Saving…";
+            var done = function () { saving = false; b.disabled = false; b.textContent = "Save new password"; };
+            Cloud.req("/auth/v1/user", { method: "PUT", body: { password: pw } }).then(function (res) {
+              if (!res.ok) throw Cloud.err(res);
+              done(); resetMode(false); enterApp(); UI.toast("Password updated");
+            }).catch(function (x) { done(); say((x && x.message) || "Couldn’t save the new password."); });
+          }
+          $("#eye2").innerHTML = I.eye;
+          $("#eye2").addEventListener("click", function () {
+            var on = this.getAttribute("aria-pressed") !== "true";
+            this.setAttribute("aria-pressed", String(on));
+            this.setAttribute("aria-label", on ? "Hide password" : "Show password");
+            this.innerHTML = on ? I.eyeOff : I.eye;
+            $("#i-npw").type = on ? "text" : "password";
+          });
+          $("#setpw").addEventListener("click", function (e) { e.preventDefault(); save(); });
+          $("#i-npw").addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); save(); }
+          });
+          $("#skipreset").addEventListener("click", function () { say(""); resetMode(false); enterApp(); });
+          function handle() {
+            var h = location.hash || "";
+            if (h.indexOf("access_token=") < 0 && h.indexOf("error_description=") < 0) return false;
+            var q = {};
+            h.replace(/^#/, "").split("&").forEach(function (kv) {
+              if (!kv) return;
+              var i = kv.indexOf("="), k = i < 0 ? kv : kv.slice(0, i), v = i < 0 ? "" : kv.slice(i + 1);
+              try { q[decodeURIComponent(k.replace(/\+/g, " "))] = decodeURIComponent(v.replace(/\+/g, " ")); } catch (x) { q[k] = v; }
+            });
+            try { history.replaceState(history.state, "", location.pathname + location.search); } catch (x) {}
+            if (!q.access_token) {
+              showLogin();
+              say(String(q.error_description || "That link didn’t work").replace(/\.+\s*$/, "") + ". Enter your email and tap Forgot password for a new link.");
+              return true;
+            }
+            Cloud.take({ access_token: q.access_token, refresh_token: q.refresh_token, expires_in: +q.expires_in || 3600, user: {} });
+            showLogin();
+            say("Working…", true);
+            Cloud.raw("/auth/v1/user").then(function (res) {
+              if (!res.ok || !res.data) throw Cloud.err(res);
+              var u = res.data, md = u.user_metadata || {}, email = u.email || "";
+              var local = Auth.accounts()[email.toLowerCase()];
+              var name = md.name || (local && local.name) || email.split("@")[0];
+              Cloud.s.user = { id: u.id, email: email, name: name };
+              Cloud.save(Cloud.s);
+              Auth.start({ name: name, email: email, id: u.id, cloud: true });
+              if (q.type === "recovery") { showReset(email); return; }
+              say("");
+              enterApp();
+              UI.toast(q.type === "signup" ? "Email confirmed. You’re signed in" : "Signed in");
+            }).catch(function (x) {
+              if (window.console) console.error(x);
+              Cloud.save(null);
+              showLogin();
+              say((x && x.message) || "That link didn’t work. Enter your email and tap Forgot password for a new one.");
+            });
+            return true;
+          }
+          return { handle: handle };
+        })();
+
         /* ============ BOOT ============ */
         function showLogin() {
           $("#app").hidden = true;
@@ -23425,7 +23525,7 @@
         Themes.apply();
         try { Pwa.init(); } catch (e) { /* install support is optional */ }
         if (Auth.user && Auth.user.cloud && !Cloud.s) { Auth.user = null; Store.del(K.session); }
-        if (Auth.user) showApp(); else showLogin();
+        if (!AuthLink.handle()) { if (Auth.user) showApp(); else showLogin(); }
       })();
     </script>
 </body>
