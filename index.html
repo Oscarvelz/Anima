@@ -16881,6 +16881,195 @@
                 "Breaking mental set starts with defining the problem and listing what else could work before judging any option.")
             ]
           },
+          "m5.3": {
+            home: "In week one, a treatment team decided Darnell was “manipulative.” Six weeks later, every late arrival still proves it. Why do first judgments stick, and how can clinicians catch their own biases?",
+            keys: [["What is confirmation bias?", "The tendency to look for, notice and remember evidence that fits what we already believe, and to miss or explain away what doesn’t. Wason’s (1960) 2-4-6 task showed it; the effect is robust.", "A detective whose magnifying glass only shows clues that agree with him, and turns cloudy over anything that doesn’t."],
+              ["What is hindsight bias?", "The “I knew it all along” feeling: once we know an outcome, we think it was more predictable than it was (Fischhoff, 1975).", "A weather forecaster on Monday announcing “I totally predicted Sunday’s rain” while holding Saturday’s sunny forecast behind his back."],
+              ["What is the framing effect?", "Choices change when the same outcomes are described as gains or losses. In Tversky and Kahneman’s (1981) disease problem, “200 saved” and “400 die” are identical, yet people choose differently.", "Two identical glasses of juice, one labelled “70% full of hope,” the other “30% empty of doom,” and everyone fights for the first."],
+              ["What are premature closure and diagnostic overshadowing?", "Premature closure is settling on a diagnosis or explanation too early and stopping the search. Diagnostic overshadowing is putting new symptoms down to a known label, so other causes are missed.", "A clinician who slams a case file shut on day one and sits on it, while a sticky note saying “night shifts, two buses” flaps from underneath, trying to be read."],
+              ["What do Meehl (1954) and Grove et al. (2000) show about clinical versus actuarial judgment?", "Mechanical (statistical) prediction did as well as or better than clinicians’ intuitive judgment in most comparisons. The finding is robust.", "A plain little calculator in a cardigan quietly tying or beating a panel of famous experts at a prediction contest, then politely offering them a biscuit."]],
+            steps: [
+              { kind: "hook", title: "Darnell, late again", body: who("<b>Darnell</b>, 38, in an outpatient program, discussed at a weekly team meeting.") +
+                "<p>In week one, he argued about the attendance rule and asked to change group times. Someone said “manipulative”, and it went into the notes.</p>" +
+                "<p>For six weeks, every late arrival has been read the same way: “testing limits again.” Each one feels like more proof.</p>" +
+                "<p>Nobody has asked why he’s late. He works night shifts and rides two buses to get there.</p>" },
+              { kind: "predict", id: "m5.3:predict", title: "Your call first",
+                case: ["The team labelled Darnell “manipulative” in week one.",
+                  { t: "The meeting room has a whiteboard.", irrelevant: true },
+                  "For six weeks, each late arrival has been read as proof of that label.",
+                  "A new intern mentions, once, that he works night shifts and takes two buses.",
+                  { t: "Darnell wears a blue jacket.", irrelevant: true },
+                  "No one has been asked to argue the other side."],
+                q: "Shown that one fact, will the team most likely drop the “manipulative” label?",
+                options: ["Yes: one clear fact is enough to change a judgment", "No: they will most likely explain it away and keep the label", "They will swing to the opposite view at once"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. After six weeks of “confirming” evidence, one disconfirming fact tends to be explained away (“he could take an earlier bus”). That is <b>confirmation bias</b> plus <b>belief perseverance</b>: beliefs outlive the evidence that built them. Changing minds usually takes a deliberate step, such as asking someone to argue the opposite.",
+                hints: ["Ask how many times the team has already “confirmed” the label.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what people usually do with one fact that doesn’t fit."] },
+              { kind: "idea", lvl: "f", title: "Seeing what we expect", body: "<p>In M5 · Problem solving you met availability, representativeness and anchoring. Here are the biases that keep a judgment alive once it’s made.</p>" +
+                '<dl class="x-dossier"><div><dt>Confirmation bias</dt><dd>Wason (1960): told “2-4-6” fits a rule, people test 8-10-12, 20-22-24, always numbers that <b>fit</b> their guess, and rarely try one that could prove it wrong. The rule was just “any increasing numbers” ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Belief perseverance</dt><dd>Ross, Lepper and Hubbard (1975) gave people false feedback, then told them it was fake. Their beliefs about their ability <b>survived the debriefing</b> " + ev("r") + ".</dd></div>" +
+                "<div><dt>Hindsight bias</dt><dd>“I knew it all along.” Fischhoff (1975): people told an outcome rated it as more predictable than people who weren’t told " + ev("r") + ".</dd></div>" +
+                "<div><dt>Overconfidence</dt><dd>Our certainty runs ahead of our accuracy. Being <b>calibrated</b> means that when you’re 80% sure, you’re right about 80% of the time. Anima’s confidence ratings let you check yours.</dd></div></dl>" +
+                "<p><b>So:</b> a first impression collects support and resists correction, and it feels like knowledge the whole time.</p>" },
+              { kind: "idea", lvl: "p", title: "Frames, losses and base rates", body: '<dl class="x-dossier"><div><dt>Framing effect</dt><dd>Tversky and Kahneman (1981): 600 people face a disease. Told one program means “200 <b>saved</b>”, most pick it; told the same program means “400 <b>die</b>”, most pick the gamble instead. Same outcomes, different words ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Loss aversion</dt><dd>A loss feels bigger than an equal gain, roughly about twice as big in many studies. How big, and how general, is still argued " + ev("c") + ".</dd></div>" +
+                "<div><dt>Sunk cost</dt><dd>Sticking with something because of what’s already been spent: “we’ve put six weeks into this plan.” Past costs can’t be recovered and shouldn’t steer the next choice.</dd></div>" +
+                "<div><dt>Base-rate neglect</dt><dd>Ignoring how common something is overall, and judging only by the vivid case in front of you (a cousin of representativeness).</dd></div>" +
+                "<div><dt>Bias blind spot</dt><dd>Pronin (2002): people see biases far more easily in others than in themselves " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> how a choice is worded, what we’ve already spent, and what we think of ourselves all tilt judgment.</p>" },
+              { kind: "contrast", id: "m5.3:contrast", title: "Two groups, one outcome",
+                q: "Which group will rate the treatment more favourably?",
+                cases: [
+                  { label: "Group A", s: ["Reads the results of a year-long alcohol treatment program.", { t: "Reads it on paper in the morning.", irrelevant: true }, { t: "Told: “70% of clients stayed sober.”", diff: true }, "Same clients, same year, same numbers."] },
+                  { label: "Group B", s: ["Reads the results of a year-long alcohol treatment program.", { t: "Reads it on paper in the morning.", irrelevant: true }, { t: "Told: “30% of clients relapsed.”", diff: true }, "Same clients, same year, same numbers."] }
+                ],
+                answer: 0,
+                features: ["Paper or screen", "Whether the result is framed as staying sober or relapsing", "The time of day", "The clients"],
+                feature: 1,
+                why: "Only the wording differs. 70% sober and 30% relapsed are the same fact, but a gain frame (“stayed sober”) reads as success and a loss frame (“relapsed”) as failure. That is the framing effect (Tversky and Kahneman, 1981). Clients hear outcome numbers this way too, so say both halves.",
+                hints: ["Find the one sentence where the two groups part ways.",
+                  "The sentences that don’t decide it are dimmed. Do the arithmetic on what’s left.",
+                  "Step one, aloud: say whether 70% sober and 30% relapsed describe different results."] },
+              { kind: "idea", lvl: "m", title: "Bias in the clinic, and what helps", body: '<dl class="x-dossier"><div><dt>Anchoring on a first impression</dt><dd>The week-one label becomes the anchor every later fact is read against.</dd></div>' +
+                "<div><dt>Premature closure</dt><dd>Settling on an explanation and stopping the search: “manipulative” ends the question of why he’s late.</dd></div>" +
+                "<div><dt>Diagnostic overshadowing</dt><dd>New problems get put down to a known label or diagnosis, so other causes (pain, a medical illness, a work schedule) are missed.</dd></div>" +
+                "<div><dt>Consider the opposite</dt><dd>Lord, Lepper and Preston (1984): asking people to imagine evidence for the opposite conclusion reduced biased reasoning. <b>Moderately</b> effective " + ev("r") + ".</dd></div>" +
+                "<div><dt>Checklists and structured assessment</dt><dd>Ask the same questions of everyone (transport, work, childcare) before interpreting behaviour.</dd></div>" +
+                "<div><dt>Clinical versus actuarial</dt><dd>Meehl (1954), then Grove et al.’s (2000) meta-analysis: mechanical prediction was <b>equal or better</b> than clinicians’ judgment in most studies " + ev("r") + ".</dd></div>" +
+                "<div><dt>Clients have them too</dt><dd>Beck’s <b>cognitive distortions</b> in CBT, such as mind-reading, catastrophising and all-or-nothing thinking, are everyday cousins of these biases. A client who says “everyone at work hates me” is confirming a belief, just as the team is.</dd></div></dl>" +
+                "<p><b>So:</b> good intentions don’t remove bias; procedures that force a second look do.</p>" },
+              { kind: "example", lvl: "p", title: "Darnell, second look", body: who("<b>Darnell</b>’s team, after a supervisor asks them to argue the opposite.") +
+                '<dl class="x-dossier"><div><dt>Consider the opposite</dt><dd>“If he weren’t manipulative, what would we expect?” Late arrivals with a reason, and he’d keep coming anyway. He has, every week.</dd></div>' +
+                "<div><dt>Structured questions</dt><dd>They finally ask about work and travel: night shift ends at 7, two buses, the program starts at 8.</dd></div>" +
+                "<div><dt>Reframe</dt><dd>His week-one push to change group times was a scheduling problem, not a power play.</dd></div>" +
+                "<div><dt>Act</dt><dd>He moves to the 10 o’clock group. He hasn’t been late since.</dd></div></dl>" +
+                "<p>“We had him figured out,” the team lead says. “We just never checked.”</p>" +
+                '<p>Catch the biases in a counselor’s own intake week.</p><button type="button" class="x-lens__b press" data-scene="biasarcade">Open the Bias Arcade</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Not every bias finding holds up equally. Confirmation bias, framing and hindsight replicate well, but some neighbouring effects, especially priming-style findings, have failed to replicate, and the size of loss aversion is debated. Gigerenzer argues many “biases” are adaptive shortcuts that look like errors only in odd lab puzzles. And most studies use short written vignettes with nothing at stake, not real teams making real decisions over weeks.</p>' +
+                "<p><b>The counter.</b> The core biases appear outside the lab too, in medical diagnostic errors and in clinical notes, and Meehl’s finding has held for seventy years. The practical stance: assume you’re biased, as everyone is, and build in steps that check.</p>" +
+                "<p><b>Person-first.</b> Describe behaviour, not character: “arrived 20 minutes late, works nights”, not “manipulative client”.</p>" +
+                "<p>Background: M5 · Problem solving and heuristics. Ahead: M5 · How language develops.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Confirmation bias.</b> A detective’s magnifying glass shows only the clues that agree with him and turns cloudy over the rest.</p>" +
+                "<p><b>Hindsight bias.</b> On Monday the forecaster swears he predicted Sunday’s rain, with Saturday’s sunny forecast behind his back.</p>" +
+                "<p><b>Framing.</b> Two identical glasses of juice, “70% full of hope” and “30% empty of doom”, and everyone fights for the first.</p>" +
+                "<p><b>Premature closure.</b> A clinician sits on a shut case file while the “night shifts, two buses” note flaps underneath.</p>" +
+                "<p><b>Actuarial judgment.</b> A calculator in a cardigan ties the experts, then offers them a biscuit.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.3:teachback", title: "Teach it back", prompt: "Explain to a new colleague why Darnell’s team kept calling him “manipulative” for six weeks, and how they could have caught it: confirmation bias and Wason’s 2-4-6 task; belief perseverance and Ross, Lepper and Hubbard’s finding that beliefs survive debriefing; hindsight bias and Fischhoff; overconfidence and calibration; the framing effect in Tversky and Kahneman’s disease problem, and why “70% stayed sober” and “30% relapsed” are rated differently; loss aversion; sunk cost; base-rate neglect; Pronin’s bias blind spot; anchoring on a first impression, premature closure and diagnostic overshadowing in clinical work; consider-the-opposite (Lord, Lepper and Preston) and how well it works; checklists and structured assessment; Meehl and Grove’s evidence on actuarial versus clinical judgment; Beck’s cognitive distortions as the client’s side of the same story; and the critique that some bias findings replicate poorly, that Gigerenzer sees many as adaptive shortcuts, and that lab vignettes are not real decisions." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Confirmation bias " + ev("r") + ". Belief perseverance " + ev("r") + ". Hindsight bias " + ev("r") + ". Framing effect " + ev("r") + ". Size and reach of loss aversion " + ev("c") + ". Bias blind spot " + ev("r") + ". Consider-the-opposite, moderately effective " + ev("r") + ". Actuarial equal to or better than clinical prediction " + ev("r") + ". Biases as errors versus adaptive shortcuts " + ev("c") + ".</p>" +
+                "<p><b>So:</b> when a label explains everything about a client, ask what would prove it wrong, then go and check.</p>" },
+              Q("In Wason’s 2-4-6 task, what do most people do?",
+                ["Test sequences that could disprove their guess", "Test only sequences that fit their guess", "Refuse to guess at all", "Guess the rule on the first try"], 1,
+                "People seek confirming examples, so they rarely discover that the rule is simply “any increasing numbers.” That is confirmation bias."),
+              Q("People keep a belief even after learning the evidence for it was fake. What is this?",
+                ["Hindsight bias", "Belief perseverance", "Loss aversion", "Base-rate neglect"], 1,
+                "Ross, Lepper and Hubbard (1975) found beliefs survived full debriefing about false feedback."),
+              Q("Group A hears “70% stayed sober”, Group B hears “30% relapsed.” Group A rates the program higher. Why?",
+                ["The groups saw different data", "The framing effect: the same outcome worded as a gain or a loss", "Sunk cost", "The bias blind spot"], 1,
+                "The numbers are identical; only the frame differs (Tversky and Kahneman, 1981)."),
+              Q("What did Grove et al.’s (2000) meta-analysis find?",
+                ["Clinicians beat statistical formulas in most studies", "Mechanical prediction was equal to or better than clinical judgment in most studies", "The two never differed", "Only experienced clinicians beat formulas"], 1,
+                "Building on Meehl (1954), mechanical prediction tied or outperformed clinical judgment in most comparisons."),
+              Q("Darnell’s team has called him “manipulative” for six weeks. What is the best next step?",
+                ["Add more late arrivals to the notes as proof", "Ask the team to consider the opposite and use structured questions about work and travel", "Discharge him for lateness", "Wait for him to explain without being asked"], 1,
+                "Consider-the-opposite and structured assessment force a second look that confirmation bias and premature closure block.")
+            ]
+          },
+          "m5.4": {
+            home: "Mrs. Hernández’s two-year-old, raised in Spanish and English, says fewer English words than his cousin, and she’s been told to stop speaking Spanish at home. How does language develop, and is that advice right?",
+            keys: [["What is perceptual narrowing in speech?", "Young infants can tell apart the sounds of every language. By about 10 to 12 months they lose much of this for sounds their home languages don’t use (Werker and Tees, 1984). Robust.", "A baby wearing a United Nations badge who can hear every language’s sounds, then at 10 months politely hands back the badges for languages nobody at home speaks."],
+              ["What are the main milestones of early language?", "Cooing around 2 months, babbling around 6 months, first words around 12 months, a vocabulary spurt around 18 months, two-word telegraphic speech around 2 years. These are ranges, not deadlines.", "A baby climbing a staircase of toy blocks labelled coo, babble, word, spurt and “want cookie”, with some babies skipping happily up two at a time and others sitting on a step for a snack."],
+              ["Why is overregularization a good sign?", "Saying “goed” or “mouses” means the child has learned a rule (add -ed, add -s) and is applying it too widely. It shows rule learning, not copying.", "A toddler proudly announcing “I goed to the zoo and saw two mouses” while a grammar robot cheers because the mistake proves he’s learning rules."],
+              ["What does Nicaraguan Sign Language show?", "From the 1980s, deaf children brought together in Managua schools created a new sign language, and younger children made it richer each year. Children don’t just learn language; they can build it.", "Deaf schoolchildren in Managua inventing a brand-new sign language on the playground, with younger kids making it richer each year."],
+              ["Do bilingual toddlers have smaller vocabularies?", "Often fewer words in each language, but a similar total number of concepts across both (Pearson et al., 1993). Dropping the home language is not recommended.", "A toddler with two small lunchboxes, one Spanish and one English, whose cousin has one big lunchbox, and a referee weighing them to find the same amount of lunch."]],
+            steps: [
+              { kind: "hook", title: "Mrs. Hernández’s worry", body: who("<b>Mrs. Hernández</b>, at a family-support visit, with her son <b>Mateo</b>, 2.") +
+                "<p>Mateo hears Spanish from his mother and grandmother and English at daycare. His cousin, the same age, speaks only English and says many more English words.</p>" +
+                "<p>A relative told her: “Stop speaking Spanish at home, or he’ll fall behind.”</p>" +
+                "<p>She’s ready to do it, though Spanish is the language she sings to him in. Is the advice right?</p>" },
+              { kind: "predict", id: "m5.4:predict", title: "Your call first",
+                case: ["Mateo, 2, hears Spanish at home and English at daycare.",
+                  { t: "He likes trucks.", irrelevant: true },
+                  "He says fewer English words than his English-only cousin.",
+                  "He also says many Spanish words, some for things he has no English word for yet.",
+                  { t: "His daycare has a sandpit.", irrelevant: true },
+                  "His mother speaks Spanish fluently and English less well."],
+                q: "If Mrs. Hernández keeps speaking Spanish at home, will Mateo most likely fall behind in language?",
+                options: ["Yes: two languages will overload him", "No: counting both languages, he is most likely on track, and English will grow with exposure", "Yes, unless she switches to English at once"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. Bilingual toddlers often know fewer words <b>in each</b> language but a similar number of <b>concepts</b> across both (Pearson et al., 1993). Count both. And switching to her weaker language would give him less rich input, not more. Professional guidance is to keep the home language.",
+                hints: ["Ask whether anyone has counted his Spanish words.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what a fair comparison of his vocabulary would include."] },
+              { kind: "idea", lvl: "f", title: "Building blocks and milestones", body: '<dl class="x-dossier"><div><dt>Phonemes</dt><dd>The smallest sounds that change meaning: /p/ and /b/ in “pat” and “bat”.</dd></div>' +
+                "<div><dt>Morphemes</dt><dd>The smallest units of meaning: “dogs” is “dog” + “-s”.</dd></div>" +
+                "<div><dt>Syntax, semantics, pragmatics</dt><dd>Rules for word order; meaning; and use in context, such as knowing “can you pass the salt?” is a request.</dd></div>" +
+                "<div><dt>Milestones</dt><dd>Cooing ~2 months; babbling ~6 months; first words ~12 months; a <b>vocabulary spurt</b> ~18 months; two-word <b>telegraphic speech</b> (“more juice”) ~2 years " + ev("r") + ".</dd></div>" +
+                "<div><dt>Overregularization</dt><dd>“Goed”, “mouses”: a rule applied too widely, which shows the child is learning rules, not just copying.</dd></div></dl>" +
+                "<p><b>So:</b> language is built in layers, and the timetable is a range that varies widely between healthy children.</p>" },
+              { kind: "idea", lvl: "p", title: "Citizens of the world, and how they learn", body: '<dl class="x-dossier"><div><dt>Perceptual narrowing</dt><dd>Werker and Tees (1984): 6- to 8-month-old English-learning infants told apart Hindi and Salish sounds that English adults can’t; by 10 to 12 months most could not. Infants start as “citizens of the world” and tune in to the languages around them ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Skinner</dt><dd>Language is learned by reinforcement and imitation. It can’t easily explain “goed”, which no adult says.</dd></div>" +
+                "<div><dt>Chomsky</dt><dd>A <b>universal grammar</b> and a language acquisition device; children hear too little to learn grammar from input alone, the <b>poverty of the stimulus</b> " + ev("c") + ". Covered in depth in M3 · lessons 7 to 11.</dd></div>" +
+                "<div><dt>Interactionist, usage-based</dt><dd>Tomasello: children build grammar from patterns in real talk, using social skills such as joint attention " + ev("c") + ".</dd></div>" +
+                "<div><dt>Linguistic relativity</dt><dd>The strong Whorf claim, that language determines what you can think, is " + ev("d") + ". Weak effects, such as on colour naming or spatial frames (left/right versus north/south), are modest and argued over " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> children are tuned by their input, but how much grammar comes built in is still unresolved.</p>" },
+              { kind: "contrast", id: "m5.4:contrast", title: "Two toddlers, one count",
+                q: "Tested in English only, which toddler is more likely to be wrongly flagged as delayed?",
+                cases: [
+                  { label: "Toddler A", s: ["Two years old, healthy, talked to and read to every day.", { t: "Has a red tricycle.", irrelevant: true }, { t: "Hears only English.", diff: true }, "Same age, same amount of talk, same family warmth."] },
+                  { label: "Toddler B", s: ["Two years old, healthy, talked to and read to every day.", { t: "Has a red tricycle.", irrelevant: true }, { t: "Hears Spanish at home and English at daycare.", diff: true }, "Same age, same amount of talk, same family warmth."] }
+                ],
+                answer: 1,
+                features: ["The tricycle", "Hearing one language or two", "Daily reading", "Age"],
+                feature: 1,
+                why: "Only the number of languages differs. Toddler B may know fewer English words than A, so an English-only test can flag a delay. Counted across both languages, total and conceptual vocabularies are similar (Pearson, Fernández and Oller, 1993). Assess in both languages, or you mistake bilingualism for delay.",
+                hints: ["Find the one sentence where the two toddlers part ways.",
+                  "The sentences that don’t decide it are dimmed. Ask what you’d count for Toddler B.",
+                  "Step one, aloud: say whether Spanish words count as words."] },
+              { kind: "idea", lvl: "m", title: "Sensitive periods, bilingualism and the clinic", body: '<dl class="x-dossier"><div><dt>Genie</dt><dd>Isolated until 13, she learned words but never full grammar. A single case, confounded by abuse and possible early disability, and ethically troubled; it can’t prove a critical period alone.</dd></div>' +
+                "<div><dt>Second-language age effects</dt><dd>Johnson and Newport (1989): immigrants who arrived in the US earlier in childhood reached higher English grammar scores. A <b>sensitive period</b>, a gradual decline rather than a cliff " + ev("r") + ".</dd></div>" +
+                "<div><dt>Nicaraguan Sign Language</dt><dd>In the 1980s, new schools in Managua brought deaf children together for the first time. With no signing teachers, they created a language, and younger children made it more structured each year " + ev("r") + ".</dd></div>" +
+                "<div><dt>Bilingual children</dt><dd>Fewer words per language, similar total concepts. Dropping the home language is <b>not recommended</b>: it can cost family closeness and richer input. The “bilingual advantage” in executive function is " + ev("c") + "; Paap and colleagues (2015) found little consistent evidence.</dd></div>" +
+                "<div><dt>In assessment and therapy</dt><dd>Assess in <b>both</b> languages before calling a delay. Use trained interpreters, not family members. Language is identity: clients may feel and remember differently in each, and <b>code-switching</b> in session can mark emotion or closeness. Follow their lead.</dd></div></dl>" +
+                "<p><b>So:</b> earlier and richer input helps, and two languages are an asset to protect, not a problem to fix.</p>" },
+              { kind: "example", lvl: "p", title: "Mateo, counted twice", body: who("<b>Mrs. Hernández</b> and a bilingual speech-language assessor.") +
+                '<dl class="x-dossier"><div><dt>Count both</dt><dd>English: about 40 words. Spanish: about 60. A few overlap (“perro”, “dog”). Total concepts: on track for his age.</dd></div>' +
+                "<div><dt>Look for rules</dt><dd>He says “I goed” in English and “yo sabo” for “yo sé” in Spanish: overregularization in both languages, a good sign.</dd></div>" +
+                "<div><dt>Advice</dt><dd>Keep Spanish at home, where her talk is richest. Keep reading and singing. English will grow at daycare.</dd></div>" +
+                "<div><dt>Follow-up</dt><dd>A check in six months, in both languages, with an interpreter for grandma.</dd></div></dl>" +
+                "<p>“So I don’t have to stop singing to him,” she says. “Good. I wasn’t going to.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Milestones are ranges, not deadlines. Charts built mostly from English-speaking, middle-class children can make healthy bilingual or late-talking children look delayed. And the big theoretical question is open: Chomsky’s view that grammar is largely innate and the usage-based view that it’s built from experience both explain some findings well, and the poverty-of-the-stimulus argument is still disputed. Evidence for a critical period rests partly on rare, confounded cases like Genie.</p>' +
+                "<p><b>The counter.</b> The practical findings don’t wait on the theory: perceptual narrowing, earlier-is-better for second languages, and similar total vocabularies in bilingual children are well supported, and Nicaraguan Sign Language shows children’s power to build language whichever theory wins.</p>" +
+                "<p><b>Person-first.</b> Write “a bilingual child” or “a child learning two languages”, not “a language-delayed child”, unless a delay has been assessed in both languages.</p>" +
+                "<p>Background: M3 · The Chomsky block; M5 · Cognitive biases. Ahead: the next M5 lesson.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Perceptual narrowing.</b> A baby with a United Nations badge hears every language’s sounds, then at 10 months hands back the badges nobody at home uses.</p>" +
+                "<p><b>Milestones.</b> A staircase of blocks, coo to “want cookie”, with some babies skipping up and others stopping for a snack.</p>" +
+                "<p><b>Overregularization.</b> “I goed to the zoo and saw two mouses!” and a grammar robot cheers.</p>" +
+                "<p><b>Nicaraguan Sign Language.</b> Deaf children in Managua invent a language on the playground, and the little ones make it richer every year.</p>" +
+                "<p><b>Bilingual vocabulary.</b> Two small lunchboxes against one big one, and the referee’s scale reads the same.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.4:teachback", title: "Teach it back", prompt: "Explain to Mrs. Hernández and a new colleague why she shouldn’t stop speaking Spanish to Mateo, and how language develops: phonemes, morphemes, syntax, semantics and pragmatics; cooing, babbling, first words, the vocabulary spurt and telegraphic speech as ranges, not deadlines; overregularization as a sign of rule learning; perceptual narrowing in Werker and Tees; Skinner’s reinforcement account, Chomsky’s universal grammar and the contested poverty of the stimulus, and Tomasello’s usage-based view; Genie and its ethical problems and confounds; Johnson and Newport’s age effects in second-language learning; Nicaraguan Sign Language; Pearson and colleagues on bilingual vocabulary; why dropping the home language is not recommended; the contested bilingual advantage (Paap); strong versus weak linguistic relativity; assessing in both languages, using interpreters, language as identity and code-switching in therapy; and the critique that milestones are ranges and the Chomsky versus usage-based debate is unresolved." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Milestone sequence " + ev("r") + ". Perceptual narrowing " + ev("r") + ". Universal grammar and poverty of the stimulus " + ev("c") + ". Usage-based account " + ev("c") + ". Sensitive period for second-language grammar " + ev("r") + ". Similar total vocabulary in bilingual children " + ev("r") + ". Bilingual executive-function advantage " + ev("c") + ". Strong Whorf hypothesis " + ev("d") + "; weak relativity effects " + ev("c") + ".</p>" +
+                "<p><b>So:</b> before calling a bilingual child delayed, count both languages, and never ask a family to give up the language they love in.</p>" },
+              Q("By about 10 to 12 months, infants lose much of their ability to tell apart sounds their home languages don’t use. What is this?",
+                ["Overregularization", "Perceptual narrowing", "Telegraphic speech", "Code-switching"], 1,
+                "Werker and Tees (1984) showed infants start able to discriminate nearly all phonemes, then tune in to their own languages."),
+              Q("A toddler says “I goed to the zoo.” What does this show?",
+                ["A language delay", "Imitation of adult speech", "Learning a grammar rule and applying it too widely", "Confusion from hearing two languages"], 2,
+                "Overregularization shows rule learning; adults don’t say “goed”, so it can’t be simple copying."),
+              Q("Compared with monolingual toddlers, bilingual toddlers typically have:",
+                ["Larger vocabularies in each language", "Fewer words per language but similar total concepts across both", "Fewer total words that never catch up", "No words until age 3"], 1,
+                "Pearson, Fernández and Oller (1993) found similar conceptual vocabulary when both languages were counted."),
+              Q("What does Nicaraguan Sign Language show?",
+                ["Deaf children cannot develop language without teachers", "Children can create a new language, and younger learners make it more structured", "Language only develops through reinforcement", "Sign languages are simplified gesture"], 1,
+                "Deaf children in 1980s Managua schools built a language among themselves, and each younger cohort enriched it."),
+              Q("Mrs. Hernández has been told to stop speaking Spanish to her son. What is the best advice?",
+                ["Switch to English at home right away", "Keep Spanish at home, and have any assessment done in both languages", "Stop all talk until a speech assessment", "Use only sign language"], 1,
+                "Dropping the home language isn’t recommended; a fair assessment counts both languages.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -18445,6 +18634,27 @@
           G("m5.2", "Anchoring", "Anclaje", "A first number pulls later estimates.", "The bias for estimates to stay close to an initial value, even an irrelevant or random one."),
           G("m5.2", "Recognition heuristic", "Heurística de reconocimiento", "Pick the option you recognise.", "Gigerenzer’s fast-and-frugal rule: if one option is recognised and the other not, infer the recognised one scores higher."),
           G("m5.2", "Problem-solving therapy", "Terapia de solución de problemas", "Define, brainstorm, evaluate, act, review.", "A structured therapy (D’Zurilla and Nezu) teaching stepwise problem solving; well supported for depression."),
+          G("m5.3", "Belief perseverance", "Perseverancia de creencias", "Beliefs outlive the evidence for them.", "The persistence of a belief after the evidence that formed it has been discredited (Ross, Lepper and Hubbard, 1975)."),
+          G("m5.3", "Hindsight bias", "Sesgo retrospectivo", "“I knew it all along.”", "The tendency, after learning an outcome, to judge it as having been more predictable than it was (Fischhoff, 1975)."),
+          G("m5.3", "Overconfidence", "Exceso de confianza", "Being surer than you are right.", "The bias for subjective confidence in judgments to exceed their actual accuracy."),
+          G("m5.3", "Calibration", "Calibración", "Confidence that matches accuracy.", "The match between how confident a person is and how often they are right; 80% confidence should mean about 80% correct."),
+          G("m5.3", "Loss aversion", "Aversión a la pérdida", "Losses hurt more than equal gains please.", "The tendency to weigh losses more heavily than gains of the same size; its size and generality are debated."),
+          G("m5.3", "Sunk cost fallacy", "Falacia del costo hundido", "Sticking with it because of what’s spent.", "Continuing a course of action because of past, unrecoverable investment rather than future costs and benefits."),
+          G("m5.3", "Base-rate neglect", "Negligencia de la tasa base", "Ignoring how common something is.", "Underweighting the overall frequency of an event or category in favour of specific, vivid case information."),
+          G("m5.3", "Bias blind spot", "Punto ciego del sesgo", "Seeing bias in others, not yourself.", "The tendency to recognise cognitive biases in other people’s judgments more than in one’s own (Pronin, 2002)."),
+          G("m5.3", "Premature closure", "Cierre prematuro", "Deciding too early and stopping the search.", "A diagnostic error in which a clinician accepts an explanation before it is verified and stops considering alternatives."),
+          G("m5.3", "Consider-the-opposite", "Considerar lo opuesto", "Ask what would prove you wrong.", "A debiasing strategy of imagining evidence for the opposite conclusion; moderately effective (Lord, Lepper and Preston, 1984)."),
+          G("m5.3", "Cognitive distortions", "Distorsiones cognitivas", "Habitual thinking errors.", "In Beck’s cognitive therapy, biased patterns such as catastrophising, mind-reading and all-or-nothing thinking that maintain distress."),
+          G("m5.4", "Phoneme", "Fonema", "The smallest sound that changes meaning.", "A minimal unit of speech sound that distinguishes words in a language, such as /p/ and /b/ in “pat” and “bat”."),
+          G("m5.4", "Morpheme", "Morfema", "The smallest unit of meaning.", "The smallest meaningful unit of language, either a word (“dog”) or a part of one (the plural “-s”)."),
+          G("m5.4", "Syntax", "Sintaxis", "Rules for putting words in order.", "The rules of a language for combining words into phrases and sentences."),
+          G("m5.4", "Semantics", "Semántica", "The meaning of words and sentences.", "The study and system of meaning in language, from word meanings to sentence meanings."),
+          G("m5.4", "Pragmatics", "Pragmática", "Using language in context.", "The social rules for using language appropriately, such as turn-taking and understanding indirect requests."),
+          G("m5.4", "Babbling", "Balbuceo", "Repeated syllables like “bababa”.", "A stage beginning around 6 months in which infants produce consonant-vowel syllables, later shaped toward the sounds of their home languages."),
+          G("m5.4", "Vocabulary spurt", "Explosión de vocabulario", "A sudden burst of new words.", "A rapid increase in word learning often seen around 18 months, though its timing and suddenness vary between children."),
+          G("m5.4", "Telegraphic speech", "Habla telegráfica", "Two-word sentences like “more juice”.", "Early speech around age 2 made of content words with function words and endings left out."),
+          G("m5.4", "Perceptual narrowing", "Estrechamiento perceptivo", "Babies tune in to their home languages.", "The decline, by about 10–12 months, in infants’ ability to discriminate speech sounds not used in their native languages (Werker and Tees, 1984)."),
+          G("m5.4", "Linguistic relativity", "Relatividad lingüística", "Language may shape thought a little.", "The Sapir–Whorf idea that language influences thought; the strong, determining version is rejected and weak effects are modest and debated."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -19011,6 +19221,18 @@
             R("Tversky & Kahneman", 1974, "review", "Judgment under Uncertainty: described availability, representativeness and anchoring as heuristics that lead to systematic biases.", st("robust", "The core effects replicate; how to interpret them is debated.")),
             R("Goldstein & Gigerenzer", 2002, "experiment", "People who recognised only one of two cities often inferred it was larger, and this recognition heuristic could beat fuller knowledge.", st("contested", "How often people actually use recognition alone is disputed.")),
             R("Cuijpers et al.", 2018, "meta-analysis", "Problem-solving therapy reduced depression in adults compared with control conditions, with effects similar to other psychotherapies.", st("robust", "Consistent across meta-analyses; study quality varies."))];
+          REFS["m5.3"] = [
+            R("Wason", 1960, "experiment", "In the 2-4-6 task, people tested mostly sequences that fit their hypothesis and rarely ones that could disconfirm it, so many failed to find the simple rule.", st("robust", "Confirmation-seeking replicates widely; whether it reflects bias or a sensible test strategy is debated.")),
+            R("Ross, Lepper & Hubbard", 1975, "experiment", "After false feedback on a task, people kept their beliefs about their ability even after being told the feedback was fake.", st("robust", "Belief perseverance after debriefing replicates across tasks.")),
+            R("Tversky & Kahneman", 1981, "experiment", "In the disease problem, most chose the sure option when outcomes were framed as lives saved and the gamble when the same outcomes were framed as deaths.", st("robust", "Framing effects replicate, including in large multi-lab projects; size varies with wording.")),
+            R("Pronin, Lin & Ross", 2002, "experiment", "People rated themselves as less susceptible to a range of biases than the average person: a bias blind spot.", st("robust", "Replicated; linked to trusting one’s own introspection.")),
+            R("Grove, Zald, Lebow, Snitz & Nelson", 2000, "meta-analysis", "Across 136 studies, mechanical prediction was about as accurate as or more accurate than clinical prediction in most comparisons.", st("robust", "Extends Meehl (1954); consistent with later meta-analyses."))];
+          REFS["m5.4"] = [
+            R("Werker & Tees", 1984, "experiment", "English-learning infants discriminated Hindi and Salish speech contrasts at 6–8 months, but most no longer did by 10–12 months.", st("robust", "Perceptual narrowing replicates across languages and methods.")),
+            R("Johnson & Newport", 1989, "observational", "Among Chinese and Korean immigrants to the US, earlier arrival predicted better English grammar, with the link strongest for arrival before puberty.", st("robust", "Age-of-acquisition effects replicate; whether there is a sharp cut-off is debated.")),
+            R("Pearson, Fernández & Oller", 1993, "observational", "Bilingual toddlers knew fewer words in each language than monolinguals, but similar numbers of words and concepts across both languages.", st("robust", "Fits later studies of total and conceptual vocabulary in bilingual children.")),
+            R("Senghas, Kita & Özyürek", 2004, "observational", "Younger cohorts of Nicaraguan signers used more segmented, rule-like structure than older signers, showing the language growing richer with each cohort.", st("robust", "Well documented; how to explain it is debated.")),
+            R("Paap, Johnson & Sawi", 2015, "review", "Argued that bilingual advantages in executive function either do not exist or appear only in narrow, unreplicated circumstances.", st("contested", "Other reviews find small effects; publication bias is a central issue."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
