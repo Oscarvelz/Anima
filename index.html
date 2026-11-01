@@ -18180,6 +18180,191 @@
                 "Interoceptive exposure and CBT for panic work well; avoidance keeps the belief alive.")
             ]
           },
+          "m7.5": {
+            home: "Yolanda, 45, works double shifts and cares for her mother. She has headaches, can’t sleep, and catches a cold every month. “Stress is just in my head,” she says. Is it?",
+            keys: [["What is Selye’s General Adaptation Syndrome?", "Hans Selye (1936) found the same body response to many different strains and borrowed the engineering word “stress” for it. Three stages: alarm, resistance, and, if the strain goes on, exhaustion. It built on Walter Cannon’s fight-or-flight.", "A three-act play starring a kind lab rat: Act I it rings an alarm bell, Act II it lifts weights heroically, Act III it collapses into a hammock."],
+              ["Why does acute stress help but chronic stress harm?", "The HPA axis runs from the brain (hypothalamus) to the pituitary to the adrenal glands, which release cortisol. In short bursts it sharpens and fuels us; switched on for weeks it wears the body down, which McEwen (1998) called allostatic load.", "A cortisol fire alarm that is brilliant for five minutes, but rings all month until its batteries are flat."],
+              ["What did Cohen’s cold-virus study find?", "Cohen and colleagues (1991) dripped cold viruses into volunteers’ noses. The more stressed people were, the more likely they were to catch a cold. Kiecolt-Glaser (1995) found wounds healed more slowly in stressed caregivers.", "A sneeze-army of cold viruses that only gets through the castle gate when the guards are stressed and sleepy."],
+              ["What is the transactional model of stress?", "Lazarus and Folkman (1984): stress depends on appraisal. Primary appraisal asks “Is this a threat or a challenge?”; secondary appraisal asks “Do I have what it takes?” Stress is the mismatch.", "A bouncer at the brain’s door with a clipboard asking every event two questions: “Danger or dare?” and “Can we handle you?”"],
+              ["Which coping works best?", "It depends on control. Problem-focused coping changes the situation; emotion-focused coping changes how we feel about it. Matching the strategy to how changeable the stressor is, called goodness-of-fit, works best; avoidance and substance use tend to backfire.", "Two toolboxes, “Fix it” and “Feel it”, under a sign: “Use Fix-it when you can change it, Feel-it when you can’t.”"]],
+            steps: [
+              { kind: "hook", title: "Yolanda’s monthly cold", body: who("<b>Ms. Okafor</b>, a counselor at a community clinic, meeting Yolanda for the first time.") +
+                "<p>Yolanda, 45, spent twenty years as a correctional officer. She now works double shifts in security and, at night, cares for her mother after a stroke.</p>" +
+                "<p>“I get headaches most days. I lie awake till three. And every month I catch another cold.”</p>" +
+                "<p>Then she shrugs. “But stress is just in your head, right? I should be tougher.”</p>" },
+              { kind: "predict", id: "m7.5:predict", title: "Your call first",
+                case: ["Yolanda works double shifts.",
+                  { t: "She drives a blue car.", irrelevant: true },
+                  "She cares for her mother most nights.",
+                  "She sleeps about four hours.",
+                  { t: "She prefers tea to coffee.", irrelevant: true },
+                  "She has headaches and a new cold almost every month."],
+                q: "Is Yolanda’s illness “just in her head”?",
+                options: ["Yes: stress is a feeling, and colds are caused only by viruses", "No: long-running stress changes the body, including how well it fights infection", "No: stress itself is a virus"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. The virus causes the cold, but months of strain, short sleep and stress hormones leave her body less able to fight it off. Her stress starts in how she reads her life and ends in her immune system. Mind and body are one loop.",
+                hints: ["Ask what months of short sleep and constant pressure might do to the body.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left as one story.",
+                  "Step one, aloud: say what a virus needs to make someone sick, besides being there."] },
+              { kind: "idea", lvl: "f", title: "Where the word came from", body: '<dl class="x-dossier"><div><dt>History card: Cannon</dt><dd>Walter Cannon, in the early 1900s, described <b>fight-or-flight</b>: faced with danger, the body speeds the heart, sends blood to the muscles and readies us to act.</dd></div>' +
+                "<div><dt>History card: Selye</dt><dd>Hans Selye (1936) noticed his lab rats showed the <b>same response</b> to cold, injury, toxins or fatigue. He borrowed the engineering word <b>“stress”</b>, the strain on a material under load, and described the <b>General Adaptation Syndrome</b>: <b>alarm</b> (the body mobilizes), <b>resistance</b> (it copes at a high cost), and <b>exhaustion</b> (resources run out and illness follows) " + ev("c") + ".</dd></div>" +
+                "<div><dt>Stressors: life events</dt><dd>Holmes and Rahe (1967) scored big life changes, from a death in the family to a move or a new job, and linked high totals to later illness. Critics note that the scale mixes good and bad events, ignores what an event means to the person, and leans on memory " + ev("c") + ".</dd></div>" +
+                "<div><dt>Stressors: daily hassles</dt><dd>Kanner, Lazarus and colleagues (1981) found that small daily hassles, such as traffic, arguments or bills, predicted health <b>as well as or better than</b> major events. Yolanda’s life is built from them.</dd></div></dl>" +
+                "<p><b>So:</b> stress began as a body response to strain, and the strains that matter most are often small and daily.</p>" },
+              { kind: "idea", lvl: "p", title: "From brain to body", body: '<dl class="x-dossier"><div><dt>The HPA axis</dt><dd>In plain words: the brain’s <b>hypothalamus</b> signals the <b>pituitary</b> gland, which signals the <b>adrenal glands</b> above the kidneys to release <b>cortisol</b>. Cortisol releases energy and dampens some immune activity so we can deal with the threat. Background: M2 · Nervous & endocrine systems, stress.</dd></div>' +
+                "<div><dt>Acute helps, chronic harms</dt><dd>A short burst sharpens attention and fuels effort. Switched on for weeks, it disturbs sleep, raises blood pressure and weakens immune defences " + ev("r") + ".</dd></div>" +
+                "<div><dt>Allostatic load</dt><dd>McEwen (1998): the body constantly adjusts to demands, called allostasis. When the adjusting never stops, the cost builds up, as <b>wear and tear</b> on the heart, metabolism and immune system.</dd></div>" +
+                "<div><dt>Psychoneuroimmunology</dt><dd>The study of how mind, nerves and immunity talk. Cohen and colleagues (1991) gave volunteers cold viruses; the <b>more stressed</b> people were, the <b>more likely</b> they were to catch a cold " + ev("r") + ". Kiecolt-Glaser and colleagues (1995) found small wounds healed <b>more slowly</b> in people caring for a relative with dementia.</dd></div>" +
+                "<div><dt>Tend-and-befriend</dt><dd>Taylor and colleagues (2000) proposed that under stress people, perhaps women especially, reach out to protect and connect, not only fight or flee. The reaching-out is well seen; the sex-difference claim is contested " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> a stressed mind changes hormones, and hormones change how well the body heals and defends itself.</p>" },
+              { kind: "contrast", id: "m7.5:contrast", title: "Same virus, one difference",
+                q: "Two people are exposed to the same cold virus. Who is more likely to get sick?",
+                cases: [
+                  { label: "Person A", s: ["Exposed to the same cold virus.", { t: "Lives in a city.", irrelevant: true }, { t: "Months of ongoing stress at work and home.", diff: true }, "Same age; same general health."] },
+                  { label: "Person B", s: ["Exposed to the same cold virus.", { t: "Lives in a city.", irrelevant: true }, { t: "Low ongoing stress.", diff: true }, "Same age; same general health."] }
+                ],
+                answer: 0,
+                features: ["Where they live", "Their level of chronic stress", "The virus", "Their age"],
+                feature: 1,
+                why: "Only chronic stress differs. Same virus, same health, yet the person under months of strain is more likely to fall ill. That is what Cohen’s cold-virus studies found.",
+                hints: ["Find the one sentence where the two people part ways.",
+                  "The sentences that don’t decide it are dimmed. The virus is the same; ask what differs about the host.",
+                  "Step one, aloud: say how each person’s last few months have been."] },
+              { kind: "idea", lvl: "m", title: "Appraisal and coping", body: '<dl class="x-dossier"><div><dt>The transactional model</dt><dd>Lazarus and Folkman (1984): stress is not in the event or the person alone but in the <b>transaction</b>. <b>Primary appraisal</b>: is this harmful, a threat or a challenge? <b>Secondary appraisal</b>: what resources do I have to deal with it? Appraisal is covered more fully in M7 · What is an emotion? The census.</dd></div>' +
+                "<div><dt>Two kinds of coping</dt><dd><b>Problem-focused</b> coping changes the situation: making a plan, asking for help, changing shifts. <b>Emotion-focused</b> coping changes how we feel: reframing, talking, relaxing, accepting. Neither is better on its own; <b>goodness-of-fit</b> says to match the strategy to how <b>controllable</b> the stressor is " + ev("c") + ".</dd></div>" +
+                "<div><dt>Avoidance and substances</dt><dd>Avoidance, such as not thinking about it, or drinking to unwind, brings quick relief and longer-term cost. Drinking to cope predicts later alcohol problems. Ahead: M7 · Craving and the motivation to use.</dd></div>" +
+                "<div><dt>Stress mindset</dt><dd>Crum and colleagues (2013) reported that people taught a <b>“stress-is-enhancing”</b> view reacted better to stress. Findings are mixed and effects may be small " + ev("c") + ".</dd></div>" +
+                "<div><dt>Social support</dt><dd>Feeling that others will help is one of the most reliable <b>buffers</b> against the health effects of stress " + ev("r") + ".</dd></div>" +
+                "<div><dt>Minority and racism-related stress</dt><dd>Prejudice, discrimination and having to stay on guard are chronic stressors in their own right, adding load for people from minority groups, on top of ordinary hassles. Early adversity can also set the stress system on high alert; see M6 · ACEs: dose, response, and limits.</dd></div>" +
+                "<div><dt>Burnout in helpers</dt><dd>Maslach described <b>burnout</b>: exhaustion, cynicism or detachment, and a sense of not achieving. Helpers, including counselors, can also feel <b>compassion fatigue</b> from absorbing others’ pain. Self-care is part of the job, not a luxury.</dd></div></dl>" +
+                "<p><b>So:</b> stress depends on how we size up demands and resources, and coping works best when it fits what can be changed.</p>" },
+              { kind: "example", lvl: "p", title: "Yolanda sorts her toolboxes", body: who("<b>Ms. Okafor</b> and Yolanda, over six sessions.") +
+                '<dl class="x-dossier"><div><dt>Normalize the link</dt><dd>“Stress isn’t only in your head. It’s in your head, your hormones and your immune system. Your colds are your body keeping score, not you being weak.”</dd></div>' +
+                "<div><dt>Sort by control</dt><dd>They list her stressors in two columns. Changeable: the second shift, no respite help for her mother. Not changeable: her mother’s stroke, her grief about it.</dd></div>" +
+                "<div><dt>Match the tools</dt><dd>Fix-it for the first column: she asks for a respite-care assessment and drops two double shifts a month. Feel-it for the second: a support group for caregivers and ten minutes a day of slow breathing.</dd></div>" +
+                "<div><dt>Protect the basics</dt><dd>A wind-down routine for sleep, a walk with her sister twice a week, and a talk about the wine she has started using to fall asleep.</dd></div></dl>" +
+                "<p>“So I’m not weak,” Yolanda says. “I was just using a hammer on things that needed a hug, and a hug on things that needed a hammer.”</p>" +
+                "<p>A note for counselors like Ms. Okafor: the same rules apply to you. Supervision, limits on caseload and time off protect against burnout and compassion fatigue.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>“Stress” is a vague umbrella. It can mean the event, the appraisal, the feeling or the body’s response, and studies don’t always say which. Much of the evidence relies on self-report, and the same tendency to feel low or anxious can inflate both stress scores and symptom reports, making the link look stronger than it is. Life-event scales ignore meaning, and newer ideas such as stress mindset rest on mixed results.</p>' +
+                "<p><b>The counter.</b> The strongest findings don’t depend on self-reported symptoms alone. In Cohen’s studies, infection was checked by lab tests after a controlled virus exposure, and wound healing was measured directly. Social support as a buffer holds up across many studies. For practice, the message is solid: chronic stress affects the body, and coping that fits the stressor helps.</p>" +
+                "<p>Ahead: M7 · Craving and the motivation to use (stress as a trigger); M7 · What to do, and not do, with emotion in the room (regulation). Background: M6 · ACEs: dose, response, and limits.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>General Adaptation Syndrome.</b> Hans Selye’s three-act play: a kind lab rat rings the alarm bell, then lifts weights heroically, then collapses into a hammock.</p>" +
+                "<p><b>Acute vs chronic stress.</b> A cortisol fire alarm, brilliant for five minutes, rings all month until its batteries are flat.</p>" +
+                "<p><b>Cohen’s cold study.</b> A sneeze-army of cold viruses only gets through the castle gate when the guards are stressed and sleepy.</p>" +
+                "<p><b>Primary and secondary appraisal.</b> A bouncer at the brain’s door asks every event two questions: “Danger or dare?” and “Can we handle you?”</p>" +
+                "<p><b>Coping fit.</b> Two toolboxes, “Fix it” and “Feel it”, under a sign: “Use Fix-it when you can change it, Feel-it when you can’t.”</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.5:teachback", title: "Teach it back", prompt: "Explain to Yolanda why her stress is not “just in her head”: Cannon’s fight-or-flight; Selye’s borrowed word and the General Adaptation Syndrome (alarm, resistance, exhaustion); life events (Holmes and Rahe) and their critiques; daily hassles (Kanner and Lazarus) as equal or better predictors; the HPA axis from brain to pituitary to adrenals and cortisol; why acute stress helps and chronic stress harms; allostatic load (McEwen); Cohen’s cold-virus study and Kiecolt-Glaser’s wound-healing study; tend-and-befriend and its contested sex difference; Lazarus and Folkman’s primary and secondary appraisal; problem-focused and emotion-focused coping and goodness-of-fit; avoidance and drinking to cope; stress mindset and its mixed evidence; social support as a buffer; minority and racism-related stress; burnout and compassion fatigue in helpers; and the plan: normalize the mind–body link, sort stressors by control, match the tools, and protect sleep, exercise and support." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Chronic stress and lowered resistance to infection " + ev("r") + ". Social support as a buffer " + ev("r") + ". Acute stress helps, chronic stress harms " + ev("r") + ". Goodness-of-fit in coping " + ev("c") + ". Life-event scales " + ev("c") + ". Tend-and-befriend as a sex difference " + ev("c") + ". Stress mindset " + ev("c") + ". Selye’s single, uniform stress response " + ev("c") + ".</p>" +
+                "<p><b>So:</b> stress lives in the meeting of demands and resources, and it reaches all the way into the body.</p>" },
+              Q("Selye’s General Adaptation Syndrome has three stages in this order:",
+                ["Resistance, alarm, exhaustion", "Alarm, resistance, exhaustion", "Exhaustion, alarm, recovery", "Fight, flight, freeze"], 1,
+                "Alarm mobilizes the body, resistance copes at a cost, exhaustion follows if strain continues."),
+              Q("Kanner and Lazarus found that daily hassles:",
+                ["Had no link to health", "Predicted health as well as or better than major life events", "Only mattered for children", "Were the same as life events"], 1,
+                "Small, repeated strains add up and predict health at least as well as big events."),
+              Q("In Cohen’s (1991) study, people exposed to a cold virus were more likely to catch a cold when they:",
+                ["Had more ongoing stress", "Exercised more", "Were older", "Had more social contacts"], 0,
+                "Higher stress, higher chance of infection; infection was confirmed by lab tests."),
+              Q("In Lazarus and Folkman’s model, secondary appraisal asks:",
+                ["Is this a threat or a challenge?", "What resources do I have to deal with it?", "How much cortisol is released?", "What happened in childhood?"], 1,
+                "Primary appraisal weighs the event; secondary appraisal weighs one’s resources."),
+              Q("Yolanda cannot change her mother’s stroke. Based on goodness-of-fit, which coping fits it best?",
+                ["Problem-focused coping, such as trying to reverse the stroke", "Emotion-focused coping, such as support and acceptance", "Avoidance, such as drinking to sleep", "Working more double shifts"], 1,
+                "Use problem-focused coping for what can change and emotion-focused coping for what cannot.")
+            ]
+          },
+          "m7.6": {
+            home: "Daniel is eight months clean. On his birthday his cousin texts “party at the old spot,” and a craving hits harder than any in weeks. Why now?",
+            keys: [["What is urge surfing?", "Cravings rise, peak and pass like waves, usually within minutes, if we don’t act on them. Urge surfing, from Marlatt’s relapse prevention and mindfulness-based relapse prevention (Bowen 2014), means noticing the urge in the body and riding it out instead of fighting or obeying it.", "A surfer riding a giant craving wave that rises, crashes, and leaves him floating on a calm sea."],
+              ["What is incentive-sensitization theory?", "Robinson and Berridge (1993): repeated drug use sensitizes the brain’s dopamine “wanting” system to drug cues, even as “liking”, the pleasure, fades. So people can crave intensely a drug they no longer enjoy.", "A megaphone labelled “wanting” that gets louder with every use, while a tiny kazoo labelled “liking” gets quieter."],
+              ["What is opponent-process theory?", "Solomon and Corbit (1974): a drug’s pleasant a-process is followed by an opposite, unpleasant b-process. With repetition the b-process grows, so people come to use to escape the low, not to chase the high (negative reinforcement).", "A seesaw where the cheerful “a-process” kid gets lighter over time and the “b-process” grump gets heavier, pinning the seesaw on the low side."],
+              ["What is incubation of craving?", "In rats, cue-induced drug seeking grows over weeks of abstinence instead of fading (Grimm and colleagues, 2001). Human evidence is emerging but contested.", "A slow-cooker labelled “cue craving” that keeps warming up the longer it sits alone in the cupboard."],
+              ["What is the abstinence violation effect?", "Marlatt and Gordon (1985): after one slip, thinking “I’ve blown it, I’m a failure” turns a lapse into a full relapse. Treating the lapse as information prevents that.", "A single spilled drop of soda that a stern judge calls “the whole ocean”, while a counselor calmly mops it up and says “data.”"]],
+            steps: [
+              { kind: "hook", title: "Daniel’s birthday text", body: who("<b>Mr. Reyes</b>, Daniel’s addiction counselor, at a check-in the day after his birthday.") +
+                "<p>You met Daniel in M3 · Classical conditioning. He is now eight months clean from opioids.</p>" +
+                "<p>“I hadn’t even thought about using in weeks. Then my cousin texts ‘party at the old spot’ on my birthday, and it hit me like a truck. My mouth was watering. I felt it in my chest.”</p>" +
+                "<p>“I didn’t go. But what’s wrong with me? Shouldn’t it be easier by now?”</p>" },
+              { kind: "predict", id: "m7.6:predict", title: "Your call first",
+                case: ["Daniel is eight months clean.",
+                  { t: "His cousin has a new phone.", irrelevant: true },
+                  "He used to use at “the old spot” with friends.",
+                  "The text arrived on his birthday, a day he used to celebrate by using.",
+                  { t: "It was raining that evening.", irrelevant: true },
+                  "In his first two weeks clean, he stayed away from all of it."],
+                q: "Why might Daniel crave more at eight months than at two weeks?",
+                options: ["He is secretly not committed to recovery", "Cues tied to past use can trigger strong wanting, and in animals cue-craving even grows during abstinence", "Cravings always shrink steadily over time, so this one must be random"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: cues. The old spot, his cousin and his birthday are strong, well-learned cues that switch on wanting. At two weeks he avoided them; now one text brought them all at once. In rats, cue-craving even grows over weeks of abstinence, though how far that holds in people is still debated. A craving is not a failure, and it doesn’t mean he will use.",
+                hints: ["Ask what was different about this day and this message.",
+                  "The sentences that don’t decide it are dimmed. Look at the cues the text carried.",
+                  "Step one, aloud: name each thing in the message that he used to pair with using."] },
+              { kind: "idea", lvl: "f", title: "What a craving is", body: '<dl class="x-dossier"><div><dt>Craving</dt><dd>A strong, felt <b>urge</b> to use, often with body signs: a watering mouth, a tight chest, restlessness. DSM-5 added craving as a <b>criterion</b> for substance use disorder.</dd></div>' +
+                "<div><dt>Cue reactivity</dt><dd>Places, people, times and moods paired with past use come to trigger craving on their own. Extinction weakens them but doesn’t erase them, which is why cues can bring craving back. Background: M3 · Extinction, cues and relapse.</dd></div>" +
+                "<div><dt>Stress and craving</dt><dd>Sinha and colleagues show that stress and negative mood raise craving, and stress-induced craving predicts relapse. Background: M7 · Stress and coping.</dd></div>" +
+                "<div><dt>HALT</dt><dd>A practical check used in recovery: am I <b>Hungry, Angry, Lonely or Tired</b>? Each makes cravings louder and is easy to fix.</dd></div>" +
+                "<div><dt>Waves pass</dt><dd>Cravings <b>rise, peak and pass</b>, usually within minutes, if we don’t act on them. <b>Urge surfing</b>, from Marlatt’s relapse prevention, means watching the urge in the body and riding it out. Mindfulness-based relapse prevention, which uses it, reduced relapse in a trial by Bowen and colleagues (2014) " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> a craving is a learned, passing wave that cues, stress and HALT states make bigger.</p>" },
+              { kind: "idea", lvl: "p", title: "Why wanting outlasts liking", body: '<dl class="x-dossier"><div><dt>Incentive sensitization</dt><dd>Robinson and Berridge (1993): repeated use makes the brain’s dopamine <b>“wanting”</b> system more and more sensitive to drug cues, while <b>“liking”</b> stays the same or fades. Strong in animal studies, with growing human evidence ' + ev("c") + ". Background: M7 · Drives and incentives, on wanting vs liking.</dd></div>" +
+                "<div><dt>Opponent process</dt><dd>Solomon and Corbit (1974): a drug’s pleasant <b>a-process</b> is followed by an opposite, unpleasant <b>b-process</b>. With repetition the b-process grows stronger and longer, so the high shrinks and the low deepens.</dd></div>" +
+                "<div><dt>The dark side</dt><dd>Koob calls this the “dark side of addiction”: over time people use less to feel good and more to <b>escape</b> withdrawal and low mood, which is <b>negative reinforcement</b>. He names the heightened negative mood <b>hyperkatifeia</b>.</dd></div>" +
+                "<div><dt>Incubation of craving</dt><dd>Grimm and colleagues (2001): in rats, cue-triggered drug seeking <b>grows</b> over weeks of abstinence before it fades. Some human studies point the same way, but the evidence is early " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> wanting can grow louder than liking, and the low after use becomes its own reason to use.</p>" },
+              { kind: "contrast", id: "m7.6:contrast", title: "Same history, one difference",
+                q: "Two people have identical drug histories and the same time clean. Who is more likely to feel a strong craving tonight?",
+                cases: [
+                  { label: "Person A", s: ["Eight months clean, same drug history.", { t: "Wearing a grey hoodie.", irrelevant: true }, { t: "Walks home past the old spot where they used.", diff: true }, "Same job; same support."] },
+                  { label: "Person B", s: ["Eight months clean, same drug history.", { t: "Wearing a grey hoodie.", irrelevant: true }, { t: "Walks home through a new neighbourhood.", diff: true }, "Same job; same support."] }
+                ],
+                answer: 0,
+                features: ["The hoodie", "Whether the route passes old cues", "Their drug history", "Their job"],
+                feature: 1,
+                why: "Only the route differs. Same history, same time clean, yet the old spot is packed with cues that trigger wanting, while the new streets carry none. That is cue reactivity, and why recovery plans change routes.",
+                hints: ["Find the one sentence where the two people part ways.",
+                  "The sentences that don’t decide it are dimmed. Their histories match; ask what they walk past.",
+                  "Step one, aloud: say what each person sees on the way home."] },
+              { kind: "idea", lvl: "m", title: "Lapses, medicines and models", body: '<dl class="x-dossier"><div><dt>Craving is not relapse</dt><dd>Feeling a craving is not using. And a single <b>lapse</b> is not a full <b>relapse</b>. Marlatt and Gordon (1985) described the <b>abstinence violation effect</b>: after a slip, “I’ve blown it, I’m a failure” makes further use more likely. Treating a lapse as <b>information</b> about a high-risk situation protects recovery.</dd></div>' +
+                "<div><dt>Medicines that reduce craving</dt><dd><b>Naltrexone</b> for alcohol and opioids, and <b>buprenorphine</b> and <b>methadone</b> for opioids, reduce craving and relapse, and buprenorphine and methadone reduce overdose deaths " + ev("r") + ".</dd></div>" +
+                "<div><dt>Two motivations at once</dt><dd>People in recovery often want to use and want to stop. <b>Ambivalence is normal</b>. In motivational interviewing, a <b>decisional balance</b> sets out the pros and cons of using and of changing, so the person can hear their own reasons. Background: M7 · Intrinsic vs extrinsic motivation.</dd></div>" +
+                "<div><dt>Disease, learning or choice?</dt><dd>The <b>brain-disease model</b> says repeated use changes the brain in lasting ways that make control hard. <b>Learning and choice</b> models, such as Lewis (2015) and Heyman, note that addiction is learned like other deep habits and that most people recover, often without treatment, when their options and rewards change. Each side has strong evidence; the debate is open " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> cravings and lapses are expected parts of recovery, and medicine, motivation and planning all help.</p>" },
+              { kind: "example", lvl: "p", title: "Daniel plans for the next wave", body: who("<b>Mr. Reyes</b> and Daniel, over the next two sessions.") +
+                '<dl class="x-dossier"><div><dt>No shame</dt><dd>“A craving on your birthday, after that text, is your learning history talking, not your character. And you didn’t go. That counts.”</dd></div>' +
+                "<div><dt>Map high-risk dates</dt><dd>They mark the calendar: birthdays, New Year’s Eve, the anniversary of a friend’s overdose, payday. For each, a plan: who he’ll be with, where, and who to call.</dd></div>" +
+                "<div><dt>Urge surfing script</dt><dd>“Notice the urge. Where is it in your body? Breathe into it. Rate it from 0 to 10. Watch it rise. You don’t have to do anything. Rate it again. Watch it peak, and start to fall.” He practises it in session.</dd></div>" +
+                "<div><dt>Change the cues</dt><dd>He mutes the group chat about the old spot, runs a HALT check when he feels shaky, and talks with his doctor about whether to add a craving medicine.</dd></div>" +
+                "<div><dt>If a lapse happens</dt><dd>“Call me. We’ll treat it as data about what happened, not a verdict on you.”</dd></div></dl>" +
+                "<p>“So the wave’s going to come,” Daniel says. “I just need a board.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Craving is measured mostly by self-report, and people rate it differently depending on the scale, the setting and whether they are in treatment. Craving predicts relapse only modestly. Much of the theory, from incentive sensitization to incubation, comes from rats, and the leap from a rat pressing a lever to a person’s life with jobs, family and choices is large. The brain-disease and choice models are still argued over.</p>' +
+                "<p><b>The counter.</b> The practical tools don’t depend on settling the theory. Cue exposure, urge surfing within relapse prevention, and craving-reducing medicines are tested in people, and medicines for opioid use disorder save lives. Treating cravings as expected and lapses as information is good practice under every model.</p>" +
+                "<p>Ahead: M7 · What to do, and not do, with emotion in the room (regulation). Background: M3 · Extinction, cues and relapse; M7 · Drives and incentives (wanting vs liking); M6 · ACEs: dose, response, and limits.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Urge surfing.</b> A surfer rides a giant craving wave that rises, crashes, and leaves him floating on a calm sea.</p>" +
+                "<p><b>Incentive sensitization.</b> A megaphone labelled “wanting” gets louder with every use, while a tiny kazoo labelled “liking” gets quieter.</p>" +
+                "<p><b>Opponent process.</b> On a seesaw, the cheerful “a-process” kid gets lighter over time and the “b-process” grump gets heavier, pinning it on the low side.</p>" +
+                "<p><b>Incubation of craving (contested in humans).</b> A slow-cooker labelled “cue craving” keeps warming up the longer it sits alone in the cupboard.</p>" +
+                "<p><b>Abstinence violation effect.</b> A stern judge calls one spilled drop of soda “the whole ocean”, while a counselor calmly mops it up and says “data.”</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.6:teachback", title: "Teach it back", prompt: "Explain to Daniel why a craving hit him at eight months: what craving is and its place in DSM-5; cue reactivity and why extinction doesn’t erase cues; stress and craving (Sinha); HALT; Robinson and Berridge’s incentive sensitization, wanting vs liking, and its animal and human evidence; Solomon and Corbit’s opponent process, the growing b-process and negative reinforcement; Koob’s dark side of addiction and hyperkatifeia; incubation of craving in rats and the contested human evidence; urge surfing and mindfulness-based relapse prevention; craving vs lapse vs relapse and the abstinence violation effect; medicines that reduce craving (naltrexone, buprenorphine, methadone); ambivalence and decisional balance in motivational interviewing; the brain-disease and learning or choice models, fairly; and the plan: no shame, map high-risk dates, practise urge surfing, change the cues, and treat a lapse as data." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Cue reactivity " + ev("r") + ". Craving-reducing medicines for opioid and alcohol use disorders " + ev("r") + ". Mindfulness-based relapse prevention and urge surfing " + ev("r") + ". Stress raising craving " + ev("r") + ". Incentive sensitization in humans " + ev("c") + ". Incubation of craving in humans " + ev("c") + ". Brain-disease vs choice models " + ev("c") + ".</p>" +
+                "<p><b>So:</b> cravings are learned waves that pass; plan for them, ride them, and treat a slip as information.</p>" },
+              Q("Incentive-sensitization theory says repeated drug use:",
+                ["Increases both wanting and liking equally", "Sensitizes wanting for the drug even as liking fades", "Removes all craving over time", "Only affects liking"], 1,
+                "Wanting grows louder while liking stays flat or fades."),
+              Q("In opponent-process theory, with repeated use:",
+                ["The a-process (high) grows stronger", "The b-process (low) grows stronger, so people use to escape it", "Both processes disappear", "The b-process turns pleasant"], 1,
+                "The growing low drives use through negative reinforcement."),
+              Q("Urge surfing is based on the idea that cravings:",
+                ["Grow forever unless obeyed", "Rise, peak and pass if not acted on", "Can be ended only by medication", "Are signs of weak character"], 1,
+                "Urges are waves; noticing and riding them out lets them pass."),
+              Q("After one drink, a client says “I’ve ruined everything” and keeps drinking. This is the:",
+                ["Abstinence violation effect", "Incubation of craving", "General Adaptation Syndrome", "Placebo effect"], 0,
+                "Marlatt and Gordon: reading a lapse as total failure turns it into a relapse."),
+              Q("Daniel’s birthday is coming up again. Which plan best fits relapse prevention?",
+                ["Ignore the date; thinking about it will cause cravings", "Mark it as high-risk, plan where and with whom he’ll be, and practise urge surfing", "Visit the old spot to prove he’s strong", "Feel ashamed of any craving"], 1,
+                "Predict high-risk dates, plan responses, and treat cravings without shame.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -19879,6 +20064,26 @@
           G("m7.4", "Catastrophic misinterpretation", "Interpretación catastrófica", "Reading normal body sensations as disaster.", "In Clark’s (1986) cognitive model of panic, misreading sensations such as a pounding heart as signs of imminent catastrophe, which escalates fear."),
           G("m7.4", "Panic attack", "Ataque de pánico", "A sudden surge of intense fear and body alarm.", "An abrupt episode of intense fear with physical symptoms such as pounding heart, breathlessness and dizziness, peaking within minutes."),
           G("m7.4", "Interoceptive exposure", "Exposición interoceptiva", "Bringing on feared body sensations safely.", "A CBT technique for panic that deliberately induces sensations such as a racing heart or dizziness, by running or spinning, until they lose their threat."),
+          G("m7.5", "Stress", "Estrés", "Strain when demands seem to outweigh resources.", "Selye borrowed the engineering word for the body’s response to strain; in the transactional model it is the mismatch between appraised demands and coping resources."),
+          G("m7.5", "Fight-or-flight response", "Respuesta de lucha o huida", "The body readying to fight or flee.", "Cannon’s term for the fast sympathetic arousal to threat: faster heart, blood sent to the muscles, energy released."),
+          G("m7.5", "General Adaptation Syndrome", "Síndrome general de adaptación", "Alarm, resistance, exhaustion.", "Selye’s (1936) three-stage account of the body’s response to prolonged stress; a single uniform response is now seen as too simple."),
+          G("m7.5", "Daily hassles", "Contrariedades cotidianas", "Small, repeated everyday stressors.", "Minor irritations such as traffic, bills and arguments; Kanner and colleagues (1981) found they predict health as well as or better than major life events."),
+          G("m7.5", "Allostatic load", "Carga alostática", "Wear and tear from constant adjusting.", "McEwen’s (1998) term for the cumulative cost to the body of repeated or chronic stress responses."),
+          G("m7.5", "Psychoneuroimmunology", "Psiconeuroinmunología", "How mind, nerves and immunity interact.", "The field studying links between psychological states, the nervous and endocrine systems, and immune function, such as stress and susceptibility to colds."),
+          G("m7.5", "Tend-and-befriend", "Cuidar y hacer amistades", "Reaching out to protect and connect under stress.", "Taylor and colleagues’ (2000) proposed stress response of nurturing and seeking support; the claim that it is stronger in women is contested."),
+          G("m7.5", "Problem-focused coping", "Afrontamiento centrado en el problema", "Changing the stressful situation.", "Coping aimed at the stressor itself, such as planning or seeking practical help; fits best when the stressor can be changed."),
+          G("m7.5", "Emotion-focused coping", "Afrontamiento centrado en la emoción", "Changing how you feel about the situation.", "Coping aimed at the emotional response, such as reframing, seeking comfort or acceptance; fits best when the stressor cannot be changed."),
+          G("m7.5", "Burnout", "Agotamiento profesional (burnout)", "Exhaustion, detachment and low accomplishment at work.", "Maslach’s description of a response to chronic job stress, common in helping professions; compassion fatigue is the related strain of absorbing others’ suffering."),
+          G("m7.6", "Craving", "Ansia (craving)", "A strong felt urge to use.", "A subjective urge to use a substance, often with bodily signs; a DSM-5 criterion for substance use disorder."),
+          G("m7.6", "Cue reactivity", "Reactividad a señales", "Craving set off by reminders of use.", "Physiological and subjective responses, including craving, to people, places and objects previously paired with substance use."),
+          G("m7.6", "Opponent-process theory", "Teoría del proceso oponente", "Every high brings a low that grows with use.", "Solomon and Corbit’s (1974) theory that a pleasant a-process is followed by an opposing b-process that strengthens with repetition, driving use to escape the low."),
+          G("m7.6", "Hyperkatifeia", "Hipercatifeia", "Heightened negative mood in addiction.", "Koob’s term for the increased sensitivity to negative emotion during withdrawal and abstinence, part of the ‘dark side’ of addiction."),
+          G("m7.6", "Incubation of craving", "Incubación del craving", "Cue craving that grows during abstinence.", "The finding in rats (Grimm and colleagues, 2001) that cue-induced drug seeking increases over weeks of abstinence; human evidence is emerging and contested."),
+          G("m7.6", "Urge surfing", "Surfear el impulso", "Riding out a craving until it passes.", "A mindfulness technique from relapse prevention: noticing an urge’s rise, peak and fall in the body without acting on it."),
+          G("m7.6", "HALT", "HALT", "Hungry, Angry, Lonely, Tired.", "A recovery self-check for states that make cravings stronger."),
+          G("m7.6", "Lapse", "Desliz (recaída puntual)", "A single slip back to use.", "A brief return to use after a period of abstinence, distinct from relapse, a return to the former pattern; best treated as information."),
+          G("m7.6", "Decisional balance", "Balance decisional", "Weighing the pros and cons of using and of changing.", "A motivational interviewing tool that lays out reasons for and against change so ambivalence can be explored."),
+          G("m7.6", "Brain-disease model of addiction", "Modelo de enfermedad cerebral de la adicción", "Addiction as lasting brain change.", "The view that repeated use alters brain circuits so control becomes hard; contested by learning and choice models (Lewis, Heyman)."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -20541,6 +20746,18 @@
             R("Schachter & Singer", 1962, "experiment", "Participants injected with epinephrine and not told its effects seemed to take on the mood of a planted partner, suggesting emotion is arousal plus a cognitive label.", st("contested", "Influential; later attempts to replicate it had problems.")),
             R("Dutton & Aron", 1974, "experiment", "Men on a swaying suspension bridge showed more signs of attraction to a female interviewer than men on a stable bridge, read as misattribution of arousal.", st("contested", "Replications are mixed.")),
             R("Clark", 1986, "review", "A cognitive approach to panic: attacks arise from catastrophic misinterpretation of normal body sensations, which raises fear and the sensations in a loop.", st("robust", "CBT for panic and interoceptive exposure built on this model have strong trial support."))];
+          REFS["m7.5"] = [
+            R("Selye", 1936, "experiment", "A syndrome produced by diverse nocuous agents: rats showed the same response to many different strains, later described as the General Adaptation Syndrome of alarm, resistance and exhaustion.", st("contested", "Founded stress research; a single uniform response is now seen as too simple.")),
+            R("Kanner, Coyne, Schaefer & Lazarus", 1981, "observational", "Daily hassles predicted psychological symptoms as well as or better than major life events.", st("contested", "Widely replicated pattern; self-report measures overlap with the symptoms they predict.")),
+            R("Cohen, Tyrrell & Smith", 1991, "experiment", "Volunteers given cold viruses were more likely to develop infection and colds the higher their psychological stress, with infection confirmed by lab tests.", st("robust", "Replicated in later viral-challenge studies.")),
+            R("Kiecolt-Glaser et al.", 1995, "experiment", "A small standard wound healed more slowly in women caring for a relative with dementia than in matched controls.", st("robust", "Fits a wider body of wound-healing and stress research.")),
+            R("Lazarus & Folkman", 1984, "review", "Stress, Appraisal, and Coping: stress as a transaction shaped by primary and secondary appraisal, with problem-focused and emotion-focused coping.", st("robust", "The dominant framework; goodness-of-fit predictions have mixed support."))];
+          REFS["m7.6"] = [
+            R("Robinson & Berridge", 1993, "review", "Incentive-sensitization theory: repeated drug use sensitizes dopamine-based wanting for drug cues, separate from liking.", st("contested", "Strong animal support; human evidence is growing.")),
+            R("Solomon & Corbit", 1974, "review", "Opponent-process theory: an affective a-process is followed by an opposing b-process that strengthens with repetition.", st("contested", "Influential; extended by Koob’s account of negative reinforcement in addiction.")),
+            R("Grimm, Hope, Wise & Shaham", 2001, "experiment", "In rats, cue-induced cocaine seeking increased over weeks of withdrawal: incubation of craving.", st("contested", "Robust in rodents; human evidence is emerging and mixed.")),
+            R("Marlatt & Gordon", 1985, "review", "Relapse Prevention: high-risk situations, coping, urge surfing and the abstinence violation effect.", st("robust", "Relapse prevention is a well-supported treatment framework.")),
+            R("Bowen et al.", 2014, "experiment", "A randomized trial found mindfulness-based relapse prevention reduced drug use and heavy drinking over 12 months compared with treatment as usual.", st("contested", "Promising; effects vary across trials."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
