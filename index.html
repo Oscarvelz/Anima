@@ -1104,6 +1104,14 @@
       .x-search input { width: 100%; height: 48px; padding: 0 16px 0 44px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--ring); }
       .x-search input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 24%, transparent); }
       .x-search svg { position: absolute; left: 16px; top: 14px; color: var(--dim); }
+      .x-labq { position: sticky; top: var(--x-hdh, 8px); z-index: 20; margin-top: 14px; padding: 8px 0; background: var(--bg); box-shadow: 0 10px 12px -10px var(--bg); }
+      .x-labq svg { top: 22px; }
+      .x-labq input { min-width: 0; }
+      #lab-n { margin-top: 8px; }
+      .x-hl { background: color-mix(in srgb, var(--primary) 28%, transparent); color: inherit; border-radius: 4px; padding: 0 2px; }
+      .x-tile__hit { display: block; margin-top: 6px; font-size: 13px; color: var(--dim); }
+      .x-labempty { margin-top: 16px; display: grid; gap: 12px; justify-items: center; }
+      .x-labempty p { margin: 0; overflow-wrap: anywhere; }
       .x-terms { display: grid; gap: 10px; }
       .x-terms[data-view="grid"] { grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); }
       .x-term { display: grid; gap: 4px; padding: 14px 16px; text-align: left; width: 100%; color: var(--text); }
@@ -7952,6 +7960,7 @@
             paintTabs();
             Sync.paint();
             if (State.tab === "glossary") filterGloss();
+            if (State.tab === "lab") filterLab();
             if ($(".x-hero3d", v)) mountHero3D($(".x-hero3d", v));
             try { StudyTime.paint(); } catch (e) {}
           },
@@ -8013,13 +8022,16 @@
           lab: function () {
             var s = vb("lab");
             var list = LAB_SCENES.slice().sort({ path: function (a, b) { return a.order - b.order; }, az: function (a, b) { return a.name.localeCompare(b.name); }, za: function (a, b) { return b.name.localeCompare(a.name); } }[s.sort]);
-            return '<div><h1 class="greet">The Lab</h1><p class="dim">See the mind move. Full-color 3D scenes you can orbit, tap and change.</p></div>' + viewBar("lab", "scenes") +
+            return '<div><h1 class="greet">The Lab</h1><p class="dim">See the mind move. Full-color 3D scenes you can orbit, tap and change.</p></div>' +
+              '<div class="x-search x-labq">' + I.search + '<input id="lab-q" type="search" placeholder="Search the Lab · EN or ES" aria-label="Search Lab scenes" autocomplete="off" value="' + esc(State.lq || "") + '"></div><p class="eyebrow" id="lab-n" aria-live="polite"></p>' +
+              viewBar("lab", "scenes") +
               '<div class="x-gal"' + layoutAttr("lab") + ">" + list.map(function (sc) {
                 return '<button type="button" class="x-tile glass press" data-scene="' + sc.id + '"' + fitAttr(sc.name, "--h1:" + sc.hue[0] + ";--h2:" + sc.hue[1]) + ">" +
                   '<span class="x-tile__glow" aria-hidden="true"></span><span class="eyebrow">' + esc(sc.kicker) + "</span>" +
                   '<span class="x-tile__t">' + esc(sc.name) + '</span><span class="x-tile__i">' + esc(sc.idea) + "</span>" +
                   '<span class="x-tile__see"><span><b>What · </b>' + esc(sc.see) + "</span><span><b>Why · </b>" + esc(sc.why) + "</span><span><b>Where you’ll see it · </b>" + esc(sc.use) + "</span></span></button>";
-              }).join("") + "</div>";
+              }).join("") + "</div>" +
+              '<div class="x-empty-s glass x-labempty" id="lab-empty" hidden><p id="lab-empty-t"></p><button type="button" class="danger press" data-labclear="1">Clear</button></div>';
           },
           review: function () {
             var due = Srs.due(), ids = Srs.ids(), s = vb("review"), now = addDays(1);
@@ -22971,6 +22983,149 @@
           var out = $("#gl-n"); if (out) out.textContent = n + (n === 1 ? " term" : " terms") + (q ? " match “" + inp.value.trim() + "”" : "");
         }
         doc.addEventListener("input", function (e) { if (e.target && e.target.id === "gl-q") filterGloss(); });
+        /* ---- Lab search: EN/ES, accent-blind, typo-tolerant, ranked, filters in place so the field keeps focus ---- */
+        var LAB_ES = {
+          lens: "Lente teórica, escuelas, historia, psicoanálisis, conductismo, humanismo, cognitivismo, biológica, evolucionista, perspectivas",
+          orbit: "Órbita biopsicosocial, modelo biopsicosocial, biológico, psicológico, social, familia, creencias, factores, salud",
+          synapse: "Sinapsis en vivo, neurona, neurotransmisor, sinapsis, dopamina, serotonina, receptor, recaptación, potencial de acción",
+          brain: "Atlas del cerebro, cerebro, lóbulo frontal, parietal, occipital, temporal, amígdala, hipocampo, hipotálamo, cerebelo, tronco encefálico, hemisferios",
+          eyes: "Pon a prueba tus ojos, sensación, percepción, ilusión, visión, atención, umbral, adaptación, color",
+          design: "Diseña un estudio, diseño experimental, variable, grupo control, hipótesis, aleatorización, muestra, sesgo",
+          aim: "Diana: fiabilidad frente a validez, fiabilidad, validez, precisión, exactitud, medición, error, consistencia",
+          sample: "¿Quién está en la muestra?, muestra, muestreo, población, representatividad, sesgo de selección, generalización, participantes",
+          fivep: "Formulación de caso: las 5 P, formulación, predisponentes, precipitantes, perpetuantes, protectores, problema, terapia",
+          maproom: "La sala de mapas, mapas rivales del malestar, diagnóstico, DSM, CIE, transdiagnóstico, malestar, clasificación, salud mental",
+          schedules: "La máquina de programas, programas de refuerzo, razón fija, razón variable, intervalo fijo, intervalo variable, refuerzo, condicionamiento operante",
+          extinction: "Escenario del estallido de extinción, extinción, estallido, recaída, refuerzo, señales, conducta, recuperación espontánea",
+          eyewitness: "Reconstrucción del testigo ocular, testigo, memoria reconstructiva, desinformación, falsos recuerdos, sugestión, pregunta capciosa, interrogatorio",
+          workingmemory: "Teatro de la memoria de trabajo, memoria de trabajo, bucle fonológico, agenda visoespacial, ejecutivo central, agrupamiento, capacidad, olvido",
+          biasarcade: "Arcade de sesgos, sesgos cognitivos, heurística, anclaje, disponibilidad, confirmación, encuadre, juicio, decisión",
+          attachment: "Teatro del apego, apego, seguro, evitativo, ansioso, desorganizado, situación extraña, cuidador, vínculo",
+          doseshield: "Dosis y escudo, ciclo vital, desarrollo, riesgo, protección, resiliencia, adversidad, estrés infantil",
+          fivelenses: "Un suceso, cinco lentes, emoción, teorías de la emoción, valoración, activación fisiológica, regulación emocional, James-Lange, Cannon-Bard",
+          bigfive: "Espejo de los Cinco Grandes, personalidad, apertura, responsabilidad, extraversión, amabilidad, neuroticismo, rasgos",
+          pressureroom: "La sala de presión, obediencia, autoridad, Milgram, conformidad, presión social, descargas, desobediencia",
+          bystander: "Calle del espectador, efecto espectador, ayuda, difusión de responsabilidad, emergencia, conducta prosocial, testigos",
+          dissonance: "Balanza de la disonancia, disonancia cognitiva, actitud, conducta, justificación, creencias, Festinger, cambio de actitud",
+          memory: "Curva del olvido, aprender a aprender, memoria, olvido, repaso espaciado, recuperación, Ebbinghaus, estudio",
+          neural: "Bosque neural, neuronas, plasticidad, plasticidad neuronal, dendritas, conexiones, aprendizaje, poda sináptica",
+          stress: "Cascada del estrés, estrés, cuerpo, cortisol, eje HPA, hipotálamo, adrenalina, lucha o huida, sistema nervioso",
+          causation: "Detective de la causalidad, correlación, causalidad, variable de confusión, causa, efecto, experimento, tercera variable"
+        };
+        var LabQ = { idx: null, gl: null };
+        function labNorm(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/ñ/g, "n").replace(/[^a-z0-9]+/g, " ").trim(); }
+        function labDist(a, b, max) { /* optimal string alignment (Damerau) distance, with early exit */
+          var m = a.length, n = b.length, d = [], i, j;
+          if (Math.abs(m - n) > max) return max + 1;
+          for (i = 0; i <= m; i++) { d[i] = [i]; }
+          for (j = 1; j <= n; j++) d[0][j] = j;
+          for (i = 1; i <= m; i++) {
+            var lo = Infinity;
+            for (j = 1; j <= n; j++) {
+              var c = a[i - 1] === b[j - 1] ? 0 : 1;
+              d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+              if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+              if (d[i][j] < lo) lo = d[i][j];
+            }
+            if (lo > max) return max + 1;
+          }
+          return d[m][n];
+        }
+        function labHit(q, w) { /* 3 exact, 2 prefix, 1.5 substring, 1 fuzzy, 0 none */
+          if (w === q) return 3;
+          var p = w.indexOf(q);
+          if (p === 0) return 2;
+          if (p > 0) return 1.5;
+          if (q.length < 4 || w.length < 3) return 0;
+          var max = q.length >= 7 ? 2 : 1;
+          return labDist(q, w, max) <= max ? 1 : 0;
+        }
+        function labIndex() {
+          if (LabQ.idx) return LabQ.idx;
+          LabQ.gl = GLOSSARY.map(function (g) { return { en: " " + labNorm(g.en) + " ", es: g.es }; }).filter(function (g) { return g.en.trim() && g.es; });
+          LabQ.idx = {};
+          LAB_SCENES.forEach(function (sc) {
+            var les = (SCENE_LESSONS[sc.id] || []).map(function (id) { var l = lessonOf(id); return id + " " + (typeof lessonLabel === "function" ? lessonLabel(id) : "") + " " + (l ? l.title : ""); }).join(" ");
+            var en = [sc.name, sc.kicker, sc.idea, sc.see, sc.why, sc.use, sc.cap, les].join(" "), enN = " " + labNorm(en) + " ";
+            var gl = LabQ.gl.filter(function (g) { return enN.indexOf(g.en) > -1; }).map(function (g) { return g.es; }).join(", ");
+            var fields = [[sc.name, 5, 1], [sc.kicker, 4, 1], [sc.idea, 3, 1], [sc.use, 3, 1], [sc.see, 1, 1], [sc.why, 1, 1], [sc.cap, 1, 0], [les, 1, 0], [LAB_ES[sc.id], 1, 0], [gl, 1, 0]].map(function (f) {
+              var words = {}; (String(f[0] || "").match(/[\p{L}\p{N}]+/gu) || []).forEach(function (o) { labNorm(o).split(" ").forEach(function (n) { if (n && !words[n]) words[n] = o; }); });
+              return { w: f[1], vis: f[2], words: words };
+            });
+            LabQ.idx[sc.id] = { fields: fields, q: labNorm(en + " " + (LAB_ES[sc.id] || "") + " " + gl) };
+          });
+          return LabQ.idx;
+        }
+        function labScore(ix, qws) { /* null when some word misses; else score and hidden-only terms */
+          var total = 0, hidden = [];
+          for (var k = 0; k < qws.length; k++) {
+            var best = 0, vis = false, hid = "";
+            ix.fields.forEach(function (f) {
+              for (var n in f.words) {
+                var h = labHit(qws[k], n); if (!h) continue;
+                if (h * f.w > best) best = h * f.w;
+                if (f.vis) vis = true; else if (!hid) hid = f.words[n];
+              }
+            });
+            if (!best) return null;
+            total += best;
+            if (!vis && hid && hidden.indexOf(hid) < 0) hidden.push(hid);
+          }
+          return { s: total, hidden: hidden };
+        }
+        function labMark(text, qws) {
+          if (!qws.length) return esc(text);
+          return String(text).split(/([\p{L}\p{N}]+)/u).map(function (t, i) {
+            if (i % 2 === 0) return esc(t);
+            var n = labNorm(t), hit = n && n.split(" ").some(function (w) { return qws.some(function (q) { return labHit(q, w) > 0; }); });
+            return hit ? '<mark class="x-hl">' + esc(t) + "</mark>" : esc(t);
+          }).join("");
+        }
+        function labPaint(tile, qws) {
+          [".eyebrow", ".x-tile__t", ".x-tile__i"].forEach(function (s) {
+            var el = tile.querySelector(":scope > " + s); if (!el) return;
+            if (el.dataset.o == null) el.dataset.o = el.textContent;
+            el.innerHTML = labMark(el.dataset.o, qws);
+          });
+          tile.querySelectorAll(".x-tile__see > span").forEach(function (el) {
+            var b = el.querySelector("b");
+            if (el.dataset.o == null) { el.dataset.o = el.textContent.slice(b ? b.textContent.length : 0); el.dataset.b = b ? b.outerHTML : ""; }
+            el.innerHTML = el.dataset.b + labMark(el.dataset.o, qws);
+          });
+        }
+        function filterLab() {
+          var inp = $("#lab-q"); if (!inp) return;
+          var bar = inp.parentNode, hd = $(".hd");
+          if (hd) { var cs = getComputedStyle(hd), h = hd.offsetHeight; bar.style.top = (cs.position === "sticky" || cs.position === "fixed") && h ? h + "px" : "8px"; }
+          if (!inp.dataset.b) {
+            inp.dataset.b = "1";
+            inp.addEventListener("keydown", function (e) { if (e.key === "Escape" && inp.value) { e.preventDefault(); e.stopPropagation(); clearLab(); } });
+          }
+          var raw = inp.value, qws = labNorm(raw).split(" ").filter(Boolean), idx = labIndex(), n = 0, ranked = [];
+          State.lq = raw;
+          doc.querySelectorAll(".x-gal .x-tile[data-scene]").forEach(function (t) {
+            var ix = idx[t.dataset.scene], hit = t.querySelector(".x-tile__hit");
+            if (ix && !t.dataset.q) t.dataset.q = ix.q;
+            var r = !qws.length ? { s: 0, hidden: [] } : ix ? labScore(ix, qws) : null;
+            t.hidden = !r; t.style.order = "";
+            if (hit) hit.remove();
+            labPaint(t, r ? qws : []);
+            if (!r) return;
+            n++; ranked.push({ t: t, s: r.s });
+            if (qws.length && r.hidden.length) {
+              var sp = doc.createElement("span"); sp.className = "x-tile__hit";
+              sp.innerHTML = "Matches: " + r.hidden.map(function (w) { return '<mark class="x-hl">' + esc(w) + "</mark>"; }).join(", ");
+              t.appendChild(sp);
+            }
+          });
+          if (qws.length) ranked.sort(function (a, b) { return b.s - a.s; }).forEach(function (x, i) { x.t.style.order = i; });
+          var q = raw.trim(), out = $("#lab-n"), em = $("#lab-empty");
+          if (out) out.textContent = !qws.length ? n + (n === 1 ? " scene" : " scenes") : n + (n === 1 ? " scene matches" : " scenes match") + " “" + q + "”";
+          if (em) { em.hidden = !(qws.length && !n); $("#lab-empty-t").textContent = "No scenes match “" + q + "”. Try fewer words or another spelling."; }
+        }
+        function clearLab() { var inp = $("#lab-q"); if (!inp) return; inp.value = ""; filterLab(); inp.focus(); }
+        doc.addEventListener("input", function (e) { if (e.target && e.target.id === "lab-q") filterLab(); });
+        doc.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-labclear]"); if (b) { e.preventDefault(); clearLab(); } });
         /* a single review card from the list: answer it now, without changing its schedule */
         /* ---- C14 Memory Kit sheet: palace walk (recall first), peg flip cards, visual hooks, personalise ---- */
         function kitBar(m, open) {
