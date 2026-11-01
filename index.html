@@ -16684,6 +16684,203 @@
                 "Believe the distress, don’t direct the memories; evidence-based therapies treat fear and meaning, not memory excavation.")
             ]
           },
+          "m5.1": {
+            home: "In thirty seconds, Miguel files a quiet client in a hoodie under “typical resistant addict”, and misses that the client can’t hear him. How do categories help us think, and when do they think for us?",
+            keys: [["What is a prototype?", "The best, most typical example of a category, an average of its members’ features. People judge a robin as a “better bird” than a penguin and verify it faster (Rosch, 1975). Typicality effects are robust. A penguin is still fully a bird.", "A robin wearing a crown labelled “Most Bird-ish Bird” while a penguin in a tuxedo waits outside the VIP rope, still a bird."],
+              ["Why do definitions fail for most categories?", "The classical view says every category has necessary and sufficient features. Wittgenstein noted that no single feature is shared by all games. Members are linked by family resemblance: overlapping features, none required.", "A family reunion where nobody shares every feature, but everyone has someone’s nose or someone’s laugh."],
+              ["What is a basic-level category?", "The middle level we name first and use most: “dog” rather than “animal” or “beagle” (Rosch and colleagues, 1976). It packs the most information for the least effort.", "A beagle at a party wearing three name tags, ANIMAL, DOG and BEAGLE, while every guest waves and shouts only “Hi, dog!”"],
+              ["What are polythetic criteria?", "Criteria where you need some number from a list, not all of them. Major depression needs 5 of 9 symptoms, so two people with the same diagnosis can share almost none.", "Two people with the same “Depression” name tag who compare symptom lists and find only one overlap."],
+              ["What is prototype matching at intake?", "Judging a client by how well they resemble a mental picture, such as “the typical resistant addict”, instead of checking the actual features. It is fast, and it can miss what doesn’t fit, like a hearing loss.", "A counselor with a giant rubber stamp marked TYPICAL, stamping a file in thirty seconds, while the client’s hearing aid waves a tiny flag: “I just didn’t hear you.”"]],
+            steps: [
+              { kind: "hook", title: "Miguel’s first thirty seconds", body: who("<b>Miguel</b>, 26, a new counselor at an outpatient substance use clinic.") +
+                "<p>His 2 p.m. intake is a quiet man of about 40, hood up, eyes on the floor. Miguel asks three questions; the client answers one, briefly, and off topic. Within thirty seconds Miguel has filed him: <b>“typical resistant addict.”</b></p>" +
+                "<p>Twenty minutes later the client pulls a hearing aid from his pocket. The battery died on the bus. He wasn’t resisting. He couldn’t hear.</p>" +
+                "<p>Miguel didn’t decide to stereotype anyone. His mind did what minds do with every chair, bird and person: it put the client in a <b>category</b>.</p>" },
+              { kind: "predict", id: "m5.1:predict", title: "Your call first",
+                case: ["People see a statement on a screen and press “true” or “false” as fast as they can.",
+                  { t: "The screen is grey.", irrelevant: true },
+                  "One trial says: “A robin is a bird.”",
+                  "Another says: “A penguin is a bird.”",
+                  "Both statements are true.",
+                  { t: "The study runs in the morning.", irrelevant: true }],
+                q: "Is a penguin a bird? And which statement do people answer faster, robin or penguin?",
+                options: ["Same speed: both are equally birds, so both are equally quick", "Robin: typical members are confirmed faster than atypical ones", "Penguin: it’s the more famous, memorable bird"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: a penguin is a bird, true, and people say so reliably. But they say “robin” faster. That is a <b>typicality effect</b>: membership feels graded even when it isn’t. A penguin is 100% bird, yet the mind treats it as a less central one. Miguel’s client was 100% a client in need; he just didn’t look like Miguel’s picture of one.",
+                hints: ["Ask which bird looks more like the bird in your head.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether being a bird and looking like a typical bird are the same thing."] },
+              { kind: "idea", lvl: "f", title: "Concepts and why definitions fail", body: "<p>A <b>concept</b> is a mental category: the idea of “bird”, “chair” or “client” that lets us treat new things like old ones. Without concepts, every robin would be a surprise.</p>" +
+                '<dl class="x-dossier"><div><dt>The classical view</dt><dd>Every category has <b>necessary and sufficient features</b>: a bachelor is an unmarried adult man. Works for a few terms; fails for most everyday ones ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Wittgenstein’s “game”</dt><dd>Try defining a game. Not all have winners, rules, competition or fun. No one feature is shared by all.</dd></div>" +
+                "<div><dt>Family resemblance</dt><dd>Members are linked by <b>overlapping features</b>, like relatives at a reunion: no single trait required, but plenty of shared ones.</dd></div>" +
+                "<div><dt>Fuzzy edges</dt><dd>Is a tomato a vegetable? Is a rug furniture? People disagree with each other, and with themselves on different days.</dd></div></dl>" +
+                "<p><b>So:</b> most categories have no clean definition; they have a centre and blurry edges.</p>" },
+              { kind: "idea", lvl: "p", title: "Prototypes, exemplars and theories", body: '<dl class="x-dossier"><div><dt>Prototype theory</dt><dd>We store an <b>average</b> of a category’s typical features and compare new items to it (Rosch, 1975). Typical members are named first, verified faster and learned earlier: <b>typicality effects</b> ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Exemplar theory</dt><dd>We store <b>specific remembered cases</b> and compare to them. Your idea of “dog” is every dog you’ve met. Which model fits better depends on the task " + ev("c") + "; many researchers think we use both.</dd></div>" +
+                "<div><dt>Basic level</dt><dd>“Dog” comes before “animal” or “beagle”: it’s the level children learn first and adults name fastest (Rosch and colleagues, 1976) " + ev("r") + ". Experts drop lower: a vet says “beagle”.</dd></div>" +
+                "<div><dt>Theory-based concepts</dt><dd>Categories rest on <b>explanations</b>, not just features. A raccoon surgically made to look like a skunk is still a raccoon, people say, because what makes it one is inside.</dd></div>" +
+                "<div><dt>Ad hoc categories</dt><dd>Built on the spot for a goal: “things to save in a fire” (Barsalou, 1983) " + ev("r") + ". Children, pets, photos, passport: no shared look, one shared purpose, and still graded by typicality.</dd></div></dl>" +
+                "<p><b>So:</b> concepts are flexible tools, built from averages, memories and explanations, and reshaped by goals.</p>" },
+              { kind: "idea", lvl: "p", title: "Culture, and categories of people", body: '<dl class="x-dossier"><div><dt>Taxonomic or thematic</dt><dd>Shown a cow, a chicken and grass, which two go together? Nisbett (2003) reported that Western participants more often grouped by <b>kind</b> (cow, chicken) and East Asian participants by <b>relation</b> (cow eats grass). Later findings are <b>mixed</b> ' + ev("c") + ": differences vary with task, age and setting, and individuals vary widely within any culture.</dd></div>" +
+                "<div><dt>Stereotypes</dt><dd>A <b>stereotype</b> is a category of people with a prototype attached. It is efficient: it fills gaps fast. It is costly: it fills them with the average, not the person " + ev("r") + ".</dd></div>" +
+                "<div><dt>Coming later</dt><dd>M9 · Social psychology picks up how stereotypes shape prejudice and behaviour.</dd></div></dl>" +
+                "<p><b>So:</b> the same machinery that sorts birds sorts people, and with people the errors cost more.</p>" },
+              { kind: "contrast", id: "m5.1:contrast", title: "Two clients, one diagnosis",
+                q: "Which client is a counselor matching to the textbook prototype of depression more likely to miss?",
+                cases: [
+                  { label: "Client A", s: ["Diagnosed with major depressive disorder.", { t: "Arrives by bus.", irrelevant: true }, { t: "Meets 5 of 9: sad mood, guilt, poor concentration, fatigue, thoughts of death.", diff: true }, "Same age, same clinic, same counselor."] },
+                  { label: "Client B", s: ["Diagnosed with major depressive disorder.", { t: "Arrives by bus.", irrelevant: true }, { t: "Meets 5 of 9: loss of interest, weight gain, sleeping too much, slowed movement, fatigue.", diff: true }, "Same age, same clinic, same counselor."] }
+                ],
+                answer: 1,
+                features: ["How they travel", "Which five of the nine criteria they meet", "Their diagnosis label", "Their age"],
+                feature: 1,
+                why: "Only the symptom set differs, and the two share just one symptom: fatigue. Client A looks like the prototype: tearful, guilty, sad. Client B never says “sad”, eats more and sleeps more, so a counselor holding a sad-face picture of depression may read flat, tired and withdrawn as laziness or resistance. Same label, almost no overlap.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left is two symptom lists.",
+                  "Step one, aloud: say which client looks like the picture of depression in your head."] },
+              { kind: "idea", lvl: "m", title: "Diagnoses are categories too", body: '<dl class="x-dossier"><div><dt>Fuzzy prototypes</dt><dd>A diagnosis is a category with a textbook centre. Real clients rarely sit at the centre; most are penguins, not robins.</dd></div>' +
+                "<div><dt>Polythetic criteria</dt><dd>DSM-5 major depression needs <b>5 of 9</b> symptoms, one of them sad mood or loss of interest. That allows hundreds of combinations; in one large sample, Fried and Nesse (2015) found 1,030 different symptom profiles among 3,703 people " + ev("r") + ". Two people can share one symptom.</dd></div>" +
+                "<div><dt>Categorical or dimensional</dt><dd>DSM sorts people into <b>have it / don’t</b>. Dimensional models such as <b>HiTOP</b> rate everyone on graded traits like internalizing and detachment. Dimensions fit the data well; how to use them in everyday practice is still debated " + ev("c") + ".</dd></div>" +
+                "<div><dt>Watch for prototype matching</dt><dd>At intake, notice the moment a client “clicks” into a type. Treat the click as a <b>hypothesis</b>: what else could explain this? Rule out the basics: hearing, vision, language, literacy, pain, medication.</dd></div></dl>" +
+                "<p><b>So:</b> use the label to organise care, then treat the person in front of you, not the average.</p>" },
+              { kind: "example", lvl: "p", title: "Miguel, the next week", body: who("<b>Miguel</b>, reworking his intake routine with his supervisor.") +
+                '<dl class="x-dossier"><div><dt>Name the click</dt><dd>When a client seems “typical”, he writes it down in the margin as a guess, not a finding.</dd></div>' +
+                "<div><dt>Check the basics first</dt><dd>He now asks every client: “Can you hear me okay? Is there anything that makes talking here harder?”</dd></div>" +
+                "<div><dt>Repair</dt><dd>With the client from Tuesday, he sits facing him, speaks clearly, and offers a written summary. The man talks for forty minutes: about work, about his daughter, and about drinking to cope with the isolation of losing his hearing.</dd></div>" +
+                "<div><dt>Look for what doesn’t fit</dt><dd>His supervisor’s rule: before closing an intake, list one thing about this person that doesn’t match the label.</dd></div></dl>" +
+                "<p>“He wasn’t a type,” Miguel says. “He was a guy whose battery died.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>No single theory of concepts wins. Prototypes explain typicality but not everything: a <b>grandmother</b> is the mother of a parent, full stop, even if she is 45, runs marathons and looks nothing like the “gray-haired kindly lady” prototype. People know that definition and use it when it matters. Exemplar models fit some lab data better, theory-based views explain why hidden essences outrank looks, and ad hoc categories show concepts are built on the fly. Each model covers some ground; none covers it all.</p>' +
+                "<p><b>The counter.</b> For practice the lesson holds on any model: categories speed thinking and invite errors at the edges, and the edges are where atypical clients live. The culture findings are mixed, so avoid treating any group as “thinking” one way.</p>" +
+                "<p><b>Person-first.</b> Write “a client with a substance use disorder”, not “an addict”; “a person with depression”, not “a depressive”.</p>" +
+                "<p>Background: M4 · Memory is reconstructive (schemas). Ahead: M9 · Social psychology.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Prototypes.</b> A robin in a crown, “Most Bird-ish Bird”, while a penguin in a tuxedo waits outside the VIP rope, still a bird.</p>" +
+                "<p><b>Family resemblance.</b> At the reunion nobody shares every feature, but everyone has someone’s nose or someone’s laugh.</p>" +
+                "<p><b>Basic level.</b> A beagle wears three name tags, ANIMAL, DOG and BEAGLE, and every guest shouts “Hi, dog!”</p>" +
+                "<p><b>Polythetic criteria.</b> Two people with the same “Depression” name tag compare symptom lists and find one overlap.</p>" +
+                "<p><b>Prototype matching.</b> A counselor stamps TYPICAL on a file in thirty seconds while a hearing aid waves a tiny flag: “I just didn’t hear you.”</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.1:teachback", title: "Teach it back", prompt: "Explain to a new colleague how Miguel’s mind filed a hard-of-hearing client as a “typical resistant addict”: concepts as mental categories; why the classical view of necessary and sufficient features fails for most categories, with Wittgenstein’s “game” and family resemblance; prototype theory (Rosch 1975) and robust typicality effects, robin versus penguin; exemplar theory and why the prototype–exemplar debate is unsettled; basic-level categories (Rosch 1976); theory-based concepts; ad hoc categories such as things to save in a fire (Barsalou 1983); taxonomic versus thematic grouping and why Nisbett’s culture findings are mixed; stereotypes as efficient but costly categories of people; diagnoses as fuzzy categories; DSM polythetic criteria, 5 of 9 for depression, so two people with one diagnosis can share almost nothing; categorical versus dimensional views such as HiTOP; treating a prototype match at intake as a hypothesis and checking basics like hearing; and the critique that no single theory of concepts wins, as the grandmother example shows." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Most everyday categories lack clean definitions " + ev("r") + ". Typicality effects " + ev("r") + ". Basic-level advantage " + ev("r") + ". Ad hoc categories " + ev("r") + ". Prototype versus exemplar models " + ev("c") + ". Cultural differences in taxonomic and thematic grouping " + ev("c") + ". Wide symptom variety within one DSM diagnosis " + ev("r") + ". Dimensional models such as HiTOP in practice " + ev("c") + ".</p>" +
+                "<p><b>So:</b> categories make thinking fast; a good clinician uses them as a first guess and checks the person.</p>" },
+              Q("People verify “A robin is a bird” faster than “A penguin is a bird.” What is this called?",
+                ["The basic-level effect", "A typicality effect", "Functional fixedness", "Family resemblance"], 1,
+                "Typical members of a category, close to its prototype, are verified faster; the penguin is still fully a bird."),
+              Q("Wittgenstein argued that no single feature is shared by all games. What view does this challenge?",
+                ["Prototype theory", "Exemplar theory", "The classical view of necessary and sufficient features", "Basic-level categories"], 2,
+                "Members of “game” share overlapping features, family resemblance, rather than a defining set."),
+              Q("A child sees a beagle and says “dog”, not “animal” or “beagle”. What does this show?",
+                ["An ad hoc category", "The basic-level category", "A stereotype", "Polythetic criteria"], 1,
+                "The basic level, such as “dog”, is learned first and named fastest (Rosch and colleagues, 1976)."),
+              Q("Two people both meet criteria for major depression but share only one symptom. How is that possible?",
+                ["One of them is misdiagnosed", "DSM criteria are polythetic: any 5 of 9 symptoms", "Depression has a single defining symptom", "They have different prototypes"], 1,
+                "Polythetic criteria require a number of symptoms from a list, so very different people can get the same label."),
+              Q("At intake, a client instantly seems “typical” of a group. What is the best next move?",
+                ["Trust the first impression; it is usually right", "Treat it as a hypothesis and check what else could explain it, starting with basics like hearing", "Assign the diagnosis that matches the type", "Avoid categories entirely"], 1,
+                "Categories are useful first guesses; checking what doesn’t fit catches the atypical client the prototype misses.")
+            ]
+          },
+          "m5.2": {
+            home: "Yesenia has tried to stay off opioids by willpower alone, four times, and now says “nothing works for me.” Why do people keep reaching for the same solution, and how can a counselor help them see others?",
+            keys: [["What is the difference between an algorithm and a heuristic?", "An algorithm is a step-by-step procedure that guarantees a solution if followed, but can be slow. A heuristic is a mental shortcut or rule of thumb: fast, usually good enough, sometimes wrong.", "A snail patiently trying every key on a ring of a thousand keys, while a cat simply tries the one with a tiny house painted on it first."],
+              ["What is functional fixedness?", "Seeing an object only in its usual use. In Duncker’s (1945) candle problem, people struggle to see that the thumbtack box can be a shelf for the candle.", "A candle stuck neatly on a wall by turning the thumbtack box into a little shelf, while a man keeps trying to glue the candle on with ice cream."],
+              ["What is mental set?", "Sticking with a method that worked before, even when a simpler one is right there. Luchins (1942) showed it with water-jar problems; the effect is robust.", "A water-jar juggler who keeps using a dazzling three-jar trick even when one jar would do the job."],
+              ["What is the availability heuristic?", "Judging how common or likely something is by how easily examples come to mind (Tversky and Kahneman, 1974). Vivid, reported events feel more frequent than they are.", "A TV news anchor who is a shark, making everyone think sharks are everywhere because shark stories come to mind so easily."],
+              ["What are the steps of problem-solving therapy?", "Define the problem, brainstorm options, evaluate them, act on one, review how it went (D’Zurilla and Nezu). It has robust support for depression.", "A five-drawer filing cabinet labelled Define, Brainstorm, Evaluate, Act and Review, and a client opening drawer two to find it stuffed with wild ideas, a few of them good."]],
+            steps: [
+              { kind: "hook", title: "Yesenia and the same door", body: who("<b>Yesenia</b>, 31, in recovery from opioid use, at her fourth intake in three years.") +
+                "<p>Each time, her plan has been the same: “This time I’ll just be stronger.” She stops cold, white-knuckles it alone, tells no one, and goes back to the same friends and the same evenings. Each time, within weeks, she uses again.</p>" +
+                "<p>Today she says, flatly, “Nothing works for me.”</p>" +
+                "<p>But only one thing has been tried, four times. The question for her counselor is a problem-solving question: why does a smart, motivated person keep pushing the same door?</p>" },
+              { kind: "predict", id: "m5.2:predict", title: "Your call first",
+                case: ["Yesenia has tried willpower alone four times; each time it failed.",
+                  { t: "She drinks her coffee black.", irrelevant: true },
+                  "She hasn’t tried medication, a group, or changing who she spends evenings with.",
+                  "She believes “nothing works for me.”",
+                  "No one has helped her list other options.",
+                  { t: "Her clinic is on the second floor.", irrelevant: true }],
+                q: "Over her next three tries, left on her own, will Yesenia most likely try something new?",
+                options: ["Yes: four failures will push her to switch strategies", "No: she will most likely repeat willpower alone, the method she knows", "She will stop trying altogether, whatever happens"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. A familiar method narrows what we can see; that is <b>mental set</b>. And “nothing works” turns four tries of <i>one</i> approach into proof about <i>all</i> approaches. Failure alone rarely opens new options. Someone usually has to ask, “What else could work?”",
+                hints: ["Ask how many different approaches she has actually tried.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what happens to people who solve a problem the same way many times."] },
+              { kind: "idea", lvl: "f", title: "Problems, algorithms and shortcuts", body: "<p>A problem is a gap between where you are and where you want to be. The <b>problem space</b> is every state and move between them.</p>" +
+                '<dl class="x-dossier"><div><dt>Algorithm</dt><dd>A step-by-step procedure that <b>guarantees</b> a solution: try every combination on a lock. Sure, but slow.</dd></div>' +
+                "<div><dt>Heuristic</dt><dd>A <b>rule of thumb</b>: start with the birthday. Fast, usually good enough, sometimes wrong.</dd></div>" +
+                "<div><dt>Means-ends analysis</dt><dd>Find the biggest difference between now and the goal, and pick a move that shrinks it (Newell and Simon).</dd></div>" +
+                "<div><dt>Working backward</dt><dd>Start from the goal and ask what must come just before it. Useful when the goal is clear and the start is messy.</dd></div>" +
+                "<div><dt>Subgoals</dt><dd>Break the problem into smaller ones: not “stay sober forever” but “get through Friday evening”.</dd></div></dl>" +
+                "<p><b>So:</b> most real problems are solved with heuristics, because there’s no time to search everything.</p>" },
+              { kind: "idea", lvl: "p", title: "Insight, and what blocks it", body: '<dl class="x-dossier"><div><dt>Insight</dt><dd>A sudden restructuring: the “aha”. Köhler’s chimpanzee Sultan, after failed tries, stacked boxes or joined two sticks to reach bananas.</dd></div>' +
+                "<div><dt>Functional fixedness</dt><dd>Duncker (1945): fix a candle to a wall with a candle, matches and a box of tacks. The fix is to empty the box and tack it up as a shelf. People see the box as a <b>container</b>, not a part " + ev("r") + ".</dd></div>" +
+                "<div><dt>Maier’s two strings</dt><dd>Two strings hang too far apart to hold both. Tie the pliers to one and swing it like a pendulum. Pliers are for gripping, so few see it.</dd></div>" +
+                "<div><dt>Mental set</dt><dd>Luchins (1942): after several water-jar problems solved with a long formula, most people used it on a problem with a one-step answer, and some failed a problem only the short way could solve " + ev("r") + ".</dd></div>" +
+                "<div><dt>Incubation</dt><dd>Stepping away sometimes helps the answer arrive. Meta-analyses find a <b>modest</b> benefit that depends on the task " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> what we already know about an object or a method can hide the answer in plain sight.</p>" },
+              { kind: "contrast", id: "m5.2:contrast", title: "Two people, one candle",
+                q: "Who is more likely to solve the candle problem quickly?",
+                cases: [
+                  { label: "Person A", s: ["Gets a candle, matches and thumbtacks, and must fix the candle to the wall.", { t: "Works at a wooden table.", irrelevant: true }, { t: "The tacks are inside the box.", diff: true }, "Same time limit, same instructions."] },
+                  { label: "Person B", s: ["Gets a candle, matches and thumbtacks, and must fix the candle to the wall.", { t: "Works at a wooden table.", irrelevant: true }, { t: "The tacks are next to the empty box.", diff: true }, "Same time limit, same instructions."] }
+                ],
+                answer: 1,
+                features: ["The table", "Whether the box holds the tacks or sits empty", "The time limit", "The instructions"],
+                feature: 1,
+                why: "Only the box differs. Full of tacks, it looks like a container and stays “just packaging”. Empty and set apart, it reads as one more object to use, and people see the shelf much sooner (Duncker, 1945; Glucksberg, 1962). The materials are identical; the framing of one object changed.",
+                hints: ["Find the one sentence where the two setups part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left is where the tacks are.",
+                  "Step one, aloud: say what a box full of tacks looks like it’s for."] },
+              { kind: "idea", lvl: "p", title: "Heuristics in judgment: biases or smart shortcuts?", body: '<dl class="x-dossier"><div><dt>Availability</dt><dd>We judge frequency by how easily examples come to mind (Tversky and Kahneman, 1974) ' + ev("r") + ". Shark attacks feel common because they’re vivid and reported.</dd></div>" +
+                "<div><dt>Representativeness</dt><dd>We judge by resemblance to a type. Linda is described as bright and active in social justice; most people rate “bank teller <b>and</b> feminist” more likely than “bank teller”, which can’t be: the <b>conjunction fallacy</b> (Tversky and Kahneman, 1983) " + ev("r") + ".</dd></div>" +
+                "<div><dt>Anchoring</dt><dd>A first number pulls later estimates toward it, even a random one " + ev("r") + ".</dd></div>" +
+                "<div><dt>System 1 and System 2</dt><dd>Kahneman (2011): fast, automatic thinking versus slow, effortful thinking. A <b>useful metaphor</b>, not two parts of the brain " + ev("c") + ".</dd></div>" +
+                "<div><dt>Ecological rationality</dt><dd>Gigerenzer argues <b>fast-and-frugal heuristics</b> are often smart. The <b>recognition heuristic</b>: if you know one city’s name and not the other’s, guess the known one is bigger, and you’ll often be right. Whether heuristics are mainly biases or mainly adaptive is still argued " + ev("c") + ".</dd></div>" +
+                "<div><dt>Expertise</dt><dd>Experts solve by <b>pattern recognition</b>: chess masters recall real board positions at a glance, but not random ones. Good heuristics, built from experience.</dd></div></dl>" +
+                "<p><b>So:</b> a heuristic is a tool; whether it misleads depends on the setting.</p>" },
+              { kind: "idea", lvl: "m", title: "Problem solving in the counseling room", body: '<dl class="x-dossier"><div><dt>Problem-solving therapy</dt><dd>D’Zurilla and Nezu’s steps: <b>define</b> the problem, <b>brainstorm</b> without judging, <b>evaluate</b> the options, <b>act</b> on one, <b>review</b>. Robust support for depression ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Break mental set</dt><dd>Ask: “What else could work?” “What would you tell a friend to try?” Make the list before judging it.</dd></div>" +
+                "<div><dt>Reframe “nothing works”</dt><dd>Separate the method from the person: “Willpower alone hasn’t worked. We haven’t tried the others yet.”</dd></div>" +
+                "<div><dt>Availability in risk</dt><dd>Clients may overestimate rare, vivid dangers and underestimate common ones. After a stretch without opioids, tolerance drops, so a usual dose can cause an overdose. That risk rarely feels as real as it is: say it plainly, and offer naloxone.</dd></div></dl>" +
+                "<p><b>So:</b> a counselor’s job is often to widen the problem space, not to supply more willpower.</p>" },
+              { kind: "example", lvl: "p", title: "Yesenia, five drawers", body: who("<b>Yesenia</b>, working through problem-solving steps with her counselor.") +
+                '<dl class="x-dossier"><div><dt>Define</dt><dd>Not “I’m weak”, but “Friday evenings with the same friends, alone with cravings.”</dd></div>' +
+                "<div><dt>Brainstorm</dt><dd>Twelve options, none judged yet: buprenorphine, a recovery group, a new Friday routine, telling her sister, changing her number, an app, even “move to the moon”.</dd></div>" +
+                "<div><dt>Evaluate</dt><dd>They weigh each for effort and fit. Medication plus a Thursday group rise to the top.</dd></div>" +
+                "<div><dt>Act and review</dt><dd>She starts both. Two weeks on, Friday is still hard, so they adjust: her sister comes over at seven.</dd></div></dl>" +
+                "<p>“So it’s not that nothing works,” she says. “It’s that I only ever tried one thing.”</p>" +
+                '<p>Spot the shortcuts in a counselor’s own intake week.</p><button type="button" class="x-lens__b press" data-scene="biasarcade">Open the Bias Arcade</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Lab puzzles are not life. The candle, the two strings and the water jars have one right answer, clear rules and nothing at stake. Real problems like Yesenia’s are messy: the goal shifts, the options interact, feelings and other people are part of the problem space. And heuristics are not errors by default. Many “bias” demonstrations use tricky wording or unusual settings; in the environments people actually live in, simple heuristics often do as well as careful calculation.</p>' +
+                "<p><b>The counter.</b> The lab findings still name real traps, mental set and functional fixedness, that clinicians see daily, and problem-solving therapy turns the steps into a method with evidence behind it. The practical stance: respect clients’ shortcuts, and notice when a shortcut has become a rut.</p>" +
+                "<p><b>Person-first.</b> Write “a client with an opioid use disorder” or “a person in recovery”, not “an addict” or “a relapser”.</p>" +
+                "<p>Background: M5 · Concepts and categories. Ahead: M5 · Cognitive biases.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Algorithm or heuristic.</b> A snail tries every key on a ring of a thousand while a cat tries the one with a tiny house painted on it.</p>" +
+                "<p><b>Functional fixedness.</b> The candle sits on a thumbtack-box shelf while a man keeps trying to glue it to the wall with ice cream.</p>" +
+                "<p><b>Mental set.</b> A water-jar juggler keeps using his three-jar trick even when one jar would do.</p>" +
+                "<p><b>Availability.</b> A shark reads the TV news, and suddenly everyone thinks sharks are everywhere.</p>" +
+                "<p><b>Problem-solving therapy.</b> Five drawers, Define to Review, and drawer two is stuffed with wild ideas, a few of them good.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.2:teachback", title: "Teach it back", prompt: "Explain to a new colleague why Yesenia keeps trying willpower alone and says “nothing works for me”, and how to help: the problem space; algorithms versus heuristics; means-ends analysis, working backward and subgoals; insight and Köhler’s chimpanzees; functional fixedness in Duncker’s candle problem and Maier’s two-string problem, and why an empty box makes the candle problem easier; mental set in Luchins’s water jars; the modest evidence for incubation; Tversky and Kahneman’s availability, representativeness with the Linda problem and the conjunction fallacy, and anchoring; System 1 and System 2 as a metaphor, not brain parts; Gigerenzer’s fast-and-frugal and recognition heuristics and the biases versus ecological rationality debate; expertise as pattern recognition; problem-solving therapy’s steps of define, brainstorm, evaluate, act and review and its support for depression; asking “what else could work?” to break mental set; availability bias in risk, including overdose risk after lost tolerance; and the critique that lab puzzles are not messy real problems and heuristics are not errors by default." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Functional fixedness " + ev("r") + ". Mental set " + ev("r") + ". Incubation " + ev("c") + ". Availability, representativeness and anchoring effects " + ev("r") + ". System 1 and System 2 as distinct brain systems " + ev("c") + ". Heuristics as mainly biases or mainly adaptive " + ev("c") + ". Problem-solving therapy for depression " + ev("r") + ".</p>" +
+                "<p><b>So:</b> when a client says “nothing works”, check how many things have actually been tried, then help them widen the list.</p>" },
+              Q("Which is a heuristic rather than an algorithm?",
+                ["Trying every combination on a lock in order", "Following a recipe exactly", "Guessing the lock code is a birthday first", "Checking every word in a dictionary"], 2,
+                "A heuristic is a fast rule of thumb that usually works but doesn’t guarantee a solution."),
+              Q("In Duncker’s candle problem, what makes the solution hard to see?",
+                ["Mental set", "Functional fixedness: seeing the box only as a container", "The availability heuristic", "Anchoring"], 1,
+                "People fix on the box’s usual use; when the box is presented empty, the shelf solution comes much faster."),
+              Q("After many water-jar problems solved with a long formula, people miss a one-step answer. What is this?",
+                ["Insight", "Incubation", "Mental set", "The conjunction fallacy"], 2,
+                "Luchins (1942) showed that a method that worked before can block simpler solutions."),
+              Q("Most people rate “Linda is a bank teller and a feminist” as more likely than “Linda is a bank teller.” What error is this?",
+                ["The conjunction fallacy, from the representativeness heuristic", "Anchoring", "Functional fixedness", "The recognition heuristic"], 0,
+                "Two things together can’t be more likely than one of them alone; resemblance to a type overrides probability."),
+              Q("Yesenia says “nothing works for me” after four tries of willpower alone. What is the best first step?",
+                ["Agree that recovery may not be possible for her", "Tell her to try harder this time", "Use problem-solving steps: define the problem and brainstorm other options", "Repeat the same plan with more check-ins"], 2,
+                "Breaking mental set starts with defining the problem and listing what else could work before judging any option.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -18228,6 +18425,26 @@
           G("m4.6", "Memory wars", "Guerras de la memoria", "The 1990s fight over recovered memories.", "The debate between memory researchers and trauma clinicians over recovered-memory therapy and false memories of abuse."),
           G("m4.6", "Cognitive processing therapy", "Terapia de procesamiento cognitivo", "Changing stuck beliefs after trauma.", "An evidence-based PTSD therapy that helps clients examine and change beliefs about a trauma, such as self-blame."),
           G("m4.6", "EMDR", "EMDR", "A PTSD therapy using eye movements.", "Eye movement desensitisation and reprocessing: an evidence-based PTSD therapy; whether the eye movements themselves add benefit is contested."),
+          G("m5.1", "Prototype", "Prototipo", "The most typical example of a category.", "An average of a category’s typical features, against which new items are compared; robins are closer to the bird prototype than penguins."),
+          G("m5.1", "Typicality effect", "Efecto de tipicidad", "Typical members are judged faster.", "The finding that typical category members are verified faster, named first and learned earlier than atypical ones."),
+          G("m5.1", "Family resemblance", "Parecido de familia", "Overlapping features, none required.", "Wittgenstein’s idea that category members share overlapping features rather than one defining set, as with games."),
+          G("m5.1", "Exemplar theory", "Teoría de ejemplares", "Comparing to remembered examples.", "The view that we categorise by comparing new items to specific stored instances rather than to an average."),
+          G("m5.1", "Basic-level category", "Categoría de nivel básico", "The everyday middle level, like “dog”.", "The level of a category hierarchy named first and used most, between superordinate (animal) and subordinate (beagle)."),
+          G("m5.1", "Ad hoc category", "Categoría ad hoc", "A category made up for a goal.", "A category built on the spot to serve a goal, such as things to save in a fire (Barsalou, 1983)."),
+          G("m5.1", "Stereotype", "Estereotipo", "A category of people with a typical picture.", "A generalised belief about members of a social group; efficient for filling gaps but prone to error about individuals."),
+          G("m5.1", "Polythetic criteria", "Criterios politéticos", "Some, not all, symptoms from a list.", "Diagnostic criteria met by any required number from a list, such as 5 of 9 for major depression, so cases can differ widely."),
+          G("m5.2", "Heuristic", "Heurística", "A mental shortcut or rule of thumb.", "A fast, effort-saving strategy for judgment or problem solving that usually works but does not guarantee a correct answer."),
+          G("m5.2", "Means-ends analysis", "Análisis medios-fines", "Shrink the gap to the goal step by step.", "A problem-solving heuristic that repeatedly picks moves reducing the biggest difference between the current state and the goal."),
+          G("m5.2", "Insight", "Insight (comprensión súbita)", "A sudden “aha” solution.", "Solving a problem by suddenly restructuring how it is seen, as in Köhler’s chimpanzees joining sticks to reach food."),
+          G("m5.2", "Functional fixedness", "Fijeza funcional", "Seeing objects only in their usual use.", "A barrier to problem solving in which an object’s familiar function hides other uses, as in Duncker’s candle problem."),
+          G("m5.2", "Mental set", "Disposición mental", "Sticking with a method that worked before.", "The tendency to reuse a familiar strategy even when a simpler or better one is available (Luchins’s water jars)."),
+          G("m5.2", "Incubation", "Incubación", "Stepping away helps a solution come.", "Improved problem solving after a break from the problem; meta-analyses find a modest, task-dependent effect."),
+          G("m5.2", "Availability heuristic", "Heurística de disponibilidad", "Judging by what comes to mind easily.", "Estimating frequency or likelihood by how easily examples are recalled, so vivid events seem more common."),
+          G("m5.2", "Representativeness heuristic", "Heurística de representatividad", "Judging by resemblance to a type.", "Estimating likelihood by how much something resembles a prototype, often ignoring base rates and probability rules."),
+          G("m5.2", "Conjunction fallacy", "Falacia de la conjunción", "Thinking two things are likelier than one.", "Judging a combination of events as more probable than one of them alone, as in the Linda problem."),
+          G("m5.2", "Anchoring", "Anclaje", "A first number pulls later estimates.", "The bias for estimates to stay close to an initial value, even an irrelevant or random one."),
+          G("m5.2", "Recognition heuristic", "Heurística de reconocimiento", "Pick the option you recognise.", "Gigerenzer’s fast-and-frugal rule: if one option is recognised and the other not, infer the recognised one scores higher."),
+          G("m5.2", "Problem-solving therapy", "Terapia de solución de problemas", "Define, brainstorm, evaluate, act, review.", "A structured therapy (D’Zurilla and Nezu) teaching stepwise problem solving; well supported for depression."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -18782,6 +18999,18 @@
             R("Garven, Wood, Malpass & Shaw", 1998, "experiment", "Interview techniques taken from the McMartin case led preschool children to make many more false allegations.", st("robust", "Suggestive interviewing effects on children replicate widely.")),
             R("Lynn et al.", 1997, "review", "Hypnosis increases recall of both accurate and inaccurate material, and confidence, without improving accuracy.", st("robust", "Hypnotically refreshed memories are widely regarded as unreliable.")),
             R("Watts et al.", 2013, "meta-analysis", "Trauma-focused psychotherapies, including prolonged exposure, cognitive processing therapy and EMDR, reduced PTSD symptoms.", st("robust", "Consistent across meta-analyses; EMDR’s eye-movement component remains contested."))];
+          REFS["m5.1"] = [
+            R("Rosch", 1975, "experiment", "People rated category members for typicality with high agreement, and typical members such as robins were processed faster than atypical ones such as penguins.", st("robust", "Typicality effects replicate across categories, tasks and languages.")),
+            R("Rosch, Mervis, Gray, Johnson & Boyes-Braem", 1976, "experiment", "Basic-level categories such as “dog” were named fastest, shared the most features and were learned first by children.", st("robust", "The basic-level advantage replicates; experts shift toward more specific levels.")),
+            R("Barsalou", 1983, "experiment", "Goal-derived ad hoc categories, such as things to take from a burning house, showed graded typicality like ordinary categories.", st("robust", "Widely cited evidence that concepts are flexible and built for goals.")),
+            R("Fried & Nesse", 2015, "observational", "Among 3,703 people with depression in the STAR*D study, there were 1,030 distinct symptom profiles; the most common was shared by under 2%.", st("robust", "Fits other studies showing great heterogeneity within DSM depression.")),
+            R("Kotov et al.", 2017, "review", "Proposed HiTOP, a dimensional, hierarchical model of psychopathology built from how symptoms co-occur.", st("contested", "Strong empirical base; its clinical usefulness compared with DSM categories is still being tested."))];
+          REFS["m5.2"] = [
+            R("Duncker", 1945, "experiment", "On Problem-Solving: people struggled to use a box of tacks as a candle shelf when the box held the tacks, showing functional fixedness.", st("robust", "Replicated, including Glucksberg’s finding that an empty box makes the solution easier.")),
+            R("Luchins", 1942, "experiment", "After water-jar problems solved with one long formula, most people kept using it when a simpler solution worked, and many missed problems only the simple way solved.", st("robust", "Einstellung effects replicate, including in chess experts.")),
+            R("Tversky & Kahneman", 1974, "review", "Judgment under Uncertainty: described availability, representativeness and anchoring as heuristics that lead to systematic biases.", st("robust", "The core effects replicate; how to interpret them is debated.")),
+            R("Goldstein & Gigerenzer", 2002, "experiment", "People who recognised only one of two cities often inferred it was larger, and this recognition heuristic could beat fuller knowledge.", st("contested", "How often people actually use recognition alone is disputed.")),
+            R("Cuijpers et al.", 2018, "meta-analysis", "Problem-solving therapy reduced depression in adults compared with control conditions, with effects similar to other psychotherapies.", st("robust", "Consistent across meta-analyses; study quality varies."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
