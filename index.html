@@ -16481,6 +16481,209 @@
                 "Ebbinghaus’s savings: even when recall fails, relearning takes less time.")
             ]
           },
+          "m4.5": {
+            home: "Carlos and Dee were in the same group session, heard the same argument, and tell it two different ways. Both are sure. Is one of them lying, or is memory built, not played back?",
+            keys: [["What did Bartlett’s “War of the Ghosts” show?", "Frederic Bartlett (1932) had British participants retell an unfamiliar Native American folk tale again and again. The story got shorter, odd details dropped out, and unfamiliar parts were reshaped to fit what they already knew: canoes became boats, the ghostly parts faded. Memory is rebuilt through schemas, our mental frameworks.", "A ghost canoe from Bartlett’s story that turns into a plain fishing boat, with a little fisherman in a woolly hat, every time someone retells it."],
+              ["What did Loftus and Palmer (1974) find?", "People watched films of car crashes. Asked how fast the cars were going when they “smashed” into each other, they estimated higher speeds than when asked about cars that “hit”. A week later, the “smashed” group was more likely to say they saw broken glass; there was none. One word in a question changed the memory.", "A car that grows a new dent every time a lawyer leans in and says “smashed”, until it looks like a crumpled can, though it only ever got a tap."],
+              ["What is the misinformation effect?", "Misleading information given after an event gets blended into the memory of it. Loftus, Miller and Burns (1978) showed people a stop sign, mentioned a yield sign later, and many then “remembered” the yield sign. Related: source monitoring errors, where we remember the content but forget where it came from.", "A memory sitting in a café, quietly accepting a sugar cube from a stranger, then swearing it always took its coffee sweet."],
+              ["What is the DRM false memory effect?", "Roediger and McDermott (1995), building on Deese (1959), read lists like bed, rest, tired, dream, snore, pillow, blanket. The word “sleep” was never on the list, yet people recalled it about half the time and recognised it as often as words that were there, often with a vivid sense of hearing it.", "A bed made only of the words “pillow”, “dream”, “blanket” and “snore”, while a crowd stands round it swearing they saw “SLEEP” written in big letters on the headboard."],
+              ["Do vivid, confident memories mean accurate ones?", "Not on their own. Flashbulb memories of shocking news feel vivid, but they drift: after 9/11, Talarico and Rubin (2003) found they changed as much as everyday memories while confidence stayed high. But confidence at a first, fair, uncontaminated test (such as a double-blind lineup) does predict accuracy quite well (Wixted and Wells, 2017). Later confidence doesn’t.", "A camera flash that takes a dazzling photo, then the photo slowly redraws itself in crayon while still insisting it’s high definition."]],
+            steps: [
+              { kind: "hook", title: "Same argument, two stories", body: who("<b>Carlos</b> and <b>Dee</b>, two members of a weekly therapy group.") +
+                "<p>Last week, two other members argued during the session. This week, the facilitator asks how people felt about it.</p>" +
+                "<p>Carlos says, “Mark shouted at Ana and stormed out. It was scary.” Dee says, “Nobody shouted. Mark raised his voice once, then said he needed air. Ana started it.”</p>" +
+                "<p>Both are certain. Both were in the room, a few chairs apart.</p>" },
+              { kind: "predict", id: "m4.5:predict", title: "Your call first",
+                case: ["Carlos and Dee sat in the same session and saw the same argument.",
+                  { t: "The group meets on Tuesdays.", irrelevant: true },
+                  "Carlos grew up in a home where raised voices came before fights.",
+                  "Dee has talked about the session with Ana twice since then.",
+                  "Each is very confident a week later.",
+                  { t: "The room has blue chairs.", irrelevant: true }],
+                q: "Whose account is “accurate”?",
+                options: ["Carlos’s: he remembers it as more intense, so it stuck harder", "Dee’s: her account is calmer and more detailed", "Probably neither fully: both have rebuilt the event, and confidence a week on can’t settle it"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: most likely neither, in full. Each memory was rebuilt. Carlos’s schema for raised voices may have filled in “shouted” and “stormed”; Dee’s talks with Ana may have blended Ana’s view into her own. A week later, high confidence doesn’t tell us who is right. Both accounts still tell us something true about how each of them experienced it.",
+                hints: ["Ask what each of them brought to the room, and what happened after.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what could have changed each memory since last week."] },
+              { kind: "idea", lvl: "f", title: "History: the War of the Ghosts", body: "<p>In 1932, Frederic Bartlett " + ev("r") + " asked British students to read <b>“The War of the Ghosts”</b>, a Native American folk tale with unfamiliar ideas about ghosts and battle, then retell it, again and again over weeks and months, or pass it from person to person.</p>" +
+                '<dl class="x-dossier"><div><dt>Shorter</dt><dd>The story lost detail with each retelling.</dd></div>' +
+                "<div><dt>More familiar</dt><dd>Odd parts were reshaped to fit what the readers knew: canoes became boats, hunting seals became fishing.</dd></div>" +
+                "<div><dt>Less ghostly</dt><dd>The supernatural parts, which made no sense to them, faded or were explained away.</dd></div></dl>" +
+                "<p>Bartlett’s word for the frameworks doing this was <b>schemas</b>: organised knowledge about how things usually go. We store the gist, then <b>schemas fill the gaps</b> when we remember.</p>" +
+                "<p><b>So:</b> remembering is rebuilding, not replaying, and we rebuild with what we already expect.</p>" },
+              { kind: "idea", lvl: "f", title: "One word changes a crash", body: "<p>Elizabeth Loftus and John Palmer (1974) " + ev("r") + " showed people films of car crashes, then asked about the speed.</p>" +
+                '<dl class="x-dossier"><div><dt>The verb</dt><dd>“About how fast were the cars going when they <b>smashed</b> into each other?” drew higher estimates (about 41 mph) than <b>hit</b> (about 34) or <b>contacted</b> (about 32).</dd></div>' +
+                "<div><dt>A week later</dt><dd>Asked “Did you see any broken glass?”, about a third of the “smashed” group said yes, roughly twice the “hit” group. There was no broken glass.</dd></div>" +
+                "<div><dt>Misinformation effect</dt><dd>Information given after the event gets blended into the memory (Loftus, Miller and Burns, 1978) " + ev("r") + ".</dd></div>" +
+                "<div><dt>Source monitoring errors</dt><dd>We keep the content but lose where it came from: did I see it, or hear it later, or imagine it? (Johnson and colleagues, 1993) " + ev("r") + "</dd></div></dl>" +
+                "<p><b>So:</b> questions don’t just collect memories; they can change them.</p>" },
+              { kind: "contrast", id: "m4.5:contrast", title: "Two witnesses, one difference",
+                q: "A week later, which witness is more likely to say they saw broken glass?",
+                cases: [
+                  { label: "Witness A", s: ["Watches the same film of a car crash.", { t: "Sits by the window.", irrelevant: true }, { t: "Is asked: “How fast were the cars going when they hit each other?”", diff: true }, "Same follow-up question a week later."] },
+                  { label: "Witness B", s: ["Watches the same film of a car crash.", { t: "Sits by the window.", irrelevant: true }, { t: "Is asked: “How fast were the cars going when they smashed into each other?”", diff: true }, "Same follow-up question a week later."] }
+                ],
+                answer: 1,
+                features: ["Where they sat", "The verb in the question", "The film they watched", "The follow-up question"],
+                feature: 1,
+                why: "Only the verb differs. “Smashed” implies a violent crash, and that idea is folded into the memory, so a week later broken glass fits the rebuilt scene. This is the misinformation effect from a single word (Loftus and Palmer, 1974).",
+                hints: ["Find the one sentence where the two witnesses part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one word.",
+                  "Step one, aloud: say what picture each verb puts in your head."] },
+              { kind: "idea", lvl: "p", title: "Building memories that never happened", body: '<dl class="x-dossier"><div><dt>DRM lists</dt><dd>Hear bed, rest, tired, dream, snore, pillow, blanket, and about half of people later recall <b>“sleep”</b>, which was never said (Roediger and McDermott, 1995) ' + ev("r") + ". The related words activate it; then we can’t tell activation from hearing.</dd></div>" +
+                "<div><dt>Imagination inflation</dt><dd>Imagining a childhood event (such as breaking a window with your hand) makes people more confident it happened (Garry and colleagues, 1996) " + ev("r") + ".</dd></div>" +
+                "<div><dt>Lost in the mall</dt><dd>Loftus and Pickrell (1995) told adults, with a relative’s help, about three true childhood events and one false one: being lost in a shopping mall. About 25% (6 of 24) came to remember the false event fully or partly " + ev("c") + ". How many of these count as full false memories, rather than guesses or partial images, is debated.</dd></div>" +
+                "<div><dt>Flashbulb memories</dt><dd>Memories of shocking news feel vivid. Neisser and Harsch (1992) found Challenger memories had shifted a lot by two and a half years on. After 9/11, Talarico and Rubin (2003) found flashbulb memories drifted as much as everyday ones, but vividness and confidence stayed high " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> a memory can be vivid, detailed and sincerely believed, and still be partly built from suggestion or imagination.</p>" },
+              { kind: "idea", lvl: "p", title: "When confidence does count", body: "<p>“Confidence means nothing” goes too far. Wixted and Wells (2017) " + ev("c") + " argued that <b>confidence at the first, fair, uncontaminated test</b> is a useful guide: high-confidence first identifications from a proper lineup are mostly correct.</p>" +
+                '<dl class="x-dossier"><div><dt>First test</dt><dd>The first time a memory is tested is the cleanest. Every later telling can add something.</dd></div>' +
+                "<div><dt>Later confidence</dt><dd>Confidence grows with feedback, retelling and time, without accuracy growing too. Courtroom certainty months later is weak evidence.</dd></div></dl>" +
+                "<p><b>Lineup reforms</b> " + ev("r") + " follow from this: run lineups <b>double-blind</b> (the officer doesn’t know who the suspect is), tell witnesses the culprit may not be there, use fair fillers, test only once, and <b>record confidence immediately</b>, in the witness’s own words.</p>" +
+                "<p><b>So:</b> protect the first telling, and write down how sure the person was before anything can change it.</p>" },
+              { kind: "idea", lvl: "m", title: "Asking without leading", body: "<p>In intake interviews and incident reports, your questions can shape what clients and staff remember:</p>" +
+                '<dl class="x-dossier"><div><dt>Open first</dt><dd>“Tell me what happened.” “What happened next?” Let the person build the account in their own order.</dd></div>' +
+                "<div><dt>Avoid leading questions</dt><dd>Not “Did he shove you?” but “What did he do?” Not “How angry was she?” but “How did she seem?”</dd></div>" +
+                "<div><dt>Write their words</dt><dd>Record the person’s own words, and note when an account was given and who talked to them first.</dd></div>" +
+                "<div><dt>Shifting details still matter</dt><dd>A client’s memory that changes in detail is still meaningful: it shows what the event means to them now.</dd></div>" +
+                "<div><dt>Two kinds of truth</dt><dd><b>Therapeutic truth</b> is the client’s lived experience and what it means, which therapy works with. <b>Forensic truth</b> is what can be shown to have happened, which courts need. Therapy doesn’t need to settle the second to help with the first.</dd></div></dl>" +
+                "<p><b>So:</b> ask open, write it down early, and treat memory as meaningful, not as a recording.</p>" },
+              { kind: "example", lvl: "p", title: "Carlos and Dee, with a skilled facilitator", body: who("<b>The facilitator</b>, responding to the two accounts.") +
+                '<dl class="x-dossier"><div><dt>No verdict</dt><dd>She doesn’t say who is right. “You both saw it from different chairs and different histories.”</dd></div>' +
+                "<div><dt>Open questions</dt><dd>“Carlos, what was that moment like for you?” “Dee, what did you notice?” Not “Didn’t he shout?”</dd></div>" +
+                "<div><dt>Meaning</dt><dd>Carlos’s “scary” links to raised voices at home; that is worth working on, whatever the decibels were.</dd></div>" +
+                "<div><dt>The incident note</dt><dd>She wrote her own note the same evening, in plain words, before the group discussed it, and marked what she saw versus what she heard later.</dd></div></dl>" +
+                "<p>Dee says, “Maybe I took Ana’s side without noticing.” Carlos says, “Maybe ‘stormed’ was my word, not his.”</p>" +
+                '<p>Try planting a detail in a witness’s memory, and see how one word in a question changes the scene.</p><button type="button" class="x-lens__b press" data-scene="eyewitness">Open Eyewitness Reconstruction</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Most false-memory studies use lab words, films or harmless childhood events, not the personal, emotional events that matter in therapy or court, so how far they generalise is limited. Implantation studies like “lost in the mall” rely on coders deciding what counts as a memory, and the rates swing with those rules. And some argue the field overstated memory’s fallibility: a first, fair test with recorded confidence can be quite accurate.</p>' +
+                "<p><b>The counter.</b> The core findings (schemas reshape recall, leading questions and later information change memories, confidence grows without accuracy) replicate across labs, materials and real cases, including wrongful convictions later overturned by DNA. The nuance is that memory is often right in gist and fragile in detail, and how you test it matters.</p>" +
+                "<p><b>Person-first.</b> Write “a client whose account changed”, not “an unreliable client”.</p>" +
+                "<p>Background: M4 · Encoding, storage and retrieval; M4 · Forgetting and interference. Ahead: M4 · Trauma and memory controversies.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Schemas reshape memory.</b> Bartlett’s ghost canoe turns into a plain fishing boat every time someone retells the story.</p>" +
+                "<p><b>Leading questions.</b> A car grows another dent every time a lawyer says “smashed”.</p>" +
+                "<p><b>Misinformation.</b> A memory accepts a sugar cube from a stranger, then swears it always took its coffee sweet.</p>" +
+                "<p><b>DRM false memory.</b> A bed made only of “pillow, dream, blanket, snore”, and everyone swears they saw “SLEEP” on the headboard.</p>" +
+                "<p><b>Flashbulb memory.</b> A dazzling flash photo slowly redraws itself in crayon, still insisting it’s high definition.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.5:teachback", title: "Teach it back", prompt: "Explain to Carlos and Dee why they remember the same argument differently and both feel sure: Bartlett’s 1932 War of the Ghosts study and how schemas fill gaps and reshape unfamiliar details; Loftus and Palmer’s 1974 smashed-versus-hit study, speed estimates and the remembered broken glass; the misinformation effect and source monitoring errors; DRM false memories for words like sleep; imagination inflation; the lost-in-the-mall study and the debate over how many count as full false memories; flashbulb memories that drift while confidence stays high after 9/11 and Challenger; why confidence at a first, fair test is more informative (Wixted and Wells, 2017) and the lineup reforms of double-blind administration and recording confidence immediately; the clinical tools of open questions, avoiding leading questions in intake and incident reports, valuing memories whose details shift, and the difference between therapeutic and forensic truth; and the critique that lab findings may not generalise to personal emotional events." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Schemas reshape recall " + ev("r") + ". Leading questions and the misinformation effect " + ev("r") + ". DRM false memories " + ev("r") + ". Flashbulb memories drift while confidence stays high " + ev("r") + ". Rates of full implanted false memories " + ev("c") + ". Confidence at a first, fair test as a guide to accuracy " + ev("c") + ".</p>" +
+                "<p><b>So:</b> memory is rebuilt each time; ask open questions, protect the first telling, and value what a memory means even when details shift.</p>" },
+              Q("What did Bartlett’s (1932) “War of the Ghosts” study show?",
+                ["People recall unfamiliar stories word for word", "People reshape unfamiliar stories to fit their schemas", "Ghost stories are remembered best", "Memory improves with each retelling"], 1,
+                "Retellings got shorter and more familiar, such as canoes becoming boats: schemas reshape memory."),
+              Q("In Loftus and Palmer (1974), what changed when the question said “smashed” instead of “hit”?",
+                ["Nothing measurable", "Lower speed estimates", "Higher speed estimates and more false reports of broken glass", "Better memory for the film"], 2,
+                "One verb raised speed estimates and, a week later, more people remembered broken glass that wasn’t there."),
+              Q("After hearing bed, rest, tired, dream, snore, many people “remember” hearing “sleep”. What is this?",
+                ["A DRM false memory", "Proactive interference", "A flashbulb memory", "Cue-dependent forgetting"], 0,
+                "Roediger and McDermott (1995): related words activate the unseen lure, which is then remembered as heard."),
+              Q("A witness was unsure at a fair, double-blind lineup but is completely certain at trial a year later. What does the research suggest?",
+                ["Trust the trial confidence: it is the most considered", "The first, recorded confidence is the better guide", "Confidence never relates to accuracy", "Certainty proves the memory was recovered"], 1,
+                "Confidence at the first, uncontaminated test is informative; confidence that grows later is not (Wixted and Wells, 2017)."),
+              Q("Writing an incident report, which question is best to ask a client first?",
+                ["“Did he push you?”", "“How hard did he hit you?”", "“Tell me what happened.”", "“He was angry, wasn’t he?”"], 2,
+                "Open questions let the person build their own account without a suggested detail being folded in.")
+            ]
+          },
+          "m4.6": {
+            home: "Rosa remembers parts of a hard time in sharp flashes and other parts not at all. Does a fragmented memory mean a false one, and what should a therapist do, or not do, about the gaps?",
+            keys: [["Is trauma usually forgotten?", "No. Most people remember traumatic events, often too well. In PTSD, the problem is intrusive memories: unwanted, vivid memories, nightmares and flashbacks that return again and again. Forgetting a whole trauma is the rare case, not the rule.", "A loudly honking alarm clock on a bedside table, ringing at 3 a.m. with no snooze button, refusing every attempt to forget it exists."],
+              ["How does stress affect what we remember?", "Stress hormones such as noradrenaline and cortisol tend to strengthen memory for the central gist of an event and weaken memory for peripheral details. So a person may recall the core of what happened clearly and the edges poorly. Whether trauma memories are more fragmented than other memories is debated.", "A theatre spotlight blazing on the centre of a stage, so the actor glows in sharp detail, while the scenery at the edges goes soft and blurry."],
+              ["Can lost memories be recovered?", "Sometimes, and they can be true: corroborated cases exist, especially memories that return spontaneously outside therapy (Geraerts and colleagues, 2007). But memories can also be created by suggestion. Dissociative amnesia is in DSM-5; how often memories are truly repressed and later recovered is contested.", "A lost-property office where sometimes your real umbrella turns up with your name inside, and sometimes a helpful clerk keeps saying “Isn’t this one yours?” until a stranger’s umbrella starts to feel familiar."],
+              ["Does hypnosis recover hidden memories?", "No. Hypnosis brings up more material, true and false, and raises confidence in all of it. It does not reliably recover accurate memories, and memories “recovered” under hypnosis are usually not accepted as evidence. Guided imagery and suggestive questioning carry the same risk.", "A hypnotist’s swinging pocket watch that tick-tocks “confidence, confidence” while handing out shiny keys that fit no lock at all."],
+              ["What do evidence-based PTSD therapies treat?", "Prolonged exposure, cognitive processing therapy and EMDR treat the fear and the meaning attached to memories the person already has. They don’t dig for new ones. EMDR’s outcomes are strong; whether its eye movements add anything is contested.", "A client and a therapist walking slowly, at the client’s pace, through a museum of an old storm, and turning a sign from “DANGER NOW” to “THAT WAS THEN”."]],
+            steps: [
+              { kind: "hook", title: "Rosa, and a decade of argument", body: who("<b>Rosa</b>, 34, starting therapy for nightmares and panic.") +
+                "<p>She has a history of trauma in her teens. Some moments come back in sharp, unwanted flashes: a smell, a sound, a door. Other stretches she can’t place at all. “I don’t even know if I’m remembering it right,” she says. “Maybe I’m making it up.”</p>" +
+                "<p>Her questions sit inside a long argument. In the 1980s and 1990s, some therapists used hypnosis, guided imagery and repeated suggestive questions to “recover” memories of abuse. Some recovered memories were later retracted, families sued therapists, and the clash became known as the <b>memory wars</b>.</p>" +
+                "<p>Both sides have left lessons for how to help Rosa.</p>" },
+              { kind: "predict", id: "m4.6:predict", title: "Your call first",
+                case: ["Rosa has remembered the core events since they happened.",
+                  { t: "She drinks tea, not coffee.", irrelevant: true },
+                  "Some details come back in vivid fragments: a smell, a sound.",
+                  "Other details, like the order of events, are hazy.",
+                  "No one has suggested to her what happened.",
+                  { t: "Her session is on Thursday mornings.", irrelevant: true }],
+                q: "Is Rosa’s fragmented memory a sign that it is false?",
+                options: ["Yes: a true memory would be complete and in order", "No: fragments and hazy details are common in memories of highly stressful events", "Yes: if she can’t put events in order, she made them up"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: no. Under stress, memory tends to hold the central gist and sharp sensory fragments, while sequence and edges blur. That pattern fits a real, frightening experience. Fragments don’t prove a memory true either, but her account has been continuous and unprompted. Her therapist doesn’t need to rule on it to help her.",
+                hints: ["Ask what stress usually does to the centre and the edges of a memory.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether her core memory came from her or from someone’s suggestion."] },
+              { kind: "idea", lvl: "f", title: "Trauma is usually remembered", body: "<p>A common belief is that terrible events are pushed out of memory. For most people, the opposite is true " + ev("r") + ".</p>" +
+                '<dl class="x-dossier"><div><dt>Too well, not too little</dt><dd>In <b>PTSD</b>, a core symptom is <b>intrusive memories</b>: unwanted memories, nightmares and flashbacks that return uninvited.</dd></div>' +
+                "<div><dt>Gist and edges</dt><dd>Stress hormones such as noradrenaline and cortisol tend to <b>strengthen the central gist</b> and <b>weaken peripheral details</b> " + ev("r") + ". The core is kept; the wallpaper is not.</dd></div>" +
+                "<div><dt>Fragments</dt><dd>Many survivors describe sensory fragments and a broken sequence. Whether trauma memories are more fragmented than other emotional memories is <b>debated</b> " + ev("c") + "; some studies find they are about as coherent.</dd></div></dl>" +
+                "<p><b>So:</b> forgetting a trauma entirely is the rare case; remembering it too much is the common one.</p>" },
+              { kind: "idea", lvl: "p", title: "Repression, dissociation and recovered memories", body: '<dl class="x-dossier"><div><dt>Repression</dt><dd>Freud’s idea that the mind pushes unbearable memories into an unconscious store, intact, to return later. As a <b>general mechanism</b> for trauma, it has little support ' + ev("c") + ".</dd></div>" +
+                "<div><dt>Dissociation</dt><dd>Feeling detached from oneself or the surroundings, often during or after trauma. <b>Dissociative amnesia</b> is a DSM-5 diagnosis: inability to recall important personal information, usually traumatic. It exists; how often true “repressed and recovered” memories happen is <b>contested</b> " + ev("c") + ".</dd></div>" +
+                "<div><dt>Recovered memories can be true</dt><dd>Corroborated cases exist. Geraerts and colleagues (2007) " + ev("r") + " found memories that returned <b>spontaneously, outside therapy</b>, were corroborated about as often as never-forgotten ones.</dd></div>" +
+                "<div><dt>Or false</dt><dd>In the same study, memories recovered through <b>suggestive therapy</b> had no corroboration. Lab work shows suggestion can build false memories (M4 · Memory is reconstructive).</dd></div>" +
+                "<div><dt>Risky techniques</dt><dd><b>Hypnosis</b>, <b>guided imagery</b> of possible abuse and <b>suggestive questioning</b> raise confidence and false detail, not accuracy " + ev("d") + ". They are not reliable ways to recover memories.</dd></div></dl>" +
+                "<p><b>So:</b> a returning memory may be true or false; how it came back matters more than how vivid it is.</p>" },
+              { kind: "contrast", id: "m4.6:contrast", title: "Two therapists, one difference",
+                q: "Which therapist’s approach risks shaping the client’s memory?",
+                cases: [
+                  { label: "Therapist A", s: ["Same client, struggling with low mood and gaps in childhood memory.", { t: "Has a bookshelf in the office.", irrelevant: true }, { t: "Asks: “What do you remember?”", diff: true }, "Same number of sessions, same warmth."] },
+                  { label: "Therapist B", s: ["Same client, struggling with low mood and gaps in childhood memory.", { t: "Has a bookshelf in the office.", irrelevant: true }, { t: "Asks: “Could you have been abused and forgotten?”", diff: true }, "Same number of sessions, same warmth."] }
+                ],
+                answer: 1,
+                features: ["The bookshelf", "Whether the question suggests a specific answer", "How many sessions they had", "How warm the therapist was"],
+                feature: 1,
+                why: "Only the question differs. “What do you remember?” leaves the content to the client. “Could you have been abused and forgotten?” plants a specific idea from a trusted authority, which, asked again over weeks, is exactly how suggestion and imagination inflation can build a false belief or memory.",
+                hints: ["Find the one sentence where the two therapists part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one question.",
+                  "Step one, aloud: say which question already contains an answer."] },
+              { kind: "idea", lvl: "p", title: "History: the memory wars", body: "<p>In the 1980s and 1990s, a wave of <b>recovered-memory therapy</b> used hypnosis, guided imagery, dream work and repeated suggestive questions to uncover suspected abuse.</p>" +
+                '<dl class="x-dossier"><div><dt>McMartin preschool</dt><dd>From 1983 in California, staff at a preschool were accused after hundreds of children were interviewed with leading, repeated and rewarding questions. The trials ended in 1990 with <b>no convictions</b>. Later experiments using those interview styles produced false allegations from children (Garven and colleagues, 1998) ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Lawsuits</dt><dd>Some adults later retracted memories recovered in therapy, and families sued therapists. In the 1994 <b>Ramona</b> case, a California jury found two therapists negligent for reinforcing false memories.</dd></div>" +
+                "<div><dt>Two camps</dt><dd>Memory researchers, led publicly by <b>Elizabeth Loftus</b>, warned that suggestion can create false memories. Many trauma clinicians warned that abuse is real, common and often disbelieved.</dd></div></dl>" +
+                "<p>Both were partly right. Abuse is real and common, and most survivors remember it. And suggestive techniques can create false memories.</p>" +
+                "<p><b>So:</b> the lesson is both/and: <b>believe the client’s distress; don’t direct their memories</b>.</p>" },
+              { kind: "idea", lvl: "m", title: "Working with Rosa’s memories", body: '<dl class="x-dossier"><div><dt>Trauma-informed care</dt><dd>Safety, choice and control for the client. Rosa decides what to share and when.</dd></div>' +
+                "<div><dt>Follow her pace</dt><dd>Don’t “dig” for memories, and don’t fill gaps for her. Gaps can stay gaps.</dd></div>" +
+                "<div><dt>Don’t suggest</dt><dd>Never propose abuse or a perpetrator the client hasn’t raised. Use open questions; avoid hypnosis and guided imagery to “find” memories.</dd></div>" +
+                "<div><dt>Treat the meaning and fear</dt><dd>Evidence-based PTSD therapies, <b>prolonged exposure</b> and <b>cognitive processing therapy</b> " + ev("r") + ", work with memories the client already has, reducing fear and changing beliefs like “it was my fault”. <b>EMDR</b> has strong outcomes too " + ev("r") + "; whether its eye movements add anything is contested " + ev("c") + ".</dd></div>" +
+                "<div><dt>Mandated reporting</dt><dd>Reporting duties are about <b>current safety facts</b>, such as a child at risk now. Follow your local law; you report, you don’t investigate.</dd></div></dl>" +
+                "<p><b>So:</b> you can help Rosa heal without ever deciding exactly what happened.</p>" },
+              { kind: "example", lvl: "p", title: "Rosa, three months in", body: who("<b>Rosa</b>, in cognitive processing therapy.") +
+                '<dl class="x-dossier"><div><dt>Validation</dt><dd>Her therapist says, “Fragments and gaps are common after frightening experiences. They don’t mean you’re making it up.”</dd></div>' +
+                "<div><dt>No digging</dt><dd>When Rosa asks, “Should we try to fill in the gaps?”, her therapist says they’ll work with what she remembers, and anything else can come, or not, in its own time.</dd></div>" +
+                "<div><dt>Meaning</dt><dd>They work on the belief “I should have stopped it”, which drives much of her shame.</dd></div>" +
+                "<div><dt>Results</dt><dd>Her nightmares ease. The memories still come, but less often, and they feel like the past.</dd></div></dl>" +
+                "<p>“I still don’t remember all of it,” she says. “I don’t need to, to feel better.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Both sides of the memory wars got things wrong. Some therapists used techniques that created false memories and hurt families; some critics wrote as if recovered memories were never true, which left real survivors disbelieved. And the science of <b>individual</b> memory accuracy is limited: no test, scan or level of detail can tell whether one person’s specific memory is true. Lab false-memory studies use harmless events and can’t ethically model trauma.</p>' +
+                "<p><b>The counter.</b> The practical guidance holds on either reading: most trauma is remembered, suggestion can distort, and effective PTSD treatment doesn’t require digging. Spontaneous, corroborated recoveries are real; suggestive therapy is the risk factor. A both/and stance protects survivors and families alike.</p>" +
+                "<p><b>Person-first.</b> Write “a client with a trauma history”, not “a trauma victim” or “a false-memory case”.</p>" +
+                "<p>Background: M4 · Forgetting and interference; M4 · Memory is reconstructive.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Trauma is usually remembered.</b> An alarm clock honks at 3 a.m. with no snooze button, refusing to be forgotten.</p>" +
+                "<p><b>Gist and edges.</b> A spotlight blazes on the centre of the stage while the scenery at the edges goes soft.</p>" +
+                "<p><b>Recovered memories.</b> At the lost-property office, sometimes your real umbrella turns up; sometimes a clerk asks “Isn’t this yours?” until a stranger’s feels familiar.</p>" +
+                "<p><b>Hypnosis.</b> A swinging watch tick-tocks “confidence, confidence” while handing out shiny keys that fit no lock.</p>" +
+                "<p><b>PTSD therapy.</b> Client and therapist walk an old-storm museum at the client’s pace, turning “DANGER NOW” to “THAT WAS THEN”.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.6:teachback", title: "Teach it back", prompt: "Explain to a new colleague how to work with Rosa’s fragmented memories without harming her or shaping them: why trauma is usually remembered, often too well, with intrusive memories in PTSD; how stress hormones strengthen central gist and weaken peripheral detail, and why fragmentation is debated; repression as a Freudian idea with little support as a general mechanism; dissociation and DSM-5 dissociative amnesia, and why the frequency of repressed and recovered memories is contested; why recovered memories can be true (spontaneous, corroborated cases, Geraerts and colleagues 2007) or false (suggestion); why hypnosis, guided imagery and suggestive questioning raise confidence, not accuracy; the 1980s–1990s memory wars, the McMartin case and the Ramona lawsuit, and the debate between Loftus and trauma clinicians; the both/and stance of believing distress without directing memories; trauma-informed care, following the client’s pace and never suggesting abuse; prolonged exposure, cognitive processing therapy and EMDR treating fear and meaning, with EMDR’s eye movements contested; mandated reporting as being about current safety facts; and the critique that both sides erred and individual memory accuracy can’t be tested." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Trauma is usually remembered, often intrusively " + ev("r") + ". Stress strengthens gist and weakens peripheral detail " + ev("r") + ". Spontaneously recovered memories can be corroborated " + ev("r") + ". Repression as a general mechanism, and how often memories are repressed and recovered " + ev("c") + ". Hypnosis and suggestive techniques as reliable memory recovery " + ev("d") + ". Prolonged exposure, CPT and EMDR for PTSD " + ev("r") + "; EMDR’s eye movements " + ev("c") + ".</p>" +
+                "<p><b>So:</b> believe the distress, don’t direct the memories, and treat the fear and meaning, not the gaps.</p>" },
+              Q("Which is most typical of memory for a traumatic event?",
+                ["It is usually forgotten completely", "It is usually remembered, often intrusively", "It is stored perfectly, like a video", "It can only be recalled under hypnosis"], 1,
+                "Most people remember trauma; in PTSD the problem is unwanted, intrusive memories, not forgetting."),
+              Q("Rosa remembers the core of an event clearly but not the order or surroundings. What does this fit?",
+                ["Proof that the memory is false", "Stress strengthening gist and weakening peripheral detail", "Repression", "A DRM false memory"], 1,
+                "Under stress, central gist tends to be kept and peripheral details lost; fragments alone don’t mean a memory is false."),
+              Q("What does hypnosis do to memory?",
+                ["Recovers accurate hidden memories", "Raises confidence and adds both true and false detail", "Erases traumatic memories", "Has no effect at all"], 1,
+                "Hypnosis increases recall of both true and false material, and confidence in all of it; it is not a reliable recovery method."),
+              Q("Geraerts and colleagues (2007) compared recovered memories. Which were corroborated about as often as continuous memories?",
+                ["Those recovered through suggestive therapy", "Those recovered under hypnosis", "Those that returned spontaneously, outside therapy", "None of them"], 2,
+                "Spontaneously recovered memories were often corroborated; memories recovered in suggestive therapy were not."),
+              Q("A client with gaps in memory asks you to help uncover what happened. What is the best trauma-informed response?",
+                ["Use guided imagery to explore possible abuse", "Suggest abuse is the likely cause of the gaps", "Work at her pace with what she remembers, without digging or suggesting", "Refer her for hypnosis"], 2,
+                "Believe the distress, don’t direct the memories; evidence-based therapies treat fear and meaning, not memory excavation.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -18009,6 +18212,22 @@
           G("m4.4", "Motivated forgetting", "Olvido motivado", "Forgetting because remembering hurts.", "Forgetting driven by wanting to avoid unpleasant memories; repression of trauma is a contested form of the claim."),
           G("m4.4", "Directed forgetting", "Olvido dirigido", "Forgetting because you were told to.", "Reduced recall of material people are instructed to forget, partly through stopping rehearsal."),
           G("m4.4", "Retrieval-induced forgetting", "Olvido inducido por la recuperación", "Recalling some things hides related ones.", "Practising retrieval of some items from a set makes related, unpractised items harder to recall (Anderson, Bjork and Bjork, 1994)."),
+          G("m4.5", "Reconstructive memory", "Memoria reconstructiva", "Memory is rebuilt, not replayed.", "Remembering rebuilds an event from stored gist, schemas and later information, so details can shift each time (Bartlett, 1932)."),
+          G("m4.5", "Schema", "Esquema", "A mental framework of how things usually go.", "Organised knowledge that guides what we notice and fills gaps when we remember, reshaping unfamiliar details to fit the familiar."),
+          G("m4.5", "Leading question", "Pregunta sugestiva", "A question that hints at its answer.", "A question whose wording suggests a detail or answer, such as “smashed” versus “hit”, which can change what is remembered (Loftus and Palmer, 1974)."),
+          G("m4.5", "Misinformation effect", "Efecto de desinformación", "Later information changes the memory.", "Misleading information given after an event is blended into the memory of it (Loftus, Miller and Burns, 1978)."),
+          G("m4.5", "Source monitoring error", "Error de monitoreo de la fuente", "Remembering what, but not where from.", "Misattributing where a memory came from, such as mistaking something heard or imagined later for something seen."),
+          G("m4.5", "DRM paradigm", "Paradigma DRM", "Related words create a false memory.", "After hearing words related to an unpresented lure (bed, rest, dream), people often recall the lure (“sleep”) as heard (Roediger and McDermott, 1995)."),
+          G("m4.5", "Imagination inflation", "Inflación por imaginación", "Imagining it makes it feel real.", "Imagining an event increases confidence that it actually happened (Garry and colleagues, 1996)."),
+          G("m4.5", "Flashbulb memory", "Memoria de destello", "A vivid memory of shocking news.", "A vivid, confident memory of where one was when hearing shocking news; its details drift over time while confidence stays high (Talarico and Rubin, 2003)."),
+          G("m4.5", "Double-blind lineup", "Rueda de reconocimiento doble ciego", "The officer doesn’t know who the suspect is.", "A lineup run by someone who doesn’t know the suspect, so they can’t cue the witness; confidence is recorded right away."),
+          G("m4.6", "Intrusive memories", "Recuerdos intrusivos", "Unwanted memories that keep returning.", "Involuntary, distressing memories, nightmares or flashbacks of a traumatic event; a core symptom of PTSD."),
+          G("m4.6", "Repression", "Represión", "Pushing memories out of awareness.", "Freud’s proposed mechanism by which unbearable memories are kept unconscious; contested as a general account of trauma memory."),
+          G("m4.6", "Dissociative amnesia", "Amnesia disociativa", "Unable to recall important personal events.", "A DSM-5 diagnosis: inability to recall important autobiographical information, usually traumatic or stressful, beyond ordinary forgetting."),
+          G("m4.6", "Recovered memory", "Memoria recuperada", "A memory that returns after being absent.", "A memory reported as forgotten and later remembered; can be true (some corroborated) or created by suggestion."),
+          G("m4.6", "Memory wars", "Guerras de la memoria", "The 1990s fight over recovered memories.", "The debate between memory researchers and trauma clinicians over recovered-memory therapy and false memories of abuse."),
+          G("m4.6", "Cognitive processing therapy", "Terapia de procesamiento cognitivo", "Changing stuck beliefs after trauma.", "An evidence-based PTSD therapy that helps clients examine and change beliefs about a trauma, such as self-blame."),
+          G("m4.6", "EMDR", "EMDR", "A PTSD therapy using eye movements.", "Eye movement desensitisation and reprocessing: an evidence-based PTSD therapy; whether the eye movements themselves add benefit is contested."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -18551,6 +18770,18 @@
             R("Tulving & Pearlstone", 1966, "experiment", "People recalled many more list words when given category cues, showing stored but inaccessible memories.", st("robust", "Cue-dependent forgetting is well replicated.")),
             R("Anderson, Bjork & Bjork", 1994, "experiment", "Practising retrieval of some items in a category reduced recall of related unpractised items.", st("robust", "Retrieval-induced forgetting replicates, though its mechanism is debated.")),
             R("Anderson & Green", 2001, "experiment", "Repeatedly suppressing a memory in the think/no-think task reduced later recall of it.", st("contested", "Some replications failed; meta-analyses suggest a small effect."))];
+          REFS["m4.5"] = [
+            R("Bartlett", 1932, "experiment", "Remembering: retellings of “The War of the Ghosts” grew shorter and were reshaped to fit readers’ schemas.", st("robust", "Schema-driven reconstruction is widely replicated, though his methods were informal.")),
+            R("Loftus & Palmer", 1974, "experiment", "“Smashed” rather than “hit” raised speed estimates and, a week later, false reports of broken glass.", st("robust", "Leading-question and misinformation effects replicate widely.")),
+            R("Roediger & McDermott", 1995, "experiment", "After lists of related words, people often recalled and recognised a never-presented lure such as “sleep”.", st("robust", "The DRM effect is one of the most reliable findings in memory research.")),
+            R("Loftus & Pickrell", 1995, "experiment", "About a quarter of adults came to remember, fully or partly, a false childhood event of being lost in a mall.", st("contested", "Small sample; how many count as full false memories depends on coding rules.")),
+            R("Wixted & Wells", 2017, "review", "Confidence at a first, fair, uncontaminated test predicts eyewitness accuracy well; later confidence does not.", st("contested", "Widely influential; how well it applies to real-world lineups is still debated."))];
+          REFS["m4.6"] = [
+            R("Geraerts et al.", 2007, "observational", "Memories recovered spontaneously outside therapy were corroborated about as often as continuous ones; those recovered in suggestive therapy were not.", st("robust", "Fits a broader picture that suggestion, not recovery itself, is the risk.")),
+            R("McNally", 2003, "review", "Remembering Trauma: traumatic events are usually remembered well, and evidence for repression as a mechanism is weak.", st("contested", "Influential; trauma clinicians dispute its view of dissociative amnesia.")),
+            R("Garven, Wood, Malpass & Shaw", 1998, "experiment", "Interview techniques taken from the McMartin case led preschool children to make many more false allegations.", st("robust", "Suggestive interviewing effects on children replicate widely.")),
+            R("Lynn et al.", 1997, "review", "Hypnosis increases recall of both accurate and inaccurate material, and confidence, without improving accuracy.", st("robust", "Hypnotically refreshed memories are widely regarded as unreliable.")),
+            R("Watts et al.", 2013, "meta-analysis", "Trauma-focused psychotherapies, including prolonged exposure, cognitive processing therapy and EMDR, reduced PTSD symptoms.", st("robust", "Consistent across meta-analyses; EMDR’s eye-movement component remains contested."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
