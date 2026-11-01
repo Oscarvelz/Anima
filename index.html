@@ -17820,6 +17820,186 @@
                 "Carstensen: shorter horizons shift priorities to what matters emotionally.")
             ]
           },
+          "m7.1": {
+            home: "Tony, 35, in residential treatment, isn’t hungry at all, yet eats three desserts when the cart rolls by. He says cravings “come out of nowhere” on his old corner. Where do they come from?",
+            keys: [["What is drive-reduction theory?", "Hull (1943): bodily needs create drives, uncomfortable tension that pushes us to act until the need is met and balance returns. It builds on Cannon’s homeostasis, the body’s habit of holding itself steady.", "A sad thermostat named Homer who spends all day flicking the heater on and off to keep the house at exactly one temperature."],
+              ["What do incentives add?", "Incentive theory says external rewards pull behaviour, not just inner needs pushing it. A tempting cue can make us eat, spend or use with no need at all.", "A completely full man who discovers a secret “second stomach” compartment that clicks open the moment the dessert cart rolls past."],
+              ["What is optimal arousal?", "Arousal theory says we seek a comfortable middle level of alertness. Yerkes and Dodson (1908) found performance best at moderate arousal, with a lower sweet spot for hard tasks; the neat inverted-U is a popular simplification of a mouse study.", "Goldilocks taking an exam three times: too sleepy, too panicked, and finally “just right,” medium-alert and writing fast."],
+              ["Is wanting the same as liking?", "No. Berridge and Robinson showed dopamine drives wanting (incentive salience), the pull toward a reward, not the pleasure of having it. Wanting can grow while liking stays flat.", "A puppet labelled “dopamine” yanking your arm toward the cookie jar, while a tiny critic labelled “liking” sits on the shelf and shrugs."],
+              ["Why did instinct theory fall?", "James and McDougall listed instincts to explain behaviour, but the lists ballooned and the logic went in circles: “he fights because of a fighting instinct; we know he has it because he fights.” It was dropped as a general theory.", "A librarian labelling every book “because instinct,” until the shelves collapse under thousands of identical labels."]],
+            steps: [
+              { kind: "hook", title: "Tony and the dessert cart", body: who("<b>Marisol</b>, a counselor in Tony’s residential program.") +
+                "<p>Tony, 35, has just finished a big lunch. He says he’s stuffed. Then the dessert cart rolls past, and he eats three desserts.</p>" +
+                "<p>Later in group he says his drug cravings work the same way: “They come out of nowhere. I’m fine, then I walk past my old corner and it hits me.”</p>" +
+                "<p>“I don’t get it,” he says. “I wasn’t hungry. I didn’t even need anything.”</p>" },
+              { kind: "predict", id: "m7.1:predict", title: "Your call first",
+                case: ["Tony had just eaten a full lunch.",
+                  { t: "He prefers chocolate to vanilla.", irrelevant: true },
+                  "He ate after seeing the dessert cart, not before.",
+                  "His drug cravings spike on his old corner.",
+                  { t: "He sits at the end of the table.", irrelevant: true },
+                  "He says he felt no need beforehand."],
+                q: "Why did Tony eat dessert when he was full?",
+                options: ["He must have been secretly hungry: all eating reduces a need", "The cart was a cue that pulled him: incentives and learned cues create wanting even without need", "He has no willpower"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: the cart pulled him. Drive theories explain eating to fix a need, but Tony had no need. A visible reward, and cues tied to past rewards, can switch on wanting by themselves. His corner works the same way for drugs. That’s not a character flaw; it’s how motivation is built, and it can be planned for.",
+                hints: ["Ask what changed right before he ate.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether he needed food, and what he saw."] },
+              { kind: "idea", lvl: "f", title: "Push: instincts and drives", body: '<dl class="x-dossier"><div><dt>Instinct theory</dt><dd>William James and William McDougall explained behaviour with inborn <b>instincts</b>. Lists grew into the thousands, and the reasoning was <b>circular</b>: naming a behaviour is not explaining it. Dropped as a general theory ' + ev("d") + ".</dd></div>" +
+                "<div><dt>Homeostasis</dt><dd>Walter Cannon: the body keeps temperature, fluids and energy within a steady range, correcting drift like a thermostat " + ev("r") + ".</dd></div>" +
+                "<div><dt>Drive-reduction theory</dt><dd>Clark Hull (1943): a <b>need</b> (lack of food) creates a <b>drive</b> (hunger, felt tension) that <b>pushes</b> us to act until the need is met and the tension falls.</dd></div>" +
+                "<div><dt>Hunger, briefly</dt><dd>The <b>hypothalamus</b> integrates hunger signals. <b>Ghrelin</b>, from the stomach, rises before meals and boosts hunger; <b>leptin</b>, from fat tissue, signals long-term energy stores. The body defends a weight range, a <b>set point</b>, though many researchers prefer <b>settling point</b>: a range that shifts with food, activity and environment.</dd></div></dl>" +
+                "<p><b>So:</b> needs push. But pushing alone can’t explain Tony.</p>" },
+              { kind: "idea", lvl: "p", title: "Pull: arousal and incentives", body: '<dl class="x-dossier"><div><dt>Where drives fall short</dt><dd>People <b>seek</b> tension, not just reduce it: curiosity, puzzles, roller coasters. And people eat, drink and use <b>without need</b>.</dd></div>' +
+                "<div><dt>Arousal theory</dt><dd>We seek an <b>optimal level of arousal</b>: bored, we look for stimulation; overwhelmed, we look for calm.</dd></div>" +
+                "<div><dt>Yerkes–Dodson</dt><dd>Yerkes and Dodson (1908): <b>moderate</b> arousal gives the best performance, and the sweet spot is <b>lower for hard tasks</b>. The tidy inverted-U curve is a later popular simplification of their mouse study; as a precise law it is contested " + ev("c") + ".</dd></div>" +
+                "<div><dt>Sensation seeking</dt><dd>Marvin Zuckerman: people differ in how much novelty and intensity they crave. High sensation seeking is linked to greater risk of substance use " + ev("r") + ".</dd></div>" +
+                "<div><dt>Incentive theory</dt><dd>External rewards <b>pull</b> behaviour. The dessert cart, a paycheck, praise, or a familiar corner tied to past highs.</dd></div></dl>" +
+                "<p><b>So:</b> motivation is pushed from inside and pulled from outside.</p>" },
+              { kind: "contrast", id: "m7.1:contrast", title: "Same fullness, one difference",
+                q: "Two people have both just eaten a large, satisfying meal. Who is more likely to eat dessert?",
+                cases: [
+                  { label: "Person A", s: ["Just ate a full meal.", { t: "Wears a blue shirt.", irrelevant: true }, { t: "A dessert cart rolls right past the table.", diff: true }, "Same hunger; same tastes."] },
+                  { label: "Person B", s: ["Just ate a full meal.", { t: "Wears a blue shirt.", irrelevant: true }, { t: "No dessert is in sight.", diff: true }, "Same hunger; same tastes."] }
+                ],
+                answer: 0,
+                features: ["The shirt", "Whether a dessert cue is present", "How much they ate", "Their tastes"],
+                feature: 1,
+                why: "Only the cue differs. Both have no drive left to reduce, yet the visible reward pulls Person A. That is incentive motivation, and it is why cue exposure matters so much in recovery.",
+                hints: ["Find the one sentence where the two people part ways.",
+                  "The sentences that don’t decide it are dimmed. Both are full; ask what they can see.",
+                  "Step one, aloud: say what each person’s table looks like."] },
+              { kind: "idea", lvl: "m", title: "Wanting is not liking", body: '<dl class="x-dossier"><div><dt>Two systems</dt><dd>Kent Berridge and Terry Robinson: <b>wanting</b> (incentive salience, the magnetic pull of a reward) and <b>liking</b> (the pleasure of getting it) are separate brain processes ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Dopamine’s real job</dt><dd>Dopamine drives <b>wanting</b>, not pleasure. Block it and animals still enjoy sugar but won’t work for it; boost it and they work harder without enjoying it more.</dd></div>" +
+                "<div><dt>Cues take over</dt><dd>With repeated drug use, cues gain more and more wanting while liking fades. That is why craving can feel huge for a drug that no longer feels good. More in M7 · Craving and the motivation to use.</dd></div>" +
+                "<div><dt>Cue-triggered eating</dt><dd>Stanley Schachter’s <b>externality</b> idea: some people eat more in response to outside cues (time, sight, smell) than inner hunger. Support is mixed " + ev("c") + "; cue reactivity matters, but it doesn’t neatly split people into types.</dd></div></dl>" +
+                "<p><b>So:</b> a cue can make you want something you won’t even enjoy.</p>" },
+              { kind: "example", lvl: "p", title: "Tony, with a map of his cues", body: who("<b>Marisol</b> and Tony, over three weeks of sessions.") +
+                '<dl class="x-dossier"><div><dt>Explain wanting</dt><dd>She teaches the push-pull idea: cravings aren’t random. Cues tied to past rewards switch on <b>wanting</b> even when he needs nothing. “Out of nowhere” becomes “out of somewhere.”</dd></div>' +
+                "<div><dt>Map the cues</dt><dd>Together they list his triggers: the corner, certain songs, payday, a friend’s car. The dessert cart becomes a safe practice cue.</dd></div>" +
+                "<div><dt>Plan for exposure</dt><dd>He can’t avoid every cue, so they plan: a different route home, a call to his sponsor when he sees the corner, and riding the wave of wanting until it passes.</dd></div>" +
+                "<div><dt>Right arousal for learning</dt><dd>Marisol keeps sessions in the middle zone: not so flat that Tony drifts off, not so intense that he panics. Too calm and too anxious both hurt learning.</dd></div></dl>" +
+                "<p>“So the craving isn’t proof I’m weak?” Tony asks. “It’s proof your brain learned well,” Marisol says. “Now we teach it something new.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>No single theory explains motivation. Drive reduction can’t explain thrill-seeking or eating when full; arousal theory is vague about what the “optimal” level is for a given person; incentive theory can describe pull after the fact without predicting which cue will win. Each covers a different slice, and stitched together they risk explaining everything and predicting little.</p>' +
+                "<p><b>The counter.</b> The slices fit real mechanisms: homeostasis and hunger hormones for push, cue-driven dopamine wanting for pull, and arousal effects on performance. Used together, they guide practical work, such as mapping cues and pitching sessions at the right intensity, better than any one alone.</p>" +
+                "<p>Background: M3 · Extinction, cues and relapse. Ahead: M7 · Needs, revisited.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Homeostasis and drive reduction.</b> Homer the sad thermostat flicks the heater on and off all day to keep the house at exactly one temperature.</p>" +
+                "<p><b>Incentives pull.</b> A completely full man finds a secret “second stomach” that clicks open when the dessert cart rolls past.</p>" +
+                "<p><b>Optimal arousal.</b> Goldilocks takes an exam too sleepy, too panicked, and finally “just right,” medium-alert.</p>" +
+                "<p><b>Wanting ≠ liking.</b> A puppet labelled “dopamine” yanks your arm toward the cookie jar while a tiny “liking” critic shrugs.</p>" +
+                "<p><b>Instinct theory’s circle.</b> A librarian labels every book “because instinct” until the shelves collapse.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.1:teachback", title: "Teach it back", prompt: "Explain to Tony why he ate dessert when full and why cravings hit on his old corner: instinct theory from James and McDougall and why it was dropped as circular; Cannon’s homeostasis; Hull’s drive-reduction theory of needs, drives and tension; hunger signals from the hypothalamus, ghrelin and leptin, and set point versus settling point; why people seek stimulation and eat without need; arousal theory and optimal arousal; Yerkes and Dodson’s finding of best performance at moderate arousal, lower for hard tasks, and why the inverted-U is a simplification; Zuckerman’s sensation seeking and substance use risk; incentive theory’s pull of external rewards; Berridge and Robinson’s wanting versus liking and dopamine’s role in incentive salience; Schachter’s externality idea and its mixed support; and the plan: teach that cues create wanting without need, map and plan for cue exposure, and keep session arousal in the middle zone." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Homeostasis keeps the body in balance " + ev("r") + ". Dopamine drives wanting, not liking " + ev("r") + ". Sensation seeking raises substance use risk " + ev("r") + ". Yerkes–Dodson as a precise inverted-U law " + ev("c") + ". Externality as a fixed eating type " + ev("c") + ". Instinct theory as a general explanation " + ev("d") + ".</p>" +
+                "<p><b>So:</b> needs push, cues pull, and a craving with no need is still real and still plannable.</p>" },
+              Q("According to drive-reduction theory, a need creates:",
+                ["An incentive that pulls us toward rewards", "A drive, an inner tension that pushes us to reduce it", "An instinct that cannot be changed", "Optimal arousal"], 1,
+                "Hull: needs create drives that push behaviour until tension falls."),
+              Q("A person who just ate a big meal orders dessert after seeing it on a cart. This best fits:",
+                ["Drive-reduction theory", "Instinct theory", "Incentive theory", "Homeostasis"], 2,
+                "An external reward pulled behaviour without any need."),
+              Q("Berridge and Robinson’s research suggests dopamine mainly drives:",
+                ["The pleasure of a reward (liking)", "The pull toward a reward (wanting)", "Body temperature", "Long-term memory"], 1,
+                "Dopamine drives wanting, or incentive salience, not pleasure itself."),
+              Q("The Yerkes–Dodson finding suggests performance on a hard task is best with:",
+                ["Very high arousal", "No arousal at all", "Fairly low to moderate arousal", "Arousal does not matter"], 2,
+                "Moderate arousal helps most, with a lower sweet spot for hard tasks."),
+              Q("Why was instinct theory abandoned as a general explanation of motivation?",
+                ["It was too mathematical", "It named behaviours instead of explaining them, in circles", "It ignored behaviour entirely", "It only applied to animals"], 1,
+                "Labelling a behaviour an instinct and citing the behaviour as proof is circular.")
+            ]
+          },
+          "m7.2": {
+            home: "Gloria, 41, homeless after release, is told she can’t work on “self-esteem goals” until housing is fixed. Yet she volunteers at a church kitchen every day and says it keeps her alive. Who’s right?",
+            keys: [["Did Maslow draw the pyramid?", "No. Maslow’s 1943 paper “A Theory of Human Motivation” described a loose ordering of needs. The pyramid was drawn later by management writers (Bridgman, Cummings and Ballard, 2019).", "Abraham Maslow staring in surprise at a giant pyramid with his name on it, built by a 1960s business consultant, shouting “I never drew this!”"],
+              ["Must needs be met in strict order?", "No. Maslow himself said needs overlap and are partly satisfied at once. Tay and Diener (2011), using worldwide data, found people gain well-being from social and respect needs even when basic needs are unmet.", "A woman eating soup on a park bench while proudly wearing a “volunteer of the month” medal, both at the same time."],
+              ["What are SDT’s basic psychological needs?", "Deci and Ryan’s Self-Determination Theory names three: autonomy (choosing for yourself), competence (feeling capable) and relatedness (feeling connected). Well-being suffers when any one is thwarted.", "A three-legged stool labelled Autonomy, Competence and Relatedness that wobbles the moment any leg is short."],
+              ["What is the need to belong?", "Baumeister and Leary (1995): humans have a fundamental need for frequent, caring contact within lasting relationships. Isolation harms health and mood.", "A person exiled to a solo island whose heart fires a rescue flare into the sky every single day."],
+              ["What did later Maslow add?", "Late in life Maslow placed self-transcendence beyond self-actualization: serving something larger than the self, such as others, a cause or the sacred.", "Maslow climbing past the top of the cartoon pyramid on a ladder, waving a “helping others” banner from the clouds."]],
+            steps: [
+              { kind: "hook", title: "Gloria and the church kitchen", body: who("<b>Mr. Hayes</b>, a reentry counselor working alongside Gloria’s caseworker.") +
+                "<p>Gloria, 41, was released three months ago and has been sleeping in shelters and on friends’ couches. Her caseworker tells her: “Housing first. We’ll get to self-esteem goals once you’re stable.”</p>" +
+                "<p>But every morning Gloria walks to a church kitchen and serves breakfast. “It’s what keeps me alive,” she says. “They need me there.”</p>" +
+                "<p>Her caseworker sees it as a distraction from the housing search.</p>" },
+              { kind: "predict", id: "m7.2:predict", title: "Your call first",
+                case: ["Gloria has no stable housing.",
+                  { t: "She likes to wear a red scarf.", irrelevant: true },
+                  "She volunteers at a church kitchen every day.",
+                  "She says the volunteering keeps her going.",
+                  { t: "She takes the number 9 bus.", irrelevant: true },
+                  "She is still actively looking for housing."],
+                q: "Should Gloria’s counselor postpone meaning and purpose goals until her housing is secured?",
+                options: ["Yes: basic needs must be fully met before higher needs matter", "No: work on housing and meaning at the same time; her role is a strength, not a distraction", "Housing doesn’t matter if she has purpose"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: work on both at once. Housing matters enormously and should be pursued hard. But needs aren’t climbed in strict order: belonging and meaning can support well-being even while basic needs are unmet, and Gloria’s daily role is fuelling her. Postponing it would take away the thing keeping her going.",
+                hints: ["Ask what the volunteering is doing for her right now.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether the volunteering is stopping her housing search."] },
+              { kind: "idea", lvl: "f", title: "What Maslow actually said", body: '<dl class="x-dossier"><div><dt>The 1943 paper</dt><dd>Abraham Maslow’s “A Theory of Human Motivation” ordered needs: <b>physiological</b>, <b>safety</b>, <b>love and belonging</b>, <b>esteem</b>, and <b>self-actualization</b>, becoming what you can be. You met it in M1 · Humanism.</dd></div>' +
+                "<div><dt>Not strict steps</dt><dd>Maslow wrote that needs <b>overlap</b> and are usually <b>partly satisfied</b> at once, and that the order has exceptions.</dd></div>" +
+                "<div><dt>Not his pyramid</dt><dd>Maslow never drew a pyramid. Later <b>management writers</b> turned his ideas into the famous triangle in the 1960s (Bridgman, Cummings and Ballard, 2019) " + ev("r") + ".</dd></div>" +
+                "<div><dt>Self-transcendence</dt><dd>Late in life Maslow added a level beyond self-actualization: <b>self-transcendence</b>, serving others or something larger than yourself.</dd></div>" +
+                "<div><dt>A contested influence</dt><dd>Some writers say Maslow’s time with the <b>Blackfoot (Siksika)</b> people in 1938 shaped his ideas, with community and giving back at the base rather than the top. The claim is debated and hard to verify " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the real Maslow was looser and kinder than the pyramid.</p>" },
+              { kind: "idea", lvl: "p", title: "Testing the hierarchy", body: '<dl class="x-dossier"><div><dt>Weak evidence for strict order</dt><dd>Wahba and Bridwell (1976) reviewed the research and found little support for a strict, step-by-step hierarchy ' + ev("d") + ".</dd></div>" +
+                "<div><dt>Worldwide data</dt><dd>Tay and Diener (2011), with data from many countries: needs look <b>fairly universal</b>, but people gain well-being from social and respect needs <b>even when basic needs are unmet</b>. Order matters somewhat, but it isn’t strict " + ev("r") + ".</dd></div>" +
+                "<div><dt>Cultural bias</dt><dd>Putting individual self-actualization at the top reflects <b>individualistic</b> values. In many <b>collectivist</b> cultures, belonging and the group’s good may come first.</dd></div>" +
+                "<div><dt>Need to belong</dt><dd>Baumeister and Leary (1995): a <b>fundamental need</b> for frequent, caring contact in lasting relationships, with real costs to health and mood when it goes unmet " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> needs are real, but they don’t wait their turn.</p>" },
+              { kind: "contrast", id: "m7.2:contrast", title: "Same unmet need, one difference",
+                q: "Two clients both lack stable housing. Who is likely doing better day to day?",
+                cases: [
+                  { label: "Client A", s: ["No stable housing.", { t: "Owns a green backpack.", irrelevant: true }, { t: "Has no regular role or place where anyone expects them.", diff: true }, "Same income; same health."] },
+                  { label: "Client B", s: ["No stable housing.", { t: "Owns a green backpack.", irrelevant: true }, { t: "Has a daily role where people count on them.", diff: true }, "Same income; same health."] }
+                ],
+                answer: 1,
+                features: ["The backpack", "Having a daily role where they’re needed", "The housing situation", "Income"],
+                feature: 1,
+                why: "Only the role differs. Both have the same unmet basic need, yet belonging, competence and purpose still lift well-being. That is why needs are better seen as working together than as a strict ladder.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. Both lack housing; ask what else they have.",
+                  "Step one, aloud: say how each client’s morning goes."] },
+              { kind: "idea", lvl: "m", title: "Alternatives to the pyramid", body: '<dl class="x-dossier"><div><dt>Self-Determination Theory</dt><dd>Edward Deci and Richard Ryan: three <b>basic psychological needs</b>, <b>autonomy</b>, <b>competence</b> and <b>relatedness</b>, support well-being and motivation across cultures ' + ev("r") + ". More in M7 · Intrinsic vs extrinsic motivation.</dd></div>" +
+                "<div><dt>A renovated pyramid</dt><dd>Kenrick and colleagues (2010) rebuilt the pyramid on evolutionary lines, dropping self-actualization and adding <b>mate acquisition</b>, <b>mate retention</b> and <b>parenting</b> " + ev("c") + ".</dd></div>" +
+                "<div><dt>Murray and McClelland</dt><dd>Henry Murray listed many psychological needs. David McClelland focused on three: <b>achievement</b>, <b>affiliation</b> and <b>power</b>, often measured with the Thematic Apperception Test, whose reliability is contested " + ev("c") + ".</dd></div>" +
+                "<div><dt>Housing First</dt><dd>Sam Tsemberis: give people housing <b>without</b> first requiring sobriety or treatment. It strongly improves housing stability " + ev("r") + ", and it shows basic needs matter while recovery, belonging and meaning are worked on <b>at the same time</b>.</dd></div></dl>" +
+                "<p><b>So:</b> people need autonomy, competence and connection, all along the way.</p>" },
+              { kind: "example", lvl: "p", title: "Gloria, housing and purpose together", body: who("<b>Mr. Hayes</b>, Gloria and her caseworker, over two months.") +
+                '<dl class="x-dossier"><div><dt>Don’t make meaning earned</dt><dd>Mr. Hayes asks the caseworker to drop the “housing first, then self-esteem” sequence. Both goals go on the plan from day one.</dd></div>' +
+                "<div><dt>Push hard on housing</dt><dd>They apply to a Housing First program that doesn’t require her to prove readiness, and set weekly housing tasks.</dd></div>" +
+                "<div><dt>Build on strengths</dt><dd>Using <b>strengths-based case management</b>, they treat the kitchen as an asset: her reliability and skills go on her résumé, and the church coordinator becomes a reference.</dd></div>" +
+                "<div><dt>Feed all three needs</dt><dd>She chooses her own goals (<b>autonomy</b>), names what she does well (<b>competence</b>), and keeps the people who count on her (<b>relatedness</b>).</dd></div></dl>" +
+                "<p>“So I don’t have to earn a reason to live?” Gloria asks. “You already have one,” Mr. Hayes says. “Now let’s get you a key to go with it.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Dismissing the hierarchy can go too far. Hunger, danger and exhaustion really do crowd out other goals, and Tay and Diener also found basic needs strongly tied to life satisfaction. The alternatives have limits too: SDT’s three needs can be stretched to fit almost any result, the renovated pyramid swaps one disputed ranking for another, and the need-for-achievement work leans on a contested projective test.</p>' +
+                "<p><b>The counter.</b> No one says basic needs don’t matter; the evidence says they aren’t a gate. Housing First fits that view: housing comes fast and without conditions, and dignity, belonging and purpose aren’t put on hold. The order is a tendency, not a rule for who deserves meaning.</p>" +
+                "<p>Background: M1 · Humanism; M7 · Drives and incentives. Ahead: M7 · Intrinsic vs extrinsic motivation.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>The pyramid is a later invention.</b> Maslow stares at a giant pyramid with his name on it, built by a 1960s business consultant: “I never drew this!”</p>" +
+                "<p><b>Needs met together.</b> A woman eats soup on a park bench while wearing her “volunteer of the month” medal, both at once.</p>" +
+                "<p><b>SDT’s basic needs.</b> A three-legged stool labelled Autonomy, Competence and Relatedness wobbles if any leg is short.</p>" +
+                "<p><b>Need to belong.</b> A person exiled to a solo island whose heart sends up a rescue flare every day.</p>" +
+                "<p><b>Self-transcendence.</b> Maslow climbs past the top of the pyramid, waving a “helping others” banner from the clouds.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.2:teachback", title: "Teach it back", prompt: "Explain to Gloria’s caseworker why her meaning goals shouldn’t wait for housing: Maslow’s 1943 “A Theory of Human Motivation” and its needs from physiological to self-actualization; why Maslow said needs overlap and are partly satisfied; why the pyramid came from later management writers, not Maslow; self-transcendence; the contested Blackfoot (Siksika) influence claim; Wahba and Bridwell’s weak evidence for a strict order; Tay and Diener’s worldwide finding that needs are fairly universal but not strictly ordered; cultural bias toward individualism; Deci and Ryan’s autonomy, competence and relatedness; Baumeister and Leary’s need to belong; Kenrick’s renovated pyramid; Murray’s needs and McClelland’s achievement, affiliation and power, and the contested TAT; Tsemberis’s Housing First; and the plan: don’t make meaning earned, pursue housing and purpose together, and use strengths-based case management." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Needs are fairly universal but not strictly ordered " + ev("r") + ". The need to belong " + ev("r") + ". Autonomy, competence and relatedness " + ev("r") + ". Housing First for housing stability " + ev("r") + ". Maslow didn’t draw the pyramid " + ev("r") + ". The renovated evolutionary pyramid " + ev("c") + ". A strict step-by-step hierarchy " + ev("d") + ".</p>" +
+                "<p><b>So:</b> meet basic needs urgently, and never make meaning wait in line.</p>" },
+              Q("Who first drew Maslow’s hierarchy as a pyramid?",
+                ["Maslow, in his 1943 paper", "Later management writers", "Carl Rogers", "Deci and Ryan"], 1,
+                "Maslow described needs in words; the pyramid came from later management writers."),
+              Q("Tay and Diener’s worldwide study found that:",
+                ["People only benefit from social needs once basic needs are fully met", "Social and respect needs can add to well-being even when basic needs are unmet", "Needs differ completely across cultures", "Basic needs don’t affect well-being"], 1,
+                "Needs are fairly universal, but the order isn’t strict."),
+              Q("Self-Determination Theory’s three basic psychological needs are:",
+                ["Safety, esteem and love", "Achievement, affiliation and power", "Autonomy, competence and relatedness", "Hunger, thirst and sleep"], 2,
+                "Deci and Ryan: autonomy, competence and relatedness."),
+              Q("Housing First programs provide housing:",
+                ["Only after people complete treatment", "Without first requiring sobriety or treatment", "Only to people who are employed", "Only after esteem goals are met"], 1,
+                "Housing comes first, without readiness conditions."),
+              Q("A homeless client volunteers daily and says it keeps her going. Based on current evidence, her counselor should:",
+                ["Tell her to stop until she has housing", "Support the volunteering while pursuing housing at the same time", "Ignore housing", "Wait until she reaches self-actualization"], 1,
+                "Basic needs and meaning can be worked on together.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -19480,6 +19660,27 @@
           G("m6.6", "Continuing bonds", "Vínculos continuos", "Staying connected to someone who has died.", "Ongoing inner and ritual connection to the deceased, through memory, conversation or keepsakes; seen as a normal part of grief rather than a failure to let go."),
           G("m6.6", "Prolonged grief disorder", "Trastorno de duelo prolongado", "Intense grief that stays disabling for a long time.", "A DSM-5-TR (2022) diagnosis for persistent, intense yearning or preoccupation with the deceased that impairs functioning and exceeds cultural norms."),
           G("m6.6", "Hospice", "Cuidados paliativos (hospicio)", "Care focused on comfort at the end of life.", "Care for people with a terminal illness that prioritizes comfort, dignity and family support over cure."),
+          G("m7.1", "Instinct theory", "Teoría de los instintos", "Explaining behaviour by inborn instincts.", "The view of James and McDougall that inborn instincts drive behaviour; abandoned as a general theory because the lists ballooned and the explanations were circular."),
+          G("m7.1", "Homeostasis", "Homeostasis", "The body keeping itself steady.", "Cannon’s term for the body’s tendency to hold temperature, fluids and energy within a stable range by correcting drift."),
+          G("m7.1", "Drive-reduction theory", "Teoría de la reducción del impulso", "Needs create tension that pushes us to act.", "Hull’s (1943) theory that a physiological need creates a drive, an aroused tension that motivates behaviour until the need is met."),
+          G("m7.1", "Optimal arousal", "Activación óptima", "A comfortable middle level of alertness.", "Arousal theory’s idea that people seek a moderate level of stimulation, looking for excitement when bored and calm when overwhelmed."),
+          G("m7.1", "Yerkes–Dodson law", "Ley de Yerkes-Dodson", "Moderate arousal helps performance most.", "From Yerkes and Dodson’s 1908 mouse study: performance is best at moderate arousal, with a lower optimum for hard tasks; the inverted-U is a popular simplification, contested as a precise law."),
+          G("m7.1", "Sensation seeking", "Búsqueda de sensaciones", "Craving novelty and intensity.", "Zuckerman’s trait describing the drive for varied, novel and intense experiences; higher levels are linked to greater risk of substance use."),
+          G("m7.1", "Incentive theory", "Teoría del incentivo", "Outside rewards pull behaviour.", "The view that external rewards and cues pull behaviour, so people can be motivated without any internal need."),
+          G("m7.1", "Ghrelin", "Grelina", "A stomach hormone that boosts hunger.", "A hormone released mainly by the stomach that rises before meals and signals the brain to increase hunger."),
+          G("m7.1", "Leptin", "Leptina", "A fat-tissue hormone signalling energy stores.", "A hormone released by fat cells that tells the hypothalamus about long-term energy stores and helps regulate appetite."),
+          G("m7.1", "Set point", "Punto de equilibrio", "A weight range the body defends.", "The idea that the body defends a weight range; the settling-point view says that range shifts with food, activity and environment."),
+          G("m7.1", "Incentive salience", "Saliencia del incentivo", "Wanting: the magnetic pull of a reward.", "Berridge and Robinson’s term for dopamine-driven wanting, separate from liking, the pleasure a reward brings."),
+          G("m7.1", "Externality", "Externalidad", "Eating in response to outside cues.", "Schachter’s idea that some people eat more in response to external cues such as sight, smell or time than to inner hunger; support is mixed."),
+          G("m7.2", "Self-transcendence", "Autotrascendencia", "Serving something larger than yourself.", "A level Maslow placed beyond self-actualization late in life: devotion to others, a cause or the sacred."),
+          G("m7.2", "Self-Determination Theory", "Teoría de la autodeterminación", "People need autonomy, competence and relatedness.", "Deci and Ryan’s theory that three basic psychological needs support motivation and well-being when met and harm them when thwarted."),
+          G("m7.2", "Autonomy", "Autonomía", "Feeling you choose your own actions.", "In Self-Determination Theory, the need to experience one’s behaviour as self-chosen rather than controlled."),
+          G("m7.2", "Competence", "Competencia", "Feeling capable and effective.", "In Self-Determination Theory, the need to feel effective and able to master challenges."),
+          G("m7.2", "Relatedness", "Vinculación", "Feeling connected and cared for.", "In Self-Determination Theory, the need to feel close to and cared about by others."),
+          G("m7.2", "Need to belong", "Necesidad de pertenencia", "A basic need for lasting, caring bonds.", "Baumeister and Leary’s (1995) proposal that humans need frequent, positive contact within stable relationships, with costs to health and mood when unmet."),
+          G("m7.2", "Need for achievement", "Necesidad de logro", "The drive to excel at challenging goals.", "One of McClelland’s three motives, with affiliation and power; often measured with the Thematic Apperception Test, whose reliability is contested."),
+          G("m7.2", "Housing First", "Vivienda Primero", "Housing without preconditions.", "Tsemberis’s approach that provides permanent housing without first requiring sobriety or treatment; strongly improves housing stability."),
+          G("m7.2", "Strengths-based case management", "Gestión de casos basada en fortalezas", "Building on what clients already do well.", "A case management approach that identifies and uses a person’s skills, interests and supports rather than focusing only on deficits."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -20118,6 +20319,18 @@
             R("Bonanno", 2004, "review", "Loss, trauma, and human resilience: resilience, a stable return to healthy functioning, is the most common response to loss, distinct from recovery.", st("robust", "Replicated in prospective studies of bereavement.")),
             R("Kübler-Ross", 1969, "observational", "On Death and Dying: interviews with terminally ill patients described denial, anger, bargaining, depression and acceptance.", st("contested", "Humanized care of the dying; as a fixed sequence for grief it is not supported.")),
             R("Erickson et al.", 2011, "experiment", "In a randomized trial, a year of aerobic walking increased hippocampus size and improved spatial memory in older adults compared with stretching.", st("robust", "Fits wider evidence that exercise benefits cognition in later life; brain-training games show weaker transfer."))];
+          REFS["m7.1"] = [
+            R("Hull", 1943, "review", "Principles of Behavior: needs create drives, and behaviour that reduces a drive is reinforced and learned.", st("contested", "Shaped decades of research; cannot explain stimulation seeking or eating without need.")),
+            R("Cannon", 1932, "review", "The Wisdom of the Body: named homeostasis, the body’s self-regulation of temperature, fluids and energy within stable ranges.", st("robust", "A foundation of physiology.")),
+            R("Yerkes & Dodson", 1908, "experiment", "Mice learned to discriminate boxes fastest at intermediate shock strengths, with weaker shocks best for the hardest discrimination.", st("contested", "Widely cited as an inverted-U law; the original study was small and the general curve is a later simplification.")),
+            R("Zuckerman", 1979, "review", "Sensation Seeking: described a trait of seeking varied, novel and intense experiences, linked to risk-taking and substance use.", st("robust", "The link with substance use risk is found across many studies.")),
+            R("Berridge & Robinson", 1998, "experiment", "Depleting dopamine in rats left their pleasure reactions to sugar intact while abolishing their motivation to get it: dopamine mediates wanting, not liking.", st("robust", "Supported by later animal and human work; underpins the incentive-sensitization theory of addiction."))];
+          REFS["m7.2"] = [
+            R("Maslow", 1943, "review", "A Theory of Human Motivation: proposed a loose ordering of physiological, safety, belonging, esteem and self-actualization needs, noting overlap and partial satisfaction.", st("contested", "Hugely influential; a strict hierarchy has weak support.")),
+            R("Bridgman, Cummings & Ballard", 2019, "review", "Traced the pyramid to management writers of the 1960s rather than Maslow, who never drew it.", st("robust", "Well-documented historical analysis.")),
+            R("Tay & Diener", 2011, "observational", "Using data from many countries, found needs fairly universal and showed social and respect needs added to well-being even when basic needs were unmet.", st("robust", "Large worldwide sample; self-report data.")),
+            R("Baumeister & Leary", 1995, "review", "The need to belong: argued humans have a fundamental need for frequent, positive interaction within lasting relationships.", st("robust", "Supported by extensive later research on social connection and health.")),
+            R("Tsemberis, Gulcur & Nakae", 2004, "experiment", "In a randomized trial, Housing First gave homeless adults with mental illness housing without treatment preconditions and greatly improved housing stability.", st("robust", "Replicated in larger trials, including Canada’s At Home/Chez Soi; effects on substance use are less consistent."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
