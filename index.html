@@ -18552,6 +18552,189 @@
                 "The MBTI is not valid for decisions like hiring.")
             ]
           },
+          "m8.3": {
+            home: "Alicia, 29, says “I’m a bad person. I’m just a felon.” She only feels worth anything when her probation officer praises her. Will more praise fix that, or does worth have to come from somewhere else?",
+            keys: [["What is incongruence?", "Carl Rogers’ term for a gap between your real self (who you think you are) and your ideal self (who you think you should be). The bigger the gap, the more distress.", "Two mirrors, “me now” and “me ideal,” standing so far apart that the person has to run between them, panting."],
+              ["What are conditions of worth?", "Love and approval given only when you meet certain conditions. Rogers argued they teach people to value themselves only when they perform.", "A mom handing out love only through a turnstile that demands a report card."],
+              ["What is unconditional positive regard?", "Valuing the person whatever they do, without approving every behaviour. With empathy and congruence, it is one of Rogers’ core conditions for therapy.", "A lighthouse that shines on the ship whether it’s sailing straight or wobbling."],
+              ["Does boosting self-esteem improve performance?", "No. Self-esteem goes along with some good outcomes, but raising it doesn’t cause better grades or work (Baumeister and colleagues, 2003).", "A gold medal labelled “self-esteem” given to a runner who didn’t train. He still finishes last."],
+              ["What is self-compassion?", "Kristin Neff’s idea: treating yourself kindly in failure, remembering everyone struggles, and noticing pain without drowning in it (self-kindness, common humanity, mindfulness).", "A woman giving herself the same warm blanket she’d give a crying friend."]],
+            steps: [
+              { kind: "hook", title: "Alicia’s check-in", body: who("<b>Alicia</b>, 29, in a women’s reentry group.") +
+                "<p>Alicia has been out for four months. She works, she shows up to group, and she passed every drug test.</p>" +
+                "<p>When the group leader asks how she’s doing, she shrugs. “I’m a bad person. I’m just a felon. That’s what I am.”</p>" +
+                "<p>The only time she lights up is after her probation officer says “good job.” For a day she feels fine. Then the feeling drains away, and she waits for the next check-in.</p>" },
+              { kind: "predict", id: "m8.3:predict", title: "Your call first",
+                case: ["Alicia feels worthy only right after her probation officer praises her.",
+                  { t: "Her group meets on Tuesdays.", irrelevant: true },
+                  "The good feeling fades within a day.",
+                  "She calls herself “just a felon.”",
+                  { t: "She takes the bus to work.", irrelevant: true },
+                  "Her sense of worth depends on someone else’s approval."],
+                q: "Will more praise from the probation officer fix Alicia’s self-worth?",
+                options: ["Yes, more praise will raise her self-esteem for good", "Probably not: praise she has to earn keeps her worth conditional; she needs regard for herself as a person and her own standards", "Yes, as long as the praise is very specific"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: probably not. More praise feeds the same pattern: she is worth something only when someone approves. Rogers would call this a condition of worth. What helps is regard for her as a person, not her performance, and help building her own standards and a kinder way of talking to herself.",
+                hints: ["Ask where Alicia’s sense of worth comes from right now.",
+                  "The sentences that don’t decide it are dimmed. Look at how long the good feeling lasts.",
+                  "Step one, aloud: say what happens to her worth on a week with no praise."] },
+              { kind: "idea", lvl: "f", title: "Rogers’ self", body: '<dl class="x-dossier"><div><dt>The actualizing tendency</dt><dd>Carl Rogers believed every person has a built-in drive to grow, like a plant turning toward light. Background: M1 · Humanism; Maslow’s side of it in M7 · Needs, revisited.</dd></div>' +
+                "<div><dt>The self-concept</dt><dd>Your organized picture of who you are: “I’m a hard worker,” “I’m a bad person.” People act, notice and remember in ways that fit it.</dd></div>" +
+                "<div><dt>Real and ideal self</dt><dd>The <b>real self</b> is who you think you are; the <b>ideal self</b> is who you think you should be. When the gap is large, Rogers called it <b>incongruence</b>, and it brings anxiety and distress.</dd></div>" +
+                "<div><dt>Conditions of worth</dt><dd>When love and approval come only if you meet conditions (good grades, no tears, no mistakes), you learn to value yourself only when you meet them, and to hide the parts that don’t fit.</dd></div>" +
+                "<div><dt>Unconditional positive regard</dt><dd>The opposite: being valued as a person whatever you do. It does not mean approving every behaviour.</dd></div>" +
+                "<div><dt>The fully functioning person</dt><dd>Rogers’ picture of health: open to experience, living in the present, trusting their own judgement, with a self-concept that fits what they actually feel and do.</dd></div></dl>" +
+                "<p><b>So:</b> distress grows when the real and ideal self sit far apart, and conditions of worth push them apart.</p>" },
+              { kind: "idea", lvl: "p", title: "Therapy, the Q-sort and self-esteem", body: '<dl class="x-dossier"><div><dt>Client-centred therapy</dt><dd>Rogers named three core conditions: <b>empathy</b>, <b>congruence</b> (being genuine) and <b>unconditional positive regard</b>. The therapeutic relationship and empathy are reliably linked to better outcomes (Elliott and colleagues, 2018; Norcross and Lambert) ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Necessary and sufficient?</dt><dd>Rogers (1957) claimed these conditions were all a client needs. They help, but they are <b>not enough on their own</b> for many problems " + ev("c") + ".</dd></div>" +
+                "<div><dt>The Q-sort</dt><dd>Clients sort cards of self-statements twice: “how I am” and “how I’d like to be.” Rogers, Butler and Haigh (1954) found the gap between the two shrank over therapy " + ev("c") + ".</dd></div>" +
+                "<div><dt>Self-esteem</dt><dd>Self-esteem goes along with feeling happier, but its links to grades, work and behaviour are weak, and <b>boosting it doesn’t cause better performance</b> (Baumeister and colleagues, 2003) " + ev("r") + ".</dd></div>" +
+                "<div><dt>Narcissism is not healthy self-esteem</dt><dd>Narcissism is an inflated, fragile sense of being special that needs constant admiration. Healthy self-esteem is steadier and doesn’t need others to lose.</dd></div>" +
+                "<div><dt>Self-compassion</dt><dd>Kristin Neff (2003): <b>self-kindness</b> instead of harsh judgement, <b>common humanity</b> (everyone fails sometimes) and <b>mindfulness</b> (noticing pain without being swept away). It doesn’t depend on being better than others. Promising; how to measure it is debated " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the relationship matters a lot; raising self-esteem by praise doesn’t, and self-compassion may be a steadier base.</p>" },
+              { kind: "contrast", id: "m8.3:contrast", title: "Same slip, one difference",
+                q: "Two clients both relapse after months of sobriety. Who is more likely to try hard to do better next time?",
+                cases: [
+                  { label: "Client A", s: ["Relapsed on a Saturday after six months clean.", { t: "Lives with her sister.", irrelevant: true }, { t: "Tells herself: “I’m pathetic. I always ruin everything.”", diff: true }, "Comes to group on Monday."] },
+                  { label: "Client B", s: ["Relapsed on a Saturday after six months clean.", { t: "Lives with her sister.", irrelevant: true }, { t: "Tells herself: “That hurt. Lots of people slip. What would I tell a friend?”", diff: true }, "Comes to group on Monday."] }
+                ],
+                answer: 1,
+                features: ["Who she lives with", "Self-criticism or self-compassion after the slip", "How long she was sober", "Coming to group"],
+                feature: 1,
+                why: "Only the way each one talks to herself differs. Breines and Chen (2012) found that people who responded to a failure with self-compassion were more motivated to improve, not less. Harsh self-criticism feeds shame, and shame makes people hide and give up.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. Think about what shame does to effort.",
+                  "Step one, aloud: say what each woman will feel walking into group on Monday."] },
+              { kind: "idea", lvl: "m", title: "Labels, shame and the existential thread", body: '<dl class="x-dossier"><div><dt>Person-first language</dt><dd>“A person with a conviction,” not “a felon.” A label for a whole person says this is all you are and all you’ll be. Person-first language keeps dignity and leaves room for change.</dd></div>' +
+                "<div><dt>Regard for the person, not every act</dt><dd>Unconditional positive regard means: “You matter, and the theft was harmful.” Both can be true. It is not approval of every behaviour.</dd></div>" +
+                "<div><dt>Internal standards</dt><dd>Help clients name what <b>they</b> value and judge themselves by it, so worth doesn’t rise and fall with each officer, judge or caseworker.</dd></div>" +
+                "<div><dt>Self-compassion in recovery</dt><dd>Shame after a slip tends to drive hiding and more use. Self-compassion lowers shame and may lower relapse risk " + ev("c") + ".</dd></div>" +
+                "<div><dt>The existential thread</dt><dd>Rollo May and Irvin Yalom took humanism toward freedom, death, isolation and meaning. Ahead: the M8 meaning lessons, such as Frankl.</dd></div></dl>" +
+                "<p><b>So:</b> separate the person from the act, and help worth come from inside.</p>" },
+              { kind: "example", lvl: "p", title: "Alicia’s group, six weeks on", body: who("<b>Alicia</b> and her group leader, Ms. Reyes.") +
+                '<dl class="x-dossier"><div><dt>Regard without conditions</dt><dd>Ms. Reyes listens without judging. “You did something harmful years ago. You’re also the person who got up at five for work all week. You’re more than one sentence.”</dd></div>' +
+                "<div><dt>Change the label</dt><dd>The group agrees to say “a person with a conviction.” Alicia rolls her eyes at first, then catches herself saying it.</dd></div>" +
+                "<div><dt>Close the gap</dt><dd>She writes “me now” and “me I want to be.” The ideal list is mostly about being a steady mom and honest friend, and some of it is already true.</dd></div>" +
+                "<div><dt>Her own standard</dt><dd>Instead of waiting for her officer’s “good job,” she ends each day by naming one thing she did that fits her values.</dd></div>" +
+                "<div><dt>A kinder voice</dt><dd>When she misses a shift, she practises: “That’s hard. Everyone messes up. What do I need now?” She calls her boss instead of hiding.</dd></div></dl>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Concepts such as the actualizing tendency and the fully functioning person are vague and hard to test. The view of human nature is very optimistic and says little about real harm people do. And it prizes an independent, self-directed self, a value of individualist cultures; in many cultures worth is rightly tied to family and community.</p>' +
+                "<p><b>The counter.</b> Parts of it have been tested well: the therapeutic relationship and empathy predict outcomes, the Q-sort made the self measurable, and self-compassion research is turning “be kind to yourself” into testable claims.</p>" +
+                "<p>Background: M1 · Humanism; M7 · Needs, revisited; M8 · Traits and the Big Five. Ahead: M8 · Social-cognitive views; the M8 meaning lessons.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Incongruence.</b> Two mirrors, “me now” and “me ideal,” stand so far apart that the person has to run between them, panting.</p>" +
+                "<p><b>Conditions of worth.</b> A mom hands out love only through a turnstile that demands a report card.</p>" +
+                "<p><b>Unconditional positive regard.</b> A lighthouse shines on the ship whether it’s sailing straight or wobbling. It lights the ship, not the wobble.</p>" +
+                "<p><b>Self-esteem and performance.</b> A gold medal labelled “self-esteem” goes to a runner who didn’t train. He still finishes last.</p>" +
+                "<p><b>Self-compassion.</b> A woman gives herself the same warm blanket she’d give a crying friend.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.3:teachback", title: "Teach it back", prompt: "Explain to Alicia’s group why more praise won’t fix her worth: Rogers’ actualizing tendency and self-concept; the real and ideal self and incongruence; conditions of worth versus unconditional positive regard (for the person, not every behaviour); the fully functioning person; the core conditions of client-centred therapy (empathy, congruence, unconditional positive regard), what the evidence says about the relationship, and why “necessary and sufficient” goes too far; the Q-sort; why boosting self-esteem doesn’t improve performance and how narcissism differs from healthy self-esteem; Neff’s three parts of self-compassion and the Breines and Chen finding; person-first language; the existential thread from May and Yalom; and the critique that humanism is vague, optimistic, individualist and hard to test." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Relationship and empathy linked to outcomes " + ev("r") + ". Boosting self-esteem doesn’t cause performance " + ev("r") + ". Core conditions as sufficient " + ev("c") + ". Q-sort gap shrinking " + ev("c") + ". Self-compassion and motivation " + ev("c") + ".</p>" +
+                "<p><b>So:</b> worth that has to be earned through someone else’s praise never stays; regard for the person, her own standards and a kinder inner voice last longer.</p>" },
+              Q("In Rogers’ theory, incongruence is:",
+                ["A gap between the real self and the ideal self", "A conflict between id and superego", "A mismatch between two traits", "Disagreeing with your therapist"], 0,
+                "A large real–ideal gap brings distress."),
+              Q("A child is praised only when she gets top grades. Rogers would call this:",
+                ["Unconditional positive regard", "A condition of worth", "Self-compassion", "Congruence"], 1,
+                "Approval tied to meeting conditions."),
+              Q("Offering unconditional positive regard to a client who stole means:",
+                ["Approving of the theft", "Valuing the person while still naming the behaviour as harmful", "Praising every action", "Never discussing the theft"], 1,
+                "Regard is for the person, not every behaviour."),
+              Q("Baumeister and colleagues (2003) found that raising self-esteem:",
+                ["Reliably raises grades and job performance", "Doesn’t cause better performance", "Cures narcissism", "Has no link to happiness"], 1,
+                "Self-esteem’s causal benefits for performance are weak."),
+              Q("Neff’s three components of self-compassion are:",
+                ["Self-kindness, common humanity, mindfulness", "Empathy, congruence, regard", "Pride, confidence, success", "Openness, warmth, calm"], 0,
+                "Kindness, shared humanity and balanced awareness of pain.")
+            ]
+          },
+          "m8.4": {
+            home: "Marco, 31, is calm and polite in counseling, explosive at home with his girlfriend, and patient with his kids. Staff argue whether he’s “really” aggressive. What if the answer is “it depends,” and the depends is the point?",
+            keys: [["What is reciprocal determinism?", "Bandura’s idea that the person (thoughts, beliefs), behaviour and environment all influence each other, back and forth.", "A triangle-shaped merry-go-round where person, behaviour and environment push each other in circles."],
+              ["How is self-efficacy built?", "Bandura’s four sources: mastery experiences (the strongest), vicarious experience, verbal persuasion and physiological states. Self-efficacy predicts behaviour change, including relapse.", "A tiny gym where you build an “I can do this” muscle by lifting one small dumbbell at a time."],
+              ["What is an if…then signature?", "Mischel and Shoda’s idea that a person is consistent in how they react to particular situations: “if a teacher warns, then calm; if a peer teases, then loud.”", "A kid’s personality as a vending machine with if…then buttons: “IF a teacher warns → calm,” “IF a peer teases → loud.”"],
+              ["What did the marshmallow test replication find?", "Watts, Duncan and Quan (2018) found much smaller links to later success once family background was controlled. Waiting isn’t destiny, but strategies such as distraction do help.", "A marshmallow wearing a “not your destiny” T-shirt next to a kid who covers her eyes and sings to wait."],
+              ["What is locus of control?", "Rotter (1966): whether you believe outcomes come from your own actions (internal) or from luck, fate and powerful others (external).", "A steering wheel inside your chest versus a steering wheel held by “luck” in the back seat."]],
+            steps: [
+              { kind: "hook", title: "Which Marco is real?", body: who("<b>Marco</b>, 31, in a court-referred program; the staff meeting about him.") +
+                "<p>In counseling, Marco is calm, polite and on time. With his two kids at supervised visits, he’s patient: he ties shoes, he waits out tantrums.</p>" +
+                "<p>At home with his girlfriend, it’s different. When she questions where he’s been, he shouts, slams doors and once punched a wall.</p>" +
+                "<p>At the staff meeting, one counselor says, “He’s an aggressive person, and the calm is an act.” Another says, “He’s a calm person having a hard time.” They’ve argued for twenty minutes.</p>" },
+              { kind: "predict", id: "m8.4:predict", title: "Your call first",
+                case: ["Marco is calm and polite in counseling.",
+                  { t: "He wears a grey hoodie to sessions.", irrelevant: true },
+                  "He is patient with his kids.",
+                  "He explodes when his girlfriend questions where he’s been.",
+                  { t: "His program meets on the third floor.", irrelevant: true },
+                  "The outbursts happen in one kind of situation, again and again."],
+                q: "Is Marco an aggressive person?",
+                options: ["Yes, aggression is his true trait and the rest is an act", "No, he’s calm; home is just stress", "The better question is when: he shows a stable if…then pattern, aggressive in one kind of situation, calm in others"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: ask when, not whether. Marco is consistent, but within situations: if his girlfriend questions him, then he explodes; if a counselor or his kids are involved, then he stays calm. That pattern is his personality, and it tells you exactly where the work is. It does not excuse the outbursts; it locates them.",
+                hints: ["Ask whether his aggression shows up everywhere or in one place.",
+                  "The sentences that don’t decide it are dimmed. Look at what triggers the outbursts.",
+                  "Step one, aloud: finish the sentence “If ___, then Marco ___.”"] },
+              { kind: "idea", lvl: "f", title: "People, behaviour and settings shape each other", body: '<dl class="x-dossier"><div><dt>Reciprocal determinism</dt><dd>Albert Bandura: the <b>person</b> (thoughts, beliefs, feelings), their <b>behaviour</b> and the <b>environment</b> all influence each other. Marco’s jealous thoughts lead to shouting; shouting changes how his girlfriend acts; her reaction feeds his thoughts. Background: Bandura’s Bobo doll in M3 · Observational learning.</dd></div>' +
+                "<div><dt>Self-efficacy</dt><dd>Your belief that you can do a specific thing. Four sources: <b>mastery experiences</b> (doing it yourself, the strongest), <b>vicarious experience</b> (watching someone like you do it), <b>verbal persuasion</b> (being told you can) and <b>physiological states</b> (reading a racing heart as “I can’t” or “I’m ready”). Self-efficacy reliably predicts behaviour change, including whether people relapse " + ev("r") + ".</dd></div>" +
+                "<div><dt>Locus of control</dt><dd>Julian Rotter (1966): an <b>internal</b> locus means you believe outcomes follow from your actions; an <b>external</b> locus means luck, fate or powerful others decide.</dd></div></dl>" +
+                "<p><b>So:</b> what you believe about yourself and your control shapes what you do, and what you do reshapes your world.</p>" },
+              { kind: "idea", lvl: "p", title: "Consistency inside situations", body: '<dl class="x-dossier"><div><dt>CAPS</dt><dd>Walter Mischel and Yuichi Shoda’s <b>cognitive-affective personality system</b>: personality is a network of how you read situations, what you expect, what you feel, what you value and what you can do. Different situations switch on different parts.</dd></div>' +
+                "<div><dt>If…then signatures</dt><dd>Mischel and Shoda (1995) watched children at a summer camp. Each child was consistently different across situations: one was aggressive <b>when warned by adults</b> but not when teased by peers; another the reverse. The pattern itself was stable " + ev("r") + ". This is how the person–situation debate from M8 · Traits and the Big Five resolves: personality <b>and</b> situation, interacting.</dd></div>" +
+                "<div><dt>The marshmallow test</dt><dd>Mischel (1972) offered preschoolers one treat now or two if they waited. Early follow-ups linked waiting to later success. Watts, Duncan and Quan (2018) found much smaller links once family background was controlled. Waiting at four is not destiny " + ev("c") + ".</dd></div>" +
+                "<div><dt>Delay strategies still work</dt><dd>Children waited longer when they distracted themselves or used <b>“cool”</b> thinking (the marshmallow is a fluffy cloud) instead of <b>“hot”</b> thinking (it’s sweet and chewy).</dd></div></dl>" +
+                "<p><b>So:</b> people are consistent in how they respond to particular situations, not in doing the same thing everywhere.</p>" },
+              { kind: "contrast", id: "m8.4:contrast", title: "Same skills, one difference",
+                q: "Two clients finished the same anger-management course and can both describe the time-out skill. Who is more likely to use it next time an argument heats up?",
+                cases: [
+                  { label: "Client A", s: ["Completed all eight sessions.", { t: "Attended the Thursday evening group.", irrelevant: true }, { t: "Says: “I know the steps, but when I’m that angry I can’t do it.”", diff: true }, "Can explain the time-out skill in his own words."] },
+                  { label: "Client B", s: ["Completed all eight sessions.", { t: "Attended the Thursday evening group.", irrelevant: true }, { t: "Says: “I’ve done it twice already. I can do it.”", diff: true }, "Can explain the time-out skill in his own words."] }
+                ],
+                answer: 1,
+                features: ["Which evening group", "Belief that he can use the skill under pressure", "How many sessions", "Knowing the steps"],
+                feature: 1,
+                why: "Only their self-efficacy differs. Both know the skill; Client B believes he can use it, and has small successes behind that belief. Self-efficacy predicts whether people actually use what they know.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. Both know the steps, so knowledge isn’t it.",
+                  "Step one, aloud: say which of Bandura’s four sources Client B is drawing on."] },
+              { kind: "idea", lvl: "m", title: "Helplessness, explanation and the clinic", body: '<dl class="x-dossier"><div><dt>Learned helplessness</dt><dd>Martin Seligman’s early work: animals that couldn’t escape shocks later stopped trying even when escape was possible. Maier and Seligman (2016) revised it: <b>passivity is the default</b> response to prolonged bad events; what is learned is <b>control</b>, that your actions matter ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Explanatory style</dt><dd>Christopher Peterson and Seligman: people who explain bad events as <b>personal, permanent and pervasive</b> (“it’s me, it’ll always be like this, it ruins everything”) are more prone to depression.</dd></div>" +
+                "<div><dt>Map the if…then</dt><dd>A functional analysis asks: what situation, what thought, what feeling, what behaviour, what result? In domestic violence and anger work, the goal is to name the situational <b>if</b> precisely, and plan the <b>then</b>. Accountability stays with the person.</dd></div>" +
+                "<div><dt>Build self-efficacy</dt><dd>Small mastery steps first, models of coping who look like the client, honest encouragement, and reframing a pounding heart as a cue to act.</dd></div>" +
+                "<div><dt>Reframe an external locus without blaming</dt><dd>“Life dealt you real barriers, and here is one piece you can steer.” Not “it’s all your fault,” and not “nothing you do matters.”</dd></div></dl>" +
+                "<p><b>So:</b> find the trigger, build belief through small wins, and show clients where their hands are on the wheel.</p>" },
+              { kind: "example", lvl: "p", title: "Marco’s if…then map", body: who("<b>Marco</b> and his counselor, Mr. Okafor, four weeks later.") +
+                '<dl class="x-dossier"><div><dt>Find the “if”</dt><dd>Together they map the last five blow-ups. Every one started when his girlfriend asked where he’d been. Marco’s thought: “She thinks I’m using again.” Feeling: shame, then anger.</dd></div>' +
+                "<div><dt>Plan the “then”</dt><dd>New plan: if she asks where he’s been, then he answers in one sentence, names the feeling (“I feel accused”) and takes a 20-minute walk if his chest is pounding.</dd></div>" +
+                "<div><dt>Small mastery</dt><dd>He practises the script in session, then uses it once at home. It works. Next week he uses it twice. “I didn’t think I could do that,” he says.</dd></div>" +
+                "<div><dt>Shift the locus</dt><dd>Marco used to say “she sets me off.” Now he says, “She asks; I choose what I do next.” The staff argument ends: he isn’t simply aggressive or calm; he has a pattern, and he is responsible for changing it.</dd></div></dl>" +
+                '<p>Compare this with the trait view: slide the five traits and see what a single score can and can’t tell you about Marco. <button type="button" class="x-lens__b press" data-scene="bigfive">Open the Big Five Mirror</button></p>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Social-cognitive theory says less about emotion and biology: temperament, genes and strong feelings sit at the edges of a model built on thoughts and expectations. And self-efficacy is partly circular: it is built mostly from past success, so when it predicts future success, part of what it measures may simply be past performance.</p>' +
+                "<p><b>The counter.</b> Self-efficacy still predicts behaviour beyond past performance in many studies, and it can be changed on purpose, which makes it a practical target. CAPS explicitly includes feelings and is open to biological input.</p>" +
+                "<p>Background: M3 · Observational learning; M8 · Traits and the Big Five; M8 · The humanistic self.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Reciprocal determinism.</b> A triangle-shaped merry-go-round where person, behaviour and environment push each other in circles.</p>" +
+                "<p><b>Mastery experiences.</b> A tiny gym where you build an “I can do this” muscle by lifting one small dumbbell at a time.</p>" +
+                "<p><b>If…then signatures.</b> A kid’s personality is a vending machine with buttons: “IF a teacher warns → calm,” “IF a peer teases → loud.”</p>" +
+                "<p><b>The marshmallow test.</b> A marshmallow wears a “not your destiny” T-shirt next to a kid who covers her eyes and sings to wait.</p>" +
+                "<p><b>Locus of control.</b> A steering wheel inside your chest, versus a steering wheel held by “luck” in the back seat.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.4:teachback", title: "Teach it back", prompt: "Explain to Marco’s team why “is he really aggressive?” is the wrong question: Bandura’s reciprocal determinism; self-efficacy and its four sources, and what it predicts, including relapse; Rotter’s internal and external locus of control; Mischel and Shoda’s CAPS and if…then signatures from the summer camp study, and how person–situation interaction settles the trait-versus-situation debate; the marshmallow test, the Watts, Duncan and Quan replication, and why distraction and cool thinking still help; learned helplessness, Maier and Seligman’s revision and explanatory style; how to map a client’s if…then triggers, build self-efficacy with small mastery steps, model coping and reframe an external locus without blaming; and the critique that the view underplays emotion and biology and that self-efficacy is partly circular." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Self-efficacy predicting behaviour change " + ev("r") + ". If…then signatures " + ev("r") + ". Control learned, passivity the default " + ev("r") + ". Marshmallow test as a destiny predictor " + ev("c") + ".</p>" +
+                "<p><b>So:</b> Marco isn’t one thing everywhere; he is consistent within situations, and naming his “if” and building belief in his “then” is where change happens.</p>" },
+              Q("Bandura’s reciprocal determinism says:",
+                ["The environment alone shapes behaviour", "Person, behaviour and environment influence each other", "Traits fix behaviour for life", "Behaviour is caused only by thoughts"], 1,
+                "All three push on each other."),
+              Q("The strongest source of self-efficacy is:",
+                ["Verbal persuasion", "Mastery experiences", "Physiological states", "Watching TV"], 1,
+                "Succeeding yourself builds belief most."),
+              Q("A child is aggressive when warned by adults but calm when teased by peers, every time. This illustrates:",
+                ["An if…then signature", "An external locus of control", "Learned helplessness", "The Barnum effect"], 0,
+                "Mischel and Shoda (1995): consistency within situations."),
+              Q("Watts, Duncan and Quan (2018) found that once family background was controlled, the marshmallow test:",
+                ["Predicted later success even more strongly", "Showed much smaller links to later success", "Could not be run", "Proved waiting is genetic"], 1,
+                "Waiting at four is not destiny."),
+              Q("Maier and Seligman’s 2016 revision of learned helplessness says:",
+                ["Helplessness is learned; control is the default", "Passivity is the default; control is learned", "Helplessness doesn’t exist", "Only animals show it"], 1,
+                "What is learned is that your actions matter.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -20296,6 +20479,26 @@
           G("m8.2", "Person–situation debate", "Debate persona–situación", "Do traits or situations drive behaviour?", "Mischel’s 1968 challenge that behaviour varies across situations; resolved by aggregated behaviour and if-then signatures."),
           G("m8.2", "Myers-Briggs Type Indicator (MBTI)", "Indicador de tipo Myers-Briggs (MBTI)", "A popular test sorting people into 16 types.", "A type-based questionnaire with poor test-retest reliability and weak validity for decisions such as hiring."),
           G("m8.2", "Barnum effect", "Efecto Barnum", "Vague profiles feel uniquely true.", "Forer’s 1949 finding that people rate general personality descriptions as highly accurate about themselves."),
+          G("m8.3", "Actualizing tendency", "Tendencia actualizante", "A built-in drive to grow.", "Carl Rogers’ view that every person has an inborn tendency to develop toward their fullest potential."),
+          G("m8.3", "Self-concept", "Autoconcepto", "Your picture of who you are.", "The organized set of beliefs a person holds about themselves, which shapes what they notice, remember and do."),
+          G("m8.3", "Ideal self", "Yo ideal", "Who you think you should be.", "In Rogers’ theory, the self a person believes they ought to be, compared with the real self they believe they are."),
+          G("m8.3", "Incongruence", "Incongruencia", "A gap between real and ideal self.", "Rogers’ term for a mismatch between self-concept and ideal self, or between self-concept and experience; a large gap brings distress."),
+          G("m8.3", "Conditions of worth", "Condiciones de valía", "Love given only if you meet conditions.", "Rogers’ term for approval that depends on meeting others’ standards, teaching people to value themselves only when they perform."),
+          G("m8.3", "Fully functioning person", "Persona plenamente funcional", "Rogers’ picture of psychological health.", "Someone open to experience, living in the present and trusting their own judgement, with a self-concept that fits their experience."),
+          G("m8.3", "Client-centred therapy", "Terapia centrada en el cliente", "Therapy built on empathy, genuineness and regard.", "Rogers’ approach, in which the therapist offers empathy, congruence and unconditional positive regard and the client leads; the relationship predicts outcomes, but the conditions are not sufficient alone."),
+          G("m8.3", "Q-sort", "Q-sort", "Sorting self-statements to measure the self.", "A method in which a person sorts cards describing themselves as they are and as they would like to be; Rogers used the gap to track therapy."),
+          G("m8.3", "Self-esteem", "Autoestima", "How much you value yourself overall.", "A person’s overall evaluation of their worth; it goes along with happiness, but boosting it does not cause better performance (Baumeister and colleagues, 2003)."),
+          G("m8.3", "Narcissism", "Narcisismo", "An inflated, fragile sense of being special.", "A pattern of grandiosity and need for admiration, distinct from healthy, stable self-esteem."),
+          G("m8.3", "Self-compassion", "Autocompasión", "Treating yourself as kindly as a friend.", "Kristin Neff’s construct of self-kindness, common humanity and mindfulness in the face of failure or pain; promising, with measurement debated."),
+          G("m8.3", "Person-first language", "Lenguaje centrado en la persona", "“A person with a conviction,” not “a felon.”", "Naming the person before the condition or history, which protects dignity and leaves room for change."),
+          G("m8.4", "Locus of control", "Locus de control", "Who you think steers outcomes: you or luck.", "Rotter’s (1966) idea that people differ in believing outcomes follow from their own actions (internal) or from luck, fate or powerful others (external)."),
+          G("m8.4", "Cognitive-affective personality system (CAPS)", "Sistema cognitivo-afectivo de la personalidad (CAPS)", "Personality as a network switched on by situations.", "Mischel and Shoda’s model in which interpretations, expectations, feelings, values and skills interact with situations to produce stable patterns."),
+          G("m8.4", "If…then signature", "Firma si…entonces", "A stable way of reacting to a particular situation.", "A person’s consistent pattern of behaviour across situations, such as aggressive when warned by adults but not when teased by peers (Mischel and Shoda, 1995)."),
+          G("m8.4", "Marshmallow test", "Prueba del malvavisco", "One treat now or two if you wait.", "Mischel’s delay-of-gratification task; later work (Watts, Duncan and Quan, 2018) found much smaller links to later success once family background was controlled."),
+          G("m8.4", "Hot and cool thinking", "Pensamiento caliente y frío", "Focusing on the tempting or the neutral side.", "Mischel’s distinction between attending to a temptation’s appealing features (hot) and its abstract features (cool); cool thinking and distraction help people wait."),
+          G("m8.4", "Explanatory style", "Estilo explicativo", "How you explain bad events.", "Peterson and Seligman’s idea that explaining bad events as personal, permanent and pervasive raises the risk of depression."),
+          G("m8.4", "Vicarious experience", "Experiencia vicaria", "Seeing someone like you succeed.", "One of Bandura’s four sources of self-efficacy, alongside mastery experiences, verbal persuasion and physiological states."),
+          G("m8.4", "Person–situation interaction", "Interacción persona–situación", "Behaviour depends on who and where.", "The view that behaviour comes from the person and the situation together, resolving the trait-versus-situation debate."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -20982,6 +21185,18 @@
             R("Roberts, Walton & Viechtbauer", 2006, "meta-analysis", "A meta-analysis of longitudinal studies: conscientiousness and agreeableness rise and neuroticism falls from young adulthood into middle age.", st("robust", "The maturity principle is well replicated.")),
             R("Mischel", 1968, "review", "Personality and Assessment: behaviour is only weakly consistent across situations, challenging trait-based prediction.", st("contested", "Sparked the person–situation debate, resolved by aggregation and if-then signatures.")),
             R("Forer", 1949, "experiment", "Students rated the same vague personality profile, drawn from horoscopes, as highly accurate about themselves: the Barnum effect.", st("robust", "Replicated many times."))];
+          REFS["m8.3"] = [
+            R("Rogers", 1957, "review", "Proposed that empathy, congruence and unconditional positive regard are necessary and sufficient conditions for therapeutic change.", st("contested", "The relationship clearly matters; that the conditions are sufficient on their own is not supported.")),
+            R("Rogers, Butler & Haigh", 1954, "observational", "Using the Q-sort, clients’ real–ideal self gap shrank over the course of client-centred therapy.", st("contested", "An early, influential attempt to measure the self; small samples and limited controls.")),
+            R("Elliott, Bohart, Watson & Murphy", 2018, "meta-analysis", "Therapist empathy was reliably linked to better client outcomes across many studies and therapy types.", st("robust", "Consistent with Norcross and Lambert’s reviews of the therapeutic relationship.")),
+            R("Baumeister, Campbell, Krueger & Vohs", 2003, "review", "High self-esteem goes along with happiness, but it does not cause better performance, and boosting it does not improve grades or work.", st("robust", "Widely cited and supported by later work.")),
+            R("Breines & Chen", 2012, "experiment", "After a failure, people led to respond with self-compassion were more motivated to improve than those given self-esteem boosts or nothing.", st("contested", "Promising; built on Neff’s (2003) construct, whose measurement is still debated."))];
+          REFS["m8.4"] = [
+            R("Bandura", 1977, "review", "Self-efficacy: beliefs about one’s capability, built from mastery, vicarious experience, persuasion and physiological states, drive behaviour change.", st("robust", "Self-efficacy predicts behaviour change, including relapse, across many fields.")),
+            R("Rotter", 1966, "observational", "Introduced internal versus external locus of control and a scale to measure it.", st("robust", "A durable construct; links to outcomes vary by domain.")),
+            R("Mischel & Shoda", 1995, "observational", "Children at a summer camp showed stable if…then signatures, such as aggression when warned by adults but not peers; the basis of CAPS.", st("robust", "If…then consistency has been found in other settings.")),
+            R("Watts, Duncan & Quan", 2018, "observational", "A larger, more diverse replication of the marshmallow test found much smaller links to later achievement once family background was controlled.", st("contested", "Delay ability is not destiny; delay strategies themselves still help.")),
+            R("Maier & Seligman", 2016, "review", "Revised learned helplessness: passivity is the default response to prolonged aversive events, and what is learned is control.", st("robust", "Grounded in later neuroscience findings."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
