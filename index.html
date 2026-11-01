@@ -16276,6 +16276,211 @@
                 "Practice improves the games themselves, but not reading, maths or everyday attention.")
             ]
           },
+          "m4.3": {
+            home: "Mr. Ortiz can’t remember last week’s session, yet he still wins at dominoes. How can one memory fail while another holds?",
+            keys: [["What are the two main kinds of long-term memory?", "Explicit (declarative) memory is what you can consciously recall and say: facts and events. Implicit (nondeclarative) memory shows in what you do without recalling it: procedural skills and habits, priming, and classically conditioned responses. Damage can wreck one and spare the other.", "A man greets his doctor with “nice to meet you” for the thousandth time, while drawing a perfect star in a mirror without looking up."],
+              ["What is the difference between episodic and semantic memory?", "Endel Tulving (1972) split declarative memory into episodic memory (events you lived, with a time and place: “my first day at work”) and semantic memory (general facts: “Paris is in France”). Autobiographical memory draws on both: the episodes and facts of your own life story.", "Two filing cabinets, one labelled “My Diary” and one “Encyclopedia”, arguing loudly over which of them owns “Paris is in France”."],
+              ["What does the hippocampus do in memory?", "It is needed to form new declarative memories and bind them together, then over time memories come to depend more on the cortex. It is not “the memory store”: Henry Molaison lost most of his hippocampus but kept his childhood memories, his vocabulary and his skills.", "A seahorse (hippocampus is Greek for seahorse) works as a mail sorter, sending every new letter off to storage but keeping none for itself."],
+              ["What are anterograde and retrograde amnesia?", "Anterograde amnesia is trouble forming new memories after the damage; retrograde amnesia is loss of memories from before it. Retrograde loss is often temporally graded: recent years are lost more than older ones. Henry Molaison had severe anterograde and partial retrograde amnesia.", "A man holding a camera that has no film for anything new, while the last few photo albums behind him slowly fade but the oldest ones stay bright."],
+              ["What is Korsakoff syndrome?", "A memory disorder caused by thiamine (vitamin B1) deficiency, most often with long-term heavy alcohol use and poor nutrition. It brings dense anterograde amnesia, some retrograde loss, and often confabulation: sincere but false memories that fill gaps, not lies. Thiamine given early can prevent it.", "A storyteller with blank pages in his book, cheerfully writing in brand-new chapters he truly believes, while a nurse hands him a giant vitamin B1 pill shaped like a key."]],
+            steps: [
+              { kind: "hook", title: "Nice to meet you, again", body: "<p><b>1953.</b> To stop severe epilepsy, surgeon William Scoville removed much of both medial temporal lobes, including most of the hippocampus, from a 27-year-old man named <b>Henry Molaison</b>. The seizures eased. But from then on he could not form new memories of facts or events. Scoville and Brenda Milner (1957) " + ev("r") + " described him as <b>H.M.</b>, the name researchers used until his death in 2008.</p>" +
+                "<p>He kept his intelligence, his vocabulary and many memories of his youth. He could hold a conversation, then meet the same researcher an hour later as a stranger.</p>" +
+                who("<b>Mr. Ortiz</b>, 58, in outpatient counseling after many years of heavy drinking.") +
+                "<p>He doesn’t remember last week’s session or what he agreed to try. His daughter says he forgets doctor’s appointments and his medication. Yet at the community centre he still plays dominoes expertly, counting tiles and blocking his opponents without a pause.</p>" },
+              { kind: "predict", id: "m4.3:predict", title: "Your call first",
+                case: ["Mr. Ortiz forgets what happened in last week’s session.",
+                  { t: "He prefers his coffee black.", irrelevant: true },
+                  "His dominoes skill is intact.",
+                  "The counselor wants him to start a new morning routine: check his pill box, then his calendar, at the same time and place every day.",
+                  "He will practise it each day with his daughter for two weeks.",
+                  { t: "He supports a baseball team from his home town.", irrelevant: true }],
+                q: "Can Mr. Ortiz learn the new routine, even if he forgets practising it?",
+                options: ["No: if he can’t remember the lessons, he can’t learn", "Yes: repeated practice can build a habit without memory of the practice", "Only if he is told the reasons each time"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: yes, very likely. Recalling events and learning skills rely on different systems. Henry Molaison got better at mirror drawing over three days while saying each time that he had never done it. Mr. Ortiz’s intact dominoes skill suggests his implicit memory works. Repeated in the same place, the routine can become a habit he does without remembering how he learned it.",
+                hints: ["Ask what kind of memory his dominoes skill uses.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: name the memory a routine needs, and the memory he is losing."] },
+              { kind: "idea", lvl: "f", title: "Two families of memory", body: "<p>Long-term memory is usually split in two:</p>" +
+                '<dl class="x-dossier"><div><dt>Explicit (declarative)</dt><dd>Memories you can bring to mind and say. <b>Episodic</b>: events you lived, with a when and where. <b>Semantic</b>: facts and word meanings. Tulving (1972) ' + ev("r") + " drew this line.</dd></div>" +
+                "<div><dt>Implicit (nondeclarative)</dt><dd>Memory shown in what you do, not what you recall. <b>Procedural</b>: skills and habits, like riding a bike or playing dominoes. <b>Priming</b>: having seen something makes it quicker to process later. <b>Classical conditioning</b>: learned responses, like a racing heart at a bar’s smell.</dd></div></dl>" +
+                "<p><b>Autobiographical memory</b> is your life story: episodes (“my wedding day”) and personal facts (“I grew up in Ponce”). <b>Prospective memory</b> is remembering to do something later: an appointment, a pill at eight. It is the kind clients most often say they’ve lost.</p>" +
+                "<p><b>So:</b> knowing <i>that</i> and knowing <i>how</i> are different memories, and they can fail separately.</p>" },
+              { kind: "idea", lvl: "f", title: "What Henry Molaison taught", body: "<p>Brenda Milner gave him a <b>mirror-drawing</b> task: trace a star while seeing only its mirror image. Over three days his errors fell steadily, just as healthy people’s do, but each day he said he had never tried it " + ev("r") + ".</p>" +
+                "<p>That one finding split memory in two: a skill could be learned without any memory of learning it.</p>" +
+                '<dl class="x-dossier"><div><dt>Hippocampus</dt><dd>Needed to <b>form</b> new declarative memories and tie their parts together. Over time they rely more on the cortex. It is a gateway, not the memory store: Henry kept his childhood memories.</dd></div>' +
+                "<div><dt>Anterograde amnesia</dt><dd>Can’t form new memories after the damage. His was severe.</dd></div>" +
+                "<div><dt>Retrograde amnesia</dt><dd>Loss of memories from before the damage, often worst for the years just before it. His covered roughly the decade before surgery.</dd></div></dl>" +
+                "<p><b>So:</b> damage to the hippocampus stops new facts and events from sticking, but leaves skills, habits and old memories largely in place.</p>" },
+              { kind: "contrast", id: "m4.3:contrast", title: "Two patients, one difference",
+                q: "Which patient is more likely to forget, an hour later, that they met their new therapist?",
+                cases: [
+                  { label: "Patient A", s: ["Brain injury after a fall, at 45.", { t: "Wears glasses.", irrelevant: true }, { t: "The damage includes both hippocampi.", diff: true }, "Same age, same rehab programme, same therapist."] },
+                  { label: "Patient B", s: ["Brain injury after a fall, at 45.", { t: "Wears glasses.", irrelevant: true }, { t: "The damage spares the hippocampi.", diff: true }, "Same age, same rehab programme, same therapist."] }
+                ],
+                answer: 0,
+                features: ["Wearing glasses", "Whether the damage hit the hippocampi", "The rehab programme", "Their age"],
+                feature: 1,
+                why: "Only the site of damage differs. The hippocampus is needed to form new declarative memories, so Patient A is likely to have anterograde amnesia: meeting the therapist won’t stick. Both may still learn rehab exercises through procedural memory, which doesn’t depend on the hippocampus.",
+                hints: ["Find the one sentence where the two patients part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say which brain area forms new memories of events."] },
+              { kind: "idea", lvl: "p", title: "Korsakoff syndrome", body: "<p><b>Korsakoff syndrome</b> is a lasting memory disorder caused by <b>thiamine (vitamin B1) deficiency</b> " + ev("r") + ". It is most common with long-term heavy alcohol use, which cuts thiamine intake and absorption, but also follows malnutrition, severe vomiting or weight-loss surgery.</p>" +
+                '<dl class="x-dossier"><div><dt>Memory</dt><dd>Dense anterograde amnesia and some retrograde loss; skills and habits are relatively spared.</dd></div>' +
+                "<div><dt>Confabulation</dt><dd>Filling gaps with sincere but false memories. It is not lying: the person believes them.</dd></div>" +
+                "<div><dt>Warning sign</dt><dd>It often follows <b>Wernicke encephalopathy</b>: confusion, unsteady walking and abnormal eye movements, a medical emergency.</dd></div>" +
+                "<div><dt>Prevention</dt><dd>Thiamine given early, especially to heavy drinkers in withdrawal, can prevent it or limit damage.</dd></div></dl>" +
+                "<p>Not every memory problem after heavy drinking is Korsakoff; many people improve with months of abstinence. Diagnosis is for a medical team.</p>" +
+                "<p><b>So:</b> in substance use work, memory complaints are a medical question as well as a counseling one.</p>" },
+              { kind: "idea", lvl: "p", title: "Henry Molaison: consent and legacy", body: "<p>Henry Molaison took part in research for more than 50 years and became the most studied person in memory science. He is remembered by name, as a person, not only as “H.M.” or “the amnesic”.</p>" +
+                '<dl class="x-dossier"><div><dt>The surgery</dt><dd>Experimental for its time, done for his epilepsy, not for research. Its effect on memory was not foreseen, and the operation was not repeated this way.</dd></div>' +
+                "<div><dt>Consent</dt><dd>He could not remember agreeing to studies, so consent came from family and later a court-appointed guardian. Writers have since asked whether his own interests were always put first.</dd></div>" +
+                "<div><dt>Legacy</dt><dd>His brain was donated and studied after his death in 2008. His case changed how memory, epilepsy surgery and amnesia care are understood.</dd></div></dl>" +
+                "<p><b>So:</b> people who cannot remember consenting need extra protection, in research and in care.</p>" },
+              { kind: "idea", lvl: "m", title: "Work with the memory that works", body: "<p>Implicit memory often survives when explicit memory fails. Use it:</p>" +
+                '<dl class="x-dossier"><div><dt>Routines</dt><dd>Same action, same time, same place: pill box by the coffee maker, checked with the first cup.</dd></div>' +
+                "<div><dt>Procedural learning</dt><dd>Practise the coping skill, don’t just explain it. Rehearse the steps until they run on their own.</dd></div>" +
+                "<div><dt>External aids</dt><dd>A wall calendar, phone alarms, a notebook from each session. They carry prospective memory for the client.</dd></div>" +
+                "<div><dt>Start each session</dt><dd>With a short written summary of last week, read together, not “Do you remember what we said?”</dd></div>" +
+                "<div><dt>Screen</dt><dd>In substance use work, screen for memory problems (for example with the MoCA) and refer for medical and neuropsychological assessment when they show.</dd></div></dl>" +
+                "<p><b>So:</b> when recall fails, build the plan into habits and the environment.</p>" },
+              { kind: "example", lvl: "p", title: "Mr. Ortiz’s plan", body: who("<b>Mr. Ortiz</b>, after his counselor noticed the forgetting.") +
+                '<dl class="x-dossier"><div><dt>Screening</dt><dd>A brief memory screen showed problems with delayed recall. He was referred to his doctor, who started thiamine and ordered an assessment.</dd></div>' +
+                "<div><dt>Routine</dt><dd>Pill box next to the coffee maker; calendar on the fridge beside it. His daughter practises the sequence with him each morning.</dd></div>" +
+                "<div><dt>Alarms</dt><dd>Phone alarms labelled “Pills” and “Counseling at 3”.</dd></div>" +
+                "<div><dt>Sessions</dt><dd>Each starts with his notebook page from last time. He reads it aloud.</dd></div></dl>" +
+                "<p>Three weeks on, he still can’t describe the first session, but he takes his pills each morning and arrives on time. “I just do it,” he says.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>The neat tree of “systems” overstates the split. Episodic and semantic memory constantly feed each other; the hippocampus also joins in some implicit tasks; and amnesia rarely spares one kind perfectly. Processing views argue memory differs by how it is used (recall versus doing), not by separate stores, and the taxonomy is still debated.</p>' +
+                "<p><b>The counter.</b> The dissociations are striking and repeated: patients like Henry Molaison learn skills they cannot remember learning, and other patients show the reverse. Whether they are “systems” or ways of processing, the clinical rule holds: implicit learning can carry a plan when recall fails.</p>" +
+                "<p><b>Person-first.</b> Write “a client with memory problems after long-term alcohol use”, not “a Korsakoff’s”.</p>" +
+                "<p>Background: M4 · Encoding, storage and retrieval; M4 · Working memory. Ahead: M4 · Forgetting and interference.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Implicit survives amnesia.</b> A man greets his doctor “nice to meet you” for the thousandth time, while drawing a perfect star in a mirror.</p>" +
+                "<p><b>Episodic versus semantic.</b> Two filing cabinets, “My Diary” and “Encyclopedia”, arguing over who owns “Paris is in France”.</p>" +
+                "<p><b>Hippocampus.</b> A seahorse mail sorter sends every new letter to storage but keeps none itself.</p>" +
+                "<p><b>Anterograde and retrograde.</b> A camera with no film for anything new, while the newest albums fade and the oldest stay bright.</p>" +
+                "<p><b>Korsakoff.</b> A storyteller cheerfully writes new chapters into his blank pages, as a nurse hands him a giant B1 pill.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.3:teachback", title: "Teach it back", prompt: "Explain to Mr. Ortiz’s daughter why he forgets sessions but still plays dominoes, and what will help: explicit (declarative) versus implicit (nondeclarative) memory; Tulving’s 1972 split of episodic and semantic memory; procedural memory, priming and classical conditioning; autobiographical and prospective memory; Henry Molaison’s 1953 surgery and Scoville and Milner’s 1957 report, and how he learned mirror drawing without remembering practising; the hippocampus as needed for forming new declarative memories, not as the memory store; anterograde versus retrograde amnesia; Korsakoff syndrome from thiamine deficiency, often with heavy alcohol use, with confabulation, and prevention with thiamine; the clinical tools of routines, procedural practice, calendars and phone alarms, and screening for memory problems in substance use clients; the ethics of Henry Molaison’s consent and legacy; and the critique that the systems overlap and the taxonomy is debated." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Explicit and implicit memory can fail separately " + ev("r") + ". Episodic versus semantic as useful categories " + ev("r") + ", as fully separate systems " + ev("c") + ". The hippocampus forms new declarative memories " + ev("r") + ". Korsakoff syndrome from thiamine deficiency, preventable with thiamine " + ev("r") + ".</p>" +
+                "<p><b>So:</b> losing the memory of events is not losing the ability to learn; good care builds on the habits that still form.</p>" },
+              Q("Henry Molaison improved at mirror drawing over three days but said each time he had never done it. What does this show?",
+                ["His surgery had no effect on memory", "Procedural learning can work without explicit memory of learning", "He was not paying attention", "Semantic memory replaced episodic memory"], 1,
+                "Skill learning (implicit memory) was spared even though he could not recall the practice (explicit memory)."),
+              Q("“Paris is the capital of France” is an example of which memory?",
+                ["Episodic", "Semantic", "Procedural", "Prospective"], 1,
+                "A general fact, not tied to when or where you learned it, is semantic memory (Tulving, 1972)."),
+              Q("What is the best description of the hippocampus’s role?",
+                ["It stores all long-term memories", "It is needed to form new declarative memories", "It controls procedural skills", "It holds working memory"], 1,
+                "Damage stops new facts and events from sticking, but older memories and skills largely remain."),
+              Q("A client with long-term heavy drinking fills memory gaps with confident but untrue stories. What should the counselor consider?",
+                ["He is lying to avoid treatment", "Possible Korsakoff syndrome: refer for medical assessment and thiamine", "Normal ageing", "Retroactive interference"], 1,
+                "Confabulation with heavy drinking suggests thiamine-related damage; it is sincere, not lying, and needs medical care."),
+              Q("A client with memory problems keeps missing appointments. What helps most?",
+                ["Asking them to try harder to remember", "Phone alarms, a calendar and a fixed routine", "Longer sessions", "Explaining why appointments matter"], 1,
+                "External aids and routines carry prospective memory and rely on implicit learning that is often spared.")
+            ]
+          },
+          "m4.4": {
+            home: "Tatiana reaches for an English word and a Spanish one arrives. Her fingers type her old phone PIN. Is forgetting fading, or memories getting in each other’s way?",
+            keys: [["What did Ebbinghaus’s forgetting curve show?", "Hermann Ebbinghaus (1885) memorised lists of nonsense syllables and tested himself. Forgetting was fast at first, within the first hours and day, then slowed and levelled off. Relearning a list took less time than learning it the first time (savings), even when he could recall none of it. Murre and Dros (2015) replicated the curve.", "Hermann Ebbinghaus on a playground slide shaped like his curve, whooshing down fast at first then gliding almost flat, while nonsense syllables “ZOF” and “DAX” tumble out of his pockets."],
+              ["What is proactive interference?", "Old learning blocks new learning: what you knew before makes the new version harder to recall. Typing your old PIN instead of the new one is the classic example. Underwood (1957) argued that much lab forgetting came from earlier lists.", "An old phone PIN in a bouncer’s jacket stands at a club door, arms folded, refusing to let the new PIN inside."],
+              ["What is retroactive interference?", "New learning blocks old learning: what you learned after makes the earlier memory harder to recall. Interference is strongest when the two are similar, like two languages or two lists of words.", "A cheerful new roommate paints over the old roommate’s name on the mailbox, so the old roommate’s letters stop arriving."],
+              ["What is retrieval failure?", "The memory is stored but can’t be reached without the right cue. Tulving and Pearlstone (1966) found people recalled far more words from a list when given the category names as cues. This is cue-dependent forgetting: forgotten is often not gone.", "A library book that definitely exists, sitting safe and dusty on a shelf in the wrong room, while the librarian searches the right one."],
+              ["Can we forget on purpose?", "Partly. In directed forgetting, people told to forget a list recall less of it. Anderson and Green (2001) reported that repeatedly suppressing a memory reduced later recall, though replications are mixed. Retrieval-induced forgetting is real: recalling some items makes related ones harder to recall. Repression of trauma is a separate, much more contested claim.", "A woman holding a “Do Not Disturb” sign up to one of her own memories, which sulks a little and gets slightly quieter, but doesn’t leave."]],
+            steps: [
+              { kind: "hook", title: "Two languages, two PINs", body: who("<b>Tatiana</b>, 41, in counseling while she retrains for a job that needs English.") +
+                "<p>She learned English at school and used it at work in her twenties. For the last twelve years she has spoken only Spanish. Now, in her English class, Spanish words keep arriving first, and she mixes the two in one sentence.</p>" +
+                "<p>Last week her bank made her change her phone PIN. Every time she unlocks it, her thumb types the old one.</p>" +
+                "<p>“My memory is going,” she says. “And I’m too old to learn a language again.”</p>" },
+              { kind: "predict", id: "m4.4:predict", title: "Your call first",
+                case: ["Tatiana used her old PIN for six years.",
+                  { t: "Her phone has a blue case.", irrelevant: true },
+                  "She has used the new PIN for one week.",
+                  "The two PINs share two of their four digits.",
+                  "Next week she will unlock her phone in a hurry at the bus stop.",
+                  { t: "She likes the new phone’s camera.", irrelevant: true }],
+                q: "At the bus stop, which PIN is more likely to pop out first?",
+                options: ["The new PIN: it’s the most recent", "The old PIN: six years of practice gets in the way", "Neither: she’ll forget both"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: the old PIN, most likely. Six years of practice makes it strong, and the two PINs are similar, so the old one competes with the new: proactive interference. Hurry makes the stronger habit win. It isn’t a failing memory; with more practice, the new PIN will take over.",
+                hints: ["Ask which memory has had more practice.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say whether the old memory is blocking the new or the new is blocking the old."] },
+              { kind: "idea", lvl: "f", title: "The forgetting curve", body: "<p>Hermann Ebbinghaus (1885) " + ev("r") + " was his own subject. He memorised lists of <b>nonsense syllables</b> (ZOF, DAX, BOK) so meaning couldn’t help, then measured what remained after minutes, hours and days.</p>" +
+                '<dl class="x-dossier"><div><dt>Fast, then slow</dt><dd>Most loss came early, in the first hours and day; after that the curve flattened and levelled off.</dd></div>' +
+                "<div><dt>Savings</dt><dd>Relearning a list took less time than learning it the first time, even when he could recall none of it. Something stayed.</dd></div>" +
+                "<div><dt>Replicated</dt><dd>Murre and Dros (2015) repeated the study on one person and found much the same curve.</dd></div></dl>" +
+                "<p><b>So:</b> forgetting is fastest right after learning, and what seems gone is often partly kept, so relearning is quicker.</p>" },
+              { kind: "idea", lvl: "f", title: "Why we forget", body: "<p>Several accounts, not one:</p>" +
+                '<dl class="x-dossier"><div><dt>Decay</dt><dd>Memory traces fade with time and disuse. Plausible, but hard to test, because time is never empty: other things are learned in it.</dd></div>' +
+                "<div><dt>Proactive interference</dt><dd><b>Old blocks new.</b> The old PIN gets in the way of the new one.</dd></div>" +
+                "<div><dt>Retroactive interference</dt><dd><b>New blocks old.</b> Learning a new language’s word makes the old one harder to find.</dd></div>" +
+                "<div><dt>Retrieval failure</dt><dd>It’s there but unreachable without the right cue: <b>cue-dependent forgetting</b>. With category names as cues, people recalled far more of a list (Tulving and Pearlstone, 1966) " + ev("r") + ".</dd></div></dl>" +
+                "<p>Interference is well supported " + ev("r") + ". Its main rule: <b>similar material interferes most</b>.</p>" +
+                "<p><b>So:</b> much forgetting is competition between memories, or a missing cue, not erasure.</p>" },
+              { kind: "contrast", id: "m4.4:contrast", title: "Two learners, one difference",
+                q: "Which learner will likely recall more of the Spanish list the next day?",
+                cases: [
+                  { label: "Learner A", s: ["Studies the same 30 Spanish words for 20 minutes.", { t: "Uses a yellow pen.", irrelevant: true }, { t: "Right after, studies 30 Italian words.", diff: true }, "Same room, same test the next day."] },
+                  { label: "Learner B", s: ["Studies the same 30 Spanish words for 20 minutes.", { t: "Uses a yellow pen.", irrelevant: true }, { t: "Right after, does 20 minutes of maths problems.", diff: true }, "Same room, same test the next day."] }
+                ],
+                answer: 1,
+                features: ["The colour of the pen", "Whether the next task was similar or different", "How long they studied", "The room"],
+                feature: 1,
+                why: "Only what came next differs. Italian is very similar to Spanish, so its words compete with the Spanish ones: retroactive interference. Maths is dissimilar and interferes much less. Interference depends on similarity.",
+                hints: ["Find the one sentence where the two learners part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: ask which second task looks most like the first."] },
+              { kind: "idea", lvl: "p", title: "Forgetting on purpose, and for good", body: '<dl class="x-dossier"><div><dt>Motivated forgetting</dt><dd>The idea that we push away painful memories. Some everyday avoidance is real; <b>repression</b> of trauma into a hidden store is far more contested ' + ev("c") + ". More in M4 · Trauma and memory controversies.</dd></div>" +
+                "<div><dt>Directed forgetting</dt><dd>Told to forget a list, people recall less of it, partly because they stop rehearsing it.</dd></div>" +
+                "<div><dt>Suppression</dt><dd>Anderson and Green (2001) reported that repeatedly trying not to think of a memory (“think/no-think”) lowered its later recall " + ev("c") + ". Some replications failed; the effect seems real but small.</dd></div>" +
+                "<div><dt>Retrieval-induced forgetting</dt><dd>Practising some items from a set makes related, unpractised items harder to recall (Anderson, Bjork and Bjork, 1994) " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>Forgetting helps.</b> It clears out the old PIN and last year’s parking spot, and dropping details lets us <b>generalise</b>: remember the gist and the rule, not every case.</p>" +
+                "<p><b>So:</b> forgetting is partly a feature, and only partly under our control.</p>" },
+              { kind: "idea", lvl: "m", title: "When clients forget the plan", body: "<p>Clients forget homework and coping plans for the same reasons Ebbinghaus forgot syllables:</p>" +
+                '<dl class="x-dossier"><div><dt>Space the reviews</dt><dd>Go over the plan the next day, then a few days later, then weekly, to catch the steep early drop.</dd></div>' +
+                "<div><dt>Vary the cues</dt><dd>Link the plan to several cues (a phone note, a fridge card, a word) so one missing cue doesn’t lose it.</dd></div>" +
+                "<div><dt>Practise in real contexts</dt><dd>Rehearse the coping step where it will be needed, or imagine it there in detail.</dd></div>" +
+                "<div><dt>Not resistance</dt><dd>Forgetting homework is normal, not proof the client doesn’t care. Ask what got in the way.</dd></div>" +
+                "<div><dt>Savings</dt><dd>A returning client isn’t starting from zero; relearning old skills is faster. Say so.</dd></div></dl>" +
+                "<p><b>So:</b> plan for forgetting instead of being surprised by it.</p>" },
+              { kind: "example", lvl: "p", title: "Tatiana, a month later", body: who("<b>Tatiana</b>, after her counselor explained interference and savings.") +
+                '<dl class="x-dossier"><div><dt>Reframe</dt><dd>“Your Spanish isn’t pushing English out because you’re old. Twelve years of practice makes it fast, and the languages are similar, so they compete.”</dd></div>' +
+                "<div><dt>Savings</dt><dd>English is coming back faster than when she first learned it at school. She tracks new words each week to see it.</dd></div>" +
+                "<div><dt>Context</dt><dd>She practises English in the places she’ll use it: the shop, phone calls, a work role-play.</dd></div>" +
+                "<div><dt>The PIN</dt><dd>She typed the new one ten times a day for a week. Now it comes first.</dd></div></dl>" +
+                "<p>“I didn’t lose it,” she says. “It was in the wrong room.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Decay is almost impossible to test cleanly: you can’t stop time passing without new experience, so interference and decay are hard to separate. And the forgetting curve isn’t one law. Its shape depends on the material: Ebbinghaus’s meaningless syllables fade fast, while meaningful stories, skills and well-practised knowledge, like a language learned in school, can last decades.</p>' +
+                "<p><b>The counter.</b> The broad pattern (fast early loss, then levelling, and savings on relearning) holds across materials, and interference by similarity is repeated in lab and life. The details shift; the practical rule stays: review early, space it out, and vary cues.</p>" +
+                "<p><b>Person-first.</b> Write “a client who forgot the plan”, not “a resistant client”.</p>" +
+                "<p>Background: M4 · Encoding, storage and retrieval; M4 · Long-term memory systems. Ahead: M4 · Memory is reconstructive; M4 · Trauma and memory controversies.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Forgetting curve.</b> Ebbinghaus whooshes down a slide shaped like his curve, fast then almost flat, as “ZOF” and “DAX” tumble from his pockets.</p>" +
+                "<p><b>Proactive interference.</b> The old PIN in a bouncer’s jacket blocks the new PIN at the door.</p>" +
+                "<p><b>Retroactive interference.</b> A new roommate paints over the old roommate’s name on the mailbox.</p>" +
+                "<p><b>Retrieval failure.</b> A library book that exists, shelved in the wrong room.</p>" +
+                "<p><b>Suppression.</b> A “Do Not Disturb” sign held up to a memory, which gets quieter but doesn’t leave.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.4:teachback", title: "Teach it back", prompt: "Explain to Tatiana why her languages and PINs get mixed up and why she isn’t starting from zero: Ebbinghaus’s 1885 forgetting curve with nonsense syllables, rapid early loss that levels off, and savings on relearning; decay versus interference; proactive interference (old blocks new) and retroactive interference (new blocks old), and why similar material interferes most; retrieval failure and cue-dependent forgetting; motivated forgetting and the contested status of repression; directed forgetting and Anderson and Green’s 2001 suppression findings with mixed replications; retrieval-induced forgetting; the benefits of forgetting for generalising; the clinical tools of spacing reviews, varying cues, practising in real contexts, not reading forgetting as resistance, and using savings with returning clients; and the critique that decay is hard to test and the curve’s shape depends on material and meaning." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>The forgetting curve and savings " + ev("r") + ". Proactive and retroactive interference, strongest for similar material " + ev("r") + ". Cue-dependent forgetting " + ev("r") + ". Decay as a separate cause " + ev("c") + ". Deliberate suppression " + ev("c") + ". Repression of trauma " + ev("c") + ".</p>" +
+                "<p><b>So:</b> most forgetting is memories competing or cues missing; plan reviews and cues, and remember relearning is faster.</p>" },
+              Q("What did Ebbinghaus (1885) find about forgetting over time?",
+                ["It is steady and even", "It is fast at first, then levels off", "Nothing is lost for a week", "It speeds up over time"], 1,
+                "Most loss comes early; the curve then flattens. Relearning also shows savings."),
+              Q("Tatiana keeps typing her old PIN instead of the new one. What is this?",
+                ["Retroactive interference", "Proactive interference", "Decay", "Retrieval-induced forgetting"], 1,
+                "Old learning blocking new learning is proactive interference."),
+              Q("A student studies Spanish, then Italian right after. Next day, Spanish recall is poor. Why?",
+                ["Decay over one night", "Retroactive interference from similar material", "Proactive interference", "Repression"], 1,
+                "New, similar learning interferes with the earlier memory; a dissimilar task like maths would interfere less."),
+              Q("A client can’t recall a coping step until the counselor says “the card in your wallet”. Then it comes back. What does this show?",
+                ["The memory had decayed", "Cue-dependent forgetting: it was stored but needed a cue", "Confabulation", "Motivated forgetting"], 1,
+                "Retrieval failure: the memory was there, but unreachable without the right cue (Tulving and Pearlstone, 1966)."),
+              Q("A client returns to counseling after two years and says they’ve forgotten all their skills. What is most accurate?",
+                ["They must start again from zero", "Relearning is usually faster than first learning (savings)", "Forgetting shows they weren’t motivated", "The skills have been repressed"], 1,
+                "Ebbinghaus’s savings: even when recall fails, relearning takes less time.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -17783,6 +17988,27 @@
           G("m4.2", "Dual-task interference", "Interferencia de doble tarea", "Two tasks at once hurt each other.", "Performance drops when two tasks are done together, most when they draw on the same working-memory component."),
           G("m4.2", "Attentional control theory", "Teoría del control atencional", "Anxiety weakens control of attention.", "Eysenck and colleagues’ (2007) theory that anxiety impairs the central executive, pulling attention toward threat and reducing efficiency on demanding tasks."),
           G("m4.2", "Teach-back", "Método de enseñanza inversa", "Asking someone to explain it in their own words.", "A communication check in which the client restates key information in their own words, testing the clarity of the explanation rather than the client."),
+          G("m4.3", "Explicit memory", "Memoria explícita", "Memory you can consciously recall and say.", "Also called declarative memory: conscious recall of facts (semantic) and events (episodic); depends on the hippocampus to form new memories."),
+          G("m4.3", "Implicit memory", "Memoria implícita", "Memory shown in what you do, not what you recall.", "Also called nondeclarative memory: procedural skills and habits, priming and classical conditioning, often spared in amnesia."),
+          G("m4.3", "Episodic memory", "Memoria episódica", "Memory of events you lived.", "In Tulving’s (1972) distinction, memory for personal experiences tied to a time and place."),
+          G("m4.3", "Semantic memory", "Memoria semántica", "Memory of general facts and meanings.", "In Tulving’s (1972) distinction, knowledge of facts, concepts and words, not tied to when or where it was learned."),
+          G("m4.3", "Procedural memory", "Memoria procedimental", "Memory for skills and habits.", "Implicit memory for how to do things, such as riding a bike; Henry Molaison learned mirror drawing without remembering the practice."),
+          G("m4.3", "Priming", "Facilitación (priming)", "Past exposure makes later processing easier.", "An implicit memory effect in which having seen a word or image makes it quicker or likelier to be processed later, without awareness of the earlier exposure."),
+          G("m4.3", "Anterograde amnesia", "Amnesia anterógrada", "Can’t form new memories after damage.", "Loss of the ability to form new declarative memories after a brain injury or illness."),
+          G("m4.3", "Retrograde amnesia", "Amnesia retrógrada", "Loss of memories from before damage.", "Loss of memories formed before a brain injury or illness, often worst for the period just before it."),
+          G("m4.3", "Korsakoff syndrome", "Síndrome de Korsakoff", "Memory loss from lack of vitamin B1.", "A lasting amnesia caused by thiamine deficiency, most often with long-term heavy alcohol use; marked anterograde amnesia and confabulation; preventable with early thiamine."),
+          G("m4.3", "Confabulation", "Confabulación", "Sincere but false memories that fill gaps.", "Producing false memories without intent to deceive, common in Korsakoff syndrome and some frontal brain damage."),
+          G("m4.3", "Autobiographical memory", "Memoria autobiográfica", "Memory of your own life story.", "Memory for one’s own life, combining episodic memories and personal semantic facts."),
+          G("m4.3", "Prospective memory", "Memoria prospectiva", "Remembering to do things later.", "Memory for intended future actions, such as keeping appointments or taking medication; supported by external aids like alarms and calendars."),
+          G("m4.4", "Forgetting curve", "Curva del olvido", "Forgetting is fast at first, then slows.", "Ebbinghaus’s (1885) finding that retention drops steeply soon after learning, then levels off."),
+          G("m4.4", "Savings", "Ahorro (reaprendizaje)", "Relearning is faster than first learning.", "Ebbinghaus’s measure: the reduction in time or trials needed to relearn material, showing it was partly retained even when it could not be recalled."),
+          G("m4.4", "Decay", "Decaimiento", "Memories fading with time.", "The account that memory traces weaken with time and disuse; hard to test apart from interference."),
+          G("m4.4", "Proactive interference", "Interferencia proactiva", "Old learning blocks new.", "Earlier learning makes it harder to recall newer, similar information, such as typing an old PIN."),
+          G("m4.4", "Retroactive interference", "Interferencia retroactiva", "New learning blocks old.", "Later learning makes it harder to recall earlier, similar information; strongest when the material is similar."),
+          G("m4.4", "Cue-dependent forgetting", "Olvido dependiente de claves", "It’s stored but you lack the cue.", "Retrieval failure: information is available in memory but not accessible without a suitable cue (Tulving and Pearlstone, 1966)."),
+          G("m4.4", "Motivated forgetting", "Olvido motivado", "Forgetting because remembering hurts.", "Forgetting driven by wanting to avoid unpleasant memories; repression of trauma is a contested form of the claim."),
+          G("m4.4", "Directed forgetting", "Olvido dirigido", "Forgetting because you were told to.", "Reduced recall of material people are instructed to forget, partly through stopping rehearsal."),
+          G("m4.4", "Retrieval-induced forgetting", "Olvido inducido por la recuperación", "Recalling some things hides related ones.", "Practising retrieval of some items from a set makes related, unpractised items harder to recall (Anderson, Bjork and Bjork, 1994)."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -18313,6 +18539,18 @@
             R("Baddeley & Hitch", 1974, "experiment", "Proposed a multi-part working memory: a phonological loop, a visuospatial sketchpad and a central executive, supported by dual-task studies.", st("robust", "The episodic buffer was added in 2000; its parts are functional, not distinct brain regions.")),
             R("Eysenck et al.", 2007, "review", "Attentional control theory: anxiety impairs the central executive, pulling attention toward threat and reducing efficiency on demanding tasks.", st("robust", "Supported by many studies; details of which functions suffer most are still debated.")),
             R("Melby-Lervåg & Hulme", 2013, "meta-analysis", "Working-memory training produced short-term gains on trained tasks, with no convincing transfer to verbal ability, reading or arithmetic.", st("debunked-or-revised", "Claims of far transfer from brain training are not supported by later meta-analyses either."))];
+          REFS["m4.3"] = [
+            R("Scoville & Milner", 1957, "case series", "After bilateral medial temporal lobe removal for epilepsy, Henry Molaison (H.M.) lost the ability to form new memories of facts and events, with intelligence intact.", st("robust", "A founding case of memory science; later imaging refined the extent of his lesion.")),
+            R("Milner", 1962, "experiment", "Henry Molaison improved at mirror drawing over three days while reporting no memory of having practised.", st("robust", "Spared skill learning in amnesia has been replicated in many patients.")),
+            R("Tulving", 1972, "review", "Distinguished episodic memory for personal events from semantic memory for general knowledge.", st("robust", "Widely used; how separate the two systems are is debated.")),
+            R("Squire", 2004, "review", "Set out the declarative versus nondeclarative taxonomy, with the hippocampus and medial temporal lobe needed for forming declarative memories.", st("contested", "The dissociations are robust; processing accounts dispute that they reflect separate systems.")),
+            R("Kopelman et al.", 2009, "review", "Korsakoff syndrome results from thiamine deficiency, usually with alcohol misuse; early thiamine treatment can prevent or limit it.", st("robust", "Thiamine for at-risk drinkers is standard guidance."))];
+          REFS["m4.4"] = [
+            R("Ebbinghaus", 1885, "experiment", "Testing himself on nonsense syllables, he found rapid early forgetting that levelled off, and savings when relearning.", st("robust", "Replicated by Murre and Dros (2015); the curve’s shape varies with material and meaning.")),
+            R("Underwood", 1957, "review", "Showed that much forgetting in lab studies came from proactive interference by lists learned earlier.", st("robust", "Interference, especially by similar material, is well supported.")),
+            R("Tulving & Pearlstone", 1966, "experiment", "People recalled many more list words when given category cues, showing stored but inaccessible memories.", st("robust", "Cue-dependent forgetting is well replicated.")),
+            R("Anderson, Bjork & Bjork", 1994, "experiment", "Practising retrieval of some items in a category reduced recall of related unpractised items.", st("robust", "Retrieval-induced forgetting replicates, though its mechanism is debated.")),
+            R("Anderson & Green", 2001, "experiment", "Repeatedly suppressing a memory in the think/no-think task reduced later recall of it.", st("contested", "Some replications failed; meta-analyses suggest a small effect."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
