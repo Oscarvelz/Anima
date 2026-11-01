@@ -17453,6 +17453,189 @@
                 "Coercive attachment therapies are harmful; Candace Newmaker died in such a session in 2000.")
             ]
           },
+          "m6.3": {
+            home: "Luis is furious: his 4-year-old insists a tall thin glass holds “more juice” than a short wide one, and that the moon follows their car. Is she lying?",
+            keys: [["What is object permanence, and when does it appear?", "Knowing that objects still exist when out of sight. Piaget placed it around 8 months, shown by searching for a hidden toy; babies of this age still make the A-not-B error. Baillargeon’s looking-time studies suggest earlier understanding, though how to read them is contested.", "A toddler who believes a teddy bear stops existing under a blanket, and gasps in amazement every single time it “reappears”."],
+              ["What is conservation, and why do preoperational children fail it?", "Understanding that amount stays the same when its shape changes. Preoperational children centre on one feature, such as height, and can’t mentally reverse the pour.", "A tall skinny glass wearing high heels, convincing a 4-year-old it holds more juice than its short wide twin."],
+              ["What are egocentrism and animism?", "Egocentrism is difficulty taking another’s point of view, as in Piaget’s three mountains task. Animism is giving lifelike intentions to objects. Both mark the preoperational stage and are not selfishness or lying.", "The moon as a loyal puppy, tongue out, chasing a child’s car down the highway."],
+              ["What does the Sally-Anne false-belief task test?", "Theory of mind: knowing others can hold beliefs different from reality and from your own. Most children pass around age 4 (Wimmer & Perner, 1983).", "A 3-year-old cheerfully telling Sally the doll exactly where her marble went, sure that Sally must know whatever she herself saw."],
+              ["How do critics revise Piaget’s stages?", "Children show abilities earlier in child-friendly tasks (Donaldson’s naughty teddy, Hughes’s policeman task), and development comes in overlapping waves rather than abrupt steps (Siegler). Culture and schooling matter too. The theory remains hugely influential.", "A stage ladder whose rungs are blurry clouds, with kids comfortably standing on two rungs at once."]],
+            steps: [
+              { kind: "hook", title: "Luis and the juice glasses", body: who("<b>Luis</b>, a dad in a parenting group.") +
+                "<p>Luis pours the same juice into a tall thin glass and a short wide one. His 4-year-old, Sofía, insists the tall one has “more.” He shows her again. She won’t budge.</p>" +
+                "<p>In the car she says the moon is following them. “She knows that’s not true,” Luis says. “She’s lying to my face, and I’m done with it.”</p>" +
+                "<p>Is Sofía being defiant, or is something else going on?</p>" },
+              { kind: "predict", id: "m6.3:predict", title: "Your call first",
+                case: ["Sofía is 4 years old.",
+                  { t: "Her favourite colour is purple.", irrelevant: true },
+                  "She watched the same juice being poured.",
+                  "She still says the tall glass has more, calmly and repeatedly.",
+                  { t: "The family car is a minivan.", irrelevant: true },
+                  "She also says the moon follows the car."],
+                q: "Is Luis’s daughter lying?",
+                options: ["Yes: she knows the amounts are equal and says otherwise to provoke him", "No: at 4 she likely truly believes it; her thinking can’t yet conserve or step outside her own view", "Yes: she has a behaviour disorder"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. Lying means saying what you believe is false. Sofía says what she believes. At 4, children typically judge amount by one striking feature, height, and read the world from their own point of view, so a moon that “follows” makes sense to her. This is immature thinking, not defiance.",
+                hints: ["Ask what lying requires her to know.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what a typical 4-year-old judges amount by."] },
+              { kind: "idea", lvl: "f", title: "The child as a little scientist", body: '<dl class="x-dossier"><div><dt>Piaget’s view</dt><dd>Jean Piaget saw children as <b>little scientists</b> who build understanding by acting on the world, testing ideas and revising them. Their mistakes follow a logic of their own.</dd></div>' +
+                "<div><dt>Schemas</dt><dd>Mental frameworks for making sense of things: “dog,” “grasping,” “more.” (Schemas also appear in M4 memory.)</dd></div>" +
+                "<div><dt>Assimilation</dt><dd>Fitting something new into an existing schema: a toddler calls a cow a “doggy.”</dd></div>" +
+                "<div><dt>Accommodation</dt><dd>Changing a schema when it doesn’t fit: “that one says moo; it’s a cow.”</dd></div>" +
+                "<div><dt>Equilibration</dt><dd>The drive to balance the two. Puzzlement pushes the child to restructure thinking, which moves development forward.</dd></div></dl>" +
+                "<p><b>So:</b> children don’t just know less than adults; for a while they think differently.</p>" },
+              { kind: "idea", lvl: "p", title: "Four stages", body: '<dl class="x-dossier"><div><dt>Sensorimotor, birth to about 2</dt><dd>Knowing the world through senses and action. <b>Object permanence</b>, that things exist out of sight, appears around 8 months in Piaget’s account. Babies still make the <b>A-not-B error</b>: after finding a toy at A, they search A again even when they saw it hidden at B. Baillargeon’s <b>violation-of-expectation</b> studies, in which babies look longer at “impossible” events, suggest earlier understanding ' + ev("c") + "; critics say longer looking may reflect novelty, not knowledge.</dd></div>" +
+                "<div><dt>Preoperational, about 2 to 7</dt><dd>Symbols and pretend play bloom, but logic lags. <b>Egocentrism</b>: in the <b>three mountains task</b>, children pick their own view when asked what a doll sees. <b>Animism</b>: the moon follows, the table is “naughty.” <b>No conservation</b>, because of <b>centration</b>: focusing on one feature, like height, and ignoring width.</dd></div>" +
+                "<div><dt>Concrete operational, about 7 to 11</dt><dd>Logical thought about real things. <b>Conservation</b>, <b>reversibility</b> (pour it back and it’s the same) and <b>classification</b> into categories and subcategories.</dd></div>" +
+                "<div><dt>Formal operational, about 11 on</dt><dd><b>Abstract, hypothetical</b> thinking: “what if,” testing ideas systematically. Not everyone reaches it, and how much it shows depends on <b>schooling and culture</b>.</dd></div></dl>" +
+                "<p><b>So:</b> each stage is a different way of reasoning, and Sofía is right where Piaget would expect.</p>" },
+              { kind: "contrast", id: "m6.3:contrast", title: "Same juice, one difference",
+                q: "Both children watch the same juice poured from a short wide glass into a tall thin one. Which is more likely to say the amount is the same?",
+                cases: [
+                  { label: "Child A", s: ["Watches the whole pour.", { t: "Wearing a striped shirt.", irrelevant: true }, { t: "Is 4 years old.", diff: true }, "Same glasses; same juice."] },
+                  { label: "Child B", s: ["Watches the whole pour.", { t: "Wearing a striped shirt.", irrelevant: true }, { t: "Is 8 years old.", diff: true }, "Same glasses; same juice."] }
+                ],
+                answer: 1,
+                features: ["The shirt", "The child’s age", "The glasses", "The juice"],
+                feature: 1,
+                why: "Only age differs. The 8-year-old, typically concrete operational, can reverse the pour in her head and weigh height against width. The 4-year-old centres on height and sees “more.”",
+                hints: ["Find the one sentence where the two children part ways.",
+                  "The sentences that don’t decide it are dimmed. Same pour; ask how each age reasons.",
+                  "Step one, aloud: say which stage each child is likely in."] },
+              { kind: "idea", lvl: "m", title: "What later research changed", body: '<dl class="x-dossier"><div><dt>Underestimating children</dt><dd>Margaret Donaldson (1978) argued that Piaget’s tasks didn’t make “human sense” to children. In the <b>naughty teddy</b> study, when a puppet “accidentally” messed up a row of counters, many more young children conserved than when an adult rearranged them on purpose ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Hughes’s policeman task</dt><dd>Asked to hide a doll from toy policemen, most preschoolers succeeded: they could take another view when the task made sense, unlike in the three mountains.</dd></div>" +
+                "<div><dt>Overlapping waves</dt><dd>Siegler showed children use several strategies at once, shifting gradually as better ones win out. Stages are <b>less abrupt</b> than Piaget described " + ev("r") + ".</dd></div>" +
+                "<div><dt>Culture and schooling</dt><dd>When abilities appear, especially formal operations, varies with schooling and the tasks a culture values.</dd></div>" +
+                "<div><dt>Theory of mind</dt><dd>A related development: understanding that others have beliefs. In the <b>Sally-Anne</b> false-belief task, Sally hides a marble and leaves; Anne moves it. Where will Sally look? Most children answer correctly around <b>age 4</b> (Wimmer & Perner, 1983) " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the sequence holds up better than the ages and the sharp edges.</p>" },
+              { kind: "example", lvl: "p", title: "Luis, in the parenting group", body: who("<b>Luis</b> and the group facilitator, the next week.") +
+                '<dl class="x-dossier"><div><dt>Reframing “lying”</dt><dd>The facilitator pours the juice demo for the whole group. At 4, Sofía’s answers show <b>immature thinking, not defiance</b>. Punishing her for them teaches fear, not logic.</dd></div>' +
+                "<div><dt>Meeting her where she is</dt><dd>Instead of arguing, Luis can play: pour it back, line up cups, ask “how could we check?” Hands-on puzzles invite accommodation.</dd></div>" +
+                "<div><dt>Explaining hard news</dt><dd>Another parent is going through a divorce. Because of <b>egocentrism</b>, a 5-year-old may believe a divorce or a parent’s incarceration happened <b>because of them</b>. Say plainly and often: “This is not your fault,” in concrete, simple words.</dd></div>" +
+                "<div><dt>Adults too</dt><dd>Under stress, adults also slip into concrete, all-or-nothing thinking. Luis laughs: “Like me yelling about the juice.”</dd></div></dl>" +
+                "<p>“So she’s not lying,” Luis says. “She’s four,” the facilitator says. “Ask her about the glasses again at eight.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Piaget <b>underestimated infants and young children</b>. His tasks were verbal and odd from a child’s view; when Donaldson and Hughes made them sensible, children succeeded years earlier. His stages are also <b>too tidy</b>: children move in overlapping waves, not abrupt leaps, and culture and schooling shape when, and whether, abilities such as formal reasoning appear.</p>' +
+                "<p><b>The counter.</b> The broad <b>sequence</b> he described, from action to symbols to concrete logic to abstract thought, is widely supported, and his core idea, that children actively build understanding, shaped education and still guides how clinicians talk to children. Hugely influential, revised in the details.</p>" +
+                "<p>Background: M6 · Attachment. Ahead: M6 · Vygotsky and social learning.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Object permanence.</b> A toddler gasps in amazement every time the teddy “reappears” from under the blanket.</p>" +
+                "<p><b>Conservation.</b> A tall skinny glass in high heels convinces a 4-year-old it holds more juice than its short wide twin.</p>" +
+                "<p><b>Egocentrism and animism.</b> The moon, a loyal puppy, chases a child’s car down the highway.</p>" +
+                "<p><b>Theory of mind.</b> A 3-year-old tells Sally the doll where her marble went, sure Sally knows what she saw.</p>" +
+                "<p><b>Stages overlap.</b> A ladder of blurry cloud rungs, kids standing on two at once.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m6.3:teachback", title: "Teach it back", prompt: "Explain to Luis why Sofía isn’t lying: Piaget’s little-scientist view; schemas, assimilation, accommodation and equilibration; the sensorimotor stage, object permanence and the A-not-B error; Baillargeon’s violation-of-expectation studies and why their reading is contested; the preoperational stage, egocentrism and the three mountains task, animism, no conservation and centration; the concrete operational stage, conservation, reversibility and classification; the formal operational stage and why not everyone reaches it; Donaldson’s naughty teddy and Hughes’s policeman task; Siegler’s overlapping waves; culture and schooling; theory of mind and the Sally-Anne task around age 4; why a young child may blame themselves for a divorce or incarceration; reframing “lying” as immature thinking; adults’ concrete thinking under stress; and why the theory remains influential." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>The broad sequence of cognitive development " + ev("r") + ". Infants understand objects earlier than Piaget thought " + ev("c") + ". Child-friendly tasks reveal earlier ability " + ev("r") + ". Overlapping waves over abrupt stages " + ev("r") + ". False belief understood around age 4 " + ev("r") + ". Fixed ages for each stage " + ev("d") + ".</p>" +
+                "<p><b>So:</b> young children reason differently, not deceitfully; meet their thinking where it is.</p>" },
+              Q("A 4-year-old says a tall thin glass has more juice than a short wide one holding the same amount. Piaget would say she lacks:",
+                ["Object permanence", "Conservation", "Theory of mind", "Attachment"], 1,
+                "Preoperational children centre on height and can’t mentally reverse the pour."),
+              Q("Fitting a new experience into an existing schema, such as calling a cow a “doggy,” is:",
+                ["Accommodation", "Equilibration", "Assimilation", "Reversibility"], 2,
+                "Assimilation fits the new into the old; accommodation changes the schema."),
+              Q("In the Sally-Anne task, a child who says Sally will look where the marble really is most likely:",
+                ["Has not yet developed false-belief understanding", "Is formal operational", "Is lying", "Lacks object permanence"], 0,
+                "Most children pass around age 4, once they grasp that others can hold false beliefs."),
+              Q("Donaldson’s naughty teddy study showed that:",
+                ["Children never conserve before 7", "More young children conserved when the change made human sense", "Teddy bears improve memory", "Stages are fixed by age"], 1,
+                "Piaget’s tasks underestimated children; sensible tasks revealed earlier ability."),
+              Q("A 5-year-old whose parent was just incarcerated says, “It’s because I was bad.” What should a clinician do?",
+                ["Correct her once and move on", "Recognise egocentric thinking and say plainly, often, in simple words, that it is not her fault", "Explain the legal process in detail", "Wait until she is older to discuss it"], 1,
+                "Preoperational egocentrism can lead young children to blame themselves; concrete, repeated reassurance fits their stage.")
+            ]
+          },
+          "m6.4": {
+            home: "Marcus fails algebra worksheets alone but solves them when his tutor sits beside him with hints. Staff say he’s “not ready.” Are they right?",
+            keys: [["What is scaffolding?", "Temporary, adjustable support from a more skilled person, withdrawn as the learner takes over. The term comes from Wood, Bruner and Ross (1976), not Vygotsky himself, but it fits his ideas.", "A painter’s scaffold around a growing building, with workers removing one plank at a time as the walls start holding themselves up."],
+              ["What is the zone of proximal development (ZPD)?", "The gap between what a learner can do alone and what they can do with guidance from a more knowledgeable other. Teaching works best inside it.", "A zone painted on the floor between “I can do it alone” and “too hard even with help,” with a coach standing right in the middle of it."],
+              ["What is private speech?", "Children talking aloud to themselves to guide their actions. Vygotsky saw it as thinking tools turning inward, fading into silent inner speech; Piaget had called it immature “egocentric speech.”", "A child narrating “now the red block goes… on top!” like a sports commentator, later whispering it, later saying nothing at all."],
+              ["How do Piaget and Vygotsky differ?", "Piaget’s child is a solo scientist discovering the world; Vygotsky’s is a social apprentice. For Vygotsky, learning happens first between people, then inside the learner (internalization), using cultural tools like language and number systems.", "Piaget alone in a lab coat in the woods, versus Vygotsky at a crowded family dinner table where everyone is teaching everyone."],
+              ["What is dynamic assessment?", "Testing with prompts and hints to see how much a person improves with help, revealing learning potential that a solo test score misses.", "An exam proctor who, instead of a stopwatch, holds a fan of hint cards like a magician, and carefully notes how quickly each card works."]],
+            steps: [
+              { kind: "hook", title: "Marcus and the worksheet", body: who("<b>Mrs. Thompson</b>, a GED tutor in the reentry program.") +
+                "<p>Marcus, 34, hands back his algebra worksheet mostly blank. Alone, he stalls on every problem.</p>" +
+                "<p>But when Mrs. Thompson sits beside him and asks, “What do we do to both sides?”, he works through them, slowly, correctly.</p>" +
+                "<p>Staff say he’s “not ready” for the GED math section. Mrs. Thompson isn’t so sure.</p>" },
+              { kind: "predict", id: "m6.4:predict", title: "Your call first",
+                case: ["Marcus fails algebra worksheets when working alone.",
+                  { t: "He wears a grey hoodie.", irrelevant: true },
+                  "With a few hints, he solves the same problems.",
+                  "The hints are questions, not answers.",
+                  { t: "The classroom has a broken clock.", irrelevant: true },
+                  "Staff judge him only on his solo work."],
+                q: "Does Marcus’s failure alone mean he can’t learn algebra?",
+                options: ["Yes: what he does alone shows what he can learn", "No: what he can do with help shows skills that are ready to develop", "It means he needs easier worksheets forever"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. His solo work shows what he has already mastered. What he does with hints shows what is ripening, his zone of proximal development. Vygotsky would say that is exactly where teaching should aim, with support that fades as he takes over.",
+                hints: ["Ask what the hinted work tells you that the solo work doesn’t.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what changes when Mrs. Thompson sits beside him."] },
+              { kind: "idea", lvl: "f", title: "Learning starts between people", body: '<dl class="x-dossier"><div><dt>Lev Vygotsky</dt><dd>A Soviet psychologist (1896–1934) who died of tuberculosis at 37. His <b>sociocultural theory</b> was suppressed in the Soviet Union for years, then translated in the West in the 1960s and 1970s.</dd></div>' +
+                "<div><dt>Social first, then individual</dt><dd>Every skill appears twice: first <b>between people</b>, then <b>inside the learner</b>. Taking in a shared way of thinking is <b>internalization</b>.</dd></div>" +
+                "<div><dt>Cultural tools</dt><dd>We think with tools our culture hands us: <b>language</b>, number systems, writing, maps. Different cultures pass on different tools.</dd></div>" +
+                "<div><dt>More knowledgeable other</dt><dd>Anyone more skilled at the task: a teacher, parent, older sibling, peer, or a fellow group member.</dd></div>" +
+                "<div><dt>Watching others</dt><dd>Learning by observing models is Bandura’s territory; see M3 · Observational learning.</dd></div></dl>" +
+                "<p><b>So:</b> for Vygotsky, the mind grows out of conversation.</p>" },
+              { kind: "idea", lvl: "p", title: "The zone, the scaffold and the voice", body: '<dl class="x-dossier"><div><dt>Zone of proximal development</dt><dd>The space between what a learner can do <b>alone</b> and what they can do <b>with help</b>. Below it is boring; above it, even help can’t bridge the gap.</dd></div>' +
+                "<div><dt>Scaffolding</dt><dd>A term from <b>Wood, Bruner and Ross (1976)</b>, not Vygotsky himself: the helper simplifies, hints, models and keeps the goal in view, then <b>fades support</b> as the learner takes over " + ev("r") + ".</dd></div>" +
+                "<div><dt>Private speech</dt><dd>Young children talk aloud to themselves to guide actions. Piaget called this <b>egocentric speech</b>, a sign of immaturity. Vygotsky saw a thinking tool going inward, becoming silent <b>inner speech</b>. Research has mostly sided with Vygotsky " + ev("r") + ".</dd></div>" +
+                "<div><dt>Guided participation</dt><dd>Barbara Rogoff described learning as <b>apprenticeship</b>: children join real activities, such as weaving, cooking or selling, with growing responsibility.</dd></div>" +
+                "<div><dt>Peer tutoring</dt><dd>A slightly more skilled peer can work inside a learner’s zone, and the tutor learns too.</dd></div></dl>" +
+                "<p><b>So:</b> teach just beyond what someone can do alone, then step back.</p>" },
+              { kind: "contrast", id: "m6.4:contrast", title: "Same score, one difference",
+                q: "Both learners get the same score on a solo algebra test. Who is more ready to learn the next unit?",
+                cases: [
+                  { label: "Learner A", s: ["Same solo score.", { t: "Sits by the window.", irrelevant: true }, { t: "With a few hints, solves most of the problems.", diff: true }, "Same test; same tutor."] },
+                  { label: "Learner B", s: ["Same solo score.", { t: "Sits by the window.", irrelevant: true }, { t: "With the same hints, still solves very few.", diff: true }, "Same test; same tutor."] }
+                ],
+                answer: 0,
+                features: ["The seat", "How much each improves with hints", "The solo score", "The tutor"],
+                feature: 1,
+                why: "Only response to help differs. Learner A has a wider zone of proximal development for this material: skills are ripening and ready for teaching. Learner B needs earlier steps first. A solo score alone can’t tell them apart.",
+                hints: ["Find the one sentence where the two learners part ways.",
+                  "The sentences that don’t decide it are dimmed. Same score; ask what help reveals.",
+                  "Step one, aloud: say what each learner does once hints arrive."] },
+              { kind: "idea", lvl: "m", title: "Two theorists, one child", body: '<dl class="x-dossier"><div><dt>Piaget vs Vygotsky</dt><dd>Piaget: the child as a <b>solo scientist</b>, development leading learning, stages unfolding. Vygotsky: the child as a <b>social apprentice</b>, learning leading development, culture shaping what grows.</dd></div>' +
+                "<div><dt>Private speech, again</dt><dd>Where Piaget heard immaturity, Vygotsky heard self-guidance. Children use more private speech on harder tasks, as Vygotsky predicted.</dd></div>" +
+                "<div><dt>Dynamic assessment</dt><dd>Testing <b>with help</b>: give hints and measure how much the person improves. It aims to show learning potential, especially for people a standard test may underrate, such as those with interrupted schooling or a different first language " + ev("c") + ". It links to M5 · Testing intelligence fairly.</dd></div>" +
+                "<div><dt>Self-instruction</dt><dd>Meichenbaum’s <b>self-instructional training</b>, rooted in Vygotsky and his colleague Luria, teaches people to guide themselves aloud, then in a whisper, then silently: private speech on purpose.</dd></div></dl>" +
+                "<p><b>So:</b> the two views complement each other; together they explain more than either alone.</p>" },
+              { kind: "example", lvl: "p", title: "Marcus, scaffolded", body: who("<b>Mrs. Thompson</b> and Marcus, over six weeks.") +
+                '<dl class="x-dossier"><div><dt>Find the zone</dt><dd>She runs a short dynamic assessment: which problems he solves alone, which with one hint, which not even with help. That map shows where to teach.</dd></div>' +
+                "<div><dt>Fade the scaffold</dt><dd>Week one: she models a problem aloud. Then they solve together. Then she only asks, “What’s your next step?” Then she sits across the room.</dd></div>" +
+                "<div><dt>Give him the voice</dt><dd>She teaches him to say the steps to himself, “same to both sides,” first aloud, then under his breath.</dd></div>" +
+                "<div><dt>Peers</dt><dd>She pairs him with a classmate one unit ahead, and later Marcus tutors a newcomer.</dd></div></dl>" +
+                "<p><b>In therapy, too.</b> Therapy is scaffolding: model a skill, practise it together, then fade, from <b>role-play</b> to <b>homework</b> to <b>real life</b>. In group therapy, members further along act as more knowledgeable others. Coping statements, such as “slow down, one step at a time,” are private speech put to work.</p>" +
+                "<p>“So I wasn’t ‘not ready,’” Marcus says. “You were ready with help,” Mrs. Thompson says. “Now you’re ready without it.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>The <b>ZPD is hard to measure precisely</b>: how wide it is depends on the task, the helper and the kind of hint, so two assessors can draw it differently. Vygotsky, who died young, left <b>less detail about stages</b> or the order in which abilities develop than Piaget did. And there is a risk of <b>over-helping</b>: support that never fades can breed learned dependence rather than independence.</p>' +
+                "<p><b>The counter.</b> Scaffolding that fades as the learner gains skill is well supported in tutoring research, private speech does guide behaviour as he proposed, and his idea that learning is social reshaped classrooms, peer tutoring and skills-based therapy. Vague in measurement, strong in practice.</p>" +
+                "<p>Background: M6 · Piaget’s stages. Ahead: M6 · Adolescence and identity.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Scaffolding.</b> Workers remove one plank at a time as the building’s walls hold themselves up.</p>" +
+                "<p><b>ZPD.</b> A coach stands right in the painted zone between “I can do it alone” and “too hard even with help.”</p>" +
+                "<p><b>Private speech.</b> A child commentates “now the red block goes… on top!”, later whispers it, later stays silent.</p>" +
+                "<p><b>Piaget vs Vygotsky.</b> Piaget alone in a lab coat in the woods; Vygotsky at a crowded dinner table where everyone teaches.</p>" +
+                "<p><b>Dynamic assessment.</b> A proctor fans out hint cards like a magician and notes how fast each one works.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m6.4:teachback", title: "Teach it back", prompt: "Explain to the reentry staff why Marcus isn’t “not ready”: who Vygotsky was and how his work reached the West; sociocultural theory; learning as social first, then individual, and internalization; cultural tools such as language and number systems; the more knowledgeable other; the zone of proximal development; scaffolding, its origin with Wood, Bruner and Ross, and fading support; private speech becoming inner speech, and how Vygotsky and Piaget read it differently; Rogoff’s guided participation; peer tutoring; Piaget’s solo scientist versus Vygotsky’s social apprentice; dynamic assessment and its link to fair testing; where Bandura’s observational learning fits; therapy as scaffolding from role-play to homework to real life; group members as more knowledgeable others; Meichenbaum’s self-instructional training; and the critiques that the ZPD is hard to measure, stages are underdescribed, and over-helping breeds dependence." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Fading scaffolding supports learning " + ev("r") + ". Private speech guides behaviour " + ev("r") + ". Dynamic assessment reveals learning potential " + ev("c") + ". The ZPD as a precise, measurable quantity " + ev("c") + ". A solo score as the full measure of what someone can learn " + ev("d") + ".</p>" +
+                "<p><b>So:</b> judge readiness by what someone can do with help, then help less and less.</p>" },
+              Q("The zone of proximal development is:",
+                ["What a learner can already do alone", "The gap between what a learner can do alone and with guidance", "Tasks too hard even with help", "A stage in Piaget’s theory"], 1,
+                "Teaching works best in the zone where help makes the difference."),
+              Q("The term “scaffolding” was introduced by:",
+                ["Vygotsky", "Piaget", "Wood, Bruner and Ross", "Bandura"], 2,
+                "Wood, Bruner and Ross (1976) coined it; it fits Vygotsky’s ideas."),
+              Q("A child says aloud, “Now this piece goes here,” while doing a puzzle. Vygotsky would see this as:",
+                ["Egocentric speech showing immaturity", "Private speech guiding action, later becoming inner speech", "A sign of a language delay", "Imitation of a model"], 1,
+                "Piaget called it egocentric; Vygotsky saw a thinking tool going inward."),
+              Q("A therapist models assertive refusal, role-plays it with a client, assigns it as homework, then reviews real-life attempts. This mirrors:",
+                ["Fading scaffolding", "Object permanence", "Classical conditioning", "Equilibration"], 0,
+                "Support moves from modelling to joint practice to independent use."),
+              Q("Which is a fair criticism of Vygotsky’s theory?",
+                ["It ignores social interaction", "The ZPD is hard to measure precisely, and support that never fades can breed dependence", "It claims learning is purely genetic", "It was never translated"], 1,
+                "The zone shifts with task and helper, and over-helping is a real risk.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -19067,6 +19250,25 @@
           G("m6.1", "Fetal alcohol spectrum disorder (FASD)", "Trastorno del espectro alcohólico fetal (TEAF)", "Effects of alcohol exposure before birth.", "A range of physical, growth, learning and behavioural effects from prenatal alcohol exposure; no safe amount of alcohol in pregnancy is known."),
           G("m6.1", "Neonatal opioid withdrawal syndrome", "Síndrome de abstinencia neonatal a opioides", "Withdrawal signs in a newborn exposed to opioids.", "Withdrawal symptoms in a newborn after prenatal opioid exposure; treatable, and not a reason to stop methadone or buprenorphine treatment in pregnancy."),
           G("m6.1", "Newborn reflexes", "Reflejos del recién nacido", "Automatic responses babies are born with.", "Inborn responses such as rooting, sucking, Moro, grasping and Babinski, most of which fade in the first months as the brain matures."),
+          G("m6.3", "Assimilation", "Asimilación", "Fitting something new into what you already know.", "In Piaget’s theory, interpreting a new experience in terms of an existing schema, such as calling a cow a “doggy.”"),
+          G("m6.3", "Accommodation", "Acomodación", "Changing what you know to fit something new.", "In Piaget’s theory, modifying an existing schema, or creating a new one, when experience doesn’t fit it."),
+          G("m6.3", "Equilibration", "Equilibración", "Balancing old ideas with new experience.", "Piaget’s process by which the conflict between assimilation and accommodation drives children toward more advanced ways of thinking."),
+          G("m6.3", "Object permanence", "Permanencia del objeto", "Knowing things still exist when out of sight.", "Understanding that objects continue to exist when not seen; placed by Piaget around 8 months, with looking-time studies suggesting earlier understanding."),
+          G("m6.3", "A-not-B error", "Error A-no-B", "Searching where a toy was before, not where it went.", "An infant’s tendency, after finding an object at location A, to keep searching at A even after watching it hidden at B."),
+          G("m6.3", "Conservation", "Conservación", "Knowing amount stays the same when shape changes.", "Understanding that quantity, number or volume is unchanged by changes in appearance; typically mastered in the concrete operational stage."),
+          G("m6.3", "Egocentrism", "Egocentrismo", "Trouble seeing things from another’s point of view.", "In Piaget’s theory, the preoperational child’s difficulty distinguishing their own perspective from others’, as in the three mountains task; not selfishness."),
+          G("m6.3", "Animism", "Animismo", "Treating objects as if they were alive.", "The preoperational tendency to attribute life, feelings or intentions to inanimate objects, such as a moon that follows the car."),
+          G("m6.3", "Centration", "Centración", "Focusing on one feature and ignoring the rest.", "The preoperational tendency to attend to a single salient dimension, such as height, while neglecting others, such as width."),
+          G("m6.3", "Theory of mind", "Teoría de la mente", "Understanding that others have their own thoughts and beliefs.", "The ability to attribute mental states, including false beliefs, to oneself and others; tested by the Sally-Anne task and typically passed around age 4."),
+          G("m6.4", "Sociocultural theory", "Teoría sociocultural", "The idea that minds grow through social life and culture.", "Vygotsky’s view that higher mental functions develop through social interaction and the cultural tools, such as language, that a society provides."),
+          G("m6.4", "Internalization", "Internalización", "Taking a shared way of thinking inside your own head.", "In Vygotsky’s theory, the process by which skills first carried out between people become part of the individual’s own thinking."),
+          G("m6.4", "Zone of proximal development (ZPD)", "Zona de desarrollo próximo (ZDP)", "What you can do with help but not yet alone.", "The range between what a learner can achieve independently and what they can achieve with guidance from a more knowledgeable other."),
+          G("m6.4", "Scaffolding", "Andamiaje", "Temporary help that is removed as skill grows.", "Adjustable support from a more skilled person that is gradually withdrawn as the learner takes over; term from Wood, Bruner and Ross (1976)."),
+          G("m6.4", "More knowledgeable other", "Otro más conocedor", "Anyone more skilled at the task who can guide you.", "In Vygotsky’s theory, a teacher, parent, peer or other person with greater skill who supports learning within the zone of proximal development."),
+          G("m6.4", "Private speech", "Habla privada", "Talking aloud to yourself to guide what you do.", "Self-directed speech that young children use to plan and guide action, which Vygotsky saw as becoming silent inner speech; Piaget called it egocentric speech."),
+          G("m6.4", "Guided participation", "Participación guiada", "Learning by joining real tasks alongside skilled people.", "Rogoff’s term for learning as apprenticeship, in which children take growing responsibility in culturally valued activities."),
+          G("m6.4", "Dynamic assessment", "Evaluación dinámica", "Testing with hints to see how much someone improves with help.", "An assessment approach that includes prompts or teaching during testing to estimate learning potential rather than only current performance."),
+          G("m6.4", "Self-instructional training", "Entrenamiento autoinstruccional", "Learning to coach yourself through a task, aloud then silently.", "Meichenbaum’s technique, rooted in Vygotsky and Luria, in which self-guiding statements move from overt speech to whispering to inner speech."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
@@ -19664,6 +19866,18 @@
             R("Fantz", 1961, "experiment", "Young infants looked longer at face-like and patterned stimuli than at plain ones, showing early visual preferences.", st("robust", "The preference-looking method remains a basic tool in infant research.")),
             R("Thomas & Chess", 1977, "longitudinal", "The New York Longitudinal Study described easy, difficult and slow-to-warm-up temperaments and stressed the fit between child and caregiving.", st("contested", "Temperament is real and partly stable; the three types leave many children unclassified.")),
             R("ACOG Committee Opinion 711", 2017, "review", "Recommended medication for opioid use disorder with methadone or buprenorphine during pregnancy over medically supervised withdrawal.", st("robust", "Consistent with WHO and SAMHSA guidance; neonatal opioid withdrawal syndrome is expected and treatable."))];
+          REFS["m6.3"] = [
+            R("Piaget & Inhelder", 1956, "observational", "In the three mountains task, young children asked what a doll saw from another side of a model often chose their own view.", st("contested", "The pattern is real; simpler perspective tasks show preschoolers can take other views earlier.")),
+            R("Baillargeon, Spelke & Wasserman", 1985, "experiment", "Infants around 5 months looked longer at an “impossible” event, a screen rotating through a hidden box, suggesting early object permanence.", st("contested", "Influential; critics argue longer looking may reflect novelty or perception rather than knowledge.")),
+            R("McGarrigle & Donaldson", 1974, "experiment", "More young children conserved number when a “naughty teddy” accidentally disturbed a row of counters than when an adult changed it on purpose.", st("robust", "Supports the wider finding that task context shapes children’s apparent reasoning; the size of the effect varies.")),
+            R("Wimmer & Perner", 1983, "experiment", "Most children around 4 and older, but few younger ones, correctly predicted where a character holding a false belief would look for an object.", st("robust", "The shift around age 4 is widely replicated across countries.")),
+            R("Siegler", 1996, "review", "Proposed the overlapping waves model: children use several strategies at once, with more advanced ones gradually becoming more common.", st("robust", "Supported by microgenetic studies of strategy change."))];
+          REFS["m6.4"] = [
+            R("Vygotsky", 1978, "review", "Mind in Society, an English collection of his writings: higher mental functions arise first between people and are then internalized; introduces the zone of proximal development.", st("robust", "Foundational and widely used; the ZPD is hard to measure precisely.")),
+            R("Wood, Bruner & Ross", 1976, "observational", "A tutor helping young children build a block pyramid adjusted support to each child’s success, introducing the term “scaffolding.”", st("robust", "Contingent, fading support is well supported in later tutoring research.")),
+            R("Rogoff", 1990, "review", "Apprenticeship in Thinking: children learn through guided participation in the cultural activities of their communities.", st("robust", "Supported by cross-cultural observational research.")),
+            R("Meichenbaum & Goodman", 1971, "experiment", "Impulsive children taught to guide themselves with self-talk, moving from aloud to whispered to silent, performed more carefully on tasks.", st("contested", "The approach is widely used; how well gains last and transfer varies across studies.")),
+            R("Caffrey, Fuchs & Fuchs", 2008, "review", "Reviewed studies of dynamic assessment and found it can add to the prediction of later achievement beyond standard tests, with mixed results.", st("contested", "Promising, but methods vary widely and evidence is uneven."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
