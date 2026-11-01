@@ -18000,6 +18000,186 @@
                 "Basic needs and meaning can be worked on together.")
             ]
           },
+          "m7.3": {
+            home: "Keisha’s token program has ended. Residents who used to read for fun now won’t open a book without points, yet Andrés, who picked his own GED goal, keeps studying. What happened?",
+            keys: [["What is the difference between intrinsic and extrinsic motivation?", "Intrinsic motivation is doing something for its own sake, because it is interesting or satisfying. Extrinsic motivation is doing it for an outcome outside the activity, such as a reward, a grade or avoiding punishment.", "A boy drawing dragons just for the joy of it, while next door a man paints a fence only because a giant coin is dangling from a fishing rod above him."],
+              ["What is the overjustification effect?", "Expected, tangible rewards for a task people already enjoy can lower their later interest once the reward stops. Lepper, Greene and Nisbett (1973): preschoolers promised a “Good Player” award drew less in free time later; children given a surprise award did not.", "A kid who loved drawing until he was paid in gold stars, and now his crayons are on strike, waving tiny picket signs and demanding a contract."],
+              ["What is the SDT motivation continuum?", "Self-Determination Theory orders motivation from amotivation, through external (rewards and punishments), introjected (guilt and pride), identified (I value it) and integrated (it fits who I am), to intrinsic. Moving up is called internalization.", "A ladder that starts with a sheriff behind you (“because I have to”), passes a tiny guilt ghost on your shoulder (“or I’ll feel guilty”), and ends at the top with you waving (“because it’s me”)."],
+              ["Can mandated clients become motivated?", "Yes. People sent by a court or employer can internalize reasons of their own, especially in autonomy-supportive care such as motivational interviewing (Miller and Rollnick), which draws out the client’s own reasons for change.", "A judge-ordered client who arrives in handcuffs made of paper and leaves holding a self-written note titled “Why I’m here”."],
+              ["Do rewards help in addiction treatment?", "Yes. Contingency management, such as vouchers for drug-free tests, reliably reduces substance use (Prendergast and colleagues, 2006). Rewards are useful to start a behaviour when intrinsic motivation is low; the plan should then build internalization and fade the rewards.", "A vending machine that pays out coupons for every clean test, works beautifully, and then one day hands its owner the keys."]],
+            steps: [
+              { kind: "hook", title: "When the points stopped", body: who("<b>Ms. Okafor</b>, a counselor in Keisha’s residential program, from M3 · Operant conditioning and M3 · Learning principles in treatment.") +
+                "<p>For three months the program ran a token system: points for chores, groups and reading time, swapped for snacks and phone minutes. Reading went up fast.</p>" +
+                "<p>Then the grant ended and so did the points. Now several residents who used to read for fun on their own won’t pick up a book. “What do I get?” one asks.</p>" +
+                "<p>Meanwhile Andrés, who chose his own goal of passing the GED, studies every evening with no points at all.</p>" },
+              { kind: "predict", id: "m7.3:predict", title: "Your call first",
+                case: ["Some residents read for fun before the program.",
+                  { t: "The library shelf is painted blue.", irrelevant: true },
+                  "They earned points for reading during the program.",
+                  "The points were promised in advance and could be swapped for snacks.",
+                  { t: "Group meets on Wednesdays.", irrelevant: true },
+                  "After the points stopped, their reading dropped."],
+                q: "Will rewarding residents with points for reading make them love reading?",
+                options: ["Yes: reward a behaviour and people come to enjoy it", "Not necessarily: expected, tangible rewards can push out the enjoyment people already had", "Rewards never change behaviour"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: not necessarily. The points raised reading while they lasted. But for residents who already enjoyed reading, a promised, tangible reward can shift the reason from “I like it” to “I get paid for it”. When the pay stops, so can the reading. This is the overjustification effect.",
+                hints: ["Ask why the residents read before the program started.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what reason a resident would give for reading now."] },
+              { kind: "idea", lvl: "f", title: "Two reasons to do anything", body: '<dl class="x-dossier"><div><dt>Intrinsic motivation</dt><dd>Doing something <b>for its own sake</b>: it is interesting, fun or satisfying in itself.</dd></div>' +
+                "<div><dt>Extrinsic motivation</dt><dd>Doing something <b>for an outcome</b> outside the activity: a reward, a grade, praise, or avoiding a penalty.</dd></div>" +
+                "<div><dt>Both are normal</dt><dd>Most of life mixes the two. You may like your job and still want the paycheck. Extrinsic motivation isn’t bad; it is a different reason.</dd></div>" +
+                "<div><dt>The link to needs</dt><dd>In M7 · Needs, revisited you met Self-Determination Theory’s <b>autonomy</b>, <b>competence</b> and <b>relatedness</b>. When those needs are fed, intrinsic motivation tends to grow; when they are thwarted, it tends to fade " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the question isn’t whether someone is motivated, but why.</p>" },
+              { kind: "idea", lvl: "p", title: "When rewards backfire", body: '<dl class="x-dossier"><div><dt>The Good Player study</dt><dd>Lepper, Greene and Nisbett (1973) worked with preschoolers who already liked drawing. Children <b>promised</b> a “Good Player” award drew for it; later, in free time, they drew <b>less</b> than before. Children who got the same award as a <b>surprise</b>, or no award, did not lose interest.</dd></div>' +
+                "<div><dt>The overjustification effect</dt><dd>An outside reward gives people a new reason for something they already enjoyed. When the reward goes, the old reason can feel weaker.</dd></div>" +
+                "<div><dt>Which rewards</dt><dd>A large review by Deci, Koestner and Ryan (1999) found the drop is strongest for rewards that are <b>expected</b>, <b>tangible</b> and given just for <b>doing the task</b> " + ev("r") + ". Cameron and Pierce argue the effect is narrower and often small, so its scope is contested " + ev("c") + ".</dd></div>" +
+                "<div><dt>Praise can help</dt><dd><b>Verbal praise</b> and <b>informational feedback</b> (“you read that whole chapter, and your summary was sharp”) can <b>increase</b> intrinsic motivation, because they feed the need for competence instead of controlling behaviour " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> a reward that feels like control can crowd out joy; one that feels like information can feed it.</p>" },
+              { kind: "contrast", id: "m7.3:contrast", title: "Same love of drawing, one difference",
+                q: "Two children both love drawing. A week later, which one is likely to draw more in free time?",
+                cases: [
+                  { label: "Child A", s: ["Loves drawing.", { t: "Wears a striped shirt.", irrelevant: true }, { t: "Was promised an award beforehand for drawing.", diff: true }, "Got the same award afterwards."] },
+                  { label: "Child B", s: ["Loves drawing.", { t: "Wears a striped shirt.", irrelevant: true }, { t: "Was not promised anything beforehand.", diff: true }, "Got the same award afterwards, as a surprise."] }
+                ],
+                answer: 1,
+                features: ["The shirt", "Whether the award was promised in advance", "Liking drawing", "The award itself"],
+                feature: 1,
+                why: "Only the promise differs. Both got the same award, but for Child A drawing became something done to earn it. That is the overjustification effect: expected rewards, not surprise ones, are the ones that crowd out interest.",
+                hints: ["Find the one sentence where the two children part ways.",
+                  "The sentences that don’t decide it are dimmed. Both got the award; ask when they knew about it.",
+                  "Step one, aloud: say why each child thinks they drew."] },
+              { kind: "idea", lvl: "m", title: "A ladder, not a switch", body: '<dl class="x-dossier"><div><dt>The SDT continuum</dt><dd>Deci and Ryan order motivation from least to most self-owned: <b>amotivation</b> (no reason at all); <b>external</b> (“because I have to”, rewards and punishments); <b>introjected</b> (“or I’ll feel guilty”, pride and shame); <b>identified</b> (“because I value it”); <b>integrated</b> (“because it fits who I am”); and <b>intrinsic</b> (“because I enjoy it”).</dd></div>' +
+                "<div><dt>Internalization</dt><dd>Moving up the ladder is <b>internalization</b>: taking a reason that started outside and making it your own. Identified and integrated motivation are still extrinsic, yet they last almost as well as enjoyment " + ev("r") + ".</dd></div>" +
+                "<div><dt>Controlling vs autonomy-supportive</dt><dd><b>Controlling</b> settings use pressure, threats and “shoulds”. <b>Autonomy-supportive</b> settings offer choice, explain the reason for a rule, and acknowledge feelings. The second kind helps people internalize " + ev("r") + ".</dd></div>" +
+                "<div><dt>Contingency management still works</dt><dd>Vouchers or prizes for drug-free tests reliably cut substance use; a meta-analysis by Prendergast and colleagues (2006) found clear effects " + ev("r") + ". Rewards are a good <b>starter</b> when intrinsic motivation is low. The plan is to build internalization and then <b>fade</b> them.</dd></div>" +
+                "<div><dt>Motivational interviewing</dt><dd>Miller and Rollnick’s approach is autonomy-supportive by design: it <b>draws out the client’s own reasons</b> for change instead of supplying them " + ev("r") + ". Even <b>mandated</b> clients, sent by a court, can come to own their reasons.</dd></div></dl>" +
+                "<p><b>So:</b> start wherever the person is on the ladder, and help them climb.</p>" },
+              { kind: "example", lvl: "p", title: "Rebuilding the reading", body: who("<b>Ms. Okafor</b>, the residents and Andrés, over the next six weeks.") +
+                '<dl class="x-dossier"><div><dt>Explore values</dt><dd>Ms. Okafor asks each resident what reading used to give them. One says it was the only quiet hour in her day; another wants to read to his daughter on visits.</dd></div>' +
+                "<div><dt>Offer choice</dt><dd>Residents pick their own books and their own reading time, and can trade titles in a small swap group, which feeds <b>relatedness</b>.</dd></div>" +
+                "<div><dt>Frame rewards as information</dt><dd>Where small rewards remain, they come with specific feedback (“you finished your first full novel here”), not as payment per page.</dd></div>" +
+                "<div><dt>Plan the fade</dt><dd>For the new contingency program for drug-free tests, the team writes the fade into the plan from day one, with each step down agreed with the client.</dd></div>" +
+                "<div><dt>Learn from Andrés</dt><dd>Andrés chose his GED goal because he wants to show his son it can be done. That is <b>identified</b> motivation, close to the top of the ladder, and it doesn’t need points.</dd></div></dl>" +
+                "<p>“So the snacks weren’t the point?” one resident asks. “They got you started,” Ms. Okafor says. “The point is the reason you keep.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>“Intrinsic versus extrinsic” sounds like a switch, but it is a continuum, and most real motives are mixed. The overjustification effect is clearest for expected, tangible, task-contingent rewards, and Cameron and Pierce argue it is narrower than often claimed. Culture matters too: Iyengar and Lepper (1999) found that Asian American children were often most motivated when a trusted person, such as their mother, chose for them, while Anglo American children did best choosing for themselves. People with more interdependent selves may find motivation in others’ choices.</p>' +
+                "<p><b>The counter.</b> SDT says autonomy means endorsing what you do, not doing it alone; a choice made by someone you trust can feel fully your own. And the practical advice holds: rewards can start behaviour, but values, choice and informational feedback help it last.</p>" +
+                "<p>Background: M3 · Operant conditioning; M3 · Learning principles in treatment; M7 · Needs, revisited. Ahead: M7 · Craving and the motivation to use.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Intrinsic vs extrinsic.</b> A boy draws dragons for pure joy, while next door a man paints a fence only because a giant coin dangles from a fishing rod above him.</p>" +
+                "<p><b>Overjustification.</b> A kid loved drawing until he was paid in gold stars; now his crayons are on strike, waving tiny picket signs and demanding a contract.</p>" +
+                "<p><b>The internalization ladder.</b> A sheriff behind you (“because I have to”), a tiny guilt ghost on your shoulder (“or I’ll feel guilty”), and at the top, just you (“because it’s me”).</p>" +
+                "<p><b>Mandated clients can internalize.</b> A judge-ordered client arrives in handcuffs made of paper and leaves holding a self-written note: “Why I’m here”.</p>" +
+                "<p><b>Contingency management, then fade.</b> A vending machine pays out coupons for clean tests, works beautifully, and then hands its owner the keys.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.3:teachback", title: "Teach it back", prompt: "Explain to Keisha’s program lead why reading dropped when the points stopped and why Andrés kept going: intrinsic versus extrinsic motivation; Lepper, Greene and Nisbett’s Good Player study and the overjustification effect; Deci, Koestner and Ryan’s finding that expected, tangible, task-contingent rewards do the most harm, and Cameron and Pierce’s contested narrower view; why praise and informational feedback can raise intrinsic motivation; SDT’s continuum from amotivation through external, introjected, identified and integrated to intrinsic, and internalization; autonomy, competence and relatedness; controlling versus autonomy-supportive settings; Prendergast’s evidence that contingency management works; Miller and Rollnick’s motivational interviewing and mandated clients; Iyengar and Lepper on culture; and the plan: explore values, offer choice, frame rewards as information, and plan the fade." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Expected, tangible rewards can lower interest in an enjoyed task " + ev("r") + ". Praise and informational feedback can raise it " + ev("r") + ". Contingency management reduces substance use " + ev("r") + ". Motivational interviewing as an autonomy-supportive approach " + ev("r") + ". Autonomy-supportive settings help internalization " + ev("r") + ". How wide the overjustification effect reaches " + ev("c") + ".</p>" +
+                "<p><b>So:</b> use rewards to start, and build the person’s own reasons to keep going.</p>" },
+              Q("In Lepper, Greene and Nisbett’s (1973) study, which preschoolers later drew less in free time?",
+                ["Those given a surprise award", "Those promised a Good Player award beforehand", "Those given no award", "All children equally"], 1,
+                "The expected reward, not the surprise one, lowered later interest."),
+              Q("Which kind of reward most reliably lowers intrinsic motivation?",
+                ["Unexpected verbal praise", "Expected, tangible rewards given just for doing the task", "Specific informational feedback", "No reward"], 1,
+                "Deci, Koestner and Ryan (1999): expected, tangible, task-contingent rewards."),
+              Q("A client stays sober “because I’d feel so guilty letting my sponsor down.” On the SDT continuum, this is:",
+                ["Intrinsic motivation", "Integrated regulation", "Introjected regulation", "Amotivation"], 2,
+                "Guilt and pride drive introjected regulation."),
+              Q("Vouchers for drug-free urine tests in contingency management:",
+                ["Don’t work because they are extrinsic", "Reliably reduce substance use and work best with a planned fade", "Only work for clients who are already intrinsically motivated", "Are banned in treatment"], 1,
+                "A robust effect; start with rewards, then build internalization."),
+              Q("A court-mandated client says, “I’m only here because the judge said so.” The most autonomy-supportive response is to:",
+                ["Remind him of the penalties for missing sessions", "Ask what, if anything, he’d want to get out of being here", "Tell him he has no choice", "Wait until he is intrinsically motivated"], 1,
+                "Motivational interviewing draws out the client’s own reasons.")
+            ]
+          },
+          "m7.4": {
+            home: "Valeria, 23, climbs the stairs, feels her heart pound, and thinks “I’m dying.” The fear makes her heart race harder. Did her fear start in her mind or her body?",
+            keys: [["What does the James–Lange theory say?", "William James (1884) and Carl Lange (1885): bodily changes come first, and the feeling is our sense of them. We feel afraid because we tremble, not the other way round.", "William James running from a bear and only then noticing, “Oh! I’m scared. My legs are already running.”"],
+              ["What did Cannon and Bard argue?", "Cannon (1927): the viscera are too slow, the same arousal shows up across different emotions, and animals still show emotion after their body feedback is cut. Emotion and bodily response happen at the same time, triggered through the thalamus, an anatomy now outdated.", "Walter Cannon as a referee blowing one whistle that starts the body race and the feeling race at the exact same moment."],
+              ["What is Schachter and Singer’s two-factor theory?", "Schachter and Singer (1962): emotion is physical arousal plus a cognitive label for it. Their epinephrine study has replication problems, so the theory is contested.", "A racing heart wearing a “?” T-shirt while two label makers argue over it: “LOVE!” “FEAR!”"],
+              ["What is misattribution of arousal?", "Arousal from one source can be read as a different emotion. Dutton and Aron (1974): men on a shaky suspension bridge seemed more attracted to an interviewer. Replications are mixed, so it is contested.", "A man on a wobbly suspension bridge who decides his shaking knees must be a crush on the interviewer."],
+              ["What is Clark’s cognitive model of panic?", "Clark (1986): panic grows from catastrophic misinterpretation of normal body sensations, such as reading a pounding heart as a heart attack, which raises fear and the sensations. CBT for panic and interoceptive exposure, built on this, work well.", "A smoke alarm screaming “FIRE!” at burnt toast, the body’s heartbeat, and Valeria learning to check the toaster first."]],
+            steps: [
+              { kind: "hook", title: "Valeria on the stairs", body: who("<b>Dr. Navarro</b>, a clinic psychologist seeing Valeria for the first time.") +
+                "<p>Valeria, 23, has had four panic attacks this month. The last one started at the top of the stairs to her apartment.</p>" +
+                "<p>“My heart was pounding so hard. I thought, this is it, I’m dying. Then it went even faster and I couldn’t breathe.”</p>" +
+                "<p>Her doctor has checked her heart, and it is healthy. She has started taking the elevator and avoiding the gym.</p>" },
+              { kind: "predict", id: "m7.4:predict", title: "Your call first",
+                case: ["Valeria had just climbed the stairs.",
+                  { t: "Her apartment is on a corner.", irrelevant: true },
+                  "Her heart was pounding.",
+                  "She thought, “I’m dying.”",
+                  { t: "She was carrying a tote bag.", irrelevant: true },
+                  "After that thought, her heart raced faster."],
+                q: "Does Valeria’s fear start in her mind or in her body?",
+                options: ["Only in her mind: the body just follows the thought", "Only in her body: the pounding heart simply is the fear", "In a loop: a body sensation, a frightening reading of it, more sensation"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: a loop. The stairs raised her heart rate (body). She read it as a sign of dying (mind). That fear raised her heart rate further, which seemed to confirm the danger. Each classic theory of emotion catches part of this loop.",
+                hints: ["Ask what made her heart pound in the first place.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left in order.",
+                  "Step one, aloud: say what happened just before and just after the thought."] },
+              { kind: "idea", lvl: "f", title: "Body first, or feeling first?", body: '<dl class="x-dossier"><div><dt>The common-sense view</dt><dd>We see the bear, <b>feel afraid</b>, and then the body reacts: the heart races and we run.</dd></div>' +
+                "<div><dt>James–Lange</dt><dd>William James (1884) and Carl Lange (1885) flipped it: the <b>bodily changes come first</b>, and the feeling is our sense of them. “We feel afraid because we tremble.”</dd></div>" +
+                "<div><dt>Cannon–Bard</dt><dd>Walter Cannon (1927), with Philip Bard, objected: the organs of the gut respond <b>too slowly</b> to explain quick feelings; the <b>same arousal</b> comes with fear, anger and excitement; and animals whose body feedback was cut, by spinal injury or removing the sympathetic nerves, still showed emotion. They proposed that the body response and the feeling happen <b>at the same time</b>, triggered through the thalamus. That anatomy is now outdated " + ev("d") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the first great debate was about order: body, feeling, or both at once.</p>" },
+              { kind: "idea", lvl: "p", title: "Arousal plus a label", body: '<dl class="x-dossier"><div><dt>Two-factor theory</dt><dd>Schachter and Singer (1962) injected people with epinephrine, which raises arousal. Those not told what to expect seemed to take on the mood of a planted partner, euphoric or angry. Emotion, they said, is <b>arousal plus a cognitive label</b>. Later attempts to repeat the study had problems " + ev("c") + ".</dd></div>' +
+                "<div><dt>Misattribution of arousal</dt><dd>Dutton and Aron (1974): men crossing the swaying Capilano suspension bridge seemed more attracted to a female interviewer than men on a low, solid bridge, as if they read their racing hearts as attraction. Replications are mixed " + ev("c") + ".</dd></div>" +
+                "<div><dt>Facial feedback</dt><dd>Strack and colleagues (1988): holding a pen in the teeth, forcing a smile, made cartoons seem funnier. A large 2016 replication found no effect; later many-lab studies suggest a small one " + ev("c") + ".</dd></div>" +
+                "<div><dt>Must thinking come first?</dt><dd>Lazarus said emotion needs an <b>appraisal</b> of what an event means; Zajonc said some feelings come before any thought. Ahead: M7 · What is an emotion? The census, for appraisal and constructed emotion.</dd></div></dl>" +
+                "<p><b>So:</b> how we read arousal shapes what we feel, though the classic demonstrations are shakier than the textbooks suggest.</p>" },
+              { kind: "contrast", id: "m7.4:contrast", title: "Same racing heart, one difference",
+                q: "Two people have identical racing hearts after climbing the same stairs. Who is likely to have a panic attack?",
+                cases: [
+                  { label: "Person A", s: ["Heart racing after the stairs.", { t: "Wearing white sneakers.", irrelevant: true }, { t: "Thinks, “I’m dying.”", diff: true }, "Same age; same healthy heart."] },
+                  { label: "Person B", s: ["Heart racing after the stairs.", { t: "Wearing white sneakers.", irrelevant: true }, { t: "Thinks, “I just climbed stairs.”", diff: true }, "Same age; same healthy heart."] }
+                ],
+                answer: 0,
+                features: ["The sneakers", "How they label the sensation", "The racing heart", "Their age"],
+                feature: 1,
+                why: "Only the label differs. Same body, same arousal, yet “I’m dying” turns a normal heartbeat into terror, while “I climbed stairs” lets it settle. That is the heart of Clark’s model of panic.",
+                hints: ["Find the one sentence where the two people part ways.",
+                  "The sentences that don’t decide it are dimmed. Their bodies match; ask what they tell themselves.",
+                  "Step one, aloud: say what each person thinks the heartbeat means."] },
+              { kind: "idea", lvl: "m", title: "Fast paths and the panic loop", body: '<dl class="x-dossier"><div><dt>LeDoux’s low road and high road</dt><dd>Joseph LeDoux described a <b>fast, rough path</b> to the amygdala that can start a fear response before we know what we saw, and a <b>slower path</b> through the cortex that checks it. A useful picture, but simplified: the brain’s fear circuits are more connected than two roads ' + ev("c") + ".</dd></div>" +
+                "<div><dt>Clark’s cognitive model of panic</dt><dd>David Clark (1986): panic attacks come from <b>catastrophic misinterpretation</b> of normal body sensations. A pounding heart becomes “heart attack”, dizziness becomes “I’m going mad”. The fear raises the sensations, which seem to prove the danger.</dd></div>" +
+                "<div><dt>Treatment that follows</dt><dd><b>CBT for panic</b> tests those readings, and <b>interoceptive exposure</b> brings on the feared sensations on purpose, by spinning or running in place, until they stop meaning danger. Both work well " + ev("r") + ".</dd></div>" +
+                "<div><dt>Safety behaviours</dt><dd>Avoiding stairs or the gym feels protective, but it keeps the belief alive: she never learns her heart can race and nothing bad happens.</dd></div></dl>" +
+                "<p><b>So:</b> panic is a body signal read as catastrophe, and changing the reading breaks the loop.</p>" },
+              { kind: "example", lvl: "p", title: "Valeria checks the toaster", body: who("<b>Dr. Navarro</b> and Valeria, over eight sessions.") +
+                '<dl class="x-dossier"><div><dt>Map the loop</dt><dd>Together they draw her last attack: stairs, pounding heart, “I’m dying”, more pounding, more fear. Valeria sees the circle for the first time.</dd></div>' +
+                "<div><dt>Test the reading</dt><dd>“What else could a pounding heart after stairs mean?” She lists it: exercise, coffee, excitement. Her cardiologist’s clear report goes on the list too.</dd></div>" +
+                "<div><dt>Bring on the sensation</dt><dd>In session she runs in place for a minute, then stays with the racing heart without leaving. Each week her fear rating drops.</dd></div>" +
+                "<div><dt>Drop the safety behaviours</dt><dd>She takes the stairs again, one floor at a time, and goes back to the gym.</dd></div></dl>" +
+                "<p>“So my heart wasn’t lying,” Valeria says. “It was just loud, and I was translating it wrong.”</p>" +
+                '<p>See one event through each theory side by side.</p><button type="button" class="x-lens__b press" data-scene="fivelenses">Open One Event, Five Lenses</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Each classic theory captures part of emotion and none captures all of it. James–Lange is right that the body matters, but arousal alone doesn’t tell fear from excitement. Cannon–Bard was right about that, but wrong about the thalamus. Two-factor theory, misattribution and facial feedback rest on studies that replicate weakly or with small effects. Modern views blend body signals, appraisal and construction rather than picking one winner.</p>' +
+                "<p><b>The counter.</b> For practice, the blend is the point. Valeria’s panic needs a body sensation and a catastrophic reading of it, and treatment that works on both, interoceptive exposure and CBT, has strong evidence even while the theories are argued over.</p>" +
+                "<p>Ahead: M7 · Emotion, feeling, affect, mood (the words); M7 · What is an emotion? The census (appraisal vs basic vs constructed); M7 · Do primary emotions exist?; M7 · How emotions are studied, and the limits (faces and measurement); M7 · Damasio’s shift: feeling and deciding (somatic markers); M7 · What to do, and not do, with emotion in the room (regulation).</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>James–Lange: body first.</b> William James runs from a bear and only then notices, “Oh! I’m scared. My legs are already running.”</p>" +
+                "<p><b>Cannon–Bard: at the same time.</b> Walter Cannon, as a referee, blows one whistle that starts the body race and the feeling race at the exact same moment.</p>" +
+                "<p><b>Two-factor labelling.</b> A racing heart in a “?” T-shirt while two label makers argue: “LOVE!” “FEAR!”</p>" +
+                "<p><b>Misattribution (contested).</b> On a shaky suspension bridge, a man decides his wobbly knees must be a crush on the interviewer.</p>" +
+                "<p><b>Catastrophic misinterpretation in panic.</b> A smoke alarm screams “FIRE!” at burnt toast, the body’s heartbeat, and Valeria learns to check the toaster first.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m7.4:teachback", title: "Teach it back", prompt: "Explain to Valeria how her fear can start in her body and her mind at once: the common-sense view; James and Lange’s claim that bodily changes come first; Cannon and Bard’s critique (slow viscera, the same arousal across emotions, emotion after cut body feedback) and their outdated thalamus account; Schachter and Singer’s two-factor theory and its replication problems; Dutton and Aron’s bridge study and its mixed replications; Strack’s pen study, the failed 2016 replication and later small effects; the Lazarus–Zajonc debate; LeDoux’s low road and high road and why it is simplified; Clark’s cognitive model of panic and catastrophic misinterpretation; and the plan: map the loop, test the reading, use interoceptive exposure, and drop safety behaviours." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Catastrophic misinterpretation in panic, and CBT with interoceptive exposure " + ev("r") + ". Two-factor theory " + ev("c") + ". Misattribution of arousal " + ev("c") + ". Facial feedback " + ev("c") + ". LeDoux’s two roads as a simplification " + ev("c") + ". Cannon and Bard’s thalamus account " + ev("d") + ".</p>" +
+                "<p><b>So:</b> emotion blends body and meaning, and changing the meaning can calm the body.</p>" },
+              Q("According to the James–Lange theory:",
+                ["We tremble because we feel afraid", "We feel afraid because we tremble", "Feeling and trembling are unrelated", "Fear comes only from thoughts"], 1,
+                "Bodily changes come first; the feeling is our sense of them."),
+              Q("Which was one of Cannon’s critiques of James–Lange?",
+                ["The same arousal appears across different emotions", "Emotions never involve the body", "Facial expressions cause emotion", "Arousal is always labelled correctly"], 0,
+                "Similar arousal comes with fear, anger and excitement, so arousal alone can’t tell them apart."),
+              Q("Schachter and Singer’s two-factor theory says emotion is:",
+                ["A reflex of the thalamus", "Physical arousal plus a cognitive label", "Only a facial expression", "Learned through reinforcement"], 1,
+                "Arousal plus a label; the original study has replication problems."),
+              Q("In Clark’s cognitive model, panic attacks grow from:",
+                ["A weak heart", "Catastrophic misinterpretation of normal body sensations", "Too little arousal", "Unconscious childhood conflict"], 1,
+                "A normal sensation read as disaster raises fear and the sensation."),
+              Q("Valeria avoids stairs so her heart won’t race. Based on Clark’s model, her therapist should:",
+                ["Support the avoidance until the fear fades", "Use interoceptive exposure to bring on the sensation safely and test her reading of it", "Tell her the panic is all in her head", "Advise more caffeine"], 1,
+                "Interoceptive exposure and CBT for panic work well; avoidance keeps the belief alive.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -19681,6 +19861,24 @@
           G("m7.2", "Need for achievement", "Necesidad de logro", "The drive to excel at challenging goals.", "One of McClelland’s three motives, with affiliation and power; often measured with the Thematic Apperception Test, whose reliability is contested."),
           G("m7.2", "Housing First", "Vivienda Primero", "Housing without preconditions.", "Tsemberis’s approach that provides permanent housing without first requiring sobriety or treatment; strongly improves housing stability."),
           G("m7.2", "Strengths-based case management", "Gestión de casos basada en fortalezas", "Building on what clients already do well.", "A case management approach that identifies and uses a person’s skills, interests and supports rather than focusing only on deficits."),
+          G("m7.3", "Intrinsic motivation", "Motivación intrínseca", "Doing something for its own sake.", "Motivation that comes from the activity itself being interesting, enjoyable or satisfying, rather than from an outside outcome."),
+          G("m7.3", "Extrinsic motivation", "Motivación extrínseca", "Doing something for an outside outcome.", "Motivation driven by a separable outcome such as a reward, grade, praise or avoiding a penalty; in SDT it ranges from controlled to self-endorsed forms."),
+          G("m7.3", "Overjustification effect", "Efecto de sobrejustificación", "Rewards crowding out enjoyment.", "The drop in interest in an already enjoyed task after expected, tangible rewards for doing it are given and then removed; shown by Lepper, Greene and Nisbett (1973). Its scope is debated."),
+          G("m7.3", "Amotivation", "Desmotivación", "Having no reason to act at all.", "The lowest point on Self-Determination Theory’s continuum: a lack of intention, often from feeling incompetent or seeing no value in the activity."),
+          G("m7.3", "Introjected regulation", "Regulación introyectada", "Acting to avoid guilt or win pride.", "A partly internalized form of extrinsic motivation in SDT, driven by inner pressure such as guilt, shame or ego involvement."),
+          G("m7.3", "Identified regulation", "Regulación identificada", "Acting because you value the goal.", "An extrinsic but self-endorsed form of motivation in SDT: the person sees the behaviour as personally important."),
+          G("m7.3", "Integrated regulation", "Regulación integrada", "Acting because it fits who you are.", "The most internalized form of extrinsic motivation in SDT, where the behaviour fits with one’s other values and identity."),
+          G("m7.3", "Autonomy-supportive environment", "Entorno que apoya la autonomía", "A setting that offers choice and reasons.", "A setting that offers choice, explains the reasons for requests and acknowledges feelings, as opposed to a controlling one that relies on pressure; it supports internalization."),
+          G("m7.3", "Informational feedback", "Retroalimentación informativa", "Feedback that tells you how you did.", "Specific, non-controlling feedback about competence, which can raise intrinsic motivation, unlike rewards experienced as control."),
+          G("m7.3", "Motivational interviewing", "Entrevista motivacional", "Drawing out a client’s own reasons to change.", "Miller and Rollnick’s collaborative, autonomy-supportive counselling style that elicits and strengthens the client’s own motivation for change."),
+          G("m7.4", "James–Lange theory", "Teoría de James-Lange", "We feel afraid because we tremble.", "The theory of William James (1884) and Carl Lange (1885) that bodily changes come first and the felt emotion is the perception of them."),
+          G("m7.4", "Cannon–Bard theory", "Teoría de Cannon-Bard", "Body and feeling happen at once.", "Cannon’s (1927) proposal, with Bard, that emotional feeling and bodily arousal are triggered at the same time through the thalamus; the anatomy is outdated."),
+          G("m7.4", "Two-factor theory", "Teoría de los dos factores", "Emotion is arousal plus a label.", "Schachter and Singer’s (1962) theory that emotion results from physiological arousal and a cognitive label for its cause; the original study has replication problems."),
+          G("m7.4", "Misattribution of arousal", "Atribución errónea de la activación", "Reading arousal from one cause as another emotion.", "Mistaking the source of bodily arousal, as in Dutton and Aron’s (1974) suspension-bridge study; replications are mixed."),
+          G("m7.4", "Low road and high road", "Vía corta y vía larga", "A fast fear path and a slower checking path.", "LeDoux’s description of a quick, rough route to the amygdala and a slower route through the cortex; useful but simplified."),
+          G("m7.4", "Catastrophic misinterpretation", "Interpretación catastrófica", "Reading normal body sensations as disaster.", "In Clark’s (1986) cognitive model of panic, misreading sensations such as a pounding heart as signs of imminent catastrophe, which escalates fear."),
+          G("m7.4", "Panic attack", "Ataque de pánico", "A sudden surge of intense fear and body alarm.", "An abrupt episode of intense fear with physical symptoms such as pounding heart, breathlessness and dizziness, peaking within minutes."),
+          G("m7.4", "Interoceptive exposure", "Exposición interoceptiva", "Bringing on feared body sensations safely.", "A CBT technique for panic that deliberately induces sensations such as a racing heart or dizziness, by running or spinning, until they lose their threat."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -20331,6 +20529,18 @@
             R("Tay & Diener", 2011, "observational", "Using data from many countries, found needs fairly universal and showed social and respect needs added to well-being even when basic needs were unmet.", st("robust", "Large worldwide sample; self-report data.")),
             R("Baumeister & Leary", 1995, "review", "The need to belong: argued humans have a fundamental need for frequent, positive interaction within lasting relationships.", st("robust", "Supported by extensive later research on social connection and health.")),
             R("Tsemberis, Gulcur & Nakae", 2004, "experiment", "In a randomized trial, Housing First gave homeless adults with mental illness housing without treatment preconditions and greatly improved housing stability.", st("robust", "Replicated in larger trials, including Canada’s At Home/Chez Soi; effects on substance use are less consistent."))];
+          REFS["m7.3"] = [
+            R("Lepper, Greene & Nisbett", 1973, "experiment", "Preschoolers who liked drawing and were promised a Good Player award later drew less in free time; children given an unexpected award or none did not.", st("robust", "The classic overjustification study; the pattern holds in later reviews for expected rewards.")),
+            R("Deci, Koestner & Ryan", 1999, "meta-analysis", "Across many experiments, expected, tangible, task-contingent rewards lowered intrinsic motivation, while positive verbal feedback raised it.", st("contested", "The pattern is well replicated; Cameron and Pierce argue the harmful effects are narrower and smaller.")),
+            R("Prendergast, Podus, Finney, Greenwell & Roll", 2006, "meta-analysis", "Contingency management, rewarding verified abstinence with vouchers or prizes, reduced drug use across many treatment studies.", st("robust", "Consistent effects across substances; gains can fade after rewards stop.")),
+            R("Miller & Rollnick", 2013, "review", "Motivational Interviewing: set out a collaborative, autonomy-supportive style that elicits the client’s own reasons for change.", st("robust", "Many trials support MI for substance use and health behaviour; effects vary by counselor skill.")),
+            R("Iyengar & Lepper", 1999, "experiment", "Anglo American children were most motivated when they chose a task themselves; Asian American children were often most motivated when a trusted person, such as their mother, chose for them.", st("contested", "Influential on culture and choice; samples were small and the idea of autonomy it tests is debated."))];
+          REFS["m7.4"] = [
+            R("James", 1884, "review", "What Is an Emotion?: argued that bodily changes follow the perception of an event and that our feeling of those changes is the emotion.", st("contested", "Body feedback matters, but arousal alone does not distinguish emotions.")),
+            R("Cannon", 1927, "review", "Critiqued James–Lange: visceral changes are slow and similar across emotions, and emotion persists when body feedback is cut; proposed simultaneous activation via the thalamus.", st("contested", "Several critiques stand; the thalamic account is outdated.")),
+            R("Schachter & Singer", 1962, "experiment", "Participants injected with epinephrine and not told its effects seemed to take on the mood of a planted partner, suggesting emotion is arousal plus a cognitive label.", st("contested", "Influential; later attempts to replicate it had problems.")),
+            R("Dutton & Aron", 1974, "experiment", "Men on a swaying suspension bridge showed more signs of attraction to a female interviewer than men on a stable bridge, read as misattribution of arousal.", st("contested", "Replications are mixed.")),
+            R("Clark", 1986, "review", "A cognitive approach to panic: attacks arise from catastrophic misinterpretation of normal body sensations, which raises fear and the sensations in a loop.", st("robust", "CBT for panic and interoceptive exposure built on this model have strong trial support."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
