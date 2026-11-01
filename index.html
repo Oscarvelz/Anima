@@ -18735,6 +18735,187 @@
                 "What is learned is that your actions matter.")
             ]
           },
+          "m8.5": {
+            home: "Darius, 26, has a forensic report that says he “shows psychopathic traits.” It rests on one inkblot test and a 20-minute interview. His attorney asks you what that means. What would you need to know before you believed it?",
+            keys: [["How do MMPI validity scales work?", "The MMPI (1943; now MMPI-2 and MMPI-3) was built by empirical criterion keying: items kept because they separated clinical groups. Its validity scales flag faking good, faking bad and careless answering, and they work well.", "A lie-detector bunny that wiggles its nose whenever someone answers “I have never told a lie, not even once.”"],
+              ["What is the problem with the Rorschach?", "Hermann Rorschach’s inkblots (1921) are scored with Exner’s Comprehensive System or R-PAS. A few scales, such as thought disorder, hold up; most interpretations are contested, and scorers often disagree.", "One butterfly-shaped inkblot that a dozen psychologists read as twelve different personalities, all arguing loudly."],
+              ["Are projective drawings valid clinical tools?", "No. House-tree-person and similar drawing tests have failed validity checks; Lilienfeld, Wood and Garb (2000) found many projective uses lack support.", "A house-tree-person drawing hung in a museum with the label “Lovely art, not a diagnosis.”"],
+              ["What is rater allegiance?", "Murrie and colleagues (2013) found that evaluators scoring the same PCL-R files gave higher psychopathy scores when they believed the prosecution hired them, lower when the defense did.", "Two talent-show judges who each mysteriously give higher marks to the act from their own team."],
+              ["Why use multi-method assessment?", "Every method has blind spots. A conclusion is trustworthy when self-report, reports from others and observed behaviour point the same way.", "A three-legged stool with legs labelled “self-report,” “others’ report” and “behaviour,” holding up one conclusion."]],
+            steps: [
+              { kind: "hook", title: "One label, thin evidence", body: who("<b>Darius</b>, 26, court-referred; his attorney, on the phone with you, his counselor.") +
+                "<p>Darius has come to every session for three months. He works nights at a warehouse and talks often about his younger sister.</p>" +
+                "<p>A forensic report arrives. It says Darius “shows psychopathic traits.” The evaluator gave him one projective test, the Rorschach, and talked with him for 20 minutes.</p>" +
+                "<p>His attorney asks you: “What does that mean? Should the judge believe it?”</p>" },
+              { kind: "predict", id: "m8.5:predict", title: "Your call first",
+                case: ["The report says Darius “shows psychopathic traits.”",
+                  { t: "The report is printed on blue letterhead.", irrelevant: true },
+                  "It rests on one Rorschach and a 20-minute unstructured interview.",
+                  "No file review, no structured psychopathy measure, no reports from others are listed.",
+                  { t: "Darius works nights at a warehouse.", irrelevant: true },
+                  "The evaluator was hired by one side of the case."],
+                q: "Is the “psychopathic traits” conclusion trustworthy?",
+                options: ["Yes, a trained evaluator wrote it", "Not on this evidence: one contested test and a short unstructured interview can’t carry so heavy a label", "Yes, the Rorschach reveals hidden personality"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: not on this evidence. The Rorschach has little support for judging psychopathy, a brief unstructured interview is the least reliable kind, and nothing converges from other sources. The conclusion may or may not be true; this report can’t tell you. Ask for a structured measure, file review and reports from people who know him.",
+                hints: ["Ask what each piece of evidence can actually show.",
+                  "The sentences that don’t decide it are dimmed. Look at which methods were used, and which weren’t.",
+                  "Step one, aloud: name one more source of evidence you’d want before believing the label."] },
+              { kind: "idea", lvl: "f", title: "Why assess, and with what", body: '<dl class="x-dossier"><div><dt>Why assess</dt><dd>To <b>describe</b> a person, support a <b>diagnosis</b>, <b>plan treatment</b> and, in courts, estimate <b>risk</b>. Each purpose needs measures validated for that purpose. Background on reliability, validity and norms: M5 · Testing intelligence fairly.</dd></div>' +
+                "<div><dt>Self-report inventories</dt><dd>Questionnaires the person answers about themselves. The <b>MMPI</b> (1943; now MMPI-2 and MMPI-3) was built by <b>empirical criterion keying</b>: items were kept if they separated clinical groups from others, whatever they seemed to be about. The <b>NEO-PI-R</b> measures the Big Five; the <b>PAI</b> covers clinical problems.</dd></div>" +
+                "<div><dt>Validity scales</dt><dd>MMPI scales that catch <b>faking good</b> (claiming impossible virtue), <b>faking bad</b> (exaggerating symptoms) and random answering. They work well " + ev("r") + ".</dd></div>" +
+                "<div><dt>Limits of self-report</dt><dd><b>Social desirability</b> (looking good), limited <b>insight</b> and deliberate <b>faking</b>, which is most likely when stakes are high, as in forensic and custody evaluations.</dd></div></dl>" +
+                "<p><b>So:</b> self-report is the workhorse of assessment, and its best tools check whether the person is answering honestly.</p>" },
+              { kind: "idea", lvl: "p", title: "Inkblots, stories and interviews", body: '<dl class="x-dossier"><div><dt>Projective tests</dt><dd>Ambiguous material on which a person is thought to “project” hidden needs, an idea rooted in M8 · Psychodynamic views. The <b>Rorschach</b> (1921) uses ten inkblots, scored with Exner’s Comprehensive System or the newer R-PAS. Some scales, such as thought disorder, have support; most interpretations are contested ' + ev("c") + ". The <b>TAT</b> (Henry Murray) asks for stories about ambiguous pictures.</dd></div>" +
+                "<div><dt>Projective drawings</dt><dd>House-tree-person and draw-a-person tests fail as clinical tools " + ev("d") + ". Lilienfeld, Wood and Garb (2000) concluded that many projective uses lack validity.</dd></div>" +
+                "<div><dt>Others’ ratings and observation</dt><dd>Reports from people who know the person, and direct observation of behaviour, add accuracy beyond self-report, especially for traits others can see.</dd></div>" +
+                "<div><dt>Structured vs unstructured interviews</dt><dd>A <b>structured clinical interview</b> such as the SCID asks set questions in a set order with set rules for scoring. Structured interviews are more reliable than unstructured ones " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the more structured and checkable the method, the more weight it can bear.</p>" },
+              { kind: "contrast", id: "m8.5:contrast", title: "Same file, one difference",
+                q: "Two qualified evaluators score Darius on the PCL-R from the same interview recording and the same file. Who is more likely to give a higher psychopathy score?",
+                cases: [
+                  { label: "Evaluator A", s: ["Trained on the PCL-R.", { t: "Works in a downtown office.", irrelevant: true }, { t: "Was hired by the defense.", diff: true }, "Reviewed the same file and recording."] },
+                  { label: "Evaluator B", s: ["Trained on the PCL-R.", { t: "Works in a downtown office.", irrelevant: true }, { t: "Was hired by the prosecution.", diff: true }, "Reviewed the same file and recording."] }
+                ],
+                answer: 1,
+                features: ["Office location", "Which side hired the evaluator", "PCL-R training", "The file reviewed"],
+                feature: 1,
+                why: "Only who hired them differs. Murrie and colleagues (2013) found evaluators scored the same cases higher on psychopathy when they believed the prosecution had hired them. Even structured tools bend toward the side paying.",
+                hints: ["Find the one sentence where the two evaluators differ.",
+                  "The sentences that don’t decide it are dimmed. Training and evidence are the same.",
+                  "Step one, aloud: say which side would want a higher psychopathy score."] },
+              { kind: "idea", lvl: "m", title: "Psychopathy, ethics and the counselor’s questions", body: '<dl class="x-dossier"><div><dt>The PCL-R</dt><dd>Robert Hare’s <b>Psychopathy Checklist–Revised</b> combines a structured interview with a <b>review of records</b>. It is the standard measure, but in court it is misused: scores vary with who hired the rater (<b>rater allegiance</b>, Murrie 2013) ' + ev("r") + ", and the word “psychopath” weighs heavily on judges and juries.</dd></div>" +
+                "<div><dt>Multi-method assessment</dt><dd>Combine self-report, others’ reports, records and observed behaviour. Trust conclusions where they converge.</dd></div>" +
+                "<div><dt>Ethics</dt><dd>Use only tests you are trained in; get <b>informed consent</b>; use <b>norms</b> that fit the person’s culture (see M8 · Personality across cultures); keep test materials secure; don’t read more into a score than it can bear. Vague, flattering reports invite the Barnum effect from M8 · Traits and the Big Five.</dd></div>" +
+                "<div><dt>Read reports critically</dt><dd>Ask: <b>which test</b>? <b>How validated</b> for this question? <b>Normed on whom</b>? Is there <b>converging evidence</b>?</dd></div>" +
+                "<div><dt>Measurement-based care</dt><dd>Brief validated measures given regularly to track progress improve outcomes " + ev("r") + ". This is where counselors use tests most.</dd></div></dl>" +
+                "<p><b>So:</b> a counselor doesn’t need to give every test, but must know which ones a report can lean on.</p>" },
+              { kind: "example", lvl: "p", title: "Your reply to Darius’s attorney", body: who("<b>You</b>, Darius’s counselor, writing back to his attorney.") +
+                '<dl class="x-dossier"><div><dt>Which test</dt><dd>“The Rorschach has little support for judging psychopathy. The standard measure, the PCL-R, wasn’t used.”</dd></div>' +
+                "<div><dt>How it was gathered</dt><dd>“A 20-minute unstructured interview is the least reliable way to reach a diagnosis. Structured interviews and file review are the standard.”</dd></div>" +
+                "<div><dt>Converging evidence</dt><dd>“No reports from employers, family or program staff are cited. In three months I have seen steady attendance and concern for his sister; that doesn’t rule anything out, but it is evidence the report didn’t weigh.”</dd></div>" +
+                "<div><dt>What to ask for</dt><dd>“An independent evaluation using validated, structured measures, record review and informant reports, with attention to who requested it.”</dd></div></dl>" +
+                "<p>You don’t claim Darius has no such traits. You say the report can’t show it either way.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Even good tests measure a person <b>in a context</b>: a stressed defendant, a frightened parent in a custody fight, a client answering in a second language. A score is a sample of behaviour on one day, not the person. And norms built on one population can misread another (M8 · Personality across cultures).</p>' +
+                "<p><b>The counter.</b> Structured, validated, multi-method assessment still beats unaided clinical judgment, which has all the same biases and none of the checks. The answer is careful testing, not no testing.</p>" +
+                "<p>Background: M5 · Testing intelligence fairly; M8 · Traits and the Big Five; M8 · Psychodynamic views.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Validity scales.</b> A lie-detector bunny wiggles its nose whenever someone answers “I have never told a lie, not even once.”</p>" +
+                "<p><b>Rorschach reliability.</b> A dozen psychologists stare at one butterfly-shaped inkblot and read twelve different personalities, all arguing loudly.</p>" +
+                "<p><b>Projective drawings.</b> A house-tree-person drawing hangs in a museum, labelled “Lovely art, not a diagnosis.”</p>" +
+                "<p><b>Rater allegiance.</b> Two talent-show judges each mysteriously give higher marks to the act from their own team.</p>" +
+                "<p><b>Multi-method assessment.</b> A three-legged stool, legs labelled “self-report,” “others’ report” and “behaviour,” holds up a single conclusion.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.5:teachback", title: "Teach it back", prompt: "Explain to Darius’s attorney how to judge the report: why we assess (description, diagnosis, treatment planning, risk); self-report inventories, the MMPI’s empirical criterion keying and validity scales, the NEO-PI-R and PAI, and the limits of self-report, especially in forensic and custody settings; projective tests, the Rorschach and what holds up, the TAT, why projective drawings fail, and the Lilienfeld, Wood and Garb review; informant reports and observation; structured versus unstructured interviews; the PCL-R, rater allegiance and the weight of the “psychopath” label; multi-method assessment; the ethics of competence, consent, cultural norms, test security and not over-interpreting; the questions a counselor asks of any report; measurement-based care; and the critique that a score is a sample in context, not the person." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>MMPI validity scales " + ev("r") + ". Structured over unstructured interviews " + ev("r") + ". Rater allegiance on the PCL-R " + ev("r") + ". Most Rorschach interpretations " + ev("c") + ". Projective drawings as clinical tools " + ev("d") + ".</p>" +
+                "<p><b>So:</b> the label on Darius is only as strong as the methods under it; ask which test, how validated, normed on whom, and whether anything else agrees.</p>" },
+              Q("The MMPI was built by empirical criterion keying, which means items were kept because they:",
+                ["Sounded like the trait they measure", "Separated clinical groups from others", "Were liked by test-takers", "Came from Freud’s theory"], 1,
+                "What mattered was whether an item told groups apart."),
+              Q("A test-taker answers “I have never told a lie, not even once.” Which feature of the MMPI is designed to catch this?",
+                ["The validity scales", "The Rorschach", "The TAT", "The SCID"], 0,
+                "Validity scales flag faking good."),
+              Q("Lilienfeld, Wood and Garb (2000) concluded that:",
+                ["All projective tests are valid", "Many projective uses lack validity", "Self-report should be abandoned", "Drawings are the best measure of trauma"], 1,
+                "A few Rorschach scales hold up; most uses don’t."),
+              Q("Compared with unstructured interviews, structured clinical interviews such as the SCID are:",
+                ["Less reliable", "More reliable", "Only for research", "The same"], 1,
+                "Set questions and rules mean evaluators agree more."),
+              Q("Murrie and colleagues (2013) found that PCL-R psychopathy scores were higher when evaluators believed they were hired by:",
+                ["The defense", "The prosecution", "A university", "The client"], 1,
+                "This is rater allegiance.")
+            ]
+          },
+          "m8.6": {
+            home: "Ji-woo, a Korean American client, and Ernesto, a Honduran client, both score “low assertiveness” on a U.S.-normed inventory. A trainee writes “passive, needs assertiveness training.” Is that a finding about them, or about the ruler?",
+            keys: [["What is the WEIRD problem?", "Henrich, Heine and Norenzayan (2010): most psychology studies Western, Educated, Industrialized, Rich, Democratic people, often college students, yet claims are made about all humans.", "A giant lab that only ever studies the same college sophomore, who wears a sweatshirt that says “Humanity.”"],
+              ["What is the reference-group effect?", "People rate themselves against those around them, so the same self-rating can mean different things in different countries; comparing countries’ average self-ratings can mislead (Heine 2002).", "Two people measuring their height against rulers that each country printed with its own starting point."],
+              ["How can respeto be misread?", "Respeto, a Latino value, means showing deference to elders, hosts and authorities; a U.S.-normed test or counselor can misread it as passivity or low assertiveness.", "A polite guest who won’t contradict the host, and an assertiveness-training robot that reads it as a “low battery” signal."],
+              ["Does the Big Five hold across cultures?", "Largely: McCrae and Terracciano (2005) found the five factors in dozens of cultures. Some samples, such as the Tsimane foragers (Gurven 2013), fit less clearly, and indigenous measures find extra factors such as interpersonal relatedness.", "The five-fish OCEAN aquarium shipped to fifty countries: the fish mostly look the same, but a few tanks have a sixth, friendly fish."],
+              ["Do national stereotypes match measured traits?", "No. Terracciano and colleagues (2005) found that beliefs about a nation’s “typical” personality did not match the measured traits of its people.", "A stereotype poster of a whole nation that the actual citizens walk past without recognizing themselves."]],
+            steps: [
+              { kind: "hook", title: "Two clients, one label", body: who("<b>Ji-woo</b>, 34, Korean American; <b>Ernesto</b>, 41, from Honduras; a counseling trainee writing intake notes.") +
+                "<p>Both clients filled out a personality inventory at intake. Both scored “low” on assertiveness against U.S. norms.</p>" +
+                "<p>Ji-woo cares for her parents and defers to them on big decisions. Ernesto speaks to his counselor formally, calls her “licenciada,” and never disagrees in session.</p>" +
+                "<p>The trainee writes for both: “Passive. Needs assertiveness training.”</p>" },
+              { kind: "predict", id: "m8.6:predict", title: "Your call first",
+                case: ["Both scored low on assertiveness on a U.S.-normed inventory.",
+                  { t: "The intake forms were printed on yellow paper.", irrelevant: true },
+                  "Ji-woo defers to her parents on big decisions.",
+                  "Ernesto speaks formally to his counselor and doesn’t disagree in session.",
+                  { t: "Both sessions were on a Tuesday.", irrelevant: true },
+                  "The norms came from a mostly white U.S. sample."],
+                q: "Are Ji-woo and Ernesto “passive”?",
+                options: ["Yes, the scores show it", "We can’t tell yet: the norms and the behaviours may reflect cultural values such as respect and family duty, not a lack of assertiveness", "Yes, and both need assertiveness training right away"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: we can’t tell yet. A score is only as meaningful as the norms behind it, and deference to elders or a counselor can be <b>respeto</b> or family duty, which are strengths in their cultures. Ask what these behaviours mean to them, and whether they can speak up when it matters to them, before writing “passive.”",
+                hints: ["Ask who the test was normed on.",
+                  "The sentences that don’t decide it are dimmed. Look at what the behaviours might mean in each client’s culture.",
+                  "Step one, aloud: say one reason Ernesto might not disagree with his counselor that isn’t passivity."] },
+              { kind: "idea", lvl: "f", title: "Selves shaped by culture", body: '<dl class="x-dossier"><div><dt>Individualism and collectivism</dt><dd>Geert Hofstede and Harry Triandis described cultures that stress personal goals and uniqueness (<b>individualist</b>) versus group harmony and duty (<b>collectivist</b>).</dd></div>' +
+                "<div><dt>Self-construal</dt><dd>Hazel Markus and Shinobu Kitayama (1991): an <b>independent</b> self is defined by inner traits; an <b>interdependent</b> self by relationships and roles. The pattern holds overall " + ev("r") + ", but people within one country vary a great deal.</dd></div>" +
+                "<div><dt>WEIRD samples</dt><dd>Henrich, Heine and Norenzayan (2010): most psychology comes from <b>Western, Educated, Industrialized, Rich, Democratic</b> people, often students, who are unusual on many measures " + ev("r") + ".</dd></div>" +
+                "<div><dt>Emic and etic</dt><dd>An <b>etic</b> approach takes a measure built in one culture and tests it everywhere; an <b>emic</b> approach builds concepts from inside each culture.</dd></div></dl>" +
+                "<p><b>So:</b> much of what we call human personality was measured in a narrow slice of humanity.</p>" },
+              { kind: "idea", lvl: "p", title: "What travels, and what doesn’t", body: '<dl class="x-dossier"><div><dt>The Big Five abroad</dt><dd>McCrae and Terracciano (2005) found the five factors from M8 · Traits and the Big Five in dozens of cultures. Among Tsimane forager-farmers in Bolivia, Gurven and colleagues (2013) found a less clear structure, so universality is debated ' + ev("c") + ".</dd></div>" +
+                "<div><dt>Indigenous constructs</dt><dd>Fanny Cheung’s <b>Chinese Personality Assessment Inventory</b> found an <b>interpersonal relatedness</b> factor (harmony, face, relationships) that the Big Five misses. Gerardo Marín described Latino values: <b>personalismo</b> (warm personal relationships), <b>familismo</b> (family first), <b>respeto</b> (deference to elders and authority) and <b>simpatía</b> (keeping interactions pleasant). Filipino psychology centres <b>kapwa</b>, a shared self with others.</dd></div>" +
+                "<div><dt>Reference-group effect</dt><dd>People rate themselves against those around them, so comparing countries’ average self-ratings can mislead (Heine 2002).</dd></div>" +
+                "<div><dt>Response styles</dt><dd><b>Acquiescence</b> (tending to agree) and <b>extreme responding</b> (picking the ends of the scale) vary across cultures and shift scores.</dd></div>" +
+                "<div><dt>National character</dt><dd>Terracciano and colleagues (2005): stereotypes of a nation’s “typical” personality do not match its people’s measured traits " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> the broad trait map travels well, but the ruler, the answers and some of the territory change.</p>" },
+              { kind: "contrast", id: "m8.6:contrast", title: "Same score, one difference",
+                q: "Two clients get the same low assertiveness score. For whom is the score more likely to mean what the test says?",
+                cases: [
+                  { label: "Client A", s: ["Same raw assertiveness score.", { t: "Took the test on a tablet.", irrelevant: true }, { t: "The test was normed on people from a different cultural group.", diff: true }, "Answered every item."] },
+                  { label: "Client B", s: ["Same raw assertiveness score.", { t: "Took the test on a tablet.", irrelevant: true }, { t: "The test was normed on people from the client’s own cultural group.", diff: true }, "Answered every item."] }
+                ],
+                answer: 1,
+                features: ["Tablet or paper", "Whether the norms match the client’s group", "The raw score", "Completing every item"],
+                feature: 1,
+                why: "Only the norms differ. A score means “low compared with this group”; if the group isn’t the client’s, the comparison can say more about cultural differences, response styles and reference groups than about the person.",
+                hints: ["Find the one sentence where the two clients differ.",
+                  "The sentences that don’t decide it are dimmed. The raw score is identical.",
+                  "Step one, aloud: finish “low compared with ___.”"] },
+              { kind: "idea", lvl: "m", title: "Culture in the counseling room", body: '<dl class="x-dossier"><div><dt>Use fitting norms</dt><dd>Check whom a test was normed and validated on (M5 · Testing intelligence fairly). If no fitting norms exist, treat scores as tentative.</dd></div>' +
+                "<div><dt>Ask what behaviour means</dt><dd>“In your family, how do people disagree with an elder?” Deference that looks like passivity may be respeto, filial duty or kapwa, and may sit alongside firm assertiveness in other settings.</dd></div>" +
+                "<div><dt>Acculturation and biculturalism</dt><dd>Clients move between cultures to different degrees, and many are skilled at switching. See M6 · Adolescence and identity.</dd></div>" +
+                "<div><dt>Cultural humility</dt><dd>Joshua Hook and colleagues (2013): an ongoing, open, other-centred stance, curious about what the client’s culture means to them, rather than a fixed checklist of <b>competence</b> facts about groups.</dd></div>" +
+                "<div><dt>Adapt treatment</dt><dd>Culturally adapted interventions (language, values, family involvement) give a modest added benefit (Hall and colleagues, 2016) " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> interpret with fitting norms, ask before labelling, and adapt the work to the client’s values.</p>" },
+              { kind: "example", lvl: "p", title: "Rewriting the intake note", body: who("<b>The trainee</b> and her supervisor, Dr. Reyes, revising the notes.") +
+                '<dl class="x-dossier"><div><dt>Check the ruler</dt><dd>The inventory’s norms were mostly white U.S. adults. Dr. Reyes: “So the score says ‘less assertive than that group,’ not ‘passive.’”</dd></div>' +
+                "<div><dt>Ask Ernesto</dt><dd>Asked how he’d handle a problem at work, Ernesto describes firmly confronting a supervisor who shorted his pay. With his counselor, he says, “You are the professional; I show respect.” That is respeto, not passivity.</dd></div>" +
+                "<div><dt>Ask Ji-woo</dt><dd>Ji-woo values caring for her parents but feels torn about a job offer in another city. Her goal isn’t “be more assertive”; it’s how to honour her parents and her own plans together.</dd></div>" +
+                "<div><dt>New notes</dt><dd>“Score below U.S. norms; norms may not fit. Values respect and family duty. Can assert in other settings. Goals in client’s words.”</dd></div></dl>" +
+                "<p>Neither client is a stereotype of their culture: Ernesto is firm at work, Ji-woo is weighing her own path.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>“Culture” can become a new stereotype. Labelling Ji-woo “collectivist” or Ernesto “high in respeto” can flatten them as much as “passive” did. People within one culture differ far more than cultural averages differ from each other, and individualism–collectivism maps whole countries onto one line.</p>' +
+                "<p><b>The counter.</b> Cultural concepts are questions to ask, not answers to assign. Used with humility, they help a counselor notice when a norm or a value might be misread, and then let the client say what is true for them.</p>" +
+                "<p>Background: M8 · Traits and the Big Five; M8 · Assessing personality; M5 · Testing intelligence fairly.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>WEIRD samples.</b> A giant lab only ever studies the same college sophomore, who wears a sweatshirt that says “Humanity.”</p>" +
+                "<p><b>Reference-group effect.</b> Two people measure their height against rulers that each country printed with its own starting point.</p>" +
+                "<p><b>Respeto misread.</b> A polite guest won’t contradict the host, and an assertiveness-training robot reads it as a “low battery” signal.</p>" +
+                "<p><b>Big Five across cultures.</b> The five-fish OCEAN aquarium ships to fifty countries; the fish mostly look the same, but a few tanks have a sixth, friendly fish.</p>" +
+                "<p><b>National character.</b> The citizens of a nation walk past a stereotype poster of themselves without recognizing anyone.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.6:teachback", title: "Teach it back", prompt: "Explain to the trainee why “passive” may be the wrong note for Ji-woo and Ernesto: individualism and collectivism (Hofstede, Triandis) and Markus and Kitayama’s independent and interdependent self-construal, with large variation within countries; the WEIRD critique; how far the Big Five replicates (McCrae and Terracciano) and the Tsimane challenge; emic versus etic approaches; indigenous constructs such as interpersonal relatedness, personalismo, familismo, respeto, simpatía and kapwa; the reference-group effect and response styles; why national stereotypes don’t match measured traits; acculturation and biculturalism; cultural humility versus competence; using fitting norms, asking what behaviour means and adapting treatment; and the critique that culture can become a new stereotype." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Independent and interdependent self-construal " + ev("r") + ". The WEIRD critique " + ev("r") + ". National stereotypes failing to match traits " + ev("r") + ". The Big Five as universal " + ev("c") + ". Culturally adapted treatment giving a modest benefit " + ev("r") + ".</p>" +
+                "<p><b>So:</b> a low score from a ruler built for someone else is a question, not a diagnosis; ask Ji-woo and Ernesto what their behaviour means before naming it.</p>" },
+              Q("The WEIRD critique (Henrich, Heine & Norenzayan, 2010) says most psychology research:",
+                ["Uses too few animals", "Comes from Western, Educated, Industrialized, Rich, Democratic samples", "Ignores college students", "Is done only in labs"], 1,
+                "A narrow slice of humanity, generalised to all."),
+              Q("Because people rate themselves against those around them, comparing countries’ average self-ratings can mislead. This is:",
+                ["The reference-group effect", "Acquiescence", "The Barnum effect", "Rater allegiance"], 0,
+                "Heine (2002): each country’s ruler starts in a different place."),
+              Q("Cheung’s Chinese Personality Assessment Inventory found an extra factor the Big Five misses:",
+                ["Interpersonal relatedness", "Neuroticism", "Locus of control", "Self-efficacy"], 0,
+                "An emic approach found harmony, face and relationships."),
+              Q("A Honduran client politely never disagrees with his counselor. A culturally humble counselor first:",
+                ["Starts assertiveness training", "Asks what that behaviour means to him, considering values like respeto", "Labels him passive", "Ignores culture entirely"], 1,
+                "Ask before labelling."),
+              Q("Terracciano and colleagues (2005) found that stereotypes of a nation’s typical personality:",
+                ["Match measured traits closely", "Do not match measured traits", "Are only true for older people", "Were never studied"], 1,
+                "The citizens don’t recognise themselves.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -20499,6 +20680,35 @@
           G("m8.4", "Explanatory style", "Estilo explicativo", "How you explain bad events.", "Peterson and Seligman’s idea that explaining bad events as personal, permanent and pervasive raises the risk of depression."),
           G("m8.4", "Vicarious experience", "Experiencia vicaria", "Seeing someone like you succeed.", "One of Bandura’s four sources of self-efficacy, alongside mastery experiences, verbal persuasion and physiological states."),
           G("m8.4", "Person–situation interaction", "Interacción persona–situación", "Behaviour depends on who and where.", "The view that behaviour comes from the person and the situation together, resolving the trait-versus-situation debate."),
+          G("m8.5", "MMPI", "MMPI", "The most-used clinical self-report inventory.", "The Minnesota Multiphasic Personality Inventory (1943; now MMPI-2 and MMPI-3), built by empirical criterion keying and including validity scales."),
+          G("m8.5", "Empirical criterion keying", "Selección empírica por criterio", "Keep items that tell groups apart.", "Building a test by keeping items that separate clinical groups from others, regardless of what the items seem to be about."),
+          G("m8.5", "Validity scales", "Escalas de validez", "Checks for faking or careless answers.", "Test scales, as in the MMPI, that flag faking good, faking bad and random responding."),
+          G("m8.5", "Social desirability bias", "Sesgo de deseabilidad social", "Answering to look good.", "The tendency to give self-report answers that present oneself favourably; strongest when stakes are high."),
+          G("m8.5", "Projective test", "Prueba proyectiva", "Ambiguous material meant to reveal hidden needs.", "Tests such as the Rorschach, TAT and drawings that assume people project inner conflicts onto ambiguous stimuli; many uses lack validity."),
+          G("m8.5", "Rorschach inkblot test", "Test de manchas de Rorschach", "Ten inkblots, interpreted.", "A projective test (1921) scored with Exner’s Comprehensive System or R-PAS; a few scales such as thought disorder hold up, most interpretations are contested."),
+          G("m8.5", "Thematic Apperception Test (TAT)", "Test de Apercepción Temática (TAT)", "Stories told about ambiguous pictures.", "Henry Murray’s projective test, in which people tell stories about pictures, read for needs and themes."),
+          G("m8.5", "Informant report", "Informe de informantes", "Ratings by people who know the person.", "Personality ratings from family, friends or coworkers, which add accuracy beyond self-report."),
+          G("m8.5", "Structured clinical interview", "Entrevista clínica estructurada", "Set questions, set order, set scoring.", "An interview such as the SCID that follows fixed questions and rules; more reliable than an unstructured interview."),
+          G("m8.5", "PCL-R", "PCL-R", "The standard psychopathy checklist.", "Robert Hare’s Psychopathy Checklist–Revised, scored from a structured interview plus file review; often misused in court."),
+          G("m8.5", "Rater allegiance", "Lealtad del evaluador", "Scores drift toward the side that hired you.", "The finding (Murrie and colleagues, 2013) that forensic evaluators give scores favouring the side that retained them."),
+          G("m8.5", "Multi-method assessment", "Evaluación multimétodo", "Several methods, one converging conclusion.", "Combining self-report, others’ reports, records and observation, and trusting conclusions where they agree."),
+          G("m8.6", "Individualism", "Individualismo", "Personal goals and uniqueness first.", "A cultural emphasis on independence, personal achievement and self-expression (Hofstede, Triandis)."),
+          G("m8.6", "Collectivism", "Colectivismo", "Group harmony and duty first.", "A cultural emphasis on family, group goals, harmony and obligations to others."),
+          G("m8.6", "Independent self-construal", "Autoconcepto independiente", "A self defined by inner traits.", "Markus and Kitayama’s (1991) term for seeing oneself as separate and defined by one’s own attributes."),
+          G("m8.6", "Interdependent self-construal", "Autoconcepto interdependiente", "A self defined by relationships.", "Markus and Kitayama’s (1991) term for seeing oneself through relationships, roles and group membership."),
+          G("m8.6", "Emic approach", "Enfoque émico", "Concepts built from inside a culture.", "Studying a culture with concepts and measures developed within it, rather than imported."),
+          G("m8.6", "Etic approach", "Enfoque ético", "One measure tested across cultures.", "Studying cultures with concepts assumed to be universal, such as testing the Big Five everywhere."),
+          G("m8.6", "Interpersonal relatedness", "Relacionalidad interpersonal", "Harmony, face and relationships.", "A personality factor found by Cheung’s Chinese Personality Assessment Inventory that the Big Five does not capture."),
+          G("m8.6", "Personalismo", "Personalismo", "Warm, personal relationships.", "A Latino value preferring personal, trusting relationships over formal, impersonal ones."),
+          G("m8.6", "Familismo", "Familismo", "Family comes first.", "A Latino value of loyalty, closeness and obligation to family."),
+          G("m8.6", "Respeto", "Respeto", "Deference to elders and authority.", "A Latino value of showing respect to elders, hosts and professionals; can be misread as passivity."),
+          G("m8.6", "Simpatía", "Simpatía", "Keeping interactions pleasant.", "A Latino value of warmth and avoiding conflict in social interactions."),
+          G("m8.6", "Kapwa", "Kapwa", "A shared self with others.", "A core concept in Filipino psychology: the self as shared with and connected to others."),
+          G("m8.6", "Reference-group effect", "Efecto del grupo de referencia", "Rating yourself against those around you.", "Because self-ratings compare with local norms, cross-country comparisons of average self-ratings can mislead (Heine 2002)."),
+          G("m8.6", "Acquiescence", "Aquiescencia", "A tendency to agree.", "A response style of agreeing with items regardless of content; varies across cultures."),
+          G("m8.6", "Extreme responding", "Respuesta extrema", "Picking the ends of the scale.", "A response style of choosing the most extreme options; varies across cultures and shifts scores."),
+          G("m8.6", "Cultural humility", "Humildad cultural", "Ongoing curiosity about the client’s culture.", "Hook and colleagues (2013): an open, other-centred stance toward a client’s cultural identity, rather than fixed knowledge about groups."),
+          G("m8.6", "Biculturalism", "Biculturalismo", "Living skilfully in two cultures.", "Identifying with and moving between two cultures, often switching frames by setting."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -21197,6 +21407,18 @@
             R("Mischel & Shoda", 1995, "observational", "Children at a summer camp showed stable if…then signatures, such as aggression when warned by adults but not peers; the basis of CAPS.", st("robust", "If…then consistency has been found in other settings.")),
             R("Watts, Duncan & Quan", 2018, "observational", "A larger, more diverse replication of the marshmallow test found much smaller links to later achievement once family background was controlled.", st("contested", "Delay ability is not destiny; delay strategies themselves still help.")),
             R("Maier & Seligman", 2016, "review", "Revised learned helplessness: passivity is the default response to prolonged aversive events, and what is learned is control.", st("robust", "Grounded in later neuroscience findings."))];
+          REFS["m8.5"] = [
+            R("Hathaway & McKinley", 1943, "observational", "Built the MMPI by empirical criterion keying, with validity scales to detect faking and careless answering.", st("robust", "Validity scales in the MMPI-2 and MMPI-3 reliably detect faking good and bad.")),
+            R("Lilienfeld, Wood & Garb", 2000, "review", "Reviewed projective techniques: a few Rorschach scales have support, but many projective uses, including drawings, lack validity.", st("robust", "Projective drawings as clinical tools are largely debunked; most Rorschach uses remain contested.")),
+            R("Hare", 1991, "observational", "Introduced the Psychopathy Checklist–Revised, scored from a structured interview plus file review.", st("contested", "A standard research measure; its use in court is often criticised.")),
+            R("Murrie et al.", 2013, "experiment", "Forensic evaluators scored the same files higher on psychopathy when they believed the prosecution, rather than the defense, had hired them.", st("robust", "Rater allegiance fits field data on adversarial evaluations.")),
+            R("First et al.", 2015, "review", "The Structured Clinical Interview for DSM (SCID): fixed questions and scoring rules for diagnosis, more reliable than unstructured interviews.", st("robust", "Structured interviews consistently beat unstructured ones on reliability."))];
+          REFS["m8.6"] = [
+            R("Markus & Kitayama", 1991, "review", "Distinguished independent and interdependent self-construals and their effects on thought, emotion and motivation.", st("robust", "Holds overall; variation within countries is large.")),
+            R("Henrich, Heine & Norenzayan", 2010, "review", "Most psychology samples are Western, Educated, Industrialized, Rich and Democratic, and these people are unusual on many measures.", st("robust", "A widely accepted critique driving more diverse sampling.")),
+            R("McCrae & Terracciano", 2005, "observational", "Peer ratings in dozens of cultures reproduced the Big Five structure.", st("contested", "Replicates widely; Gurven and colleagues (2013) found a less clear structure among Tsimane foragers.")),
+            R("Terracciano et al.", 2005, "observational", "Beliefs about national character across many cultures did not match the measured personality traits of those nations’ people.", st("robust", "National stereotypes are poor guides to individuals or averages.")),
+            R("Hook et al.", 2013, "observational", "Defined and measured cultural humility; clients who saw their therapist as culturally humble reported stronger alliance and better progress.", st("contested", "A promising construct; the evidence base is still growing. Culturally adapted treatments show a modest benefit (Hall et al., 2016)."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
