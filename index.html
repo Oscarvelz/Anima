@@ -17070,6 +17070,198 @@
                 "Dropping the home language isn’t recommended; a fair assessment counts both languages.")
             ]
           },
+          "m5.5": {
+            home: "Kevin, 19, failed school and says “I’m just stupid”, yet he keeps the commissary books in his head and can fix any engine. What is intelligence, and is he right?",
+            keys: [["What is Spearman’s g?", "Spearman (1904) noticed that people who do well on one mental test tend to do well on others, a pattern called the positive manifold. He named the shared factor g, general intelligence. The pattern is robust.", "A general named “g” in a tiny hat who turns up at every classroom quiz, maths, words and puzzles alike, and quietly helps a little with all of them."],
+              ["What is the difference between fluid and crystallized intelligence?", "Fluid intelligence is reasoning with new problems; it peaks in early adulthood. Crystallized intelligence is knowledge and skills built up over time; it keeps growing into later adulthood (Cattell–Horn–Carroll model).", "A fresh pineapple, quick and zingy, at its best when young, beside a jar of pineapple jam whose flavour keeps getting richer as the years go by."],
+              ["What does the Flynn effect show?", "IQ test scores rose across generations in many countries during the twentieth century. The rise was too fast to be genetic, so environment (schooling, health, nutrition, complex daily life) must matter.", "Grandparents standing a little shorter in IQ than their grandkids, the whole family on a staircase that rises every decade, too fast for genes to climb."],
+              ["Is matching teaching to “learning styles” supported?", "No. Gardner’s multiple intelligences is popular in schools but has weak support as separate intelligences, and teaching to a preferred learning style does not improve learning (Pashler et al., 2008). Largely debunked.", "A teacher sorting children into a “seeing” lane, a “hearing” lane and a “doing” lane, and a referee with a stopwatch showing every lane finishes the lesson in the same time."],
+              ["What does heritability tell you, and what doesn’t it?", "Heritability describes how much of the variation within a group is linked to genetic differences, in that environment. It rises with age. It says nothing about one person’s destiny, and nothing about why groups differ.", "Two pots of the same mixed seeds, one in rich soil and one in poor: within each pot the seeds differ by their genes, but the gap between pots is all soil."]],
+            steps: [
+              { kind: "hook", title: "Kevin’s verdict on himself", body: who("<b>Kevin</b>, 19, in a reentry program, at his first counseling session.") +
+                "<p>Asked about goals, he shrugs: “I’m just stupid. I failed school.” He left in tenth grade after years of being held back.</p>" +
+                "<p>Staff say he ran the commissary books inside without writing anything down, and the program’s van mechanic calls him when he’s stuck.</p>" +
+                "<p>He doesn’t think any of that counts. Is he right about himself?</p>" },
+              { kind: "predict", id: "m5.5:predict", title: "Your call first",
+                case: ["Kevin failed and left school in tenth grade.",
+                  { t: "He wears a grey hoodie most days.", irrelevant: true },
+                  "He was moved between five schools and often missed class.",
+                  "He keeps running totals of the commissary books in his head, accurately.",
+                  "He diagnoses and fixes engine faults others can’t.",
+                  { t: "He prefers coffee to tea.", irrelevant: true },
+                  "He was never assessed for a reading difficulty."],
+                q: "Is Kevin’s school failure good evidence that he has low intelligence?",
+                options: ["Yes: school grades are the best measure of intelligence", "No: school failure has many causes, and he shows strong reasoning and learning elsewhere", "Yes, because he says so himself"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. School results reflect intelligence <b>and</b> attendance, instability, teaching, reading difficulties and much else. Kevin’s mental arithmetic and fault-finding show learning, reasoning and adapting, which is what intelligence means. A missed reading assessment is a red flag worth following up.",
+                hints: ["Ask what else could explain failing school.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what intelligence is, then check whether Kevin shows it anywhere."] },
+              { kind: "idea", lvl: "f", title: "One ability or many?", body: '<dl class="x-dossier"><div><dt>What intelligence means</dt><dd>Most definitions agree on the ability to <b>learn</b> from experience, <b>reason</b> and solve problems, and <b>adapt</b> to new situations.</dd></div>' +
+                "<div><dt>Spearman’s g</dt><dd>Spearman (1904): people who do well on one kind of mental test tend to do well on others, the <b>positive manifold</b>. He called the shared factor <b>g</b>, general intelligence " + ev("r") + ".</dd></div>" +
+                "<div><dt>Thurstone</dt><dd>Argued for several <b>primary mental abilities</b>, such as verbal comprehension, number, spatial ability, memory and reasoning. Later work found these abilities still correlate, so g sits above them.</dd></div>" +
+                "<div><dt>Cattell–Horn–Carroll (CHC)</dt><dd>Today’s main model: g at the top, broad abilities beneath, narrow skills below. Two broad ones matter most here: <b>fluid</b> intelligence, reasoning with new problems, peaks in early adulthood; <b>crystallized</b> intelligence, knowledge and skills, keeps growing into later adulthood " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> intelligence has a general core and many specific strengths, and the two kinds change differently across life.</p>" },
+              { kind: "idea", lvl: "p", title: "Bigger tents: Gardner, Sternberg and emotional intelligence", body: '<dl class="x-dossier"><div><dt>Gardner’s multiple intelligences</dt><dd>Gardner (1983) proposed separate intelligences, such as linguistic, logical-mathematical, spatial, musical, bodily-kinesthetic, interpersonal and intrapersonal. Hugely popular in schools, but weak evidence that they are independent intelligences rather than talents that mostly share g ' + ev("c") + ".</dd></div>" +
+                "<div><dt>Learning styles</dt><dd>The idea that teaching should match a “visual” or “auditory” learner is " + ev("d") + ": Pashler and colleagues (2008) found no good evidence that matching improves learning. It is not Gardner’s own claim.</dd></div>" +
+                "<div><dt>Sternberg’s triarchic theory</dt><dd><b>Analytic</b> (school-style problem solving), <b>creative</b> (handling novelty) and <b>practical</b> (getting things done in real life) intelligence; later called successful intelligence. Influential; whether practical intelligence is separate from g is " + ev("c") + ".</dd></div>" +
+                "<div><dt>Emotional intelligence</dt><dd>Mayer and Salovey (1990): perceiving, using, understanding and managing emotions. <b>Ability</b> EI can be measured with tests; popular claims that EI matters more than IQ are overstated " + ev("c") + ".</dd></div></dl>" +
+                "<p><b>So:</b> broader theories capture real human strengths, but the evidence for them as separate intelligences is thinner than their popularity suggests.</p>" },
+              { kind: "contrast", id: "m5.5:contrast", title: "Twins apart, one difference",
+                q: "Two identical twins were adopted into different homes as babies. As adults, which one is more likely to score higher on an IQ test?",
+                cases: [
+                  { label: "Twin A", s: ["Same genes as his brother; healthy and well fed growing up.", { t: "Supports a different football team.", irrelevant: true }, { t: "Went to an underfunded school with frequent teacher turnover and left early.", diff: true }, "Loving adoptive family, similar income."] },
+                  { label: "Twin B", s: ["Same genes as his brother; healthy and well fed growing up.", { t: "Supports a different football team.", irrelevant: true }, { t: "Went to a well-run school and stayed several years longer.", diff: true }, "Loving adoptive family, similar income."] }
+                ],
+                answer: 1,
+                features: ["The football team", "Quality and length of schooling", "Their genes", "Family warmth"],
+                feature: 1,
+                why: "Their genes are identical, so any gap comes from environment, and schooling is the one thing that differs. Each extra year of schooling raises IQ scores (Ritchie and Tucker-Drob, 2018). Yet twins raised apart still resemble each other more than strangers do. Genes and environment both matter.",
+                hints: ["Find the one sentence where the two twins part ways.",
+                  "The sentences that don’t decide it are dimmed. Their genes are the same; what isn’t?",
+                  "Step one, aloud: say what schooling does to test scores."] },
+              { kind: "idea", lvl: "m", title: "Nature, nurture and the clinic", body: '<dl class="x-dossier"><div><dt>Heritability</dt><dd>Twin and adoption studies show IQ is substantially heritable, and heritability <b>rises with age</b> ' + ev("r") + ". But it describes variation <b>within a group</b> in a given environment. It is not a person’s destiny, and it says nothing about why groups differ.</dd></div>" +
+                "<div><dt>Environment matters</dt><dd>Children adopted into more advantaged homes score higher than they otherwise would; schooling raises IQ (Ritchie and Tucker-Drob, 2018) " + ev("r") + ".</dd></div>" +
+                "<div><dt>The Flynn effect</dt><dd>Scores rose across generations in many countries, so test norms had to be reset. Far too fast to be genetic " + ev("r") + "; the causes (schooling, health, nutrition, more abstract daily life) are " + ev("c") + ".</dd></div>" +
+                "<div><dt>Group differences</dt><dd>Average score gaps between groups exist on some tests, have narrowed over time, and track differences in schooling, income, health, discrimination and test familiarity. Nothing in the evidence shows any group is innately less intelligent.</dd></div>" +
+                "<div><dt>Growth mindset</dt><dd>Dweck: believing ability can grow helps learning. Large replications found small average effects, larger for struggling students (Sisk et al., 2018) " + ev("c") + ".</dd></div>" +
+                "<div><dt>In practice</dt><dd>Challenge a global “I’m stupid” with <b>specific</b> strengths. Adapt materials to reading level without talking down. Screen for <b>learning disability</b> and <b>traumatic brain injury</b>, both common among justice-involved clients.</dd></div></dl>" +
+                "<p><b>So:</b> genes and environment both shape intelligence, and neither writes one person’s future.</p>" },
+              { kind: "example", lvl: "p", title: "Kevin, with evidence", body: who("<b>Kevin</b> and his counselor, two sessions later.") +
+                '<dl class="x-dossier"><div><dt>Test the belief</dt><dd>“Stupid people can’t track a hundred items in their heads. What does it take to do that?” Kevin: “Remembering. Math, I guess.”</dd></div>' +
+                "<div><dt>Name the strengths</dt><dd>Mental arithmetic and working memory; fluid reasoning when he traces an engine fault; practical intelligence in getting things done.</dd></div>" +
+                "<div><dt>Find the real snag</dt><dd>A screening suggests a reading difficulty, never assessed, and a head injury at 15. Both referred for proper assessment.</dd></div>" +
+                "<div><dt>Adapt, don’t dumb down</dt><dd>Worksheets rewritten in plain language, with diagrams; the goals are his own: a mechanic’s certificate.</dd></div></dl>" +
+                "<p>“So I’m not stupid,” Kevin says. “I just couldn’t read the stuff they gave me.” “That’s a lot closer to the evidence,” his counselor says.</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Definitions of intelligence are culture-bound: what counts as smart (speed, abstract reasoning, school knowledge) reflects the societies that wrote the tests. Tests capture some abilities well, such as reasoning, vocabulary and memory, and others poorly, such as wisdom, creativity and practical skill. The g factor is a robust statistical pattern, but what causes it is still debated.</p>' +
+                "<p><b>The counter.</b> Within the cultures they were built for, IQ tests predict school performance and some job outcomes well, and the positive manifold appears in every large battery of tests. A useful, limited measure beats no measure, so long as it is used as one piece of evidence.</p>" +
+                "<p><b>Person-first.</b> Say “a client with a learning disability” or “a client who left school early”, never “low-IQ client”.</p>" +
+                "<p>Background: M2 · heritability; M5 · How language develops. Ahead: Testing intelligence fairly.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Spearman’s g.</b> A general named “g” in a tiny hat turns up at every quiz, maths, words and puzzles alike.</p>" +
+                "<p><b>Fluid and crystallized.</b> A fresh pineapple, best when young, beside a jar of pineapple jam that only gets richer with age.</p>" +
+                "<p><b>The Flynn effect.</b> Grandparents a little shorter in IQ than their grandkids, on a staircase rising every decade, too fast for genes to climb.</p>" +
+                "<p><b>Learning styles.</b> Children sorted into seeing, hearing and doing lanes, and the referee’s stopwatch shows every lane finishing together.</p>" +
+                "<p><b>Heritability.</b> Two pots of the same mixed seeds: within a pot, the genes; between the pots, the soil.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.5:teachback", title: "Teach it back", prompt: "Explain to Kevin and a new colleague why failing school doesn’t prove he’s stupid, and what intelligence is: learning, reasoning and adapting; Spearman’s g and the positive manifold; Thurstone’s primary mental abilities; the Cattell–Horn–Carroll model with fluid intelligence peaking early and crystallized intelligence growing into later adulthood; Gardner’s multiple intelligences and their weak support; why matching teaching to learning styles is debunked (Pashler); Sternberg’s analytic, creative and practical intelligence; ability emotional intelligence and overstated popular claims; heritability rising with age but describing variation within a group, not individual destiny or group differences; adoption studies and schooling raising IQ (Ritchie and Tucker-Drob); the Flynn effect as too fast to be genetic; growth mindset’s small average effects (Sisk); challenging global beliefs with specific strengths, adapting materials without talking down, and screening for learning disability and brain injury; and the critique that definitions are culture-bound and tests capture wisdom and creativity poorly." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Positive manifold and g " + ev("r") + ". Fluid peaks early, crystallized keeps growing " + ev("r") + ". Multiple intelligences as separate intelligences " + ev("c") + ". Learning-styles matching " + ev("d") + ". Practical intelligence as separate from g " + ev("c") + ". Popular emotional-intelligence claims " + ev("c") + ". Heritability rising with age " + ev("r") + ". Schooling raises IQ " + ev("r") + ". Flynn effect " + ev("r") + "; its causes " + ev("c") + ". Growth-mindset interventions " + ev("c") + ".</p>" +
+                "<p><b>So:</b> when a client says “I’m stupid”, look for the specific strengths and the real obstacles, because intelligence is broader than school and shaped by both genes and environment.</p>" },
+              Q("People who do well on one kind of mental test tend to do well on others. What is this pattern called?",
+                ["The Flynn effect", "The positive manifold", "Crystallized intelligence", "Stereotype threat"], 1,
+                "Spearman (1904) described the positive manifold and named the shared factor g."),
+              Q("Which kind of intelligence keeps growing into later adulthood?",
+                ["Fluid intelligence", "Crystallized intelligence", "Emotional intelligence", "Primary mental ability"], 1,
+                "In the Cattell–Horn–Carroll model, fluid reasoning peaks earlier, while knowledge and skills keep growing."),
+              Q("IQ scores rose across generations in many countries. Why is this strong evidence that environment matters?",
+                ["Because genes changed quickly", "Because the rise was too fast to be genetic", "Because the tests got easier each year", "Because only rich countries showed it"], 1,
+                "Gene pools don’t change that fast; schooling, health and daily life do."),
+              Q("What does a high heritability of IQ in a group mean?",
+                ["Each person’s IQ is fixed at birth", "Differences between groups are genetic", "Much of the variation within that group, in that environment, is linked to genetic differences", "Schooling can’t change IQ"], 2,
+                "Heritability describes variation within a group; it isn’t individual destiny and doesn’t explain group differences."),
+              Q("A teacher plans to teach “visual learners” only with pictures. What does the evidence say?",
+                ["It reliably improves learning", "Matching teaching to learning styles has no good supporting evidence", "It only works for crystallized intelligence", "It is required by Gardner’s theory"], 1,
+                "Pashler and colleagues (2008) found no good evidence that matching instruction to learning style improves learning.")
+            ]
+          },
+          "m5.6": {
+            home: "Ana, 30, from Honduras, with three years of schooling, was given an English-language IQ test in jail by a rushed evaluator. The score is now used to say she can’t benefit from counseling. Is that fair?",
+            keys: [["Why did Binet and Simon build the first intelligence test?", "In 1905, to find French schoolchildren who needed extra help, not to rank people’s fixed worth. Later users, such as Goddard in the eugenics movement, turned it into a ranking tool.", "Alfred Binet as a school nurse holding a thermometer labelled “Who needs extra help?”, and someone later grabbing it to use as a ruler for ranking people."],
+              ["How can language and culture make a test unfair?", "A test given in a language the person doesn’t speak well, or built on schooling and test habits they never had, measures those gaps rather than ability. Test in the person’s language with appropriate norms.", "A fish who swims beautifully being handed an English-only tree-climbing exam, while the examiner writes “low ability” instead of noticing the exam was for squirrels."],
+              ["What does a diagnosis of intellectual disability require?", "Under DSM-5, both limits in intellectual functioning and limits in adaptive functioning (everyday living skills), with onset during the developmental period. A low score alone is not enough.", "A two-key safe labelled “Intellectual Disability” that only opens when both the “thinking limits” key and the “everyday-living limits” key are turned together."],
+              ["What is the difference between reliability and validity?", "Reliability is consistency: the test gives similar results each time. Validity is whether it measures what it claims to and predicts what it should. A test can be reliable but not valid.", "A bathroom scale that shows exactly the same number every morning, and a cat pointing out that it’s measuring the weight of your slippers, not you."],
+              ["What did Hall v. Florida (2014) decide?", "The US Supreme Court struck down Florida’s rigid IQ cutoff for intellectual disability in death-penalty cases, because every score has a margin of error and adaptive functioning must also be considered.", "A judge rubbing out a hard painted line on a measuring tape and replacing it with a soft, fuzzy band, then handing the evaluator a second tape for everyday life."]],
+            steps: [
+              { kind: "hook", title: "Ana’s score", body: who("<b>Ana</b>, 30, from Honduras, in a jail mental-health unit.") +
+                "<p>Ana went to school for three years. She speaks Spanish; her English is limited. She raised three younger siblings and ran a market stall.</p>" +
+                "<p>A rushed evaluator gave her an English-language IQ test with no interpreter. Her score was low, and the report concludes: “Unlikely to benefit from counseling.”</p>" +
+                "<p>She has been taken off the counseling waitlist. Does that score tell us what Ana can do?</p>" },
+              { kind: "idea", lvl: "f", title: "Where IQ tests came from", body: '<dl class="x-dossier"><div><dt>Binet and Simon, 1905</dt><dd>Asked by the French government to find schoolchildren who needed <b>extra help</b>. Binet warned against treating the score as a fixed measure of worth.</dd></div>' +
+                "<div><dt>Terman’s Stanford-Binet</dt><dd>Terman adapted the test in the US (1916) and popularised the <b>IQ</b>. He also believed it measured fixed, inborn ability.</dd></div>" +
+                "<div><dt>Army Alpha and Beta</dt><dd>Group tests given to US soldiers in World War I: Alpha in written English, Beta in pictures for those who couldn’t read English. Results were later misread as proof of fixed group differences, ignoring schooling and time in the country.</dd></div>" +
+                "<div><dt>Misuse in eugenics</dt><dd>Goddard tested arriving immigrants at Ellis Island, often in English or through poor translation, and labelled many “feeble-minded”. The 1924 Immigration Act restricted immigration from southern and eastern Europe, with eugenic arguments in the debate. In <b>Buck v. Bell</b> (1927) the Supreme Court upheld the forced sterilization of Carrie Buck; tens of thousands were sterilized under such laws.</dd></div></dl>" +
+                "<p><b>So:</b> the first test was built to help; history shows what happens when a score is treated as fixed worth and used against people.</p>" },
+              { kind: "predict", id: "m5.6:predict", title: "Your call first",
+                case: ["Ana took an IQ test in English, a language she speaks little.",
+                  { t: "The test room had a broken clock.", irrelevant: true },
+                  "There was no interpreter.",
+                  "She had three years of schooling and had never taken a timed test.",
+                  "The norms came from US adults educated in English.",
+                  { t: "She likes to draw flowers.", irrelevant: true },
+                  "She has run a market stall and raised three siblings."],
+                q: "Does Ana’s score show her true ability?",
+                options: ["Yes: an IQ score is objective", "No: it mostly reflects language, schooling and test familiarity, so it can’t stand alone", "Yes, if the test was a well-known one"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. A test in a language she barely speaks, with norms from people unlike her, measures her English and her schooling as much as her reasoning. Her everyday life shows adaptive skill. The score can’t be read alone, and it shouldn’t decide her care.",
+                hints: ["Ask what the test would measure if you took it in a language you barely know.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say who the norms were built from."] },
+              { kind: "idea", lvl: "f", title: "What a good test needs", body: '<dl class="x-dossier"><div><dt>Standardization</dt><dd>Everyone gets the same questions, instructions, timing and scoring, so scores can be compared.</dd></div>' +
+                "<div><dt>Norms</dt><dd>Scores are compared with a large sample of similar people. IQ tests are scaled so the average is <b>100</b>; norms must match the person tested, and they age as the Flynn effect pushes scores up.</dd></div>" +
+                "<div><dt>Reliability</dt><dd>Consistency: similar results on another day or another version.</dd></div>" +
+                "<div><dt>Validity</dt><dd>Measuring what it claims to, and predicting what it should.</dd></div>" +
+                "<div><dt>Today’s tests</dt><dd>The <b>WAIS</b> for adults and the <b>WISC</b> for children, Wechsler scales giving a full-scale IQ and index scores such as verbal comprehension and working memory.</dd></div>" +
+                "<div><dt>What IQ predicts</dt><dd>School performance well, and some job outcomes " + ev("r") + ". It predicts less about wisdom, creativity, kindness, motivation or whether someone can use therapy.</dd></div></dl>" +
+                "<p><b>So:</b> a good test is standardized, normed on people like the test-taker, consistent and accurate, and even then it measures only part of a person.</p>" },
+              { kind: "idea", lvl: "p", title: "Bias, culture and threat", body: '<dl class="x-dossier"><div><dt>Test bias versus group differences</dt><dd>A different average score is not itself proof of bias. Modern major tests often predict outcomes about equally well across groups ' + ev("r") + ". Yet a test can still disadvantage people through language, schooling and test familiarity, which no prediction check fixes.</dd></div>" +
+                "<div><dt>Culture-fair attempts</dt><dd>Raven’s Progressive Matrices use shapes, not words. They are still affected by schooling, and the Flynn effect is largest on them. No test is culture-free.</dd></div>" +
+                "<div><dt>Stereotype threat</dt><dd>Steele and Aronson (1995): Black students did worse on a hard verbal test when it was framed as measuring ability. The effect is real in some studies, but larger replications are mixed and it may be smaller than first thought " + ev("c") + ".</dd></div>" +
+                "<div><dt>Larry P. v. Riles</dt><dd>A California court (1979) found IQ tests had contributed to Black students being placed in classes for “educable mentally retarded” students at far higher rates, and barred their use for that placement.</dd></div></dl>" +
+                "<p><b>So:</b> fairness takes more than a test that predicts equally well; it needs attention to who was tested, how and in what language.</p>" },
+              { kind: "contrast", id: "m5.6:contrast", title: "Same score, one difference",
+                q: "Both clients got the same low score. Whose score is more trustworthy as a picture of their ability?",
+                cases: [
+                  { label: "Client A", s: ["Spanish-speaking adult with limited schooling.", { t: "Tested on a Tuesday.", irrelevant: true }, { t: "Tested in English with US English-speaking norms, no interpreter.", diff: true }, "Same low score; same jail unit."] },
+                  { label: "Client B", s: ["Spanish-speaking adult with limited schooling.", { t: "Tested on a Tuesday.", irrelevant: true }, { t: "Tested in Spanish with norms for Spanish speakers of similar education.", diff: true }, "Same low score; same jail unit."] }
+                ],
+                answer: 1,
+                features: ["The day of the week", "The language and norms of the test", "Their schooling", "The setting"],
+                feature: 1,
+                why: "Only the language and norms differ. Client A’s score is mixed up with English skill and an unfair comparison group, so it says little. Client B’s score is more trustworthy, though still one piece of evidence beside education, acculturation and everyday functioning.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. Same score; ask how each was reached.",
+                  "Step one, aloud: say who each client is being compared with."] },
+              { kind: "idea", lvl: "m", title: "Diagnosis, the law and best practice", body: '<dl class="x-dossier"><div><dt>Intellectual disability (DSM-5)</dt><dd>Requires <b>both</b> deficits in intellectual functioning <b>and</b> deficits in adaptive functioning (conceptual, social and practical everyday skills), with onset during the developmental period. Severity is set by adaptive functioning, not the score.</dd></div>' +
+                "<div><dt>Atkins v. Virginia (2002)</dt><dd>The US Supreme Court ruled that executing people with intellectual disability is unconstitutional.</dd></div>" +
+                "<div><dt>Hall v. Florida (2014)</dt><dd>Florida had used a rigid cutoff: a score above 70 ended the inquiry. The Court struck it down, because every score has a margin of error and adaptive functioning must be weighed. For Florida practitioners, this shapes how evaluations in capital cases must be done.</dd></div>" +
+                "<div><dt>Best practice</dt><dd>Test in the person’s <b>language</b>, with <b>appropriate norms</b>; use trained <b>interpreters</b>, not family or other inmates; consider education and <b>acculturation</b>; treat the score as <b>one piece</b> of evidence.</dd></div>" +
+                "<div><dt>In practice</dt><dd>Counseling helps people across the IQ range when delivery is adapted: plainer language, shorter sessions, more repetition, visuals. Don’t gatekeep services by IQ.</dd></div></dl>" +
+                "<p><b>So:</b> a score never diagnoses, and never decides who deserves help.</p>" },
+              { kind: "example", lvl: "p", title: "Ana, assessed again", body: who("<b>Ana</b> and a bilingual psychologist, with a Spanish interpreter on standby.") +
+                '<dl class="x-dossier"><div><dt>Language and norms</dt><dd>A Spanish-language test normed on Spanish speakers, with her three years of schooling noted in the report.</dd></div>' +
+                "<div><dt>Adaptive functioning</dt><dd>She managed a stall’s money and stock, raised siblings, and navigates the jail’s rules well: no sign of everyday-living limits.</dd></div>" +
+                "<div><dt>Conclusion</dt><dd>Limited formal education, not intellectual disability. The earlier report’s conclusion is withdrawn.</dd></div>" +
+                "<div><dt>Care</dt><dd>Back on the counseling waitlist, with a Spanish-speaking counselor and handouts in plain Spanish.</dd></div></dl>" +
+                "<p>“They tested my English,” Ana says, “not me.” “Yes,” the psychologist says. “And now we have.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>IQ is useful and limited. It predicts school and some work outcomes, yet it was built within particular cultures, misses much of what people can do, and has been used to sterilize, exclude and segregate. And fairness is partly a <b>values</b> question, not only a statistical one: a test can predict equally well for every group and still be unfair if it shuts people out of help they could use.</p>' +
+                "<p><b>The counter.</b> Without standardized tests, decisions fall back on impressions, which are often more biased. Used well, in the right language with the right norms and alongside adaptive functioning, tests protect people, as in Atkins and Hall.</p>" +
+                "<p><b>Person-first.</b> Write “a person with an intellectual disability” and “a client with limited formal schooling”, never “retarded” or “low-functioning”.</p>" +
+                "<p>Background: M0 · Reliability and validity; M5 · Theories of intelligence. Ahead: the next module.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Binet’s purpose.</b> Binet the school nurse with a thermometer saying “Who needs extra help?”, later grabbed and used as a ranking ruler.</p>" +
+                "<p><b>Language and culture bias.</b> A graceful swimmer of a fish handed an English-only tree-climbing exam, while the examiner writes “low ability” about the wrong thing.</p>" +
+                "<p><b>Intellectual disability.</b> A two-key safe that opens only with both the “thinking limits” key and the “everyday-living limits” key.</p>" +
+                "<p><b>Reliability versus validity.</b> A scale that reads the same every morning, while the cat points out it’s weighing your slippers.</p>" +
+                "<p><b>Hall v. Florida.</b> A judge rubs out a hard painted line on the tape and draws a fuzzy band, then hands over a second tape for everyday life.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m5.6:teachback", title: "Teach it back", prompt: "Explain to a colleague why Ana’s first score shouldn’t decide her care, and how to test intelligence fairly: Binet and Simon’s purpose of finding children who needed help; Terman’s Stanford-Binet; Army Alpha and Beta; Goddard at Ellis Island, the 1924 Immigration Act and Buck v. Bell; standardization, norms with an average of 100, reliability and validity; the WAIS and WISC; what IQ predicts and what it doesn’t; test bias versus group differences, and how language, schooling and test familiarity can disadvantage people even when prediction is equal; Raven’s matrices and why no test is culture-free; stereotype threat (Steele and Aronson) and its mixed replications; the DSM-5 requirement of both intellectual and adaptive limits with developmental onset; Atkins v. Virginia, Hall v. Florida and Larry P. v. Riles; best practice with language, norms, interpreters, education and acculturation; adapting counseling instead of gatekeeping by IQ; and the critique that IQ is useful but limited and fairness is partly a values question." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>IQ predicts school performance " + ev("r") + ". Major tests predicting about equally well across groups " + ev("r") + ". Culture-free testing " + ev("d") + ". Stereotype threat " + ev("c") + ". Flynn effect, largest on Raven’s " + ev("r") + ". Diagnosis of intellectual disability needs adaptive limits too: settled in DSM-5 and in law.</p>" +
+                "<p><b>So:</b> test in the person’s language with the right norms, read the score as one piece, and never use it to shut someone out of help.</p>" },
+              Q("Why did Binet and Simon create the first intelligence test in 1905?",
+                ["To rank immigrants", "To find schoolchildren who needed extra help", "To select army officers", "To prove intelligence was inherited"], 1,
+                "Binet built it to identify children needing support and warned against treating scores as fixed worth."),
+              Q("A test gives almost the same score each time a person takes it, but it mostly measures English vocabulary rather than reasoning. The test is:",
+                ["Valid but not reliable", "Reliable but not valid for reasoning", "Neither reliable nor valid", "Both reliable and valid"], 1,
+                "Consistency is reliability; measuring the intended ability is validity."),
+              Q("Under DSM-5, which is required for a diagnosis of intellectual disability?",
+                ["A low IQ score alone", "Limits in intellectual and adaptive functioning, with onset during development", "Limits in adaptive functioning alone", "Failing school"], 1,
+                "Both kinds of limits are needed, beginning in the developmental period."),
+              Q("What did the Supreme Court decide in Hall v. Florida (2014)?",
+                ["States may execute people with intellectual disability", "A rigid IQ cutoff can’t end the inquiry, given measurement error and adaptive functioning", "IQ tests can’t be used in court", "Raven’s matrices must be used for all defendants"], 1,
+                "The Court struck down Florida’s strict cutoff, building on Atkins v. Virginia (2002)."),
+              Q("Ana’s low English-language score was used to deny her counseling. What is the best response?",
+                ["Accept the score; tests are objective", "Retest in Spanish with appropriate norms, assess adaptive functioning, and offer adapted counseling regardless", "Retest in English with more time", "Refer her only to medication"], 1,
+                "Fair testing uses the person’s language and fitting norms, and counseling works across the IQ range when adapted.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -18655,6 +18847,28 @@
           G("m5.4", "Telegraphic speech", "Habla telegráfica", "Two-word sentences like “more juice”.", "Early speech around age 2 made of content words with function words and endings left out."),
           G("m5.4", "Perceptual narrowing", "Estrechamiento perceptivo", "Babies tune in to their home languages.", "The decline, by about 10–12 months, in infants’ ability to discriminate speech sounds not used in their native languages (Werker and Tees, 1984)."),
           G("m5.4", "Linguistic relativity", "Relatividad lingüística", "Language may shape thought a little.", "The Sapir–Whorf idea that language influences thought; the strong, determining version is rejected and weak effects are modest and debated."),
+          G("m5.5", "Intelligence", "Inteligencia", "Learning, reasoning and adapting.", "The ability to learn from experience, reason and solve problems, and adapt to new situations; definitions vary across cultures."),
+          G("m5.5", "General intelligence (g)", "Inteligencia general (g)", "The shared factor across mental tests.", "Spearman’s (1904) name for the common factor behind the tendency of people who do well on one mental test to do well on others."),
+          G("m5.5", "Positive manifold", "Variedad positiva", "Good at one test, good at others.", "The robust pattern that scores on different kinds of mental tests tend to go together."),
+          G("m5.5", "Primary mental abilities", "Habilidades mentales primarias", "Thurstone’s several abilities.", "Thurstone’s proposal of separate abilities such as verbal comprehension, number, spatial ability, memory and reasoning."),
+          G("m5.5", "Fluid intelligence", "Inteligencia fluida", "Reasoning with new problems.", "The ability to reason and solve novel problems; in the Cattell–Horn–Carroll model it peaks in early adulthood."),
+          G("m5.5", "Crystallized intelligence", "Inteligencia cristalizada", "Knowledge built up over time.", "Accumulated knowledge and skills, such as vocabulary; it keeps growing into later adulthood."),
+          G("m5.5", "Multiple intelligences", "Inteligencias múltiples", "Gardner’s separate intelligences.", "Gardner’s (1983) theory of several independent intelligences; popular in schools but weakly supported as separate intelligences."),
+          G("m5.5", "Learning styles", "Estilos de aprendizaje", "Matching teaching to style doesn’t help.", "The idea that people learn better when teaching matches a preferred style; matching has no good evidence (Pashler et al., 2008)."),
+          G("m5.5", "Triarchic theory", "Teoría triárquica", "Analytic, creative, practical.", "Sternberg’s theory of analytic, creative and practical intelligence, later called successful intelligence."),
+          G("m5.5", "Emotional intelligence", "Inteligencia emocional", "Perceiving and managing emotions.", "Mayer and Salovey’s (1990) ability to perceive, use, understand and manage emotions; measurable as an ability, but popular claims are overstated."),
+          G("m5.5", "Flynn effect", "Efecto Flynn", "Scores rose across generations.", "The rise in IQ test scores across generations in many countries, too fast to be genetic."),
+          G("m5.5", "Growth mindset", "Mentalidad de crecimiento", "Believing ability can grow.", "Dweck’s idea that believing ability can develop aids learning; large replications find small average effects (Sisk et al., 2018)."),
+          G("m5.6", "IQ", "CI (cociente intelectual)", "A standardized intelligence score.", "Intelligence quotient: a score from a standardized test, scaled so the average for the norm group is 100."),
+          G("m5.6", "Standardization", "Estandarización", "Same test, same way, for everyone.", "Giving and scoring a test in the same way for everyone so that scores can be compared."),
+          G("m5.6", "Norms", "Normas", "The comparison group for scores.", "Scores from a large sample that a person’s score is compared with; they must match the person tested."),
+          G("m5.6", "Wechsler scales", "Escalas de Wechsler", "The WAIS and WISC.", "The most used IQ tests today: the WAIS for adults and the WISC for children."),
+          G("m5.6", "Test bias", "Sesgo de las pruebas", "A test unfair to some groups.", "When a test measures or predicts differently for some groups, or disadvantages them through language, schooling or test familiarity."),
+          G("m5.6", "Culture-fair test", "Prueba culturalmente justa", "A test meant to avoid culture.", "A test, such as Raven’s Progressive Matrices, designed to reduce language and cultural content; none is fully culture-free."),
+          G("m5.6", "Stereotype threat", "Amenaza del estereotipo", "Worry about a stereotype hurting scores.", "The risk that awareness of a negative stereotype lowers performance (Steele and Aronson, 1995); replications are mixed."),
+          G("m5.6", "Intellectual disability", "Discapacidad intelectual", "Intellectual and adaptive limits from early on.", "A DSM-5 diagnosis requiring deficits in both intellectual and adaptive functioning, with onset during the developmental period."),
+          G("m5.6", "Adaptive functioning", "Funcionamiento adaptativo", "Everyday living skills.", "Conceptual, social and practical skills for daily life; required alongside intellectual limits to diagnose intellectual disability."),
+          G("m5.6", "Acculturation", "Aculturación", "Adapting to a new culture.", "The process of taking on another culture’s language and ways; it should be considered when testing people from other cultures."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -19233,6 +19447,18 @@
             R("Pearson, Fernández & Oller", 1993, "observational", "Bilingual toddlers knew fewer words in each language than monolinguals, but similar numbers of words and concepts across both languages.", st("robust", "Fits later studies of total and conceptual vocabulary in bilingual children.")),
             R("Senghas, Kita & Özyürek", 2004, "observational", "Younger cohorts of Nicaraguan signers used more segmented, rule-like structure than older signers, showing the language growing richer with each cohort.", st("robust", "Well documented; how to explain it is debated.")),
             R("Paap, Johnson & Sawi", 2015, "review", "Argued that bilingual advantages in executive function either do not exist or appear only in narrow, unreplicated circumstances.", st("contested", "Other reviews find small effects; publication bias is a central issue."))];
+          REFS["m5.5"] = [
+            R("Spearman", 1904, "observational", "Schoolchildren’s scores on different mental tests tended to go together, which Spearman explained with a general factor, g.", st("robust", "The positive manifold appears in every large test battery since.")),
+            R("Flynn", 1987, "observational", "IQ scores rose substantially across generations in many countries, too fast to be explained by genetic change.", st("robust", "Widely replicated; causes are debated and gains have stalled in some countries.")),
+            R("Pashler, McDaniel, Rohrer & Bjork", 2008, "review", "Found no adequate evidence that matching instruction to a learner’s preferred learning style improves learning.", st("robust", "Later reviews agree; the belief remains common among teachers.")),
+            R("Ritchie & Tucker-Drob", 2018, "meta-analysis", "Across natural experiments, additional years of education raised intelligence test scores.", st("robust", "Consistent across several research designs; how long the gains last is still studied.")),
+            R("Sisk, Burgoyne, Sun, Butler & Macnamara", 2018, "meta-analysis", "Growth-mindset interventions had small average effects on academic achievement, somewhat larger for at-risk students.", st("contested", "Larger trials report small effects for some groups; size and reach are debated."))];
+          REFS["m5.6"] = [
+            R("Binet & Simon", 1905, "review", "Described the first practical intelligence scale, built to identify French schoolchildren who needed extra educational help.", st("robust", "The historical purpose is well documented.")),
+            R("Brown, Reynolds & Whitaker", 1999, "review", "Concluded that major standardized ability tests generally predict outcomes about equally well across US racial and ethnic groups.", st("contested", "Prediction-based bias is often small; critics say fairness involves more than prediction.")),
+            R("Steele & Aronson", 1995, "experiment", "Black students performed worse on a difficult verbal test when it was described as diagnostic of ability than when it was not.", st("contested", "Influential; larger replications and meta-analyses find mixed or smaller effects.")),
+            R("Flore & Wicherts", 2015, "meta-analysis", "Stereotype threat effects on girls’ maths performance were small and showed signs of publication bias.", st("contested", "Part of a wider debate about the size of stereotype threat.")),
+            R("Kanaya, Scullin & Ceci", 2003, "observational", "As outdated IQ norms were replaced, more children scored in the intellectual disability range, showing how the Flynn effect can affect diagnosis.", st("robust", "Norm obsolescence is now considered in evaluations, including in capital cases."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
