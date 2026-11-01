@@ -16070,6 +16070,212 @@
                 "A replacement behaviour that meets the same need (escape from anxiety, briefly) is reinforced instead of punishing the walk-out.")
             ]
           },
+          "m4.1": {
+            home: "Lucía read her notes four times and blanked on the exam. Her friend read once, quizzed herself, and passed. What did the friend know about memory?",
+            keys: [["What are the three stages of memory?", "Encoding (getting information in), storage (keeping it over time) and retrieval (getting it back out when needed). A memory can fail at any of the three; blanking on an exam is often a retrieval failure, not proof nothing was stored.", "A tiny post office where a clerk stamps the letter in (encoding), files it in a drawer (storage), and has to find the right drawer again when you ask (retrieval), and she sometimes forgets which drawer."],
+              ["What does the modal model say, and what are its limits?", "Atkinson and Shiffrin (1968) drew memory as a flow: sensory memory, then short-term memory, then long-term memory, with attention and rehearsal moving information along. It is a useful map, but too simple: rehearsal alone doesn’t guarantee long-term memory, short-term memory has parts, and the stores interact.", "A three-room house with a doorman at each door; the house plan is handy for visitors, but the real people inside keep wandering between rooms through windows the plan doesn’t show."],
+              ["What do levels of processing and encoding specificity say?", "Craik and Lockhart (1972): thinking about meaning (deep) leaves stronger memories than noticing looks or sound (shallow); relating it to yourself is deeper still. Tulving and Thomson (1973): a cue helps most when it matches how the memory was encoded, so context and state at learning can aid recall. Godden and Baddeley’s (1975) divers recalled more in the place they learned; the effect is real but modest.", "A scuba diver who can only remember the grocery list while underwater, then forgets it all on the beach, until she pops back under and the eggs and bananas float back into her head."],
+              ["Why does rereading feel good but work poorly?", "Rereading makes the text feel familiar, and that fluency feels like knowing. It is an illusion: recognising a page is not the same as recalling it with the page closed. Learners routinely overrate rereading and underrate testing.", "A highlighter that glows so bright Lucía feels like a genius, while the exam page in front of her stays perfectly, sparklingly blank."],
+              ["What are the testing and spacing effects?", "Retrieval practice: pulling information out of memory, as in a quiz, strengthens it more than restudying (Roediger and Karpicke, 2006). Spacing: study spread over days beats the same time crammed. Both are robust, and both feel harder while they work better.", "A brain at the gym lifting weights, where each rep is pulling a fact OUT of the head, not pushing it in, and the reps are spread over a week so the muscle has time to grow."]],
+            steps: [
+              { kind: "hook", title: "Four rereads, one blank", body: who("<b>Lucía</b>, a counseling student, the evening before her first psychology exam.") +
+                "<p>She reads her notes four times, highlighting in three colours. Each pass feels easier. By midnight every page looks familiar, and she feels ready.</p>" +
+                "<p>Her friend <b>Marisol</b> reads the notes once, then closes them and quizzes herself three times, checking what she missed. It feels slow and a bit uncomfortable.</p>" +
+                "<p>Next morning Lucía turns over the paper, and her mind goes blank. Marisol passes.</p>" },
+              { kind: "predict", id: "m4.1:predict", title: "Your call first",
+                case: ["Lucía read her notes four times.",
+                  { t: "Lucía used three highlighter colours.", irrelevant: true },
+                  "Her friend read the notes once, then quizzed herself three times.",
+                  "Both spent about the same total time.",
+                  { t: "They study in the same library.", irrelevant: true }],
+                q: "One week later, without more study, who remembers more?",
+                options: ["Lucía: four reads put it in four times", "Her friend: quizzing strengthens memory more", "No difference: same time, same memory"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: her friend. Roediger and Karpicke (2006) found that students who restudied did slightly better on a test five minutes later, but after a week, those who had practised recalling remembered far more. Rereading builds familiarity; recalling builds the route back to the memory.",
+                hints: ["Ask which method practises the thing the exam asks for: getting it out.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what each student did with the notes closed."] },
+              { kind: "idea", lvl: "f", title: "Three stages and a map", body: "<p>Every memory goes through three stages:</p>" +
+                '<dl class="x-dossier"><div><dt>Encoding</dt><dd>Turning experience into a form the brain can keep. Attention comes first: what you never noticed, you can’t remember.</dd></div>' +
+                "<div><dt>Storage</dt><dd>Keeping it over time.</dd></div>" +
+                "<div><dt>Retrieval</dt><dd>Getting it back when you need it. Much “forgetting” is a retrieval failure: the memory is there, the route to it isn’t.</dd></div></dl>" +
+                "<p>Atkinson and Shiffrin’s <b>modal model</b> (1968) draws memory as three stores. <b>Sensory memory</b> holds a near-complete trace for a moment: Sperling (1960) flashed grids of letters and showed that people briefly had more than they could report, an <b>iconic</b> (visual) trace lasting under a second. Attention moves some of it into <b>short-term memory</b>, and rehearsal moves some into <b>long-term memory</b>.</p>" +
+                "<p>Use it as a map, not a wiring diagram. Simply repeating something doesn’t reliably store it, short-term memory turned out to have several parts (M4 · Working memory), and long-term knowledge shapes what we notice in the first place.</p>" +
+                "<p><b>So:</b> getting it in, keeping it and getting it out are different jobs, and each can fail.</p>" },
+              { kind: "idea", lvl: "f", title: "Meaning beats surface", body: "<p>Craik and Lockhart’s <b>levels of processing</b> (1972): words processed for <b>meaning</b> (“Does it fit this sentence?”) are remembered better than words processed for looks (“Is it in capitals?”) or sound (“Does it rhyme?”) " + ev("r") + ".</p>" +
+                '<dl class="x-dossier"><div><dt>Self-reference</dt><dd>Asking “Does this describe me?” is deeper still: the <b>self-reference effect</b>.</dd></div>' +
+                "<div><dt>Elaboration</dt><dd>Linking new facts to what you know, asking why and how, and making examples.</dd></div>" +
+                "<div><dt>Dual coding</dt><dd>Words plus a picture give two routes back (Paivio). That’s why each lesson here has a silly picture.</dd></div></dl>" +
+                "<p>Lucía’s highlighting kept her at the surface: colour, layout, the look of the page.</p>" +
+                "<p><b>So:</b> the more you think about what it means, and what it means to you, the more of it stays.</p>" },
+              { kind: "contrast", id: "m4.1:contrast", title: "Two divers, one difference",
+                q: "Which diver is likely to recall more words?",
+                cases: [
+                  { label: "Diver A", s: ["Learns a list of 36 words underwater.", { t: "Wears a yellow wetsuit.", irrelevant: true }, { t: "Is tested underwater, where she learned.", diff: true }, "Same list, same study time, same delay."] },
+                  { label: "Diver B", s: ["Learns a list of 36 words underwater.", { t: "Wears a yellow wetsuit.", irrelevant: true }, { t: "Is tested on the beach.", diff: true }, "Same list, same study time, same delay."] }
+                ],
+                answer: 0,
+                features: ["The colour of the wetsuit", "Whether the test place matches the learning place", "How long the list is", "How long they studied"],
+                feature: 1,
+                why: "Only the test place differs. Godden and Baddeley (1975) found divers recalled more when learning and testing matched, land or underwater: <b>encoding specificity</b>. The context at learning becomes part of the memory and works as a cue. The effect is real but modest, and smaller for recognition than for free recall.",
+                hints: ["Find the one sentence where the two divers part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say where each diver learned and where each was tested."] },
+              { kind: "idea", lvl: "p", title: "Getting it back out", body: "<p>Tulving and Thomson’s <b>encoding specificity</b> (1973): a <b>retrieval cue</b> works best when it matches what was encoded. Two kinds of match:</p>" +
+                '<dl class="x-dossier"><div><dt>Context-dependent</dt><dd>The place, sounds and setting of learning help recall. Real but modest ' + ev("r") + "; imagining the original room recovers some of it.</dd></div>" +
+                "<div><dt>State-dependent</dt><dd>Inner states, such as mood or being intoxicated, act as cues too, so recall is better in a matching state.</dd></div>" +
+                "<div><dt>Tip of the tongue</dt><dd>You know you know it, can name the first letter or the length, but can’t reach it. Proof that storage and retrieval are separate.</dd></div></dl>" +
+                "<p><b>Retrieval practice</b> (the testing effect): every time you pull a fact out, you make the route stronger. Roediger and Karpicke (2006) " + ev("r") + " found it beat restudying a week later. The <b>spacing effect</b> " + ev("r") + ": the same study time spread over days beats one long cram.</p>" +
+                "<p>Both feel harder. Rereading feels smooth, and that <b>fluency</b> fools us into thinking we know it. Anima itself is built this way: quizzes that make you recall, and reviews spaced out over days.</p>" +
+                "<p><b>So:</b> study by getting it out, a little at a time, not by putting it in again.</p>" },
+              { kind: "idea", lvl: "m", title: "Storage is not a shelf", body: "<p>Memories are not books on a library shelf, pulled out unchanged. A new memory is fragile; it is stabilised over hours to years by <b>consolidation</b>, and <b>sleep</b> helps " + ev("r") + ": people who sleep after learning keep more than those who stay awake the same hours. Lucía’s late night cost her twice.</p>" +
+                "<p>Each recall also rebuilds the memory, which is why it can grow stronger, and why it can change (M4 · Memory is reconstructive, later in this module).</p>" +
+                "<p><b>In the session.</b> Clients forget much of what is said in therapy, sometimes most of it within days. Bennett-Levy and others suggest the same tools work for clients:</p>" +
+                '<dl class="x-dossier"><div><dt>Recall, not repeat</dt><dd>At the end, ask: “What’s the one thing you want to take from today?” Let them say it in their own words.</dd></div>' +
+                "<div><dt>Write it down</dt><dd>A short written summary, or a card the client writes themselves.</dd></div>" +
+                "<div><dt>Space it</dt><dd>Revisit the key point next session, and between sessions with a reminder or app.</dd></div>" +
+                "<div><dt>Make it theirs</dt><dd>Link the skill to their own life: self-reference and elaboration.</dd></div></dl>" +
+                "<p><b>So:</b> a session only helps if the client can still find it on Thursday.</p>" },
+              { kind: "example", lvl: "p", title: "Lucía’s next exam", body: who("<b>Lucía</b>, two weeks before the next exam, with a new plan.") +
+                '<dl class="x-dossier"><div><dt>Read once</dt><dd>For meaning: after each section she writes one question and one example from her placement.</dd></div>' +
+                "<div><dt>Close the notes</dt><dd>She answers her questions from memory, then checks and marks what she missed.</dd></div>" +
+                "<div><dt>Space it</dt><dd>Fifteen minutes on four days instead of one long night.</dd></div>" +
+                "<div><dt>Sleep</dt><dd>No all-nighter: she stops at ten.</dd></div>" +
+                "<div><dt>On the day</dt><dd>When she blanks, she pictures the desk where she quizzed herself, and the first answer comes back.</dd></div></dl>" +
+                "<p>It feels harder. She remembers more.</p>" +
+                '<p>See how much fits in, and what helps it stay.</p><button type="button" class="x-lens__b press" data-scene="workingmemory">Open the Working Memory Theatre</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>“Depth” is hard to define on its own. If deep processing is whatever leads to better memory, and better memory proves the processing was deep, the theory is circular. Craik and Lockhart offered no independent measure of depth, and shallow processing can win when the test matches it: rhyme-based learning helps on a rhyme test (transfer-appropriate processing).</p>' +
+                "<p><b>The counter.</b> The practical lesson survives: across hundreds of studies, thinking about meaning, linking to the self and retrieving beat passive exposure. The stage model and the depth idea are maps; the testing and spacing effects stand on their own as robust findings in labs and classrooms.</p>" +
+                "<p><b>And the modal model.</b> Its boxes are a teaching map, not anatomy. Rehearsal alone is a weak path to long-term memory, and the short-term store turned out to be a workspace with parts.</p>" +
+                "<p>Background: M1 · Cognitive psychology; M2 · The drivers: attention, repetition, spacing, sleep, error. Ahead: M4 · Working memory.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Three stages.</b> A post office clerk stamps the letter in, files it in a drawer, and has to find the right drawer again when you ask.</p>" +
+                "<p><b>The modal model.</b> A three-room house with a doorman at each door, while the people inside wander through windows the plan doesn’t show.</p>" +
+                "<p><b>Encoding specificity.</b> A scuba diver remembers the grocery list only underwater, forgets it on the beach, and gets it back when she dives again.</p>" +
+                "<p><b>Fluency illusion.</b> A highlighter glows so bright Lucía feels like a genius, while the exam page stays sparklingly blank.</p>" +
+                "<p><b>Retrieval and spacing.</b> A brain lifts weights where each rep is pulling a fact OUT, with the reps spread over a week.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.1:teachback", title: "Teach it back", prompt: "Explain to Lucía why rereading failed her and what to do instead: the three stages of encoding, storage and retrieval; Atkinson and Shiffrin’s modal model as a map, and its limits; sensory memory and Sperling’s iconic trace; Craik and Lockhart’s levels of processing, the self-reference effect, elaboration and dual coding; encoding specificity, retrieval cues, Godden and Baddeley’s divers and how big that effect is, and state-dependent memory; the tip-of-the-tongue state; retrieval practice and Roediger and Karpicke’s 2006 finding; the spacing effect; the illusion of fluency from rereading; consolidation and sleep; how a counselor can help clients remember sessions; and the critique that “depth” is hard to define independently." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Retrieval practice " + ev("r") + ". Spacing " + ev("r") + ". Meaning beats surface " + ev("r") + ", though “depth” as a theory " + ev("c") + ". Context-dependent recall " + ev("r") + ", modest in size. Sleep and consolidation " + ev("r") + ". The modal model as a full account " + ev("c") + ".</p>" +
+                "<p><b>So:</b> memory is built by getting things out, spaced over time, with meaning attached, for students and for clients.</p>" },
+              Q("Lucía rereads her notes four times and feels sure she knows them. What best explains her false confidence?",
+                ["Sensory memory overload", "An illusion of fluency: familiar text feels known", "Encoding specificity", "The self-reference effect"], 1,
+                "Rereading makes the page feel familiar; that ease is mistaken for being able to recall it with the notes closed."),
+              Q("Students study a passage. One group rereads it; the other recalls it from memory. Who remembers more a week later?",
+                ["The rereading group", "The recall group", "Neither: they score the same", "Whoever studied in the morning"], 1,
+                "The testing effect: Roediger and Karpicke (2006) found retrieval practice beat restudying after a week, even though restudying looked better after five minutes."),
+              Q("Which question leads to the best memory for the word “courage”?",
+                ["Is it written in capitals?", "Does it rhyme with “porridge”?", "Does it describe a time in your life?", "How many letters does it have?"], 2,
+                "Relating a word to yourself is deep processing: the self-reference effect beats processing for looks or sound."),
+              Q("A client recalls more about her childhood home when she visits the street where she grew up. What does this illustrate?",
+                ["Context-dependent retrieval", "Iconic memory", "Articulatory suppression", "Consolidation failure"], 0,
+                "Encoding specificity: cues present at encoding, here the place, help retrieval when they return."),
+              Q("At the end of a session, what best helps a client remember the key point?",
+                ["The therapist repeats it three times", "The client says it in their own words and writes it down", "A longer session", "Avoiding the topic next week"], 1,
+                "Recalling in their own words is retrieval practice and elaboration; a written note gives a cue to return to.")
+            ]
+          },
+          "m4.2": {
+            home: "Andre nodded through ten minutes of program rules at intake, then broke three of them in his first week. Was he defiant, or was his mental workbench full?",
+            keys: [["How much can working memory hold?", "Miller (1956) said “seven, plus or minus two” items, but that counted chunks people had already grouped. Cowan (2001) argued the true limit is about four chunks, a view more widely accepted now. Capacity varies with the material and the strategy.", "A tiny juggler who can keep only about four flaming pineapples in the air at once, and a fifth one drops every time she tries."],
+              ["What is chunking?", "Grouping items into bigger meaningful units so more fits in the same few slots. Chase and Simon (1973) found chess masters recalled real game positions far better than novices, but not random ones: their skill was chunks built from experience, not a bigger memory.", "The same juggler adds a fifth pineapple only by taping two together, so it still counts as one in the air."],
+              ["What are the parts of Baddeley and Hitch’s model?", "Baddeley and Hitch (1974) split short-term memory into a working system: the phonological loop (sounds and words), the visuospatial sketchpad (images and space), and the central executive (attention, the boss). Baddeley added the episodic buffer in 2000, which links the parts with long-term memory.", "An office with a parrot reciting words, an artist sketching a map, a harried boss with a clipboard, and a filing clerk who staples their work into one story."],
+              ["What is articulatory suppression?", "Repeating an irrelevant sound, like “la la la”, ties up the phonological loop, so people remember fewer words and lose the effect of word length. It shows the loop runs on inner speech; a second task in the same system interferes most (dual-task interference).", "A parrot repeats a phone number on a loop inside your ear, until someone makes you sing “la la la” and the number falls right out of the parrot’s beak."],
+              ["What does anxiety do to working memory?", "Worry uses working-memory capacity and pulls attention toward threat, leaving less for the task. Eysenck’s attentional control theory (2007) says anxiety weakens the central executive’s control. ADHD, depression, sleep loss and substance withdrawal also lower it, which matters at intake.", "A blaring panic alarm sits on three of the juggler’s four chairs, so she has only one chair left to stand on and one pineapple she can keep up."]],
+            steps: [
+              { kind: "hook", title: "Ten minutes of rules", body: who("<b>Andre</b>, 34, at intake for a residential recovery program, two days after leaving detox.") +
+                "<p>He hasn’t slept well, his hands shake a little, and he’s worried about his job. The intake worker reads out twelve program rules in about ten minutes: curfew, phone times, sign-out sheet, chores, visitor hours, medication at the window.</p>" +
+                "<p>Andre nods all the way through and signs the form. In his first week he misses curfew, uses his phone in group, and leaves without signing out.</p>" +
+                "<p>A staff member writes: “Noncompliant. Was told the rules at intake.”</p>" },
+              { kind: "predict", id: "m4.2:predict", title: "Your call first",
+                case: ["The program has twelve rules.",
+                  { t: "The rules are printed in a blue folder.", irrelevant: true },
+                  "Option one: all twelve read aloud at intake.",
+                  "Option two: three rules a day for four days, each written on a card he keeps.",
+                  "Andre is anxious and two days out of detox.",
+                  { t: "The intake room has a window.", irrelevant: true }],
+                q: "Which way will Andre remember the rules better?",
+                options: ["All twelve at intake: get it over with", "Three a day, written on a card", "No difference: he either cares or he doesn’t"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the answer: three a day, on a card. Working memory holds about four chunks, and anxiety and withdrawal shrink that further. Twelve spoken rules overflow it; most never reach long-term memory. Three at a time fits, the card takes the load off memory, and repeating over four days adds spacing. His “noncompliance” may be overload, not defiance.",
+                hints: ["Ask how many things a stressed person can hold in mind at once.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: count how many rules each option asks him to hold at one time."] },
+              { kind: "idea", lvl: "f", title: "A small workbench", body: "<p><b>Short-term memory</b> is a brief store. <b>Working memory</b> is the wider idea: holding information in mind <i>and working on it</i>, like keeping a phone number while you dial, or following a rule while talking.</p>" +
+                "<p>George Miller’s famous “<b>magical number seven, plus or minus two</b>” (1956) is often quoted, but Miller himself was half joking, and people had grouped items to reach it. Nelson Cowan (2001) reviewed the evidence and put the limit at about <b>four chunks</b> " + ev("r") + ", now the more accepted figure.</p>" +
+                "<p><b>Chunking</b> beats the limit: FBI-CIA-USA is three chunks, not nine letters. Chase and Simon (1973) " + ev("r") + " showed chess masters recalled real game positions after a five-second look far better than novices, but no better for pieces placed at random. Experience builds chunks; it doesn’t enlarge the bench.</p>" +
+                "<p><b>So:</b> people hold about four things at once, more only when they can group them.</p>" },
+              { kind: "idea", lvl: "f", title: "Baddeley and Hitch’s model", body: "<p>Alan Baddeley and Graham Hitch (1974) replaced the single short-term box with a team " + ev("r") + ":</p>" +
+                '<dl class="x-dossier"><div><dt>Phonological loop</dt><dd>Holds sounds and words by inner rehearsal, for about two seconds’ worth of speech unless refreshed.</dd></div>' +
+                "<div><dt>Visuospatial sketchpad</dt><dd>Holds images, places and layouts, like the route to the nurse’s window.</dd></div>" +
+                "<div><dt>Central executive</dt><dd>Directs attention, switches tasks, and holds back distractions. Closely tied to <b>executive function</b>.</dd></div>" +
+                "<div><dt>Episodic buffer</dt><dd>Added in 2000: binds the parts and long-term memory into one scene or story.</dd></div></dl>" +
+                "<p>Evidence: <b>articulatory suppression</b>. Saying “la la la” while reading a list blocks the loop, and recall drops. <b>Dual-task interference</b> is worst when two tasks need the same part: two verbal tasks clash more than one verbal and one visual.</p>" +
+                "<p><b>So:</b> words, pictures and attention draw on partly separate resources, and a boss that runs out of attention first.</p>" },
+              { kind: "contrast", id: "m4.2:contrast", title: "Two clients, one difference",
+                q: "Which client is likely to remember more of the instructions?",
+                cases: [
+                  { label: "Client A", s: ["Hears the same six instructions in the same words.", { t: "Sits in a green chair.", irrelevant: true }, { t: "Is calm and settled.", diff: true }, "Same speaker, same pace, same room."] },
+                  { label: "Client B", s: ["Hears the same six instructions in the same words.", { t: "Sits in a green chair.", irrelevant: true }, { t: "Is in the middle of a panic attack.", diff: true }, "Same speaker, same pace, same room."] }
+                ],
+                answer: 0,
+                features: ["The colour of the chair", "Whether the client is calm or panicking", "How many instructions there are", "Who is speaking"],
+                feature: 1,
+                why: "Only the client’s state differs. Anxiety uses working memory: worry takes up slots, and attention is pulled toward threat. Eysenck’s attentional control theory (2007) says anxiety weakens the central executive. The panicking client has less bench left for the instructions.",
+                hints: ["Find the one sentence where the two clients part ways.",
+                  "The sentences that don’t decide it are dimmed. What’s left differs in one place only.",
+                  "Step one, aloud: say what else is taking up each client’s attention."] },
+              { kind: "idea", lvl: "p", title: "What shrinks the bench", body: "<p>Working memory is not fixed for a person; it drops with state:</p>" +
+                '<dl class="x-dossier"><div><dt>Anxiety and stress</dt><dd>Worry competes for capacity, and threat captures attention. <b>Attentional control theory</b> (Eysenck and colleagues, 2007) ' + ev("r") + "</dd></div>" +
+                "<div><dt>ADHD</dt><dd>Working-memory and executive weaknesses are common, though not universal.</dd></div>" +
+                "<div><dt>Depression</dt><dd>Rumination occupies the bench; concentration problems are part of the diagnosis.</dd></div>" +
+                "<div><dt>Withdrawal and early recovery</dt><dd>Withdrawal from alcohol and other substances, poor sleep and early abstinence can lower attention and memory for weeks.</dd></div></dl>" +
+                "<p><b>Brain training.</b> Practising working-memory games makes people better at those games. But Melby-Lervåg and Hulme’s (2013) meta-analysis found no convincing <b>far transfer</b> to reading, maths or everyday attention " + ev("d") + ". Changing the load works better than trying to grow the bench.</p>" +
+                "<p><b>So:</b> a client in crisis has less working memory than the same person on a calm day.</p>" },
+              { kind: "idea", lvl: "m", title: "Lighten the load", body: "<p>In practice, the counselor’s job is to fit information to the bench the client has today:</p>" +
+                '<dl class="x-dossier"><div><dt>One or two points</dt><dd>Give one or two points at a time, then pause. Save the rest for later.</dd></div>' +
+                "<div><dt>Write it down</dt><dd>A card, a handout, a text: memory moves from the head to paper. Use the sketchpad too, with a simple map or picture.</dd></div>" +
+                "<div><dt>Chunk it</dt><dd>Group twelve rules under three headings: times, phones, leaving the building.</dd></div>" +
+                "<div><dt>Teach-back</dt><dd>“So I know I explained it well, can you tell me in your words what happens at curfew?” It checks the explanation, not the client.</dd></div>" +
+                "<div><dt>Slow intake</dt><dd>Only the essentials on day one; the rest over the first week, revisited.</dd></div>" +
+                "<div><dt>Crisis</dt><dd>In acute distress, one instruction at a time: “Sit here. Breathe with me.” Calm first, information later.</dd></div></dl>" +
+                "<p><b>So:</b> when a client forgets, change the delivery before you blame the client.</p>" },
+              { kind: "example", lvl: "p", title: "Andre, take two", body: who("<b>Andre</b>’s program, after the team reviewed the first week.") +
+                '<dl class="x-dossier"><div><dt>Day one</dt><dd>Three rules only: curfew at ten, sign out at the desk, medication at the window. Written on a pocket card.</dd></div>' +
+                "<div><dt>Teach-back</dt><dd>“Tell me in your words what you do before you leave.” Andre: “Write my name on the sheet.”</dd></div>" +
+                "<div><dt>Days two to four</dt><dd>Three more rules each day, added to the card, the earlier ones asked back first.</dd></div>" +
+                "<div><dt>The note</dt><dd>Rewritten: “Rules were given too fast at intake, while he was in early withdrawal. Re-taught in chunks.”</dd></div></dl>" +
+                "<p>In week two he breaks none.</p>" +
+                '<p>Hear a discharge plan fast under stress, or chunked with a card, and try to recall it.</p><button type="button" class="x-lens__b press" data-scene="workingmemory">Open the Working Memory Theatre</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>The model’s parts are boxes on a diagram, not brain parts. No single “phonological loop” sits in one place; working memory draws on networks across frontal and parietal cortex shared with attention and long-term memory. And “capacity” isn’t one number: it changes with the material, familiarity, strategy and task, so “four chunks” is a rough average, not a fixed size.</p>' +
+                "<p><b>The counter.</b> The boxes are a working tool: they predict which tasks will clash (two verbal tasks more than verbal plus visual) and why chunking and writing things down help. The small, state-sensitive limit is one of the most replicated findings in cognitive psychology, whatever its exact size.</p>" +
+                "<p><b>Person-first.</b> Write “a client in early recovery”, not “an addict who won’t follow rules”.</p>" +
+                "<p>Background: M1 · Cognitive psychology; M4 · Encoding, storage and retrieval. Ahead: M4 · Long-term memory systems.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>About four chunks.</b> A tiny juggler keeps only about four flaming pineapples in the air; a fifth always drops.</p>" +
+                "<p><b>Chunking.</b> She adds a fifth only by taping two pineapples together, so they count as one.</p>" +
+                "<p><b>Baddeley and Hitch.</b> An office with a reciting parrot, a sketching artist, a harried boss with a clipboard, and a clerk stapling it into one story.</p>" +
+                "<p><b>Articulatory suppression.</b> A parrot loops a phone number inside your ear, until you sing “la la la” and the number falls out of its beak.</p>" +
+                "<p><b>Anxiety.</b> A panic alarm sits on three of the juggler’s four chairs, leaving her one.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m4.2:teachback", title: "Teach it back", prompt: "Explain to Andre’s intake team why he broke the rules and what to change: short-term versus working memory; Miller’s 1956 “seven plus or minus two” and Cowan’s 2001 estimate of about four chunks; chunking and Chase and Simon’s chess masters; Baddeley and Hitch’s 1974 model with the phonological loop, visuospatial sketchpad and central executive, and the episodic buffer added in 2000; articulatory suppression and dual-task interference; the link to attention and executive function; how anxiety uses working memory and Eysenck’s attentional control theory; how ADHD, depression and withdrawal lower it; why brain-training shows weak far transfer (Melby-Lervåg and Hulme, 2013); the clinical tools of one or two points at a time, writing it down, teach-back, reducing load in crisis and slowing intake; and the critique that the model’s boxes are not brain parts and capacity varies with material and strategy." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>A small limit of about four chunks " + ev("r") + ". Chunking " + ev("r") + ". Baddeley and Hitch’s parts as a working model " + ev("r") + ", as brain anatomy " + ev("c") + ". Anxiety reduces working memory " + ev("r") + ". Brain training for far transfer " + ev("d") + ".</p>" +
+                "<p><b>So:</b> working memory is small and shrinks under stress; good care hands information over in pieces the client can carry.</p>" },
+              Q("According to Cowan (2001), about how many chunks can working memory hold?",
+                ["About 2", "About 4", "About 7", "About 12"], 1,
+                "Cowan argued the limit is about four chunks; Miller’s seven counted items people had already grouped."),
+              Q("Chess masters recall real game positions far better than novices, but not random ones. What explains this?",
+                ["They have a larger working memory", "They chunk familiar patterns from experience", "Articulatory suppression", "Better eyesight"], 1,
+                "Chase and Simon (1973): experience builds chunks; with random boards there are no patterns to chunk, so the advantage vanishes."),
+              Q("Saying “la la la” while memorising a list of words lowers recall. Which part is being blocked?",
+                ["Visuospatial sketchpad", "Phonological loop", "Episodic buffer", "Sensory memory"], 1,
+                "Articulatory suppression ties up the inner speech the phonological loop uses to rehearse words."),
+              Q("A client is very anxious at intake. What is the best way to explain the program rules?",
+                ["Read all of them quickly so it’s done", "One or two points at a time, written down, with teach-back", "Ask if they have any questions, then move on", "Tell them the rules are in the handbook"], 1,
+                "Anxiety shrinks working memory; small chunks, a written aid and teach-back fit what the client can hold."),
+              Q("What did Melby-Lervåg and Hulme (2013) find about working-memory training?",
+                ["It reliably raises IQ", "Gains on trained tasks, but no convincing far transfer", "It cures ADHD", "It has no effect even on trained tasks"], 1,
+                "Practice improves the games themselves, but not reading, maths or everyday attention.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -17556,6 +17762,27 @@
           G("m3.6", "Behavioural activation", "Activación conductual", "Doing small valued things before feeling like it.", "A treatment for depression that schedules rewarding and valued activities before motivation returns; Dimidjian et al. (2006) found it matched antidepressants for more severe depression."),
           G("m3.6", "Differential reinforcement of alternative behaviour", "Reforzamiento diferencial de conducta alternativa", "Rewarding a replacement behaviour instead of punishing.", "DRA: reinforcing a behaviour that meets the same need as the problem behaviour, such as asking for a break instead of walking out, while the problem behaviour no longer pays off."),
           G("m3.6", "Aversion therapy", "Terapia de aversión", "Pairing a behaviour with something unpleasant.", "Pairing a behaviour with nausea-inducing drugs or shock; historically used for drinking and, harmfully, in conversion practices against same-sex attraction, which caused lasting harm and are condemned."),
+          G("m4.1", "Encoding", "Codificación", "Getting information into memory.", "The first stage of memory: turning experience into a form that can be stored; it depends on attention and is stronger when processing is meaningful."),
+          G("m4.1", "Storage", "Almacenamiento", "Keeping information over time.", "The second stage of memory: holding encoded information, stabilised over time by consolidation; not a fixed shelf, since memories change when recalled."),
+          G("m4.1", "Retrieval", "Recuperación", "Getting information back out of memory.", "The third stage of memory: accessing stored information when needed; many failures to remember are retrieval failures, as in the tip-of-the-tongue state."),
+          G("m4.1", "Modal model", "Modelo modal", "Memory drawn as three stores in a row.", "Atkinson and Shiffrin’s (1968) model: sensory memory, short-term memory and long-term memory, linked by attention and rehearsal; a useful map but too simple."),
+          G("m4.1", "Sensory memory", "Memoria sensorial", "A very brief trace of what the senses take in.", "A large-capacity, very short store; Sperling (1960) showed the visual (iconic) trace holds more than people can report and fades in under a second."),
+          G("m4.1", "Levels of processing", "Niveles de procesamiento", "Thinking about meaning makes memories stronger.", "Craik and Lockhart’s (1972) idea that deep, meaning-based processing produces more durable memory than shallow processing of looks or sound; criticised because depth is hard to define independently."),
+          G("m4.1", "Self-reference effect", "Efecto de autorreferencia", "Better memory for what you relate to yourself.", "Information processed in relation to oneself, such as “Does this describe me?”, is remembered better than information processed for general meaning."),
+          G("m4.1", "Dual coding", "Codificación dual", "Learning with words and pictures together.", "Paivio’s idea that information encoded both verbally and as an image has two routes for retrieval, improving recall."),
+          G("m4.1", "Encoding specificity", "Especificidad de la codificación", "Cues work best when they match how you learned.", "Tulving and Thomson’s (1973) principle that a retrieval cue is effective to the extent it matches what was encoded, including context (context-dependent memory) and inner state (state-dependent memory)."),
+          G("m4.1", "Testing effect", "Efecto de la evaluación", "Being tested helps you remember.", "The finding that recalling information, as in a quiz, improves later retention more than restudying it (Roediger and Karpicke, 2006); robust across materials and ages."),
+          G("m4.1", "Illusion of fluency", "Ilusión de fluidez", "Feeling you know something because it looks familiar.", "Mistaking the ease of rereading or recognising material for the ability to recall it; leads learners to prefer rereading over more effective retrieval practice."),
+          G("m4.1", "Consolidation", "Consolidación", "A new memory becoming stable over time.", "The process, over hours to years, by which new memories become more stable; sleep after learning supports it."),
+          G("m4.2", "Working memory", "Memoria de trabajo", "Holding and using information in mind at once.", "A limited system for keeping information active while working on it; Cowan (2001) estimated its capacity at about four chunks, and it shrinks with anxiety, stress and withdrawal."),
+          G("m4.2", "Phonological loop", "Bucle fonológico", "The inner voice that rehearses words.", "In Baddeley and Hitch’s (1974) model, the part that holds speech-based information through inner rehearsal; blocked by articulatory suppression."),
+          G("m4.2", "Visuospatial sketchpad", "Agenda visoespacial", "The mind’s scratchpad for images and places.", "In Baddeley and Hitch’s model, the part that holds and manipulates visual and spatial information."),
+          G("m4.2", "Central executive", "Ejecutivo central", "The attention boss of working memory.", "In Baddeley and Hitch’s model, the part that directs attention, switches between tasks and coordinates the other components; linked to executive function."),
+          G("m4.2", "Episodic buffer", "Búfer episódico", "Where the parts join into one scene.", "Added by Baddeley in 2000: a limited store that binds information from the other components and long-term memory into integrated episodes."),
+          G("m4.2", "Articulatory suppression", "Supresión articulatoria", "Saying something else blocks word rehearsal.", "Repeating an irrelevant sound, such as “la la la”, occupies the phonological loop and reduces memory for verbal material."),
+          G("m4.2", "Dual-task interference", "Interferencia de doble tarea", "Two tasks at once hurt each other.", "Performance drops when two tasks are done together, most when they draw on the same working-memory component."),
+          G("m4.2", "Attentional control theory", "Teoría del control atencional", "Anxiety weakens control of attention.", "Eysenck and colleagues’ (2007) theory that anxiety impairs the central executive, pulling attention toward threat and reducing efficiency on demanding tasks."),
+          G("m4.2", "Teach-back", "Método de enseñanza inversa", "Asking someone to explain it in their own words.", "A communication check in which the client restates key information in their own words, testing the clarity of the explanation rather than the client."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -18074,6 +18301,18 @@
             R("Petry et al.", 2005, "experiment", "In a multisite trial, adding prize-based contingency management to usual care increased stimulant-negative tests and retention.", st("robust", "CM is among the best-supported treatments for stimulant use; effects often shrink after incentives end.")),
             R("Miller, Meyers & Tonigan", 1999, "experiment", "CRAFT engaged more treatment-refusing loved ones in treatment (about 64%) than a confrontational intervention or Al-Anon facilitation.", st("robust", "Replicated in later CRAFT trials.")),
             R("Dimidjian et al.", 2006, "experiment", "For more severe depression, behavioural activation matched antidepressant medication and outperformed cognitive therapy.", st("robust", "Behavioural activation is supported by later meta-analyses."))];
+          REFS["m4.1"] = [
+            R("Sperling", 1960, "experiment", "When cued to report one row of a briefly flashed letter grid, people could report almost any row, showing a large visual trace that faded in under a second.", st("robust", "The brief iconic trace is well replicated.")),
+            R("Craik & Lockhart", 1972, "review", "Proposed levels of processing: deep, meaning-based processing leaves more durable memories than shallow processing of appearance or sound.", st("contested", "The meaning advantage is robust; “depth” as a theory is criticised as circular without an independent measure.")),
+            R("Godden & Baddeley", 1975, "experiment", "Divers recalled more words when tested in the same place they learned them, underwater or on land.", st("robust", "Context effects replicate but are modest, and smaller for recognition than free recall.")),
+            R("Roediger & Karpicke", 2006, "experiment", "Students who practised recalling a passage remembered far more after a week than students who restudied it, though restudying looked better after five minutes.", st("robust", "The testing effect is replicated across materials, ages and classrooms.")),
+            R("Cepeda et al.", 2006, "meta-analysis", "Across hundreds of comparisons, study spread over time produced better long-term retention than the same study massed together.", st("robust", "The spacing effect is among the most reliable findings in learning research."))];
+          REFS["m4.2"] = [
+            R("Cowan", 2001, "review", "Argued that working memory holds about four chunks, not Miller’s seven plus or minus two, once rehearsal and grouping are controlled.", st("robust", "Widely accepted as a rough average; capacity varies with material and strategy.")),
+            R("Chase & Simon", 1973, "experiment", "Chess masters recalled real game positions after a brief look far better than novices, but not randomly placed pieces.", st("robust", "Expertise-based chunking is well replicated across domains.")),
+            R("Baddeley & Hitch", 1974, "experiment", "Proposed a multi-part working memory: a phonological loop, a visuospatial sketchpad and a central executive, supported by dual-task studies.", st("robust", "The episodic buffer was added in 2000; its parts are functional, not distinct brain regions.")),
+            R("Eysenck et al.", 2007, "review", "Attentional control theory: anxiety impairs the central executive, pulling attention toward threat and reducing efficiency on demanding tasks.", st("robust", "Supported by many studies; details of which functions suffer most are still debated.")),
+            R("Melby-Lervåg & Hulme", 2013, "meta-analysis", "Working-memory training produced short-term gains on trained tasks, with no convincing transfer to verbal ability, reading or arithmetic.", st("debunked-or-revised", "Claims of far transfer from brain training are not supported by later meta-analyses either."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
