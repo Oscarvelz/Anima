@@ -17262,6 +17262,197 @@
                 "Fair testing uses the person’s language and fitting norms, and counseling works across the IQ range when adapted.")
             ]
           },
+          "m6.1": {
+            home: "Brianna, 24, in early recovery and five months pregnant, fears she has “already ruined” her baby because she used before she knew. Is a baby’s future fixed before birth?",
+            keys: [["Why is the embryonic period the most sensitive time for structural defects?", "In weeks 3 to 8 the major organs and body structures are forming, so a harmful exposure then is most likely to disrupt their structure. Later exposures more often affect growth and function.", "A construction crew in hard hats building a tiny baby’s heart, limbs and spine in weeks 3 to 8, under bright signs reading “HARD HAT ZONE: most sensitive”."],
+              ["What is the recommended approach for opioid use during pregnancy?", "Medication treatment with methadone or buprenorphine is recommended over withdrawal, and a pregnant person shouldn’t stop abruptly. Neonatal opioid withdrawal syndrome can occur but is treatable.", "A calm lifeguard handing a pregnant swimmer a sturdy steady raft labelled “methadone / buprenorphine” instead of telling her to let go and swim to shore alone."],
+              ["What did the visual cliff (Gibson and Walk, 1960) show?", "Most crawling infants refused to cross a glass surface over an apparent drop, even with their mother calling, showing depth perception that is tied to crawling experience.", "A baby crawling across a glass-topped table who stops dead at the “cliff”, while mom waves a teddy bear from the other side and the baby politely declines."],
+              ["What is synaptic pruning?", "The brain makes far more connections than it keeps; connections that get used are strengthened and little-used ones are cleared away: use it or lose it.", "A gardener in a sun hat trimming a giant bush of brain connections, keeping every branch that gets used and snipping the ones no one visits."],
+              ["What happened to the “crack baby” idea?", "Later, better-controlled studies (Frank et al., 2001) found prenatal cocaine effects smaller than feared and often confounded by poverty and stress; the “crack baby” syndrome was debunked.", "A giant newspaper headline shouting “CRACK BABIES” being corrected with a red pen to “poverty and stress mattered more”."]],
+            steps: [
+              { kind: "hook", title: "Brianna’s fear", body: who("<b>Brianna</b>, 24, in early recovery, five months pregnant.") +
+                "<p>Brianna used opioids and drank before she knew she was pregnant. She’s now in treatment and on buprenorphine, and she came to her first prenatal visit late, afraid of being judged.</p>" +
+                "<p>“I already ruined my baby,” she tells her counselor. “What’s the point?”</p>" +
+                "<p>What does development science actually say about what happened, and what can still happen?</p>" },
+              { kind: "predict", id: "m6.1:predict", title: "Your call first",
+                case: ["Brianna used substances in the first weeks, before she knew she was pregnant.",
+                  { t: "Her favourite colour is green.", irrelevant: true },
+                  "She is now in treatment and stable on buprenorphine.",
+                  "She has started prenatal care.",
+                  { t: "She lives near a bus stop.", irrelevant: true },
+                  "Her sister has offered to help after the birth."],
+                q: "Is Brianna’s baby’s future fixed by her early use?",
+                options: ["Yes: the damage is done before birth", "No: timing and dose matter, many outcomes are open, and stable care after birth makes a real difference", "Only if she used cocaine"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. Some exposures carry real risks, but effects depend on timing, dose and the substance, and many babies exposed early do well. Treatment now, prenatal care and supportive caregiving afterward all shift the odds. Her fear is understandable; it isn’t the whole picture.",
+                hints: ["Ask what is still changing for Brianna now.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what could still help this baby."] },
+              { kind: "idea", lvl: "f", title: "Three prenatal stages", body: '<dl class="x-dossier"><div><dt>Germinal (about weeks 1–2)</dt><dd>The fertilized egg divides and implants in the uterine wall.</dd></div>' +
+                "<div><dt>Embryonic (about weeks 3–8)</dt><dd>The major organs and structures form: heart, neural tube, limbs, face. This is the <b>most sensitive period</b> for structural defects " + ev("r") + ".</dd></div>" +
+                "<div><dt>Fetal (week 9 to birth)</dt><dd>Organs grow and mature; the brain keeps developing throughout, so exposures here more often affect growth, brain and behaviour.</dd></div>" +
+                "<div><dt>Teratogens</dt><dd>Agents that can harm prenatal development. Their effects depend on <b>timing</b>, <b>dose</b>, the baby’s and parent’s genes, and what else is going on.</dd></div></dl>" +
+                "<p><b>So:</b> when something happens can matter as much as what happens.</p>" },
+              { kind: "idea", lvl: "p", title: "What harms, what helps", body: '<dl class="x-dossier"><div><dt>Alcohol</dt><dd>Can cause <b>fetal alcohol spectrum disorders</b> (FASD), affecting face, growth, learning and behaviour. No safe amount is known ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Nicotine</dt><dd>Linked to lower birth weight and preterm birth " + ev("r") + ".</dd></div>" +
+                "<div><dt>Opioids</dt><dd>Babies may have <b>neonatal opioid withdrawal syndrome</b> after birth; it is <b>treatable</b>. Medication with methadone or buprenorphine is recommended over withdrawal during pregnancy " + ev("r") + ". Brianna shouldn’t stop abruptly.</dd></div>" +
+                "<div><dt>Cocaine</dt><dd>1980s headlines predicted a lost generation of “crack babies”. Later controlled studies (Frank et al., 2001) found smaller effects than feared, tangled up with poverty, stress and other exposures. The syndrome was <b>debunked</b> " + ev("d") + ".</dd></div>" +
+                "<div><dt>Infections</dt><dd><b>Rubella</b> early in pregnancy can cause deafness, heart and eye defects; vaccination before pregnancy prevents it. <b>Zika</b> virus can cause microcephaly.</dd></div>" +
+                "<div><dt>Protective factors</dt><dd>Prenatal care, good nutrition, treatment, social support and a safe home all improve outcomes.</dd></div></dl>" +
+                "<p><b>So:</b> risks are real, but they are odds shaped by timing, dose and support, not verdicts.</p>" },
+              { kind: "idea", lvl: "p", title: "The newborn and the infant", body: '<dl class="x-dossier"><div><dt>Reflexes</dt><dd><b>Rooting</b> (turning toward a touch on the cheek), <b>sucking</b>, <b>Moro</b> (startling with arms flung out), <b>grasping</b> and <b>Babinski</b> (toes fanning when the sole is stroked). Most fade in the first months as the brain matures.</dd></div>' +
+                "<div><dt>Perception</dt><dd>Fantz showed newborns look longer at face-like patterns " + ev("r") + ". In the <b>visual cliff</b> (Gibson and Walk, 1960) crawling infants refused to cross an apparent drop; later work tied wariness of heights to crawling experience " + ev("r") + ".</dd></div>" +
+                "<div><dt>Motor milestones</dt><dd>Sitting, crawling, walking: each comes within a <b>range</b> of ages, not on a single date.</dd></div>" +
+                "<div><dt>Temperament</dt><dd>Thomas and Chess (1977) described <b>easy</b>, <b>difficult</b> and <b>slow-to-warm-up</b> babies, with many fitting none neatly. Fit between temperament and caregiving matters.</dd></div></dl>" +
+                "<p><b>So:</b> babies arrive equipped and active, and they change fast.</p>" },
+              { kind: "contrast", id: "m6.1:contrast", title: "Same exposure, one difference",
+                q: "Both babies had the same prenatal exposure. Which is more likely to do well by school age?",
+                cases: [
+                  { label: "Baby A", s: ["Same prenatal exposure to opioids and alcohol.", { t: "Born in spring.", irrelevant: true }, { t: "Caregiving afterward was chaotic, with frequent moves and little support.", diff: true }, "Same hospital; same treatment for withdrawal."] },
+                  { label: "Baby B", s: ["Same prenatal exposure to opioids and alcohol.", { t: "Born in spring.", irrelevant: true }, { t: "Caregiving afterward was stable and supportive, with early intervention.", diff: true }, "Same hospital; same treatment for withdrawal."] }
+                ],
+                answer: 1,
+                features: ["The season of birth", "The caregiving after birth", "The prenatal exposure", "The hospital"],
+                feature: 1,
+                why: "Only the caregiving differs. Stable, responsive care and early intervention are among the strongest influences on how exposed children turn out, which is why exposure isn’t destiny.",
+                hints: ["Find the one sentence where the two babies part ways.",
+                  "The sentences that don’t decide it are dimmed. Same exposure; ask what came after.",
+                  "Step one, aloud: say what each baby’s home was like."] },
+              { kind: "idea", lvl: "m", title: "A brain built by experience", body: '<dl class="x-dossier"><div><dt>Plasticity</dt><dd>The infant brain is highly changeable: experience wires it.</dd></div>' +
+                "<div><dt>Synaptic pruning</dt><dd>The brain overproduces connections, then strengthens the ones used and prunes the rest: <b>use it or lose it</b> " + ev("r") + ".</dd></div>" +
+                "<div><dt>Early intervention</dt><dd>Home visiting and developmental services in the first years improve outcomes for many at-risk children " + ev("r") + ".</dd></div>" +
+                "<div><dt>Bridge: Harlow</dt><dd>Harlow’s infant monkeys sought a soft cloth “mother” over a wire one that gave milk: comfort, not only food. That leads to the next lesson, attachment.</dd></div></dl>" +
+                "<p><b>So:</b> what a baby experiences after birth keeps shaping the brain.</p>" },
+              { kind: "example", lvl: "p", title: "Brianna, with her counselor", body: who("<b>Brianna</b> and her counselor, at week 22.") +
+                '<dl class="x-dossier"><div><dt>Nonjudgmental start</dt><dd>“You came in. That’s the most protective thing you could do today.”</dd></div>' +
+                "<div><dt>Facts, not verdicts</dt><dd>Early exposure carries some risk; it doesn’t decide her baby’s future. Staying on buprenorphine is recommended; stopping abruptly would be riskier.</dd></div>" +
+                "<div><dt>Plan for birth</dt><dd>The hospital team knows to watch for and treat neonatal opioid withdrawal; she can room in and hold her baby, which helps.</dd></div>" +
+                "<div><dt>After birth</dt><dd>A referral to early intervention and a home-visiting nurse; her sister’s help written into the plan.</dd></div></dl>" +
+                "<p>“So it’s not over,” Brianna says. “No,” the counselor says. “A lot of it is just starting.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Many prenatal findings are <b>correlational</b>. People who use substances in pregnancy are also more likely to face poverty, stress, violence and poor care, and those confounders can produce the same outcomes. The “crack baby” scare shows how a correlational story, plus stigma, became a false certainty.</p>' +
+                "<p><b>The counter.</b> Some effects are robust under controls, such as FASD from alcohol. Confounding argues for care in claims, not for ignoring risk.</p>" +
+                "<p><b>Clinical point.</b> Stigma drives pregnant people away from prenatal care, which is itself a risk. Nonjudgmental, hope-giving care keeps them in.</p>" +
+                "<p>Background: M0 · Confounding variable; M2 · Neuroplasticity. Ahead: M6 · Attachment.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Embryonic sensitivity.</b> A hard-hat crew building a baby’s organs in weeks 3 to 8 under “HARD HAT ZONE: most sensitive” signs.</p>" +
+                "<p><b>Opioids in pregnancy.</b> A lifeguard handing a pregnant swimmer a steady methadone or buprenorphine raft instead of telling her to let go.</p>" +
+                "<p><b>Visual cliff.</b> A crawling baby stops at the glass “cliff” while mom waves from the other side.</p>" +
+                "<p><b>Synaptic pruning.</b> A gardener trims a bush of brain connections, keeping the branches that get used.</p>" +
+                "<p><b>The “crack baby” myth.</b> A red pen corrects the headline “CRACK BABIES” to “poverty and stress mattered more”.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m6.1:teachback", title: "Teach it back", prompt: "Explain to Brianna’s care team why her baby’s future isn’t fixed: the germinal, embryonic and fetal stages, and why weeks 3 to 8 are most sensitive for structural defects; teratogens and how timing and dose matter; alcohol and FASD with no known safe amount; nicotine; opioids, treatable neonatal opioid withdrawal syndrome, and why methadone or buprenorphine is recommended over withdrawal; the debunked “crack baby” syndrome and Frank et al. (2001); rubella and Zika; protective factors; newborn reflexes that fade; Fantz’s face preference and the visual cliff; milestones as ranges; Thomas and Chess’s temperament types; plasticity and synaptic pruning; early intervention; Harlow as a bridge to attachment; the critique that many prenatal findings are confounded by poverty and stress; and why stigma keeps people from prenatal care." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Embryonic period most sensitive for structural defects " + ev("r") + ". No known safe amount of alcohol " + ev("r") + ". Methadone or buprenorphine over withdrawal in pregnancy " + ev("r") + ". “Crack baby” syndrome " + ev("d") + ". Depth perception tied to crawling " + ev("r") + ". Early intervention helps " + ev("r") + ".</p>" +
+                "<p><b>So:</b> prenatal exposure shifts odds; treatment, care and a stable home shift them back. Meet Brianna with facts and hope, not blame.</p>" },
+              Q("During which prenatal stage are the major organs forming, making it most sensitive to structural defects?",
+                ["Germinal", "Embryonic", "Fetal", "Neonatal"], 1,
+                "Weeks 3 to 8, the embryonic period, is when organs and structures form."),
+              Q("Brianna is pregnant and has opioid use disorder. What is the recommended approach?",
+                ["Stop all opioids abruptly", "Medication with methadone or buprenorphine rather than withdrawal", "Wait until after birth to seek any treatment", "Switch to alcohol to taper"], 1,
+                "Medication treatment is recommended over withdrawal; neonatal opioid withdrawal syndrome is treatable."),
+              Q("What did later, better-controlled studies conclude about “crack babies”?",
+                ["The syndrome was confirmed as severe and permanent", "Effects were smaller than feared and often confounded by poverty and stress", "Cocaine has no effect at all on any outcome", "Only boys were affected"], 1,
+                "Frank et al. (2001) found smaller effects than feared; the syndrome was debunked."),
+              Q("In Gibson and Walk’s visual cliff, crawling infants:",
+                ["Crossed eagerly to their mothers", "Mostly refused to cross the apparent drop", "Could not see the glass at all", "Only crossed if they were newborns"], 1,
+                "Most crawling infants avoided the drop; later work tied this to crawling experience."),
+              Q("Two babies had the same prenatal exposure. What most likely explains why one does better at school age?",
+                ["Season of birth", "Stable, supportive caregiving and early intervention afterward", "Hair colour", "Nothing: exposure decides everything"], 1,
+                "Postnatal care and plasticity mean exposure isn’t destiny.")
+            ]
+          },
+          "m6.2": {
+            home: "Jasmine, 27, says she “chooses men who leave” and texts her partner 30 times when he doesn’t reply. Her mother was in and out of prison when she was a child. Is her pattern permanent?",
+            keys: [["What did Harlow’s monkey studies (1958) show?", "Infant monkeys clung to a soft cloth “mother” rather than a wire one that gave milk, especially when frightened: attachment rests on comfort, not just food. The studies are also criticised as cruel.", "A baby monkey hugging a fluffy bathrobe mom, while the wire mom holding a milk bottle stands alone, waving the bottle hopelessly."],
+              ["What are a secure base and a safe haven?", "A responsive caregiver is a secure base to explore from and a safe haven to return to when frightened or upset.", "A toddler using mom as a lighthouse: sailing out to explore, glancing back at the beam, and steering home fast when a storm appears."],
+              ["How is Lorenz’s imprinting different from human attachment?", "Goslings follow the first moving object they see in a brief critical window. Human attachment builds slowly over months through responsive care and stays open to change.", "A parade of goslings marching in a line behind a bearded Austrian in boots, who is not, despite appearances, their mother."],
+              ["What are the anxiety and avoidance dimensions of adult attachment?", "Anxiety is worry about rejection and abandonment; avoidance is discomfort with closeness and dependence. People vary along both, which fits the data better than fixed types.", "A phone with 30 sent texts, sweating anxiously, sitting next to a phone wearing noise-cancelling headphones."],
+              ["What is “earned security”?", "Adults who describe a difficult childhood but have made coherent sense of it, often through a supportive relationship or therapy, and relate securely now. Attachment is moderately stable, not destiny.", "A woman stitching a sturdy new quilt labelled “secure” out of patches from an old, ragged one, with her therapist holding the other end."]],
+            steps: [
+              { kind: "hook", title: "Jasmine’s 30 texts", body: who("<b>Jasmine</b>, 27, in outpatient counseling.") +
+                "<p>When her partner doesn’t reply for an hour, Jasmine sends text after text, 30 one evening, then feels ashamed. “I always choose men who leave,” she says.</p>" +
+                "<p>Her mother was in and out of prison throughout her childhood; Jasmine moved between her grandmother and foster homes.</p>" +
+                "<p>Is she stuck with this pattern, or can it change?</p>" },
+              { kind: "predict", id: "m6.2:predict", title: "Your call first",
+                case: ["Jasmine’s mother was repeatedly absent during her childhood.",
+                  { t: "She drives a blue car.", irrelevant: true },
+                  "She fears being left and seeks reassurance intensely.",
+                  "She has a steady relationship with her counselor.",
+                  { t: "She prefers tea to coffee.", irrelevant: true },
+                  "Her grandmother was a reliable presence."],
+                q: "Is Jasmine’s attachment pattern permanent?",
+                options: ["Yes: early attachment sets adult relationships for life", "No: patterns are moderately stable, but new relationships and therapy can build security", "It depends only on her genes"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: no. Early experience shapes expectations, and those tend to persist, but only moderately. Reliable relationships, like her grandmother and her counselor, and work on making sense of her past can build what researchers call earned security.",
+                hints: ["Ask whether anyone in her life has been reliable.",
+                  "The sentences that don’t decide it are dimmed. Read what’s left.",
+                  "Step one, aloud: say what could still change her expectations."] },
+              { kind: "idea", lvl: "f", title: "Where attachment theory came from", body: '<dl class="x-dossier"><div><dt>Bowlby, 1950s</dt><dd>In a report for the World Health Organization (1951) on children separated from their families, Bowlby argued that a continuous, warm bond matters for mental health. He saw attachment as an <b>evolved system</b>: staying close to a caregiver when afraid helped infants survive.</dd></div>' +
+                "<div><dt>Harlow, 1958</dt><dd>Infant rhesus monkeys clung to a soft cloth “mother” over a wire one that gave milk, especially when frightened " + ev("r") + ". <b>Comfort, not just food</b>, drives the bond. The studies caused lasting distress to the animals and are a landmark in debates on research ethics.</dd></div>" +
+                "<div><dt>Lorenz, imprinting</dt><dd>Goslings follow the first moving object they see, even Lorenz himself, in a brief critical window. A useful <b>contrast</b>: human attachment builds over months and stays open to change.</dd></div>" +
+                "<div><dt>Secure base and safe haven</dt><dd>A responsive caregiver is a <b>secure base</b> to explore from and a <b>safe haven</b> to return to under threat.</dd></div></dl>" +
+                "<p><b>So:</b> the bond is about safety and comfort, built by responsiveness.</p>" },
+              { kind: "idea", lvl: "p", title: "The Strange Situation", body: '<dl class="x-dossier"><div><dt>The procedure</dt><dd>Ainsworth (1978): a roughly 20-minute lab sequence in which a toddler is briefly separated from and reunited with the caregiver, with a stranger present at times. The key moment is the <b>reunion</b>.</dd></div>' +
+                "<div><dt>Secure</dt><dd>Upset or not at separation, the child seeks the caregiver at reunion, is comforted, and returns to play.</dd></div>" +
+                "<div><dt>Anxious-ambivalent (resistant)</dt><dd>Very distressed; at reunion seeks contact yet resists it and is hard to settle.</dd></div>" +
+                "<div><dt>Avoidant</dt><dd>Little visible distress; at reunion ignores or turns away from the caregiver.</dd></div>" +
+                "<div><dt>Disorganized</dt><dd>Added by Main and Solomon: contradictory or frozen behaviour, with no consistent strategy. Linked to <b>frightening or frightened</b> caregiving and to maltreatment " + ev("r") + ".</dd></div>" +
+                "<div><dt>Internal working models</dt><dd>Children build expectations of whether others will be there and whether they deserve care, carried into later relationships.</dd></div></dl>" +
+                "<p><b>So:</b> each pattern is a sensible strategy for the care a child receives.</p>" },
+              { kind: "contrast", id: "m6.2:contrast", title: "Same test, one difference",
+                q: "Both toddlers go through the Strange Situation. Which is more likely to seek comfort and settle at reunion?",
+                cases: [
+                  { label: "Toddler A", s: ["Same age and similar temperament.", { t: "Wearing a red shirt.", irrelevant: true }, { t: "The caregiver usually notices distress and responds warmly and quickly.", diff: true }, "Same lab; same stranger."] },
+                  { label: "Toddler B", s: ["Same age and similar temperament.", { t: "Wearing a red shirt.", irrelevant: true }, { t: "The caregiver often misses or brushes off distress.", diff: true }, "Same lab; same stranger."] }
+                ],
+                answer: 0,
+                features: ["The shirt", "The caregiver’s responsiveness", "The child’s age", "The lab"],
+                feature: 1,
+                why: "Only responsiveness differs. Children whose distress is reliably met learn the caregiver is a safe haven, and tend to show secure reunions; children whose distress is often missed learn to dampen or amplify their signals.",
+                hints: ["Find the one sentence where the two toddlers part ways.",
+                  "The sentences that don’t decide it are dimmed. Same test; ask what each child has learned to expect.",
+                  "Step one, aloud: say how each caregiver usually responds."] },
+              { kind: "idea", lvl: "m", title: "Adults, culture and debate", body: '<dl class="x-dossier"><div><dt>Adult attachment</dt><dd>Hazan and Shaver (1987) applied attachment to romantic love. Today it is measured on two <b>dimensions</b>: <b>anxiety</b> (fear of abandonment) and <b>avoidance</b> (discomfort with closeness). Dimensions fit the data better than fixed types ' + ev("r") + "; the typology is contested.</dd></div>" +
+                "<div><dt>Stability</dt><dd>Moderate, not destiny. <b>Earned security</b>: adults who make coherent sense of a hard childhood can relate securely.</dd></div>" +
+                "<div><dt>Culture</dt><dd>Strange Situation results vary: more avoidant classifications in some German samples, more resistant ones in some Japanese samples, where infants were rarely separated from mothers. The test’s meaning isn’t universal.</dd></div>" +
+                "<div><dt>Temperament</dt><dd>Kagan argued reunion behaviour partly reflects inborn temperament. Most researchers now see both temperament and care at work.</dd></div>" +
+                "<div><dt>Overstated claims</dt><dd>“Attachment parenting” claims that specific practices are required for secure attachment go beyond the evidence. <b>Reactive attachment disorder</b> is rare and specific, tied to severe early neglect.</dd></div>" +
+                "<div><dt>Harmful “attachment therapy”</dt><dd>Coercive “holding” or “rebirthing” therapies are harmful and not supported " + ev("d") + ". In 2000, ten-year-old Candace Newmaker died during such a session in Colorado; her therapists were convicted.</dd></div></dl>" +
+                "<p><b>So:</b> attachment is real and important; many popular claims about it are not.</p>" },
+              { kind: "example", lvl: "p", title: "Jasmine, in counseling", body: who("<b>Jasmine</b> and her counselor, three months in.") +
+                '<dl class="x-dossier"><div><dt>Therapy as secure base</dt><dd>Her counselor is consistent: same time, same warmth, and a clear plan for breaks. When Jasmine tests whether she will be dropped, she isn’t.</dd></div>' +
+                "<div><dt>Naming the pattern</dt><dd>When she feels abandoned, the anxiety dimension spikes; texting brings short relief and longer shame. They practise waiting, soothing and one clear message.</dd></div>" +
+                "<div><dt>Making sense of the past</dt><dd>Her mother’s incarceration meant repeated loss, not that Jasmine was unlovable. Parental incarceration is a recognised strain on attachment.</dd></div>" +
+                "<div><dt>Looking ahead</dt><dd>If she has children, programs such as <b>Circle of Security</b> and <b>Attachment and Biobehavioral Catch-up</b> (ABC), which has strong trial evidence, teach caregivers to follow a child’s cues.</dd></div></dl>" +
+                "<p>“So I’m not broken,” Jasmine says. “You learned to keep watch,” the counselor says. “You can learn to rest too.”</p>" +
+                '<p>See the patterns play out in a reunion.</p><button type="button" class="x-lens__b press" data-scene="attachment">Open the Attachment Theatre</button>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>The Strange Situation is a single, roughly <b>20-minute lab test</b> built in one culture, and its categories don’t mean the same everywhere. Temperament and heritability shape reunion behaviour too. And pop psychology has stretched “attachment styles” into fixed labels for adults, when the evidence supports moderately stable dimensions that change with relationships.</p>' +
+                "<p><b>The counter.</b> Caregiver sensitivity predicts security across many studies, and interventions that raise sensitivity, such as ABC, improve children’s attachment in randomised trials. The core is robust; the labels are not destiny.</p>" +
+                "<p>Background: M6 · Prenatal life and infancy. Ahead: M6 · ACEs: dose, response, and limits.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Harlow.</b> A baby monkey hugs a fluffy bathrobe mom while the wire mom waves her milk bottle hopelessly.</p>" +
+                "<p><b>Secure base and safe haven.</b> A toddler sails out from a lighthouse mom, glances back at the beam, and heads home when a storm appears.</p>" +
+                "<p><b>Lorenz’s imprinting.</b> A gosling parade follows a bearded Austrian in boots: not the same as human attachment.</p>" +
+                "<p><b>Anxiety and avoidance.</b> A sweating phone with 30 sent texts beside a phone wearing noise-cancelling headphones.</p>" +
+                "<p><b>Earned security.</b> A woman stitches a sturdy “secure” quilt from an old ragged one, her therapist holding the other end.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m6.2:teachback", title: "Teach it back", prompt: "Explain to Jasmine’s care team why her pattern isn’t permanent: Bowlby’s WHO report and attachment as an evolved system; Harlow’s cloth and wire mothers, comfort over food, and the ethics critique; Lorenz’s imprinting as a contrast; secure base and safe haven; Ainsworth’s Strange Situation and the secure, anxious-ambivalent and avoidant patterns; Main and Solomon’s disorganized pattern and frightening or frightened caregiving; internal working models; Hazan and Shaver’s adult attachment, and anxiety and avoidance as dimensions; moderate stability and earned security; cultural variation in Germany and Japan; Kagan’s temperament challenge; overstated attachment-parenting claims; reactive attachment disorder as rare; why holding therapy is harmful, and the death of Candace Newmaker; therapy as a secure base; parental incarceration; Circle of Security and ABC; and the critique of a short lab test and pop-psychology labels." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Comfort, not just food, drives infant bonds " + ev("r") + ". Caregiver sensitivity linked to security " + ev("r") + ". Dimensions over fixed types " + ev("r") + ". ABC improves attachment " + ev("r") + ". Rigid attachment-style labels " + ev("c") + ". Holding therapy " + ev("d") + ".</p>" +
+                "<p><b>So:</b> early bonds shape expectations, and steady new relationships, including therapy, can reshape them.</p>" },
+              Q("In Harlow’s studies, frightened infant monkeys ran to:",
+                ["The wire mother with milk", "The soft cloth mother without milk", "Neither mother", "Whichever was closer"], 1,
+                "Comfort, not just feeding, drove the bond."),
+              Q("In the Strange Situation, a toddler ignores the caregiver at reunion and keeps playing. This fits:",
+                ["Secure", "Anxious-ambivalent", "Avoidant", "Imprinting"], 2,
+                "Avoidant children show little distress and turn away at reunion."),
+              Q("Disorganized attachment is most linked to:",
+                ["Easy temperament", "Frightening or frightened caregiving and maltreatment", "Being an only child", "Daycare attendance"], 1,
+                "Main and Solomon tied it to caregivers who are a source of fear."),
+              Q("Which best describes current views of adult attachment?",
+                ["Four fixed types set in infancy", "Two dimensions, anxiety and avoidance, that are moderately stable and can change", "Purely genetic", "Irrelevant to relationships"], 1,
+                "Dimensions fit the data better than types, and earned security shows change is possible."),
+              Q("A parent asks about “holding therapy” for an adopted child. What should a clinician say?",
+                ["It is the best treatment for attachment problems", "It is harmful and unsupported; evidence-based options such as ABC or Circle of Security exist", "It works if done gently", "It is required for reactive attachment disorder"], 1,
+                "Coercive attachment therapies are harmful; Candace Newmaker died in such a session in 2000.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -18869,6 +19060,14 @@
           G("m5.6", "Intellectual disability", "Discapacidad intelectual", "Intellectual and adaptive limits from early on.", "A DSM-5 diagnosis requiring deficits in both intellectual and adaptive functioning, with onset during the developmental period."),
           G("m5.6", "Adaptive functioning", "Funcionamiento adaptativo", "Everyday living skills.", "Conceptual, social and practical skills for daily life; required alongside intellectual limits to diagnose intellectual disability."),
           G("m5.6", "Acculturation", "Aculturación", "Adapting to a new culture.", "The process of taking on another culture’s language and ways; it should be considered when testing people from other cultures."),
+          G("m6.1", "Germinal stage", "Etapa germinal", "The first two weeks after conception.", "The prenatal stage, about weeks 1–2, in which the fertilized egg divides and implants in the uterine wall."),
+          G("m6.1", "Embryonic stage", "Etapa embrionaria", "Weeks 3 to 8, when organs form.", "The prenatal stage, about weeks 3–8, in which major organs and structures form; the most sensitive period for structural defects."),
+          G("m6.1", "Fetal stage", "Etapa fetal", "Week 9 to birth: growth and maturing.", "The prenatal stage from about week 9 to birth, in which organs grow and mature and the brain keeps developing."),
+          G("m6.1", "Teratogen", "Teratógeno", "Something that can harm prenatal development.", "An agent, such as alcohol, some drugs or infections like rubella and Zika, that can harm prenatal development; effects depend on timing, dose and other factors."),
+          G("m6.1", "Fetal alcohol spectrum disorder (FASD)", "Trastorno del espectro alcohólico fetal (TEAF)", "Effects of alcohol exposure before birth.", "A range of physical, growth, learning and behavioural effects from prenatal alcohol exposure; no safe amount of alcohol in pregnancy is known."),
+          G("m6.1", "Neonatal opioid withdrawal syndrome", "Síndrome de abstinencia neonatal a opioides", "Withdrawal signs in a newborn exposed to opioids.", "Withdrawal symptoms in a newborn after prenatal opioid exposure; treatable, and not a reason to stop methadone or buprenorphine treatment in pregnancy."),
+          G("m6.1", "Newborn reflexes", "Reflejos del recién nacido", "Automatic responses babies are born with.", "Inborn responses such as rooting, sucking, Moro, grasping and Babinski, most of which fade in the first months as the brain matures."),
+          G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           G("m3.7", "Verbal behavior", "Conducta verbal", "Speaking as behaviour shaped by what listeners do.", "Skinner’s (1957) term and book: language treated as operant behaviour, reinforced through other people; sorted into mands, tacts, echoics and intraverbals; challenged by Chomsky (1959); see Universal grammar."),
           G("m3.7", "Mand", "Mando", "A request, kept going by getting the thing.", "In Skinner’s analysis, a verbal operant controlled by what the speaker wants and reinforced by getting it, such as “more juice!” followed by juice; usually taught first in verbal behaviour programmes; see Tact."),
@@ -19459,6 +19658,12 @@
             R("Steele & Aronson", 1995, "experiment", "Black students performed worse on a difficult verbal test when it was described as diagnostic of ability than when it was not.", st("contested", "Influential; larger replications and meta-analyses find mixed or smaller effects.")),
             R("Flore & Wicherts", 2015, "meta-analysis", "Stereotype threat effects on girls’ maths performance were small and showed signs of publication bias.", st("contested", "Part of a wider debate about the size of stereotype threat.")),
             R("Kanaya, Scullin & Ceci", 2003, "observational", "As outdated IQ norms were replaced, more children scored in the intellectual disability range, showing how the Flynn effect can affect diagnosis.", st("robust", "Norm obsolescence is now considered in evaluations, including in capital cases."))];
+          REFS["m6.1"] = [
+            R("Frank, Augustyn, Knight, Pell & Zuckerman", 2001, "review", "A systematic review of prenatal cocaine exposure found no consistent effects on early childhood development once confounders such as other exposures and poverty were accounted for.", st("robust", "Ended the “crack baby” syndrome as a scientific claim; subtle, specific effects are still studied.")),
+            R("Gibson & Walk", 1960, "experiment", "Most crawling infants would not cross a glass surface over an apparent drop, even when their mothers called them.", st("robust", "Later work tied wariness of heights to crawling experience rather than to inborn fear alone.")),
+            R("Fantz", 1961, "experiment", "Young infants looked longer at face-like and patterned stimuli than at plain ones, showing early visual preferences.", st("robust", "The preference-looking method remains a basic tool in infant research.")),
+            R("Thomas & Chess", 1977, "longitudinal", "The New York Longitudinal Study described easy, difficult and slow-to-warm-up temperaments and stressed the fit between child and caregiving.", st("contested", "Temperament is real and partly stable; the three types leave many children unclassified.")),
+            R("ACOG Committee Opinion 711", 2017, "review", "Recommended medication for opioid use disorder with methadone or buprenorphine during pregnancy over medically supervised withdrawal.", st("robust", "Consistent with WHO and SAMHSA guidance; neonatal opioid withdrawal syndrome is expected and treatable."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
