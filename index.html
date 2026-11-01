@@ -18365,6 +18365,193 @@
                 "Predict high-risk dates, plan responses, and treat cravings without shame.")
             ]
           },
+          "m8.1": {
+            home: "Roberto snaps in group: “I don’t have a drinking problem, my wife has a nagging problem.” And whenever his late father comes up, he cracks a joke. Is he lying?",
+            keys: [["What are Freud’s topography and structure of the mind?", "Topography: the conscious (what you notice now), the preconscious (what you can call up) and the unconscious (what is kept out of awareness). Structure: the id (urges), the ego (the realistic manager) and the superego (the inner rules and conscience). They are metaphors, not brain parts.", "An iceberg wearing a tiny captain’s hat (the ego), while below the waterline a party animal (the id) and a strict librarian (the superego) argue."],
+              ["What is displacement?", "A defense mechanism: a feeling is moved from the person who caused it to a safer target. Anger at the boss comes out at home.", "A man furious at his boss comes home and yells at his innocent houseplant."],
+              ["What is projection?", "A defense mechanism: seeing in others a feeling or trait we can’t accept in ourselves.", "A guy pointing at everyone else’s messy room while standing in a mountain of his own laundry."],
+              ["What is humor as a defense, and Vaillant’s hierarchy?", "George Vaillant ranked defenses from immature (denial, projection, acting out) to mature (humor, sublimation, altruism). In his Harvard study following men across life, more mature defenses predicted better adult outcomes. Humor eases pain while still facing it, though it can also be used to dodge it.", "A stand-up comedian at a funeral keeps the crowd laughing so he doesn’t cry."],
+              ["What is the falsifiability critique?", "Karl Popper argued that a scientific theory must say what result would prove it wrong. Much of Freud’s theory can explain any outcome after the fact, so it can’t be tested.", "Karl Popper holds up a “Prove me wrong” sign, and Freud’s theory ducks, dodges and cartwheels around it every time."]],
+            steps: [
+              { kind: "hook", title: "Roberto in group", body: who("<b>Ms. Alvarez</b>, a substance use counselor, running Tuesday group.") +
+                "<p>Roberto, 38, is in the program after a second DUI. When another member mentions drinking to cope, Roberto cuts in, red in the face.</p>" +
+                "<p>“I don’t have a drinking problem. My wife has a <i>nagging</i> problem. I drink like everybody else.”</p>" +
+                "<p>Later, someone asks about his father, who died last spring. Roberto grins: “Dad? He’d have loved this place. Free coffee.” The group laughs. He does this every time his father comes up.</p>" },
+              { kind: "predict", id: "m8.1:predict", title: "Your call first",
+                case: ["Roberto has two DUIs but says he has no drinking problem.",
+                  { t: "He wears the same baseball cap to every group.", irrelevant: true },
+                  "He blames his wife’s “nagging” for the conflict at home.",
+                  "He jokes every time his late father comes up.",
+                  { t: "The group meets on Tuesdays.", irrelevant: true },
+                  "He gets angry, not calm, when drinking is mentioned."],
+                q: "Is Roberto lying when he says he has no drinking problem?",
+                options: ["Yes, he knows he has a problem and is hiding it on purpose", "Probably not in the plain sense: he may be protecting himself from a painful truth without fully seeing it", "No, two DUIs prove nothing about drinking"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: this looks less like a lie and more like a defense. Denial keeps a threatening fact out of full awareness; blaming his wife looks like projection or rationalization; the jokes about his father may keep grief at arm’s length. The heat in his voice is a clue: people rarely get angry defending something that doesn’t matter to them. Defenses are not fully conscious choices, and they protect real pain.",
+                hints: ["Ask what the anger and the jokes might be protecting him from.",
+                  "The sentences that don’t decide it are dimmed. Look at what he does when drinking or his father comes up.",
+                  "Step one, aloud: say the difference between hiding a fact and not letting yourself see it."] },
+              { kind: "idea", lvl: "f", title: "Freud’s map of the mind", body: "<p>You met Freud’s story in M1 · Psychoanalysis and the humanists’ push back against it in M1 · Humanism. Here we go deeper.</p>" +
+                '<dl class="x-dossier"><div><dt>Topography</dt><dd>Three levels of awareness: the <b>conscious</b>, what you notice right now; the <b>preconscious</b>, what you can call up, like a phone number; and the <b>unconscious</b>, wishes, fears and memories kept out of awareness that still shape behaviour.</dd></div>' +
+                "<div><dt>Structure</dt><dd>The <b>id</b> wants pleasure now; the <b>superego</b> holds the rules and conscience absorbed from parents and culture; the <b>ego</b> is the realistic manager trying to satisfy both and the outside world. These are <b>metaphors</b> for competing pulls, not parts of the brain.</dd></div>" +
+                "<div><dt>Defense mechanisms</dt><dd>Anna Freud (1936) set out how the ego protects us from anxiety, mostly outside awareness: <b>denial</b> (refusing a painful fact), <b>projection</b> (seeing our own unwanted feelings in others), <b>displacement</b> (aiming a feeling at a safer target), <b>rationalization</b> (a good-sounding reason for the real one), <b>reaction formation</b> (acting the opposite of what we feel), <b>sublimation</b> (turning an urge into something valued) and <b>humor</b>.</dd></div>" +
+                "<div><dt>Vaillant’s hierarchy</dt><dd>George Vaillant ranked defenses from <b>immature</b> (denial, projection, acting out) to <b>mature</b> (humor, sublimation, altruism, anticipation). In the Harvard study that followed men from college into old age, men who used more mature defenses had better work, relationships and health later on " + ev("r") + ".</dd></div></dl>" +
+                "<p><b>So:</b> defenses are everyday ways of managing pain, from rigid and costly to flexible and healthy.</p>" },
+              { kind: "idea", lvl: "p", title: "Stages, complexes and the neo-Freudians", body: '<dl class="x-dossier"><div><dt>Psychosexual stages</dt><dd>Freud said personality forms through <b>oral, anal, phallic, latency and genital</b> stages, and that getting “stuck” in one leaves lasting traits. Studies have found little support for the stages as stated ' + ev("d") + ".</dd></div>" +
+                "<div><dt>Oedipus complex</dt><dd>The claim that young children desire the opposite-sex parent and rival the same-sex one. Not supported as a universal stage; cross-cultural and developmental evidence fits it poorly " + ev("d") + ".</dd></div>" +
+                "<div><dt>Jung</dt><dd>Proposed a <b>collective unconscious</b> shared by all humans, filled with <b>archetypes</b> such as the hero and the shadow. Rich for art and therapy talk, but untestable " + ev("c") + ".</dd></div>" +
+                "<div><dt>Adler</dt><dd>Stressed striving to overcome feelings of <b>inferiority</b>, and <b>social interest</b>, a sense of belonging and contribution, as the mark of health. His ideas on <b>birth order</b> have weak evidence in large studies " + ev("d") + ".</dd></div>" +
+                "<div><dt>Horney</dt><dd>Rejected Freud’s idea of <b>penis envy</b> as a view from a male-dominated culture, and put <b>basic anxiety</b>, a child’s sense of being alone in a hostile world, at the centre.</dd></div>" +
+                "<div><dt>Erikson</dt><dd>Turned Freud’s stages into psychosocial crises across the whole lifespan. Background: M6 · Adolescence and identity.</dd></div>" +
+                "<div><dt>Object relations and attachment</dt><dd>Melanie Klein and Donald Winnicott moved the focus from drives to <b>relationships</b>. Winnicott’s <b>“good-enough mother”</b> meets a child’s needs well enough, not perfectly. This line of thought fed attachment theory. Background: M6 · Attachment.</dd></div></dl>" +
+                "<p><b>So:</b> many of Freud’s specific claims failed, and his followers shifted the focus toward relationships and social life.</p>" },
+              { kind: "contrast", id: "m8.1:contrast", title: "Same denial, one difference",
+                q: "Two clients both play down their drinking. Who is more likely to be drinking more a year later?",
+                cases: [
+                  { label: "Client A", s: ["Says, “I drink like everybody else.”", { t: "Comes to session in a work uniform.", irrelevant: true }, { t: "The counselor confronts hard: “You’re an alcoholic in denial. Admit it.”", diff: true }, "Same history; same program."] },
+                  { label: "Client B", s: ["Says, “I drink like everybody else.”", { t: "Comes to session in a work uniform.", irrelevant: true }, { t: "The counselor reflects gently: “It sounds like the drinking feels normal to you, and the DUIs don’t quite fit.”", diff: true }, "Same history; same program."] }
+                ],
+                answer: 0,
+                features: ["The work uniform", "Whether the counselor confronts or reflects", "What the client said", "Their history"],
+                feature: 1,
+                why: "Only the counselor’s style differs. Miller, Benefield and Tonigan (1993) found that the more a counselor confronted, the more clients drank a year later. Attacking denial tends to make the defense dig in.",
+                hints: ["Find the one sentence where the two cases part ways.",
+                  "The sentences that don’t decide it are dimmed. The clients say the same thing; look at the counselor.",
+                  "Step one, aloud: say how you would feel if each counselor said that to you."] },
+              { kind: "idea", lvl: "m", title: "What survived, and what the evidence says", body: '<dl class="x-dossier"><div><dt>What survived</dt><dd>Drew Westen (1998) argued that several core ideas hold up: much of mental life is <b>unconscious</b>; mental processes can <b>conflict</b>, so we can want and fear the same thing; early relationships set <b>templates</b> we bring to later ones, seen in therapy as <b>transference</b>; and <b>defenses</b> are real ' + ev("r") + ".</dd></div>" +
+                "<div><dt>Implicit, not repressed</dt><dd>Modern research shows plenty of <b>implicit</b> processing: priming, implicit memory, automatic attitudes. That is not the same as Freud’s dynamic unconscious full of <b>repressed</b> wishes; evidence for repression of whole traumatic memories is weak " + ev("c") + ". Background: M4 · Trauma and memory controversies.</dd></div>" +
+                "<div><dt>Falsifiability</dt><dd>Karl Popper used psychoanalysis as his example of a theory that is not scientific: if a man is generous, that is sublimation; if he is stingy, that is reaction formation. A theory that explains every outcome predicts none.</dd></div>" +
+                "<div><dt>Therapy outcomes</dt><dd>Short-term <b>psychodynamic therapy</b> shows meaningful benefits in meta-analyses (Shedler 2010; Leichsenring and colleagues) " + ev("r") + ". Whether it equals or beats other therapies is argued; comparisons are few and often run by its supporters " + ev("c") + ".</dd></div>" +
+                "<div><dt>In the counselor too</dt><dd><b>Transference</b> is the client bringing old relationship patterns to the counselor. <b>Countertransference</b> is the counselor’s own reactions to the client. Noticing both, in supervision, keeps them from steering the work.</dd></div></dl>" +
+                "<p><b>So:</b> the specific theory is weak, but the broad idea of a mind that protects itself, outside awareness, holds up.</p>" },
+              { kind: "example", lvl: "p", title: "Ms. Alvarez works with the defense", body: who("<b>Ms. Alvarez</b> and Roberto, after group and in the next two sessions.") +
+                '<dl class="x-dossier"><div><dt>Don’t attack denial</dt><dd>She doesn’t say “You’re in denial.” In motivational interviewing she <b>rolls with resistance</b>: “So from where you sit, the drinking isn’t the problem, the arguments are.” His <b>sustain talk</b> (reasons not to change) is heard, not fought.</dd></div>' +
+                "<div><dt>Notice with compassion</dt><dd>She sees the blaming and the jokes as <b>protection</b>, not manipulation. “When your dad comes up, you make us laugh. I wonder what it would be like not to have to.”</dd></div>" +
+                "<div><dt>Look for change talk</dt><dd>She asks, “What would your wife say the DUIs cost you?” Roberto goes quiet, then: “My license. Maybe more, if I’m honest.” She reflects that line back.</dd></div>" +
+                "<div><dt>Watch her own reactions</dt><dd>She notices she feels irritated when he mocks the group, a flash of <b>countertransference</b>; her own brother drank. She takes it to supervision instead of into the room.</dd></div>" +
+                "<div><dt>Make room for grief</dt><dd>Later, alone, she asks gently about his father. The jokes slow down. His father drank too.</dd></div></dl>" +
+                "<p>“I keep thinking if I stop laughing about him,” Roberto says, “I won’t stop the other thing either.”</p>" },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>Much of Freud’s theory is unfalsifiable: it explains any outcome after the fact. It was built from a small, biased set of case studies, mostly Viennese middle-class patients, read through Freud’s own interpretations, not tested against controls. It carried strong gender bias, from penis envy to “hysteria” in women. The psychosexual stages and the Oedipus complex have little support.</p>' +
+                "<p><b>The counter.</b> Later researchers kept what could be tested and dropped the rest. Defenses can be rated reliably and predict outcomes in long studies like Vaillant’s; implicit processes are well established; short-term psychodynamic therapy has trial support. The useful clinical stance, noticing defenses kindly instead of attacking them, also matches what motivational interviewing research shows.</p>" +
+                "<p>Ahead: M8 · Traits and the Big Five; M8 · The humanistic self. Background: M1 · Psychoanalysis; M1 · Humanism; M6 · Attachment; M4 · Trauma and memory controversies.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>Topography and structure.</b> An iceberg wears a tiny captain’s hat (the ego), while below the waterline a party animal (the id) and a strict librarian (the superego) argue.</p>" +
+                "<p><b>Displacement.</b> A man furious at his boss comes home and yells at his innocent houseplant.</p>" +
+                "<p><b>Projection.</b> A guy points at everyone else’s messy room while standing in a mountain of his own laundry.</p>" +
+                "<p><b>Humor, a mature defense.</b> A stand-up comedian at a funeral keeps the crowd laughing so he doesn’t cry.</p>" +
+                "<p><b>Falsifiability.</b> Karl Popper holds up a “Prove me wrong” sign, and Freud’s theory dodges it every time.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.1:teachback", title: "Teach it back", prompt: "Explain to a new counselor why Roberto may not be lying: Freud’s topography (conscious, preconscious, unconscious) and structure (id, ego, superego) as metaphors, not brain parts; Anna Freud’s defense mechanisms (denial, projection, displacement, rationalization, reaction formation, sublimation, humor) and which ones Roberto shows; Vaillant’s hierarchy and his Harvard finding on mature defenses; the psychosexual stages and Oedipus complex and why they lack support; the neo-Freudians (Jung’s archetypes, Adler’s inferiority and birth order, Horney’s basic anxiety, Erikson); object relations and Winnicott’s good-enough mother; what survived, per Westen; implicit processes vs a repressed unconscious; Popper’s falsifiability critique; the evidence for short-term psychodynamic therapy; transference and countertransference; and why Miller’s 1993 finding says to roll with resistance, not confront denial." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Unconscious and implicit processes " + ev("r") + ". Defenses and Vaillant’s mature-defense finding " + ev("r") + ". Confrontation predicting more drinking " + ev("r") + ". Short-term psychodynamic therapy works " + ev("r") + "; equal to or better than others " + ev("c") + ". Repressed traumatic memories " + ev("c") + ". Jung’s archetypes " + ev("c") + ". Birth-order effects on personality " + ev("d") + ". Psychosexual stages and the Oedipus complex as stated " + ev("d") + ".</p>" +
+                "<p><b>So:</b> Roberto’s denial and jokes are protection; meet them with curiosity, not a battering ram.</p>" },
+              Q("Freud’s id, ego and superego are best understood as:",
+                ["Three separate brain regions", "Metaphors for competing pulls in the mind", "Stages a child passes through", "Types of personality disorder"], 1,
+                "They describe urges, rules and a realistic manager, not brain parts."),
+              Q("Furious at his supervisor, a man comes home and snaps at his kids. This is:",
+                ["Projection", "Sublimation", "Displacement", "Reaction formation"], 2,
+                "Displacement moves a feeling to a safer target."),
+              Q("In Vaillant’s long-term Harvard study, men who used more mature defenses such as humor and sublimation:",
+                ["Had worse adult outcomes", "Had better work, relationships and health later", "Showed no difference", "Became more anxious"], 1,
+                "Mature defenses predicted better adult outcomes."),
+              Q("Popper’s main criticism of psychoanalysis was that it:",
+                ["Used too many statistics", "Could explain any outcome, so no result could prove it wrong", "Ignored childhood", "Focused only on behaviour"], 1,
+                "A theory that explains everything after the fact can’t be tested."),
+              Q("Roberto says, “My wife has a nagging problem, not me.” Which response best fits the evidence?",
+                ["“You’re in denial. Admit you’re an alcoholic.”", "Reflect his view gently and listen for his own reasons to change", "Ignore the comment and move on", "Tell the group to confront him"], 1,
+                "Confrontation predicted more drinking (Miller 1993); rolling with resistance keeps him talking.")
+            ]
+          },
+          "m8.2": {
+            home: "After one week, Ms. Chen calls one new counselor “lazy” and another “a natural leader.” Now a personality test is about to decide who gets hired. What can a trait really tell her?",
+            keys: [["What is the Big Five (OCEAN)?", "Five broad trait dimensions found across many languages and cultures: Openness, Conscientiousness, Extraversion, Agreeableness and Neuroticism (Costa and McCrae; Goldberg).", "Five fish: a curious fish reading poetry, a tidy fish with a planner, a party fish with a microphone, a fish hugging everyone, and a nervous fish checking the stove."],
+              ["Are traits types or dimensions?", "Dimensions. Each trait runs from low to high, and most people score near the middle, not in one box or the other.", "A volume knob on each trait instead of an on/off switch, with most knobs turned near the middle."],
+              ["What is the maturity principle?", "On average, people become more conscientious and agreeable, and less neurotic, from young adulthood into middle age (Roberts and colleagues, 2006).", "A grumpy 20-year-old cactus that softens into a mellow 50-year-old cactus wearing reading glasses."],
+              ["What is the Barnum effect?", "Forer (1949): people rate vague, general descriptions as uniquely accurate about themselves. It makes weak personality feedback feel true.", "A fortune cookie says “You are sometimes shy but can be outgoing,” and everyone in the restaurant gasps, “That’s SO me!”"],
+              ["Why is the MBTI poor for decisions?", "The Myers-Briggs Type Indicator sorts people into 16 types, but many people get a different type when retested, and types predict job performance poorly. It shouldn’t be used for hiring.", "An MBTI box that sorts the same person into a different drawer each month."]],
+            steps: [
+              { kind: "hook", title: "Ms. Chen’s first week", body: who("<b>Ms. Chen</b>, a supervisor at a reentry center, talking with HR.") +
+                "<p>Two new counselors started Monday. Dev sat quietly in the staff meeting, left at five sharp and hasn’t volunteered for anything. Tasha ran the group when the lead was out and chatted with every client in the lobby.</p>" +
+                "<p>“Dev is lazy,” Ms. Chen says. “Tasha is a natural leader. You can just tell.”</p>" +
+                "<p>HR has a new plan: every applicant will take a personality test, and the results will help decide who gets hired.</p>" },
+              { kind: "predict", id: "m8.2:predict", title: "Your call first",
+                case: ["Ms. Chen has watched Dev for one week.",
+                  { t: "Dev drives a blue car.", irrelevant: true },
+                  "Dev is new to the staff and the building.",
+                  "Ms. Chen saw him mostly in one setting: staff meetings.",
+                  { t: "The center serves lunch at noon.", irrelevant: true },
+                  "Dev leaves at five because he picks up his daughter."],
+                q: "Will the counselor labeled “lazy” act lazy across all situations?",
+                options: ["Yes, a trait shows up the same way everywhere", "Probably not: one week in one setting is a thin sample, and behaviour varies with the situation", "Yes, first impressions of personality are usually right"],
+                after: "No grade here. Keep your guess in mind.",
+                reveal: "Here’s the most likely answer: probably not. Behaviour in any one situation is a weak guide to a trait. Dev is new, quiet in meetings and leaves on time for his child; with clients, one-on-one, he may be careful and thorough. Traits predict behaviour averaged over many situations, not a single week in one room.",
+                hints: ["Ask how many situations Ms. Chen has actually seen him in.",
+                  "The sentences that don’t decide it are dimmed. Look at why he might be quiet or leave on time.",
+                  "Step one, aloud: name two settings where Dev might act differently."] },
+              { kind: "idea", lvl: "f", title: "Describing people with traits", body: '<dl class="x-dossier"><div><dt>Traits</dt><dd>Fairly stable tendencies to think, feel and act in certain ways. The trait approach describes <b>how much</b> of each tendency a person has.</dd></div>' +
+                "<div><dt>The lexical hypothesis</dt><dd>Gordon Allport reasoned that if a trait matters, people will have a word for it. He and Odbert combed the dictionary for thousands of trait words. Raymond Cattell boiled them down to the <b>16PF</b>; Hans Eysenck argued for three: <b>psychoticism, extraversion, neuroticism</b> (PEN).</dd></div>" +
+                "<div><dt>The Big Five, OCEAN</dt><dd>Paul Costa and Robert McCrae, and Lewis Goldberg, found five broad dimensions again and again: <b>Openness</b> (curious, imaginative), <b>Conscientiousness</b> (organized, dependable), <b>Extraversion</b> (outgoing, energetic), <b>Agreeableness</b> (warm, cooperative) and <b>Neuroticism</b> (prone to worry and low mood). The structure appears in many languages " + ev("r") + ".</dd></div>" +
+                "<div><dt>HEXACO</dt><dd>Michael Ashton and Kibeom Lee add a sixth, <b>honesty-humility</b>. Whether six beats five is still argued " + ev("c") + ".</dd></div>" +
+                "<div><dt>Dimensions, not types</dt><dd>Each trait runs from low to high, and <b>most people are near the middle</b>. “Introvert” and “extravert” are ends of a scale, not two boxes.</dd></div></dl>" +
+                "<p><b>So:</b> traits describe how much of five broad tendencies a person has, on a scale where most of us sit in the middle.</p>" },
+              { kind: "idea", lvl: "p", title: "Stable, changing and predictive", body: '<dl class="x-dossier"><div><dt>Rank-order stability</dt><dd>Where you stand compared with others becomes <b>more stable with age</b>; it is lower in youth and settles through adulthood.</dd></div>' +
+                "<div><dt>The maturity principle</dt><dd>Roberts and colleagues (2006): on average, people grow <b>more conscientious and agreeable</b> and <b>less neurotic</b> from young adulthood into middle age " + ev("r") + ".</dd></div>" +
+                "<div><dt>Traits can change</dt><dd>Roberts and colleagues (2017) reviewed therapy studies: treatment brought lasting drops in <b>neuroticism</b> within weeks " + ev("c") + ".</dd></div>" +
+                "<div><dt>Genes</dt><dd>Twin studies find the Big Five are <b>moderately heritable</b>; genes and environment both matter. Background: M2 · Genes, heritability & epigenetics.</dd></div>" +
+                "<div><dt>What traits predict</dt><dd><b>Conscientiousness</b> predicts job performance, better health habits and even a longer life. <b>Neuroticism</b> raises the risk of anxiety, depression and other mental health problems " + ev("r") + ".</dd></div>" +
+                "<div><dt>The person–situation debate</dt><dd>Walter Mischel (1968) showed that behaviour in one situation predicts behaviour in another only weakly. The resolution: traits predict <b>behaviour averaged across many situations</b>, and people show stable <b>if-then signatures</b> (“if criticized, then withdraws”). Ahead: M8 · Social-cognitive views.</dd></div></dl>" +
+                "<p><b>So:</b> traits are fairly stable but can shift, they predict real outcomes on average, and situations still matter.</p>" },
+              { kind: "contrast", id: "m8.2:contrast", title: "Same test, one difference",
+                q: "Two people take the same personality questionnaire and retake it five weeks later. Whose result is more likely to come out the same?",
+                cases: [
+                  { label: "Person A", s: ["Answers the same set of questions twice.", { t: "Takes it on a laptop.", irrelevant: true }, { t: "Gets a score on each dimension, such as extraversion at the 55th percentile.", diff: true }, "Same mood; same week of the month."] },
+                  { label: "Person B", s: ["Answers the same set of questions twice.", { t: "Takes it on a laptop.", irrelevant: true }, { t: "Gets an MBTI-style type, such as “ENFP”.", diff: true }, "Same mood; same week of the month."] }
+                ],
+                answer: 0,
+                features: ["The laptop", "Whether the result is a dimension score or a type", "The questions", "Their mood"],
+                feature: 1,
+                why: "Only the way the result is reported differs. Most people sit near the middle of each trait, so a tiny shift in answers can flip a type from “E” to “I,” while a dimension score barely moves. That is why many people get a different MBTI type on retest.",
+                hints: ["Find the one sentence where the two people part ways.",
+                  "The sentences that don’t decide it are dimmed. Think about someone who sits right at the middle.",
+                  "Step one, aloud: say what happens to a type when a middle score moves a little."] },
+              { kind: "idea", lvl: "m", title: "Types, horoscopes and hiring", body: '<dl class="x-dossier"><div><dt>The MBTI</dt><dd>The Myers-Briggs Type Indicator sorts people into <b>16 types</b>. Because it splits dimensions into boxes, many people get a <b>different type on retest</b>, and types predict job performance poorly. It is popular for team-building talk, but not valid for hiring or other decisions ' + ev("d") + ".</dd></div>" +
+                "<div><dt>The Barnum effect</dt><dd>Bertram Forer (1949) gave students the same vague “personal” profile, built from horoscopes. They rated it as highly accurate about themselves. General statements such as “you can be outgoing but sometimes shy” feel personal to almost everyone " + ev("r") + ".</dd></div>" +
+                "<div><dt>Using tests well</dt><dd>Well-built Big Five measures, especially <b>conscientiousness</b>, add some useful information in hiring when tied to the job, alongside structured interviews and work samples. No test should be the only gate.</dd></div>" +
+                "<div><dt>In the clinic</dt><dd>Use trait language to <b>describe</b>, not to set destiny: “you tend to worry,” not “you’re a worrier.” High <b>neuroticism</b> is a treatable target; Barlow’s <b>Unified Protocol</b> aims at it across anxiety and depression. Traits can also guide fit: an extraverted client may prefer group work, a more introverted one individual sessions.</dd></div></dl>" +
+                "<p><b>So:</b> dimension scores from good measures inform; types and vague profiles mostly flatter.</p>" },
+              { kind: "example", lvl: "p", title: "Ms. Chen slows down", body: who("<b>Ms. Chen</b> and the HR lead, two weeks later.") +
+                '<dl class="x-dossier"><div><dt>Widen the sample</dt><dd>She watches Dev with clients. One-on-one, he is calm, thorough and follows up on every referral. Tasha shines in groups but misses paperwork deadlines. “Lazy” and “natural leader” came from one setting.</dd></div>' +
+                "<div><dt>Describe, don’t label</dt><dd>She rewrites her notes: “Dev is quieter in large meetings and very conscientious with case files. Tasha is highly extraverted and energizes groups.”</dd></div>" +
+                "<div><dt>Fix the hiring plan</dt><dd>HR had planned to use an MBTI-style type test. She pushes back: use a validated Big Five measure, if any, as one input alongside a structured interview and a work sample, never as the cutoff.</dd></div>" +
+                "<div><dt>Watch for Barnum</dt><dd>When a vendor’s sample report says “You value connection but need time to recharge,” she laughs: “That describes everyone in this building.”</dd></div></dl>" +
+                '<p>Try sliding the five traits yourself, and see how most people land near the middle. <button type="button" class="x-lens__b press" data-scene="bigfive">Open the Big Five Mirror</button></p>' },
+              { kind: "mastery", lvl: "m", title: "Where the account is thin", body: '<p class="x-crit"><b>Strongest critique</b>The Big Five is descriptive, not explanatory: saying someone is late because they are low in conscientiousness just renames the behaviour. It rests mostly on self-report, which people can shade. And it grew out of English and other Western word lists; some cultures yield different or fewer factors, and the five don’t replicate equally well everywhere.</p>' +
+                "<p><b>The counter.</b> A good description is still useful: the five dimensions predict health, work and mental health outcomes, and ratings by others agree with self-reports. Research on the genes, development and if-then patterns behind traits is starting to supply explanations. Ahead: M8 · Personality across cultures.</p>" +
+                "<p>Ahead: M8 · Social-cognitive views; M8 · Assessing personality; M8 · Personality across cultures. Background: M8 · Psychodynamic views; M2 · Genes, heritability & epigenetics; M5 · Cognitive biases.</p>" },
+              { kind: "idea", lvl: "f", title: "Make it stick", body: "<p><b>The Big Five, OCEAN.</b> Five fish: a curious fish reading poetry, a tidy fish with a planner, a party fish with a microphone, a fish hugging everyone, and a nervous fish checking the stove.</p>" +
+                "<p><b>Dimensions, not types.</b> Each trait has a volume knob instead of an on/off switch, and most knobs sit near the middle.</p>" +
+                "<p><b>The maturity principle.</b> A grumpy 20-year-old cactus softens into a mellow 50-year-old cactus wearing reading glasses.</p>" +
+                "<p><b>The Barnum effect.</b> A fortune cookie says “You are sometimes shy but can be outgoing,” and everyone in the restaurant gasps, “That’s SO me!”</p>" +
+                "<p><b>MBTI retest.</b> The MBTI box sorts the same person into a different drawer each month.</p>" +
+                "<p>Silly picture, true idea. If one of yours is sillier, add it as your hook in Review.</p>" },
+              { kind: "teachback", id: "m8.2:teachback", title: "Teach it back", prompt: "Explain to Ms. Chen what traits can and can’t tell her: the trait approach and Allport’s lexical hypothesis; Cattell’s 16PF and Eysenck’s PEN; the Big Five (openness, conscientiousness, extraversion, agreeableness, neuroticism) from Costa and McCrae and Goldberg, and its spread across languages; HEXACO and honesty-humility; traits as dimensions with most people near the middle; rank-order stability and the maturity principle; change through therapy; moderate heritability; what conscientiousness and neuroticism predict; Mischel’s person–situation debate, aggregated behaviour and if-then signatures; why the MBTI and its retest problems don’t belong in hiring; the Barnum effect; the critique that the Big Five describes rather than explains and rests on self-report and Western lexicons; and how to use trait language in the clinic: descriptive, not destiny, neuroticism as a treatment target, and fitting care to a client’s traits." },
+              { kind: "idea", lvl: "f", title: "So", body: "<p>Big Five structure " + ev("r") + ". Maturity principle " + ev("r") + ". Conscientiousness and neuroticism predicting outcomes " + ev("r") + ". Barnum effect " + ev("r") + ". Therapy lowering neuroticism " + ev("c") + ". HEXACO over the Big Five " + ev("c") + ". MBTI types for hiring " + ev("d") + ".</p>" +
+                "<p><b>So:</b> one week in one room shows a slice, not a trait; describe people on dimensions and don’t let a type decide a job.</p>" },
+              Q("The Big Five traits are:",
+                ["Openness, conscientiousness, extraversion, agreeableness, neuroticism", "Id, ego, superego, conscious, unconscious", "Introversion, intuition, thinking, judging, feeling", "Psychoticism, extraversion, neuroticism, honesty, humility"], 0,
+                "OCEAN: openness, conscientiousness, extraversion, agreeableness, neuroticism."),
+              Q("From young adulthood into middle age, people on average become:",
+                ["Less conscientious and more neurotic", "More conscientious and agreeable, and less neurotic", "Completely unchanged", "More extraverted only"], 1,
+                "The maturity principle (Roberts and colleagues, 2006)."),
+              Q("Mischel’s person–situation debate was resolved mainly by showing that traits predict:",
+                ["Behaviour in every single situation", "Behaviour averaged across many situations", "Nothing at all", "Only behaviour in childhood"], 1,
+                "Traits predict aggregated behaviour; single situations vary."),
+              Q("Everyone in a class rates the same vague profile as “very accurate about me.” This is the:",
+                ["Maturity principle", "Lexical hypothesis", "Barnum effect", "Halo of HEXACO"], 2,
+                "Forer (1949): general statements feel personal to almost everyone."),
+              Q("HR wants to hire counselors using MBTI types. The best advice is:",
+                ["Use it; types are highly reliable", "Don’t use it for hiring; many people get a different type on retest and types predict performance poorly", "Use it only for managers", "Replace interviews with it"], 1,
+                "The MBTI is not valid for decisions like hiring.")
+            ]
+          },
           "m3.7": {
             home: "A toddler says “more juice!” and gets juice. Is that how all of language is learned?",
             keys: [["What did Skinner claim in Verbal Behavior (1957)?", "That speaking is behaviour like any other, shaped by its consequences: what listeners do after we speak makes that kind of speech more or less likely."],
@@ -20084,6 +20271,31 @@
           G("m7.6", "Lapse", "Desliz (recaída puntual)", "A single slip back to use.", "A brief return to use after a period of abstinence, distinct from relapse, a return to the former pattern; best treated as information."),
           G("m7.6", "Decisional balance", "Balance decisional", "Weighing the pros and cons of using and of changing.", "A motivational interviewing tool that lays out reasons for and against change so ambivalence can be explored."),
           G("m7.6", "Brain-disease model of addiction", "Modelo de enfermedad cerebral de la adicción", "Addiction as lasting brain change.", "The view that repeated use alters brain circuits so control becomes hard; contested by learning and choice models (Lewis, Heyman)."),
+          G("m8.1", "Preconscious", "Preconsciente", "What you can call up when you try.", "In Freud’s topography, the level between conscious and unconscious: thoughts and memories not in awareness now but easily retrieved."),
+          G("m8.1", "Denial", "Negación", "Refusing to accept a painful fact.", "A defense mechanism that keeps a threatening reality, such as a drinking problem, out of full awareness; not the same as lying."),
+          G("m8.1", "Rationalization", "Racionalización", "A good-sounding reason for the real one.", "A defense mechanism that offers acceptable explanations for behaviour whose true motives feel threatening."),
+          G("m8.1", "Reaction formation", "Formación reactiva", "Acting the opposite of what you feel.", "A defense mechanism in which an unacceptable feeling is hidden behind exaggerated displays of its opposite."),
+          G("m8.1", "Sublimation", "Sublimación", "Turning an urge into something valued.", "A mature defense mechanism that channels unacceptable impulses into socially valued activities such as work, art or sport."),
+          G("m8.1", "Hierarchy of defenses", "Jerarquía de defensas", "Defenses ranked from immature to mature.", "Vaillant’s ordering of defense mechanisms; in his Harvard study, mature defenses such as humor and sublimation predicted better adult outcomes."),
+          G("m8.1", "Psychosexual stages", "Etapas psicosexuales", "Freud’s oral, anal, phallic, latency and genital stages.", "Freud’s proposed sequence of childhood development centred on body zones; little empirical support as stated."),
+          G("m8.1", "Oedipus complex", "Complejo de Edipo", "Freud’s claimed rivalry with the same-sex parent.", "Freud’s idea that young children desire the opposite-sex parent and rival the same-sex one; not supported as a universal stage."),
+          G("m8.1", "Collective unconscious", "Inconsciente colectivo", "Jung’s shared inherited layer of mind.", "Jung’s proposed unconscious shared by all humans, holding archetypes such as the hero and the shadow; untestable."),
+          G("m8.1", "Archetype", "Arquetipo", "A universal image or role, in Jung’s theory.", "A pattern such as the hero, the mother or the shadow that Jung believed lives in the collective unconscious."),
+          G("m8.1", "Basic anxiety", "Ansiedad básica", "Feeling alone in a hostile world.", "Karen Horney’s term for a child’s sense of helplessness and isolation, which she saw as the root of later neurotic patterns."),
+          G("m8.1", "Object relations", "Relaciones objetales", "How early relationships shape the inner world.", "A psychodynamic school (Klein, Winnicott) that focuses on internalized images of others formed in early relationships."),
+          G("m8.1", "Good-enough mother", "Madre suficientemente buena", "Care that is good enough, not perfect.", "Winnicott’s term for a caregiver who meets a child’s needs well enough, with manageable lapses that help the child grow."),
+          G("m8.1", "Sustain talk", "Discurso de mantenimiento", "A client’s reasons not to change.", "In motivational interviewing, statements favouring the status quo; counselors roll with them rather than argue."),
+          G("m8.2", "Trait", "Rasgo", "A fairly stable tendency to think, feel or act.", "A dimension of personality on which people differ by degree and which predicts behaviour averaged over many situations."),
+          G("m8.2", "Lexical hypothesis", "Hipótesis léxica", "Important traits get words.", "Allport’s idea that traits that matter in social life become encoded in everyday language, so dictionaries can map personality."),
+          G("m8.2", "Big Five", "Cinco Grandes", "Openness, conscientiousness, extraversion, agreeableness, neuroticism.", "The five broad trait dimensions (OCEAN) found across many languages by Costa and McCrae and by Goldberg."),
+          G("m8.2", "HEXACO", "HEXACO", "Big Five plus honesty-humility.", "Ashton and Lee’s six-factor model of personality; whether it improves on the Big Five is contested."),
+          G("m8.2", "Neuroticism", "Neuroticismo", "Tendency toward worry and low mood.", "A Big Five trait linked to anxiety and depression risk; a treatable target, for example with Barlow’s Unified Protocol."),
+          G("m8.2", "Conscientiousness", "Responsabilidad", "Organized, dependable, self-disciplined.", "A Big Five trait that predicts job performance, health habits and longevity."),
+          G("m8.2", "Maturity principle", "Principio de madurez", "People grow steadier with age.", "The finding that, on average, conscientiousness and agreeableness rise and neuroticism falls from young adulthood to middle age."),
+          G("m8.2", "Rank-order stability", "Estabilidad de orden", "Keeping your place relative to others.", "How consistently people keep their standing on a trait compared with others over time; it rises with age."),
+          G("m8.2", "Person–situation debate", "Debate persona–situación", "Do traits or situations drive behaviour?", "Mischel’s 1968 challenge that behaviour varies across situations; resolved by aggregated behaviour and if-then signatures."),
+          G("m8.2", "Myers-Briggs Type Indicator (MBTI)", "Indicador de tipo Myers-Briggs (MBTI)", "A popular test sorting people into 16 types.", "A type-based questionnaire with poor test-retest reliability and weak validity for decisions such as hiring."),
+          G("m8.2", "Barnum effect", "Efecto Barnum", "Vague profiles feel uniquely true.", "Forer’s 1949 finding that people rate general personality descriptions as highly accurate about themselves."),
           G("m6.1", "Visual cliff", "Precipicio visual", "A glass-over-a-drop test of depth perception.", "Gibson and Walk’s (1960) apparatus: crawling infants mostly refused to cross glass over an apparent drop, showing depth perception tied to crawling experience."),
           G("m6.2", "Secure base", "Base segura", "A trusted person to explore from.", "In attachment theory, the caregiver whose reliable presence lets a child venture out and explore, checking back now and then; see Safe haven."),
           G("m6.2", "Safe haven", "Refugio seguro", "A trusted person to return to when scared.", "In attachment theory, the caregiver a child turns to for comfort when distressed or threatened; see Secure base."),
@@ -20758,6 +20970,18 @@
             R("Grimm, Hope, Wise & Shaham", 2001, "experiment", "In rats, cue-induced cocaine seeking increased over weeks of withdrawal: incubation of craving.", st("contested", "Robust in rodents; human evidence is emerging and mixed.")),
             R("Marlatt & Gordon", 1985, "review", "Relapse Prevention: high-risk situations, coping, urge surfing and the abstinence violation effect.", st("robust", "Relapse prevention is a well-supported treatment framework.")),
             R("Bowen et al.", 2014, "experiment", "A randomized trial found mindfulness-based relapse prevention reduced drug use and heavy drinking over 12 months compared with treatment as usual.", st("contested", "Promising; effects vary across trials."))];
+          REFS["m8.1"] = [
+            R("A. Freud", 1936, "review", "The Ego and the Mechanisms of Defence: set out denial, projection, displacement, reaction formation, sublimation and other ways the ego manages anxiety.", st("contested", "The defenses are widely used clinically; the drive theory behind them is not well supported.")),
+            R("Vaillant", 1977, "longitudinal", "Adaptation to Life: in the Harvard study following men from college onward, those using more mature defenses had better work, relationships and health.", st("robust", "Defense maturity has predicted outcomes in later long-term samples too.")),
+            R("Westen", 1998, "review", "The Scientific Legacy of Sigmund Freud: unconscious processes, conflict, relational templates and defenses survive; many specific claims do not.", st("robust", "Widely cited summary; fits research on implicit processes.")),
+            R("Miller, Benefield & Tonigan", 1993, "experiment", "Problem drinkers given a directive-confrontational counseling style drank more a year later than those given a client-centred style; more confrontation predicted more drinking.", st("robust", "Fits the wider motivational interviewing evidence.")),
+            R("Shedler", 2010, "review", "The Efficacy of Psychodynamic Psychotherapy: meta-analyses show meaningful benefits that tend to last after treatment ends.", st("contested", "Benefits are supported; claims of equal or better effects than other therapies are debated."))];
+          REFS["m8.2"] = [
+            R("Costa & McCrae", 1992, "review", "The NEO Personality Inventory and the five-factor model: openness, conscientiousness, extraversion, agreeableness and neuroticism.", st("robust", "The five-factor structure recurs across many languages and samples.")),
+            R("Goldberg", 1990, "observational", "Analyses of everyday English trait words repeatedly yielded five broad factors, supporting the lexical hypothesis.", st("robust", "Replicated in many languages, though not equally well everywhere.")),
+            R("Roberts, Walton & Viechtbauer", 2006, "meta-analysis", "A meta-analysis of longitudinal studies: conscientiousness and agreeableness rise and neuroticism falls from young adulthood into middle age.", st("robust", "The maturity principle is well replicated.")),
+            R("Mischel", 1968, "review", "Personality and Assessment: behaviour is only weakly consistent across situations, challenging trait-based prediction.", st("contested", "Sparked the person–situation debate, resolved by aggregation and if-then signatures.")),
+            R("Forer", 1949, "experiment", "Students rated the same vague personality profile, drawn from horoscopes, as highly accurate about themselves: the Barnum effect.", st("robust", "Replicated many times."))];
           /* phase 3m-1: M3 lessons 7–8 · the Chomsky block */
           REFS["m3.7"] = [
             R("Skinner", 1957, "review", "Verbal Behavior: speaking treated as operant behaviour shaped by listeners’ responses, sorted into mands, tacts, echoics and intraverbals.", st("contested", "Its units are still used in applied work; as a full account of grammar it was widely rejected after Chomsky’s review.")),
